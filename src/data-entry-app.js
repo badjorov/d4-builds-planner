@@ -108,7 +108,7 @@ function readConditions(raw) {
 
 function readForm(form) {
   const data = new FormData(form);
-  const next = entityTemplate(type);
+  const next = draft ? structuredClone(draft) : entityTemplate(type);
   next.id = String(data.get('id') || '').trim();
   next.name = String(data.get('name') || '');
   if (type !== 'paragonBoard' && type !== 'seasonalMechanic' && type !== 'talisman') next.name = next.name || next.id;
@@ -117,10 +117,12 @@ function readForm(form) {
   next.verified = data.get('verified') === 'on';
   const note = String(data.get('note') || '').trim();
   if (note) next.note = note;
+  else if (draft && draft.note === null) next.note = null;
   else delete next.note;
   if (type === 'skill') {
     next.category = String(data.get('category') || '').trim() || null;
-    next.tags = String(data.get('tags') || '').split(',').map(tag => tag.trim()).filter(Boolean);
+    const tagText = String(data.get('tags') || '').trim();
+    next.tags = tagText ? tagText.split(',').map(tag => tag.trim()).filter(Boolean) : (draft && draft.tags === null ? null : []);
     next.coeffPct = num(data.get('coeffPct'));
     next.rank = num(data.get('rank'));
     next.dot = data.get('dot') === '' ? null : data.get('dot') === 'true';
@@ -140,8 +142,10 @@ function readForm(form) {
   if (next.effects) {
     const effects = [];
     let index = 0;
+    const previous = Array.isArray(draft?.effects) ? draft.effects : [];
     while (data.has(`effectSource-${index}`) || form.querySelector(`[data-effect="${index}"]`)) {
       const effect = {
+        ...(previous[index] || {}),
         stat: String(data.get(`stat-${index}`) || '').trim() || null,
         bucket: String(data.get(`bucket-${index}`) || '').trim() || null,
         value: readValue(data.get(`value-${index}`)),
@@ -152,6 +156,7 @@ function readForm(form) {
       };
       const effectNote = String(data.get(`effectNote-${index}`) || '').trim();
       if (effectNote) effect.note = effectNote;
+      else delete effect.note;
       effects.push(effect);
       index += 1;
       if (index > 30) break;

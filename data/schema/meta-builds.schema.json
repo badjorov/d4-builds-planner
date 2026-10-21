@@ -40,7 +40,50 @@
         },
         "source": { "type": "string", "minLength": 1 },
         "verified": { "type": "boolean" },
-        "note": { "type": "string" }
+        "note": { "type": ["string", "null"] },
+        "author": { "type": ["string", "null"] },
+        "updated": { "type": ["string", "null"] },
+        "recordedOn": { "type": ["string", "null"] },
+        "expertise": { "type": ["string", "null"] },
+        "gear": { "$ref": "#/$defs/gearList" },
+        "paragon": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": { "type": "string" }
+          }
+        },
+        "seasonal": { "$ref": "#/$defs/seasonalList" }
+      }
+    },
+    "gearList": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["helm", "chest", "gloves", "pants", "boots", "amulet", "ring1", "ring2", "bludgeoning", "slashing", "dualWield1", "dualWield2"],
+      "properties": {
+        "helm": { "type": ["string", "null"] },
+        "chest": { "type": ["string", "null"] },
+        "gloves": { "type": ["string", "null"] },
+        "pants": { "type": ["string", "null"] },
+        "boots": { "type": ["string", "null"] },
+        "amulet": { "type": ["string", "null"] },
+        "ring1": { "type": ["string", "null"] },
+        "ring2": { "type": ["string", "null"] },
+        "bludgeoning": { "type": ["string", "null"] },
+        "slashing": { "type": ["string", "null"] },
+        "dualWield1": { "type": ["string", "null"] },
+        "dualWield2": { "type": ["string", "null"] }
+      }
+    },
+    "seasonalList": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["runes", "charms"],
+      "properties": {
+        "runes": { "type": "array", "items": { "type": "string" } },
+        "charms": { "type": "array", "items": { "type": "string" } }
       }
     }
   }

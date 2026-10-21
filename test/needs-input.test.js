@@ -17,16 +17,19 @@ test('needs-input lists nulls, unverified flags, ranges, and empty collections',
   assert.ok(paths.includes('/affixes empty'));
 });
 
-test('the migrated catalog asks for unknown Hammer data and keeps the sourced scalar', () => {
+test('transcribed coefficients stay unverified and the sourced scalar stays put', () => {
   const items = needsInput(catalog);
   const text = formatNeedsInput(items);
-  assert.match(text, /\/skills\/hota\/coeffPct — null/);
   assert.match(text, /\/skills\/hota\/verified — unverified/);
+  assert.equal(text.includes('/skills/hota/coeffPct — null'), false);
   assert.match(text, /\/aspects\/writhing\/effects\/0\/value — range/);
   assert.match(text, /\/skillVariants — empty/);
-  assert.match(text, /\/affixes — empty/);
   assert.match(text, /\/talismans — empty/);
+  assert.equal(text.includes('/affixes — empty'), false);
+  assert.match(text, /\/affixes\/guardian-finesse\/slot — null/);
   assert.equal(items.some(item => item.path === '/mainstat/percentPer10'), false);
-  assert.equal(catalog.skills.find(skill => skill.id === 'hota').coeffPct, null);
+  assert.equal(items.some(item => item.path === '/glyphs/disembowel/effects/0/value'), false);
+  assert.equal(catalog.skills.find(skill => skill.id === 'hota').coeffPct, 170);
+  assert.equal(catalog.skills.find(skill => skill.id === 'hota').verified, false);
   assert.ok(items.length > 20);
 });

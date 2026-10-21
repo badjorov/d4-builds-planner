@@ -78,7 +78,7 @@ export function legacyEntity(entity, group) {
     max: range[1] ?? null,
     bucket: effect.bucket ?? null,
     source: entity.source || effect.source || 'manual-entry',
-    verified: entity.verified === true,
+    verified: Object.prototype.hasOwnProperty.call(effect, 'verified') ? effect.verified === true : entity.verified === true,
     note: entity.note || effect.note || ''
   };
 }

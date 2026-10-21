@@ -82,7 +82,20 @@
         "stacking": { "type": ["string", "null"] },
         "source": { "$ref": "#/$defs/source" },
         "verified": { "type": "boolean" },
-        "note": { "type": "string" }
+        "note": { "type": ["string", "null"] },
+        "range": {
+          "oneOf": [
+            { "type": "null" },
+            {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": { "type": ["number", "null"] }
+            }
+          ]
+        },
+        "unit": { "type": ["string", "null"] },
+        "count": { "type": ["number", "null"] }
       }
     },
     "meta": {
@@ -179,9 +192,30 @@
         "id": { "type": "string", "minLength": 1 },
         "name": { "type": "string" },
         "category": { "type": ["string", "null"] },
-        "tags": { "type": "array", "items": { "type": "string" } },
+        "tags": {
+          "oneOf": [
+            { "type": "null" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
         "coeffPct": { "type": ["number", "null"] },
         "rank": { "type": ["number", "null"] },
+        "maxRank": { "type": ["number", "null"] },
+        "tooltip": { "type": ["string", "null"] },
+        "modifiers": { "type": "array", "items": { "type": "string" } },
+        "transcribed": { "type": ["string", "null"] },
+        "suspect": { "type": "boolean" },
+        "recordedSource": { "type": "string", "minLength": 1 },
+        "transcriptionId": { "type": "string", "minLength": 1 },
+        "nextRank": {
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "required": ["damage", "coeffPct"],
+          "properties": {
+            "damage": { "type": ["number", "null"] },
+            "coeffPct": { "type": ["number", "null"] }
+          }
+        },
         "dot": { "type": ["boolean", "null"] },
         "furyGeneratePerCast": { "type": ["number", "null"] },
         "furySpendPerCast": { "type": ["number", "null"] },
@@ -189,7 +223,7 @@
         "effects": { "type": "array", "items": { "$ref": "#/$defs/effect" } },
         "source": { "$ref": "#/$defs/source" },
         "verified": { "type": "boolean" },
-        "note": { "type": "string" }
+        "note": { "type": ["string", "null"] }
       }
     },
     "skillVariant": {
@@ -227,10 +261,16 @@
         "id": { "type": "string", "minLength": 1 },
         "name": { "type": "string" },
         "slots": { "oneOf": [{ "type": "null" }, { "type": "array", "items": { "type": "string" } }] },
+        "rank": { "type": ["string", "number", "null"] },
+        "category": { "type": ["string", "null"] },
+        "potencyNote": { "type": ["string", "null"] },
+        "transcribed": { "type": ["string", "null"] },
+        "suspect": { "type": "boolean" },
+        "recordedSource": { "type": "string", "minLength": 1 },
         "effects": { "type": "array", "items": { "$ref": "#/$defs/effect" } },
         "source": { "$ref": "#/$defs/source" },
         "verified": { "type": "boolean" },
-        "note": { "type": "string" }
+        "note": { "type": ["string", "null"] }
       }
     },
     "unique": {
@@ -255,10 +295,16 @@
         "id": { "type": "string", "minLength": 1 },
         "name": { "type": "string" },
         "slot": { "type": ["string", "null"] },
+        "category": { "type": ["string", "null"] },
+        "rarity": { "type": ["string", "null"] },
+        "learned": { "type": ["boolean", "null"] },
+        "sourceId": { "type": "string", "minLength": 1 },
+        "transcribed": { "type": ["string", "null"] },
+        "suspect": { "type": "boolean" },
         "effects": { "type": "array", "items": { "$ref": "#/$defs/effect" } },
         "source": { "$ref": "#/$defs/source" },
         "verified": { "type": "boolean" },
-        "note": { "type": "string" }
+        "note": { "type": ["string", "null"] }
       }
     },
     "paragonBoard": {
@@ -296,10 +342,18 @@
         "id": { "type": "string", "minLength": 1 },
         "name": { "type": "string" },
         "level": { "type": ["number", "null"] },
+        "rarity": { "type": ["string", "null"] },
+        "radius": { "type": ["number", "null"] },
+        "base": { "type": ["string", "null"] },
+        "additional": { "type": ["string", "null"] },
+        "legendary": { "type": ["string", "null"] },
+        "transcribed": { "type": ["string", "null"] },
+        "suspect": { "type": "boolean" },
+        "recordedSource": { "type": "string", "minLength": 1 },
         "effects": { "type": "array", "items": { "$ref": "#/$defs/effect" } },
         "source": { "$ref": "#/$defs/source" },
         "verified": { "type": "boolean" },
-        "note": { "type": "string" }
+        "note": { "type": ["string", "null"] }
       }
     },
     "namedEffects": {

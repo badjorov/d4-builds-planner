@@ -1,14 +1,55 @@
 {
-  "note": "Known meta builds are entered by you. Rows with example true are schema samples and are ignored by the novelty score. Do not paste builds from Maxroll, Mobalytics, Icy Veins, Wowhead, or d4builds.",
+  "note": "The shipped row is a user-supplied name list and link, kept so novelty has a real baseline. It replaces the EXAMPLE row. No numeric guide data is stored. Do not paste further builds from Maxroll, Mobalytics, Icy Veins, Wowhead, or d4builds.",
   "builds": [
     {
-      "id": "example",
-      "name": "EXAMPLE — not a real build",
-      "example": true,
-      "skills": ["EXAMPLE-skill"],
-      "aspects": ["EXAMPLE-aspect"],
-      "uniques": ["EXAMPLE-unique"],
-      "keyItems": ["EXAMPLE-unique"],
+      "id": "ww-d4builds-immortal-speed-130",
+      "name": "Whirlwind Barb (S15) - Immortal Speed 130",
+      "example": false,
+      "skills": [
+        "whirlwind",
+        "war-cry",
+        "challenging-shout",
+        "rallying-cry",
+        "wrath-of-the-berserker",
+        "iron-skin"
+      ],
+      "aspects": [],
+      "uniques": [],
+      "keyItems": [
+        "polearm",
+        "Tuskhelm of Joritz the Mighty",
+        "Enigma",
+        "Gohr's Devastating Grips",
+        "Tibault's Will",
+        "Earthstriker's Aspect",
+        "Melted Heart of Selig",
+        "Crushing Aspect",
+        "Ring of Starless Skies",
+        "Aspect of Channeling (2H Mace)",
+        "Insight",
+        "Spirit (1H Mace)",
+        "Ramaladni's Magnum Opus",
+        "Starting Board",
+        "Might",
+        "Warbringer",
+        "Twister",
+        "Decimator",
+        "Imbiber",
+        "Weapons Master",
+        "Marshal",
+        "Flawless Technique",
+        "Wrath",
+        "Igni",
+        "Ohm",
+        "Bac",
+        "Mot",
+        "Fer of the Crucible",
+        "Beru of the Crucible",
+        "Linta of the Crucible",
+        "Blood-Mad Idol",
+        "The Furnace",
+        "Hellfire Torch"
+      ],
       "bucketProfile": {
         "additive": null,
         "multiplicative": null,
@@ -17,9 +58,65 @@
         "vuln": null,
         "overpower": null
       },
-      "source": "manual-entry",
+      "source": "https://d4builds.gg/builds/whirlwind-barbarian-endgame/?var=4",
       "verified": false,
-      "note": "EXAMPLE only. This is not a meta build. Replace it with builds you enter yourself, each with a source URL."
+      "author": "Rob2628",
+      "updated": "2026-10-12",
+      "recordedOn": "2026-10-21",
+      "expertise": "polearm",
+      "gear": {
+        "helm": "Tuskhelm of Joritz the Mighty",
+        "chest": "Enigma",
+        "gloves": "Gohr's Devastating Grips",
+        "pants": "Tibault's Will",
+        "boots": "Earthstriker's Aspect",
+        "amulet": "Melted Heart of Selig",
+        "ring1": "Crushing Aspect",
+        "ring2": "Ring of Starless Skies",
+        "bludgeoning": "Aspect of Channeling (2H Mace)",
+        "slashing": "Insight",
+        "dualWield1": "Spirit (1H Mace)",
+        "dualWield2": "Ramaladni's Magnum Opus"
+      },
+      "paragon": [
+        [
+          "Starting Board",
+          "Might"
+        ],
+        [
+          "Warbringer",
+          "Twister"
+        ],
+        [
+          "Decimator",
+          "Imbiber"
+        ],
+        [
+          "Weapons Master",
+          "Marshal"
+        ],
+        [
+          "Flawless Technique",
+          "Wrath"
+        ]
+      ],
+      "seasonal": {
+        "runes": [
+          "Igni",
+          "Ohm",
+          "Bac",
+          "Mot"
+        ],
+        "charms": [
+          "Fer of the Crucible",
+          "Beru of the Crucible",
+          "Linta of the Crucible",
+          "Blood-Mad Idol",
+          "The Furnace",
+          "Hellfire Torch"
+        ]
+      },
+      "note": "Lists and link only. aspects and uniques are empty because the supplied row did not classify them. Every gear, paragon, rune, and charm name is in keyItems and in the structured fields. Bucket profile is null. Not verified."
     }
   ]
 }

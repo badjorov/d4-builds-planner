@@ -16,6 +16,8 @@ Tests: `npm test` (Node built-in runner, no dependencies). The script passes `te
 
 Only official Blizzard pages and manual entry from your own game client. No datamines, no client reading, and no copying from Maxroll, Mobalytics, Icy Veins, Wowhead, or d4builds. Never invent numbers: unknown stays `null`, and `verified` stays false until the exact value is in the source.
 
+One exception is recorded on purpose. `data/meta-builds.json` has a single user-supplied Whirlwind name list and a d4builds link. That row stores names and the link only. It has no numeric guide data, `verified` is false, and it is not an open-license dataset. Do not add more rows from guide sites.
+
 Search tests use invented numbers only in `test/fixtures/`, and those files are marked `SYNTHETIC`.
 
 Sources cited by the catalog:
@@ -25,12 +27,14 @@ Sources cited by the catalog:
 | https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy | Patch 3.2.1 numbers migrated from v0 | © Blizzard Entertainment. Official patch notes. Not an open-license dataset. |
 | https://news.blizzard.com/en-us/article/24292852/the-3-2-0-ptr-what-you-need-to-know | 3.2.0 PTR notes migrated from v0 | © Blizzard Entertainment. Official PTR notes. Not an open-license dataset. |
 | https://news.blizzard.com/en-us/article/23189677/diablo-iv-feature-overview | The statement that Barbarians carry four weapons. Slot ids are still unverified planner labels. | © Blizzard Entertainment. Official feature overview. Not an open-license dataset. |
+| user video 2026-10-21 batch2 (transcribed) | Hand transcription of the user's own videos: skill tooltips, temper manuals, glyph text, and one codex aspect. Suspect flags, notes, and the transcribed wording are kept. Nothing from this source is verified. | User's own gameplay footage. Not an open-license dataset. |
+| https://d4builds.gg/builds/whirlwind-barbarian-endgame/?var=4 | The meta row's name list and link only. Not used for catalog numbers. | User-supplied reference. Not an open-license dataset. No numeric guide data was copied. |
 
 No open-license game dataset is included. If you add one later, list its URL and license in this table and in `meta.sources`.
 
 ## Catalog
 
-`data/schema/catalog.schema.json` is the class catalog. `data/barbarian.json` is the migrated v0 data. `data/schema/build.schema.json` is a build: skills, 13 gear slots (affixes plus one aspect or one unique), and empty stubs for boards, glyphs, and talismans. `data/meta-builds.json` is the novelty comparison file. It ships with one row named `EXAMPLE — not a real build`. That row is ignored. Fill in your own builds.
+`data/schema/catalog.schema.json` is the class catalog. `data/barbarian.json` is the migrated v0 data plus the batch-2 video transcription. `data/schema/build.schema.json` is a build: skills, 13 gear slots (affixes plus one aspect or one unique), and stubs for boards, glyphs, and talismans. A slot may also carry an item name when the catalog has no sourced stats for that item. `data/meta-builds.json` is the novelty comparison file. Its one row is the Whirlwind name list above, and `example` is false. `data/builds.json` holds saved builds. The user's current build is in that file and is not a meta row.
 
 Each effect has a stat or damage bucket, a point value or a `[min, max]` roll range, conditions, a stacking rule, a source, and a verified flag. All of those are null when the notes do not say them. `src/schema.js` checks the subset of JSON Schema used by those files.
 
@@ -41,7 +45,7 @@ Constraints live in the catalog: skill-bar size (null until a source states it),
 1. Enumerate skill cores whose tags match the filter, up to the skill-bar size or the core-size limit.
 2. Rank aspects and uniques by `marginal()` from `src/engine.js` (marginal percent of a bucket times the item's point value), place them greedily, then run a beam search. The kept loadout is the higher of the two. Items with a null point value, an unknown condition, or a unique slot of null are not placed. Paragon, glyphs, boards, and talismans are not searched.
 3. Reject a build that breaks slot constraints or misses a minimum you set. Fury sustain is generation per second minus spend per second for the rotation. Berserk, Vulnerable, and Overpower uptime are fractions you enter (0–1). EHP is `life / ((1 - armor mitigation) × (1 - resist mitigation) × Π(1 - DR))` using mitigation percents you read off the character sheet. Armor and resist ratings are not converted, because that curve is not in the sourced data.
-4. Novelty is the distance to the nearest non-example row in `data/meta-builds.json`: the average of Jaccard distance (skills, aspects, uniques, key items) and normalized bucket-profile distance. With no real meta rows, novelty is 1. Rank is power × novelty, after a power floor. Fully verified builds are the default. The unverified-data toggle shows the rest, each with its unverified share. The page lists up to 20 and prints the engine's why breakdown.
+4. Novelty is the distance to the nearest non-example row in `data/meta-builds.json`: the average of Jaccard distance (skills, aspects, uniques, key items) and normalized bucket-profile distance. The shipped row has a null bucket profile, so only the name-list distance is used. With no real meta rows, novelty is 1. Rank is power × novelty, after a power floor. Fully verified builds are the default. The unverified-data toggle shows the rest, each with its unverified share. The page lists up to 20 and prints the engine's why breakdown.
 
 Manual weapon, main stat, and crit inputs count as unverified until you check that you verified them in game. Checking the box does not create a source.
 

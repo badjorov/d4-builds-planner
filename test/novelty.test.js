@@ -14,12 +14,35 @@ test('Jaccard distance and bucket distance', () => {
   assert.equal(bucketDistance({ additive: null }, { additive: null }), null);
 });
 
-test('the EXAMPLE meta row is ignored and an empty real list is fully novel', () => {
-  const none = noveltyAgainstMeta({ skills: ['hota'], aspects: [], uniques: [], keyItems: [] }, { additive: 1 }, meta);
+test('an example-only meta file is ignored and an empty real list is fully novel', () => {
+  const onlyExampleDoc = {
+    builds: [{
+      id: 'example',
+      name: 'EXAMPLE',
+      example: true,
+      skills: ['EXAMPLE-skill'],
+      aspects: ['EXAMPLE-aspect'],
+      uniques: ['EXAMPLE-unique'],
+      keyItems: ['EXAMPLE-unique'],
+      bucketProfile: { additive: null, multiplicative: null, mainstat: null, crit: null, vuln: null, overpower: null },
+      source: 'manual-entry',
+      verified: false
+    }]
+  };
+  const none = noveltyAgainstMeta({ skills: ['hota'], aspects: [], uniques: [], keyItems: [] }, { additive: 1 }, onlyExampleDoc);
   assert.equal(none.novelty, 1);
   assert.equal(none.nearestId, null);
-  const onlyExample = noveltyAgainstMeta({ skills: ['EXAMPLE-skill'], aspects: ['EXAMPLE-aspect'], uniques: ['EXAMPLE-unique'], keyItems: ['EXAMPLE-unique'] }, {}, meta);
+  const onlyExample = noveltyAgainstMeta({ skills: ['EXAMPLE-skill'], aspects: ['EXAMPLE-aspect'], uniques: ['EXAMPLE-unique'], keyItems: ['EXAMPLE-unique'] }, {}, onlyExampleDoc);
   assert.equal(onlyExample.novelty, 1);
+});
+
+test('the shipped meta row is a real name list with no bucket numbers', () => {
+  assert.equal(meta.builds[0].example, false);
+  assert.equal(meta.builds[0].verified, false);
+  const distance = noveltyAgainstMeta({ skills: ['whirlwind'], aspects: [], uniques: [], keyItems: [] }, {}, meta);
+  assert.equal(distance.nearestId, 'ww-d4builds-immortal-speed-130');
+  assert.ok(distance.novelty < 1);
+  assert.equal(distance.bucket, null);
 });
 
 test('a copied meta build scores below a different build of equal power, and the power floor applies', () => {

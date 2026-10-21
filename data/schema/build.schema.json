@@ -47,7 +47,16 @@
     "critChance": { "type": ["number", "null"] },
     "critDmg": { "type": ["number", "null"] },
     "vulnPct": { "type": ["number", "null"] },
-    "overpowerPct": { "type": ["number", "null"] }
+    "overpowerPct": { "type": ["number", "null"] },
+    "label": { "type": "string" },
+    "source": { "type": "string", "minLength": 1 },
+    "verified": { "type": "boolean" },
+    "note": { "type": ["string", "null"] },
+    "maxFury": { "type": ["number", "null"] },
+    "resistanceCapPct": { "type": ["number", "null"] },
+    "expertise": { "type": ["string", "null"] },
+    "runes": { "type": "array", "items": { "type": "string" } },
+    "manualInputsVerified": { "type": "boolean" }
   },
   "$defs": {
     "slotAssignment": {
@@ -69,7 +78,13 @@
           }
         },
         "aspectId": { "type": ["string", "null"] },
-        "uniqueId": { "type": ["string", "null"] }
+        "uniqueId": { "type": ["string", "null"] },
+        "itemName": { "type": ["string", "null"] },
+        "hands": { "type": ["string", "null"] },
+        "weaponType": { "type": ["string", "null"] },
+        "attacksPerSecond": { "type": ["number", "null"] },
+        "itemCritChance": { "type": ["number", "null"] },
+        "itemNote": { "type": ["string", "null"] }
       }
     },
     "boardStub": {
@@ -78,6 +93,7 @@
       "required": ["boardId", "nodeIds"],
       "properties": {
         "boardId": { "type": ["string", "null"] },
+        "name": { "type": ["string", "null"] },
         "nodeIds": { "type": "array", "items": { "type": "string" } }
       }
     },

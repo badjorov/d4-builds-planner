@@ -1,0 +1,269 @@
+{
+  "note": "Saved builds are not meta baselines. The row below is the user's current build. Video sheet numbers stay unverified. Names the user confirmed are still unverified game data: verified is false on the build.",
+  "builds": [
+    {
+      "id": "users-current-build",
+      "name": "user's current build",
+      "label": "user's current build",
+      "class": "Barbarian",
+      "skills": [
+        "whirlwind",
+        "war-cry",
+        "challenging-shout",
+        "rallying-cry",
+        "wrath-of-the-berserker",
+        "iron-skin"
+      ],
+      "variants": [],
+      "gear": [
+        {
+          "slotId": "helm",
+          "affixes": [],
+          "aspectId": null,
+          "uniqueId": null,
+          "itemName": "Leoric's Crown",
+          "hands": null,
+          "weaponType": null,
+          "attacksPerSecond": null,
+          "itemCritChance": null,
+          "itemNote": "User confirmed the helm is Leoric's Crown. Tuskhelm of Joritz the Mighty is a charm, not the helm."
+        },
+        {
+          "slotId": "chest",
+          "affixes": [],
+          "aspectId": null,
+          "uniqueId": null,
+          "itemName": "Enigma",
+          "hands": null,
+          "weaponType": null,
+          "attacksPerSecond": null,
+          "itemCritChance": null,
+          "itemNote": null
+        },
+        {
+          "slotId": "gloves",
+          "affixes": [],
+          "aspectId": null,
+          "uniqueId": null,
+          "itemName": "Gohr's Devastating Grips",
+          "hands": null,
+          "weaponType": null,
+          "attacksPerSecond": null,
+          "itemCritChance": null,
+          "itemNote": null
+        },
+        {
+          "slotId": "pants",
+          "affixes": [],
+          "aspectId": null,
+          "uniqueId": null,
+          "itemName": "Tibault's Will",
+          "hands": null,
+          "weaponType": null,
+          "attacksPerSecond": null,
+          "itemCritChance": null,
+          "itemNote": null
+        },
+        {
+          "slotId": "boots",
+          "affixes": [],
+          "aspectId": null,
+          "uniqueId": null,
+          "itemName": "Earthstriker's Aspect",
+          "hands": null,
+          "weaponType": null,
+          "attacksPerSecond": null,
+          "itemCritChance": null,
+          "itemNote": null
+        },
+        {
+          "slotId": "amulet",
+          "affixes": [],
+          "aspectId": null,
+          "uniqueId": null,
+          "itemName": "Melted Heart of Selig",
+          "hands": null,
+          "weaponType": null,
+          "attacksPerSecond": null,
+          "itemCritChance": null,
+          "itemNote": null
+        },
+        {
+          "slotId": "ring-1",
+          "affixes": [],
+          "aspectId": null,
+          "uniqueId": null,
+          "itemName": "Crushing Aspect",
+          "hands": null,
+          "weaponType": null,
+          "attacksPerSecond": null,
+          "itemCritChance": null,
+          "itemNote": null
+        },
+        {
+          "slotId": "ring-2",
+          "affixes": [],
+          "aspectId": null,
+          "uniqueId": null,
+          "itemName": "Stone of Jordan",
+          "hands": null,
+          "weaponType": null,
+          "attacksPerSecond": null,
+          "itemCritChance": null,
+          "itemNote": "User confirmed Stone of Jordan replaces Ring of Starless Skies."
+        },
+        {
+          "slotId": "weapon-1",
+          "affixes": [],
+          "aspectId": null,
+          "uniqueId": null,
+          "itemName": "Runeword polearm",
+          "hands": "2H",
+          "weaponType": "polearm",
+          "attacksPerSecond": 0.9,
+          "itemCritChance": 94.5,
+          "itemNote": "Bludgeoning slot. User confirmed a runeword polearm. 0.9 attacks per second and 94.5% crit chance were read on this weapon and are unverified. They are separate from the sheet crit chance."
+        },
+        {
+          "slotId": "weapon-2",
+          "affixes": [],
+          "aspectId": null,
+          "uniqueId": null,
+          "itemName": "Insight",
+          "hands": "2H",
+          "weaponType": null,
+          "attacksPerSecond": null,
+          "itemCritChance": null,
+          "itemNote": "Slashing slot. User confirmed Insight is on a two-handed weapon. The supplied meta list already had slashing = Insight. This records that confirmation rather than a different assignment."
+        },
+        {
+          "slotId": "weapon-3",
+          "affixes": [],
+          "aspectId": null,
+          "uniqueId": null,
+          "itemName": "Spirit",
+          "hands": "1H",
+          "weaponType": "mace",
+          "attacksPerSecond": null,
+          "itemCritChance": null,
+          "itemNote": "User confirmed Spirit is on a one-handed weapon. The supplied meta list already named it Spirit (1H Mace). The mace type is that list text, not a new measurement."
+        },
+        {
+          "slotId": "weapon-4",
+          "affixes": [],
+          "aspectId": null,
+          "uniqueId": null,
+          "itemName": "Ramaladni's Magnum Opus",
+          "hands": "1H",
+          "weaponType": null,
+          "attacksPerSecond": null,
+          "itemCritChance": null,
+          "itemNote": "Dual-wield slot from the supplied meta list. Counted as one of the two one-handed arsenal weapons the user confirmed. Catalog unique id ramaladni is not linked: its slots and stats are still null."
+        },
+        {
+          "slotId": "slot-13",
+          "affixes": [],
+          "aspectId": null,
+          "uniqueId": null,
+          "itemName": null,
+          "hands": null,
+          "weaponType": null,
+          "attacksPerSecond": null,
+          "itemCritChance": null,
+          "itemNote": "Planner placeholder. The supplied lists name 12 gear slots and do not name a 13th item."
+        }
+      ],
+      "boards": [
+        {
+          "boardId": null,
+          "name": "Starting Board",
+          "nodeIds": []
+        },
+        {
+          "boardId": null,
+          "name": "Warbringer",
+          "nodeIds": []
+        },
+        {
+          "boardId": null,
+          "name": "Decimator",
+          "nodeIds": []
+        },
+        {
+          "boardId": null,
+          "name": "Weapons Master",
+          "nodeIds": []
+        },
+        {
+          "boardId": null,
+          "name": "Flawless Technique",
+          "nodeIds": []
+        }
+      ],
+      "glyphs": [
+        {
+          "glyphId": "might",
+          "level": null
+        },
+        {
+          "glyphId": "twister",
+          "level": null
+        },
+        {
+          "glyphId": "imbiber",
+          "level": null
+        },
+        {
+          "glyphId": "marshal",
+          "level": null
+        },
+        {
+          "glyphId": "wrath",
+          "level": null
+        }
+      ],
+      "talismans": [
+        "Fer of the Crucible",
+        "Beru of the Crucible",
+        "Linta of the Crucible",
+        "Endurant Faith",
+        "Seal of the Epiphany",
+        "Hellfire Torch",
+        "Tuskhelm of Joritz the Mighty"
+      ],
+      "rotation": [],
+      "uptime": {
+        "berserk": null,
+        "vulnerable": null,
+        "overpower": null
+      },
+      "defense": {
+        "life": null,
+        "armor": 52185,
+        "resists": null,
+        "armorMitigationPct": null,
+        "resistMitigationPct": null,
+        "dr": null
+      },
+      "weaponDmg": null,
+      "mainStat": 4101,
+      "critChance": 100,
+      "critDmg": 7414.8,
+      "vulnPct": 206.8,
+      "overpowerPct": null,
+      "maxFury": 826,
+      "resistanceCapPct": 80,
+      "expertise": "polearm",
+      "runes": [
+        "Igni",
+        "Ohm",
+        "Bac",
+        "Mot"
+      ],
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "manualInputsVerified": false,
+      "note": "Based on the Whirlwind Barb (S15) Immortal Speed 130 name list. User-confirmed differences: Leoric's Crown is the helm and Tuskhelm of Joritz the Mighty is a charm; Stone of Jordan replaces Ring of Starless Skies; the bludgeoning slot is a runeword polearm; Endurant Faith and Seal of the Epiphany replace Blood-Mad Idol and The Furnace; the arsenal is 2 two-handed weapons and 2 one-handed weapons. Sheet numbers transcribed from video and left unverified: Strength 4101, crit chance 100%, crit damage 7414.8%, Vulnerable damage 206.8%, max Fury 826, armor 52185, resistances capped at 80%. The 80% figure is the cap that was read, not an EHP resist mitigation percent. Life, weapon damage, and armor mitigation were not shown."
+    }
+  ]
+}

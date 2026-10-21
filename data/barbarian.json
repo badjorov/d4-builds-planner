@@ -3,7 +3,7 @@
     "class": "Barbarian",
     "patch": "3.2.1",
     "season": 15,
-    "rules": "Official Blizzard patch notes + manual in-game entry only. No datamines, no scraping. null = unknown.",
+    "rules": "Official Blizzard patch notes + manual in-game entry only. No datamines, no scraping. null = unknown. Batch 2 is a hand transcription of the user's own videos and stays verified false.",
     "primarySource": "https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy",
     "sources": [
       {
@@ -20,6 +20,11 @@
         "url": "https://news.blizzard.com/en-us/article/23189677/diablo-iv-feature-overview",
         "title": "Diablo IV Feature Overview",
         "license": "© Blizzard Entertainment. Official feature overview, cited only for the statement that Barbarians carry four weapons. Not an open-license dataset."
+      },
+      {
+        "url": "user video 2026-10-21 batch2 (transcribed)",
+        "title": "User in-game video transcription, 2026-10-21 batch 2",
+        "license": "User's own gameplay footage, transcribed by hand. Not an open-license dataset. Every value from this source stays verified false."
       }
     ]
   },
@@ -187,8 +192,8 @@
         "Core",
         "Earthquake?"
       ],
-      "coeffPct": null,
-      "rank": null,
+      "coeffPct": 170,
+      "rank": 11,
       "dot": null,
       "furyGeneratePerCast": null,
       "furySpendPerCast": null,
@@ -197,17 +202,31 @@
         {
           "stat": "coefficient",
           "bucket": null,
-          "value": null,
+          "value": 170,
           "conditions": null,
           "stacking": null,
-          "source": "manual-entry",
+          "source": "user video 2026-10-21 batch2 (transcribed)",
           "verified": false,
-          "note": "Enter tooltip % at your rank."
+          "note": "Enter tooltip % at your rank. Tooltip coefficient transcribed from user video. Unverified."
         }
       ],
       "source": "manual-entry",
       "verified": false,
-      "note": "Enter tooltip % at your rank."
+      "note": "Enter tooltip % at your rank. Transcription id hammer-of-the-ancients.",
+      "maxRank": 15,
+      "tooltip": "35 Fury, 4,680,287 (170%)",
+      "modifiers": [
+        "Crit +3%[+]/20 max Fury up to 20%[+]",
+        "+25%[+] size +20%[x]",
+        "Fury gen +3%[+]/enemy up to 30% 5s",
+        "+20%[x] with Overpower",
+        "Ancestral (Fire, 2 Ancients 1,608,125 (52%), burning explode 424,457 (13%))",
+        "Fissure 11,559,324 (1,515%) slow 80% 4s",
+        "Explosive 10,769,853 (3,558%)"
+      ],
+      "transcribed": "35 Fury, 4,680,287 (170%). Crit +3%[+]/20 max Fury up to 20%[+]; +25%[+] size +20%[x]; Fury gen +3%[+]/enemy up to 30% 5s; +20%[x] with Overpower; Ancestral (Fire, 2 Ancients 1,608,125 (52%), burning explode 424,457 (13%)); Fissure 11,559,324 (1,515%) slow 80% 4s; Explosive 10,769,853 (3,558%).",
+      "transcriptionId": "hammer-of-the-ancients",
+      "recordedSource": "user video 2026-10-21 batch2 (transcribed)"
     },
     {
       "id": "whirlwind",
@@ -217,8 +236,8 @@
         "Core",
         "Channeled"
       ],
-      "coeffPct": null,
-      "rank": null,
+      "coeffPct": 18,
+      "rank": 1,
       "dot": null,
       "furyGeneratePerCast": null,
       "furySpendPerCast": null,
@@ -227,15 +246,31 @@
         {
           "stat": "coefficient",
           "bucket": null,
-          "value": null,
+          "value": 18,
           "conditions": null,
           "stacking": null,
-          "source": "manual-entry",
-          "verified": false
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false,
+          "note": "Tooltip coefficient transcribed from user video. Unverified."
         }
       ],
       "source": "manual-entry",
-      "verified": false
+      "verified": false,
+      "maxRank": 15,
+      "tooltip": "25 Fury/s, 3,217,620 (18%)",
+      "modifiers": [
+        "MS +15%[+]",
+        "Cost Damage Bonus +40%[x] +10 Fury",
+        "Channel +10%[x] per 3 hits x25",
+        "Weaken on crit 4s",
+        "Tornado Dust Devil 4,915,123 (131%)",
+        "Bursting 732,680 (317%) Fire + 3,227,293 (1,068%) burn",
+        "Winding (other skills grant 4 charges up to 20, +15%[x] dmg & +10%[+] MS per stack, shrapnel 1,839,460 (106%) + 893,293 (115%) bleed)"
+      ],
+      "transcribed": "25 Fury/s, 3,217,620 (18%). MS +15%[+]; Cost Damage Bonus +40%[x] +10 Fury; Channel +10%[x] per 3 hits x25; Weaken on crit 4s; Tornado Dust Devil 4,915,123 (131%); Bursting 732,680 (317%) Fire + 3,227,293 (1,068%) burn; Winding (other skills grant 4 charges up to 20, +15%[x] dmg & +10%[+] MS per stack, shrapnel 1,839,460 (106%) + 893,293 (115%) bleed).",
+      "suspect": true,
+      "recordedSource": "user video 2026-10-21 batch2 (transcribed)",
+      "note": "Rank read as 1/15, inconsistent with other skills at 10-15; re-check."
     },
     {
       "id": "rend",
@@ -245,8 +280,8 @@
         "Core",
         "Bleed"
       ],
-      "coeffPct": null,
-      "rank": null,
+      "coeffPct": 86,
+      "rank": 11,
       "dot": true,
       "furyGeneratePerCast": null,
       "furySpendPerCast": null,
@@ -255,15 +290,29 @@
         {
           "stat": "coefficient",
           "bucket": null,
-          "value": null,
+          "value": 86,
           "conditions": null,
           "stacking": null,
-          "source": "manual-entry",
-          "verified": false
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false,
+          "note": "Tooltip coefficient transcribed from user video. Unverified."
         }
       ],
       "source": "manual-entry",
-      "verified": false
+      "verified": false,
+      "maxRank": 15,
+      "tooltip": "35 Fury, 663,015 (86%) + 3,564,785 (184%) bleed/5s",
+      "modifiers": [
+        "+20%[x] vs moving",
+        "+20%[x] vs Vulnerable",
+        "+20%[+] cast speed",
+        "heal 1%/s per bleeding",
+        "Scorching 1,058,164 (138%) + 4,375,932 (507%) burn",
+        "Blood Sworn (spread 50% bleed on death)",
+        "Flaying +40%[+] size/dmg, +20% per slash up to 60%"
+      ],
+      "transcribed": "35 Fury, 663,015 (86%) + 3,564,785 (184%) bleed/5s. +20%[x] vs moving; +20%[x] vs Vulnerable; +20%[+] cast speed; heal 1%/s per bleeding; Scorching 1,058,164 (138%) + 4,375,932 (507%) burn; Blood Sworn (spread 50% bleed on death); Flaying +40%[+] size/dmg, +20% per slash up to 60%.",
+      "recordedSource": "user video 2026-10-21 batch2 (transcribed)"
     },
     {
       "id": "rallying-cry-madawc",
@@ -331,8 +380,8 @@
       "tags": [
         "Mobility"
       ],
-      "coeffPct": null,
-      "rank": null,
+      "coeffPct": 652,
+      "rank": 11,
       "dot": null,
       "furyGeneratePerCast": null,
       "furySpendPerCast": null,
@@ -341,17 +390,30 @@
         {
           "stat": "coefficient",
           "bucket": null,
-          "value": null,
+          "value": 652,
           "conditions": null,
           "stacking": null,
-          "source": "https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy",
+          "source": "user video 2026-10-21 batch2 (transcribed)",
           "verified": false,
-          "note": "3.2.1 only changed Battering Ram hitbox; no number published."
+          "note": "3.2.1 only changed Battering Ram hitbox; no number published. Tooltip coefficient transcribed from user video. Unverified."
         }
       ],
       "source": "https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy",
       "verified": false,
-      "note": "3.2.1 only changed Battering Ram hitbox; no number published."
+      "note": "3.2.1 only changed Battering Ram hitbox; no number published.",
+      "maxRank": 15,
+      "tooltip": "+15 Fury, CD 16.00s, 4,304,672 (652%)",
+      "modifiers": [
+        "Unstoppable",
+        "up to +20%[x] by distance",
+        "+5%[x]/enemy up to 30%[x]",
+        "CD -1s/enemy up to 5",
+        "Battering Ram Fire 1,375,560 (105%) knockdown 3s, trail 2,875,662 (391%)",
+        "Phalanx 2 Ancients 2,134,315 (261%)",
+        "Merciless Assault 3 charges"
+      ],
+      "transcribed": "+15 Fury, CD 16.00s, 4,304,672 (652%). Unstoppable; up to +20%[x] by distance; +5%[x]/enemy up to 30%[x]; CD -1s/enemy up to 5; Battering Ram Fire 1,375,560 (105%) knockdown 3s, trail 2,875,662 (391%); Phalanx 2 Ancients 2,134,315 (261%); Merciless Assault 3 charges.",
+      "recordedSource": "user video 2026-10-21 batch2 (transcribed)"
     },
     {
       "id": "kick",
@@ -360,8 +422,8 @@
       "tags": [
         "Brawling"
       ],
-      "coeffPct": null,
-      "rank": null,
+      "coeffPct": 148,
+      "rank": 15,
       "dot": null,
       "furyGeneratePerCast": null,
       "furySpendPerCast": null,
@@ -370,17 +432,748 @@
         {
           "stat": "coefficient",
           "bucket": null,
-          "value": null,
+          "value": 148,
           "conditions": null,
           "stacking": null,
-          "source": "https://news.blizzard.com/en-us/article/24292852/the-3-2-0-ptr-what-you-need-to-know",
+          "source": "user video 2026-10-21 batch2 (transcribed)",
           "verified": false,
-          "note": "Power Variant bug fix only."
+          "note": "Power Variant bug fix only. Tooltip coefficient transcribed from user video. Unverified."
         }
       ],
       "source": "https://news.blizzard.com/en-us/article/24292852/the-3-2-0-ptr-what-you-need-to-know",
       "verified": false,
-      "note": "Power Variant bug fix only."
+      "note": "Power Variant bug fix only.",
+      "maxRank": 15,
+      "tooltip": "2 charges, CD 5.43s, 1,983,100 (148%), knockback, terrain 903,190 (110%) stun 3s",
+      "modifiers": [
+        "Moving +20%[x]",
+        "Vulnerable 4s",
+        "Mobility CD -2s",
+        "Collide 426,453 (55%)",
+        "Madness dash 5,483,517 (675%) knockdown 4s (Mobility)",
+        "Crimson 783,959 (101%) fire, explode 2,259,230 (291%)",
+        "Power (Core, 30 Fury, 3,132,328 (385%), +8.0%[x]/max Fury up to 150)"
+      ],
+      "transcribed": "2 charges, CD 5.43s, 1,983,100 (148%), knockback, terrain 903,190 (110%) stun 3s. Moving +20%[x]; Vulnerable 4s; Mobility CD -2s; Collide 426,453 (55%); Madness dash 5,483,517 (675%) knockdown 4s (Mobility); Crimson 783,959 (101%) fire, explode 2,259,230 (291%); Power (Core, 30 Fury, 3,132,328 (385%), +8.0%[x]/max Fury up to 150).",
+      "recordedSource": "user video 2026-10-21 batch2 (transcribed)"
+    },
+    {
+      "id": "flay",
+      "name": "Flay",
+      "category": null,
+      "tags": null,
+      "dot": null,
+      "furyGeneratePerCast": null,
+      "furySpendPerCast": null,
+      "variantOf": null,
+      "effects": [
+        {
+          "stat": "coefficient",
+          "bucket": null,
+          "conditions": null,
+          "stacking": null,
+          "note": "Tooltip coefficient transcribed from user video. Unverified.",
+          "value": 15,
+          "verified": false,
+          "source": "user video 2026-10-21 batch2 (transcribed)"
+        }
+      ],
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "coeffPct": 15,
+      "rank": 10,
+      "maxRank": 15,
+      "tooltip": "+15 Fury, LH 50%, 128,476 (15%) + 386,013 (45%) bleed/5s",
+      "modifiers": [
+        "Slow 20%",
+        "Duration +5s",
+        "Anemia (bleed -2s, Vulnerable)",
+        "Hemorrhaging (+2s if enemy moves far)",
+        "The Flayer (blood explosion 326,944 (114%) bleed/5s)",
+        "Healing 1% max life (1,475)/s per bleeding nearby enemy up to 5%",
+        "Weaken (20%/15%/10%)"
+      ],
+      "transcribed": "+15 Fury, LH 50%, 128,476 (15%) + 386,013 (45%) bleed/5s. Slow 20%; Duration +5s; Anemia (bleed -2s, Vulnerable); Hemorrhaging (+2s if enemy moves far); The Flayer (blood explosion 326,944 (114%) bleed/5s); Healing 1% max life (1,475)/s per bleeding nearby enemy up to 5%; Weaken (20%/15%/10%)."
+    },
+    {
+      "id": "frenzy",
+      "name": "Frenzy",
+      "category": null,
+      "tags": null,
+      "dot": null,
+      "furyGeneratePerCast": null,
+      "furySpendPerCast": null,
+      "variantOf": null,
+      "effects": [
+        {
+          "stat": "coefficient",
+          "bucket": null,
+          "conditions": null,
+          "stacking": null,
+          "note": "Tooltip coefficient transcribed from user video. Unverified.",
+          "value": 168,
+          "verified": false,
+          "source": "user video 2026-10-21 batch2 (transcribed)"
+        }
+      ],
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "coeffPct": 168,
+      "rank": 11,
+      "maxRank": 15,
+      "tooltip": "+7 Fury, LH 30%, 1,321,228 (168%) per pair, AS +10%[+] up to 30%[+]",
+      "modifiers": [
+        "Unhindered at max",
+        "Ferocity per stack (5% AS, x4)",
+        "+2 Fury",
+        "+2 stacks",
+        "Raging (Fire, 15% explosion 3,448,854 (451%) burn/5s)",
+        "Throwing (ranged pierce 3,032,000 (88%), 20% at max shrapnel 1,885,729 (55%) + 1,796,351 (51%) bleed)",
+        "Barrage (+5 stacks, Berserking 5s at max)"
+      ],
+      "transcribed": "+7 Fury, LH 30%, 1,321,228 (168%) per pair, AS +10%[+] up to 30%[+]. Unhindered at max; Ferocity per stack (5% AS, x4); +2 Fury; +2 stacks; Raging (Fire, 15% explosion 3,448,854 (451%) burn/5s); Throwing (ranged pierce 3,032,000 (88%), 20% at max shrapnel 1,885,729 (55%) + 1,796,351 (51%) bleed); Barrage (+5 stacks, Berserking 5s at max)."
+    },
+    {
+      "id": "bash",
+      "name": "Bash",
+      "category": null,
+      "tags": null,
+      "dot": null,
+      "furyGeneratePerCast": null,
+      "furySpendPerCast": null,
+      "variantOf": null,
+      "effects": [
+        {
+          "stat": "coefficient",
+          "bucket": null,
+          "conditions": null,
+          "stacking": null,
+          "note": "Tooltip coefficient transcribed from user video. Unverified.",
+          "value": 316,
+          "verified": false,
+          "source": "user video 2026-10-21 batch2 (transcribed)"
+        }
+      ],
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "coeffPct": 316,
+      "rank": 12,
+      "maxRank": 15,
+      "tooltip": "+15 Fury, LH 50%, 2,059,707 (316%), every 5th clobbers (stun 1.5s)",
+      "modifiers": [
+        "Clobber +10 Fury",
+        "Clobber +1 Overpower",
+        "threshold -2",
+        "Resolve (+25% Armor, up to 8)",
+        "Atomic Blast 2,210,845 (344%) Fire",
+        "Violent Swings 25% clobber chance",
+        "Heavy Knuckles (clobber 100% crit, Vulnerable 4s)"
+      ],
+      "transcribed": "+15 Fury, LH 50%, 2,059,707 (316%), every 5th clobbers (stun 1.5s). Clobber +10 Fury; Clobber +1 Overpower; threshold -2; Resolve (+25% Armor, up to 8); Atomic Blast 2,210,845 (344%) Fire; Violent Swings 25% clobber chance; Heavy Knuckles (clobber 100% crit, Vulnerable 4s)."
+    },
+    {
+      "id": "lunging-strike",
+      "name": "Lunging Strike",
+      "category": null,
+      "tags": null,
+      "dot": null,
+      "furyGeneratePerCast": null,
+      "furySpendPerCast": null,
+      "variantOf": null,
+      "effects": [
+        {
+          "stat": "coefficient",
+          "bucket": null,
+          "conditions": null,
+          "stacking": null,
+          "note": "Tooltip coefficient transcribed from user video. Unverified.",
+          "value": 113,
+          "verified": false,
+          "source": "user video 2026-10-21 batch2 (transcribed)"
+        }
+      ],
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "coeffPct": 113,
+      "rank": 11,
+      "maxRank": 15,
+      "tooltip": "+12 Fury, 3,382,384 (113%) (next rank read 3,222,723 (123%) SUSPECT)",
+      "modifiers": [
+        "Range +2",
+        "+1 Fury per enemy",
+        "Berserking 2s on crit, +15%[+] crit",
+        "Healing 2% max life (0)",
+        "Whirling Dust Devil 304,771 (10%)",
+        "Impaling (2s CD, path dmg)",
+        "Skewer 15%[x] +10%[x]/target up to 100%[x]"
+      ],
+      "transcribed": "+12 Fury, 3,382,384 (113%) (next rank read 3,222,723 (123%) SUSPECT). Range +2; +1 Fury per enemy; Berserking 2s on crit, +15%[+] crit; Healing 2% max life (0); Whirling Dust Devil 304,771 (10%); Impaling (2s CD, path dmg); Skewer 15%[x] +10%[x]/target up to 100%[x].",
+      "suspect": true,
+      "nextRank": {
+        "damage": 3222723,
+        "coeffPct": 123
+      },
+      "note": "Next-rank value read as 3,222,723 (123%), lower absolute than current 3,382,384 (113%) while % is higher; re-check."
+    },
+    {
+      "id": "upheaval",
+      "name": "Upheaval",
+      "category": null,
+      "tags": null,
+      "dot": null,
+      "furyGeneratePerCast": null,
+      "furySpendPerCast": null,
+      "variantOf": null,
+      "effects": [
+        {
+          "stat": "coefficient",
+          "bucket": null,
+          "conditions": null,
+          "stacking": null,
+          "note": "Tooltip coefficient transcribed from user video. Unverified.",
+          "value": 278,
+          "verified": false,
+          "source": "user video 2026-10-21 batch2 (transcribed)"
+        }
+      ],
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "coeffPct": 278,
+      "rank": 11,
+      "maxRank": 15,
+      "tooltip": "45 Fury, 5,547,851 (278%)",
+      "modifiers": [
+        "+30%[x] first 5 enemies",
+        "cost 25",
+        "Free Cast per 100 Fury spent (stack 300)",
+        "Overpower consume +20%[+] size +20%[x]",
+        "Suppress +75%[x] range-based",
+        "Iron Burst 1,462,254 (182%) + 2,759,752 (3,238%) bleed",
+        "Trailblazing 5,329,385 (56%) Fire + trail 2,875,662 (391%) burn/3s"
+      ],
+      "transcribed": "45 Fury, 5,547,851 (278%). +30%[x] first 5 enemies; cost 25; Free Cast per 100 Fury spent (stack 300); Overpower consume +20%[+] size +20%[x]; Suppress +75%[x] range-based; Iron Burst 1,462,254 (182%) + 2,759,752 (3,238%) bleed; Trailblazing 5,329,385 (56%) Fire + trail 2,875,662 (391%) burn/3s."
+    },
+    {
+      "id": "double-swing",
+      "name": "Double Swing",
+      "category": null,
+      "tags": null,
+      "dot": null,
+      "furyGeneratePerCast": null,
+      "furySpendPerCast": null,
+      "variantOf": null,
+      "effects": [
+        {
+          "stat": "coefficient",
+          "bucket": null,
+          "conditions": null,
+          "stacking": null,
+          "note": "Tooltip coefficient transcribed from user video. Unverified.",
+          "value": 114,
+          "verified": false,
+          "source": "user video 2026-10-21 batch2 (transcribed)"
+        }
+      ],
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "coeffPct": 114,
+      "rank": 10,
+      "maxRank": 15,
+      "tooltip": "30 Fury, 1,485,023 (114%) per weapon",
+      "modifiers": [
+        "Fortify 3% per enemy hit by both",
+        "20% hit twice",
+        "cost -2/hit",
+        "+2%[x]/enemy 3s",
+        "Flurry +1 hit 1,462,254 (112%), +2 while Berserking",
+        "Twister Dust Devils 1,462,254 (112%)",
+        "Slice and Dice (+20% size, -40% cast speed, edge 2 cuts 3,461,409 (266%), +10%[+] cast speed x5)"
+      ],
+      "transcribed": "30 Fury, 1,485,023 (114%) per weapon. Fortify 3% per enemy hit by both; 20% hit twice; cost -2/hit; +2%[x]/enemy 3s; Flurry +1 hit 1,462,254 (112%), +2 while Berserking; Twister Dust Devils 1,462,254 (112%); Slice and Dice (+20% size, -40% cast speed, edge 2 cuts 3,461,409 (266%), +10%[+] cast speed x5)."
+    },
+    {
+      "id": "ground-stomp",
+      "name": "Ground Stomp",
+      "category": null,
+      "tags": null,
+      "dot": null,
+      "furyGeneratePerCast": null,
+      "furySpendPerCast": null,
+      "variantOf": null,
+      "effects": [
+        {
+          "stat": "coefficient",
+          "bucket": null,
+          "conditions": null,
+          "stacking": null,
+          "note": "Tooltip coefficient transcribed from user video. Unverified.",
+          "value": 184,
+          "verified": false,
+          "source": "user video 2026-10-21 batch2 (transcribed)"
+        }
+      ],
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "coeffPct": 184,
+      "rank": 11,
+      "maxRank": 15,
+      "tooltip": "CD 14.28s, 1,784,232 (184%), stun 3s",
+      "modifiers": [
+        "+2 charges",
+        "+20 Fury",
+        "+30%[x]",
+        "+30%[+] size",
+        "Breach Fire fissure 9,102,961 (1,180%), burning +30%[x] taken",
+        "Seismic Earthquake 4,438,477 (575%) slow 50%",
+        "Stomping Grounds extra stomps 559,599 (14%) for 5s"
+      ],
+      "transcribed": "CD 14.28s, 1,784,232 (184%), stun 3s. +2 charges; +20 Fury; +30%[x]; +30%[+] size; Breach Fire fissure 9,102,961 (1,180%), burning +30%[x] taken; Seismic Earthquake 4,438,477 (575%) slow 50%; Stomping Grounds extra stomps 559,599 (14%) for 5s."
+    },
+    {
+      "id": "rallying-cry",
+      "name": "Rallying Cry",
+      "category": null,
+      "tags": null,
+      "dot": null,
+      "furyGeneratePerCast": null,
+      "furySpendPerCast": null,
+      "variantOf": null,
+      "effects": [
+        {
+          "stat": "coefficient",
+          "bucket": null,
+          "conditions": null,
+          "stacking": null,
+          "value": null,
+          "verified": false,
+          "source": "user video 2026-10-21 batch2 (transcribed)"
+        }
+      ],
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "coeffPct": null,
+      "rank": 15,
+      "maxRank": 15,
+      "tooltip": "CD 25.00s, MS +30%[+] 4.0s, Resource Gen +17%[x], MS +10%[+], Fortify 15% max life, +20%[x] +20%/ally",
+      "modifiers": [
+        "Duration 7s",
+        "Fury Gain 3 per 5m",
+        "The World (Daze+Slow 124% 4s, AS instead of MS, 2.5s CD)",
+        "Madawc (Fury -10, Madawc 6,480,735 (556%))"
+      ],
+      "transcribed": "CD 25.00s, MS +30%[+] 4.0s, Resource Gen +17%[x], MS +10%[+], Fortify 15% max life, +20%[x] +20%/ally. Duration 7s; Fury Gain 3 per 5m; The World (Daze+Slow 124% 4s, AS instead of MS, 2.5s CD); Madawc (Fury -10, Madawc 6,480,735 (556%))."
+    },
+    {
+      "id": "iron-skin",
+      "name": "Iron Skin",
+      "category": null,
+      "tags": null,
+      "dot": null,
+      "furyGeneratePerCast": null,
+      "furySpendPerCast": null,
+      "variantOf": null,
+      "effects": [
+        {
+          "stat": "coefficient",
+          "bucket": null,
+          "conditions": null,
+          "stacking": null,
+          "value": null,
+          "verified": false,
+          "source": "user video 2026-10-21 batch2 (transcribed)"
+        }
+      ],
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "coeffPct": null,
+      "rank": 14,
+      "maxRank": 15,
+      "tooltip": "CD 14.00s, DR +30%, Barrier 83% missing life 5s",
+      "modifiers": [
+        "MS +15%[+]",
+        "Weaken 5s",
+        "2 Resolve",
+        "Max Life +15%",
+        "Juggernaut (Unstoppable, damage/knockback attackers)",
+        "Endure (no barrier, can't drop below 1, heal 21.5%)",
+        "Retaliation (3x duration, shrapnel)"
+      ],
+      "transcribed": "CD 14.00s, DR +30%, Barrier 83% missing life 5s. MS +15%[+]; Weaken 5s; 2 Resolve; Max Life +15%; Juggernaut (Unstoppable, damage/knockback attackers); Endure (no barrier, can't drop below 1, heal 21.5%); Retaliation (3x duration, shrapnel)."
+    },
+    {
+      "id": "challenging-shout",
+      "name": "Challenging Shout",
+      "category": null,
+      "tags": null,
+      "dot": null,
+      "furyGeneratePerCast": null,
+      "furySpendPerCast": null,
+      "variantOf": null,
+      "effects": [
+        {
+          "stat": "coefficient",
+          "bucket": null,
+          "conditions": null,
+          "stacking": null,
+          "value": null,
+          "verified": false,
+          "source": "user video 2026-10-21 batch2 (transcribed)"
+        }
+      ],
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "coeffPct": null,
+      "rank": 11,
+      "maxRank": 15,
+      "tooltip": "CD 14.28s, Taunt, 20.6% DR 6.0s; burn 12,112,596 (4,030%) Fire/4s; no DR instead +20%[x] vs Burning; Weakens",
+      "modifiers": [
+        "Duration +2s",
+        "first 5 taunted +20%[x]",
+        "taking dmg +5 Fury",
+        "Bawl +20% decaying DR",
+        "Talic 1,676,546 (523%)"
+      ],
+      "transcribed": "CD 14.28s, Taunt, 20.6% DR 6.0s; burn 12,112,596 (4,030%) Fire/4s; no DR instead +20%[x] vs Burning; Weakens. Duration +2s; first 5 taunted +20%[x]; taking dmg +5 Fury; Bawl +20% decaying DR; Talic 1,676,546 (523%).",
+      "note": "no direct-hit coefficient shown; percentages in tooltip are burn/secondary effects"
+    },
+    {
+      "id": "war-cry",
+      "name": "War Cry",
+      "category": null,
+      "tags": null,
+      "dot": null,
+      "furyGeneratePerCast": null,
+      "furySpendPerCast": null,
+      "variantOf": null,
+      "effects": [
+        {
+          "stat": "coefficient",
+          "bucket": null,
+          "conditions": null,
+          "stacking": null,
+          "value": null,
+          "verified": false,
+          "source": "user video 2026-10-21 batch2 (transcribed)"
+        }
+      ],
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "coeffPct": null,
+      "rank": 15,
+      "maxRank": 15,
+      "tooltip": "CD 15.00s, +28.5%[x] dmg 4.0s, +15% bonus, full to allies, Berserking 4s, Vulnerable 4s",
+      "modifiers": [
+        "Slow 20%",
+        "2 Ferocity",
+        "duration 6s",
+        "The Scream (Fear, +3.43%[x] per feared up to 34.30%[x])",
+        "Korlic 1,309,671 (460%)"
+      ],
+      "transcribed": "CD 15.00s, +28.5%[x] dmg 4.0s, +15% bonus, full to allies, Berserking 4s, Vulnerable 4s. Slow 20%; 2 Ferocity; duration 6s; The Scream (Fear, +3.43%[x] per feared up to 34.30%[x]); Korlic 1,309,671 (460%)."
+    },
+    {
+      "id": "leap",
+      "name": "Leap",
+      "category": null,
+      "tags": null,
+      "dot": null,
+      "furyGeneratePerCast": null,
+      "furySpendPerCast": null,
+      "variantOf": null,
+      "effects": [
+        {
+          "stat": "coefficient",
+          "bucket": null,
+          "conditions": null,
+          "stacking": null,
+          "note": "Tooltip coefficient transcribed from user video. Unverified.",
+          "value": 132,
+          "verified": false,
+          "source": "user video 2026-10-21 batch2 (transcribed)"
+        }
+      ],
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "coeffPct": 132,
+      "rank": 11,
+      "maxRank": 15,
+      "tooltip": "+15 Fury, CD 14.28s, 1,286,746 (132%), slow 70% 3s.",
+      "modifiers": [
+        "Arsenal Bonus (DW 2s Berserking, Bludg 1 Overpower, Slash 1 Resolve)",
+        "20 Fury",
+        "+20%[x] & knockdown 3s",
+        "Pull",
+        "Mosh 3 Ancients 430,079 (54%)",
+        "Earthshatter 682,021 (75%), recast 5s, quake 2,411,865 (311%)/4s",
+        "Death From Above up to 30% size & 3,014,036 (351%)."
+      ],
+      "transcribed": "+15 Fury, CD 14.28s, 1,286,746 (132%), slow 70% 3s.",
+      "note": "modifiers transcribed in clip 6 (Skill tree 3)"
+    },
+    {
+      "id": "mighty-throw",
+      "name": "Mighty Throw",
+      "category": null,
+      "tags": null,
+      "dot": null,
+      "furyGeneratePerCast": null,
+      "furySpendPerCast": null,
+      "variantOf": null,
+      "effects": [
+        {
+          "stat": "coefficient",
+          "bucket": null,
+          "conditions": null,
+          "stacking": null,
+          "note": "Tooltip coefficient transcribed from user video. Unverified.",
+          "value": 154,
+          "verified": false,
+          "source": "user video 2026-10-21 batch2 (transcribed)"
+        }
+      ],
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "coeffPct": 154,
+      "rank": 11,
+      "maxRank": 15,
+      "tooltip": "CD 12.24s, impact 10%[x], pulse 3,222,034 (154%)/s 4s",
+      "modifiers": [
+        "Barrier 15% max life (737) 4s",
+        "radius +20%",
+        "2 Ferocity",
+        "Overpower +10%[x]",
+        "Mightiest (Ultimate, 16,592,826 (2,143%), 6s CD)",
+        "Rapid swap pulse 1,568,539 (181%)",
+        "Spares 2 weapons 1,353,424 (160%) + pulse 2,656,867 (312%)"
+      ],
+      "transcribed": "CD 12.24s, impact 10%[x], pulse 3,222,034 (154%)/s 4s. Barrier 15% max life (737) 4s; radius +20%; 2 Ferocity; Overpower +10%[x]; Mightiest (Ultimate, 16,592,826 (2,143%), 6s CD); Rapid swap pulse 1,568,539 (181%); Spares 2 weapons 1,353,424 (160%) + pulse 2,656,867 (312%)."
+    },
+    {
+      "id": "rupture",
+      "name": "Rupture",
+      "category": null,
+      "tags": null,
+      "dot": null,
+      "furyGeneratePerCast": null,
+      "furySpendPerCast": null,
+      "variantOf": null,
+      "effects": [
+        {
+          "stat": "coefficient",
+          "bucket": null,
+          "conditions": null,
+          "stacking": null,
+          "note": "Tooltip coefficient transcribed from user video. Unverified.",
+          "value": 86,
+          "verified": false,
+          "source": "user video 2026-10-21 batch2 (transcribed)"
+        }
+      ],
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "coeffPct": 86,
+      "rank": 11,
+      "maxRank": 15,
+      "tooltip": "CD 8.64s, 663,015 (86%) + 3,564,785 (184%) bleed",
+      "modifiers": [
+        "Size +25%",
+        "+20%[x] -5%/extra enemy",
+        "CD -1s",
+        "heal 22% on hit",
+        "All For One 2 Ancients 426,065 (55%) + rip 4,385,244 (519%)",
+        "Blood Pool 5,164,191 (583%) bleed, +15% AS allies",
+        "Gore 1,386,119 (181%) bleed"
+      ],
+      "transcribed": "CD 8.64s, 663,015 (86%) + 3,564,785 (184%) bleed. Size +25%; +20%[x] -5%/extra enemy; CD -1s; heal 22% on hit; All For One 2 Ancients 426,065 (55%) + rip 4,385,244 (519%); Blood Pool 5,164,191 (583%) bleed, +15% AS allies; Gore 1,386,119 (181%) bleed."
+    },
+    {
+      "id": "steel-grasp",
+      "name": "Steel Grasp",
+      "category": null,
+      "tags": null,
+      "dot": null,
+      "furyGeneratePerCast": null,
+      "furySpendPerCast": null,
+      "variantOf": null,
+      "effects": [
+        {
+          "stat": "coefficient",
+          "bucket": null,
+          "conditions": null,
+          "stacking": null,
+          "note": "Tooltip coefficient transcribed from user video. Unverified.",
+          "value": 139,
+          "verified": false,
+          "source": "user video 2026-10-21 batch2 (transcribed)"
+        }
+      ],
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "coeffPct": 139,
+      "rank": 11,
+      "maxRank": 15,
+      "tooltip": "2 charges, CD 8.64s, 3 chains 1,063,348 (139%), pull",
+      "modifiers": [
+        "+1 charge",
+        "Berserking 2s",
+        "Vulnerable 4s",
+        "Weaken 4s",
+        "Solo Chain (Basic, 15 Fury, no CD)",
+        "Devil's Chain 2 charges, 3 Dust Devils 783,959 (101%)",
+        "Chain Whip (Brawling, 2 extra chains 2,056,007 (251%))"
+      ],
+      "transcribed": "2 charges, CD 8.64s, 3 chains 1,063,348 (139%), pull. +1 charge; Berserking 2s; Vulnerable 4s; Weaken 4s; Solo Chain (Basic, 15 Fury, no CD); Devil's Chain 2 charges, 3 Dust Devils 783,959 (101%); Chain Whip (Brawling, 2 extra chains 2,056,007 (251%))."
+    },
+    {
+      "id": "death-blow",
+      "name": "Death Blow",
+      "category": null,
+      "tags": null,
+      "dot": null,
+      "furyGeneratePerCast": null,
+      "furySpendPerCast": null,
+      "variantOf": null,
+      "effects": [
+        {
+          "stat": "coefficient",
+          "bucket": null,
+          "conditions": null,
+          "stacking": null,
+          "note": "Tooltip coefficient transcribed from user video. Unverified.",
+          "value": 737,
+          "verified": false,
+          "source": "user video 2026-10-21 batch2 (transcribed)"
+        }
+      ],
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "coeffPct": 737,
+      "rank": 11,
+      "maxRank": 15,
+      "tooltip": "CD 9.05s, 5,640,785 (737%), kill resets",
+      "modifiers": [
+        "Overpower on kill",
+        "Execute 2s",
+        "2 charges",
+        "kill restores 100% Fury",
+        "Blast Fire + 4,473,322 (47%) burn, explode 895,055 (117%)",
+        "Sonic Boom 11,464,073 (221%)",
+        "Consecutive (CD 5s, +25%[x] up to 75%[x])"
+      ],
+      "transcribed": "CD 9.05s, 5,640,785 (737%), kill resets. Overpower on kill; Execute 2s; 2 charges; kill restores 100% Fury; Blast Fire + 4,473,322 (47%) burn, explode 895,055 (117%); Sonic Boom 11,464,073 (221%); Consecutive (CD 5s, +25%[x] up to 75%[x])."
+    },
+    {
+      "id": "wrath-of-the-berserker",
+      "name": "Wrath of the Berserker",
+      "category": null,
+      "tags": null,
+      "dot": null,
+      "furyGeneratePerCast": null,
+      "furySpendPerCast": null,
+      "variantOf": null,
+      "effects": [
+        {
+          "stat": "coefficient",
+          "bucket": null,
+          "conditions": null,
+          "stacking": null,
+          "value": null,
+          "verified": false,
+          "source": "user video 2026-10-21 batch2 (transcribed)"
+        }
+      ],
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "coeffPct": null,
+      "rank": 11,
+      "maxRank": 15,
+      "tooltip": "CD 34.32s, +50%[+] dmg, Unstoppable 15.0s, Basic +560%[+], burn 279,568 (32%), +10% All Res, Berserking base doubled, 1 Overpower/s",
+      "modifiers": [
+        "+20%[+] AS & +30%[+] Fury gen",
+        "duration 18.0s",
+        "Full Throttle aura 2,750,484 (360%) + burn 279,568 (32%), +10% All Res",
+        "Deep Impact 2,095,283 (256%) Fire",
+        "Maximum Carnage +1s per 25 Fury up to 5"
+      ],
+      "transcribed": "CD 34.32s, +50%[+] dmg, Unstoppable 15.0s, Basic +560%[+], burn 279,568 (32%), +10% All Res, Berserking base doubled, 1 Overpower/s. +20%[+] AS & +30%[+] Fury gen; duration 18.0s; Full Throttle aura 2,750,484 (360%) + burn 279,568 (32%), +10% All Res; Deep Impact 2,095,283 (256%) Fire; Maximum Carnage +1s per 25 Fury up to 5.",
+      "note": "no direct-hit coefficient shown; percentages in tooltip are burn/secondary effects"
+    },
+    {
+      "id": "iron-maelstrom",
+      "name": "Iron Maelstrom",
+      "category": null,
+      "tags": null,
+      "dot": null,
+      "furyGeneratePerCast": null,
+      "furySpendPerCast": null,
+      "variantOf": null,
+      "effects": [
+        {
+          "stat": "coefficient",
+          "bucket": null,
+          "conditions": null,
+          "stacking": null,
+          "note": "Tooltip coefficient transcribed from user video. Unverified.",
+          "value": 173,
+          "verified": false,
+          "source": "user video 2026-10-21 batch2 (transcribed)"
+        }
+      ],
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "coeffPct": 173,
+      "rank": 11,
+      "maxRank": 15,
+      "tooltip": "CD 18.11s, Bludg 3,439,353 (173%) stun 2.0s; Slash 770,621 (112%) + 5,825,731 (745%) bleed; DW 1,368,074 (175%)",
+      "modifiers": [
+        "Swap CD -1s",
+        "activation -2s all CDs",
+        "Weaken 4s",
+        "Additional (Bludg +10%[+] CD, Slash +10%[+] Vuln, DW +20%[+] cast speed)",
+        "Armageddon (quake 1,324,809 (171%); shrapnel 72,796 (10%) + 1,387,080 (193%); Dust Devils 206,170 (26%))",
+        "Hidden Technique 3 charges +75%[x]",
+        "Mastered Weapon (single Weapon Mastery skill, CD 15s)"
+      ],
+      "transcribed": "CD 18.11s, Bludg 3,439,353 (173%) stun 2.0s; Slash 770,621 (112%) + 5,825,731 (745%) bleed; DW 1,368,074 (175%). Swap CD -1s; activation -2s all CDs; Weaken 4s; Additional (Bludg +10%[+] CD, Slash +10%[+] Vuln, DW +20%[+] cast speed); Armageddon (quake 1,324,809 (171%); shrapnel 72,796 (10%) + 1,387,080 (193%); Dust Devils 206,170 (26%)); Hidden Technique 3 charges +75%[x]; Mastered Weapon (single Weapon Mastery skill, CD 15s)."
+    },
+    {
+      "id": "call-of-the-ancients",
+      "name": "Call of the Ancients",
+      "category": null,
+      "tags": null,
+      "dot": null,
+      "furyGeneratePerCast": null,
+      "furySpendPerCast": null,
+      "variantOf": null,
+      "effects": [
+        {
+          "stat": "coefficient",
+          "bucket": null,
+          "conditions": null,
+          "stacking": null,
+          "value": null,
+          "verified": false,
+          "source": "user video 2026-10-21 batch2 (transcribed)"
+        }
+      ],
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "coeffPct": null,
+      "rank": 11,
+      "maxRank": 15,
+      "tooltip": "CD 34.28s, 3 Ancients 10s",
+      "modifiers": [
+        "Korlic 2,669,215 (136%) & 879,422 (123%)",
+        "Talic 1,732,464 (243%)",
+        "Madawc 3,923,431 (176%). +5%[+] AS & +5%[x] per Ancient",
+        "Ancients +15%[+] AS",
+        "5% DR per Ancient",
+        "+3%[x] mutual",
+        "Highlander (1 permanent)",
+        "The Chosen (1 strong, 2x duration; Korlic 10 Fury, Talic slow 25%, Madawc 30% stun)",
+        "Empowered (Korlic quake 2,055,906 (122%), Talic DD 1,455,353 (188%), Madawc burn 2,223,553 (27%))"
+      ],
+      "transcribed": "CD 34.28s, 3 Ancients 10s. Korlic 2,669,215 (136%) & 879,422 (123%); Talic 1,732,464 (243%); Madawc 3,923,431 (176%). +5%[+] AS & +5%[x] per Ancient; Ancients +15%[+] AS; 5% DR per Ancient; +3%[x] mutual; Highlander (1 permanent); The Chosen (1 strong, 2x duration; Korlic 10 Fury, Talic slow 25%, Madawc 30% stun); Empowered (Korlic quake 2,055,906 (122%), Talic DD 1,455,353 (188%), Madawc burn 2,223,553 (27%))."
     }
   ],
   "skillVariants": [],
@@ -563,6 +1356,49 @@
       ],
       "source": "https://news.blizzard.com/en-us/article/24292852/the-3-2-0-ptr-what-you-need-to-know",
       "verified": false
+    },
+    {
+      "id": "aspect-of-coagulation",
+      "name": "Aspect of Coagulation",
+      "slots": null,
+      "rank": "5/16",
+      "category": "aspect",
+      "potencyNote": "Aspects get 50%/100% potency on Amulets / Two-Handed weapons",
+      "transcribed": "Aspect of Coagulation, RANK 5/16: 20% [20-30]% increased Fortify generation and 1.9% [1.5-2.0]% DR while Fortified. Aspects get 50%/100% potency on Amulets / Two-Handed weapons. (only tooltip shown)",
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "effects": [
+        {
+          "stat": "increased Fortify generation",
+          "bucket": null,
+          "value": 20,
+          "range": [
+            20,
+            30
+          ],
+          "unit": "%",
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false
+        },
+        {
+          "stat": "DR while Fortified",
+          "bucket": null,
+          "value": 1.9,
+          "range": [
+            1.5,
+            2
+          ],
+          "unit": "%",
+          "conditions": [
+            "while Fortified"
+          ],
+          "stacking": null,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false
+        }
+      ]
     }
   ],
   "uniques": [
@@ -667,7 +1503,860 @@
       "note": "CDR 0.5s."
     }
   ],
-  "affixes": [],
+  "affixes": [
+    {
+      "id": "elemental-surge-day",
+      "name": "Elemental Surge - Day",
+      "slot": null,
+      "category": "Weapons",
+      "rarity": "Legendary",
+      "learned": null,
+      "transcribed": "Lucky Hit up to 40% chance to deal +[1,500-2,400] Physical / Fire / Lightning dmg",
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "effects": [
+        {
+          "stat": "Lucky Hit up to 40% chance to deal +[1,500-2,400] Physical / Fire / Lightning dmg",
+          "bucket": null,
+          "value": [
+            1500,
+            2400
+          ],
+          "unit": "flat",
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false
+        }
+      ]
+    },
+    {
+      "id": "elemental-surge-night",
+      "name": "Elemental Surge - Night",
+      "slot": null,
+      "category": "Weapons",
+      "rarity": "Legendary",
+      "learned": null,
+      "transcribed": "same for Cold / Poison / Shadow",
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "effects": [
+        {
+          "stat": "same for Cold / Poison / Shadow",
+          "bucket": null,
+          "value": null,
+          "unit": null,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false
+        }
+      ]
+    },
+    {
+      "id": "worldly-destruction",
+      "name": "Worldly Destruction",
+      "slot": null,
+      "category": "Weapons",
+      "rarity": "Legendary",
+      "learned": null,
+      "transcribed": "+[9.0-12.5]% Attack Speed; +[5.0-6.5]% Crit Chance; LH up to +[12.5-16.0]% Vulnerable 2s; LH up to +[12.5-16.0]% Weaken 2s",
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "effects": [
+        {
+          "stat": "+[9.0-12.5]% Attack Speed",
+          "bucket": null,
+          "value": [
+            9,
+            12.5
+          ],
+          "unit": "%",
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false
+        },
+        {
+          "stat": "+[5.0-6.5]% Crit Chance",
+          "bucket": null,
+          "value": [
+            5,
+            6.5
+          ],
+          "unit": "%",
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false
+        },
+        {
+          "stat": "LH up to +[12.5-16.0]% Vulnerable 2s",
+          "bucket": null,
+          "value": [
+            12.5,
+            16
+          ],
+          "unit": "%",
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false
+        },
+        {
+          "stat": "LH up to +[12.5-16.0]% Weaken 2s",
+          "bucket": null,
+          "value": [
+            12.5,
+            16
+          ],
+          "unit": "%",
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false
+        }
+      ]
+    },
+    {
+      "id": "worldly-scourge",
+      "name": "Worldly Scourge",
+      "slot": null,
+      "category": "Weapons",
+      "rarity": "Legendary",
+      "learned": null,
+      "transcribed": "LH up to +[12.5-16.0]% Daze / Freeze / Immobilize / Stun 2s",
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "effects": [
+        {
+          "stat": "LH up to +[12.5-16.0]% Daze / Freeze / Immobilize / Stun 2s",
+          "bucket": null,
+          "value": [
+            12.5,
+            16
+          ],
+          "unit": "%",
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false
+        }
+      ]
+    },
+    {
+      "id": "worldly-afflictions",
+      "name": "Worldly Afflictions",
+      "slot": null,
+      "category": "Weapons",
+      "rarity": "Rare",
+      "learned": null,
+      "transcribed": "LH up to +[9.0-11.5]% Daze / Freeze / Immobilize / Stun 2s",
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "effects": [
+        {
+          "stat": "LH up to +[9.0-11.5]% Daze / Freeze / Immobilize / Stun 2s",
+          "bucket": null,
+          "value": [
+            9,
+            11.5
+          ],
+          "unit": "%",
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false
+        }
+      ]
+    },
+    {
+      "id": "demolition-finesse",
+      "name": "Demolition Finesse",
+      "slot": null,
+      "category": "Offensive",
+      "rarity": "Legendary",
+      "learned": null,
+      "transcribed": "+[30-40]% dmg with 2H Bludgeoning / 2H Slashing / Dual-Wielded",
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "effects": [
+        {
+          "stat": "+[30-40]% dmg with 2H Bludgeoning / 2H Slashing / Dual-Wielded",
+          "bucket": null,
+          "value": [
+            30,
+            40
+          ],
+          "unit": "%",
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false
+        }
+      ]
+    },
+    {
+      "id": "elemental-finesse-day",
+      "name": "Elemental Finesse - Day",
+      "slot": null,
+      "category": "Offensive",
+      "rarity": "Rare",
+      "learned": null,
+      "transcribed": "+[21.5-28.5]% Physical / Fire / Lightning / Holy",
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "effects": [
+        {
+          "stat": "+[21.5-28.5]% Physical / Fire / Lightning / Holy",
+          "bucket": null,
+          "value": [
+            21.5,
+            28.5
+          ],
+          "unit": "%",
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false
+        }
+      ]
+    },
+    {
+      "id": "elemental-finesse-night",
+      "name": "Elemental Finesse - Night",
+      "slot": null,
+      "category": "Offensive",
+      "rarity": "Rare",
+      "learned": null,
+      "transcribed": "+[21.5-28.5]% Cold / Poison / Shadow",
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "effects": [
+        {
+          "stat": "+[21.5-28.5]% Cold / Poison / Shadow",
+          "bucket": null,
+          "value": [
+            21.5,
+            28.5
+          ],
+          "unit": "%",
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false
+        }
+      ]
+    },
+    {
+      "id": "natural-finesse",
+      "name": "Natural Finesse",
+      "slot": null,
+      "category": "Offensive",
+      "rarity": "Legendary",
+      "learned": null,
+      "transcribed": "+[30-40]% dmg to Close / Crowd Controlled / Distant",
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "effects": [
+        {
+          "stat": "+[30-40]% dmg to Close / Crowd Controlled / Distant",
+          "bucket": null,
+          "value": [
+            30,
+            40
+          ],
+          "unit": "%",
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false
+        }
+      ]
+    },
+    {
+      "id": "sharpened-finesse",
+      "name": "Sharpened Finesse",
+      "slot": null,
+      "category": "Offensive",
+      "rarity": "Legendary",
+      "learned": null,
+      "transcribed": "+[40-50]% dmg when Spending Resolve; +[3.5-4.5]% dmg per Overpower stack",
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "effects": [
+        {
+          "stat": "+[40-50]% dmg when Spending Resolve",
+          "bucket": null,
+          "value": [
+            40,
+            50
+          ],
+          "unit": "%",
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false
+        },
+        {
+          "stat": "+[3.5-4.5]% dmg per Overpower stack",
+          "bucket": null,
+          "value": [
+            3.5,
+            4.5
+          ],
+          "unit": "%",
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false
+        }
+      ]
+    },
+    {
+      "id": "slayer-s-finesse",
+      "name": "Slayer's Finesse",
+      "slot": null,
+      "category": "Offensive",
+      "rarity": "Legendary",
+      "learned": null,
+      "transcribed": "+[30-40]% Weapon Mastery / Brawling / Ancient / Earthquake dmg",
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "effects": [
+        {
+          "stat": "+[30-40]% Weapon Mastery / Brawling / Ancient / Earthquake dmg",
+          "bucket": null,
+          "value": [
+            30,
+            40
+          ],
+          "unit": "%",
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false
+        }
+      ]
+    },
+    {
+      "id": "worldly-finesse",
+      "name": "Worldly Finesse",
+      "slot": null,
+      "category": "Offensive",
+      "rarity": "Legendary",
+      "learned": null,
+      "transcribed": "+[15-25]% Crit Dmg; +[25-35]% DoT; +[30-40]% Vulnerable dmg",
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "effects": [
+        {
+          "stat": "+[15-25]% Crit Dmg",
+          "bucket": null,
+          "value": [
+            15,
+            25
+          ],
+          "unit": "%",
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false
+        },
+        {
+          "stat": "+[25-35]% DoT",
+          "bucket": null,
+          "value": [
+            25,
+            35
+          ],
+          "unit": "%",
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false
+        },
+        {
+          "stat": "+[30-40]% Vulnerable dmg",
+          "bucket": null,
+          "value": [
+            30,
+            40
+          ],
+          "unit": "%",
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false
+        }
+      ]
+    },
+    {
+      "id": "judicator-finesse",
+      "name": "Judicator Finesse",
+      "slot": null,
+      "category": "Offensive",
+      "rarity": "Magic",
+      "learned": null,
+      "transcribed": "+[7-12]% Juggernaut / Zealot / Arbiter Form / vs Weakened",
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "effects": [
+        {
+          "stat": "+[7-12]% Juggernaut / Zealot / Arbiter Form / vs Weakened",
+          "bucket": null,
+          "value": [
+            7,
+            12
+          ],
+          "unit": "%",
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false
+        }
+      ]
+    },
+    {
+      "id": "guardian-finesse",
+      "name": "Guardian Finesse",
+      "slot": null,
+      "category": "Offensive",
+      "rarity": "Magic",
+      "learned": null,
+      "transcribed": "SUSPECT, read identical to Judicator",
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "effects": [],
+      "suspect": true,
+      "note": "Transcribed as identical to Judicator Finesse; affixes not recorded (null) pending re-check."
+    },
+    {
+      "id": "natural-resistance",
+      "name": "Natural Resistance",
+      "slot": null,
+      "category": "Defensive",
+      "rarity": "Legendary",
+      "learned": null,
+      "transcribed": "+[1,750-2,500] Fire / Lightning / Cold / Poison / Shadow Res",
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "effects": [
+        {
+          "stat": "+[1,750-2,500] Fire / Lightning / Cold / Poison / Shadow Res",
+          "bucket": null,
+          "value": [
+            1750,
+            2500
+          ],
+          "unit": "flat",
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false
+        }
+      ]
+    },
+    {
+      "id": "worldly-endurance",
+      "name": "Worldly Endurance",
+      "slot": null,
+      "category": "Defensive",
+      "rarity": "Legendary",
+      "learned": null,
+      "transcribed": "+[1,100-1,550] Max Life; +[1,500-2,000] Armor; +[2.50-4.00]% All Elem Res; +1 Max Resolve Stacks",
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "effects": [
+        {
+          "stat": "+[1,100-1,550] Max Life",
+          "bucket": null,
+          "value": [
+            1100,
+            1550
+          ],
+          "unit": "flat",
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false
+        },
+        {
+          "stat": "+[1,500-2,000] Armor",
+          "bucket": null,
+          "value": [
+            1500,
+            2000
+          ],
+          "unit": "flat",
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false
+        },
+        {
+          "stat": "+[2.50-4.00]% All Elem Res",
+          "bucket": null,
+          "value": [
+            2.5,
+            4
+          ],
+          "unit": "%",
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false
+        },
+        {
+          "stat": "+1 Max Resolve Stacks",
+          "bucket": null,
+          "value": null,
+          "unit": null,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false
+        }
+      ]
+    },
+    {
+      "id": "paladin-perseverance-legendary",
+      "name": "Paladin Perseverance",
+      "slot": null,
+      "category": "Defensive",
+      "rarity": "Legendary",
+      "learned": null,
+      "transcribed": "+[3.5-5.0]% Block; +[15-20]% Armor in Arbiter Form",
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "effects": [
+        {
+          "stat": "+[3.5-5.0]% Block",
+          "bucket": null,
+          "value": [
+            3.5,
+            5
+          ],
+          "unit": "%",
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false
+        },
+        {
+          "stat": "+[15-20]% Armor in Arbiter Form",
+          "bucket": null,
+          "value": [
+            15,
+            20
+          ],
+          "unit": "%",
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false
+        }
+      ],
+      "sourceId": "paladin-perseverance",
+      "note": "Source id paladin-perseverance was shared by two rarities. Stored as paladin-perseverance-legendary."
+    },
+    {
+      "id": "paladin-perseverance-rare",
+      "name": "Paladin Perseverance",
+      "slot": null,
+      "category": "Defensive",
+      "rarity": "Rare",
+      "learned": null,
+      "transcribed": "+[1.0-3.0]% Block; +[5-10]% Armor in Arbiter Form",
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "effects": [
+        {
+          "stat": "+[1.0-3.0]% Block",
+          "bucket": null,
+          "value": [
+            1,
+            3
+          ],
+          "unit": "%",
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false
+        },
+        {
+          "stat": "+[5-10]% Armor in Arbiter Form",
+          "bucket": null,
+          "value": [
+            5,
+            10
+          ],
+          "unit": "%",
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false
+        }
+      ],
+      "sourceId": "paladin-perseverance",
+      "note": "Source id paladin-perseverance was shared by two rarities. Stored as paladin-perseverance-rare."
+    },
+    {
+      "id": "barbarian-protection-legacy",
+      "name": "Barbarian Protection (Legacy)",
+      "slot": null,
+      "category": "Defensive",
+      "rarity": "Legendary",
+      "learned": false,
+      "transcribed": "+100 All Stats x4",
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "effects": [
+        {
+          "stat": "+100 All Stats",
+          "bucket": null,
+          "value": null,
+          "unit": "flat",
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false,
+          "count": 4
+        }
+      ]
+    },
+    {
+      "id": "natural-schemes",
+      "name": "Natural Schemes",
+      "slot": null,
+      "category": "Utility",
+      "rarity": "Legendary",
+      "learned": null,
+      "transcribed": "+[444-666] Thorns; +[8.0-12.5]% Fortify Gen; +[8.0-12.5]% Barrier Gen",
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "effects": [
+        {
+          "stat": "+[444-666] Thorns",
+          "bucket": null,
+          "value": [
+            444,
+            666
+          ],
+          "unit": "flat",
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false
+        },
+        {
+          "stat": "+[8.0-12.5]% Fortify Gen",
+          "bucket": null,
+          "value": [
+            8,
+            12.5
+          ],
+          "unit": "%",
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false
+        },
+        {
+          "stat": "+[8.0-12.5]% Barrier Gen",
+          "bucket": null,
+          "value": [
+            8,
+            12.5
+          ],
+          "unit": "%",
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false
+        }
+      ]
+    },
+    {
+      "id": "worldly-fortune",
+      "name": "Worldly Fortune",
+      "slot": null,
+      "category": "Utility",
+      "rarity": "Legendary",
+      "learned": null,
+      "transcribed": "+[2.5-5.0]% Lucky Hit; +[8.0-12.5]% Impairment Reduction; +[8.0-12.5]% CC Duration",
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "effects": [
+        {
+          "stat": "+[2.5-5.0]% Lucky Hit",
+          "bucket": null,
+          "value": [
+            2.5,
+            5
+          ],
+          "unit": "%",
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false
+        },
+        {
+          "stat": "+[8.0-12.5]% Impairment Reduction",
+          "bucket": null,
+          "value": [
+            8,
+            12.5
+          ],
+          "unit": "%",
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false
+        },
+        {
+          "stat": "+[8.0-12.5]% CC Duration",
+          "bucket": null,
+          "value": [
+            8,
+            12.5
+          ],
+          "unit": "%",
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false
+        }
+      ]
+    },
+    {
+      "id": "natural-motion",
+      "name": "Natural Motion",
+      "slot": null,
+      "category": "Mobility",
+      "rarity": "Legendary",
+      "learned": null,
+      "transcribed": "+[15-20]% Move Speed; +[32-42]% MS for 4s after Elite kill; +[8.0-12.5]% Mobility CDR; +[15-20]% Evade CDR",
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "effects": [
+        {
+          "stat": "+[15-20]% Move Speed",
+          "bucket": null,
+          "value": [
+            15,
+            20
+          ],
+          "unit": "%",
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false
+        },
+        {
+          "stat": "+[32-42]% MS for 4s after Elite kill",
+          "bucket": null,
+          "value": [
+            32,
+            42
+          ],
+          "unit": "%",
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false
+        },
+        {
+          "stat": "+[8.0-12.5]% Mobility CDR",
+          "bucket": null,
+          "value": [
+            8,
+            12.5
+          ],
+          "unit": "%",
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false
+        },
+        {
+          "stat": "+[15-20]% Evade CDR",
+          "bucket": null,
+          "value": [
+            15,
+            20
+          ],
+          "unit": "%",
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false
+        }
+      ]
+    },
+    {
+      "id": "worldly-stability",
+      "name": "Worldly Stability",
+      "slot": null,
+      "category": "Resource",
+      "rarity": "Legendary",
+      "learned": null,
+      "transcribed": "+[5-8]% Resource Gen; +[5-8]% Resource Cost Red; LH up to +[4-6]% chance restore +[15-22] Primary Resource; +[8.0-12.5]% CDR",
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "effects": [
+        {
+          "stat": "+[5-8]% Resource Gen",
+          "bucket": null,
+          "value": [
+            5,
+            8
+          ],
+          "unit": "%",
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false
+        },
+        {
+          "stat": "+[5-8]% Resource Cost Red",
+          "bucket": null,
+          "value": [
+            5,
+            8
+          ],
+          "unit": "%",
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false
+        },
+        {
+          "stat": "LH up to +[4-6]% chance restore +[15-22] Primary Resource",
+          "bucket": null,
+          "value": null,
+          "unit": null,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false
+        },
+        {
+          "stat": "+[8.0-12.5]% CDR",
+          "bucket": null,
+          "value": [
+            8,
+            12.5
+          ],
+          "unit": "%",
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false
+        }
+      ]
+    }
+  ],
   "paragonBoards": [],
   "paragonNodes": [
     {
@@ -755,7 +2444,7 @@
     {
       "id": "disembowel",
       "name": "Disembowel Glyph",
-      "level": null,
+      "level": 1,
       "effects": [
         {
           "stat": "damage",
@@ -769,13 +2458,20 @@
         }
       ],
       "source": "https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy",
-      "verified": true,
-      "note": "20%[x] -> 15%[x]; glyph level at which this applies not stated."
+      "verified": false,
+      "note": "20%[x] -> 15%[x]; glyph level at which this applies not stated. Video transcription (unverified): rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3) The legendary line is stored on legendary and does not replace the patch-note effect.",
+      "rarity": "Rare",
+      "radius": 3,
+      "base": "per 5 Will +4.0% Bleeding",
+      "additional": "killing Bleeding enemy 10% chance -1s non-Ultimate CDs",
+      "legendary": "+5.5%[x]",
+      "transcribed": "Disembowel L1: per 5 Will +4.0% Bleeding. Add: killing Bleeding enemy 10% chance -1s non-Ultimate CDs. Leg: +5.5%[x].",
+      "recordedSource": "user video 2026-10-21 batch2 (transcribed)"
     },
     {
       "id": "crusher",
       "name": "Crusher Glyph",
-      "level": null,
+      "level": 1,
       "effects": [
         {
           "stat": "damage",
@@ -789,8 +2485,316 @@
         }
       ],
       "source": "https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy",
-      "verified": true,
-      "note": "20%[x] -> 15%[x]."
+      "verified": false,
+      "note": "20%[x] -> 15%[x]. Video transcription (unverified): rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3) The legendary line is stored on legendary and does not replace the patch-note effect.",
+      "rarity": "Rare",
+      "radius": 3,
+      "base": "per 5 Str +6.6% with Mace",
+      "additional": "Mace +30.0%[x] Overpower dmg",
+      "legendary": "+5.5%[x]",
+      "transcribed": "Crusher L1: per 5 Str +6.6% with Mace. Add: Mace +30.0%[x] Overpower dmg. Leg: +5.5%[x].",
+      "recordedSource": "user video 2026-10-21 batch2 (transcribed)"
+    },
+    {
+      "id": "might",
+      "name": "Might",
+      "effects": [],
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "level": 115,
+      "rarity": "Legendary",
+      "radius": 5,
+      "base": "+160.0% to Magic nodes",
+      "additional": "8.0%[x] dmg with 2H (40 Str)",
+      "legendary": "20.0%[x] vs Healthy",
+      "transcribed": "Might L115: +160.0% to Magic nodes. Add: 8.0%[x] dmg with 2H (40 Str). Leg: 20.0%[x] vs Healthy.",
+      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3)"
+    },
+    {
+      "id": "twister",
+      "name": "Twister",
+      "effects": [],
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "level": 115,
+      "rarity": "Legendary",
+      "radius": 5,
+      "base": "per 5 Str, Dust Devils +90.3%[+]",
+      "additional": "8.0%[x] dmg 4s after creating Dust Devil (40 Str)",
+      "legendary": "Dust Devil dmg +20.0%[x]",
+      "transcribed": "Twister L115: per 5 Str, Dust Devils +90.3%[+]. Add: 8.0%[x] dmg 4s after creating Dust Devil (40 Str). Leg: Dust Devil dmg +20.0%[x].",
+      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3)"
+    },
+    {
+      "id": "imbiber",
+      "name": "Imbiber",
+      "effects": [],
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "level": 115,
+      "rarity": "Legendary",
+      "radius": 5,
+      "base": "per 5 Will, +30.1%[+] dmg and +5.2%[+] potion healing per missing potion, up to 25%[+] each",
+      "additional": null,
+      "legendary": "dmg while Healthy +16.0%[x]",
+      "transcribed": "Imbiber L115: per 5 Will, +30.1%[+] dmg and +5.2%[+] potion healing per missing potion, up to 25%[+] each. Leg: dmg while Healthy +16.0%[x].",
+      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3)"
+    },
+    {
+      "id": "exploit",
+      "name": "Exploit",
+      "effects": [],
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "level": 115,
+      "rarity": "Legendary",
+      "radius": 5,
+      "base": "per 5 Dex, +25.8%[+] vs Vulnerable",
+      "additional": "damaged enemies Vulnerable 3s, max once/5s (25 Dex)",
+      "legendary": "+15.6%[x] vs Vulnerable",
+      "transcribed": "Exploit L115: per 5 Dex, +25.8%[+] vs Vulnerable. Add: damaged enemies Vulnerable 3s, max once/5s (25 Dex). Leg: +15.6%[x] vs Vulnerable.",
+      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3)"
+    },
+    {
+      "id": "ambidextrous",
+      "name": "Ambidextrous",
+      "effects": [],
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "level": 1,
+      "rarity": "Rare",
+      "radius": 3,
+      "base": "+25.0% Magic nodes",
+      "additional": "8.0%[x] with 1H (40 Str)",
+      "legendary": "+5.5%[x] (unlocks L46)",
+      "transcribed": "Ambidextrous Rare L1: +25.0% Magic nodes. Add: 8.0%[x] with 1H (40 Str). Leg: +5.5%[x] (unlocks L46).",
+      "note": null
+    },
+    {
+      "id": "wrath",
+      "name": "Wrath",
+      "effects": [],
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "level": 115,
+      "rarity": "Legendary",
+      "radius": 5,
+      "base": "per 5 Dex, +14.2% Crit Dmg",
+      "additional": "crits generate 3 Fury (25 Dex)",
+      "legendary": "Crit Dmg +17.0%[x]",
+      "transcribed": "Wrath L115: per 5 Dex, +14.2% Crit Dmg. Add: crits generate 3 Fury (25 Dex). Leg: Crit Dmg +17.0%[x].",
+      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3)"
+    },
+    {
+      "id": "marshal",
+      "name": "Marshal",
+      "effects": [],
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "level": 115,
+      "rarity": "Legendary",
+      "radius": 5,
+      "base": "+133.3% Magic nodes",
+      "additional": "casting Shout reduces other Shout CDs by 2.0s; while Shout active next Core Skill Fury cost -10% (40 Str)",
+      "legendary": "+15.6%[x]",
+      "transcribed": "Marshal L115: +133.3% Magic nodes. Add: casting Shout reduces other Shout CDs by 2.0s; while Shout active next Core Skill Fury cost -10% (40 Str). Leg: +15.6%[x].",
+      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3)"
+    },
+    {
+      "id": "challenger",
+      "name": "Challenger",
+      "effects": [],
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "level": 115,
+      "rarity": "Legendary",
+      "radius": 5,
+      "base": "+133.3% Normal nodes",
+      "additional": "10.0%[x] less dmg from Elites (40 Str)",
+      "legendary": "+15.6%[x] vs Elites",
+      "transcribed": "Challenger L115: +133.3% Normal nodes. Add: 10.0%[x] less dmg from Elites (40 Str). Leg: +15.6%[x] vs Elites.",
+      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3)"
+    },
+    {
+      "id": "bloodfeeder",
+      "name": "Bloodfeeder",
+      "effects": [],
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "level": 1,
+      "rarity": "Rare",
+      "radius": 3,
+      "base": "per 5 Dex, +4.0% vs Bleeding",
+      "additional": "+5.0%[+] crit chance vs Bleeding",
+      "legendary": "+5.5%[x]",
+      "transcribed": "Bloodfeeder L1: per 5 Dex, +4.0% vs Bleeding. Add: +5.0%[+] crit chance vs Bleeding. Leg: +5.5%[x].",
+      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3)"
+    },
+    {
+      "id": "brawl",
+      "name": "Brawl",
+      "effects": [],
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "level": 1,
+      "rarity": "Rare",
+      "radius": 3,
+      "base": "+30.0% Rare nodes",
+      "additional": "Brawling +18.0%[x]",
+      "legendary": "Brawling +13.7%[x]",
+      "transcribed": "Brawl L1: +30.0% Rare nodes. Add: Brawling +18.0%[x]. Leg: Brawling +13.7%[x].",
+      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3)"
+    },
+    {
+      "id": "cleaver",
+      "name": "Cleaver",
+      "effects": [],
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "level": 1,
+      "rarity": "Rare",
+      "radius": 3,
+      "base": "per 5 Str +6.6% with Axe",
+      "additional": "Axe +12.0%[x] Crit Dmg",
+      "legendary": "+5.5%[x]",
+      "transcribed": "Cleaver L1: per 5 Str +6.6% with Axe. Add: Axe +12.0%[x] Crit Dmg. Leg: +5.5%[x].",
+      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3)"
+    },
+    {
+      "id": "executioner",
+      "name": "Executioner",
+      "effects": [],
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "level": 1,
+      "rarity": "Rare",
+      "radius": 3,
+      "base": "per 5 Str +6.6% with Polearm",
+      "additional": "Polearm +10.0%[x] vs Healthy or Injured",
+      "legendary": "+5.5%[x]",
+      "transcribed": "Executioner L1: per 5 Str +6.6% with Polearm. Add: Polearm +10.0%[x] vs Healthy or Injured. Leg: +5.5%[x].",
+      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3)"
+    },
+    {
+      "id": "dominate",
+      "name": "Dominate",
+      "effects": [],
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "level": 1,
+      "rarity": "Rare",
+      "radius": 3,
+      "base": "per 5 Will +6.6% Overpower dmg",
+      "additional": "Overpower charge every 15s",
+      "legendary": "+5.5%[x]",
+      "transcribed": "Dominate L1: per 5 Will +6.6% Overpower dmg. Add: Overpower charge every 15s. Leg: +5.5%[x].",
+      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3)"
+    },
+    {
+      "id": "mortal-draw",
+      "name": "Mortal Draw",
+      "effects": [],
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "level": 1,
+      "rarity": "Rare",
+      "radius": 3,
+      "base": "per 5 Dex +1.9% swap dmg",
+      "additional": "swap 18% chance to crit",
+      "legendary": "+5.5%[x]",
+      "transcribed": "Mortal Draw L1: per 5 Dex +1.9% swap dmg. Add: swap 18% chance to crit. Leg: +5.5%[x].",
+      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3)"
+    },
+    {
+      "id": "revenge",
+      "name": "Revenge",
+      "effects": [],
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "level": 1,
+      "rarity": "Rare",
+      "radius": 3,
+      "base": "+30.0% Rare nodes",
+      "additional": "Thorns dmg increases dmg taken from you 1.0%[x] up to 8.0%[x] for 10s",
+      "legendary": "+5.5%[x]",
+      "transcribed": "Revenge L1: +30.0% Rare nodes. Add: Thorns dmg increases dmg taken from you 1.0%[x] up to 8.0%[x] for 10s. Leg: +5.5%[x].",
+      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3)"
+    },
+    {
+      "id": "rumble",
+      "name": "Rumble",
+      "effects": [],
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "level": 1,
+      "rarity": "Rare",
+      "radius": 3,
+      "base": "per 5 Str +6.6% vs CC per active Earthquake",
+      "additional": "10.0%[x] vs Bosses/CC per active Earthquake",
+      "legendary": "Earthquake +16.4%[x]",
+      "transcribed": "Rumble L1: per 5 Str +6.6% vs CC per active Earthquake. Add: 10.0%[x] vs Bosses/CC per active Earthquake. Leg: Earthquake +16.4%[x].",
+      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3)"
+    },
+    {
+      "id": "seeking",
+      "name": "Seeking",
+      "effects": [],
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "level": 1,
+      "rarity": "Rare",
+      "radius": 3,
+      "base": "per 5 Str +6.6% with Sword",
+      "additional": "Sword 3 Fury on kill",
+      "legendary": "+5.5%[x]",
+      "transcribed": "Seeking L1: per 5 Str +6.6% with Sword. Add: Sword 3 Fury on kill. Leg: +5.5%[x].",
+      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3)"
+    },
+    {
+      "id": "territorial",
+      "name": "Territorial",
+      "effects": [],
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "level": 1,
+      "rarity": "Rare",
+      "radius": 3,
+      "base": "per 5 Dex +4.0% vs Close",
+      "additional": "15.0%[+] DR vs Close",
+      "legendary": "+5.5%[x] vs Vulnerable",
+      "transcribed": "Territorial L1: per 5 Dex +4.0% vs Close. Add: 15.0%[+] DR vs Close. Leg: +5.5%[x] vs Vulnerable.",
+      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3)"
+    },
+    {
+      "id": "undaunted",
+      "name": "Undaunted",
+      "effects": [],
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "level": 1,
+      "rarity": "Rare",
+      "radius": 3,
+      "base": "per 5 Will +4.0% while Fortified",
+      "additional": "up to 10.0% DR with more Fortify",
+      "legendary": "+5.5%[x]",
+      "transcribed": "Undaunted L1: per 5 Will +4.0% while Fortified. Add: up to 10.0% DR with more Fortify. Leg: +5.5%[x].",
+      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3)"
+    },
+    {
+      "id": "weapon-master",
+      "name": "Weapon Master",
+      "effects": [],
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "level": null,
+      "rarity": null,
+      "radius": null,
+      "base": "+30.0% Rare nodes",
+      "additional": null,
+      "legendary": "Weapon Mastery +8.2%[x]",
+      "transcribed": "Weapon Master: SUSPECT level (read L1, legendary border). +30.0% Rare nodes. Leg: Weapon Mastery +8.2%[x].",
+      "suspect": true,
+      "note": "Level unclear: read as L1 but with a legendary border; level/rarity left null."
     }
   ],
   "talismans": [],
