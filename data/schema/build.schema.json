@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "build.schema.json",
+  "title": "Build slot assignment",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "name",
+    "class",
+    "skills",
+    "variants",
+    "gear",
+    "boards",
+    "glyphs",
+    "talismans",
+    "rotation",
+    "uptime",
+    "defense",
+    "weaponDmg",
+    "mainStat",
+    "critChance",
+    "critDmg",
+    "vulnPct",
+    "overpowerPct"
+  ],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "name": { "type": "string" },
+    "class": { "type": "string" },
+    "skills": { "type": "array", "items": { "type": "string" } },
+    "variants": { "type": "array", "items": { "type": "string" } },
+    "gear": {
+      "type": "array",
+      "minItems": 13,
+      "maxItems": 13,
+      "items": { "$ref": "#/$defs/slotAssignment" }
+    },
+    "boards": { "type": "array", "items": { "$ref": "#/$defs/boardStub" } },
+    "glyphs": { "type": "array", "items": { "$ref": "#/$defs/glyphStub" } },
+    "talismans": { "type": "array", "items": { "type": ["string", "null"] } },
+    "rotation": { "type": "array", "items": { "$ref": "#/$defs/rotationStep" } },
+    "uptime": { "$ref": "#/$defs/uptime" },
+    "defense": { "$ref": "#/$defs/defense" },
+    "weaponDmg": { "type": ["number", "null"] },
+    "mainStat": { "type": ["number", "null"] },
+    "critChance": { "type": ["number", "null"] },
+    "critDmg": { "type": ["number", "null"] },
+    "vulnPct": { "type": ["number", "null"] },
+    "overpowerPct": { "type": ["number", "null"] }
+  },
+  "$defs": {
+    "slotAssignment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["slotId", "affixes", "aspectId", "uniqueId"],
+      "properties": {
+        "slotId": { "type": "string", "minLength": 1 },
+        "affixes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["affixId", "value"],
+            "properties": {
+              "affixId": { "type": "string" },
+              "value": { "type": ["number", "null"] }
+            }
+          }
+        },
+        "aspectId": { "type": ["string", "null"] },
+        "uniqueId": { "type": ["string", "null"] }
+      }
+    },
+    "boardStub": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["boardId", "nodeIds"],
+      "properties": {
+        "boardId": { "type": ["string", "null"] },
+        "nodeIds": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "glyphStub": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["glyphId", "level"],
+      "properties": {
+        "glyphId": { "type": ["string", "null"] },
+        "level": { "type": ["number", "null"] }
+      }
+    },
+    "rotationStep": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["skillId", "castsPerSecond"],
+      "properties": {
+        "skillId": { "type": "string" },
+        "castsPerSecond": { "type": ["number", "null"] }
+      }
+    },
+    "uptime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["berserk", "vulnerable", "overpower"],
+      "properties": {
+        "berserk": { "type": ["number", "null"] },
+        "vulnerable": { "type": ["number", "null"] },
+        "overpower": { "type": ["number", "null"] }
+      }
+    },
+    "defense": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["life", "armor", "resists", "armorMitigationPct", "resistMitigationPct", "dr"],
+      "properties": {
+        "life": { "type": ["number", "null"] },
+        "armor": { "type": ["number", "null"] },
+        "resists": { "type": ["number", "null"] },
+        "armorMitigationPct": { "type": ["number", "null"] },
+        "resistMitigationPct": { "type": ["number", "null"] },
+        "dr": {
+          "oneOf": [
+            { "type": "null" },
+            { "type": "array", "items": { "type": ["number", "null"] } }
+          ]
+        }
+      }
+    }
+  }
+}

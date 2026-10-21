@@ -1,0 +1,45 @@
+{
+  "note": "SYNTHETIC fixture. Not a known meta.",
+  "builds": [
+    {
+      "id": "example-do-not-rank",
+      "name": "EXAMPLE — not a real meta build",
+      "example": true,
+      "skills": ["example-skill"],
+      "aspects": ["example-aspect"],
+      "uniques": ["example-unique"],
+      "keyItems": ["example-unique"],
+      "bucketProfile": {
+        "additive": null,
+        "multiplicative": null,
+        "mainstat": null,
+        "crit": null,
+        "vuln": null,
+        "overpower": null
+      },
+      "source": "synthetic-fixture",
+      "verified": false,
+      "note": "EXAMPLE placeholder. Excluded from novelty."
+    },
+    {
+      "id": "synth-meta-beta",
+      "name": "SYNTHETIC meta that matches Beta",
+      "example": false,
+      "skills": ["beta"],
+      "aspects": ["synth-mult", "synth-add-40", "synth-add-30", "synth-helm-only"],
+      "uniques": ["synth-ring"],
+      "keyItems": ["synth-ring"],
+      "bucketProfile": {
+        "additive": 1.7,
+        "multiplicative": 1.5,
+        "mainstat": 1,
+        "crit": 1,
+        "vuln": 1,
+        "overpower": 1
+      },
+      "source": "synthetic-fixture",
+      "verified": false,
+      "note": "SYNTHETIC comparison row. Not a real meta build."
+    }
+  ]
+}

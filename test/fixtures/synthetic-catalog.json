@@ -1,0 +1,553 @@
+{
+  "meta": {
+    "class": "Synthetic",
+    "patch": "fixture",
+    "season": null,
+    "rules": "SYNTHETIC FIXTURE. Numbers are invented for tests and are not game data.",
+    "primarySource": "synthetic-fixture",
+    "synthetic": true,
+    "note": "SYNTHETIC FIXTURE. Not Diablo 4 data.",
+    "sources": [
+      {
+        "url": "synthetic-fixture",
+        "title": "Synthetic test fixture",
+        "license": "Test-only invented numbers. No game license. Not for play."
+      }
+    ]
+  },
+  "constraints": {
+    "skillBarSize": 2,
+    "oneAspectPerSlot": true,
+    "uniquesFixedToSlots": true,
+    "note": "SYNTHETIC constraints. skillBarSize 2 is a test limit, not a game value.",
+    "gearSlots": [
+      {
+        "id": "helm",
+        "name": "Helm",
+        "kind": "armor",
+        "acceptsAspect": true,
+        "acceptsUnique": true,
+        "source": "synthetic-fixture",
+        "verified": false,
+        "note": "SYNTHETIC slot label for tests. Not a game fact."
+      },
+      {
+        "id": "chest",
+        "name": "Chest Armor",
+        "kind": "armor",
+        "acceptsAspect": true,
+        "acceptsUnique": true,
+        "source": "synthetic-fixture",
+        "verified": false,
+        "note": "SYNTHETIC slot label for tests. Not a game fact."
+      },
+      {
+        "id": "gloves",
+        "name": "Gloves",
+        "kind": "armor",
+        "acceptsAspect": true,
+        "acceptsUnique": true,
+        "source": "synthetic-fixture",
+        "verified": false,
+        "note": "SYNTHETIC slot label for tests. Not a game fact."
+      },
+      {
+        "id": "pants",
+        "name": "Pants",
+        "kind": "armor",
+        "acceptsAspect": true,
+        "acceptsUnique": true,
+        "source": "synthetic-fixture",
+        "verified": false,
+        "note": "SYNTHETIC slot label for tests. Not a game fact."
+      },
+      {
+        "id": "boots",
+        "name": "Boots",
+        "kind": "armor",
+        "acceptsAspect": true,
+        "acceptsUnique": true,
+        "source": "synthetic-fixture",
+        "verified": false,
+        "note": "SYNTHETIC slot label for tests. Not a game fact."
+      },
+      {
+        "id": "amulet",
+        "name": "Amulet",
+        "kind": "jewelry",
+        "acceptsAspect": true,
+        "acceptsUnique": true,
+        "source": "synthetic-fixture",
+        "verified": false,
+        "note": "SYNTHETIC slot label for tests. Not a game fact."
+      },
+      {
+        "id": "ring-1",
+        "name": "Ring 1",
+        "kind": "jewelry",
+        "acceptsAspect": true,
+        "acceptsUnique": true,
+        "source": "synthetic-fixture",
+        "verified": false,
+        "note": "SYNTHETIC slot label for tests. Not a game fact."
+      },
+      {
+        "id": "ring-2",
+        "name": "Ring 2",
+        "kind": "jewelry",
+        "acceptsAspect": true,
+        "acceptsUnique": true,
+        "source": "synthetic-fixture",
+        "verified": false,
+        "note": "SYNTHETIC slot label for tests. Not a game fact."
+      },
+      {
+        "id": "weapon-1",
+        "name": "Arsenal weapon 1",
+        "kind": "weapon",
+        "acceptsAspect": true,
+        "acceptsUnique": true,
+        "source": "synthetic-fixture",
+        "verified": false,
+        "note": "SYNTHETIC slot label for tests. Not a game fact."
+      },
+      {
+        "id": "weapon-2",
+        "name": "Arsenal weapon 2",
+        "kind": "weapon",
+        "acceptsAspect": true,
+        "acceptsUnique": true,
+        "source": "synthetic-fixture",
+        "verified": false,
+        "note": "SYNTHETIC slot label for tests. Not a game fact."
+      },
+      {
+        "id": "weapon-3",
+        "name": "Arsenal weapon 3",
+        "kind": "weapon",
+        "acceptsAspect": true,
+        "acceptsUnique": true,
+        "source": "synthetic-fixture",
+        "verified": false,
+        "note": "SYNTHETIC slot label for tests. Not a game fact."
+      },
+      {
+        "id": "weapon-4",
+        "name": "Arsenal weapon 4",
+        "kind": "weapon",
+        "acceptsAspect": true,
+        "acceptsUnique": true,
+        "source": "synthetic-fixture",
+        "verified": false,
+        "note": "SYNTHETIC slot label for tests. Not a game fact."
+      },
+      {
+        "id": "slot-13",
+        "name": null,
+        "kind": "unverified",
+        "acceptsAspect": true,
+        "acceptsUnique": true,
+        "source": "synthetic-fixture",
+        "verified": false,
+        "note": "SYNTHETIC slot label for tests. Not a game fact."
+      }
+    ],
+    "playability": {
+      "minFuryPerSecond": null,
+      "minBerserkUptime": null,
+      "minVulnerableUptime": null,
+      "minOverpowerUptime": null,
+      "minEhp": null,
+      "note": "SYNTHETIC. Minimums stay null in the fixture; tests pass them in."
+    }
+  },
+  "mainstat": {
+    "id": "synth-mainstat",
+    "name": "SYNTHETIC main stat",
+    "percentPer10": 1,
+    "bucket": "mainstat",
+    "source": "synthetic-fixture",
+    "verified": true,
+    "note": "SYNTHETIC scalar, not the game's Strength scalar."
+  },
+  "skills": [
+    {
+      "category": "Core",
+      "tags": [
+        "Core",
+        "Bleed"
+      ],
+      "coeffPct": 100,
+      "rank": 1,
+      "dot": false,
+      "furyGeneratePerCast": 10,
+      "furySpendPerCast": 4,
+      "variantOf": null,
+      "effects": [
+        {
+          "stat": "coefficient",
+          "bucket": null,
+          "value": 100,
+          "conditions": [],
+          "stacking": "base",
+          "source": "synthetic-fixture",
+          "verified": true
+        }
+      ],
+      "source": "synthetic-fixture",
+      "verified": true,
+      "note": "SYNTHETIC fixture skill. Not game data.",
+      "id": "alpha",
+      "name": "SYNTHETIC Alpha"
+    },
+    {
+      "category": "Core",
+      "tags": [
+        "Core"
+      ],
+      "coeffPct": 50,
+      "rank": 1,
+      "dot": false,
+      "furyGeneratePerCast": 10,
+      "furySpendPerCast": 4,
+      "variantOf": null,
+      "effects": [
+        {
+          "stat": "coefficient",
+          "bucket": null,
+          "value": 50,
+          "conditions": [],
+          "stacking": "base",
+          "source": "synthetic-fixture",
+          "verified": true
+        }
+      ],
+      "source": "synthetic-fixture",
+      "verified": true,
+      "note": "SYNTHETIC fixture skill. Not game data.",
+      "id": "beta",
+      "name": "SYNTHETIC Beta"
+    },
+    {
+      "category": "Defensive",
+      "tags": [
+        "Defensive"
+      ],
+      "coeffPct": 10,
+      "rank": 1,
+      "dot": false,
+      "furyGeneratePerCast": 10,
+      "furySpendPerCast": 4,
+      "variantOf": null,
+      "effects": [
+        {
+          "stat": "coefficient",
+          "bucket": null,
+          "value": 10,
+          "conditions": [],
+          "stacking": "base",
+          "source": "synthetic-fixture",
+          "verified": true
+        }
+      ],
+      "source": "synthetic-fixture",
+      "verified": true,
+      "note": "SYNTHETIC fixture skill. Not game data.",
+      "id": "gamma",
+      "name": "SYNTHETIC Gamma"
+    },
+    {
+      "category": "Core",
+      "tags": [
+        "Core"
+      ],
+      "coeffPct": null,
+      "rank": null,
+      "dot": null,
+      "furyGeneratePerCast": null,
+      "furySpendPerCast": null,
+      "variantOf": null,
+      "effects": [
+        {
+          "stat": "coefficient",
+          "bucket": null,
+          "value": null,
+          "conditions": null,
+          "stacking": null,
+          "source": "synthetic-fixture",
+          "verified": false
+        }
+      ],
+      "source": "synthetic-fixture",
+      "verified": false,
+      "note": "SYNTHETIC fixture skill. Not game data.",
+      "id": "delta",
+      "name": "SYNTHETIC Delta"
+    }
+  ],
+  "skillVariants": [],
+  "expertise": [],
+  "aspects": [
+    {
+      "slots": [
+        "helm",
+        "chest",
+        "gloves",
+        "pants",
+        "boots",
+        "amulet",
+        "ring-1",
+        "ring-2",
+        "weapon-1",
+        "weapon-2",
+        "weapon-3",
+        "weapon-4",
+        "slot-13"
+      ],
+      "effects": [
+        {
+          "stat": "damage",
+          "bucket": "multiplicative",
+          "value": 50,
+          "conditions": [],
+          "stacking": "bucket",
+          "source": "synthetic-fixture",
+          "verified": true
+        }
+      ],
+      "source": "synthetic-fixture",
+      "verified": true,
+      "note": "SYNTHETIC fixture aspect. Not game data.",
+      "id": "synth-mult",
+      "name": "SYNTHETIC mult 50"
+    },
+    {
+      "slots": [
+        "helm",
+        "chest",
+        "gloves",
+        "pants",
+        "boots",
+        "amulet",
+        "ring-1",
+        "ring-2",
+        "weapon-1",
+        "weapon-2",
+        "weapon-3",
+        "weapon-4",
+        "slot-13"
+      ],
+      "effects": [
+        {
+          "stat": "damage",
+          "bucket": "additive",
+          "value": 40,
+          "conditions": [],
+          "stacking": "bucket",
+          "source": "synthetic-fixture",
+          "verified": true
+        }
+      ],
+      "source": "synthetic-fixture",
+      "verified": true,
+      "note": "SYNTHETIC fixture aspect. Not game data.",
+      "id": "synth-add-40",
+      "name": "SYNTHETIC add 40"
+    },
+    {
+      "slots": [
+        "helm",
+        "chest",
+        "gloves",
+        "pants",
+        "boots",
+        "amulet",
+        "ring-1",
+        "ring-2",
+        "weapon-1",
+        "weapon-2",
+        "weapon-3",
+        "weapon-4",
+        "slot-13"
+      ],
+      "effects": [
+        {
+          "stat": "damage",
+          "bucket": "additive",
+          "value": 30,
+          "conditions": [],
+          "stacking": "bucket",
+          "source": "synthetic-fixture",
+          "verified": true
+        }
+      ],
+      "source": "synthetic-fixture",
+      "verified": true,
+      "note": "SYNTHETIC fixture aspect. Not game data.",
+      "id": "synth-add-30",
+      "name": "SYNTHETIC add 30"
+    },
+    {
+      "slots": [
+        "helm"
+      ],
+      "effects": [
+        {
+          "stat": "damage",
+          "bucket": "multiplicative",
+          "value": 100,
+          "conditions": [],
+          "stacking": "bucket",
+          "source": "synthetic-fixture",
+          "verified": true
+        }
+      ],
+      "source": "synthetic-fixture",
+      "verified": true,
+      "note": "SYNTHETIC fixture aspect. Not game data.",
+      "id": "synth-helm-only",
+      "name": "SYNTHETIC helm mult 100"
+    },
+    {
+      "slots": null,
+      "effects": [
+        {
+          "stat": null,
+          "bucket": "multiplicative",
+          "value": null,
+          "conditions": null,
+          "stacking": null,
+          "source": "synthetic-fixture",
+          "verified": false
+        }
+      ],
+      "source": "synthetic-fixture",
+      "verified": false,
+      "note": "SYNTHETIC fixture aspect. Not game data.",
+      "id": "synth-null",
+      "name": "SYNTHETIC null aspect"
+    },
+    {
+      "slots": [
+        "helm",
+        "chest",
+        "gloves",
+        "pants",
+        "boots",
+        "amulet",
+        "ring-1",
+        "ring-2",
+        "weapon-1",
+        "weapon-2",
+        "weapon-3",
+        "weapon-4",
+        "slot-13"
+      ],
+      "effects": [
+        {
+          "stat": "damage",
+          "bucket": "multiplicative",
+          "value": 500,
+          "conditions": [],
+          "stacking": "bucket",
+          "source": "synthetic-fixture",
+          "verified": false
+        }
+      ],
+      "source": "synthetic-fixture",
+      "verified": false,
+      "note": "SYNTHETIC fixture aspect. Not game data.",
+      "id": "synth-unverified",
+      "name": "SYNTHETIC unverified mult 500"
+    }
+  ],
+  "uniques": [
+    {
+      "id": "synth-ring",
+      "name": "SYNTHETIC ring unique",
+      "slots": [
+        "ring-1"
+      ],
+      "effects": [
+        {
+          "stat": "damage",
+          "bucket": "multiplicative",
+          "value": 20,
+          "conditions": [],
+          "stacking": "bucket",
+          "source": "synthetic-fixture",
+          "verified": true
+        }
+      ],
+      "source": "synthetic-fixture",
+      "verified": true,
+      "note": "SYNTHETIC unique fixed to ring-1."
+    },
+    {
+      "id": "synth-ring-weak",
+      "name": "SYNTHETIC weak ring unique",
+      "slots": [
+        "ring-1"
+      ],
+      "effects": [
+        {
+          "stat": "damage",
+          "bucket": "multiplicative",
+          "value": 5,
+          "conditions": [],
+          "stacking": "bucket",
+          "source": "synthetic-fixture",
+          "verified": true
+        }
+      ],
+      "source": "synthetic-fixture",
+      "verified": true,
+      "note": "SYNTHETIC unique fixed to the same slot as synth-ring."
+    },
+    {
+      "id": "synth-mystery",
+      "name": "SYNTHETIC slotless unique",
+      "slots": null,
+      "effects": [
+        {
+          "stat": "damage",
+          "bucket": "multiplicative",
+          "value": 80,
+          "conditions": [],
+          "stacking": "bucket",
+          "source": "synthetic-fixture",
+          "verified": true
+        }
+      ],
+      "source": "synthetic-fixture",
+      "verified": true,
+      "note": "SYNTHETIC unique with no slot. Search must not place it."
+    }
+  ],
+  "affixes": [],
+  "paragonBoards": [],
+  "paragonNodes": [
+    {
+      "id": "synth-paragon",
+      "name": "SYNTHETIC paragon node",
+      "boardId": null,
+      "effects": [
+        {
+          "stat": "damage",
+          "bucket": "multiplicative",
+          "value": 999,
+          "conditions": [],
+          "stacking": "bucket",
+          "source": "synthetic-fixture",
+          "verified": true
+        }
+      ],
+      "source": "synthetic-fixture",
+      "verified": true,
+      "note": "SYNTHETIC paragon node. Search must ignore it."
+    }
+  ],
+  "glyphs": [],
+  "talismans": [],
+  "seasonalMechanics": []
+}

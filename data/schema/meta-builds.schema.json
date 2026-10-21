@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "meta-builds.schema.json",
+  "title": "Known meta builds",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["builds"],
+  "properties": {
+    "note": { "type": "string" },
+    "builds": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/metaBuild" }
+    }
+  },
+  "$defs": {
+    "metaBuild": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "example", "skills", "aspects", "uniques", "keyItems", "bucketProfile", "source", "verified"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "name": { "type": "string" },
+        "example": { "type": "boolean" },
+        "skills": { "type": "array", "items": { "type": "string" } },
+        "aspects": { "type": "array", "items": { "type": "string" } },
+        "uniques": { "type": "array", "items": { "type": "string" } },
+        "keyItems": { "type": "array", "items": { "type": "string" } },
+        "bucketProfile": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["additive", "multiplicative", "mainstat", "crit", "vuln", "overpower"],
+          "properties": {
+            "additive": { "type": ["number", "null"] },
+            "multiplicative": { "type": ["number", "null"] },
+            "mainstat": { "type": ["number", "null"] },
+            "crit": { "type": ["number", "null"] },
+            "vuln": { "type": ["number", "null"] },
+            "overpower": { "type": ["number", "null"] }
+          }
+        },
+        "source": { "type": "string", "minLength": 1 },
+        "verified": { "type": "boolean" },
+        "note": { "type": "string" }
+      }
+    }
+  }
+}

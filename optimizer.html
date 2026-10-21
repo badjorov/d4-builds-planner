@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>D4 build optimizer</title>
+  <link rel="stylesheet" href="src/ui.css">
+</head>
+<body>
+<nav><a href="index.html">Calculator</a> <a href="optimizer.html">Optimizer</a> <a href="data-entry.html">Data entry</a></nav>
+<h1>Build optimizer</h1>
+<p>Class-agnostic search. This catalog is Barbarian first. Paragon boards, glyphs, and talismans are stored but not searched. Unknown game numbers stay null and do not become damage.</p>
+<p id="status">Loading catalog…</p>
+<fieldset>
+  <legend>Search</legend>
+  <div id="tags"></div>
+  <label>Core size limit <input id="maxSkills" type="number" min="1" value="1"></label>
+  <label>Beam width <input id="beamWidth" type="number" min="1" value="3"></label>
+  <label>Power floor <input id="powerFloor" type="number" value="0"></label>
+  <label><input id="includeUnverified" type="checkbox"> Include unverified data</label>
+  <label><input id="manualInputsVerified" type="checkbox"> I verified the manual inputs in game</label>
+</fieldset>
+<fieldset>
+  <legend>Manual inputs (not game data — leave blank for null)</legend>
+  <label>Weapon damage <input id="weaponDmg" type="number"></label>
+  <label>Main stat <input id="mainStat" type="number"></label>
+  <label>Crit chance % <input id="critChance" type="number"></label>
+  <label>Crit damage % <input id="critDmg" type="number"></label>
+  <label>Vulnerable % <input id="vulnPct" type="number"></label>
+  <label>Overpower % <input id="overpowerPct" type="number"></label>
+  <br>
+  <label>Berserk uptime (0–1) <input id="upBerserk" type="number" step="0.05"></label>
+  <label>Vulnerable uptime (0–1) <input id="upVulnerable" type="number" step="0.05"></label>
+  <label>Overpower uptime (0–1) <input id="upOverpower" type="number" step="0.05"></label>
+  <label>Casts per second <input id="castsPerSecond" type="number" step="0.1"></label>
+</fieldset>
+<fieldset>
+  <legend>Playability minimums (blank = do not reject) and defense</legend>
+  <label>Min fury / second <input id="minFury" type="number"></label>
+  <label>Min Berserk uptime <input id="minBerserk" type="number" step="0.05"></label>
+  <label>Min Vulnerable uptime <input id="minVulnerable" type="number" step="0.05"></label>
+  <label>Min Overpower uptime <input id="minOverpower" type="number" step="0.05"></label>
+  <label>Min EHP <input id="minEhp" type="number"></label>
+  <br>
+  <label>Life <input id="life" type="number"></label>
+  <label>Armor rating <input id="armor" type="number"></label>
+  <label>Armor mitigation % <input id="armorMitigationPct" type="number"></label>
+  <label>Resist rating <input id="resists" type="number"></label>
+  <label>Resist mitigation % <input id="resistMitigationPct" type="number"></label>
+  <label>DR % layers <input id="dr" type="text" placeholder="blank = null"></label>
+</fieldset>
+<p><button id="run" type="button">Search</button></p>
+<p id="summary"></p>
+<div id="results"></div>
+<script type="module" src="src/optimizer-app.js"></script>
+</body>
+</html>
