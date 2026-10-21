@@ -1,0 +1,1 @@
+{"name":"d4-barb-builds","private":true,"type":"module","scripts":{"test":"node --test test/","start":"python3 -m http.server 8080"}}

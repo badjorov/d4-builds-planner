@@ -1,0 +1,14 @@
+<!doctype html><html><head><meta charset="utf-8"><title>D4 Barb Builds (internal v0)</title>
+<style>body{font-family:sans-serif;max-width:1100px;margin:auto;background:#1a1414;color:#eee}fieldset{border:1px solid #633;margin:8px 0}
+.unv{color:#fb5}.ver{color:#7d7}input[type=number]{width:70px}pre{background:#000;padding:8px;white-space:pre-wrap}a{color:#9cf}button{margin:2px}</style></head>
+<body><h1>D4 Barbarian Builds — internal v0 (S15, patch 3.2.1)</h1>
+<p>Build: <select id="buildSel"></select> <button id="new">New</button> <button id="del">Delete</button> <button id="exp">Export JSON</button> <input type="file" id="imp" accept=".json"> name <input id="bname"></p>
+<fieldset><legend>Inputs</legend>Skill <select id="skill"></select> coeff% <input type="number" id="coeff"> weapon dmg <input type="number" id="weapon">
+Strength <input type="number" id="str"> CC% <input type="number" id="cc"> CD% <input type="number" id="cd"><br>
+<label><input type="checkbox" id="vuln">Vulnerable</label> vuln% <input type="number" id="vulnPct"> <label><input type="checkbox" id="op">Overpower</label> OP% <input type="number" id="opPct">
+<label><input type="checkbox" id="dot">DoT</label><br>Extra additive % (gear/paragon rare nodes) <input type="number" id="addx"></fieldset>
+<fieldset><legend>Modifiers (expertise, aspects, uniques, paragon, glyphs) — <span class="ver">✔ verified</span> / <span class="unv">? unverified</span></legend><div id="mods"></div></fieldset>
+<h2>Result: <span id="total"></span> <button id="why">why?</button></h2><pre id="whyv" hidden></pre><div id="marg"></div>
+<fieldset><legend>Confirm / debunk (local only)</legend><div id="votes"></div></fieldset>
+<footer><small>Diablo® is a trademark of Blizzard Entertainment. Not affiliated with Blizzard.</small></footer>
+<script type="module" src="src/app.js"></script></body></html>
