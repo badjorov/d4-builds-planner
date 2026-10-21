@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>D4 data entry</title>
+  <link rel="stylesheet" href="src/ui.css">
+</head>
+<body>
+<nav><a href="index.html">Calculator</a> <a href="optimizer.html">Optimizer</a> <a href="data-entry.html">Data entry</a></nav>
+<h1>Data entry</h1>
+<p>Add or edit catalog entities. A verified flag means the exact value is in the source URL. Leave unknowns null. Nothing here is written to disk until you export the JSON and replace <code>data/barbarian.json</code>.</p>
+<p id="status">Loading…</p>
+<div class="row">
+  <section class="grow">
+    <label>Type <select id="entityType"></select></label>
+    <button id="newEntity" type="button">New</button>
+    <button id="exportCatalog" type="button">Export JSON</button>
+    <label>Import <input id="importCatalog" type="file" accept="application/json,.json"></label>
+    <button id="resetCatalog" type="button">Reset to bundled file</button>
+    <ul id="entityList"></ul>
+  </section>
+  <section class="grow">
+    <form id="entityForm"></form>
+    <p id="formError" class="warn"></p>
+  </section>
+</div>
+<h2>Needs input <span id="checklistCount"></span></h2>
+<p>Every null, unverified flag, roll range, and empty collection in the catalog currently loaded in this page.</p>
+<pre id="checklist" class="checklist"></pre>
+<script type="module" src="src/data-entry-app.js"></script>
+</body>
+</html>

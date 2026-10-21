@@ -1,0 +1,319 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "catalog.schema.json",
+  "title": "Class catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "meta",
+    "constraints",
+    "mainstat",
+    "skills",
+    "skillVariants",
+    "expertise",
+    "aspects",
+    "uniques",
+    "affixes",
+    "paragonBoards",
+    "paragonNodes",
+    "glyphs",
+    "talismans",
+    "seasonalMechanics"
+  ],
+  "properties": {
+    "meta": { "$ref": "#/$defs/meta" },
+    "constraints": { "$ref": "#/$defs/constraints" },
+    "mainstat": { "$ref": "#/$defs/mainstat" },
+    "skills": { "type": "array", "items": { "$ref": "#/$defs/skill" } },
+    "skillVariants": { "type": "array", "items": { "$ref": "#/$defs/skillVariant" } },
+    "expertise": { "type": "array", "items": { "$ref": "#/$defs/expertise" } },
+    "aspects": { "type": "array", "items": { "$ref": "#/$defs/aspect" } },
+    "uniques": { "type": "array", "items": { "$ref": "#/$defs/unique" } },
+    "affixes": { "type": "array", "items": { "$ref": "#/$defs/affix" } },
+    "paragonBoards": { "type": "array", "items": { "$ref": "#/$defs/paragonBoard" } },
+    "paragonNodes": { "type": "array", "items": { "$ref": "#/$defs/paragonNode" } },
+    "glyphs": { "type": "array", "items": { "$ref": "#/$defs/glyph" } },
+    "talismans": { "type": "array", "items": { "$ref": "#/$defs/namedEffects" } },
+    "seasonalMechanics": { "type": "array", "items": { "$ref": "#/$defs/namedEffects" } }
+  },
+  "$defs": {
+    "source": { "type": "string", "minLength": 1 },
+    "bucket": {
+      "enum": [
+        "additive",
+        "multiplicative",
+        "crit",
+        "vuln",
+        "overpower",
+        "mainstat",
+        "special",
+        "none",
+        "additive?",
+        "vuln?",
+        null
+      ]
+    },
+    "effectValue": {
+      "oneOf": [
+        { "type": "null" },
+        { "type": "number" },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": { "type": ["number", "null"] }
+        }
+      ]
+    },
+    "effect": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stat", "bucket", "value", "conditions", "stacking", "source", "verified"],
+      "properties": {
+        "stat": { "type": ["string", "null"] },
+        "bucket": { "$ref": "#/$defs/bucket" },
+        "value": { "$ref": "#/$defs/effectValue" },
+        "conditions": {
+          "oneOf": [
+            { "type": "null" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "stacking": { "type": ["string", "null"] },
+        "source": { "$ref": "#/$defs/source" },
+        "verified": { "type": "boolean" },
+        "note": { "type": "string" }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["class", "patch", "season", "rules", "primarySource", "sources"],
+      "properties": {
+        "class": { "type": "string" },
+        "patch": { "type": "string" },
+        "season": { "type": ["integer", "null"] },
+        "rules": { "type": "string" },
+        "primarySource": { "$ref": "#/$defs/source" },
+        "synthetic": { "type": "boolean" },
+        "note": { "type": "string" },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["url", "title", "license"],
+            "properties": {
+              "url": { "$ref": "#/$defs/source" },
+              "title": { "type": "string" },
+              "license": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "gearSlot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "kind", "acceptsAspect", "acceptsUnique", "source", "verified"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "name": { "type": ["string", "null"] },
+        "kind": { "type": "string" },
+        "acceptsAspect": { "type": "boolean" },
+        "acceptsUnique": { "type": "boolean" },
+        "source": { "$ref": "#/$defs/source" },
+        "verified": { "type": "boolean" },
+        "note": { "type": "string" }
+      }
+    },
+    "constraints": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["skillBarSize", "gearSlots", "oneAspectPerSlot", "uniquesFixedToSlots", "playability"],
+      "properties": {
+        "skillBarSize": { "type": ["integer", "null"] },
+        "oneAspectPerSlot": { "type": "boolean" },
+        "uniquesFixedToSlots": { "type": "boolean" },
+        "note": { "type": "string" },
+        "gearSlots": {
+          "type": "array",
+          "minItems": 13,
+          "maxItems": 13,
+          "items": { "$ref": "#/$defs/gearSlot" }
+        },
+        "playability": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["minFuryPerSecond", "minBerserkUptime", "minVulnerableUptime", "minOverpowerUptime", "minEhp"],
+          "properties": {
+            "minFuryPerSecond": { "type": ["number", "null"] },
+            "minBerserkUptime": { "type": ["number", "null"] },
+            "minVulnerableUptime": { "type": ["number", "null"] },
+            "minOverpowerUptime": { "type": ["number", "null"] },
+            "minEhp": { "type": ["number", "null"] },
+            "note": { "type": "string" }
+          }
+        }
+      }
+    },
+    "mainstat": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "percentPer10", "bucket", "source", "verified"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "percentPer10": { "type": ["number", "null"] },
+        "bucket": { "$ref": "#/$defs/bucket" },
+        "source": { "$ref": "#/$defs/source" },
+        "verified": { "type": "boolean" },
+        "note": { "type": "string" }
+      }
+    },
+    "skill": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "category", "tags", "coeffPct", "rank", "dot", "furyGeneratePerCast", "furySpendPerCast", "variantOf", "effects", "source", "verified"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "name": { "type": "string" },
+        "category": { "type": ["string", "null"] },
+        "tags": { "type": "array", "items": { "type": "string" } },
+        "coeffPct": { "type": ["number", "null"] },
+        "rank": { "type": ["number", "null"] },
+        "dot": { "type": ["boolean", "null"] },
+        "furyGeneratePerCast": { "type": ["number", "null"] },
+        "furySpendPerCast": { "type": ["number", "null"] },
+        "variantOf": { "type": ["string", "null"] },
+        "effects": { "type": "array", "items": { "$ref": "#/$defs/effect" } },
+        "source": { "$ref": "#/$defs/source" },
+        "verified": { "type": "boolean" },
+        "note": { "type": "string" }
+      }
+    },
+    "skillVariant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "skillId", "effects", "source", "verified"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "name": { "type": "string" },
+        "skillId": { "type": ["string", "null"] },
+        "effects": { "type": "array", "items": { "$ref": "#/$defs/effect" } },
+        "source": { "$ref": "#/$defs/source" },
+        "verified": { "type": "boolean" },
+        "note": { "type": "string" }
+      }
+    },
+    "expertise": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "effects", "source", "verified"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "name": { "type": "string" },
+        "effects": { "type": "array", "items": { "$ref": "#/$defs/effect" } },
+        "source": { "$ref": "#/$defs/source" },
+        "verified": { "type": "boolean" },
+        "note": { "type": "string" }
+      }
+    },
+    "aspect": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "slots", "effects", "source", "verified"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "name": { "type": "string" },
+        "slots": { "oneOf": [{ "type": "null" }, { "type": "array", "items": { "type": "string" } }] },
+        "effects": { "type": "array", "items": { "$ref": "#/$defs/effect" } },
+        "source": { "$ref": "#/$defs/source" },
+        "verified": { "type": "boolean" },
+        "note": { "type": "string" }
+      }
+    },
+    "unique": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "slots", "effects", "source", "verified"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "name": { "type": "string" },
+        "slots": { "oneOf": [{ "type": "null" }, { "type": "array", "items": { "type": "string" } }] },
+        "effects": { "type": "array", "items": { "$ref": "#/$defs/effect" } },
+        "source": { "$ref": "#/$defs/source" },
+        "verified": { "type": "boolean" },
+        "note": { "type": "string" }
+      }
+    },
+    "affix": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "slot", "effects", "source", "verified"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "name": { "type": "string" },
+        "slot": { "type": ["string", "null"] },
+        "effects": { "type": "array", "items": { "$ref": "#/$defs/effect" } },
+        "source": { "$ref": "#/$defs/source" },
+        "verified": { "type": "boolean" },
+        "note": { "type": "string" }
+      }
+    },
+    "paragonBoard": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "nodeIds", "source", "verified"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "name": { "type": ["string", "null"] },
+        "nodeIds": { "type": "array", "items": { "type": "string" } },
+        "source": { "$ref": "#/$defs/source" },
+        "verified": { "type": "boolean" },
+        "note": { "type": "string" }
+      }
+    },
+    "paragonNode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "boardId", "effects", "source", "verified"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "name": { "type": "string" },
+        "boardId": { "type": ["string", "null"] },
+        "effects": { "type": "array", "items": { "$ref": "#/$defs/effect" } },
+        "source": { "$ref": "#/$defs/source" },
+        "verified": { "type": "boolean" },
+        "note": { "type": "string" }
+      }
+    },
+    "glyph": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "level", "effects", "source", "verified"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "name": { "type": "string" },
+        "level": { "type": ["number", "null"] },
+        "effects": { "type": "array", "items": { "$ref": "#/$defs/effect" } },
+        "source": { "$ref": "#/$defs/source" },
+        "verified": { "type": "boolean" },
+        "note": { "type": "string" }
+      }
+    },
+    "namedEffects": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "effects", "source", "verified"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "name": { "type": ["string", "null"] },
+        "effects": { "type": "array", "items": { "$ref": "#/$defs/effect" } },
+        "source": { "$ref": "#/$defs/source" },
+        "verified": { "type": "boolean" },
+        "note": { "type": "string" }
+      }
+    }
+  }
+}

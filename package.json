@@ -1,1 +1,10 @@
-{"name":"d4-barb-builds","private":true,"type":"module","scripts":{"test":"node --test test/","start":"python3 -m http.server 8080"}}
+{
+  "name": "d4-barb-builds",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "needs-input": "node scripts/needs-input.js",
+    "start": "python3 -m http.server 8080"
+  }
+}

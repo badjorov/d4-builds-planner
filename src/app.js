@@ -1,8 +1,9 @@
 import {compute,marginal} from './engine.js';
+import {legacyEntity} from './catalog.js';
 const D=await (await fetch('data/barbarian.json')).json();
 const $=id=>document.getElementById(id);const KEY='d4bb.builds',VK='d4bb.votes';
-const groups=['expertise','aspects','uniques','paragon','glyphs'];
-const all=groups.flatMap(g=>D[g].map(e=>({...e,group:g})));
+const groups=[['expertise','expertise'],['aspects','aspects'],['uniques','uniques'],['paragonNodes','paragon'],['glyphs','glyphs']];
+const all=groups.flatMap(([key,group])=>(D[key]||[]).map(e=>legacyEntity(e,group)));
 let builds=JSON.parse(localStorage[KEY]||'{}');let votes=JSON.parse(localStorage[VK]||'{}');
 const blank=()=>({name:'New build',skill:D.skills[0].id,coeff:D.skills[0].coeffPct,weapon:null,str:null,cc:null,cd:null,vuln:false,vulnPct:null,op:false,opPct:null,dot:false,addx:null,mods:{}});
 let cur=Object.keys(builds)[0];if(!cur){cur='b'+Date.now();builds[cur]=blank();}
@@ -12,7 +13,7 @@ $('skill').innerHTML=D.skills.map(s=>`<option value="${s.id}">${s.name}</option>
 const F=['coeff','weapon','str','cc','cd','vulnPct','opPct','addx'],C=['vuln','op','dot'];
 function renderSel(){$('buildSel').innerHTML=Object.entries(builds).map(([k,b])=>`<option value="${k}" ${k==cur?'selected':''}>${b.name}</option>`).join('');}
 function load(){const b=builds[cur];$('bname').value=b.name;$('skill').value=b.skill;F.forEach(f=>$(f).value=b[f]??'');C.forEach(c=>$(c).checked=!!b[c]);
- $('mods').innerHTML=groups.map(g=>`<b>${g}</b><br>`+D[g].map(e=>{const m=b.mods[e.id]||{};const v=m.value??e.value??'';
+ $('mods').innerHTML=['expertise','aspects','uniques','paragon','glyphs'].map(g=>`<b>${g}</b><br>`+all.filter(e=>e.group===g).map(e=>{const m=b.mods[e.id]||{};const v=m.value??e.value??'';
   return `<label><input type="checkbox" data-on="${e.id}" ${m.on?'checked':''}> <span class="${e.verified?'ver':'unv'}">${e.verified?'✔':'?'}</span> ${e.name}</label>
   val <input type="number" data-val="${e.id}" value="${v}" placeholder="${e.min!=null?e.min+'-'+e.max:'null'}"> [${e.bucket??'?'}] <a href="${e.source.startsWith('http')?e.source:'#'}" target="_blank">src</a> <small>${e.note||''}</small><br>`}).join('')).join('');
  calc();}

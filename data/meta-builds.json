@@ -1,0 +1,25 @@
+{
+  "note": "Known meta builds are entered by you. Rows with example true are schema samples and are ignored by the novelty score. Do not paste builds from Maxroll, Mobalytics, Icy Veins, Wowhead, or d4builds.",
+  "builds": [
+    {
+      "id": "example",
+      "name": "EXAMPLE — not a real build",
+      "example": true,
+      "skills": ["EXAMPLE-skill"],
+      "aspects": ["EXAMPLE-aspect"],
+      "uniques": ["EXAMPLE-unique"],
+      "keyItems": ["EXAMPLE-unique"],
+      "bucketProfile": {
+        "additive": null,
+        "multiplicative": null,
+        "mainstat": null,
+        "crit": null,
+        "vuln": null,
+        "overpower": null
+      },
+      "source": "manual-entry",
+      "verified": false,
+      "note": "EXAMPLE only. This is not a meta build. Replace it with builds you enter yourself, each with a source URL."
+    }
+  ]
+}
