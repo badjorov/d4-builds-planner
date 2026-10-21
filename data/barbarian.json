@@ -1,0 +1,43 @@
+{
+ "meta": {"class":"Barbarian","patch":"3.2.1","season":15,"rules":"Official Blizzard patch notes + manual in-game entry only. No datamines, no scraping. null = unknown.","primarySource":"https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy"},
+ "mainstat": {"id":"core-stat-scalar","name":"Strength core stat scalar","percentPer10":0.8,"bucket":"mainstat","source":"https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy","verified":true,"note":"Patch 3.2.1: damage per 10 Strength 1.1% -> 0.8%. Whether this bucket multiplies separately is the community model [VERIFY in game]."},
+ "skills": [
+  {"id":"hota","name":"Hammer of the Ancients","category":"Core","tags":["Core","Earthquake?"],"coeffPct":null,"rank":null,"source":"manual-entry","verified":false,"note":"Enter tooltip % at your rank."},
+  {"id":"whirlwind","name":"Whirlwind","category":"Core","tags":["Core","Channeled"],"coeffPct":null,"rank":null,"source":"manual-entry","verified":false},
+  {"id":"rend","name":"Rend","category":"Core","tags":["Core","Bleed"],"coeffPct":null,"dot":true,"rank":null,"source":"manual-entry","verified":false},
+  {"id":"rallying-cry-madawc","name":"Rallying Cry (Madawc Variant)","category":"Tactical/Shout","tags":["Shout"],"coeffPct":100,"source":"https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy","verified":true,"note":"Patch 3.2.1: damage 200% -> 100%. Rank scaling unknown [VERIFY tooltip]."},
+  {"id":"cota-madawc","name":"Call of the Ancients (Madawc)","category":"Ultimate","tags":["Ultimate","Ancients"],"coeffPct":120,"source":"https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy","verified":true,"note":"Patch 3.2.1: Madawc damage 240% -> 120%."},
+  {"id":"charge","name":"Charge","category":"Mobility","tags":["Mobility"],"coeffPct":null,"source":"https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy","verified":false,"note":"3.2.1 only changed Battering Ram hitbox; no number published."},
+  {"id":"kick","name":"Kick","category":"Brawling","tags":["Brawling"],"coeffPct":null,"source":"https://news.blizzard.com/en-us/article/24292852/the-3-2-0-ptr-what-you-need-to-know","verified":false,"note":"Power Variant bug fix only."}
+ ],
+ "expertise": [
+  {"id":"2h-sword-bleed","name":"Two-Handed Sword Expertise: Bleeding bonus","value":15,"bucket":"multiplicative","condition":"bleed","source":"https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy","verified":true,"note":"30%[x] -> 15%[x]. Rank requirement unknown."},
+  {"id":"2h-mace","name":"Two-Handed Mace Expertise","value":null,"bucket":null,"source":"manual-entry","verified":false},
+  {"id":"2h-axe","name":"Two-Handed Axe Expertise","value":null,"bucket":"vuln?","source":"manual-entry","verified":false},
+  {"id":"dual-wield","name":"Dual Wield / One-Handed Expertise","value":null,"bucket":null,"source":"manual-entry","verified":false}
+ ],
+ "aspects": [
+  {"id":"writhing","name":"Writhing Aspect","min":6,"max":9,"value":null,"bucket":"multiplicative","condition":null,"source":"https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy","verified":false,"note":"6-9%[x] per 3.2.1. Enter your roll; trigger condition not in notes."},
+  {"id":"battle-mad","name":"Battle-Mad Aspect","min":10,"max":15,"value":null,"bucket":"additive?","source":"https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy","verified":false,"note":"10-15% (no [x] marker in notes) - bucket unverified."},
+  {"id":"raid-leader","name":"Raid Leader's Aspect","min":7,"max":10,"value":null,"bucket":"none","effect":"damage reduction","source":"https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy","verified":false,"note":"Also grants 7-10% DR; main effect not in notes."},
+  {"id":"walloping","name":"Walloping Aspect","min":null,"max":null,"value":null,"bucket":null,"source":"https://news.blizzard.com/en-us/article/24292852/the-3-2-0-ptr-what-you-need-to-know","verified":false},
+  {"id":"warpath","name":"Warpath Aspect","min":null,"max":null,"value":null,"bucket":null,"source":"https://news.blizzard.com/en-us/article/24292852/the-3-2-0-ptr-what-you-need-to-know","verified":false}
+ ],
+ "uniques": [
+  {"id":"red-furor","name":"Ring of Red Furor","value":null,"bucket":"crit","source":"https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy","verified":false,"note":"Fury threshold 100 -> 30; +1%[x] crit dmg per Fury above 30. Base crit bonus value unknown."},
+  {"id":"ravenous","name":"Ring of the Ravenous","value":null,"bucket":"special","source":"https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy","verified":false,"note":"Applies 1 Rend stack, 0.5s cooldown."},
+  {"id":"nomads-heart","name":"Nomad's Longing Heart","value":null,"bucket":"multiplicative","source":"https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy","verified":false,"note":"'Double damage bonus' now also vs Healthy; value unknown."},
+  {"id":"ramaladni","name":"Ramaladni's Magnum Opus","value":null,"bucket":"special","source":"https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy","verified":false,"note":"Drains 7% max Fury in combat."},
+  {"id":"harrogath","name":"Rage of Harrogath","value":null,"bucket":"none","source":"https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy","verified":false,"note":"CDR 0.5s."}
+ ],
+ "paragon": [
+  {"id":"hemorrhage","name":"Hemorrhage (Legendary Node)","value":60,"bucket":"multiplicative","condition":"bleed?","source":"https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy","verified":true,"note":"75%[x] -> 60%[x]; conditions not in notes."},
+  {"id":"blood-rage","name":"Blood Rage (Legendary Node)","value":45,"bucket":"multiplicative","source":"https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy","verified":true,"note":"60%[x] -> 45%[x]."},
+  {"id":"flawless-technique","name":"Flawless Technique (Legendary Node)","value":45,"bucket":"multiplicative","source":"https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy","verified":true,"note":"50%[x] -> 45%[x]."},
+  {"id":"rare-node","name":"Rare node (+% damage, manual)","value":null,"bucket":"additive","source":"manual-entry","verified":false}
+ ],
+ "glyphs": [
+  {"id":"disembowel","name":"Disembowel Glyph","value":15,"bucket":"multiplicative","source":"https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy","verified":true,"note":"20%[x] -> 15%[x]; glyph level at which this applies not stated."},
+  {"id":"crusher","name":"Crusher Glyph","value":15,"bucket":"multiplicative","source":"https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy","verified":true,"note":"20%[x] -> 15%[x]."}
+ ]
+}
