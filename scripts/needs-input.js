@@ -1,5 +1,5 @@
 import { readFileSync } from 'node:fs';
-import { formatNeedsInput, needsInput, openNeeds, pendingAllocation } from '../src/needs-input.js';
+import { needsInput, openNeeds, pendingAllocation, splitForBuild, summarizeNeeds } from '../src/needs-input.js';
 
 const files = [
   ['../data/barbarian.json', ''],
@@ -7,17 +7,29 @@ const files = [
   ['../data/meta-builds.json', '/meta-builds.json']
 ];
 
-const items = files.flatMap(([path, root]) => needsInput(JSON.parse(readFileSync(new URL(path, import.meta.url), 'utf8')), root));
+const loaded = Object.fromEntries(files.map(([path]) => {
+  const name = path.split('/').pop();
+  return [name, JSON.parse(readFileSync(new URL(path, import.meta.url), 'utf8'))];
+}));
+const items = files.flatMap(([path, root]) => needsInput(loaded[path.split('/').pop()], root));
 items.sort((a, b) => a.path.localeCompare(b.path) || a.reason.localeCompare(b.reason));
-console.log(formatNeedsInput(items));
-console.log('');
-console.log(`open ${openNeeds(items).length}`);
-console.log(`pending-allocation ${pendingAllocation(items).length}`);
-const by = {};
-for (const item of openNeeds(items)) {
-  const cat = item.path.split('/').filter(Boolean)[0] || '(root)';
-  by[cat] ??= { null: 0, unverified: 0, range: 0, empty: 0, total: 0 };
-  by[cat][item.reason] = (by[cat][item.reason] || 0) + 1;
-  by[cat].total += 1;
+
+const buildFlag = process.argv.indexOf('--build');
+const which = buildFlag === -1 ? 'user' : process.argv[buildFlag + 1];
+const builds = loaded['builds.json'].builds || [];
+const build = which === 'user'
+  ? builds.find(entry => entry.id === 'users-current-build') || builds[0]
+  : builds.find(entry => entry.id === which) || builds[0];
+const split = splitForBuild(items, build, loaded['barbarian.json']);
+
+function printGroup(label, group) {
+  console.log(`${label} ${group.length}`);
+  const by = summarizeNeeds(group);
+  for (const key of Object.keys(by).sort()) console.log(`${label} ${key} ${JSON.stringify(by[key])}`);
 }
-for (const key of Object.keys(by).sort()) console.log(`${key} ${JSON.stringify(by[key])}`);
+
+printGroup('required', split.required);
+printGroup('nice-to-have', split.niceToHave);
+console.log(`pending-allocation ${pendingAllocation(items).length}`);
+console.log(`open ${openNeeds(items).length}`);
+console.log(`build ${build?.id || '(none)'}`);

@@ -27,9 +27,9 @@
         "license": "User's own gameplay footage, transcribed by hand. Not an open-license dataset. Every value from this source stays verified false."
       },
       {
-        "url": "user video codex (frames)",
+        "url": "video-frames",
         "title": "Codex of Power, read from the user video frames",
-        "license": "User's own gameplay footage. Not an open-license dataset. Every value from this source stays verified false."
+        "license": "User's own gameplay footage, confirmed by the user. Not an open-license dataset. userConfirmed marks that confirmation. verified stays false."
       }
     ]
   },
@@ -183,7 +183,7 @@
       "total": 83,
       "source": "user correction 2026-10-22",
       "verified": true,
-      "note": "All 83 points are spent. The confirmed active skills are Whirlwind, War Cry, Challenging Shout, Rallying Cry, Wrath of the Berserker, and Iron Skin, plus the upgrades named on those skills. allocationVerified on a skill, and verified on an upgrade, confirm the allocation only. Numeric values stay unverified unless they already were. Flay is inactive. Every other non-passive skill and upgrade is inactive. Passive skills remain pending; this catalog has no passive rows."
+      "note": "All 83 points are spent. The confirmed active skills are Whirlwind, War Cry, Challenging Shout, Rallying Cry, Wrath of the Berserker, and Iron Skin, plus the upgrades named on those skills. allocationVerified on a skill, and verified on an upgrade, confirm the allocation only. Numeric values stay unverified unless they already were. Flay is inactive. Every other non-passive skill and upgrade is inactive. passives is empty: no passive name is present in the sourced repo data, so none were added."
     },
     "tooltipLifeNote": "Max Life on the user build is 473. That is a minimum-life setup with Melted Heart of Selig and Endurant Faith. Life numbers implied by skill tooltips are not Max Life and are ignored.",
     "rankNote": "A skill rank is base ranks, capped by maxRank (15), plus bonus ranks from gear, talismans, and paragon. rank and rankTotal store the shown total. baseRank and bonusRank stay null when the split was not shown."
@@ -1990,7 +1990,7 @@
           "value": 9,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 11,
@@ -2008,14 +2008,15 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
       "note": "6-9%[x] per 3.2.1. Enter your roll; trigger condition not in notes. Frame reading merged into the existing row. Earlier effects and their sources are kept.",
       "priorSource": "https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy",
       "rank": "11/11",
       "category": "Offensive",
       "description": "Enemies take 9.0% [6.0 - 9.0]% increased Damage Over Time for every second they've been affected by a Damage Over Time, up to 10 seconds.",
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "battle-mad",
@@ -2041,7 +2042,7 @@
           "value": 15,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 11,
@@ -2059,14 +2060,15 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
       "note": "10-15% (no [x] marker in notes) - bucket unverified. Frame reading merged into the existing row. Earlier effects and their sources are kept.",
       "priorSource": "https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy",
       "rank": "11/11",
       "category": "Utility",
       "description": "After swapping weapons 5 times gain Berserking for 4 seconds. Additionally, you deal 15.0%[x] [10.0 - 15.0]% increased damage while Berserking.",
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "raid-leader",
@@ -2092,7 +2094,7 @@
           "value": 10,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 21,
@@ -2115,7 +2117,7 @@
           "value": 6,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 21,
@@ -2133,14 +2135,15 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
       "note": "Also grants 7-10% DR; main effect not in notes. Frame reading merged into the existing row. Earlier effects and their sources are kept.",
       "priorSource": "https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy",
       "rank": "21/21",
       "category": "Utility",
       "description": "Your Shouts grant you 10%[x] [7 - 10]% Damage Reduction and also Heal allies for 6.0%[x] [4.0 - 6.0]% of their Maximum Life per second.",
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "walloping",
@@ -2153,7 +2156,7 @@
           "value": 59,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 20,
@@ -2172,14 +2175,15 @@
           "note": "Replaces a placeholder effect that had no number. Previous effect source: https://news.blizzard.com/en-us/article/24292852/the-3-2-0-ptr-what-you-need-to-know."
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
       "priorSource": "https://news.blizzard.com/en-us/article/24292852/the-3-2-0-ptr-what-you-need-to-know",
       "rank": "20/21",
       "category": "Offensive",
       "description": "Your Skills while wielding a Bludgeoning weapon deal 59%[x] [40 - 60]% increased damage if the enemy is Incapacitated or Vulnerable.",
       "note": "Frame reading merged into the existing row. The PTR placeholder had no number and was replaced by this frame point. Previous name: Walloping Aspect.",
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "warpath",
@@ -2192,7 +2196,7 @@
           "value": 60,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 21,
@@ -2211,14 +2215,15 @@
           "note": "Replaces a placeholder effect that had no number. Previous effect source: https://news.blizzard.com/en-us/article/24292852/the-3-2-0-ptr-what-you-need-to-know."
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
       "priorSource": "https://news.blizzard.com/en-us/article/24292852/the-3-2-0-ptr-what-you-need-to-know",
       "rank": "21/21",
       "category": "Offensive",
       "description": "While you have Overpower charges, your attacks while wielding a Bludgeoning weapon deal 60%[x] [40 - 60]% increased damage.",
       "note": "Frame reading merged into the existing row. The PTR placeholder had no number and was replaced by this frame point. Previous name: Warpath Aspect.",
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-coagulation",
@@ -2228,7 +2233,7 @@
       "category": "Defensive",
       "potencyNote": "Aspects get 50%/100% potency on Amulets / Two-Handed weapons",
       "transcribed": "Aspect of Coagulation, RANK 5/16: 20% [20-30]% increased Fortify generation and 1.9% [1.5-2.0]% DR while Fortified. Aspects get 50%/100% potency on Amulets / Two-Handed weapons. (only tooltip shown)",
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
       "effects": [
         {
@@ -2287,7 +2292,7 @@
           "value": 19,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 5,
@@ -2309,14 +2314,15 @@
       "priorRank": "5/16",
       "description": "Gain 30%[+] increased Fortify generation and 19% [15 - 20]% Damage Reduction while Fortified.",
       "note": "Frame reading merged into the existing row. Earlier effects and their sources are kept. Previous rank: 5/16.",
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "accelerating",
       "name": "Accelerating Aspect",
       "slots": null,
       "rank": "21/21",
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
       "note": "Unverified codex entry. The user supplied the upgrade rank, the roll range, and the value at that rank. Affix text was not provided. Frame reading merged into the existing row. Earlier effects and their sources are kept.",
       "effects": [
@@ -2347,14 +2353,15 @@
       "priorSource": "user correction 2026-10-22",
       "category": "Offensive",
       "description": "Critical Strikes with Core Skills increase your Attack Speed by 50.0%[+] [30.0 - 50.0]%.",
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "anger-management",
       "name": "Aspect of Anger Management",
       "slots": null,
       "rank": "9/11",
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
       "note": "Unverified codex entry. The user supplied the upgrade rank, the roll range, and the value at that rank. Affix text was not provided. Frame reading merged into the existing row. Earlier effects and their sources are kept. Previous name: Anger Management.",
       "effects": [
@@ -2385,7 +2392,8 @@
       "priorSource": "user correction 2026-10-22",
       "category": "Utility",
       "description": "While above 50 Primary Resource, deal 19.0%[x] [15.0 - 20.0]% increased damage and gain Berserking, but lose 3 Primary Resource Regeneration.",
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-disobedience",
@@ -2401,7 +2409,7 @@
           "value": 1.5,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 6,
@@ -2419,9 +2427,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-glynns-anvil",
@@ -2437,7 +2446,7 @@
           "value": 4,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 16,
@@ -2460,7 +2469,7 @@
           "value": 40,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 16,
@@ -2478,9 +2487,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-heavenly-strength",
@@ -2496,7 +2506,7 @@
           "value": 28,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 9,
@@ -2514,9 +2524,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-might",
@@ -2532,7 +2543,7 @@
           "value": 30,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 11,
@@ -2550,9 +2561,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-shelter",
@@ -2568,7 +2580,7 @@
           "value": 48,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 19,
@@ -2586,9 +2598,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-tempering-blows",
@@ -2604,7 +2617,7 @@
           "value": 30,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 11,
@@ -2622,9 +2635,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-the-fortress",
@@ -2640,7 +2654,7 @@
           "value": 59,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 20,
@@ -2658,9 +2672,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-the-protector",
@@ -2676,7 +2691,7 @@
           "value": 98,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 15,
@@ -2694,9 +2709,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "bruisers-aspect",
@@ -2712,7 +2728,7 @@
           "value": 230,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 5,
@@ -2729,9 +2745,10 @@
           ]
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "enshrouding-aspect",
@@ -2747,7 +2764,7 @@
           "value": 29,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 20,
@@ -2766,9 +2783,10 @@
           "note": "Linear upgrade interpolation does not reproduce this observed point. value stays the observed point, and this formula application is unverified."
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "everliving-aspect",
@@ -2784,7 +2802,7 @@
           "value": 3,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 11,
@@ -2802,9 +2820,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "iron-blood-aspect",
@@ -2820,7 +2839,7 @@
           "value": 30,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 21,
@@ -2838,9 +2857,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "irrepressible-aspect",
@@ -2856,7 +2876,7 @@
           "value": 45,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 16,
@@ -2874,9 +2894,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "juggernauts-aspect",
@@ -2892,7 +2913,7 @@
           "value": 145,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 46,
@@ -2910,9 +2931,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "protecting-aspect",
@@ -2928,7 +2950,7 @@
           "value": 6,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 5,
@@ -2945,9 +2967,10 @@
           ]
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "snowveiled-aspect",
@@ -2963,7 +2986,7 @@
           "value": 30,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 11,
@@ -2981,9 +3004,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-berserk-ripping",
@@ -2999,7 +3023,7 @@
           "value": 60,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 21,
@@ -3017,9 +3041,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-binding-morass",
@@ -3035,7 +3060,7 @@
           "value": 68,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 10,
@@ -3058,7 +3083,7 @@
           "value": 53,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 10,
@@ -3077,9 +3102,10 @@
           "note": "Linear upgrade interpolation does not reproduce this observed point. value stays the observed point, and this formula application is unverified."
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-channeling",
@@ -3095,7 +3121,7 @@
           "value": 69,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 20,
@@ -3113,9 +3139,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-elemental-fate",
@@ -3131,7 +3158,7 @@
           "value": 60,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 21,
@@ -3149,9 +3176,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-encroaching-wrath",
@@ -3167,7 +3195,7 @@
           "value": 60,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 21,
@@ -3185,9 +3213,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-exorcism",
@@ -3203,7 +3232,7 @@
           "value": 44,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 15,
@@ -3221,9 +3250,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-frenzied-onslaught",
@@ -3239,7 +3269,7 @@
           "value": 46,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 12,
@@ -3257,9 +3287,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-incendiary-fissures",
@@ -3275,7 +3306,7 @@
           "value": 60,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 21,
@@ -3293,9 +3324,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-inner-calm",
@@ -3311,7 +3343,7 @@
           "value": 73,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 24,
@@ -3329,9 +3361,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-limitless-rage",
@@ -3347,7 +3380,7 @@
           "value": 0.2,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 21,
@@ -3365,9 +3398,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-reanimation",
@@ -3383,7 +3417,7 @@
           "value": 88,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 29,
@@ -3401,9 +3435,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-the-expectant",
@@ -3419,7 +3454,7 @@
           "value": 8,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 21,
@@ -3437,9 +3472,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-the-moonrise",
@@ -3455,7 +3491,7 @@
           "value": 58,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 19,
@@ -3473,9 +3509,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "conceited-aspect",
@@ -3491,7 +3528,7 @@
           "value": 60,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 21,
@@ -3509,9 +3546,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "cremators-aspect",
@@ -3527,7 +3565,7 @@
           "value": 65,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 31,
@@ -3545,9 +3583,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "crushing-aspect",
@@ -3563,7 +3602,7 @@
           "value": 64,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 20,
@@ -3581,9 +3620,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "cut-to-the-bone-aspect",
@@ -3599,7 +3639,7 @@
           "value": 60,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 21,
@@ -3617,9 +3657,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "duelists-aspect",
@@ -3635,7 +3676,7 @@
           "value": 6.5,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 21,
@@ -3653,9 +3694,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "edgemasters-aspect",
@@ -3671,7 +3713,7 @@
           "value": 59,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 20,
@@ -3689,9 +3731,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "ferocious-aspect",
@@ -3707,7 +3750,7 @@
           "value": 6,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 3,
@@ -3724,9 +3767,10 @@
           ]
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "heavy-hitting-aspect",
@@ -3742,7 +3786,7 @@
           "value": 60,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 21,
@@ -3760,9 +3804,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "hellbent-commander-aspect",
@@ -3778,7 +3823,7 @@
           "value": 60,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 21,
@@ -3796,9 +3841,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "needleflare-aspect",
@@ -3814,7 +3860,7 @@
           "value": 58,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 19,
@@ -3832,9 +3878,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "progenitors-aspect",
@@ -3850,7 +3897,7 @@
           "value": 59,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 20,
@@ -3868,9 +3915,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "skullbreakers-aspect",
@@ -3886,7 +3934,7 @@
           "value": 59,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 20,
@@ -3904,9 +3952,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "unrelenting-aspect",
@@ -3922,7 +3971,7 @@
           "value": 60,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 11,
@@ -3940,9 +3989,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "vanquishing-aspect",
@@ -3958,7 +4008,7 @@
           "value": 88,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 29,
@@ -3976,9 +4026,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "vehement-brawlers-aspect",
@@ -3994,7 +4045,7 @@
           "value": 55,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 21,
@@ -4012,9 +4063,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "wanton-rupture-aspect",
@@ -4030,7 +4082,7 @@
           "value": 30,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 21,
@@ -4048,9 +4100,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-adaptability",
@@ -4066,7 +4119,7 @@
           "value": 24,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 10,
@@ -4083,9 +4136,10 @@
           ]
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-alacrity",
@@ -4101,7 +4155,7 @@
           "value": 60,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 11,
@@ -4119,9 +4173,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-apogeic-furor",
@@ -4137,7 +4192,7 @@
           "value": 9.5,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 7,
@@ -4154,9 +4209,10 @@
           ]
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-berserk-fury",
@@ -4172,7 +4228,7 @@
           "value": 11,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 21,
@@ -4189,9 +4245,10 @@
           ]
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-deluge",
@@ -4207,7 +4264,7 @@
           "value": 7,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 2,
@@ -4224,9 +4281,10 @@
           ]
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-efficiency",
@@ -4242,7 +4300,7 @@
           "value": 49,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 15,
@@ -4260,9 +4318,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-furious-impulse",
@@ -4278,7 +4337,7 @@
           "value": 10,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 7,
@@ -4296,9 +4355,10 @@
           "note": "Linear upgrade interpolation does not reproduce this observed point. value stays the observed point, and this formula application is unverified."
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-the-orange-herald",
@@ -4314,7 +4374,7 @@
           "value": 1,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 4,
@@ -4331,9 +4391,10 @@
           ]
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-the-umbral",
@@ -4349,7 +4410,7 @@
           "value": 6,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 5,
@@ -4366,9 +4427,10 @@
           ]
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-vocalized-empowerment",
@@ -4384,7 +4446,7 @@
           "value": 13.5,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 8,
@@ -4401,9 +4463,10 @@
           ]
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-voracious-rage",
@@ -4419,7 +4482,7 @@
           "value": 28.5,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 18,
@@ -4437,9 +4500,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "bear-clan-berserkers-aspect",
@@ -4455,7 +4519,7 @@
           "value": 74,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 25,
@@ -4473,9 +4537,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "bold-chieftains-aspect",
@@ -4491,7 +4556,7 @@
           "value": 10,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 5,
@@ -4508,9 +4573,10 @@
           ]
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "sapping-aspect",
@@ -4526,7 +4592,7 @@
           "value": 1.5,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 6,
@@ -4543,9 +4609,10 @@
           ]
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "starlight-aspect",
@@ -4561,7 +4628,7 @@
           "value": 28,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 9,
@@ -4579,9 +4646,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "vulpines-aspect",
@@ -4597,7 +4665,7 @@
           "value": 22,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 8,
@@ -4614,9 +4682,10 @@
           ]
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-accursed-touch",
@@ -4632,7 +4701,7 @@
           "value": 40,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 11,
@@ -4650,9 +4719,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-anemia",
@@ -4668,7 +4738,7 @@
           "value": 30,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 21,
@@ -4686,9 +4756,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-audacity",
@@ -4704,7 +4775,7 @@
           "value": 14.8,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 20,
@@ -4723,9 +4794,10 @@
           "note": "Linear upgrade interpolation does not reproduce this observed point. value stays the observed point, and this formula application is unverified."
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-booming-voice",
@@ -4741,7 +4813,7 @@
           "value": 30,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 11,
@@ -4759,9 +4831,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-dominance",
@@ -4777,7 +4850,7 @@
           "value": 2,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 2,
@@ -4794,9 +4867,10 @@
           ]
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-elusive-menace",
@@ -4812,7 +4886,7 @@
           "value": 29,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 10,
@@ -4830,9 +4904,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-fortune",
@@ -4848,7 +4923,7 @@
           "value": 20,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 11,
@@ -4866,9 +4941,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-rallying-reversal",
@@ -4884,7 +4960,7 @@
           "value": 15,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 21,
@@ -4902,9 +4978,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-retribution",
@@ -4920,7 +4997,7 @@
           "value": 23,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 9,
@@ -4938,9 +5015,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-warmth",
@@ -4956,7 +5034,7 @@
           "value": 2.8,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 9,
@@ -4974,9 +5052,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "battle-fervors-aspect",
@@ -4992,7 +5071,7 @@
           "value": 15,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 11,
@@ -5010,9 +5089,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "blood-boiling-aspect",
@@ -5028,7 +5108,7 @@
           "value": 31215,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 16,
@@ -5045,9 +5125,10 @@
           ]
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "earthstrikers-aspect",
@@ -5063,7 +5144,7 @@
           "value": 19.5,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 9,
@@ -5081,9 +5162,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "eluding-aspect",
@@ -5099,7 +5181,7 @@
           "value": 14,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 5,
@@ -5117,9 +5199,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "embattled-aspect",
@@ -5135,7 +5218,7 @@
           "value": 199,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 50,
@@ -5153,9 +5236,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "exploiters-aspect",
@@ -5171,7 +5255,7 @@
           "value": 49,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 20,
@@ -5189,9 +5273,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "overheating-aspect",
@@ -5207,7 +5292,7 @@
           "value": 20,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 11,
@@ -5225,9 +5310,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "steadfast-berserkers-aspect",
@@ -5243,7 +5329,7 @@
           "value": 5.9,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 20,
@@ -5261,9 +5347,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "sticker-thought-aspect",
@@ -5279,7 +5366,7 @@
           "value": 5568,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 20,
@@ -5296,9 +5383,10 @@
           ]
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "tidal-aspect",
@@ -5314,7 +5402,7 @@
           "value": 3,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 3,
@@ -5331,9 +5419,10 @@
           ]
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "undying-aspect",
@@ -5349,7 +5438,7 @@
           "value": 3,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 11,
@@ -5367,9 +5456,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "weapon-masters-aspect",
@@ -5385,7 +5475,7 @@
           "value": 1.5,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 6,
@@ -5407,7 +5497,7 @@
           "value": 15,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 6,
@@ -5425,9 +5515,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "wildbolt-aspect",
@@ -5443,7 +5534,7 @@
           "value": 1.5,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 21,
@@ -5466,7 +5557,7 @@
           "value": 15,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 21,
@@ -5481,9 +5572,10 @@
           "note": "No bracket range was shown, so the upgrade curve was not applied."
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-forward-momentum",
@@ -5499,7 +5591,7 @@
           "value": 35,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 21,
@@ -5517,9 +5609,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-metamorphosis",
@@ -5535,7 +5628,7 @@
           "value": 4.5,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 12,
@@ -5553,9 +5646,10 @@
           "note": "Range is stored as shown, high to low. The left endpoint is rank 1 and the right endpoint is the cap."
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-nebulous-brews",
@@ -5571,7 +5665,7 @@
           "value": 30,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 21,
@@ -5589,9 +5683,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-slaughter",
@@ -5607,7 +5702,7 @@
           "value": 44,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 15,
@@ -5625,9 +5720,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-swift-spirit",
@@ -5643,7 +5739,7 @@
           "value": 4.5,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 16,
@@ -5661,9 +5757,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "aspect-of-the-unholy-confederate",
@@ -5679,7 +5776,7 @@
           "value": 1.5,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 6,
@@ -5697,9 +5794,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "craven-aspect",
@@ -5715,7 +5813,7 @@
           "value": 1.2,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 3,
@@ -5733,9 +5831,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "ghostwalker-aspect",
@@ -5751,7 +5850,7 @@
           "value": 19,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 19,
@@ -5769,9 +5868,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "sickfoots-aspect",
@@ -5787,7 +5887,7 @@
           "value": 1.5,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 6,
@@ -5805,9 +5905,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     },
     {
       "id": "wind-striker-aspect",
@@ -5823,7 +5924,7 @@
           "value": 50,
           "conditions": null,
           "stacking": null,
-          "source": "user video codex (frames)",
+          "source": "video-frames",
           "verified": false,
           "upgrade": {
             "level": 21,
@@ -5841,9 +5942,10 @@
           "unit": "%"
         }
       ],
-      "source": "user video codex (frames)",
+      "source": "video-frames",
       "verified": false,
-      "available": true
+      "available": true,
+      "userConfirmed": true
     }
   ],
   "uniques": [
@@ -7143,5 +7245,6 @@
     "source": "user correction 2026-10-22",
     "verified": true,
     "note": "Linear interpolation matches Accelerating Aspect at 21/21 (50 on a 30-50 range) and Anger Management at 9/11 (19 on a 15-20 range). The left endpoint is rank 1 and the right endpoint is the cap, including when the range is printed high to low. Aspect rows stay unverified. A row whose observed point does not match this curve keeps the observed point and marks that formula application unverified."
-  }
+  },
+  "passives": []
 }

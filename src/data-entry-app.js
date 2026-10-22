@@ -1,6 +1,6 @@
 import { ENTITY_KEYS, entityTemplate, upsertEntity } from './catalog.js';
 import { validate } from './schema.js';
-import { formatNeedsInput, needsInput, openNeeds, pendingAllocation } from './needs-input.js';
+import { needsInput, pendingAllocation, splitForBuild } from './needs-input.js';
 import { esc } from './html.js';
 
 const $ = (id) => document.getElementById(id);
@@ -11,6 +11,7 @@ let catalog = null;
 let bundled = null;
 let schema = null;
 let extraNeeds = [];
+let userBuild = null;
 let type = 'skill';
 let draft = null;
 
@@ -26,8 +27,15 @@ function list() {
 
 function renderChecklist() {
   const items = [...needsInput(catalog), ...extraNeeds].sort((a, b) => a.path.localeCompare(b.path) || a.reason.localeCompare(b.reason));
-  $('checklistCount').textContent = `(${openNeeds(items).length} open, ${pendingAllocation(items).length} pending allocation)`;
-  $('checklist').textContent = formatNeedsInput(items);
+  const split = splitForBuild(items, userBuild, catalog);
+  const pending = pendingAllocation(items).length;
+  $('checklistCount').textContent = `(${split.required.length} required, ${split.niceToHave.length} nice-to-have, ${pending} pending allocation)`;
+  const block = (label, group) => {
+    const lines = [`${label} (${group.length})`];
+    for (const item of group) lines.push(`${item.path} — ${item.reason} — ${item.message}`);
+    return lines.join('\n');
+  };
+  $('checklist').textContent = `${block('Required', split.required)}\n\n${block('Nice to have', split.niceToHave)}`;
 }
 
 function renderList() {
@@ -274,6 +282,7 @@ const [savedBuilds, metaBuilds] = await Promise.all([
   fetch('data/meta-builds.json').then(response => response.json())
 ]);
 extraNeeds = [...needsInput(savedBuilds, '/builds.json'), ...needsInput(metaBuilds, '/meta-builds.json')];
+userBuild = (savedBuilds.builds || []).find(entry => entry.id === 'users-current-build') || savedBuilds.builds?.[0] || null;
 catalog = structuredClone(bundled);
 if (localStorage[STORAGE]) $('status').textContent = 'Bundled catalog loaded. This browser also has a local edit; Reset clears it, or import a file. Showing the bundled file.';
 else $('status').textContent = 'Bundled catalog loaded.';

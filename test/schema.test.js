@@ -106,9 +106,11 @@ test('migration keeps sourced numbers and stores transcribed coefficients unveri
   assert.equal(writhing.slots, null);
   assert.equal(writhing.effects[1].value, 9);
   assert.deepEqual(writhing.effects[1].range, [6, 9]);
-  assert.equal(writhing.effects[1].source, 'user video codex (frames)');
+  assert.equal(writhing.effects[1].source, 'video-frames');
   assert.equal(catalog.aspects.length, 102);
-  assert.equal(catalog.aspects.every(aspect => aspect.source === 'user video codex (frames)' && aspect.verified === false), true);
+  assert.equal(catalog.aspects.every(aspect => aspect.source === 'video-frames' && aspect.userConfirmed === true && aspect.verified === false), true);
+  assert.equal(catalog.aspects.every(aspect => typeof aspect.description === 'string' && aspect.description.length > 0 && /^\d+\/\d+$/.test(String(aspect.rank))), true);
+  assert.deepEqual(catalog.passives, []);
   const coagulation = catalog.aspects.find(aspect => aspect.id === 'aspect-of-coagulation');
   assert.equal(coagulation.verified, false);
   assert.equal(coagulation.slots, null);

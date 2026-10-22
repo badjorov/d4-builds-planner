@@ -9,6 +9,7 @@
     "constraints",
     "mainstat",
     "skills",
+    "passives",
     "skillVariants",
     "expertise",
     "aspects",
@@ -25,6 +26,7 @@
     "constraints": { "$ref": "#/$defs/constraints" },
     "mainstat": { "$ref": "#/$defs/mainstat" },
     "skills": { "type": "array", "items": { "$ref": "#/$defs/skill" } },
+    "passives": { "type": "array", "items": { "$ref": "#/$defs/passive" } },
     "skillVariants": { "type": "array", "items": { "$ref": "#/$defs/skillVariant" } },
     "expertise": { "type": "array", "items": { "$ref": "#/$defs/expertise" } },
     "aspects": { "type": "array", "items": { "$ref": "#/$defs/aspect" } },
@@ -237,6 +239,25 @@
         "note": { "type": ["string", "null"] }
       }
     },
+    "passive": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "allocated", "rank", "rankTotal", "baseRank", "bonusRank", "maxRank", "effects", "source", "verified"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "name": { "type": "string" },
+        "allocated": { "type": ["boolean", "null"] },
+        "rank": { "type": ["number", "null"] },
+        "rankTotal": { "type": ["number", "null"] },
+        "baseRank": { "type": ["number", "null"] },
+        "bonusRank": { "type": ["number", "null"] },
+        "maxRank": { "type": ["number", "null"] },
+        "effects": { "type": "array", "items": { "$ref": "#/$defs/effect" } },
+        "source": { "$ref": "#/$defs/source" },
+        "verified": { "type": "boolean" },
+        "note": { "type": ["string", "null"] }
+      }
+    },
     "skillVariant": {
       "type": "object",
       "additionalProperties": false,
@@ -281,6 +302,7 @@
         "transcribed": { "type": ["string", "null"] },
         "suspect": { "type": "boolean" },
         "available": { "type": "boolean" },
+        "userConfirmed": { "type": "boolean" },
         "recordedSource": { "type": "string", "minLength": 1 },
         "effects": { "type": "array", "items": { "$ref": "#/$defs/effect" } },
         "source": { "$ref": "#/$defs/source" },
