@@ -61,6 +61,8 @@
     "critAudit": { "$ref": "#/$defs/critAudit" },
     "additivePct": { "type": ["number", "null"] },
     "additiveAudit": { "$ref": "#/$defs/additiveAudit" },
+    "offensiveSheet": { "$ref": "#/$defs/offensiveSheet" },
+    "vulnerableDamageInAdditive": { "type": "boolean" },
     "vulnPct": { "type": ["number", "null"] },
     "overpowerPct": { "type": ["number", "null"] },
     "overpowerStacks": { "$ref": "#/$defs/overpowerStacks" },
@@ -199,6 +201,32 @@
         "note": { "type": "string" }
       }
     },
+    "offensiveSheet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source", "verified", "allDamage", "vulnerable", "physical", "vsElites", "vsHealthy", "vsInjured", "whileHealthy", "whileFortified"],
+      "properties": {
+        "source": { "type": "string", "minLength": 1 },
+        "verified": { "type": "boolean" },
+        "allDamage": { "type": "number" },
+        "allDamageItemsAndParagon": { "type": "number" },
+        "vulnerable": { "type": "number" },
+        "physical": { "type": "number" },
+        "fire": { "type": "number" },
+        "lightning": { "type": "number" },
+        "cold": { "type": "number" },
+        "holy": { "type": "number" },
+        "poison": { "type": "number" },
+        "shadow": { "type": "number" },
+        "vsElites": { "type": "number" },
+        "vsHealthy": { "type": "number" },
+        "vsInjured": { "type": "number" },
+        "whileHealthy": { "type": "number" },
+        "whileFortified": { "type": "number" },
+        "thorns": { "type": "number" },
+        "note": { "type": "string" }
+      }
+    },
     "additiveAudit": {
       "type": "object",
       "additionalProperties": false,
@@ -240,6 +268,9 @@
         "healthyInjured": { "type": ["number", "null"] },
         "dustDevil": { "type": ["number", "null"] },
         "consecutiveWeapon": { "type": ["number", "null"] },
+        "elites": { "type": ["number", "null"] },
+        "playerHealthy": { "type": ["number", "null"] },
+        "missingPotions": { "type": ["number", "null"] },
         "estimate": {
           "type": "object",
           "additionalProperties": false,
@@ -254,6 +285,9 @@
             "healthyInjured": { "type": "boolean" },
             "dustDevil": { "type": "boolean" },
             "consecutiveWeapon": { "type": "boolean" },
+            "elites": { "type": "boolean" },
+            "playerHealthy": { "type": "boolean" },
+            "missingPotions": { "type": "boolean" },
             "note": { "type": "string" }
           }
         }

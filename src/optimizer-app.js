@@ -85,9 +85,14 @@ function run() {
       healthyInjured: savedBuild?.uptime?.healthyInjured ?? null,
       dustDevil: savedBuild?.uptime?.dustDevil ?? null,
       consecutiveWeapon: savedBuild?.uptime?.consecutiveWeapon ?? null,
+      elites: savedBuild?.uptime?.elites ?? null,
+      playerHealthy: savedBuild?.uptime?.playerHealthy ?? null,
+      missingPotions: savedBuild?.uptime?.missingPotions ?? null,
       estimate: savedBuild?.uptime?.estimate
     },
     additivePct: savedBuild?.additivePct ?? null,
+    offensiveSheet: savedBuild?.offensiveSheet,
+    vulnerableDamageInAdditive: savedBuild?.vulnerableDamageInAdditive === true,
     defense,
     minimums: {
       furyPerSecond: num($('minFury').value),

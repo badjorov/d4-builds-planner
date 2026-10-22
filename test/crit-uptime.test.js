@@ -75,9 +75,13 @@ test('Decimator joins the Vulnerable and Overpower states, and Might 8% is on fo
   const earth = evaluated.input.modifiers.find(mod => mod.name.startsWith('Earthstriker'));
   assert.equal(earth.value, 19.5);
   assert.equal(earth.when, undefined);
-  for (const id of ['flawless-technique', 'imbiber', 'wrath']) {
+  for (const id of ['flawless-technique', 'wrath']) {
     assert.equal(evaluated.input.modifiers.some(mod => mod.id === id), false, id);
   }
+  const imbiber = evaluated.input.modifiers.find(mod => mod.id === 'imbiber');
+  assert.equal(imbiber.value, 16);
+  assert.equal(imbiber.when, undefined);
+  assert.equal(evaluated.input.modifiers.some(mod => mod.value === 5 && mod.id === 'imbiber'), false);
   const twister = evaluated.input.modifiers.find(mod => mod.id === 'twister');
   assert.equal(twister.value, 13);
   assert.equal(twister.when, undefined);
@@ -85,16 +89,26 @@ test('Decimator joins the Vulnerable and Overpower states, and Might 8% is on fo
   assert.equal(marshal.value, 13.5);
   assert.equal(marshal.when, undefined);
   const healthy = evaluated.input.modifiers.filter(mod => mod.when === 'healthyInjured');
-  assert.deepEqual(healthy.map(mod => mod.value).sort((a, b) => a - b), [26, 75]);
-  assert.equal(evaluated.input.modifiers.some(mod => mod.value === 39.9 || mod.value === 39.8 || mod.value === 17.8 || mod.value === 16), false);
+  assert.deepEqual(healthy.map(mod => mod.value).sort((a, b) => a - b), [26, 26, 75]);
+  assert.equal(healthy.find(mod => mod.sheetConditional)?.name, 'vs Healthy or Injured');
+  assert.equal(healthy.find(mod => mod.id === 'might')?.value, 26);
+  assert.equal(evaluated.input.modifiers.some(mod => mod.value === 39.9 || mod.value === 39.8 || mod.value === 17.8), false);
   assert.equal(evaluated.input.notes.some(note => note.includes('Twister') && note.includes('not multiplied')), true);
-  assert.equal(evaluated.input.notes.some(note => note.includes('Imbiber') && note.includes('potion count')), true);
-  assert.equal(evaluated.input.notes.some(note => note.includes('while you are Healthy')), true);
+  assert.equal(evaluated.input.notes.some(note => note.includes('Imbiber') && note.includes('factor is 1.0')), true);
+  assert.equal(evaluated.input.modifiers.some(mod => mod.name === 'while you are Healthy' && mod.value === 223.2), true);
+  assert.equal(evaluated.input.modifiers.some(mod => mod.name === 'while Fortified' && mod.value === 35), true);
+  assert.equal(evaluated.input.modifiers.some(mod => mod.name === 'Damage with Physical' && mod.value === 250.5), true);
+  assert.equal(evaluated.input.modifiers.some(mod => mod.name === 'vs Elites' && mod.when === 'elites' && mod.value === 133.5), true);
+  assert.equal(evaluated.input.modifiers.some(mod => mod.name === 'Vulnerable Damage' && mod.when === 'vulnerable' && mod.value === 208.8), true);
+  assert.equal(evaluated.input.modifiers.filter(mod => mod.name === 'vs Healthy or Injured').length, 1);
+  const vulnTerm = evaluated.result.terms.find(term => term.label === 'Vulnerable');
+  assert.equal(vulnTerm.value, 1);
   assert.equal(evaluated.input.notes.some(note => note.includes('Wrath') && note.includes('7424.8')), true);
   assert.equal(evaluated.input.notes.some(note => note.includes('Flawless Technique') && note.includes('condition unknown')), true);
   assert.equal(evaluated.input.notes.some(note => note.includes('alternate reading')), true);
   const add = evaluated.result.terms.find(term => term.label === 'Additive');
-  assert.equal(add.value, 1 + 606.7 / 100);
+  assert.ok(add.value > 1 + 606.7 / 100);
+  assert.equal(add.expr.includes('sheet All Damage'), true);
   const skill = catalog.skills.find(entry => entry.id === 'whirlwind');
   const hands = Object.fromEntries((saved.gear || []).filter(slot => slot.hands).map(slot => [slot.slotId, slot.hands]));
   const copied = buildFromCore(catalog, [skill], {

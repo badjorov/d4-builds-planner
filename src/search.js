@@ -206,6 +206,8 @@ export function buildFromCore(catalog, skills, opts = {}) {
     vulnPct: opts.vulnPct ?? null,
     overpowerPct: opts.overpowerPct ?? null,
     additivePct: opts.additivePct ?? null,
+    ...(opts.offensiveSheet ? { offensiveSheet: opts.offensiveSheet } : {}),
+    ...(opts.vulnerableDamageInAdditive === true ? { vulnerableDamageInAdditive: true } : {}),
     boards: opts.boards || [],
     glyphs: opts.glyphs || [],
     gear: emptyGear(catalog).map(slot => ({

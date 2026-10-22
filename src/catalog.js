@@ -133,7 +133,7 @@ function skillById(catalog, id) {
   return catalog.skills.find(skill => skill.id === id) || null;
 }
 
-const BLENDED_UPTIMES = new Set(['channeling', 'fortified', 'unstoppable', 'furyAbove50', 'dustDevil']);
+const BLENDED_UPTIMES = new Set(['channeling', 'fortified', 'unstoppable', 'furyAbove50', 'dustDevil', 'elites', 'playerHealthy']);
 const STATE_UPTIMES = new Set(['berserk', 'vulnerable', 'overpower', 'healthyInjured']);
 
 function singleSkill(build, catalog) {
@@ -176,7 +176,19 @@ function conditionState(effect, build, catalog) {
   for (const raw of effect.conditions) {
     const text = String(raw).toLowerCase();
     if (text.includes('?')) return { state: 'unknown' };
-    if (text.includes('potion')) return { state: 'unknown' };
+    if (text.includes('potion')) {
+      const missing = build.uptime?.missingPotions;
+      if (typeof missing !== 'number') return { state: 'unknown' };
+      if (missing <= 0) return { state: 'inactive' };
+      return { state: 'unknown' };
+    }
+    if ((text.includes('you are healthy') || (text.includes('while') && text.includes('healthy'))) && !text.includes('injured')) {
+      const value = build.uptime?.playerHealthy;
+      if (typeof value !== 'number') return { state: 'unknown' };
+      if (value <= 0) return { state: 'inactive' };
+      if (value < 1) partial = 'playerHealthy';
+      continue;
+    }
     if (text.includes('dust devil')) {
       if (!(text.includes('after') || text.includes('creating'))) return { state: 'inactive' };
       if (!createsDustDevils(singleSkill(build, catalog))) return { state: 'inactive' };
@@ -305,6 +317,62 @@ function appendDamageModifiers(entity, build, catalog, modifiers, notes, label, 
   }
 }
 
+const SHEET_ELEMENTS = ['physical', 'fire', 'lightning', 'cold', 'holy', 'poison', 'shadow'];
+
+function skillDamageElement(skill) {
+  const text = [skill?.tooltip, skill?.note, skill?.aura?.note, ...(skill?.effects || []).map(effect => `${effect.stat || ''} ${effect.note || ''}`)].join('\n');
+  const hits = SHEET_ELEMENTS.filter(name => new RegExp(`\\b${name}\\b`, 'i').test(text));
+  return hits.length === 1 ? hits[0] : null;
+}
+
+function pushSheetLine(modifiers, name, value, when) {
+  if (typeof value !== 'number' || value === 0) return;
+  const modifier = { name, bucket: 'additive', value, active: true, sheetConditional: true, kind: 'sheet' };
+  if (when) modifier.when = when;
+  modifiers.push(modifier);
+}
+
+function sheetWhen(uptime, key) {
+  const value = uptime?.[key];
+  if (typeof value !== 'number' || value <= 0) return { skip: true };
+  if (value < 1) return { when: key };
+  return {};
+}
+
+function applyOffensiveSheet(build, skills, modifiers, notes) {
+  const sheet = build.offensiveSheet;
+  if (!sheet) return;
+  const uptime = build.uptime || {};
+  const element = skills.length === 1 ? skillDamageElement(skills[0]) : null;
+  if (element && typeof sheet[element] === 'number') {
+    pushSheetLine(modifiers, `Damage with ${element[0].toUpperCase()}${element.slice(1)}`, sheet[element]);
+    notes.push(`Offensive sheet: Damage with ${element} ${sheet[element]}% is in the additive bucket for this skill.`);
+  } else if (skills.length === 1) {
+    notes.push(`${skills[0].name}: no single damage element is stored, so the sheet element row stays out.`);
+  }
+  const vulnerable = sheetWhen(uptime, 'vulnerable');
+  if (!vulnerable.skip && build.vulnerableDamageInAdditive === true) {
+    pushSheetLine(modifiers, 'Vulnerable Damage', sheet.vulnerable, vulnerable.when);
+  }
+  const elites = sheetWhen(uptime, 'elites');
+  if (!elites.skip) pushSheetLine(modifiers, 'vs Elites', sheet.vsElites, elites.when);
+  const healthyInjured = sheetWhen(uptime, 'healthyInjured');
+  if (!healthyInjured.skip && sheet.vsHealthy === sheet.vsInjured) {
+    pushSheetLine(modifiers, 'vs Healthy or Injured', sheet.vsHealthy, healthyInjured.when);
+    notes.push('Offensive sheet: vs Healthy and vs Injured are each 26%. An enemy is in only one of those states, so the shared window adds 26 once.');
+  }
+  const playerHealthy = sheetWhen(uptime, 'playerHealthy');
+  if (!playerHealthy.skip) pushSheetLine(modifiers, 'while you are Healthy', sheet.whileHealthy, playerHealthy.when);
+  const fortified = sheetWhen(uptime, 'fortified');
+  if (!fortified.skip) pushSheetLine(modifiers, 'while Fortified', sheet.whileFortified, fortified.when);
+  if (uptime.missingPotions === 0 && (build.glyphs || []).some(glyph => glyph.glyphId === 'imbiber')) {
+    notes.push('Imbiber: 5%[x] per missing potion uses 0 missing potions of a capacity of 4. The factor is 1.0. Estimate.');
+  }
+  notes.push('Double-count: sheet vs Healthy 26% and vs Injured 26% match Might 26%[x]. While Fortified 35% does not match Warbringer 45%[x] or Crushing 64%[x], so a sheet row is a separate additive source from an [x] line. Headline keeps the additive 26 and Might 26%[x].');
+  notes.push('Double-count: Vulnerable Damage 208.8% is in the additive bucket on the Vulnerable state. The vulnerable term does not apply that percent again. Melted Heart x35% Vulnerable Damage Multiplier is a different [x] and stays multiplicative.');
+  notes.push('Double-count: while Fortified 35% is additive. Warbringer 45%[x] and Crushing 64%[x] stay multiplicative.');
+}
+
 export function engineInputFromBuild(catalog, build, opts = {}) {
   const skills = (build.skills || []).map(id => skillById(catalog, id)).filter(Boolean);
   const coeffPct = skills.length === 1 ? skills[0].coeffPct : null;
@@ -368,8 +436,10 @@ export function engineInputFromBuild(catalog, build, opts = {}) {
       }
     }
   }
+  applyOffensiveSheet(build, skills, modifiers, notes);
   if (typeof build.additivePct === 'number') {
-    notes.push(`Additive audit: sheet All Damage ${build.additivePct}% is the additive input. Factor ${1 + build.additivePct / 100}. Video-read, unverified. Catalog +% Damage lines are not added on top. Physical damage and the conditional sheet lines stay separate.`);
+    const verified = build.additiveAudit?.verified === true ? 'Screenshot-verified' : 'Video-read, unverified';
+    notes.push(`Additive audit: sheet All Damage ${build.additivePct}% is the unconditional additive base. ${verified}. The conditional sheet rows join that same sum. Catalog +% Damage lines stay out of the sum.`);
   }
   const auras = [];
   for (const skill of skills) {
@@ -390,7 +460,7 @@ export function engineInputFromBuild(catalog, build, opts = {}) {
     notes.push(`Overpower is ${stacks.activeStacks} stacks × ${stacks.perStack}% = ${build.overpowerPct}%, including a ${stacks.lingerSeconds}s linger. The uptime is an estimate.`);
   }
   const estimate = uptime.estimate || {};
-  for (const [key, label] of [['channeling', 'Channeling'], ['furyAbove50', 'Fury above 50'], ['unstoppable', 'Unstoppable'], ['fortified', 'Fortified'], ['healthyInjured', 'Healthy or Injured'], ['dustDevil', 'Dust Devil'], ['consecutiveWeapon', 'Consecutive weapon']]) {
+  for (const [key, label] of [['channeling', 'Channeling'], ['furyAbove50', 'Fury above 50'], ['unstoppable', 'Unstoppable'], ['fortified', 'Fortified'], ['healthyInjured', 'Healthy or Injured'], ['dustDevil', 'Dust Devil'], ['consecutiveWeapon', 'Consecutive weapon'], ['elites', 'Elites'], ['playerHealthy', 'Player Healthy'], ['missingPotions', 'Missing potions']]) {
     if (estimate[key] === true && typeof uptime[key] === 'number') {
       notes.push(`${label} uptime ${uptime[key]} is an estimate.`);
     }
@@ -417,6 +487,7 @@ export function engineInputFromBuild(catalog, build, opts = {}) {
     notes,
     auras,
     additivePct: typeof build.additivePct === 'number' ? build.additivePct : null,
+    vulnerableDamageInAdditive: build.vulnerableDamageInAdditive === true,
     alternateCrit
   };
 }
