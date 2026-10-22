@@ -204,7 +204,9 @@ export function buildFromCore(catalog, skills, opts = {}) {
     critChance: opts.critChance ?? null,
     critDmg: opts.critDmg ?? null,
     vulnPct: opts.vulnPct ?? null,
-    overpowerPct: opts.overpowerPct ?? null
+    overpowerPct: opts.overpowerPct ?? null,
+    boards: opts.boards || [],
+    glyphs: opts.glyphs || []
   });
 }
 

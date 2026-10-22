@@ -204,6 +204,26 @@ export function damageEffects(entity, build, catalog) {
   return active;
 }
 
+function appendDamageModifiers(entity, build, catalog, modifiers, notes, label) {
+  for (const piece of damageEffects(entity, build, catalog)) {
+    if (piece.state === 'unknown') {
+      notes.push(`${label.name}: condition unknown, damage effect not applied.`);
+      continue;
+    }
+    if (piece.bucket === 'overpower' && typeof build.overpowerPct === 'number') {
+      notes.push(`${label.name}: Overpower per-stack line is included in overpowerPct and is not added again.`);
+      continue;
+    }
+    if (piece.bucket === 'crit' && typeof build.critDmg === 'number') {
+      notes.push(`${label.name}: Critical Strike Damage ${piece.value} stays out of the crit term. The sheet total ${build.critDmg}% is the crit input.`);
+      continue;
+    }
+    const modifier = { name: label.name, bucket: piece.bucket, value: piece.value, active: true, kind: label.kind, id: entity.id };
+    if (piece.state === 'partial' && piece.when) modifier.when = piece.when;
+    modifiers.push(modifier);
+  }
+}
+
 export function engineInputFromBuild(catalog, build, opts = {}) {
   const skills = (build.skills || []).map(id => skillById(catalog, id)).filter(Boolean);
   const coeffPct = skills.length === 1 ? skills[0].coeffPct : null;
@@ -222,24 +242,30 @@ export function engineInputFromBuild(catalog, build, opts = {}) {
       if (!id) continue;
       const entity = (list || []).find(item => item.id === id);
       if (!entity) continue;
-      for (const piece of damageEffects(entity, build, catalog)) {
-        if (piece.state === 'unknown') {
-          notes.push(`${entity.name}: condition unknown, damage effect not applied.`);
-          continue;
-        }
-        if (piece.bucket === 'overpower' && typeof build.overpowerPct === 'number') {
-          notes.push(`${entity.name}: Overpower per-stack line is included in overpowerPct and is not added again.`);
-          continue;
-        }
-        if (piece.bucket === 'crit' && typeof build.critDmg === 'number') {
-          notes.push(`${entity.name}: Critical Strike Damage ${piece.value} stays out of the crit term. The sheet total ${build.critDmg}% is the crit input.`);
-          continue;
-        }
-        const modifier = { name: `${entity.name} (${slot.slotId})`, bucket: piece.bucket, value: piece.value, active: true, kind, id: entity.id };
-        if (piece.state === 'partial' && piece.when) modifier.when = piece.when;
-        modifiers.push(modifier);
-      }
+      appendDamageModifiers(entity, build, catalog, modifiers, notes, { name: `${entity.name} (${slot.slotId})`, kind });
     }
+  }
+  for (const board of build.boards || []) {
+    for (const nodeId of board.nodeIds || []) {
+      const node = (catalog.paragonNodes || []).find(item => item.id === nodeId);
+      if (!node) {
+        notes.push(`Paragon node ${nodeId} is not in the catalog.`);
+        continue;
+      }
+      appendDamageModifiers(node, build, catalog, modifiers, notes, { name: node.name, kind: 'paragon' });
+    }
+  }
+  for (const placed of build.glyphs || []) {
+    const glyph = (catalog.glyphs || []).find(item => item.id === placed.glyphId);
+    if (!glyph) {
+      notes.push(`Glyph ${placed.glyphId} is not in the catalog.`);
+      continue;
+    }
+    if (typeof placed.level !== 'number') {
+      notes.push(`${glyph.name}: glyph level is unknown, so its damage lines are not applied.`);
+      continue;
+    }
+    appendDamageModifiers(glyph, build, catalog, modifiers, notes, { name: `${glyph.name} (glyph ${placed.level})`, kind: 'glyph' });
   }
   const auras = [];
   for (const skill of skills) {

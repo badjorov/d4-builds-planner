@@ -1,4 +1,5 @@
 import { optimize } from './search.js';
+import { evaluateBuild } from './catalog.js';
 import { esc } from './html.js';
 
 const $ = (id) => document.getElementById(id);
@@ -19,6 +20,7 @@ function drList(value) {
 
 let catalog = null;
 let metaBuilds = { builds: [] };
+let savedBuild = null;
 
 function selectedTags() {
   return [...document.querySelectorAll('#tags input:checked')].map(input => input.value);
@@ -32,7 +34,11 @@ function renderTags() {
 
 function renderResults(out) {
   const rows = out.ranked;
-  $('summary').textContent = `${rows.length} ranked of ${out.considered} scored. ${out.rejectedCount} rejected by constraints. Paragon, glyphs, boards, and talismans were not searched.`;
+  const equipped = savedBuild ? evaluateBuild(catalog, { ...savedBuild, skills: ['whirlwind'] }) : null;
+  const equippedText = equipped
+    ? ` Equipped Whirlwind power ${equipped.result.total.toFixed(2)}.`
+    : '';
+  $('summary').textContent = `${rows.length} ranked of ${out.considered} scored. ${out.rejectedCount} rejected by constraints.${equippedText} Equipped paragon nodes and glyphs are scored. Which nodes, glyphs, boards, and talismans to equip was not searched.`;
   if (!rows.length) {
     $('results').innerHTML = '<p class="warn">No build passed the power floor and the verification filter. Leave manual inputs blank only when you mean null, or turn on unverified data. The data-entry page lists every null and unverified field.</p>';
     return;
@@ -86,6 +92,8 @@ function run() {
       ehp: num($('minEhp').value)
     },
     metaBuilds,
+    boards: savedBuild?.boards || [],
+    glyphs: savedBuild?.glyphs || [],
     limit: 20
   });
   renderResults(out);
@@ -96,6 +104,9 @@ $('run').addEventListener('click', run);
 try {
   catalog = await (await fetch(catalogUrl)).json();
   metaBuilds = await (await fetch(metaUrl)).json();
+  const buildsUrl = params.get('builds') || 'data/builds.json';
+  const buildsFile = await (await fetch(buildsUrl)).json();
+  savedBuild = (buildsFile.builds || []).find(build => build.id === 'users-current-build') || null;
   const cap = catalog.constraints?.skillBarSize;
   if (typeof cap === 'number') $('maxSkills').value = String(cap);
   renderTags();

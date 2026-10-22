@@ -9717,28 +9717,32 @@
       "effects": [
         {
           "stat": "Max Life as Fortify per 300 Fury spent",
+          "kind": "defense",
           "bucket": null,
           "value": 2,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "unit": "%"
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "For every 300 Fury you spend, gain 2% of your Maximum Life (9) as Fortify. The (9) is the life amount shown on the tooltip. The stored value stays 2."
         },
         {
           "stat": "damage while Fortified",
+          "kind": "damage",
           "bucket": "multiplicative",
           "value": 45,
-          "conditions": null,
+          "conditions": ["while Fortified"],
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "unit": "%"
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "Deal 45%[x] increased damage while Fortified."
         }
       ],
-      "source": "user video 1 (watchVideo 2026-10-22)",
-      "verified": false,
-      "note": "Legendary node."
+      "source": "user screenshot 2026-10-22",
+      "verified": true,
+      "note": "For every 300 Fury you spend, gain 2% of your Maximum Life (9) as Fortify. Deal 45%[x] increased damage while Fortified."
     },
     {
       "id": "warbringer-raw-power",
