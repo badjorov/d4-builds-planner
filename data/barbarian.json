@@ -323,6 +323,7 @@
       "source": "manual-entry",
       "verified": false,
       "maxRank": 15,
+      "activeWeaponSlot": "weapon-2",
       "tooltip": "386% (3,717,620), 2 Dust Devils 510% each; 40%[x] +10 Fury cost; channel 1%[x]/hit up to 25; 32 Fury/s; Lucky Hit 20%; Physical; arsenal Bludgeoning (Deathshead).",
       "modifiers": [
         {

@@ -192,7 +192,7 @@
       "required": ["verified", "reading", "sheetCritChance", "sheetCritDmg", "note"],
       "properties": {
         "verified": { "type": "boolean" },
-        "reading": { "enum": ["bonus", "full", "s2"] },
+        "reading": { "enum": ["bonus", "full", "s2", "headline", "sheet-includes-gear-x", "active-weapon", "sheet-includes-gear-x-active-weapon"] },
         "sheetCritChance": { "type": "number" },
         "sheetCritDmg": { "type": "number" },
         "bonusFactor": { "type": "number" },

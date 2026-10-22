@@ -243,6 +243,7 @@
         "aura": { "$ref": "#/$defs/aura" },
         "furyGeneratePerCast": { "type": ["number", "null"] },
         "furySpendPerCast": { "type": ["number", "null"] },
+        "activeWeaponSlot": { "type": ["string", "null"] },
         "variantOf": { "type": ["string", "null"] },
         "effects": { "type": "array", "items": { "$ref": "#/$defs/effect" } },
         "source": { "$ref": "#/$defs/source" },

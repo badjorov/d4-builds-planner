@@ -1,4 +1,4 @@
-import { compute, marginal } from './engine.js';
+import { compute, marginal, SEPARATE_CRIT_KINDS } from './engine.js';
 
 export const ENTITY_KEYS = {
   skill: 'skills',
@@ -331,6 +331,7 @@ function appendDamageModifiers(entity, build, catalog, modifiers, notes, label, 
       continue;
     }
     const modifier = { name: label.name, bucket: piece.bucket, value: piece.value, active: true, kind: label.kind, id: entity.id };
+    if (label.slotId) modifier.slotId = label.slotId;
     if (piece.when) modifier.when = piece.when;
     modifiers.push(modifier);
   }
@@ -418,7 +419,7 @@ export function engineInputFromBuild(catalog, build, opts = {}) {
       const affix = (catalog.affixes || []).find(item => item.id === placed.affixId);
       if (!affix) continue;
       const effects = (affix.effects || []).map(effect => (typeof placed.value === 'number' ? { ...effect, value: placed.value } : effect));
-      appendDamageModifiers({ ...affix, effects }, build, catalog, modifiers, notes, { name: `${affix.name} (${slot.slotId})`, kind: 'affix' }, alternateCrit);
+      appendDamageModifiers({ ...affix, effects }, build, catalog, modifiers, notes, { name: `${affix.name} (${slot.slotId})`, kind: 'affix', slotId: slot.slotId }, alternateCrit);
     }
   }
   for (const board of build.boards || []) {
@@ -492,9 +493,10 @@ export function engineInputFromBuild(catalog, build, opts = {}) {
     }
   }
   if (typeof build.critChance === 'number' && typeof build.critDmg === 'number' && build.critDmg > 0) {
-    const critMults = modifiers.filter(mod => mod.bucket === 'crit-mult');
-    const summed = 1 + critMults.reduce((sum, mod) => sum + mod.value / 100, 0);
-    notes.push(`Crit formula [A][B][C]: (A + ${build.critDmg / 100}) / A × 1.5 × (1 + sum of Critical Strike Damage Multiplier [x]). A is the state's additive factor. At ${build.critChance}% crit chance the crit factor is used directly. Headline: sheet ${build.critDmg}% is additive Critical Strike Damage. It does not include the base 50% or the [x] multipliers ${critMults.map(mod => mod.value).join(' + ') || '(none)'} (factor ${summed.toFixed(4)}). Confidence: high on the mechanic, low on the sheet display. Sources: [A] https://d4guides.gg/en/guides/mechanics/damage-calculation-in-diablo-4-how-your-damage-works ; [B] https://mobalytics.gg/diablo-4/guides/damage-buckets-deep-dive ; [C] https://www.wowhead.com/diablo-4/news/breaking-down-the-critical-strike-and-vulnerable-damage-change-diablo-4-335487.`);
+    const gearCrit = modifiers.filter(mod => mod.bucket === 'crit-mult' && !SEPARATE_CRIT_KINDS.has(mod.kind));
+    const separateCrit = modifiers.filter(mod => mod.bucket === 'crit-mult' && SEPARATE_CRIT_KINDS.has(mod.kind));
+    const gearX = 1 + gearCrit.reduce((sum, mod) => sum + mod.value / 100, 0);
+    notes.push(`Crit formula follow-up 2026-10-22. Headline: (A + ${build.critDmg / 100}) / A × gear [x] sum × each aspect, unique, or skill [x]. The sheet percent already includes the base 50% (medium [E]), so there is no extra ×1.5. Gear [x] lines ${gearCrit.map(mod => mod.value).join(' + ') || '(none)'} sum to ${gearX.toFixed(4)} (medium-high [A]). Separate [x] lines ${separateCrit.map(mod => mod.value).join(' + ') || '(none)'} each multiply. Low confidence, switched by critAudit.reading: whether the sheet already includes the gear [x] lines, and whether a weapon [x] crit line applies only while that weapon swings. Sources: [A] https://d4guides.gg/en/guides/mechanics/damage-calculation-in-diablo-4-how-your-damage-works ; [E] https://diablo4.cc/us/Glossary ; [F] https://us.forums.blizzard.com/en/d4/t/weapon-stats-and-weapons-used/47095.`);
   }
   if (modifiers.some(mod => mod.bucket === 'vuln-mult') || build.vulnerableDamageInAdditive === true) {
     const sheetVuln = build.offensiveSheet?.vulnerable;
@@ -587,9 +589,37 @@ function blendScore(input, uptime) {
   };
 }
 
+export const CRIT_READINGS = ['headline', 'sheet-includes-gear-x', 'active-weapon', 'sheet-includes-gear-x-active-weapon'];
+
+export function resolveCritReading(build, opts = {}) {
+  const requested = opts.critReading ?? build?.critAudit?.reading;
+  return CRIT_READINGS.includes(requested) ? requested : 'headline';
+}
+
+function activeWeaponSlotFor(catalog, build) {
+  const skills = (build.skills || []).map(id => skillById(catalog, id)).filter(Boolean);
+  if (skills.length !== 1) return null;
+  return skills[0].activeWeaponSlot || null;
+}
+
+function applyCritReading(modifiers, reading, activeWeaponSlot) {
+  const separate = mod => mod.bucket !== 'crit-mult' || SEPARATE_CRIT_KINDS.has(mod.kind);
+  if (reading === 'sheet-includes-gear-x' || reading === 'sheet-includes-gear-x-active-weapon') {
+    return modifiers.filter(separate);
+  }
+  if (reading === 'active-weapon') {
+    if (!activeWeaponSlot) return modifiers.filter(separate);
+    return modifiers.filter(mod => separate(mod) || mod.slotId === activeWeaponSlot);
+  }
+  return modifiers;
+}
+
 function applyFormulaOpts(input, opts = {}) {
   let modifiers = (input.modifiers || []).map(mod => ({ ...mod }));
-  if (opts.omitCritMult === true) modifiers = modifiers.filter(mod => mod.bucket !== 'crit-mult');
+  modifiers = applyCritReading(modifiers, opts.critReading || 'headline', opts.activeWeaponSlot || null);
+  if (opts.omitGearCritMult === true || opts.omitCritMult === true) {
+    modifiers = modifiers.filter(mod => mod.bucket !== 'crit-mult' || (opts.omitCritMult !== true && SEPARATE_CRIT_KINDS.has(mod.kind)));
+  }
   if (Array.isArray(opts.onlyCritMultValues)) {
     modifiers = modifiers.filter(mod => mod.bucket !== 'crit-mult' || opts.onlyCritMultValues.includes(mod.value));
   }
@@ -597,34 +627,44 @@ function applyFormulaOpts(input, opts = {}) {
     modifiers = modifiers.map(mod => (mod.name === 'Vulnerable Damage' ? { ...mod, value: mod.value - 20 } : mod));
   }
   if (typeof opts.addCritMult === 'number') {
-    modifiers = [...modifiers, { name: opts.addCritMultName || 'extra crit multiplier', bucket: 'crit-mult', value: opts.addCritMult, active: true }];
+    modifiers = [...modifiers, {
+      name: opts.addCritMultName || 'extra crit multiplier',
+      bucket: 'crit-mult',
+      value: opts.addCritMult,
+      active: true,
+      kind: opts.addCritMultKind || 'skill'
+    }];
   }
   return {
     ...input,
     modifiers,
-    ...(opts.vulnMultMode ? { vulnMultMode: opts.vulnMultMode } : {}),
-    ...(opts.critMultMode ? { critMultMode: opts.critMultMode } : {}),
-    ...(opts.critSheetIncludesBase === true ? { critSheetIncludesBase: true } : {})
+    ...(opts.vulnMultMode ? { vulnMultMode: opts.vulnMultMode } : {})
   };
 }
 
 export function evaluateBuild(catalog, build, opts = {}) {
-  const input = applyFormulaOpts(engineInputFromBuild(catalog, build, opts), opts);
+  const critReading = resolveCritReading(build, opts);
+  const activeWeaponSlot = opts.activeWeaponSlot || activeWeaponSlotFor(catalog, build);
+  const input = applyFormulaOpts(engineInputFromBuild(catalog, build, opts), { ...opts, critReading, activeWeaponSlot });
+  if (critReading === 'active-weapon' && !activeWeaponSlot) {
+    input.notes.push('Active-weapon crit reading has no stored swinging weapon for this skill, so gear [x] crit lines stay out of this reading.');
+  }
   const uptime = build.uptime || blankUptime();
   const result = blendScore(input, uptime);
   let critAlternate = null;
   let conditionalCritAlternate = null;
-  if (typeof build.critChance === 'number' && build.critChance > 0 && typeof build.critDmg === 'number' && build.critDmg > 0 && opts.omitCritMult !== true) {
-    const stripped = applyFormulaOpts(input, { omitCritMult: true });
-    const alt = blendScore(stripped, uptime);
-    critAlternate = {
-      total: alt.total,
-      reading: 'sheet-includes-crit-multipliers',
-      verified: false
-    };
+  if (typeof build.critChance === 'number' && build.critChance > 0 && typeof build.critDmg === 'number' && build.critDmg > 0 && opts.omitGearCritMult !== true && opts.omitCritMult !== true) {
+    const gearInSheet = critReading === 'sheet-includes-gear-x' || critReading === 'sheet-includes-gear-x-active-weapon';
+    const altReading = gearInSheet ? 'headline' : 'sheet-includes-gear-x';
+    const alt = blendScore(applyFormulaOpts(engineInputFromBuild(catalog, build, opts), {
+      ...opts,
+      critReading: altReading,
+      activeWeaponSlot
+    }), uptime);
+    critAlternate = { total: alt.total, reading: altReading, verified: false };
     const flawless = (input.alternateCrit || []).reduce((sum, item) => sum + item.value, 0);
     if (flawless) {
-      const conditional = blendScore(applyFormulaOpts(input, { addCritMult: flawless, addCritMultName: 'Flawless Technique' }), uptime);
+      const conditional = blendScore(applyFormulaOpts(input, { addCritMult: flawless, addCritMultName: 'Flawless Technique', addCritMultKind: 'skill' }), uptime);
       conditionalCritAlternate = {
         total: conditional.total,
         multiplier: 1 + flawless / 100,
@@ -633,7 +673,7 @@ export function evaluateBuild(catalog, build, opts = {}) {
       };
     }
   }
-  return { input, result, marginal: marginal(input), critAlternate, conditionalCritAlternate };
+  return { input, result, marginal: marginal(input), critReading, critAlternate, conditionalCritAlternate };
 }
 
 export function verificationFields(catalog, build, opts = {}) {

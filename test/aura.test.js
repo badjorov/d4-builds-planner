@@ -38,7 +38,7 @@ test('a wrath aura adds the hit for its uptime and the burn skips crit', () => {
     uptime: { berserk: null, vulnerable: null, overpower: null }
   };
   const evaluated = evaluateBuild(catalog, build);
-  near(evaluated.result.total, 840 + 28);
+  near(evaluated.result.total, 560 + 28);
   assert.equal(evaluated.input.notes.some(note => note.includes('estimate')), true);
 });
 

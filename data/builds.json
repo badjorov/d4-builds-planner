@@ -1102,13 +1102,13 @@
       ],
       "critAudit": {
         "verified": false,
-        "reading": "s2",
+        "reading": "headline",
         "sheetCritChance": 100,
         "sheetCritDmg": 7424.8,
         "bonusFactor": 75.248,
         "fullFactor": 74.248,
         "source": "user screenshot 2026-10-22",
-        "note": "S2/S15 formula from the 2026-10-22 research note. Crit factor is (A + 74.248) / A × 1.5 × (1 + sum of Critical Strike Damage Multiplier [x]). A is the state's additive factor. At 100% crit chance that factor is used directly. Headline: sheet 7,424.8% is additive Critical Strike Damage. It does not include the base 50% and it does not include the [x] multipliers. Those [x] lines sum: Insight 310 + Deathshead 88 + Ramaladni 44 = 442%, factor 5.42. The earlier 1 + 74.248 = 75.248 and full-multiplier 74.248 readings are replaced. Equipped additive Critical Strike Damage lines stay inside the sheet: Gohr's gloves +50%, Stone of Jordan +65%, Insight +180%, Spirit +78%, Ramaladni's Magnum Opus +75%. Equipped Critical Strike Chance lines stay inside sheet 100%: gloves +16%, Stone of Jordan +5.5%, Insight +94.3%, Deathshead +7.5%. Wrath +17.8%[x] is not named Critical Strike Damage Multiplier; the stored note keeps it inside the sheet. Flawless Technique +45%[x] for 4s stays an alternate. Confidence is high for the mechanic and low for how the sheet displays the base 50% and the [x] lines. Sources: [A] https://d4guides.gg/en/guides/mechanics/damage-calculation-in-diablo-4-how-your-damage-works (Chrix1848, 2026-10-05, S15/3.2.2); [B] Blizzard season 2 note quoted at https://mobalytics.gg/diablo-4/guides/damage-buckets-deep-dive; [C] https://www.wowhead.com/diablo-4/news/breaking-down-the-critical-strike-and-vulnerable-damage-change-diablo-4-335487 (2023)."
+        "note": "Follow-up 2026-10-22. Headline crit factor is (A + 74.248) / A × (1 + sum of gear [x] crit) × each aspect, unique, or skill [x] crit. The sheet 7,424.8% already includes the base 50% (medium [E]), so the extra ×1.5 is off. Gear lines sum (medium-high [A]): Insight 310 + Deathshead 88 + Ramaladni 44 = 442%, factor 5.42. reading is the one switch for the low-confidence pair: headline, sheet-includes-gear-x, active-weapon (Whirlwind swings Deathshead, weapon-2, x88%), or sheet-includes-gear-x-active-weapon. The in-game test is unequip Insight and compare the sheet. Additive gear crit stays inside the sheet: Gohr's +50%, Stone of Jordan +65%, Insight +180%, Spirit +78%, Ramaladni's +75%. Crit chance lines stay inside sheet 100%. Wrath +17.8%[x] is not named Critical Strike Damage Multiplier; the stored note keeps it inside the sheet. Flawless Technique +45%[x] is a skill line and multiplies separately in the alternate. Sources: [A] https://d4guides.gg/en/guides/mechanics/damage-calculation-in-diablo-4-how-your-damage-works ; [E] https://diablo4.cc/us/Glossary ; [F] https://us.forums.blizzard.com/en/d4/t/weapon-stats-and-weapons-used/47095."
       }
     }
   ]

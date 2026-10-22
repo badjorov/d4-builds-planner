@@ -21,11 +21,27 @@ test('the sheet crit percent is additive and the weapon [x] lines sum', () => {
   assert.equal(evaluated.input.modifiers.some(mod => mod.bucket === 'multiplicative' && (mod.value === 310 || mod.value === 88 || mod.value === 44 || mod.value === 35)), false);
   assert.equal(evaluated.input.modifiers.some(mod => mod.bucket === 'vuln-mult' && mod.value === 35 && mod.when === 'vulnerable'), true);
   assert.ok(crit.value < 75.248);
-  assert.equal(crit.expr.includes('× 1.5 ×'), true);
-  assert.equal(evaluated.critAlternate.reading, 'sheet-includes-crit-multipliers');
+  assert.equal(crit.expr.includes('× 1.5'), false);
+  assert.equal(crit.expr.includes('gear [x]'), true);
+  assert.equal(evaluated.critReading, 'headline');
+  assert.equal(evaluated.critAlternate.reading, 'sheet-includes-gear-x');
   assert.ok(evaluated.critAlternate.total < evaluated.result.total);
   const vuln = evaluated.result.terms.find(term => term.label === 'Vulnerable');
   assert.ok(Math.abs(vuln.value - 1.2 * 1.35) < 1e-9);
+});
+
+test('critAudit.reading switches the gear crit lines', () => {
+  const build = whirlwindBuild();
+  const headline = evaluateBuild(catalog, build, { critReading: 'headline' });
+  const active = evaluateBuild(catalog, build, { critReading: 'active-weapon' });
+  const sheet = evaluateBuild(catalog, build, { critReading: 'sheet-includes-gear-x' });
+  const both = evaluateBuild(catalog, build, { critReading: 'sheet-includes-gear-x-active-weapon' });
+  assert.deepEqual(active.input.modifiers.filter(mod => mod.bucket === 'crit-mult').map(mod => mod.value), [88]);
+  assert.equal(sheet.input.modifiers.some(mod => mod.bucket === 'crit-mult'), false);
+  assert.equal(both.result.total, sheet.result.total);
+  assert.ok(sheet.result.total < active.result.total);
+  assert.ok(active.result.total < headline.result.total);
+  assert.equal(catalog.skills.find(skill => skill.id === 'whirlwind').activeWeaponSlot, 'weapon-2');
 });
 
 test('channeling applies the 138% imprint on Whirlwind and leaves the codex 69% off', () => {

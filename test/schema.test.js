@@ -345,7 +345,7 @@ test('video 1 keeps confirmed values and flags the conflicting readings', () => 
   assert.equal(saved.defense.armor, 33715);
   assert.equal(saved.defense.resists, 21218);
   assert.equal(saved.critAudit.verified, false);
-  assert.equal(saved.critAudit.reading, 's2');
+  assert.equal(saved.critAudit.reading, 'headline');
   assert.equal(saved.critAudit.sheetCritDmg, 7424.8);
   assert.equal(saved.uptime.channeling, 1);
   assert.equal(saved.uptime.furyAbove50, 1);

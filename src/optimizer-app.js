@@ -1,5 +1,5 @@
 import { optimize } from './search.js';
-import { evaluateBuild } from './catalog.js';
+import { CRIT_READINGS, evaluateBuild } from './catalog.js';
 import { esc } from './html.js';
 
 const $ = (id) => document.getElementById(id);
@@ -34,11 +34,16 @@ function renderTags() {
 
 function renderResults(out) {
   const rows = out.ranked;
-  const equipped = savedBuild ? evaluateBuild(catalog, { ...savedBuild, skills: ['whirlwind'] }) : null;
-  const equippedText = equipped
-    ? ` Equipped Whirlwind power ${equipped.result.total.toFixed(2)}.`
-    : '';
-  $('summary').textContent = `${rows.length} ranked of ${out.considered} scored. ${out.rejectedCount} rejected by constraints.${equippedText} Equipped paragon nodes and glyphs are scored. Which nodes, glyphs, boards, and talismans to equip was not searched.`;
+  const equippedBuild = savedBuild ? { ...savedBuild, skills: ['whirlwind'] } : null;
+  const equipped = equippedBuild ? evaluateBuild(catalog, equippedBuild) : null;
+  let equippedText = '';
+  if (equipped) {
+    const totals = CRIT_READINGS.map(reading => evaluateBuild(catalog, equippedBuild, { critReading: reading }).result.total);
+    const low = Math.min(...totals);
+    const high = Math.max(...totals);
+    equippedText = ` Equipped Whirlwind power ${equipped.result.total.toFixed(2)}. Crit reading ${equipped.critReading}. Flagged range ${low.toFixed(2)} to ${high.toFixed(2)}.`;
+  }
+  $('summary').textContent = `${rows.length} ranked of ${out.considered} scored. ${out.rejectedCount} rejected by constraints.${equippedText} Equipped paragon nodes, glyphs, and weapon affixes are scored. Which nodes, glyphs, boards, and talismans to equip was not searched.`;
   if (!rows.length) {
     $('results').innerHTML = '<p class="warn">No build passed the power floor and the verification filter. Leave manual inputs blank only when you mean null, or turn on unverified data. The data-entry page lists every null and unverified field.</p>';
     return;
@@ -104,7 +109,12 @@ function run() {
     metaBuilds,
     boards: savedBuild?.boards || [],
     glyphs: savedBuild?.glyphs || [],
+    critAudit: savedBuild?.critAudit,
     slotHands: Object.fromEntries((savedBuild?.gear || []).filter(slot => slot.hands).map(slot => [slot.slotId, slot.hands])),
+    arsenalSlots: (savedBuild?.gear || []).filter(slot => (catalog.constraints?.gearSlots || []).some(def => def.id === slot.slotId && def.kind === 'weapon')).map(slot => ({
+      slotId: slot.slotId,
+      affixes: (slot.affixes || []).map(affix => ({ ...affix }))
+    })),
     limit: 20
   });
   renderResults(out);

@@ -190,8 +190,19 @@ export function searchGear(catalog, build, opts = {}) {
   return { ...picked, power: evaluation.result.total, evaluation, greedy, beam, greedyPower, beamPower };
 }
 
+function arsenalAffixes(catalog, opts) {
+  const weaponIds = new Set((catalog.constraints?.gearSlots || []).filter(slot => slot.kind === 'weapon').map(slot => slot.id));
+  const bySlot = new Map();
+  for (const row of opts.arsenalSlots || []) {
+    if (weaponIds.size && !weaponIds.has(row.slotId)) continue;
+    bySlot.set(row.slotId, (row.affixes || []).map(affix => ({ ...affix })));
+  }
+  return bySlot;
+}
+
 export function buildFromCore(catalog, skills, opts = {}) {
   const ids = skills.map(skill => skill.id);
+  const affixes = arsenalAffixes(catalog, opts);
   return blankBuild(catalog, {
     id: `core-${ids.join('+') || 'empty'}`,
     name: skills.map(skill => skill.name).join(' + ') || 'Empty core',
@@ -208,11 +219,13 @@ export function buildFromCore(catalog, skills, opts = {}) {
     additivePct: opts.additivePct ?? null,
     ...(opts.offensiveSheet ? { offensiveSheet: opts.offensiveSheet } : {}),
     ...(opts.vulnerableDamageInAdditive === true ? { vulnerableDamageInAdditive: true } : {}),
+    ...(opts.critAudit ? { critAudit: opts.critAudit } : {}),
     boards: opts.boards || [],
     glyphs: opts.glyphs || [],
     gear: emptyGear(catalog).map(slot => ({
       ...slot,
-      ...(opts.slotHands?.[slot.slotId] ? { hands: opts.slotHands[slot.slotId] } : {})
+      ...(opts.slotHands?.[slot.slotId] ? { hands: opts.slotHands[slot.slotId] } : {}),
+      ...(affixes.has(slot.slotId) ? { affixes: affixes.get(slot.slotId) } : {})
     }))
   });
 }
@@ -238,11 +251,11 @@ export function explain(result) {
   lines.push(`Unverified share ${(result.unverifiedShare * 100).toFixed(1)}%`);
   if (result.unverifiedFields?.length) lines.push(`Unverified fields: ${result.unverifiedFields.map(field => field.path).join(', ')}`);
   if (result.critAlternate) {
-    lines.push(`Crit alternate (sheet already includes the [x] crit multipliers) power ${result.critAlternate.total.toFixed(4)}. Low confidence.`);
+    lines.push(`Crit alternate (${result.critAlternate.reading}) power ${result.critAlternate.total.toFixed(4)}. Low confidence. Switch critAudit.reading to use it.`);
   }
   if (result.conditionalCritAlternate) {
     const alt = result.conditionalCritAlternate;
-    lines.push(`Flawless Technique +45%[x] added to the crit-multiplier sum (×${alt.multiplier}). Power ${alt.total.toFixed(4)}. Estimate. The headline score leaves it out.`);
+    lines.push(`Flawless Technique +45%[x] multiplies separately (×${alt.multiplier}). Power ${alt.total.toFixed(4)}. Estimate. The headline score leaves it out.`);
   }
   return lines.join('\n');
 }

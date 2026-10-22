@@ -1,22 +1,35 @@
 // Class-agnostic damage engine.
-// S2/S15 Vulnerable and crit formula, user research note 2026-10-22.
-// [A] d4guides.gg, Chrix1848, 2026-10-05, season 15 / patch 3.2.2 (medium; current-season guide):
+// Vulnerable and crit formula, user research note 2026-10-22, follow-up the same day.
+// [A] d4guides.gg, Chrix1848, 2026-10-05, season 15 / patch 3.2.2 (medium; current-season guide).
+//     Same-type gear multipliers add, and aspect/unique/skill [x] crit multiplies separately: medium-high.
 //     https://d4guides.gg/en/guides/mechanics/damage-calculation-in-diablo-4-how-your-damage-works
 // [B] Blizzard season 2 dev note, quoted in Mobalytics (high for the quoted baseline; 2023):
 //     https://mobalytics.gg/diablo-4/guides/damage-buckets-deep-dive
 // [C] Wowhead, season 2 change, 2023 (high for the quoted baseline):
 //     https://www.wowhead.com/diablo-4/news/breaking-down-the-critical-strike-and-vulnerable-damage-change-diablo-4-335487
+// [E] diablo4.cc glossary, datamined tooltip strings, version undated (medium that the sheet crit figure includes the inherent 50%):
+//     https://diablo4.cc/us/Glossary
+// [F] Blizzard forum, player reply, not staff, date unknown (low on whether every equipped weapon's [x] crit counts):
+//     https://us.forums.blizzard.com/en/d4/t/weapon-stats-and-weapons-used/47095
 // Base Vulnerable ×1.2: high [B][C][A]. Sheet Vulnerable Damage is additive, and only vs Vulnerable: high [B][C][A].
 // Whether a sheet Vulnerable Damage percent includes that 20% is unverified: low.
 // [x] Vulnerable Damage Multiplier lines sum, then 1.2 × (1 + sum): medium [A].
-// Crit (A + additive crit damage) / A × 1.5 × (1 + sum of [x] crit multipliers): high on the mechanic [A][B][C].
-// Whether the sheet crit percent includes the base 50% or the [x] lines: low.
+// Headline crit: (A + sheet crit damage) / A × (1 + sum of gear [x] crit) × each aspect/unique/skill [x] crit.
+// The extra ×1.5 is dropped because the sheet figure already includes the base 50% (medium [E]).
+// Whether the sheet also includes gear [x] crit, and whether a weapon [x] crit line applies only while that weapon swings: low [A][F].
 export const BUCKETS=['additive','multiplicative','mainstat','crit','vuln','overpower'];
+export const SEPARATE_CRIT_KINDS=new Set(['aspect','unique','skill']);
 const VULN_BASE=1.2;
-const CRIT_BASE=1.5;
 function percentFactor(list,mode){
   if(mode==='product')return list.reduce((p,m)=>p*(1+m.value/100),1);
   return 1+list.reduce((s,m)=>s+m.value/100,0);
+}
+export function critMultiplier(mods){
+  const gear=mods.filter(m=>!SEPARATE_CRIT_KINDS.has(m.kind));
+  const separate=mods.filter(m=>SEPARATE_CRIT_KINDS.has(m.kind));
+  const gearX=1+gear.reduce((s,m)=>s+m.value/100,0);
+  const separateX=separate.reduce((p,m)=>p*(1+m.value/100),1);
+  return {gear,separate,gearX,separateX,factor:gearX*separateX};
 }
 export function compute(inp){
   const mods=(inp.modifiers||[]).filter(m=>m.active!==false&&typeof m.value==='number');
@@ -35,14 +48,17 @@ export function compute(inp){
   terms.push({label:'Multiplicative',value:mul,expr:mm.map(m=>`(1+${m.value/100}) ${m.name}`).join(' × ')||'1'});
   const ms=1+((inp.mainStat??0)/10)*((inp.mainStatPer10??0)/100);
   terms.push({label:'Main stat',value:ms,expr:`1 + ${inp.mainStat}/10 × ${(inp.mainStatPer10??0)/100}`});
-  const csd=(inp.critDmg??0)/100-(inp.critSheetIncludesBase===true?0.5:0);
+  const csd=(inp.critDmg??0)/100;
   const critMods=mods.filter(m=>m.bucket==='crit-mult');
-  const critX=percentFactor(critMods,inp.critMultMode);
+  const critParts=critMultiplier(critMods);
+  const critX=critParts.factor;
   const chance=(inp.critChance??0)/100;
   const A=add>0?add:1;
-  const critFull=((A+csd)/A)*CRIT_BASE*critX;
+  const critFull=((A+csd)/A)*critX;
   const crit=inp.isDot||chance<=0?1:(chance>=1?critFull:(1-chance)+chance*critFull);
-  const critExpr=inp.isDot?'DoT: no crit':chance<=0?'no crit chance':`(${Number(A.toFixed(4))} + ${Number(csd.toFixed(4))}) / ${Number(A.toFixed(4))} × 1.5 × ${Number(critX.toFixed(4))}`;
+  const gearText=critParts.gear.length?`${Number(critParts.gearX.toFixed(4))} gear [x] (${critParts.gear.map(m=>`${m.value}%`).join(' + ')})`:'1 gear [x]';
+  const separateText=critParts.separate.length?` × ${Number(critParts.separateX.toFixed(4))} separate [x] (${critParts.separate.map(m=>`${m.value}% ${m.name}`).join(', ')})`:'';
+  const critExpr=inp.isDot?'DoT: no crit':chance<=0?'no crit chance':`(${Number(A.toFixed(4))} + ${Number(csd.toFixed(4))}) / ${Number(A.toFixed(4))} × ${gearText}${separateText}`;
   terms.push({label:'Crit (expected)',value:crit,expr:critExpr});
   const vulnMods=mods.filter(m=>m.bucket==='vuln-mult');
   const vulnX=percentFactor(vulnMods,inp.vulnMultMode);
