@@ -18,147 +18,467 @@
       "gear": [
         {
           "slotId": "helm",
-          "affixes": [],
+          "affixes": [
+            {
+              "affixId": "v1-helm-strength",
+              "value": 111
+            },
+            {
+              "affixId": "v1-helm-willpower",
+              "value": 111
+            },
+            {
+              "affixId": "v1-helm-attack-speed",
+              "value": 17.5
+            },
+            {
+              "affixId": "v1-helm-cooldown-reduction",
+              "value": 25
+            },
+            {
+              "affixId": "v1-helm-armor",
+              "value": 1111
+            },
+            {
+              "affixId": "v1-helm-poison-res",
+              "value": 10
+            },
+            {
+              "affixId": "v1-helm-all-stats",
+              "value": 82
+            }
+          ],
           "aspectId": null,
-          "uniqueId": null,
+          "uniqueId": "leorics-crown",
           "itemName": "Leoric's Crown",
           "hands": null,
           "weaponType": null,
           "attacksPerSecond": null,
           "itemCritChance": null,
-          "itemNote": "User confirmed the helm is Leoric's Crown. Tuskhelm of Joritz the Mighty is a charm, not the helm."
+          "itemNote": "Ancestral Mythic Unique. User confirmed the helm is Leoric's Crown. Tuskhelm of Joritz the Mighty is a charm, not the helm."
         },
         {
           "slotId": "chest",
-          "affixes": [],
+          "affixes": [
+            {
+              "affixId": "v1-chest-max-resource",
+              "value": 18
+            },
+            {
+              "affixId": "v1-chest-armor-roll",
+              "value": 1322
+            },
+            {
+              "affixId": "v1-chest-max-life",
+              "value": 19
+            },
+            {
+              "affixId": "v1-chest-dr",
+              "value": 13
+            },
+            {
+              "affixId": "v1-chest-armor-flat",
+              "value": 3000
+            }
+          ],
           "aspectId": null,
-          "uniqueId": null,
+          "uniqueId": "enigma",
           "itemName": "Enigma",
           "hands": null,
           "weaponType": null,
           "attacksPerSecond": null,
           "itemCritChance": null,
-          "itemNote": null
+          "itemNote": "Ancestral Unique Runeword."
         },
         {
           "slotId": "gloves",
-          "affixes": [],
+          "affixes": [
+            {
+              "affixId": "v1-gloves-attack-speed",
+              "value": 34
+            },
+            {
+              "affixId": "v1-gloves-crit-chance",
+              "value": 16
+            },
+            {
+              "affixId": "v1-gloves-fire-mult",
+              "value": 45
+            },
+            {
+              "affixId": "v1-gloves-core-skills",
+              "value": 13
+            },
+            {
+              "affixId": "v1-gloves-crit-damage",
+              "value": 50
+            }
+          ],
           "aspectId": null,
-          "uniqueId": null,
+          "uniqueId": "gohrs-devastating-grips",
           "itemName": "Gohr's Devastating Grips",
           "hands": null,
           "weaponType": null,
           "attacksPerSecond": null,
           "itemCritChance": null,
-          "itemNote": null
+          "itemNote": "Mythic."
         },
         {
           "slotId": "pants",
-          "affixes": [],
+          "affixes": [
+            {
+              "affixId": "v1-pants-max-resource",
+              "value": 30
+            },
+            {
+              "affixId": "v1-pants-life-regen",
+              "value": 276
+            },
+            {
+              "affixId": "v1-pants-dr",
+              "value": 11.5
+            },
+            {
+              "affixId": "v1-pants-impairment",
+              "value": 15.5
+            },
+            {
+              "affixId": "v1-pants-phys-res",
+              "value": 23.5
+            }
+          ],
           "aspectId": null,
-          "uniqueId": null,
+          "uniqueId": "tibaults-will",
           "itemName": "Tibault's Will",
           "hands": null,
           "weaponType": null,
           "attacksPerSecond": null,
           "itemCritChance": null,
-          "itemNote": null
+          "itemNote": "Mythic."
         },
         {
           "slotId": "boots",
-          "affixes": [],
-          "aspectId": null,
+          "affixes": [
+            {
+              "affixId": "v1-boots-all-stats",
+              "value": 42
+            },
+            {
+              "affixId": "v1-boots-fury-regen",
+              "value": 5
+            },
+            {
+              "affixId": "v1-boots-move-speed",
+              "value": 29
+            },
+            {
+              "affixId": "v1-boots-all-res",
+              "value": 42
+            },
+            {
+              "affixId": "v1-boots-temper-move-speed",
+              "value": 39.5
+            }
+          ],
+          "aspectId": "earthstrikers-aspect",
           "uniqueId": null,
-          "itemName": "Earthstriker's Aspect",
+          "itemName": "Earthstriker's Boneweave",
           "hands": null,
           "weaponType": null,
           "attacksPerSecond": null,
           "itemCritChance": null,
-          "itemNote": null
+          "itemNote": "Legendary boots with Earthstriker's Aspect. The video name was Earthstriker's Boneweave. Tempered Movement Speed 39.5% against [25-35] is suspect."
         },
         {
           "slotId": "amulet",
-          "affixes": [],
+          "affixes": [
+            {
+              "affixId": "v1-selig-vuln-mult",
+              "value": 10
+            },
+            {
+              "affixId": "v1-selig-strength",
+              "value": 115
+            },
+            {
+              "affixId": "v1-selig-all-res",
+              "value": 28.5
+            },
+            {
+              "affixId": "v1-selig-dual-wield",
+              "value": 3
+            },
+            {
+              "affixId": "v1-selig-move-speed",
+              "value": 45
+            }
+          ],
           "aspectId": null,
-          "uniqueId": null,
+          "uniqueId": "melted-heart-of-selig",
           "itemName": "Melted Heart of Selig",
           "hands": null,
           "weaponType": null,
           "attacksPerSecond": null,
           "itemCritChance": null,
-          "itemNote": null
+          "itemNote": "Mythic."
         },
         {
           "slotId": "ring-1",
-          "affixes": [],
+          "affixes": [
+            {
+              "affixId": "v1-soj-strength",
+              "value": 115
+            },
+            {
+              "affixId": "v1-soj-crit-chance",
+              "value": 5.5
+            },
+            {
+              "affixId": "v1-soj-crit-damage",
+              "value": 65
+            },
+            {
+              "affixId": "v1-soj-max-life",
+              "value": 33
+            },
+            {
+              "affixId": "v1-soj-all-skills",
+              "value": 3
+            }
+          ],
           "aspectId": null,
+          "uniqueId": "stone-of-jordan",
+          "itemName": "Stone of Jordan",
+          "hands": null,
+          "weaponType": null,
+          "attacksPerSecond": null,
+          "itemCritChance": null,
+          "itemNote": "Video 1 reads this as Ring 1. An earlier name list had Stone of Jordan replacing Ring of Starless Skies on ring 2. The video's ring note puts Crushing on ring 2, so Stone of Jordan is on ring 1 here."
+        },
+        {
+          "slotId": "ring-2",
+          "affixes": [
+            {
+              "affixId": "v1-crush-all-res",
+              "value": 115
+            },
+            {
+              "affixId": "v1-crush-strength",
+              "value": 115
+            },
+            {
+              "affixId": "v1-crush-vuln-mult",
+              "value": 10
+            },
+            {
+              "affixId": "v1-crush-vuln",
+              "value": 16
+            },
+            {
+              "affixId": "v1-crush-max-resource",
+              "value": 12
+            },
+            {
+              "affixId": "v1-crush-cdr",
+              "value": 5
+            }
+          ],
+          "aspectId": "crushing-aspect",
           "uniqueId": null,
           "itemName": "Crushing Aspect",
           "hands": null,
           "weaponType": null,
           "attacksPerSecond": null,
           "itemCritChance": null,
-          "itemNote": null
-        },
-        {
-          "slotId": "ring-2",
-          "affixes": [],
-          "aspectId": null,
-          "uniqueId": null,
-          "itemName": "Stone of Jordan",
-          "hands": null,
-          "weaponType": null,
-          "attacksPerSecond": null,
-          "itemCritChance": null,
-          "itemNote": "User confirmed Stone of Jordan replaces Ring of Starless Skies."
+          "itemNote": "Video name Crushing Spiritmachy, identified as the Crushing Aspect ring. Video Ring 2."
         },
         {
           "slotId": "weapon-1",
-          "affixes": [],
+          "affixes": [
+            {
+              "affixId": "v1-insight-weapon-damage",
+              "value": 107
+            },
+            {
+              "affixId": "v1-insight-strength",
+              "value": 412
+            },
+            {
+              "affixId": "v1-insight-fury-regen",
+              "value": 85
+            },
+            {
+              "affixId": "v1-insight-attack-speed",
+              "value": 115
+            },
+            {
+              "affixId": "v1-insight-crit-chance",
+              "value": 16
+            },
+            {
+              "affixId": "v1-insight-crit-damage",
+              "value": 75
+            },
+            {
+              "affixId": "v1-insight-damage",
+              "value": 320
+            },
+            {
+              "affixId": "v1-insight-item-quality",
+              "value": 30
+            },
+            {
+              "affixId": "v1-insight-ga-crit-damage",
+              "value": 34
+            },
+            {
+              "affixId": "v1-insight-phys-mult",
+              "value": 20
+            }
+          ],
           "aspectId": null,
-          "uniqueId": null,
-          "itemName": "Runeword polearm",
+          "uniqueId": "insight",
+          "itemName": "Insight",
           "hands": "2H",
           "weaponType": "polearm",
           "attacksPerSecond": 0.9,
           "itemCritChance": 94.5,
-          "itemNote": "Bludgeoning slot. User confirmed a runeword polearm. 0.9 attacks per second and 94.5% crit chance were read on this weapon and are unverified. They are separate from the sheet crit chance."
+          "itemNote": "User: Insight is the runeword polearm on a 2H slot at 0.9 Attacks per Second, and the polearm crit chance is 94.5%. The video read a polearm in a 1H slot at 1.00 Attacks per Second and a +16% crit affix. Those video readings are suspect and are not the slot values. This is the bludgeoning slot the user confirmed as the runeword polearm."
         },
         {
           "slotId": "weapon-2",
-          "affixes": [],
-          "aspectId": null,
+          "affixes": [
+            {
+              "affixId": "v1-channel-weapon-damage",
+              "value": 667
+            },
+            {
+              "affixId": "v1-channel-strength",
+              "value": 110
+            },
+            {
+              "affixId": "v1-channel-all-damage",
+              "value": 12
+            },
+            {
+              "affixId": "v1-channel-crit-damage",
+              "value": 65
+            },
+            {
+              "affixId": "v1-channel-vuln",
+              "value": 23
+            },
+            {
+              "affixId": "v1-channel-crit-chance",
+              "value": 5.5
+            },
+            {
+              "affixId": "v1-channel-temper-phys",
+              "value": 20
+            }
+          ],
+          "aspectId": "aspect-of-channeling",
           "uniqueId": null,
-          "itemName": "Insight",
+          "itemName": "Aspect of Channeling",
           "hands": "2H",
-          "weaponType": null,
-          "attacksPerSecond": null,
+          "weaponType": "mace",
+          "attacksPerSecond": 1,
           "itemCritChance": null,
-          "itemNote": "Slashing slot. User confirmed Insight is on a two-handed weapon. The supplied meta list already had slashing = Insight. This records that confirmation rather than a different assignment."
+          "itemNote": "2H mace. The video item name was Beatsmash of Channeling, and the video called this the 2H bludgeoning weapon at 1.00 Attacks per Second. The user says the bludgeoning slot is the Insight polearm, so this mace is the other 2H weapon. The bludgeoning label is suspect. The 1.00 Attacks per Second has no conflicting user number and stays on this slot, unverified."
         },
         {
           "slotId": "weapon-3",
-          "affixes": [],
+          "affixes": [
+            {
+              "affixId": "v1-spirit-weapon-damage",
+              "value": 175
+            },
+            {
+              "affixId": "v1-spirit-strength",
+              "value": 262
+            },
+            {
+              "affixId": "v1-spirit-all-damage",
+              "value": 80
+            },
+            {
+              "affixId": "v1-spirit-attack-speed",
+              "value": 32.5
+            },
+            {
+              "affixId": "v1-spirit-impairment",
+              "value": 65.5
+            },
+            {
+              "affixId": "v1-spirit-all-skills",
+              "value": 4
+            },
+            {
+              "affixId": "v1-spirit-item-quality",
+              "value": 6
+            },
+            {
+              "affixId": "v1-spirit-crit-damage",
+              "value": 75
+            },
+            {
+              "affixId": "v1-spirit-damage-mult",
+              "value": 25
+            }
+          ],
           "aspectId": null,
-          "uniqueId": null,
+          "uniqueId": "spirit",
           "itemName": "Spirit",
           "hands": "1H",
           "weaponType": "mace",
           "attacksPerSecond": null,
           "itemCritChance": null,
-          "itemNote": "User confirmed Spirit is on a one-handed weapon. The supplied meta list already named it Spirit (1H Mace). The mace type is that list text, not a new measurement."
+          "itemNote": "User: Spirit is on the 1H. The earlier list called it a 1H mace, and that type is list text. The video read a 2H Sword at 1.00 Attacks per Second. That placement, weapon type, and attack speed are suspect and are not applied here."
         },
         {
           "slotId": "weapon-4",
-          "affixes": [],
+          "affixes": [
+            {
+              "affixId": "v1-ramaladni-weapon-damage",
+              "value": 108
+            },
+            {
+              "affixId": "v1-ramaladni-strength",
+              "value": 110
+            },
+            {
+              "affixId": "v1-ramaladni-dexterity",
+              "value": 110
+            },
+            {
+              "affixId": "v1-ramaladni-crit-damage",
+              "value": 65
+            },
+            {
+              "affixId": "v1-ramaladni-crit-chance",
+              "value": 5.5
+            },
+            {
+              "affixId": "v1-ramaladni-dual-wield",
+              "value": 10
+            },
+            {
+              "affixId": "v1-ramaladni-max-life",
+              "value": 36
+            },
+            {
+              "affixId": "v1-ramaladni-phys-mult",
+              "value": 20
+            }
+          ],
           "aspectId": null,
-          "uniqueId": null,
+          "uniqueId": "ramaladni",
           "itemName": "Ramaladni's Magnum Opus",
           "hands": "1H",
           "weaponType": null,
-          "attacksPerSecond": null,
+          "attacksPerSecond": 1.1,
           "itemCritChance": null,
-          "itemNote": "Dual-wield slot from the supplied meta list. Counted as one of the two one-handed arsenal weapons the user confirmed. Catalog unique id ramaladni is not linked: its slots and stats are still null."
+          "itemNote": "Video: 1H Slashing, 1.10 Attacks per Second. One of the two one-handed arsenal weapons."
         },
         {
           "slotId": "slot-13",
@@ -175,51 +495,84 @@
       ],
       "boards": [
         {
-          "boardId": null,
+          "boardId": "starting-board",
           "name": "Starting Board",
-          "nodeIds": []
+          "nodeIds": [
+            "starting-brawn",
+            "starting-raw-power",
+            "starting-iron-strength",
+            "starting-normal-strength",
+            "starting-normal-dexterity",
+            "starting-magic-damage",
+            "starting-magic-max-life",
+            "starting-magic-willpower"
+          ]
         },
         {
-          "boardId": null,
+          "boardId": "warbringer",
           "name": "Warbringer",
-          "nodeIds": []
+          "nodeIds": [
+            "warbringer-legendary",
+            "warbringer-raw-power",
+            "warbringer-brute-force",
+            "warbringer-hungering-fury",
+            "warbringer-conditioned"
+          ]
         },
         {
-          "boardId": null,
+          "boardId": "decimator",
           "name": "Decimator",
-          "nodeIds": []
+          "nodeIds": [
+            "decimator-legendary",
+            "decimator-pillage",
+            "decimator-destroyer",
+            "decimator-demolish",
+            "decimator-arrogance"
+          ]
         },
         {
-          "boardId": null,
+          "boardId": "weapons-master",
           "name": "Weapons Master",
-          "nodeIds": []
+          "nodeIds": [
+            "weapons-master-legendary",
+            "weapons-master-iron-strength",
+            "weapons-master-raw-power",
+            "weapons-master-nimble",
+            "weapons-master-hunter-killer",
+            "weapons-master-deflection"
+          ]
         },
         {
-          "boardId": null,
+          "boardId": "flawless-technique-board",
           "name": "Flawless Technique",
-          "nodeIds": []
+          "nodeIds": [
+            "flawless-technique",
+            "flawless-wild-force",
+            "flawless-heavy-blows",
+            "flawless-nimble"
+          ]
         }
       ],
       "glyphs": [
         {
           "glyphId": "might",
-          "level": null
+          "level": 70
         },
         {
           "glyphId": "twister",
-          "level": null
+          "level": 70
         },
         {
           "glyphId": "imbiber",
-          "level": null
+          "level": 70
         },
         {
           "glyphId": "marshal",
-          "level": null
+          "level": 70
         },
         {
           "glyphId": "wrath",
-          "level": null
+          "level": 70
         }
       ],
       "talismans": [
@@ -263,7 +616,7 @@
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
       "manualInputsVerified": false,
-      "note": "Based on the Whirlwind Barb (S15) Immortal Speed 130 name list. User-confirmed differences: Leoric's Crown is the helm and Tuskhelm of Joritz the Mighty is a charm; Stone of Jordan replaces Ring of Starless Skies; the bludgeoning slot is a runeword polearm; Endurant Faith and Seal of the Epiphany replace Blood-Mad Idol and The Furnace; the arsenal is 2 two-handed weapons and 2 one-handed weapons. The character sheet was confirmed from the user's screenshot: level 70, Strength 4101, Intelligence 981, Willpower 1333, Dexterity 1320, Armor 32183, Toughness 29309 for all damage types, Weapon Damage 4566, Max Life 473. Video readings that the screenshot did not confirm stay unverified: crit chance 100%, crit damage 7414.8%, Vulnerable damage 206.8%, max Fury 826, resistances capped at 80%. The 80% figure is the cap that was read, not an EHP resist mitigation percent. Armor mitigation was not shown. Life numbers implied by skill tooltips are ignored. Confirmed skill allocation, 2026-10-22: Whirlwind, War Cry, Challenging Shout, Rallying Cry, Wrath of the Berserker, and Iron Skin. Flay is not active. The upgrade list on this build is the confirmed allocation. Upgrade numbers stay on the catalog rows and stay unverified.",
+      "note": "Based on the Whirlwind Barb (S15) Immortal Speed 130 name list. User-confirmed differences: Leoric's Crown is the helm and Tuskhelm of Joritz the Mighty is a charm; Stone of Jordan replaces Ring of Starless Skies; the bludgeoning slot is a runeword polearm; Endurant Faith and Seal of the Epiphany replace Blood-Mad Idol and The Furnace; the arsenal is 2 two-handed weapons and 2 one-handed weapons. The character sheet was confirmed from the user's screenshot: level 70, Strength 4101, Intelligence 981, Willpower 1333, Dexterity 1320, Armor 32183, Toughness 29309 for all damage types, Weapon Damage 4566, Max Life 473. Video readings that the screenshot did not confirm stay unverified: crit chance 100%, crit damage 7414.8%, Vulnerable damage 206.8%, max Fury 826, resistances capped at 80%. The 80% figure is the cap that was read, not an EHP resist mitigation percent. Armor mitigation was not shown. Life numbers implied by skill tooltips are ignored. Confirmed skill allocation, 2026-10-22: Whirlwind, War Cry, Challenging Shout, Rallying Cry, Wrath of the Berserker, and Iron Skin. Flay is not active. The upgrade list on this build is the confirmed allocation. Upgrade numbers stay on the catalog rows and stay unverified. Video 1 (user video 1 (watchVideo 2026-10-22)) added the equipped item rolls, paragon boards, glyph level 70, charms, Prime Evil powers, and polearm expertise. Confirmed values kept: Insight is the 2H polearm at 0.9 APS with 94.5% crit, Spirit is 1H, Armor 32183, Life 473, and the rank model with Whirlwind at 41. The video's conflicting readings are suspect. Flay stays inactive.",
       "sheet": {
         "level": 70,
         "strength": 4101,
@@ -277,7 +630,189 @@
         "maxLife": 473,
         "source": "user screenshot, confirmed by Nikolay 2026-10-22",
         "verified": true,
-        "note": "Max Life 473 is intentional: a minimum-life setup with Melted Heart of Selig and Endurant Faith. Life numbers implied by skill tooltips are ignored. Armor 32183 replaces the earlier video reading of 52185. Toughness 29309 was read for all damage types and is not an armor or resist mitigation percent."
+        "note": "Max Life 473 is intentional: a minimum-life setup with Melted Heart of Selig and Endurant Faith. Life numbers implied by skill tooltips are ignored. Armor 32183 replaces the earlier video reading of 52185. Toughness 29309 was read for all damage types and is not an armor or resist mitigation percent. Video 1 read Armor 32,185 and Life 475. The confirmed values stay 32,183 and 473. Those video readings are suspect.",
+        "videoReadings": [
+          {
+            "stat": "armor mitigation shown with the video armor",
+            "value": 75.7,
+            "unit": "%",
+            "suspect": true,
+            "source": "user video 1 (watchVideo 2026-10-22)",
+            "note": "Read next to Armor 32,185. The confirmed armor is 32,183, so this percent was not copied onto armor mitigation."
+          },
+          {
+            "stat": "resistances",
+            "value": 19446,
+            "unit": null,
+            "suspect": false,
+            "source": "user video 1 (watchVideo 2026-10-22)",
+            "note": "85% capped, all types. The cap conflicts with the stored 80% cap reading."
+          },
+          {
+            "stat": "Healing Received",
+            "value": 67.1,
+            "unit": "%",
+            "suspect": false,
+            "source": "user video 1 (watchVideo 2026-10-22)"
+          },
+          {
+            "stat": "Life Regeneration",
+            "value": 276,
+            "unit": null,
+            "suspect": false,
+            "source": "user video 1 (watchVideo 2026-10-22)"
+          },
+          {
+            "stat": "Damage Reduction",
+            "value": 50,
+            "unit": "%",
+            "suspect": false,
+            "source": "user video 1 (watchVideo 2026-10-22)"
+          },
+          {
+            "stat": "Bludgeoning base weapon damage",
+            "value": 5010,
+            "unit": null,
+            "suspect": false,
+            "source": "user video 1 (watchVideo 2026-10-22)",
+            "note": "Does not replace the confirmed weapon damage of 4566."
+          },
+          {
+            "stat": "Dual-Wield base weapon damage",
+            "value": 4178,
+            "unit": null,
+            "suspect": false,
+            "source": "user video 1 (watchVideo 2026-10-22)",
+            "note": "Does not replace the confirmed weapon damage of 4566."
+          },
+          {
+            "stat": "Slashing base weapon damage",
+            "value": 5129,
+            "unit": null,
+            "suspect": false,
+            "source": "user video 1 (watchVideo 2026-10-22)",
+            "note": "Does not replace the confirmed weapon damage of 4566."
+          },
+          {
+            "stat": "Weapon Speed",
+            "value": 1.1,
+            "unit": null,
+            "suspect": false,
+            "source": "user video 1 (watchVideo 2026-10-22)"
+          },
+          {
+            "stat": "Attack Speed",
+            "value": 100,
+            "unit": "%",
+            "suspect": false,
+            "source": "user video 1 (watchVideo 2026-10-22)"
+          },
+          {
+            "stat": "All Damage",
+            "value": 606.7,
+            "unit": "%",
+            "suspect": false,
+            "source": "user video 1 (watchVideo 2026-10-22)"
+          },
+          {
+            "stat": "Physical damage",
+            "value": 250.5,
+            "unit": "%",
+            "suspect": false,
+            "source": "user video 1 (watchVideo 2026-10-22)"
+          },
+          {
+            "stat": "Fire damage",
+            "value": 135,
+            "unit": "%",
+            "suspect": false,
+            "source": "user video 1 (watchVideo 2026-10-22)"
+          },
+          {
+            "stat": "Cold damage",
+            "value": 134.3,
+            "unit": "%",
+            "suspect": false,
+            "source": "user video 1 (watchVideo 2026-10-22)"
+          },
+          {
+            "stat": "other element damage",
+            "value": 90.5,
+            "unit": "%",
+            "suspect": false,
+            "source": "user video 1 (watchVideo 2026-10-22)"
+          },
+          {
+            "stat": "vs Elites",
+            "value": 135.5,
+            "unit": "%",
+            "suspect": false,
+            "source": "user video 1 (watchVideo 2026-10-22)"
+          },
+          {
+            "stat": "vs Healthy/Injured",
+            "value": 26,
+            "unit": "%",
+            "suspect": false,
+            "source": "user video 1 (watchVideo 2026-10-22)"
+          },
+          {
+            "stat": "while Healthy",
+            "value": 223.2,
+            "unit": "%",
+            "suspect": false,
+            "source": "user video 1 (watchVideo 2026-10-22)"
+          },
+          {
+            "stat": "while Fortified",
+            "value": 55,
+            "unit": "%",
+            "suspect": false,
+            "source": "user video 1 (watchVideo 2026-10-22)"
+          },
+          {
+            "stat": "Fury Cost Reduction",
+            "value": 30,
+            "unit": "%",
+            "suspect": false,
+            "source": "user video 1 (watchVideo 2026-10-22)"
+          },
+          {
+            "stat": "Fury Regeneration",
+            "value": 85,
+            "unit": null,
+            "suspect": false,
+            "source": "user video 1 (watchVideo 2026-10-22)"
+          },
+          {
+            "stat": "Bonus Fury Generation",
+            "value": 52.5,
+            "unit": "%",
+            "suspect": false,
+            "source": "user video 1 (watchVideo 2026-10-22)"
+          },
+          {
+            "stat": "Fury on Kill",
+            "value": 11,
+            "unit": null,
+            "suspect": false,
+            "source": "user video 1 (watchVideo 2026-10-22)"
+          },
+          {
+            "stat": "Movement Speed",
+            "value": 200,
+            "unit": "%",
+            "suspect": false,
+            "source": "user video 1 (watchVideo 2026-10-22)"
+          },
+          {
+            "stat": "Cooldown Reduction",
+            "value": 39.4,
+            "unit": "%",
+            "suspect": false,
+            "source": "user video 1 (watchVideo 2026-10-22)"
+          }
+        ]
       },
       "upgrades": [
         {
@@ -351,6 +886,144 @@
         {
           "skillId": "iron-skin",
           "name": "Resolve"
+        }
+      ],
+      "suspectReadings": [
+        {
+          "field": "armor",
+          "videoValue": 32185,
+          "confirmedValue": 32183,
+          "suspect": true,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "note": "The screenshot armor stays 32,183. The video also showed 75.7% beside 32,185."
+        },
+        {
+          "field": "maxLife",
+          "videoValue": 475,
+          "confirmedValue": 473,
+          "suspect": true,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "note": "The confirmed Max Life stays 473."
+        },
+        {
+          "field": "insight.attacksPerSecond",
+          "videoValue": 1,
+          "confirmedValue": 0.9,
+          "suspect": true,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "note": "The video read Insight as a polearm in a 1H slot at 1.00 APS. The user says it is the 2H polearm at 0.9 APS."
+        },
+        {
+          "field": "insight.placement",
+          "videoValue": "polearm in 1H slot",
+          "confirmedValue": "2H polearm",
+          "suspect": true,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "note": "Weapon placement follows the user."
+        },
+        {
+          "field": "insight.itemCritChance",
+          "videoValue": 16,
+          "confirmedValue": 94.5,
+          "suspect": true,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "note": "The +16% Critical Strike Chance affix does not match the user's 94.5% polearm crit chance. The affix is stored and marked suspect. The slot keeps 94.5."
+        },
+        {
+          "field": "spirit.placement",
+          "videoValue": "2H Sword",
+          "confirmedValue": "1H",
+          "suspect": true,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "note": "The earlier list called it a 1H mace. The video sword reading was not applied."
+        },
+        {
+          "field": "spirit.attacksPerSecond",
+          "videoValue": 1,
+          "confirmedValue": null,
+          "suspect": true,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "note": "1.00 APS was read with the 2H Sword placement. The 1H slot attack speed stays null."
+        },
+        {
+          "field": "channeling.slotLabel",
+          "videoValue": "2H bludgeoning",
+          "confirmedValue": "other 2H slot; bludgeoning is the Insight polearm",
+          "suspect": true,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "note": "The mace and its 1.00 APS stay on weapon-2. Only the bludgeoning label conflicts."
+        },
+        {
+          "field": "skill.rank",
+          "videoValue": "11/5",
+          "confirmedValue": "base plus bonus; Whirlwind total 41",
+          "suspect": true,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "note": "The rank display was misread. Skill ranks were not changed. Flay stays inactive."
+        },
+        {
+          "field": "vulnPct",
+          "videoValue": 226.8,
+          "confirmedValue": 206.8,
+          "suspect": true,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "note": "An earlier video read 206.8. This video reads 226.8. Neither is from the confirmed screenshot, so 206.8 stays and 226.8 is suspect."
+        },
+        {
+          "field": "resistanceCapPct",
+          "videoValue": 85,
+          "confirmedValue": 80,
+          "suspect": true,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "note": "This video reads resistances capped at 85%. The earlier reading of 80% stays."
+        },
+        {
+          "field": "glyph.level",
+          "videoValue": 70,
+          "confirmedValue": null,
+          "suspect": true,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "note": "This video reads 70. An earlier read said 155. The previous stored level was 115, inferred from a section header. The five equipped glyphs are level 70 and suspect."
+        },
+        {
+          "field": "earthstrikers-aspect.itemPower",
+          "videoValue": "+45% Movement Speed for 3s on weapon swap; +25% damage while you have Overpower",
+          "confirmedValue": "codex: 19.5%[x] [15.5-20.5] while you have Overpower, plus 1 Overpower stack on weapon swap",
+          "suspect": true,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "note": "The codex effect is unchanged. The video item power is stored beside it."
+        },
+        {
+          "field": "aspect-of-channeling.itemPower",
+          "videoValue": "+150% [150] damage while Channeling",
+          "confirmedValue": "codex: 69%[x] [50-70]",
+          "suspect": true,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "note": "The bracket has a single number. The codex effect is unchanged."
+        },
+        {
+          "field": "crushing-aspect.itemPower",
+          "videoValue": "+45% [30-45] damage for 5s after dealing Vulnerable damage",
+          "confirmedValue": "codex: 64%[x] [45-65] while Fortified",
+          "suspect": true,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "note": "The codex effect is unchanged."
+        },
+        {
+          "field": "ramaladni.furyDrain",
+          "videoValue": "lose 2 Fury per second in combat",
+          "confirmedValue": "patch note: drains 7% max Fury",
+          "suspect": true,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "note": "Both readings are stored. Neither replaces the other."
+        },
+        {
+          "field": "boots.temperedMovementSpeed",
+          "videoValue": 39.5,
+          "confirmedValue": null,
+          "suspect": true,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "note": "Outside the shown range [25-35]."
         }
       ]
     }

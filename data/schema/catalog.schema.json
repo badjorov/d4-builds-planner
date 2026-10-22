@@ -403,6 +403,7 @@
         "effects": { "type": "array", "items": { "$ref": "#/$defs/effect" } },
         "source": { "$ref": "#/$defs/source" },
         "verified": { "type": "boolean" },
+        "suspect": { "type": "boolean" },
         "note": { "type": "string" }
       }
     },

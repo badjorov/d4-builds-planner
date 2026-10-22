@@ -30,6 +30,11 @@
         "url": "video-frames",
         "title": "Codex of Power, read from the user video frames",
         "license": "User's own gameplay footage, confirmed by the user. Not an open-license dataset. userConfirmed marks that confirmation. verified stays false."
+      },
+      {
+        "url": "user video 1 (watchVideo 2026-10-22)",
+        "title": "User video 1, gear, paragon, charms, and the character sheet",
+        "license": "User's own gameplay footage, machine transcription. Not an open-license dataset. Every value from this source stays verified false. Conflicting readings are suspect."
       }
     ]
   },
@@ -341,7 +346,7 @@
       ],
       "transcribed": "25 Fury/s, 3,217,620 (18%). MS +15%[+]; Cost Damage Bonus +40%[x] +10 Fury; Channel +10%[x] per 3 hits x25; Weaken on crit 4s; Tornado Dust Devil 4,915,123 (131%); Bursting 732,680 (317%) Fire + 3,227,293 (1,068%) burn; Winding (other skills grant 4 charges up to 20, +15%[x] dmg & +10%[+] MS per stack, shrapnel 1,839,460 (106%) + 893,293 (115%) bleed).",
       "recordedSource": "user video 2026-10-21 batch2 (transcribed)",
-      "note": "Shown rank is 41/15. rank is the total. maxRank 15 is the base-rank cap. baseRank and bonusRank were not shown, so the split across gear, talismans, and paragon stays unknown. This replaces the earlier suspect reading of 1/15.",
+      "note": "Shown rank is 41/15. rank is the total. maxRank 15 is the base-rank cap. baseRank and bonusRank were not shown, so the split across gear, talismans, and paragon stays unknown. This replaces the earlier suspect reading of 1/15. Video 1, ranks misread as 11/5 and not applied: 32 Fury per second; 5,727,105 [189%]; 2 Dust Devils for 4,933,123; +40%[x] damage at +10 Fury cost; +1%[x] per hit, stacking to 25.",
       "allocated": true,
       "rankTotal": 41,
       "baseRank": null,
@@ -1129,7 +1134,8 @@
       "baseRank": null,
       "bonusRank": null,
       "allocationVerified": true,
-      "allocationSource": "user confirmation 2026-10-22"
+      "allocationSource": "user confirmation 2026-10-22",
+      "note": "Video 1, ranks misread as 11/5 and not applied: +52% Movement Speed for 4s; +77% Resource Generation, +10% Movement Speed; Fortify for 15% of Max Life; +20% effectiveness plus 2% per ally."
     },
     {
       "id": "iron-skin",
@@ -1202,7 +1208,7 @@
         }
       ],
       "transcribed": "CD 14.00s, DR +30%, Barrier 83% missing life 5s. MS +15%[+]; Weaken 5s; Max Life +15%; Juggernaut (Unstoppable, damage/knockback attackers); Endure (no barrier, can't drop below 1, heal 21.5%); Retaliation (3x duration, shrapnel).",
-      "note": "Resolve is a Barbarian Iron Skin upgrade. The 2026-10-21 transcription read \"2 Resolve\" and that line was removed in the Paladin cleanup. The upgrade is allocated again with no numeric value.",
+      "note": "Resolve is a Barbarian Iron Skin upgrade. The 2026-10-21 transcription read \"2 Resolve\" and that line was removed in the Paladin cleanup. The upgrade is allocated again with no numeric value. Video 1, ranks misread as 11/5 and not applied: barrier for 22.8% of Max Life; Unstoppable; 1% Max Life per second; +15% Movement Speed; 2 stacks of Resolve. The Resolve count stays off the upgrade, which remains name-only.",
       "allocated": true,
       "rankTotal": 14,
       "baseRank": null,
@@ -1283,7 +1289,7 @@
         }
       ],
       "transcribed": "CD 14.28s, Taunt, 20.6% DR 6.0s; burn 12,112,596 (4,030%) Fire/4s; no DR instead +20%[x] vs Burning; Weakens. Duration +2s; first 5 taunted +20%[x]; taking dmg +5 Fury; Bawl +20% decaying DR; Talic 1,676,546 (523%).",
-      "note": "no direct-hit coefficient shown; percentages in tooltip are burn/secondary effects",
+      "note": "no direct-hit coefficient shown; percentages in tooltip are burn/secondary effects Video 1, ranks misread as 11/5 and not applied: 26.0% Damage Reduction for 6s; burn for 12,232,596 over 5s; no Damage Reduction but +20% damage vs Burning; Weaken; the first 5 taunted enemies take +20% damage.",
       "allocated": true,
       "rankTotal": 11,
       "baseRank": null,
@@ -1363,7 +1369,8 @@
       "baseRank": null,
       "bonusRank": null,
       "allocationVerified": true,
-      "allocationSource": "user confirmation 2026-10-22"
+      "allocationSource": "user confirmation 2026-10-22",
+      "note": "Video 1, ranks misread as 11/5 and not applied: +38.5% damage for 4s; +10% bonus and Berserking for 4s; 2 stacks of Ferocity; Vulnerable for 4s."
     },
     {
       "id": "leap",
@@ -1748,7 +1755,7 @@
         }
       ],
       "transcribed": "CD 34.32s, +50%[+] dmg, Unstoppable 15.0s, Basic +560%[+], burn 279,568 (32%), +10% All Res, Berserking base doubled, 1 Overpower/s. +20%[+] AS & +30%[+] Fury gen; duration 18.0s; Full Throttle aura 2,750,484 (360%) + burn 279,568 (32%), +10% All Res; Deep Impact 2,095,283 (256%) Fire; Maximum Carnage +1s per 25 Fury up to 5.",
-      "note": "no direct-hit coefficient shown; percentages in tooltip are burn/secondary effects",
+      "note": "no direct-hit coefficient shown; percentages in tooltip are burn/secondary effects Video 1, ranks misread as 11/5 and not applied: +50% damage, Berserking and Unstoppable for 15s; Fire aura for 2,759,584, burn 279,568, +50% All Resistance; Berserking's base bonus doubled; 1 stack of Overpower per second.",
       "allocated": true,
       "rankTotal": 11,
       "baseRank": null,
@@ -1963,6 +1970,35 @@
       ],
       "source": "manual-entry",
       "verified": false
+    },
+    {
+      "id": "polearm-expertise",
+      "name": "Polearm Expertise",
+      "effects": [
+        {
+          "stat": "Lucky Hit Chance",
+          "bucket": null,
+          "value": 15,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        },
+        {
+          "stat": "damage while Healthy",
+          "bucket": null,
+          "value": 15,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "note": "Rank 10/10 as read. The build expertise stays polearm."
     }
   ],
   "aspects": [
@@ -3137,12 +3173,24 @@
             70
           ],
           "unit": "%"
+        },
+        {
+          "stat": "damage while Channeling a Skill",
+          "bucket": null,
+          "value": 150,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%",
+          "note": "The bracket shows a single number, 150. No second endpoint was stored."
         }
       ],
       "source": "video-frames",
       "verified": false,
       "available": true,
-      "userConfirmed": true
+      "userConfirmed": true,
+      "note": "Video 1 item power on the 2H mace (video name Beatsmash of Channeling). It does not match the confirmed codex roll of 69%[x] [50-70], so this reading is suspect and the codex effect is unchanged. 4,560 DPS, per hit 3,648-5,472, 1.00 Attacks per Second."
     },
     {
       "id": "aspect-of-elemental-fate",
@@ -3618,12 +3666,27 @@
             65
           ],
           "unit": "%"
+        },
+        {
+          "stat": "damage for 5s after dealing Vulnerable damage",
+          "bucket": null,
+          "value": 45,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            30,
+            45
+          ],
+          "unit": "%"
         }
       ],
       "source": "video-frames",
       "verified": false,
       "available": true,
-      "userConfirmed": true
+      "userConfirmed": true,
+      "note": "Video 1 item power on the Crushing Aspect ring (the video name Crushing Spiritmachy). It does not match the confirmed codex text, so this reading is suspect and the codex effect is unchanged."
     },
     {
       "id": "cut-to-the-bone-aspect",
@@ -5160,12 +5223,33 @@
             20.5
           ],
           "unit": "%"
+        },
+        {
+          "stat": "Movement Speed for 3s on weapon swap",
+          "bucket": null,
+          "value": 45,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        },
+        {
+          "stat": "damage while you have Overpower",
+          "bucket": null,
+          "value": 25,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
         }
       ],
       "source": "video-frames",
       "verified": false,
       "available": true,
-      "userConfirmed": true
+      "userConfirmed": true,
+      "note": "Video 1 item power on Earthstriker's Boneweave boots. It does not match the confirmed codex text, so this reading is suspect and the codex effect is unchanged. Armor on the item is 1,001. Legendary, 900 Item Power."
     },
     {
       "id": "eluding-aspect",
@@ -6012,7 +6096,9 @@
     {
       "id": "ramaladni",
       "name": "Ramaladni's Magnum Opus",
-      "slots": null,
+      "slots": [
+        "weapon-4"
+      ],
       "effects": [
         {
           "stat": null,
@@ -6023,11 +6109,58 @@
           "source": "https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy",
           "verified": false,
           "note": "Drains 7% max Fury in combat."
+        },
+        {
+          "stat": "DPS",
+          "bucket": null,
+          "value": 2350,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        },
+        {
+          "stat": "damage per hit",
+          "bucket": null,
+          "value": null,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            1566,
+            3133
+          ],
+          "note": "Shown as a per-hit range next to DPS."
+        },
+        {
+          "stat": "damage per point of Fury",
+          "bucket": null,
+          "value": 0.5,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            0.2,
+            0.5
+          ],
+          "unit": "%"
+        },
+        {
+          "stat": "Fury lost per second in combat",
+          "bucket": null,
+          "value": 2,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "note": "The stored patch note says this unique drains 7% max Fury. Both readings are kept."
         }
       ],
       "source": "https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy",
       "verified": false,
-      "note": "Drains 7% max Fury in combat."
+      "note": "Drains 7% max Fury in combat. Video 1: 1H Slashing, 900 Item Power, 2,350 DPS, 1.10 Attacks per Second. user video 1 (watchVideo 2026-10-22). verified stays false."
     },
     {
       "id": "harrogath",
@@ -6048,6 +6181,452 @@
       "source": "https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy",
       "verified": false,
       "note": "CDR 0.5s."
+    },
+    {
+      "slots": [
+        "helm"
+      ],
+      "effects": [
+        {
+          "stat": "Armor",
+          "bucket": null,
+          "value": 1326,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        },
+        {
+          "stat": "gem effect",
+          "bucket": null,
+          "value": 150,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            50,
+            150
+          ],
+          "unit": "%"
+        },
+        {
+          "stat": "Damage Reduction",
+          "bucket": null,
+          "value": 50,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        },
+        {
+          "stat": "Movement Speed",
+          "bucket": null,
+          "value": -30,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%",
+          "note": "Lose 30% Movement Speed."
+        },
+        {
+          "stat": "damage per soul",
+          "bucket": null,
+          "value": 4.1,
+          "conditions": null,
+          "stacking": "up to 100, no refresh",
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            1,
+            5
+          ],
+          "unit": "%",
+          "note": "Life absorbs a soul for 10s. Counts as Jewelry."
+        },
+        {
+          "stat": "damage taken per soul",
+          "bucket": null,
+          "value": -1,
+          "conditions": null,
+          "stacking": "up to 100, no refresh",
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "id": "leorics-crown",
+      "name": "Leoric's Crown",
+      "note": "Ancestral Mythic Unique, 900 Item Power, 25/25, Transfigured. The 25/25 figure is stored as read and is not interpreted."
+    },
+    {
+      "slots": [
+        "chest"
+      ],
+      "effects": [
+        {
+          "stat": "Armor",
+          "bucket": null,
+          "value": 3596,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        },
+        {
+          "stat": "Teleport Primary Resource cost",
+          "bucket": null,
+          "value": 15,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "note": "You can use Sorcerer's Teleport."
+        },
+        {
+          "stat": "Rune Ign (0/150) Bomber Shadow",
+          "bucket": null,
+          "value": 10,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%",
+          "note": "At a cost of 150 Offering, cast a Shadow that reduces Damage Taken by 10% for 10s."
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "id": "enigma",
+      "name": "Enigma",
+      "note": "Ancestral Unique Runeword, 900 Item Power."
+    },
+    {
+      "slots": [
+        "gloves"
+      ],
+      "effects": [
+        {
+          "stat": "Armor",
+          "bucket": null,
+          "value": 1001,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        },
+        {
+          "stat": "Whirlwind increased damage",
+          "bucket": null,
+          "value": 111,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            90,
+            135
+          ],
+          "unit": "%",
+          "note": "Pulls enemies every 3s."
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "id": "gohrs-devastating-grips",
+      "name": "Gohr's Devastating Grips",
+      "note": "Mythic, 900 Item Power."
+    },
+    {
+      "slots": [
+        "pants"
+      ],
+      "effects": [
+        {
+          "stat": "Armor",
+          "bucket": null,
+          "value": 2505,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        },
+        {
+          "stat": "damage while Unstoppable",
+          "bucket": null,
+          "value": 20,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            10,
+            20
+          ],
+          "unit": "%",
+          "note": "And for 5s after."
+        },
+        {
+          "stat": "Primary Resource on becoming Unstoppable",
+          "bucket": null,
+          "value": 50,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        },
+        {
+          "stat": "Rune Mal (0/50) Prime Bulwark",
+          "bucket": null,
+          "value": 15,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%",
+          "note": "15% Damage Reduction for 10s."
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "id": "tibaults-will",
+      "name": "Tibault's Will",
+      "note": "Mythic, 900 Item Power."
+    },
+    {
+      "slots": [
+        "weapon-1"
+      ],
+      "effects": [
+        {
+          "stat": "DPS",
+          "bucket": null,
+          "value": 3040,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        },
+        {
+          "stat": "damage per hit",
+          "bucket": null,
+          "value": null,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            2432,
+            3648
+          ],
+          "note": "Shown as a per-hit range next to DPS."
+        },
+        {
+          "stat": "video Attacks per Second",
+          "bucket": null,
+          "value": 1,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "note": "Suspect. The user says 0.9 on a 2H polearm. The video read 1.00 in a 1H slot."
+        },
+        {
+          "stat": "Rune Ral: Enduring Spirit, Damage Reduction",
+          "bucket": null,
+          "value": 10,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%",
+          "note": "Text cut off after \"10% Damage Reduction\". The rest is null."
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "id": "insight",
+      "name": "Insight",
+      "note": "Runeword RalTirTalSol, 900 Item Power. User: this is the 2H polearm at 0.9 Attacks per Second, with 94.5% crit chance on the weapon. Video: polearm in a 1H slot at 1.00 Attacks per Second, and a +16% Critical Strike Chance affix. The video placement, attack speed, and crit-chance affix are suspect. 3,040 DPS. Per hit 2,432-3,648."
+    },
+    {
+      "slots": [
+        "weapon-3"
+      ],
+      "effects": [
+        {
+          "stat": "DPS",
+          "bucket": null,
+          "value": 2264,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        },
+        {
+          "stat": "damage per hit",
+          "bucket": null,
+          "value": null,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            1745,
+            2783
+          ],
+          "note": "Shown as a per-hit range next to DPS."
+        },
+        {
+          "stat": "video Attacks per Second",
+          "bucket": null,
+          "value": 1,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "note": "Suspect. Read on the video's 2H Sword placement. Not applied to the 1H slot."
+        },
+        {
+          "stat": "video weapon",
+          "bucket": null,
+          "value": null,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "note": "Suspect. The video read a 2H Sword. The user says Spirit is on the 1H. No sword stats were copied onto the slot."
+        },
+        {
+          "stat": "Rune Tal: Lord of Hatred",
+          "bucket": null,
+          "value": null,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "note": "Text cut off. No further rune text was stored."
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "id": "spirit",
+      "name": "Spirit",
+      "note": "Runeword TalThulOrtAmn, 900 Item Power. User: Spirit is on the 1H. The earlier list called it a 1H mace. Video: 2H Sword at 1.00 Attacks per Second. That placement and attack speed are suspect. 2,264 DPS. Per hit 1,745-2,783."
+    },
+    {
+      "slots": [
+        "ring-1"
+      ],
+      "effects": [
+        {
+          "stat": "Resistance to All Elements",
+          "bucket": null,
+          "value": 115,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        },
+        {
+          "stat": "damage of the highest element",
+          "bucket": null,
+          "value": 25,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            15,
+            25
+          ],
+          "unit": "%",
+          "note": "Each resistance equals your highest."
+        },
+        {
+          "stat": "Unhindered; touching an enemy makes it Vulnerable for 10s",
+          "bucket": null,
+          "value": null,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        },
+        {
+          "stat": "Primary Resource after touching 500 enemies",
+          "bucket": null,
+          "value": 50,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "id": "stone-of-jordan",
+      "name": "Stone of Jordan",
+      "note": "Unique, 900 Item Power. Video Ring 1. +115 Resistance to All Elements, with no range shown."
+    },
+    {
+      "slots": [
+        "amulet"
+      ],
+      "effects": [
+        {
+          "stat": "damage taken goes to Primary Resource instead of Life",
+          "bucket": null,
+          "value": null,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "note": "Described as drastically reduced. No separate reduction number was shown."
+        },
+        {
+          "stat": "Primary Resource",
+          "bucket": null,
+          "value": 100,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        },
+        {
+          "stat": "Maximum Life",
+          "bucket": null,
+          "value": -20,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        },
+        {
+          "stat": "damage while above 50 Primary Resource",
+          "bucket": null,
+          "value": 45,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            25,
+            45
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "id": "melted-heart-of-selig",
+      "name": "Melted Heart of Selig",
+      "note": "Mythic, 900 Item Power. The header and one affix both read +28.5% Resistance to All Elements. The ranged affix is the stored roll."
     }
   ],
   "affixes": [
@@ -6787,9 +7366,1792 @@
           "verified": false
         }
       ]
+    },
+    {
+      "id": "v1-helm-strength",
+      "name": "+111 Strength",
+      "slot": "helm",
+      "effects": [
+        {
+          "stat": "+111 Strength",
+          "bucket": null,
+          "value": 111,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            83,
+            139
+          ]
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-helm-willpower",
+      "name": "+111 Willpower",
+      "slot": "helm",
+      "effects": [
+        {
+          "stat": "+111 Willpower",
+          "bucket": null,
+          "value": 111,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            83,
+            139
+          ]
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-helm-attack-speed",
+      "name": "+17.5% Attack Speed",
+      "slot": "helm",
+      "effects": [
+        {
+          "stat": "+17.5% Attack Speed",
+          "bucket": null,
+          "value": 17.5,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            14,
+            21
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-helm-cooldown-reduction",
+      "name": "25.0% Cooldown Reduction",
+      "slot": "helm",
+      "effects": [
+        {
+          "stat": "25.0% Cooldown Reduction",
+          "bucket": null,
+          "value": 25,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            16,
+            25
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-helm-armor",
+      "name": "+1,111 Armor",
+      "slot": "helm",
+      "effects": [
+        {
+          "stat": "+1,111 Armor",
+          "bucket": null,
+          "value": 1111,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-helm-poison-res",
+      "name": "+10.0% Poison Resistance",
+      "slot": "helm",
+      "effects": [
+        {
+          "stat": "+10.0% Poison Resistance",
+          "bucket": null,
+          "value": 10,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "category": "Socket"
+    },
+    {
+      "id": "v1-helm-all-stats",
+      "name": "+82 All Stats",
+      "slot": "helm",
+      "effects": [
+        {
+          "stat": "+82 All Stats",
+          "bucket": null,
+          "value": 82,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "category": "Socket"
+    },
+    {
+      "id": "v1-chest-max-resource",
+      "name": "+18 Maximum Resource",
+      "slot": "chest",
+      "effects": [
+        {
+          "stat": "+18 Maximum Resource",
+          "bucket": null,
+          "value": 18,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            15,
+            20
+          ]
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-chest-armor-roll",
+      "name": "+1,322 Armor",
+      "slot": "chest",
+      "effects": [
+        {
+          "stat": "+1,322 Armor",
+          "bucket": null,
+          "value": 1322,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            925,
+            1322
+          ]
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-chest-max-life",
+      "name": "+19.0% Maximum Life",
+      "slot": "chest",
+      "effects": [
+        {
+          "stat": "+19.0% Maximum Life",
+          "bucket": null,
+          "value": 19,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            14,
+            19
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-chest-dr",
+      "name": "13.0% Damage Reduction",
+      "slot": "chest",
+      "effects": [
+        {
+          "stat": "13.0% Damage Reduction",
+          "bucket": null,
+          "value": 13,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            9,
+            13
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-chest-armor-flat",
+      "name": "+3,000 Armor",
+      "slot": "chest",
+      "effects": [
+        {
+          "stat": "+3,000 Armor",
+          "bucket": null,
+          "value": 3000,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-gloves-attack-speed",
+      "name": "+34.0% Attack Speed",
+      "slot": "gloves",
+      "effects": [
+        {
+          "stat": "+34.0% Attack Speed",
+          "bucket": null,
+          "value": 34,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            26,
+            34
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-gloves-crit-chance",
+      "name": "+16.0% Critical Strike Chance",
+      "slot": "gloves",
+      "effects": [
+        {
+          "stat": "+16.0% Critical Strike Chance",
+          "bucket": null,
+          "value": 16,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            11,
+            16
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-gloves-fire-mult",
+      "name": "+45.0% Fire Damage Multiplier",
+      "slot": "gloves",
+      "effects": [
+        {
+          "stat": "+45.0% Fire Damage Multiplier",
+          "bucket": null,
+          "value": 45,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            35,
+            45
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-gloves-core-skills",
+      "name": "Greater Affix +13 to Core Skills",
+      "slot": "gloves",
+      "effects": [
+        {
+          "stat": "Greater Affix +13 to Core Skills",
+          "bucket": null,
+          "value": 13,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            12,
+            13
+          ]
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "rarity": "Greater Affix"
+    },
+    {
+      "id": "v1-gloves-crit-damage",
+      "name": "+50.0% Critical Strike Damage",
+      "slot": "gloves",
+      "effects": [
+        {
+          "stat": "+50.0% Critical Strike Damage",
+          "bucket": null,
+          "value": 50,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-pants-max-resource",
+      "name": "Greater Affix +30 Maximum Resource",
+      "slot": "pants",
+      "effects": [
+        {
+          "stat": "Greater Affix +30 Maximum Resource",
+          "bucket": null,
+          "value": 30,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            25,
+            30
+          ]
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "rarity": "Greater Affix"
+    },
+    {
+      "id": "v1-pants-life-regen",
+      "name": "+276 Life Regeneration",
+      "slot": "pants",
+      "effects": [
+        {
+          "stat": "+276 Life Regeneration",
+          "bucket": null,
+          "value": 276,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-pants-dr",
+      "name": "11.5% Damage Reduction",
+      "slot": "pants",
+      "effects": [
+        {
+          "stat": "11.5% Damage Reduction",
+          "bucket": null,
+          "value": 11.5,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            9,
+            11.5
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-pants-impairment",
+      "name": "+15.5% Impairment Reduction",
+      "slot": "pants",
+      "effects": [
+        {
+          "stat": "+15.5% Impairment Reduction",
+          "bucket": null,
+          "value": 15.5,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            11,
+            15.5
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-pants-phys-res",
+      "name": "+23.5% Physical Resistance",
+      "slot": "pants",
+      "effects": [
+        {
+          "stat": "+23.5% Physical Resistance",
+          "bucket": null,
+          "value": 23.5,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            17.5,
+            23.5
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-ramaladni-weapon-damage",
+      "name": "+108 Weapon Damage",
+      "slot": "weapon-4",
+      "effects": [
+        {
+          "stat": "+108 Weapon Damage",
+          "bucket": null,
+          "value": 108,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-ramaladni-strength",
+      "name": "Greater Affix +110 Strength",
+      "slot": "weapon-4",
+      "effects": [
+        {
+          "stat": "Greater Affix +110 Strength",
+          "bucket": null,
+          "value": 110,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            83,
+            110
+          ]
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "rarity": "Greater Affix"
+    },
+    {
+      "id": "v1-ramaladni-dexterity",
+      "name": "Greater Affix +110 Dexterity",
+      "slot": "weapon-4",
+      "effects": [
+        {
+          "stat": "Greater Affix +110 Dexterity",
+          "bucket": null,
+          "value": 110,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            83,
+            110
+          ]
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "rarity": "Greater Affix"
+    },
+    {
+      "id": "v1-ramaladni-crit-damage",
+      "name": "+65.0% Critical Strike Damage",
+      "slot": "weapon-4",
+      "effects": [
+        {
+          "stat": "+65.0% Critical Strike Damage",
+          "bucket": null,
+          "value": 65,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            50,
+            65
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-ramaladni-crit-chance",
+      "name": "Greater Affix +5.5% Critical Strike Chance",
+      "slot": "weapon-4",
+      "effects": [
+        {
+          "stat": "Greater Affix +5.5% Critical Strike Chance",
+          "bucket": null,
+          "value": 5.5,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            4,
+            5.5
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "rarity": "Greater Affix"
+    },
+    {
+      "id": "v1-ramaladni-dual-wield",
+      "name": "Greater Affix +10 to Dual-Wield Skills",
+      "slot": "weapon-4",
+      "effects": [
+        {
+          "stat": "Greater Affix +10 to Dual-Wield Skills",
+          "bucket": null,
+          "value": 10,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            8,
+            10
+          ]
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "rarity": "Greater Affix"
+    },
+    {
+      "id": "v1-ramaladni-max-life",
+      "name": "+36.0% Maximum Life",
+      "slot": "weapon-4",
+      "effects": [
+        {
+          "stat": "+36.0% Maximum Life",
+          "bucket": null,
+          "value": 36,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            28,
+            36
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-ramaladni-phys-mult",
+      "name": "+20.0% Physical Damage Multiplier",
+      "slot": "weapon-4",
+      "effects": [
+        {
+          "stat": "+20.0% Physical Damage Multiplier",
+          "bucket": null,
+          "value": 20,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-insight-weapon-damage",
+      "name": "+107 Weapon Damage",
+      "slot": "weapon-1",
+      "effects": [
+        {
+          "stat": "+107 Weapon Damage",
+          "bucket": null,
+          "value": 107,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            83,
+            107
+          ]
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-insight-strength",
+      "name": "Greater Affix +412 Strength",
+      "slot": "weapon-1",
+      "effects": [
+        {
+          "stat": "Greater Affix +412 Strength",
+          "bucket": null,
+          "value": 412,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            310,
+            412
+          ]
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "rarity": "Greater Affix"
+    },
+    {
+      "id": "v1-insight-fury-regen",
+      "name": "+85 Fury Regeneration",
+      "slot": "weapon-1",
+      "effects": [
+        {
+          "stat": "+85 Fury Regeneration",
+          "bucket": null,
+          "value": 85,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            65,
+            85
+          ]
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-insight-attack-speed",
+      "name": "+115.0% Attack Speed",
+      "slot": "weapon-1",
+      "effects": [
+        {
+          "stat": "+115.0% Attack Speed",
+          "bucket": null,
+          "value": 115,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            75,
+            115
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-insight-crit-chance",
+      "name": "Greater Affix +16.0% Critical Strike Chance",
+      "slot": "weapon-1",
+      "effects": [
+        {
+          "stat": "Greater Affix +16.0% Critical Strike Chance",
+          "bucket": null,
+          "value": 16,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            11,
+            16
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "rarity": "Greater Affix",
+      "suspect": true,
+      "note": "Suspect. The user says the polearm crit chance is 94.5%, which does not match this 16% read."
+    },
+    {
+      "id": "v1-insight-crit-damage",
+      "name": "+75.0% Critical Strike Damage",
+      "slot": "weapon-1",
+      "effects": [
+        {
+          "stat": "+75.0% Critical Strike Damage",
+          "bucket": null,
+          "value": 75,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            50,
+            75
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-insight-damage",
+      "name": "+320% Damage",
+      "slot": "weapon-1",
+      "effects": [
+        {
+          "stat": "+320% Damage",
+          "bucket": null,
+          "value": 320,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            260,
+            320
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-insight-item-quality",
+      "name": "+30% Item Quality",
+      "slot": "weapon-1",
+      "effects": [
+        {
+          "stat": "+30% Item Quality",
+          "bucket": null,
+          "value": 30,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            24,
+            30
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-insight-ga-crit-damage",
+      "name": "Greater Affix +34.0% Critical Strike Damage",
+      "slot": "weapon-1",
+      "effects": [
+        {
+          "stat": "Greater Affix +34.0% Critical Strike Damage",
+          "bucket": null,
+          "value": 34,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            26,
+            34
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "rarity": "Greater Affix"
+    },
+    {
+      "id": "v1-insight-phys-mult",
+      "name": "+20.0% Physical Damage Multiplier",
+      "slot": "weapon-1",
+      "effects": [
+        {
+          "stat": "+20.0% Physical Damage Multiplier",
+          "bucket": null,
+          "value": 20,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-spirit-weapon-damage",
+      "name": "+175 Weapon Damage",
+      "slot": "weapon-3",
+      "effects": [
+        {
+          "stat": "+175 Weapon Damage",
+          "bucket": null,
+          "value": 175,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            84,
+            175
+          ]
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-spirit-strength",
+      "name": "+262 Strength",
+      "slot": "weapon-3",
+      "effects": [
+        {
+          "stat": "+262 Strength",
+          "bucket": null,
+          "value": 262,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            232,
+            262
+          ]
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-spirit-all-damage",
+      "name": "+80% All Damage Multiplier",
+      "slot": "weapon-3",
+      "effects": [
+        {
+          "stat": "+80% All Damage Multiplier",
+          "bucket": null,
+          "value": 80,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "note": "The bracket shows a single number, 80. No second endpoint was stored."
+    },
+    {
+      "id": "v1-spirit-attack-speed",
+      "name": "+32.5% Attack Speed",
+      "slot": "weapon-3",
+      "effects": [
+        {
+          "stat": "+32.5% Attack Speed",
+          "bucket": null,
+          "value": 32.5,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            25,
+            32.5
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-spirit-impairment",
+      "name": "65.5% Impairment Reduction",
+      "slot": "weapon-3",
+      "effects": [
+        {
+          "stat": "65.5% Impairment Reduction",
+          "bucket": null,
+          "value": 65.5,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            50,
+            65.5
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-spirit-all-skills",
+      "name": "+4 to All Skills",
+      "slot": "weapon-3",
+      "effects": [
+        {
+          "stat": "+4 to All Skills",
+          "bucket": null,
+          "value": 4,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            3,
+            4
+          ]
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-spirit-item-quality",
+      "name": "+6 Item Quality",
+      "slot": "weapon-3",
+      "effects": [
+        {
+          "stat": "+6 Item Quality",
+          "bucket": null,
+          "value": 6,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            4,
+            6
+          ]
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-spirit-crit-damage",
+      "name": "+75% Critical Strike Damage",
+      "slot": "weapon-3",
+      "effects": [
+        {
+          "stat": "+75% Critical Strike Damage",
+          "bucket": null,
+          "value": 75,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-spirit-damage-mult",
+      "name": "Greater Affix +25.0% Damage Multiplier",
+      "slot": "weapon-3",
+      "effects": [
+        {
+          "stat": "Greater Affix +25.0% Damage Multiplier",
+          "bucket": null,
+          "value": 25,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "rarity": "Greater Affix"
+    },
+    {
+      "id": "v1-soj-strength",
+      "name": "+115 Strength",
+      "slot": "ring-1",
+      "effects": [
+        {
+          "stat": "+115 Strength",
+          "bucket": null,
+          "value": 115,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            83,
+            139
+          ]
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-soj-crit-chance",
+      "name": "+5.5% Critical Strike Chance",
+      "slot": "ring-1",
+      "effects": [
+        {
+          "stat": "+5.5% Critical Strike Chance",
+          "bucket": null,
+          "value": 5.5,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            3.5,
+            5.5
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-soj-crit-damage",
+      "name": "+65.0% Critical Strike Damage",
+      "slot": "ring-1",
+      "effects": [
+        {
+          "stat": "+65.0% Critical Strike Damage",
+          "bucket": null,
+          "value": 65,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            50,
+            65
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-soj-max-life",
+      "name": "+33.0% Maximum Life",
+      "slot": "ring-1",
+      "effects": [
+        {
+          "stat": "+33.0% Maximum Life",
+          "bucket": null,
+          "value": 33,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            25,
+            33
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-soj-all-skills",
+      "name": "Greater Affix +3 to All Skills",
+      "slot": "ring-1",
+      "effects": [
+        {
+          "stat": "Greater Affix +3 to All Skills",
+          "bucket": null,
+          "value": 3,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            2,
+            3
+          ]
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "rarity": "Greater Affix"
+    },
+    {
+      "id": "v1-selig-vuln-mult",
+      "name": "Greater Affix +10.0% Vulnerable Damage Multiplier",
+      "slot": "amulet",
+      "effects": [
+        {
+          "stat": "Greater Affix +10.0% Vulnerable Damage Multiplier",
+          "bucket": null,
+          "value": 10,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            8,
+            10
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "rarity": "Greater Affix"
+    },
+    {
+      "id": "v1-selig-strength",
+      "name": "+115 Strength",
+      "slot": "amulet",
+      "effects": [
+        {
+          "stat": "+115 Strength",
+          "bucket": null,
+          "value": 115,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            83,
+            115
+          ]
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-selig-all-res",
+      "name": "+28.5% Resistance to All Elements",
+      "slot": "amulet",
+      "effects": [
+        {
+          "stat": "+28.5% Resistance to All Elements",
+          "bucket": null,
+          "value": 28.5,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            21.5,
+            28.5
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-selig-dual-wield",
+      "name": "+3 to Dual-Wield Skills",
+      "slot": "amulet",
+      "effects": [
+        {
+          "stat": "+3 to Dual-Wield Skills",
+          "bucket": null,
+          "value": 3,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            2,
+            3
+          ]
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-selig-move-speed",
+      "name": "+45.0% Movement Speed",
+      "slot": "amulet",
+      "effects": [
+        {
+          "stat": "+45.0% Movement Speed",
+          "bucket": null,
+          "value": 45,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            35,
+            45
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-boots-all-stats",
+      "name": "+42 All Stats",
+      "slot": "boots",
+      "effects": [
+        {
+          "stat": "+42 All Stats",
+          "bucket": null,
+          "value": 42,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            34,
+            42
+          ]
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-boots-fury-regen",
+      "name": "+5 Fury Regeneration",
+      "slot": "boots",
+      "effects": [
+        {
+          "stat": "+5 Fury Regeneration",
+          "bucket": null,
+          "value": 5,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            4,
+            5
+          ]
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-boots-move-speed",
+      "name": "+29.0% Movement Speed",
+      "slot": "boots",
+      "effects": [
+        {
+          "stat": "+29.0% Movement Speed",
+          "bucket": null,
+          "value": 29,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            21,
+            29
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-boots-all-res",
+      "name": "+42.0% Resistance to All Elements",
+      "slot": "boots",
+      "effects": [
+        {
+          "stat": "+42.0% Resistance to All Elements",
+          "bucket": null,
+          "value": 42,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            34,
+            42
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-boots-temper-move-speed",
+      "name": "Tempered +39.5% Movement Speed",
+      "slot": "boots",
+      "effects": [
+        {
+          "stat": "Tempered +39.5% Movement Speed",
+          "bucket": null,
+          "value": 39.5,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            25,
+            35
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "category": "Tempered",
+      "suspect": true,
+      "note": "Suspect. The video read Earthstriker's Boneweave with tempered Movement Speed 39.5% against [25-35]. The roll is outside that range."
+    },
+    {
+      "id": "v1-channel-weapon-damage",
+      "name": "+667 Weapon Damage",
+      "slot": "weapon-2",
+      "effects": [
+        {
+          "stat": "+667 Weapon Damage",
+          "bucket": null,
+          "value": 667,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            500,
+            667
+          ]
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-channel-strength",
+      "name": "+110 Strength",
+      "slot": "weapon-2",
+      "effects": [
+        {
+          "stat": "+110 Strength",
+          "bucket": null,
+          "value": 110,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            83,
+            110
+          ]
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-channel-all-damage",
+      "name": "+12.0% All Damage Multiplier",
+      "slot": "weapon-2",
+      "effects": [
+        {
+          "stat": "+12.0% All Damage Multiplier",
+          "bucket": null,
+          "value": 12,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            12,
+            18
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-channel-crit-damage",
+      "name": "+65.0% Critical Strike Damage",
+      "slot": "weapon-2",
+      "effects": [
+        {
+          "stat": "+65.0% Critical Strike Damage",
+          "bucket": null,
+          "value": 65,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            50,
+            65
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-channel-vuln",
+      "name": "+23.0% Vulnerable Damage",
+      "slot": "weapon-2",
+      "effects": [
+        {
+          "stat": "+23.0% Vulnerable Damage",
+          "bucket": null,
+          "value": 23,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            17.5,
+            23
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-channel-crit-chance",
+      "name": "+5.5% Critical Strike Chance",
+      "slot": "weapon-2",
+      "effects": [
+        {
+          "stat": "+5.5% Critical Strike Chance",
+          "bucket": null,
+          "value": 5.5,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            4,
+            5.5
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-channel-temper-phys",
+      "name": "Tempered +20.0% Physical Damage Multiplier",
+      "slot": "weapon-2",
+      "effects": [
+        {
+          "stat": "Tempered +20.0% Physical Damage Multiplier",
+          "bucket": null,
+          "value": 20,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%",
+          "count": 3
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "category": "Tempered",
+      "suspect": true,
+      "note": "Suspect. Listed 3 times. No bracket range was shown."
+    },
+    {
+      "id": "v1-crush-all-res",
+      "name": "+115 All Resistances",
+      "slot": "ring-2",
+      "effects": [
+        {
+          "stat": "+115 All Resistances",
+          "bucket": null,
+          "value": 115,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-crush-strength",
+      "name": "+115 Strength",
+      "slot": "ring-2",
+      "effects": [
+        {
+          "stat": "+115 Strength",
+          "bucket": null,
+          "value": 115,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            83,
+            115
+          ]
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-crush-vuln-mult",
+      "name": "Greater Affix +10.0% Vulnerable Damage Multiplier",
+      "slot": "ring-2",
+      "effects": [
+        {
+          "stat": "Greater Affix +10.0% Vulnerable Damage Multiplier",
+          "bucket": null,
+          "value": 10,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            8,
+            10
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "rarity": "Greater Affix"
+    },
+    {
+      "id": "v1-crush-vuln",
+      "name": "+16.0% Vulnerable Damage",
+      "slot": "ring-2",
+      "effects": [
+        {
+          "stat": "+16.0% Vulnerable Damage",
+          "bucket": null,
+          "value": 16,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            11,
+            16
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-crush-max-resource",
+      "name": "+12% Maximum Resource",
+      "slot": "ring-2",
+      "effects": [
+        {
+          "stat": "+12% Maximum Resource",
+          "bucket": null,
+          "value": 12,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            8,
+            12
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "v1-crush-cdr",
+      "name": "5.0% Cooldown Reduction",
+      "slot": "ring-2",
+      "effects": [
+        {
+          "stat": "5.0% Cooldown Reduction",
+          "bucket": null,
+          "value": 5,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "range": [
+            3,
+            5
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
     }
   ],
-  "paragonBoards": [],
+  "paragonBoards": [
+    {
+      "id": "starting-board",
+      "name": "Starting Board",
+      "nodeIds": [
+        "starting-brawn",
+        "starting-raw-power",
+        "starting-iron-strength",
+        "starting-normal-strength",
+        "starting-normal-dexterity",
+        "starting-magic-damage",
+        "starting-magic-max-life",
+        "starting-magic-willpower"
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "note": "Glyph Might. Rare, normal, and magic nodes as read. Glyph numbers are on the glyph."
+    },
+    {
+      "id": "warbringer",
+      "name": "Warbringer",
+      "nodeIds": [
+        "warbringer-legendary",
+        "warbringer-raw-power",
+        "warbringer-brute-force",
+        "warbringer-hungering-fury",
+        "warbringer-conditioned"
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "note": "Glyph Twister."
+    },
+    {
+      "id": "decimator",
+      "name": "Decimator",
+      "nodeIds": [
+        "decimator-legendary",
+        "decimator-pillage",
+        "decimator-destroyer",
+        "decimator-demolish",
+        "decimator-arrogance"
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "note": "Glyph Imbiber."
+    },
+    {
+      "id": "weapons-master",
+      "name": "Weapons Master",
+      "nodeIds": [
+        "weapons-master-legendary",
+        "weapons-master-iron-strength",
+        "weapons-master-raw-power",
+        "weapons-master-nimble",
+        "weapons-master-hunter-killer",
+        "weapons-master-deflection"
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "note": "Glyph Marshal."
+    },
+    {
+      "id": "flawless-technique-board",
+      "name": "Flawless Technique",
+      "nodeIds": [
+        "flawless-technique",
+        "flawless-wild-force",
+        "flawless-heavy-blows",
+        "flawless-nimble"
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "note": "Glyph Wrath."
+    }
+  ],
   "paragonNodes": [
     {
       "id": "hemorrhage",
@@ -6836,7 +9198,7 @@
     {
       "id": "flawless-technique",
       "name": "Flawless Technique (Legendary Node)",
-      "boardId": null,
+      "boardId": "flawless-technique-board",
       "effects": [
         {
           "stat": "damage",
@@ -6847,11 +9209,22 @@
           "source": "https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy",
           "verified": true,
           "note": "50%[x] -> 45%[x]."
+        },
+        {
+          "stat": "Critical Strike Chance",
+          "bucket": null,
+          "value": 3,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%",
+          "note": "Video 1 legendary node: consecutive attacks with the same weapon, for 4s. The +45%[x] Critical Strike Damage in that sentence matches the stored patch-note value and was not added again."
         }
       ],
       "source": "https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy",
       "verified": true,
-      "note": "50%[x] -> 45%[x]."
+      "note": "50%[x] -> 45%[x]. Video 1 legendary node also reads +3% Critical Strike Chance and +45%[x] Critical Strike Damage for 4s on consecutive attacks with the same weapon."
     },
     {
       "id": "rare-node",
@@ -6870,6 +9243,787 @@
       ],
       "source": "manual-entry",
       "verified": false
+    },
+    {
+      "id": "starting-brawn",
+      "name": "Brawn",
+      "boardId": "starting-board",
+      "effects": [
+        {
+          "stat": "Damage",
+          "bucket": null,
+          "value": 20,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        },
+        {
+          "stat": "Life",
+          "bucket": null,
+          "value": 42,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        },
+        {
+          "stat": "bonus",
+          "bucket": null,
+          "value": 10,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "note": "Rare node on the Starting board."
+    },
+    {
+      "id": "starting-raw-power",
+      "name": "Raw Power",
+      "boardId": "starting-board",
+      "effects": [
+        {
+          "stat": "Damage",
+          "bucket": null,
+          "value": 20,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        },
+        {
+          "stat": "Strength",
+          "bucket": null,
+          "value": 10,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        },
+        {
+          "stat": "bonus",
+          "bucket": null,
+          "value": 10,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "note": "Rare node on the Starting board."
+    },
+    {
+      "id": "starting-iron-strength",
+      "name": "Iron Strength",
+      "boardId": "starting-board",
+      "effects": [
+        {
+          "stat": "damage vs Elites",
+          "bucket": null,
+          "value": 30,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        },
+        {
+          "stat": "Strength",
+          "bucket": null,
+          "value": 10,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        },
+        {
+          "stat": "bonus",
+          "bucket": null,
+          "value": 15,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "note": "Rare node on the Starting board."
+    },
+    {
+      "id": "starting-normal-strength",
+      "name": "Strength",
+      "boardId": "starting-board",
+      "effects": [
+        {
+          "stat": "Strength",
+          "bucket": null,
+          "value": 5,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "note": "Normal node."
+    },
+    {
+      "id": "starting-normal-dexterity",
+      "name": "Dexterity",
+      "boardId": "starting-board",
+      "effects": [
+        {
+          "stat": "Dexterity",
+          "bucket": null,
+          "value": 5,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "note": "Normal node."
+    },
+    {
+      "id": "starting-magic-damage",
+      "name": "Damage",
+      "boardId": "starting-board",
+      "effects": [
+        {
+          "stat": "Damage",
+          "bucket": null,
+          "value": 5,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "note": "Magic node."
+    },
+    {
+      "id": "starting-magic-max-life",
+      "name": "Max Life",
+      "boardId": "starting-board",
+      "effects": [
+        {
+          "stat": "Max Life",
+          "bucket": null,
+          "value": 2,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "note": "Magic node."
+    },
+    {
+      "id": "starting-magic-willpower",
+      "name": "Willpower",
+      "boardId": "starting-board",
+      "effects": [
+        {
+          "stat": "Willpower",
+          "bucket": null,
+          "value": 12,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "note": "Magic node."
+    },
+    {
+      "id": "warbringer-legendary",
+      "name": "Warbringer",
+      "boardId": "warbringer",
+      "effects": [
+        {
+          "stat": "Max Life as Fortify per 300 Fury spent",
+          "bucket": null,
+          "value": 2,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        },
+        {
+          "stat": "damage while Fortified",
+          "bucket": "multiplicative",
+          "value": 45,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "note": "Legendary node."
+    },
+    {
+      "id": "warbringer-raw-power",
+      "name": "Raw Power",
+      "boardId": "warbringer",
+      "effects": [
+        {
+          "stat": "Damage",
+          "bucket": null,
+          "value": 20,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        },
+        {
+          "stat": "Strength",
+          "bucket": null,
+          "value": 10,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        },
+        {
+          "stat": "Dust Devil",
+          "bucket": null,
+          "value": 39.5,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "note": "Rare node."
+    },
+    {
+      "id": "warbringer-brute-force",
+      "name": "Brute Force",
+      "boardId": "warbringer",
+      "effects": [
+        {
+          "stat": "damage while Fortified",
+          "bucket": null,
+          "value": 20,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        },
+        {
+          "stat": "Strength",
+          "bucket": null,
+          "value": 10,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        },
+        {
+          "stat": "Dust Devil",
+          "bucket": null,
+          "value": 19.5,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "note": "Rare node."
+    },
+    {
+      "id": "warbringer-hungering-fury",
+      "name": "Hungering Fury",
+      "boardId": "warbringer",
+      "effects": [
+        {
+          "stat": "Max Fury",
+          "bucket": null,
+          "value": 8,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        },
+        {
+          "stat": "Fury on Kill",
+          "bucket": null,
+          "value": 2,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "note": "Rare node."
+    },
+    {
+      "id": "warbringer-conditioned",
+      "name": "Conditioned",
+      "boardId": "warbringer",
+      "effects": [
+        {
+          "stat": "All Resistance",
+          "bucket": null,
+          "value": 6,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        },
+        {
+          "stat": "Healing",
+          "bucket": null,
+          "value": 8,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "note": "Rare node."
+    },
+    {
+      "id": "decimator-legendary",
+      "name": "Decimator",
+      "boardId": "decimator",
+      "effects": [
+        {
+          "stat": "damage vs Vulnerable",
+          "bucket": "multiplicative",
+          "value": 20,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        },
+        {
+          "stat": "damage while having Overpower",
+          "bucket": "multiplicative",
+          "value": 20,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "note": "Legendary node."
+    },
+    {
+      "id": "decimator-pillage",
+      "name": "Pillage",
+      "boardId": "decimator",
+      "effects": [
+        {
+          "stat": "Armor",
+          "bucket": null,
+          "value": 6,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        },
+        {
+          "stat": "Vulnerable",
+          "bucket": null,
+          "value": 15,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "note": "Rare node."
+    },
+    {
+      "id": "decimator-destroyer",
+      "name": "Destroyer",
+      "boardId": "decimator",
+      "effects": [
+        {
+          "stat": "damage per Overpower stack",
+          "bucket": null,
+          "value": 8,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        },
+        {
+          "stat": "Strength",
+          "bucket": null,
+          "value": 10,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "note": "Rare node."
+    },
+    {
+      "id": "decimator-demolish",
+      "name": "Demolish",
+      "boardId": "decimator",
+      "effects": [
+        {
+          "stat": "Vulnerable",
+          "bucket": null,
+          "value": 15,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        },
+        {
+          "stat": "Strength",
+          "bucket": null,
+          "value": 10,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "note": "Rare node."
+    },
+    {
+      "id": "decimator-arrogance",
+      "name": "Arrogance",
+      "boardId": "decimator",
+      "effects": [
+        {
+          "stat": "Armor",
+          "bucket": null,
+          "value": 6,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        },
+        {
+          "stat": "Healing",
+          "bucket": null,
+          "value": 8,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "note": "Rare node."
+    },
+    {
+      "id": "weapons-master-legendary",
+      "name": "Weapons Master",
+      "boardId": "weapons-master",
+      "effects": [
+        {
+          "stat": "Fury on weapon swap",
+          "bucket": null,
+          "value": 4,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        },
+        {
+          "stat": "damage vs Injured and Healthy",
+          "bucket": "multiplicative",
+          "value": 75,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "note": "Legendary node."
+    },
+    {
+      "id": "weapons-master-iron-strength",
+      "name": "Iron Strength",
+      "boardId": "weapons-master",
+      "effects": [
+        {
+          "stat": "Max Fury",
+          "bucket": null,
+          "value": 4,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        },
+        {
+          "stat": "Strength",
+          "bucket": null,
+          "value": 10,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "note": "Rare node."
+    },
+    {
+      "id": "weapons-master-raw-power",
+      "name": "Raw Power",
+      "boardId": "weapons-master",
+      "effects": [
+        {
+          "stat": "Damage",
+          "bucket": null,
+          "value": 20,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        },
+        {
+          "stat": "Strength",
+          "bucket": null,
+          "value": 10,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "note": "Rare node."
+    },
+    {
+      "id": "weapons-master-nimble",
+      "name": "Nimble",
+      "boardId": "weapons-master",
+      "effects": [
+        {
+          "stat": "Attack Speed",
+          "bucket": null,
+          "value": 2.5,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        },
+        {
+          "stat": "Damage",
+          "bucket": null,
+          "value": 10,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "note": "Rare node."
+    },
+    {
+      "id": "weapons-master-hunter-killer",
+      "name": "Hunter Killer",
+      "boardId": "weapons-master",
+      "effects": [
+        {
+          "stat": "Fury on Kill",
+          "bucket": null,
+          "value": 4,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        },
+        {
+          "stat": "Movement Speed after an Elite kill",
+          "bucket": null,
+          "value": 20,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "note": "Rare node."
+    },
+    {
+      "id": "weapons-master-deflection",
+      "name": "Deflection & Denial",
+      "boardId": "weapons-master",
+      "effects": [
+        {
+          "stat": "All Resistance",
+          "bucket": null,
+          "value": 6,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        },
+        {
+          "stat": "Armor",
+          "bucket": null,
+          "value": 6,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "note": "Rare node."
+    },
+    {
+      "id": "flawless-wild-force",
+      "name": "Wild Force",
+      "boardId": "flawless-technique-board",
+      "effects": [
+        {
+          "stat": "Damage",
+          "bucket": null,
+          "value": 20,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        },
+        {
+          "stat": "Strength",
+          "bucket": null,
+          "value": 10,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "note": "Rare node."
+    },
+    {
+      "id": "flawless-heavy-blows",
+      "name": "Heavy Blows",
+      "boardId": "flawless-technique-board",
+      "effects": [
+        {
+          "stat": "Critical Strike Damage",
+          "bucket": null,
+          "value": 30,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        },
+        {
+          "stat": "Strength",
+          "bucket": null,
+          "value": 10,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "note": "Rare node."
+    },
+    {
+      "id": "flawless-nimble",
+      "name": "Nimble",
+      "boardId": "flawless-technique-board",
+      "effects": [
+        {
+          "stat": "Nimble",
+          "bucket": null,
+          "value": null,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "note": "No values were transcribed for this rare node."
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "note": "Rare node. No values were shown."
     }
   ],
   "glyphs": [
@@ -6930,47 +10084,181 @@
     {
       "id": "might",
       "name": "Might",
-      "effects": [],
+      "effects": [
+        {
+          "stat": "Damage",
+          "bucket": null,
+          "value": 56,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        },
+        {
+          "stat": "damage vs Elites, Healthy and Injured",
+          "bucket": null,
+          "value": 28,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        },
+        {
+          "stat": "Dexterity",
+          "bucket": null,
+          "value": 90,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        },
+        {
+          "stat": "Willpower",
+          "bucket": null,
+          "value": 90,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        },
+        {
+          "stat": "damage while wielding 2H",
+          "bucket": "multiplicative",
+          "value": 19,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        },
+        {
+          "stat": "bonus to Magic nodes in range",
+          "bucket": null,
+          "value": 80,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        }
+      ],
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
-      "level": 115,
+      "level": 70,
       "rarity": "Legendary",
       "radius": 5,
       "base": "+160.0% to Magic nodes",
       "additional": "8.0%[x] dmg with 2H (40 Str)",
       "legendary": "20.0%[x] vs Healthy",
       "transcribed": "Might L115: +160.0% to Magic nodes. Add: 8.0%[x] dmg with 2H (40 Str). Leg: 20.0%[x] vs Healthy.",
-      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3)"
+      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3) This video reads glyph level 70. An earlier read said 155. The previous transcription stored 115, inferred from a section header. The level is suspect. Earlier base, additional, and legendary strings are kept. Previous stored level: 115.",
+      "suspect": true
     },
     {
       "id": "twister",
       "name": "Twister",
-      "effects": [],
+      "effects": [
+        {
+          "stat": "Dust Devil damage",
+          "bucket": "multiplicative",
+          "value": 39.5,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        },
+        {
+          "stat": "Dust Devil damage",
+          "bucket": null,
+          "value": 874.8,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        },
+        {
+          "stat": "damage for 4s after creating a Dust Devil",
+          "bucket": "multiplicative",
+          "value": 15,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        }
+      ],
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
-      "level": 115,
+      "level": 70,
       "rarity": "Legendary",
       "radius": 5,
       "base": "per 5 Str, Dust Devils +90.3%[+]",
       "additional": "8.0%[x] dmg 4s after creating Dust Devil (40 Str)",
       "legendary": "Dust Devil dmg +20.0%[x]",
       "transcribed": "Twister L115: per 5 Str, Dust Devils +90.3%[+]. Add: 8.0%[x] dmg 4s after creating Dust Devil (40 Str). Leg: Dust Devil dmg +20.0%[x].",
-      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3)"
+      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3) This video reads glyph level 70. An earlier read said 155. The previous transcription stored 115, inferred from a section header. The level is suspect. Earlier base, additional, and legendary strings are kept. Previous stored level: 115.",
+      "suspect": true
     },
     {
       "id": "imbiber",
       "name": "Imbiber",
-      "effects": [],
+      "effects": [
+        {
+          "stat": "damage while Healthy",
+          "bucket": null,
+          "value": 56,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        },
+        {
+          "stat": "damage while Healthy",
+          "bucket": null,
+          "value": 54.6,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        },
+        {
+          "stat": "damage per missing potion",
+          "bucket": "multiplicative",
+          "value": 5,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        },
+        {
+          "stat": "Potion Healing per missing potion",
+          "bucket": null,
+          "value": 5,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        }
+      ],
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
-      "level": 115,
+      "level": 70,
       "rarity": "Legendary",
       "radius": 5,
       "base": "per 5 Will, +30.1%[+] dmg and +5.2%[+] potion healing per missing potion, up to 25%[+] each",
       "additional": null,
       "legendary": "dmg while Healthy +16.0%[x]",
       "transcribed": "Imbiber L115: per 5 Will, +30.1%[+] dmg and +5.2%[+] potion healing per missing potion, up to 25%[+] each. Leg: dmg while Healthy +16.0%[x].",
-      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3)"
+      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3) This video reads glyph level 70. An earlier read said 155. The previous transcription stored 115, inferred from a section header. The level is suspect. Earlier base, additional, and legendary strings are kept. Previous stored level: 115.",
+      "suspect": true
     },
     {
       "id": "exploit",
@@ -7005,32 +10293,122 @@
     {
       "id": "wrath",
       "name": "Wrath",
-      "effects": [],
+      "effects": [
+        {
+          "stat": "Critical Strike Damage",
+          "bucket": null,
+          "value": 118,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        },
+        {
+          "stat": "Critical Strike Damage",
+          "bucket": null,
+          "value": 172,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        },
+        {
+          "stat": "Fury generated by Critical Strikes",
+          "bucket": null,
+          "value": 5,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        }
+      ],
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
-      "level": 115,
+      "level": 70,
       "rarity": "Legendary",
       "radius": 5,
       "base": "per 5 Dex, +14.2% Crit Dmg",
       "additional": "crits generate 3 Fury (25 Dex)",
       "legendary": "Crit Dmg +17.0%[x]",
       "transcribed": "Wrath L115: per 5 Dex, +14.2% Crit Dmg. Add: crits generate 3 Fury (25 Dex). Leg: Crit Dmg +17.0%[x].",
-      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3)"
+      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3) This video reads glyph level 70. An earlier read said 155. The previous transcription stored 115, inferred from a section header. The level is suspect. Earlier base, additional, and legendary strings are kept. Previous stored level: 115.",
+      "suspect": true
     },
     {
       "id": "marshal",
       "name": "Marshal",
-      "effects": [],
+      "effects": [
+        {
+          "stat": "Damage",
+          "bucket": null,
+          "value": 15,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        },
+        {
+          "stat": "Damage",
+          "bucket": null,
+          "value": 57,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        },
+        {
+          "stat": "Max Fury",
+          "bucket": null,
+          "value": 4,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        },
+        {
+          "stat": "Dexterity",
+          "bucket": null,
+          "value": 45,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        },
+        {
+          "stat": "Willpower",
+          "bucket": null,
+          "value": 45,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        },
+        {
+          "stat": "other Shout cooldown reduction on casting a Shout",
+          "bucket": null,
+          "value": 2,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "s"
+        }
+      ],
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
-      "level": 115,
+      "level": 70,
       "rarity": "Legendary",
       "radius": 5,
       "base": "+133.3% Magic nodes",
       "additional": "casting Shout reduces other Shout CDs by 2.0s; while Shout active next Core Skill Fury cost -10% (40 Str)",
       "legendary": "+15.6%[x]",
       "transcribed": "Marshal L115: +133.3% Magic nodes. Add: casting Shout reduces other Shout CDs by 2.0s; while Shout active next Core Skill Fury cost -10% (40 Str). Leg: +15.6%[x].",
-      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3)"
+      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3) This video reads glyph level 70. An earlier read said 155. The previous transcription stored 115, inferred from a section header. The level is suspect. Earlier base, additional, and legendary strings are kept. Previous stored level: 115.",
+      "suspect": true
     },
     {
       "id": "challenger",
@@ -7229,7 +10607,341 @@
       "note": "Level unclear: read as L1 but with a legendary border; level/rarity left null."
     }
   ],
-  "talismans": [],
+  "talismans": [
+    {
+      "id": "beru-of-the-crucible",
+      "name": "Beru of the Crucible",
+      "effects": [
+        {
+          "stat": "Cold Resistance",
+          "bucket": null,
+          "value": null,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        },
+        {
+          "stat": "Max Resource",
+          "bucket": null,
+          "value": null,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "note": "Magic, 800. No numbers were shown for these two stats."
+    },
+    {
+      "id": "fer-of-the-crucible",
+      "name": "Fer of the Crucible",
+      "effects": [
+        {
+          "stat": "Cold Resistance",
+          "bucket": null,
+          "value": null,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        },
+        {
+          "stat": "Max Resource",
+          "bucket": null,
+          "value": null,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "note": "Magic, 800. No numbers were shown for these two stats."
+    },
+    {
+      "id": "linta-of-the-crucible",
+      "name": "Linta of the Crucible",
+      "effects": [
+        {
+          "stat": "Cold Resistance",
+          "bucket": null,
+          "value": null,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        },
+        {
+          "stat": "Max Resource",
+          "bucket": null,
+          "value": null,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "note": "Magic, 800. No numbers were shown for these two stats."
+    },
+    {
+      "id": "crucible-set",
+      "name": "Crucible set bonus (7/5)",
+      "effects": [
+        {
+          "stat": "Berserking bonus",
+          "bucket": null,
+          "value": 20,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        },
+        {
+          "stat": "cost speed",
+          "bucket": null,
+          "value": 10,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        },
+        {
+          "stat": "Damage Reduction while Berserking",
+          "bucket": null,
+          "value": 50,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        },
+        {
+          "stat": "damage",
+          "bucket": null,
+          "value": 200,
+          "conditions": null,
+          "stacking": "after 5s",
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        },
+        {
+          "stat": "Max Life",
+          "bucket": null,
+          "value": 30,
+          "conditions": null,
+          "stacking": "after 5s",
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "suspect": true,
+      "note": "The set-bonus sentence is garbled. The numbers that were read are stored. Nothing was filled in past the garbled ending."
+    },
+    {
+      "id": "tuskhelm-of-joritz-the-mighty",
+      "name": "Tuskhelm of Joritz the Mighty",
+      "effects": [
+        {
+          "stat": "Kill XP",
+          "bucket": null,
+          "value": 10,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        },
+        {
+          "stat": "Max Resource",
+          "bucket": null,
+          "value": 15,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        },
+        {
+          "stat": "All Skills",
+          "bucket": null,
+          "value": 2,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        },
+        {
+          "stat": "damage",
+          "bucket": null,
+          "value": 15,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%",
+          "note": "50% chance when gaining Berserking while Berserk."
+        },
+        {
+          "stat": "Fury per second",
+          "bucket": null,
+          "value": 2,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        },
+        {
+          "stat": "Cooldown Reduction",
+          "bucket": null,
+          "value": 10,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "note": "Unique charm. The chance and the Berserking condition stay in the effect note."
+    },
+    {
+      "id": "hellfire-torch",
+      "name": "Hellfire Torch",
+      "effects": [
+        {
+          "stat": "All Stats",
+          "bucket": null,
+          "value": 16,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        },
+        {
+          "stat": "All Resistances",
+          "bucket": null,
+          "value": 12,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        },
+        {
+          "stat": "All Skills",
+          "bucket": null,
+          "value": 3,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "note": "Mythic charm."
+    },
+    {
+      "id": "endurant-faith",
+      "name": "Endurant Faith",
+      "effects": [
+        {
+          "stat": "Physical Resistance",
+          "bucket": null,
+          "value": 2252,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        },
+        {
+          "stat": "All Stats",
+          "bucket": null,
+          "value": 48,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        },
+        {
+          "stat": "reduction of damage over 50% of Max Life",
+          "bucket": null,
+          "value": 19,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%",
+          "note": "That damage is spread over 4.0s."
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "note": "Unique charm."
+    },
+    {
+      "id": "seal-of-the-epiphany",
+      "name": "Seal of the Epiphany",
+      "effects": [
+        {
+          "stat": "All Stats",
+          "bucket": null,
+          "value": 15,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        },
+        {
+          "stat": "Movement Speed while Berserking",
+          "bucket": null,
+          "value": 150,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        },
+        {
+          "stat": "Lucky Hit chance to become Berserking",
+          "bucket": null,
+          "value": 50,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%",
+          "note": "Up to 50%."
+        },
+        {
+          "stat": "Unique Charms",
+          "bucket": null,
+          "value": 20,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false,
+      "note": "Mythic Ascendant Seal, 900."
+    }
+  ],
   "seasonalMechanics": [
     {
       "id": "hells-legacy",
@@ -7238,6 +10950,140 @@
       "source": "https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy",
       "verified": false,
       "note": "Season title from the official article URL already cited in v0. No mechanic numbers are stored."
+    },
+    {
+      "id": "ghosts-of-odium",
+      "name": "Ghosts of Odium",
+      "effects": [
+        {
+          "stat": "physical damage",
+          "bucket": null,
+          "value": 56847,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "undying-rage",
+      "name": "Undying Rage",
+      "effects": [
+        {
+          "stat": "Undying Rage",
+          "bucket": null,
+          "value": null,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "note": "No numbers were shown."
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "flask-of-bile",
+      "name": "Flask of Bile",
+      "effects": [
+        {
+          "stat": "Primary Resource",
+          "bucket": null,
+          "value": 50,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "death-collector",
+      "name": "Death Collector",
+      "effects": [
+        {
+          "stat": "Death Collector",
+          "bucket": null,
+          "value": null,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "note": "No numbers were shown."
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "strangling-grip",
+      "name": "Strangling Grip",
+      "effects": [
+        {
+          "stat": "Vulnerable",
+          "bucket": null,
+          "value": 5,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "s"
+        },
+        {
+          "stat": "Immobilize",
+          "bucket": null,
+          "value": 15,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "vengeful-soul",
+      "name": "Vengeful Soul",
+      "effects": [
+        {
+          "stat": "Max Life over 4s",
+          "bucket": null,
+          "value": 20,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%"
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
+    },
+    {
+      "id": "fever-of-malice",
+      "name": "Fever of Malice",
+      "effects": [
+        {
+          "stat": "Fever of Malice",
+          "bucket": null,
+          "value": null,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "note": "No numbers were shown."
+        }
+      ],
+      "source": "user video 1 (watchVideo 2026-10-22)",
+      "verified": false
     }
   ],
   "codexCurve": {

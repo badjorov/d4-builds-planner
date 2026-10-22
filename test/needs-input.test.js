@@ -30,7 +30,8 @@ test('transcribed coefficients stay unverified and the sourced scalar stays put'
   assert.equal(text.includes('/skills/flay/'), false);
   assert.match(text, /\/aspects\/writhing\/effects\/0\/value — range/);
   assert.match(text, /\/skillVariants — empty/);
-  assert.match(text, /\/talismans — empty/);
+  assert.equal(text.includes('/talismans — empty'), false);
+  assert.match(text, /\/talismans\/tuskhelm-of-joritz-the-mighty\/verified — unverified/);
   assert.equal(text.includes('/affixes — empty'), false);
   assert.equal(text.includes('/affixes/guardian-finesse/'), false);
   assert.equal(catalog.skills.find(skill => skill.id === 'hota').allocated, false);

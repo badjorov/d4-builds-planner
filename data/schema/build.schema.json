@@ -69,7 +69,11 @@
     "expertise": { "type": ["string", "null"] },
     "runes": { "type": "array", "items": { "type": "string" } },
     "manualInputsVerified": { "type": "boolean" },
-    "sheet": { "$ref": "#/$defs/characterSheet" }
+    "sheet": { "$ref": "#/$defs/characterSheet" },
+    "suspectReadings": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/suspectReading" }
+    }
   },
   "$defs": {
     "slotAssignment": {
@@ -173,6 +177,36 @@
         "maxLife": { "type": "number" },
         "source": { "type": "string", "minLength": 1 },
         "verified": { "type": "boolean" },
+        "note": { "type": "string" },
+        "videoReadings": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/videoReading" }
+        }
+      }
+    },
+    "suspectReading": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["field", "videoValue", "confirmedValue", "suspect", "source"],
+      "properties": {
+        "field": { "type": "string", "minLength": 1 },
+        "videoValue": { "type": ["number", "string", "null"] },
+        "confirmedValue": { "type": ["number", "string", "null"] },
+        "suspect": { "type": "boolean" },
+        "source": { "type": "string", "minLength": 1 },
+        "note": { "type": "string" }
+      }
+    },
+    "videoReading": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stat", "value", "suspect", "source"],
+      "properties": {
+        "stat": { "type": "string", "minLength": 1 },
+        "value": { "type": ["number", "null"] },
+        "unit": { "type": ["string", "null"] },
+        "suspect": { "type": "boolean" },
+        "source": { "type": "string", "minLength": 1 },
         "note": { "type": "string" }
       }
     }
