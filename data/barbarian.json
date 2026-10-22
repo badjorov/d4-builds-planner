@@ -9460,7 +9460,7 @@
           "stacking": null,
           "source": "https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy",
           "verified": true,
-          "note": "50%[x] -> 45%[x]."
+          "note": "50%[x] -> 45%[x]. Condition text is pending. Needs input. This line stays out of the score."
         },
         {
           "stat": "Critical Strike Chance",
@@ -9889,21 +9889,25 @@
           "stat": "damage vs Vulnerable",
           "bucket": "multiplicative",
           "value": 20,
-          "conditions": null,
+          "conditions": ["vs Vulnerable"],
+          "alignWithState": true,
           "stacking": null,
           "source": "user video 1 (watchVideo 2026-10-22)",
           "verified": false,
-          "unit": "%"
+          "unit": "%",
+          "note": "20%[x] vs Vulnerable uses the Vulnerable uptime state. The line is on in that state and off in the other."
         },
         {
           "stat": "damage while having Overpower",
           "bucket": "multiplicative",
           "value": 20,
-          "conditions": null,
+          "conditions": ["while having Overpower"],
+          "alignWithState": true,
           "stacking": null,
           "source": "user video 1 (watchVideo 2026-10-22)",
           "verified": false,
-          "unit": "%"
+          "unit": "%",
+          "note": "20%[x] while having Overpower uses the Overpower uptime state. The line is on in that state and off in the other."
         }
       ],
       "source": "user video 1 (watchVideo 2026-10-22)",
@@ -10050,7 +10054,8 @@
           "stacking": null,
           "source": "user video 1 (watchVideo 2026-10-22)",
           "verified": false,
-          "unit": "%"
+          "unit": "%",
+          "note": "Healthy and Injured share is pending. Needs input. This 75%[x] line stays out of the score."
         }
       ],
       "source": "user video 1 (watchVideo 2026-10-22)",
@@ -10358,12 +10363,12 @@
           "stat": "damage with Two-Handed",
           "bucket": "multiplicative",
           "value": 8,
-          "conditions": null,
+          "conditions": ["with a Two-Handed weapon"],
           "stacking": null,
           "source": "user screenshot 2026-10-22",
           "verified": true,
           "unit": "%",
-          "note": "Screenshot additional: 8%[x] with Two-Handed, 60/+40 Strength in range. Video read 19 while wielding 2H, and an earlier additional line said 40 Str."
+          "note": "Screenshot additional: 8%[x] with Two-Handed, 60/+40 Strength in range. Video read 19 while wielding 2H, and an earlier additional line said 40 Str. Always on for Whirlwind on the 2H arsenal. Uptime 1."
         },
         {
           "stat": "legendary bonus vs Healthy and Injured",
@@ -10374,7 +10379,7 @@
           "source": "user screenshot 2026-10-22",
           "verified": true,
           "unit": "%",
-          "note": "Screenshot legendary 26.0%[x]. Video read 28% vs Elites, Healthy and Injured, and an earlier legendary line said 20.0%[x] vs Healthy."
+          "note": "Screenshot legendary 26.0%[x]. Video read 28% vs Elites, Healthy and Injured, and an earlier legendary line said 20.0%[x] vs Healthy. Healthy and Injured share is pending. Needs input. This line stays out of the score."
         }
       ],
       "source": "user screenshot 2026-10-22",
@@ -10426,14 +10431,15 @@
       ],
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
-      "level": null,
+      "level": 133,
+      "provisional": true,
       "rarity": "Legendary",
       "radius": 5,
       "base": "per 5 Str, Dust Devils +90.3%[+]",
       "additional": "8.0%[x] dmg 4s after creating Dust Devil (40 Str)",
       "legendary": "Dust Devil dmg +20.0%[x]",
       "transcribed": "Twister L115: per 5 Str, Dust Devils +90.3%[+]. Add: 8.0%[x] dmg 4s after creating Dust Devil (40 Str). Leg: Dust Devil dmg +20.0%[x].",
-      "note": "Equipped glyph level is approximately 131-135. Unverified, pending screenshots. The 70, 115, and 155 readings are dropped. Earlier base, additional, and legendary strings are kept.",
+      "note": "Provisional level 133. The user said the equipped glyphs are about 131-135. Might is 135 and verified. No level-scaling formula is stored, so the damage lines stay unscored. Needs input. The 70, 115, and 155 readings are dropped. Earlier base, additional, and legendary strings are kept.",
       "levelVerified": false,
       "levelApproximate": [
         131,
@@ -10487,14 +10493,15 @@
       ],
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
-      "level": null,
+      "level": 133,
+      "provisional": true,
       "rarity": "Legendary",
       "radius": 5,
       "base": "per 5 Will, +30.1%[+] dmg and +5.2%[+] potion healing per missing potion, up to 25%[+] each",
       "additional": null,
       "legendary": "dmg while Healthy +16.0%[x]",
       "transcribed": "Imbiber L115: per 5 Will, +30.1%[+] dmg and +5.2%[+] potion healing per missing potion, up to 25%[+] each. Leg: dmg while Healthy +16.0%[x].",
-      "note": "Equipped glyph level is approximately 131-135. Unverified, pending screenshots. The 70, 115, and 155 readings are dropped. Earlier base, additional, and legendary strings are kept.",
+      "note": "Provisional level 133. The user said the equipped glyphs are about 131-135. Might is 135 and verified. No level-scaling formula is stored, so the damage lines stay unscored. Needs input. The 70, 115, and 155 readings are dropped. Earlier base, additional, and legendary strings are kept.",
       "levelVerified": false,
       "levelApproximate": [
         131,
@@ -10569,14 +10576,15 @@
       ],
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
-      "level": null,
+      "level": 133,
+      "provisional": true,
       "rarity": "Legendary",
       "radius": 5,
       "base": "per 5 Dex, +14.2% Crit Dmg",
       "additional": "crits generate 3 Fury (25 Dex)",
       "legendary": "Crit Dmg +17.0%[x]",
       "transcribed": "Wrath L115: per 5 Dex, +14.2% Crit Dmg. Add: crits generate 3 Fury (25 Dex). Leg: Crit Dmg +17.0%[x].",
-      "note": "Equipped glyph level is approximately 131-135. Unverified, pending screenshots. The 70, 115, and 155 readings are dropped. Earlier base, additional, and legendary strings are kept.",
+      "note": "Provisional level 133. The user said the equipped glyphs are about 131-135. Might is 135 and verified. No level-scaling formula is stored, so the damage lines stay unscored. Needs input. The 70, 115, and 155 readings are dropped. Earlier base, additional, and legendary strings are kept.",
       "levelVerified": false,
       "levelApproximate": [
         131,
@@ -10647,14 +10655,15 @@
       ],
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
-      "level": null,
+      "level": 133,
+      "provisional": true,
       "rarity": "Legendary",
       "radius": 5,
       "base": "+133.3% Magic nodes",
       "additional": "casting Shout reduces other Shout CDs by 2.0s; while Shout active next Core Skill Fury cost -10% (40 Str)",
       "legendary": "+15.6%[x]",
       "transcribed": "Marshal L115: +133.3% Magic nodes. Add: casting Shout reduces other Shout CDs by 2.0s; while Shout active next Core Skill Fury cost -10% (40 Str). Leg: +15.6%[x].",
-      "note": "Equipped glyph level is approximately 131-135. Unverified, pending screenshots. The 70, 115, and 155 readings are dropped. Earlier base, additional, and legendary strings are kept.",
+      "note": "Provisional level 133. The user said the equipped glyphs are about 131-135. Might is 135 and verified. No level-scaling formula is stored, so the damage lines stay unscored. Needs input. The 70, 115, and 155 readings are dropped. Earlier base, additional, and legendary strings are kept.",
       "levelVerified": false,
       "levelApproximate": [
         131,

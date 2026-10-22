@@ -105,7 +105,8 @@
         "unit": { "type": ["string", "null"] },
         "count": { "type": ["number", "null"] },
         "slotType": { "type": ["string", "null"] },
-        "scored": { "type": "boolean" }
+        "scored": { "type": "boolean" },
+        "alignWithState": { "type": "boolean" }
       }
     },
     "meta": {
@@ -386,6 +387,7 @@
         "name": { "type": "string" },
         "level": { "type": ["number", "null"] },
         "levelVerified": { "type": "boolean" },
+        "provisional": { "type": "boolean" },
         "levelApproximate": {
           "type": "array",
           "minItems": 2,

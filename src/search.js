@@ -1,5 +1,5 @@
 import { marginal } from './engine.js';
-import { blankBuild, damageEffects, engineInputFromBuild, evaluateBuild, knownBucket, pointValue, slotIds, unverifiedShare, verificationFields, buildKeys } from './catalog.js';
+import { blankBuild, damageEffects, emptyGear, engineInputFromBuild, evaluateBuild, knownBucket, pointValue, slotIds, unverifiedShare, verificationFields, buildKeys } from './catalog.js';
 import { checkBuild } from './constraints.js';
 import { noveltyAgainstMeta, rankByPowerNovelty } from './novelty.js';
 
@@ -206,7 +206,11 @@ export function buildFromCore(catalog, skills, opts = {}) {
     vulnPct: opts.vulnPct ?? null,
     overpowerPct: opts.overpowerPct ?? null,
     boards: opts.boards || [],
-    glyphs: opts.glyphs || []
+    glyphs: opts.glyphs || [],
+    gear: emptyGear(catalog).map(slot => ({
+      ...slot,
+      ...(opts.slotHands?.[slot.slotId] ? { hands: opts.slotHands[slot.slotId] } : {})
+    }))
   });
 }
 

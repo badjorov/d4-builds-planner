@@ -164,6 +164,7 @@
         "glyphId": { "type": ["string", "null"] },
         "level": { "type": ["number", "null"] },
         "levelVerified": { "type": "boolean" },
+        "provisional": { "type": "boolean" },
         "levelApproximate": {
           "type": "array",
           "minItems": 2,

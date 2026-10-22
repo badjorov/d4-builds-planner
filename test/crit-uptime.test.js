@@ -64,18 +64,83 @@ test('Fury above 50 at 1 applies Melted Heart fully, and a partial Fury uptime s
   assert.ok(always.result.total > evaluated.result.total);
 });
 
-test('equipped boards score Warbringer, and unset conditions or glyph levels stay off', () => {
+test('Decimator joins the Vulnerable and Overpower states, and Might 8% is on for a two-handed arsenal', () => {
   const evaluated = evaluateBuild(catalog, whirlwindBuild());
-  const ids = evaluated.input.modifiers.map(mod => mod.id);
-  assert.equal(ids.includes('warbringer-legendary'), true);
-  for (const id of ['decimator-legendary', 'weapons-master-legendary', 'flawless-technique', 'might', 'twister', 'imbiber', 'marshal', 'wrath']) {
-    assert.equal(ids.includes(id), false);
+  const decimator = evaluated.input.modifiers.filter(mod => mod.id === 'decimator-legendary');
+  assert.equal(decimator.find(mod => mod.when === 'vulnerable')?.value, 20);
+  assert.equal(decimator.find(mod => mod.when === 'overpower')?.value, 20);
+  const might = evaluated.input.modifiers.find(mod => mod.id === 'might');
+  assert.equal(might.value, 8);
+  assert.equal(might.when, undefined);
+  const earth = evaluated.input.modifiers.find(mod => mod.name.startsWith('Earthstriker'));
+  assert.equal(earth.value, 19.5);
+  assert.equal(earth.when, undefined);
+  for (const id of ['weapons-master-legendary', 'flawless-technique', 'twister', 'imbiber', 'marshal', 'wrath']) {
+    assert.equal(evaluated.input.modifiers.some(mod => mod.id === id), false);
   }
-  assert.equal(evaluated.input.notes.some(note => note.includes('Twister') && note.includes('glyph level')), true);
-  assert.equal(evaluated.input.notes.some(note => note.includes('Decimator') && note.includes('condition unknown')), true);
+  assert.equal(evaluated.input.notes.some(note => note.includes('Twister') && note.includes('level-scaling formula')), true);
+  assert.equal(evaluated.input.notes.some(note => note.includes('Healthy and Injured share is pending')), true);
+  assert.equal(evaluated.input.notes.some(note => note.includes('Flawless Technique') && note.includes('condition unknown')), true);
   const skill = catalog.skills.find(entry => entry.id === 'whirlwind');
-  const copied = buildFromCore(catalog, [skill], { boards: saved.boards, glyphs: saved.glyphs, uptime: saved.uptime });
-  assert.equal(evaluateBuild(catalog, copied).input.modifiers.some(mod => mod.id === 'warbringer-legendary'), true);
+  const hands = Object.fromEntries((saved.gear || []).filter(slot => slot.hands).map(slot => [slot.slotId, slot.hands]));
+  const copied = buildFromCore(catalog, [skill], {
+    boards: saved.boards,
+    glyphs: saved.glyphs,
+    uptime: saved.uptime,
+    slotHands: hands
+  });
+  const copiedEval = evaluateBuild(catalog, copied);
+  assert.equal(copiedEval.input.modifiers.some(mod => mod.id === 'warbringer-legendary'), true);
+  assert.equal(copiedEval.input.modifiers.some(mod => mod.id === 'might' && mod.value === 8), true);
   const bare = buildFromCore(catalog, [skill], { uptime: saved.uptime });
   assert.equal(evaluateBuild(catalog, bare).input.modifiers.some(mod => mod.id === 'warbringer-legendary'), false);
+  const off = evaluateBuild(catalog, {
+    ...whirlwindBuild(),
+    uptime: { ...saved.uptime, vulnerable: 0, overpower: 0 }
+  });
+  assert.equal(off.input.modifiers.some(mod => mod.id === 'decimator-legendary'), false);
+});
+
+test('a provisional glyph scores only from a stored level-scaling formula', () => {
+  const formula = 'min + (max - min) * (level - 1) / (maxLevel - 1)';
+  const mini = {
+    meta: { class: 'Barbarian' },
+    mainstat: { verified: false },
+    skills: [{ id: 'whirlwind', name: 'Whirlwind', tags: ['Core'], coeffPct: 100, dot: false }],
+    aspects: [],
+    uniques: [],
+    paragonNodes: [],
+    glyphs: [{
+      id: 'scaled',
+      name: 'Scaled',
+      provisional: true,
+      effects: [{
+        stat: 'damage',
+        bucket: 'multiplicative',
+        value: 1,
+        conditions: [],
+        stacking: null,
+        source: 'test',
+        verified: false,
+        range: [10, 20],
+        upgrade: { formula, maxLevel: 100 }
+      }]
+    }],
+    constraints: { gearSlots: [] }
+  };
+  const build = {
+    skills: ['whirlwind'],
+    gear: [],
+    boards: [],
+    glyphs: [{ glyphId: 'scaled', level: 133, provisional: true }],
+    uptime: {},
+    weaponDmg: 100,
+    mainStat: 0,
+    critChance: 0,
+    critDmg: 0
+  };
+  const scaled = evaluateBuild(mini, build);
+  const expected = 10 + (20 - 10) * (133 - 1) / (100 - 1);
+  assert.equal(scaled.input.modifiers[0].value, expected);
+  assert.equal(scaled.result.total, 100 * (1 + expected / 100));
 });

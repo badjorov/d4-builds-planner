@@ -94,6 +94,7 @@ function run() {
     metaBuilds,
     boards: savedBuild?.boards || [],
     glyphs: savedBuild?.glyphs || [],
+    slotHands: Object.fromEntries((savedBuild?.gear || []).filter(slot => slot.hands).map(slot => [slot.slotId, slot.hands])),
     limit: 20
   });
   renderResults(out);

@@ -170,7 +170,14 @@ function conditionState(effect, build, catalog) {
     if (key === 'berserk' || key === 'vulnerable' || key === 'overpower') {
       if (typeof build.uptime?.[key] !== 'number') return { state: 'unknown' };
       if (build.uptime[key] <= 0) return { state: 'inactive' };
+      if (effect.alignWithState === true && build.uptime[key] < 1) partial = key;
       continue;
+    }
+    if (/\btwo-handed\b/.test(text)) {
+      const hands = (build.gear || []).map(slot => slot.hands).filter(Boolean);
+      if (hands.includes('2H')) continue;
+      if (hands.length) return { state: 'inactive' };
+      return { state: 'unknown' };
     }
     if (BLENDED_UPTIMES.has(key)) {
       const value = build.uptime?.[key];
@@ -204,10 +211,45 @@ export function damageEffects(entity, build, catalog) {
   return active;
 }
 
+const GLYPH_LEVEL_FORMULA = 'min + (max - min) * (level - 1) / (maxLevel - 1)';
+
+function scaledEffectValue(effect, level) {
+  const upgrade = effect?.upgrade;
+  const range = effect?.range;
+  if (!upgrade || upgrade.formula !== GLYPH_LEVEL_FORMULA || !Array.isArray(range)) return null;
+  const maxLevel = upgrade.maxLevel;
+  const [min, max] = range;
+  if (typeof min !== 'number' || typeof max !== 'number' || typeof maxLevel !== 'number' || maxLevel <= 1) return null;
+  if (typeof level !== 'number') return null;
+  return min + (max - min) * (level - 1) / (maxLevel - 1);
+}
+
+function scaledGlyph(glyph, level) {
+  let scaledCount = 0;
+  let unscaled = 0;
+  const effects = (glyph.effects || []).map(effect => {
+    const scaled = scaledEffectValue(effect, level);
+    const damage = knownBucket(effect.bucket) && pointValue(effect.value) != null && effect.scored !== false && !NON_DAMAGE_KINDS.has(effect.kind);
+    if (scaled != null) {
+      scaledCount += 1;
+      return { ...effect, value: scaled };
+    }
+    if (damage) {
+      unscaled += 1;
+      return { ...effect, scored: false };
+    }
+    return effect;
+  });
+  if (!scaledCount) return null;
+  return { glyph: { ...glyph, effects }, unscaled };
+}
+
 function appendDamageModifiers(entity, build, catalog, modifiers, notes, label) {
   for (const piece of damageEffects(entity, build, catalog)) {
     if (piece.state === 'unknown') {
-      notes.push(`${label.name}: condition unknown, damage effect not applied.`);
+      const stat = piece.effect.stat || '';
+      if (/healthy|injured/i.test(stat)) notes.push(`${label.name}: Healthy and Injured share is pending, damage effect not applied.`);
+      else notes.push(`${label.name}: condition unknown, damage effect not applied.`);
       continue;
     }
     if (piece.bucket === 'overpower' && typeof build.overpowerPct === 'number') {
@@ -265,7 +307,17 @@ export function engineInputFromBuild(catalog, build, opts = {}) {
       notes.push(`${glyph.name}: glyph level is unknown, so its damage lines are not applied.`);
       continue;
     }
-    appendDamageModifiers(glyph, build, catalog, modifiers, notes, { name: `${glyph.name} (glyph ${placed.level})`, kind: 'glyph' });
+    let scoring = glyph;
+    if (placed.provisional === true || glyph.provisional === true) {
+      const scaled = scaledGlyph(glyph, placed.level);
+      if (!scaled) {
+        notes.push(`${glyph.name}: provisional level ${placed.level} has no level-scaling formula in the catalog, so its damage lines are not applied. Needs input.`);
+        continue;
+      }
+      scoring = scaled.glyph;
+      if (scaled.unscaled) notes.push(`${glyph.name}: provisional level ${placed.level} leaves ${scaled.unscaled} damage line${scaled.unscaled === 1 ? '' : 's'} unscored. No level-scaling formula is stored for ${scaled.unscaled === 1 ? 'it' : 'them'}. Needs input.`);
+    }
+    appendDamageModifiers(scoring, build, catalog, modifiers, notes, { name: `${glyph.name} (glyph ${placed.level})`, kind: 'glyph' });
   }
   const auras = [];
   for (const skill of skills) {
