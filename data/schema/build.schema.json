@@ -60,6 +60,7 @@
     "critDmg": { "type": ["number", "null"] },
     "vulnPct": { "type": ["number", "null"] },
     "overpowerPct": { "type": ["number", "null"] },
+    "overpowerStacks": { "$ref": "#/$defs/overpowerStacks" },
     "label": { "type": "string" },
     "source": { "type": "string", "minLength": 1 },
     "verified": { "type": "boolean" },
@@ -173,6 +174,22 @@
       "properties": {
         "skillId": { "type": "string" },
         "castsPerSecond": { "type": ["number", "null"] }
+      }
+    },
+    "overpowerStacks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["perStack", "maxStacks", "activeStacks", "lingerSeconds", "estimate"],
+      "properties": {
+        "perStack": { "type": "number" },
+        "maxStacks": { "type": "integer" },
+        "activeStacks": { "type": "integer" },
+        "lingerSeconds": { "type": "number" },
+        "gainPerSecond": { "type": "number" },
+        "stackSeconds": { "type": "number" },
+        "estimate": { "type": "boolean" },
+        "source": { "type": "string", "minLength": 1 },
+        "note": { "type": "string" }
       }
     },
     "uptime": {

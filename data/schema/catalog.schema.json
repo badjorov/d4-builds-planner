@@ -237,6 +237,7 @@
         "dot": { "type": ["boolean", "null"] },
         "cooldown": { "type": ["number", "null"] },
         "duration": { "type": ["number", "null"] },
+        "aura": { "$ref": "#/$defs/aura" },
         "furyGeneratePerCast": { "type": ["number", "null"] },
         "furySpendPerCast": { "type": ["number", "null"] },
         "variantOf": { "type": ["string", "null"] },
@@ -244,6 +245,22 @@
         "source": { "$ref": "#/$defs/source" },
         "verified": { "type": "boolean" },
         "note": { "type": ["string", "null"] }
+      }
+    },
+    "aura": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["coeffPct", "dot", "burnCoeffPct", "burnDot", "uptime"],
+      "properties": {
+        "coeffPct": { "type": ["number", "null"] },
+        "dot": { "type": "boolean" },
+        "burnCoeffPct": { "type": ["number", "null"] },
+        "burnDot": { "type": "boolean" },
+        "burnDuration": { "type": ["number", "null"] },
+        "uptime": { "type": ["number", "null"] },
+        "estimate": { "type": "boolean" },
+        "source": { "type": "string", "minLength": 1 },
+        "note": { "type": "string" }
       }
     },
     "skillVariant": {

@@ -57,7 +57,7 @@ test('transcribed coefficients stay unverified and the sourced scalar stays put'
 test('inactive skills and upgrades stay out of needs-input, and the remaining skill fields are active', () => {
   const items = needsInput(catalog).filter(item => item.path.startsWith('/skills/'));
   const active = new Set(catalog.skills.filter(skill => skill.allocated === true).map(skill => skill.id));
-  assert.equal(items.length, 110);
+  assert.equal(items.length, 98);
   for (const item of items) {
     const id = item.path.split('/')[2];
     assert.equal(active.has(id), true, item.path);
@@ -90,8 +90,12 @@ test('needs-input splits the user build into engine-blocking, required, and nice
   assert.equal(split.niceToHave.some(item => item.path.startsWith('/glyphs/disembowel/')), true);
   assert.equal(split.niceToHave.some(item => item.path === '/aspects/crushing-aspect/slots'), true);
   assert.equal(split.niceToHave.some(item => item.path.includes('/aspects/crushing-aspect/effects/') && item.path.endsWith('/stacking')), true);
-  const overpower = split.required.find(item => item.path === '/builds.json/builds/users-current-build/overpowerPct');
-  assert.equal(overpower.provenance, 'user-only');
+  assert.equal(split.required.some(item => item.path === '/builds.json/builds/users-current-build/overpowerPct'), false);
+  assert.equal(saved.builds.find(entry => entry.id === 'users-current-build').overpowerPct, 104);
+  for (const id of ['war-cry', 'rallying-cry', 'iron-skin', 'wrath-of-the-berserker']) {
+    assert.equal(catalog.skills.find(skill => skill.id === id).coeffPct, 0);
+    assert.equal(split.required.some(item => item.path === `/skills/${id}/coeffPct`), false);
+  }
   assert.equal(catalog.skills.find(skill => skill.id === 'whirlwind').dot, false);
   assert.equal(split.engineBlocking.some(item => item.path === '/skills/whirlwind/dot'), false);
   const crushingConditions = split.engineBlocking.filter(item => item.path.startsWith('/aspects/crushing-aspect/effects/') && item.path.endsWith('/conditions'));

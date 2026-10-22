@@ -1101,9 +1101,10 @@
           "bucket": null,
           "conditions": null,
           "stacking": null,
-          "value": null,
-          "verified": false,
-          "source": "user video 2026-10-21 batch2 (transcribed)"
+          "value": 0,
+          "verified": true,
+          "source": "user screenshot 2026-10-22",
+          "note": "Rallying Cry deals no direct damage. coeffPct is 0. Source: user screenshot 2026-10-22."
         },
         {
           "stat": "Movement Speed",
@@ -1168,7 +1169,7 @@
       ],
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
-      "coeffPct": null,
+      "coeffPct": 0,
       "rank": 29,
       "maxRank": 15,
       "tooltip": "45 Fury, Movement Speed 50%[x] 4s, resource generation 77%[x], +10% Movement Speed, Fortify 15% Maximum Life, +20% effectiveness.",
@@ -1221,7 +1222,7 @@
       "bonusRank": null,
       "allocationVerified": true,
       "allocationSource": "user confirmation 2026-10-22",
-      "note": "Video 1, ranks misread as 11/5 and not applied: +52% Movement Speed for 4s; +77% Resource Generation, +10% Movement Speed; Fortify for 15% of Max Life; +20% effectiveness plus 2% per ally. Screenshot rank is 29/15. The earlier stored rank was 15. Screenshot: rank 29/15, 45 Fury, Movement Speed 50%[x] for 4s, resource generation 77%[x], +10% Movement Speed, Fortify 15% of Maximum Life, +20% effectiveness. The screenshot does not restate a cooldown, so the earlier 25s cooldown is not confirmed. 50%[x] Movement Speed replaces the video's +52%.",
+      "note": "Video 1, ranks misread as 11/5 and not applied: +52% Movement Speed for 4s; +77% Resource Generation, +10% Movement Speed; Fortify for 15% of Max Life; +20% effectiveness plus 2% per ally. Screenshot rank is 29/15. The earlier stored rank was 15. Screenshot: rank 29/15, 45 Fury, Movement Speed 50%[x] for 4s, resource generation 77%[x], +10% Movement Speed, Fortify 15% of Maximum Life, +20% effectiveness. The screenshot does not restate a cooldown, so the earlier 25s cooldown is not confirmed. 50%[x] Movement Speed replaces the video's +52%. Screenshot answer: this skill deals no damage, so coeffPct is 0.",
       "duration": 4
     },
     {
@@ -1239,9 +1240,10 @@
           "bucket": null,
           "conditions": null,
           "stacking": null,
-          "value": null,
-          "verified": false,
-          "source": "user video 2026-10-21 batch2 (transcribed)"
+          "value": 0,
+          "verified": true,
+          "source": "user screenshot 2026-10-22",
+          "note": "Iron Skin deals no direct damage. coeffPct is 0. Source: user screenshot 2026-10-22."
         },
         {
           "stat": "Maximum Life",
@@ -1282,7 +1284,7 @@
       ],
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
-      "coeffPct": null,
+      "coeffPct": 0,
       "rank": 18,
       "maxRank": 15,
       "tooltip": "CD 8.45s, +10% Maximum Life, barrier 87.6% (414), Unstoppable, knockback, 15%[x] Movement Speed, 2 Resolve (25%[+] armor per stack).",
@@ -1331,7 +1333,7 @@
         }
       ],
       "transcribed": "CD 14.00s, DR +30%, Barrier 83% missing life 5s. MS +15%[+]; Weaken 5s; Max Life +15%; Juggernaut (Unstoppable, damage/knockback attackers); Endure (no barrier, can't drop below 1, heal 21.5%); Retaliation (3x duration, shrapnel).",
-      "note": "Resolve is a Barbarian Iron Skin upgrade. The 2026-10-21 transcription read \"2 Resolve\" and that line was removed in the Paladin cleanup. The upgrade is allocated again with no numeric value. Video 1, ranks misread as 11/5 and not applied: barrier for 22.8% of Max Life; Unstoppable; 1% Max Life per second; +15% Movement Speed; 2 stacks of Resolve. The Resolve count stays off the upgrade, which remains name-only. Screenshot rank is 18/15. The earlier stored rank was 14. Screenshot: rank 18/15, CD 8.45s, +10% Maximum Life, barrier 87.6% (414), Unstoppable, knockback, 15%[x] Movement Speed, 2 Resolve at 25%[+] armor per stack. The barrier's 414 is the tooltip amount, not Max Life. Max Life stays 473. No duration in seconds was shown.",
+      "note": "Resolve is a Barbarian Iron Skin upgrade. The 2026-10-21 transcription read \"2 Resolve\" and that line was removed in the Paladin cleanup. The upgrade is allocated again with no numeric value. Video 1, ranks misread as 11/5 and not applied: barrier for 22.8% of Max Life; Unstoppable; 1% Max Life per second; +15% Movement Speed; 2 stacks of Resolve. The Resolve count stays off the upgrade, which remains name-only. Screenshot rank is 18/15. The earlier stored rank was 14. Screenshot: rank 18/15, CD 8.45s, +10% Maximum Life, barrier 87.6% (414), Unstoppable, knockback, 15%[x] Movement Speed, 2 Resolve at 25%[+] armor per stack. The barrier's 414 is the tooltip amount, not Max Life. Max Life stays 473. No duration in seconds was shown. Screenshot answer: this skill deals no damage, so coeffPct is 0.",
       "allocated": true,
       "rankTotal": 18,
       "baseRank": null,
@@ -1466,9 +1468,10 @@
           "bucket": null,
           "conditions": null,
           "stacking": null,
-          "value": null,
-          "verified": false,
-          "source": "user video 2026-10-21 batch2 (transcribed)"
+          "value": 0,
+          "verified": true,
+          "source": "user screenshot 2026-10-22",
+          "note": "War Cry deals no direct damage. coeffPct is 0. 38.5%[x] stays a buff. Source: user screenshot 2026-10-22."
         },
         {
           "stat": "damage",
@@ -1485,7 +1488,7 @@
       ],
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
-      "coeffPct": null,
+      "coeffPct": 0,
       "rank": 29,
       "maxRank": 15,
       "tooltip": "CD 15.09s, 38.5%[x] 4s, Berserking 4s, 2 Ferocity, Vulnerable 4s. Berserking 75%[x] damage, 15%[x] Movement Speed. Vulnerable 20%.",
@@ -1536,7 +1539,7 @@
       "bonusRank": null,
       "allocationVerified": true,
       "allocationSource": "user confirmation 2026-10-22",
-      "note": "Video 1, ranks misread as 11/5 and not applied: +38.5% damage for 4s; +10% bonus and Berserking for 4s; 2 stacks of Ferocity; Vulnerable for 4s. Screenshot rank is 29/15. The earlier stored rank was 15. Screenshot: CD 15.09s, 38.5%[x] for 4s, Berserking 4s, 2 Ferocity, Vulnerable 4s. Keyword text on the same tooltip: Berserking 75%[x] damage and 15%[x] Movement Speed, Vulnerable 20%. Those keyword lines are not copied onto the sheet Vulnerable total. 38.5%[x] is a buff, so coeffPct stays unset.",
+      "note": "Video 1, ranks misread as 11/5 and not applied: +38.5% damage for 4s; +10% bonus and Berserking for 4s; 2 stacks of Ferocity; Vulnerable for 4s. Screenshot rank is 29/15. The earlier stored rank was 15. Screenshot: CD 15.09s, 38.5%[x] for 4s, Berserking 4s, 2 Ferocity, Vulnerable 4s. Keyword text on the same tooltip: Berserking 75%[x] damage and 15%[x] Movement Speed, Vulnerable 20%. Those keyword lines are not copied onto the sheet Vulnerable total. 38.5%[x] is a buff, so coeffPct stays unset. Screenshot answer: this skill deals no damage, so coeffPct is 0.",
       "cooldown": 15.09,
       "duration": 4
     },
@@ -1861,7 +1864,7 @@
       "name": "Wrath of the Berserker",
       "category": null,
       "tags": null,
-      "dot": true,
+      "dot": false,
       "furyGeneratePerCast": null,
       "furySpendPerCast": null,
       "variantOf": null,
@@ -1871,9 +1874,10 @@
           "bucket": null,
           "conditions": null,
           "stacking": null,
-          "value": null,
-          "verified": false,
-          "source": "user video 2026-10-21 batch2 (transcribed)"
+          "value": 0,
+          "verified": true,
+          "source": "user screenshot 2026-10-22",
+          "note": "No direct hit. coeffPct is 0. Source: user screenshot 2026-10-22."
         },
         {
           "stat": "damage",
@@ -1926,7 +1930,7 @@
       ],
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
-      "coeffPct": null,
+      "coeffPct": 0,
       "rank": 29,
       "maxRank": 15,
       "tooltip": "CD 54.32s, 30%[x], Berserking, Unstoppable 15.8s; fire aura 560% + burn 56% over 5s (DoT); +50% all resistance; Berserking base doubled; 1 Overpower/s.",
@@ -1971,7 +1975,7 @@
         }
       ],
       "transcribed": "CD 34.32s, +50%[+] dmg, Unstoppable 15.0s, Basic +560%[+], burn 279,568 (32%), +10% All Res, Berserking base doubled, 1 Overpower/s. +20%[+] AS & +30%[+] Fury gen; duration 18.0s; Full Throttle aura 2,750,484 (360%) + burn 279,568 (32%), +10% All Res; Deep Impact 2,095,283 (256%) Fire; Maximum Carnage +1s per 25 Fury up to 5.",
-      "note": "no direct-hit coefficient shown; percentages in tooltip are burn/secondary effects Video 1, ranks misread as 11/5 and not applied: +50% damage, Berserking and Unstoppable for 15s; Fire aura for 2,759,584, burn 279,568, +50% All Resistance; Berserking's base bonus doubled; 1 stack of Overpower per second. Screenshot rank is 29/15. The earlier stored rank was 11. Screenshot: rank 29/15, CD 54.32s, 30%[x], Berserking, Unstoppable 15.8s, fire aura 560% and burn 56% over 5s (DoT), +50% all resistance, Berserking's base is doubled, 1 Overpower per second. Overpower 26%[+] per stack, max 4, 4s each, matches the Earthstriker line and is not stored again. dot is true because the burn is a DoT. 30%[x] is a buff, and 560% and 56% are two damage figures, so coeffPct stays unset.",
+      "note": "no direct-hit coefficient shown; percentages in tooltip are burn/secondary effects Video 1, ranks misread as 11/5 and not applied: +50% damage, Berserking and Unstoppable for 15s; Fire aura for 2,759,584, burn 279,568, +50% All Resistance; Berserking's base bonus doubled; 1 stack of Overpower per second. Screenshot rank is 29/15. The earlier stored rank was 11. Screenshot: rank 29/15, CD 54.32s, 30%[x], Berserking, Unstoppable 15.8s, fire aura 560% and burn 56% over 5s (DoT), +50% all resistance, Berserking's base is doubled, 1 Overpower per second. Overpower 26%[+] per stack, max 4, 4s each, matches the Earthstriker line and is not stored again. dot is true because the burn is a DoT. 30%[x] is a buff, and 560% and 56% are two damage figures, so coeffPct stays unset. Screenshot answer: no direct hit, so coeffPct is 0 and dot is false for that hit. The fire aura and the DoT burn are the aura object. 30%[x] stays a buff.",
       "allocated": true,
       "rankTotal": 29,
       "baseRank": null,
@@ -1979,7 +1983,18 @@
       "allocationVerified": true,
       "allocationSource": "user confirmation 2026-10-22",
       "cooldown": 54.32,
-      "duration": 15.8
+      "duration": 15.8,
+      "aura": {
+        "coeffPct": 560,
+        "dot": false,
+        "burnCoeffPct": 56,
+        "burnDot": true,
+        "burnDuration": 5,
+        "uptime": 0.290869,
+        "estimate": true,
+        "source": "user screenshot 2026-10-22",
+        "note": "Fire aura 560% plus a 56% burn over 5s. The burn is damage over time. Both apply while Wrath is active, 15.8s of a 54.32s cooldown (15.8/54.32 = 0.290869). The 56% is the burn total over 5s. It is not divided by 5 and it is not repeated inside the aura window. The uptime is an estimate."
+      }
     },
     {
       "id": "iron-maelstrom",
@@ -5448,7 +5463,7 @@
         },
         {
           "stat": "Overpower damage per stack",
-          "bucket": "additive",
+          "bucket": "overpower",
           "value": 26,
           "conditions": [
             "while you have Overpower"
@@ -5457,7 +5472,7 @@
           "source": "user screenshot 2026-10-22",
           "verified": true,
           "unit": "%",
-          "note": "Screenshot: +26%[+] damage per stack, stacks up to 4, each lasts 4s. Condition copied from the aspect description: increased damage while you have Overpower.",
+          "note": "Screenshot: +26%[+] damage per stack, stacks up to 4, each lasts 4s. This is the Overpower term. The build resolves 4 stacks as overpowerPct 104, so this line is not added again. Condition copied from the aspect description: increased damage while you have Overpower.",
           "kind": "damage"
         }
       ],

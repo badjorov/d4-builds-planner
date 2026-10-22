@@ -202,9 +202,31 @@ export function engineInputFromBuild(catalog, build, opts = {}) {
           notes.push(`${entity.name}: condition unknown, damage effect not applied.`);
           continue;
         }
+        if (piece.bucket === 'overpower' && typeof build.overpowerPct === 'number') {
+          notes.push(`${entity.name}: Overpower per-stack line is included in overpowerPct and is not added again.`);
+          continue;
+        }
         modifiers.push({ name: `${entity.name} (${slot.slotId})`, bucket: piece.bucket, value: piece.value, active: true, kind, id: entity.id });
       }
     }
+  }
+  const auras = [];
+  for (const skill of skills) {
+    const aura = skill.aura;
+    if (!aura || typeof aura.uptime !== 'number') continue;
+    if (typeof aura.coeffPct === 'number' && aura.coeffPct !== 0) {
+      auras.push({ name: `${skill.name} aura`, coeffPct: aura.coeffPct, isDot: aura.dot === true, uptime: aura.uptime, estimate: aura.estimate === true });
+    }
+    if (typeof aura.burnCoeffPct === 'number' && aura.burnCoeffPct !== 0) {
+      auras.push({ name: `${skill.name} burn`, coeffPct: aura.burnCoeffPct, isDot: aura.burnDot !== false, uptime: aura.uptime, estimate: aura.estimate === true });
+    }
+  }
+  for (const aura of auras) {
+    if (aura.estimate) notes.push(`${aura.name} is applied for uptime ${aura.uptime}. That fraction is an estimate.`);
+  }
+  if (build.overpowerStacks && typeof build.overpowerPct === 'number') {
+    const stacks = build.overpowerStacks;
+    notes.push(`Overpower is ${stacks.activeStacks} stacks × ${stacks.perStack}% = ${build.overpowerPct}%, including a ${stacks.lingerSeconds}s linger. The uptime is an estimate.`);
   }
   const mainStatPer10 = catalog.mainstat?.verified === true ? catalog.mainstat.percentPer10 : null;
   return {
@@ -220,7 +242,25 @@ export function engineInputFromBuild(catalog, build, opts = {}) {
     overpowerPct: build.overpowerPct,
     isDot,
     modifiers,
-    notes
+    notes,
+    auras
+  };
+}
+
+function scoreWithAuras(input, patch) {
+  const direct = compute({ ...input, ...patch });
+  let total = direct.total;
+  const extra = [];
+  for (const aura of input.auras || []) {
+    const part = compute({ ...input, ...patch, coeffPct: aura.coeffPct, isDot: aura.isDot });
+    const scaled = part.total * aura.uptime;
+    total += scaled;
+    extra.push({ label: aura.name, value: scaled, expr: `${part.total} × ${aura.uptime}` });
+  }
+  return {
+    ...direct,
+    total,
+    terms: [...direct.terms, ...extra]
   };
 }
 
@@ -230,7 +270,7 @@ export function evaluateBuild(catalog, build, opts = {}) {
   const flags = [];
   if (typeof uptime.vulnerable === 'number') flags.push(['vulnerable', uptime.vulnerable]);
   if (typeof uptime.overpower === 'number') flags.push(['overpower', uptime.overpower]);
-  if (!flags.length) return { input, result: compute(input), marginal: marginal(input) };
+  if (!flags.length) return { input, result: scoreWithAuras(input, {}), marginal: marginal(input) };
   let states = [{ patch: {}, weight: 1 }];
   for (const [key, raw] of flags) {
     const on = Math.min(1, Math.max(0, raw));
@@ -244,7 +284,7 @@ export function evaluateBuild(catalog, build, opts = {}) {
   let total = 0;
   let shown = null;
   for (const state of states) {
-    const result = compute({ ...input, ...state.patch });
+    const result = scoreWithAuras(input, state.patch);
     total += result.total * state.weight;
     if (!shown || state.weight >= shown.weight) shown = { result, weight: state.weight };
   }
