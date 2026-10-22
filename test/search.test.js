@@ -114,6 +114,8 @@ test('a candidate with the equipped layout scores the equipped power', () => {
     critChance: saved.critChance,
     critDmg: saved.critDmg,
     maxFury: saved.maxFury,
+    sheetContext: saved.sheetContext,
+    currentFury: saved.currentFury,
     vulnPct: saved.vulnPct,
     overpowerPct: saved.overpowerPct,
     additivePct: saved.additivePct,

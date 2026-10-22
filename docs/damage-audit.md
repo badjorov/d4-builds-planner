@@ -27,9 +27,11 @@ No other numbers were copied from those pages.
 
 The tooltip is stored at `data/barbarian.json:6375`: "Skills deal 0.50%[x] [0.35-0.50]% increased damage per point of Fury you have." The effect value is the per-point rate, 0.5, bucket multiplicative, conditions empty, verified. Max Fury on the defence sheet is 826 (`data/builds.json:727`).
 
-The previous calc used 0.5 a single time, factor 1.005. The rate times Max Fury is `1 + 0.005 × 826 = 5.13`, modifier value 413. That is the headline now (`src/catalog.js` scales the rate when `build.maxFury` is a number). With `maxFury` unset, the rate stays 0.5, so a search that has no Max Fury still uses the per-point rate once.
+The previous calc used 0.5 a single time, factor 1.005. The rate times Max Fury is `1 + 0.005 × 826 = 5.13`, modifier value 413. That is the headline now. Ramaladni reads `currentFury` when that input is a number, and otherwise the resolved Max Fury. With both unset, the rate stays 0.5, so a search that has no Max Fury still uses the per-point rate once.
 
-Current Fury on a hit is not stored. The same tooltip drains 7% Fury per second in combat (`data/barbarian.json:6337`). Max Fury 826, regeneration 85, and +52.5% generation are town values and may be higher in combat. 5.13× is the full-Max-Fury reading. A lower current Fury would shrink this factor. The ratio against the old 1.005 line is 5.13 / 1.005 = 5.1045, and the blended headline moves from 8,306,112,712.15 to 42,398,366,381.44 by that exact ratio.
+`currentFury` is empty on the saved build. It defaults to the resolved Max Fury, 826, and that default is flagged as an estimate. The same tooltip drains 7% Fury per second in combat (`data/barbarian.json:6337`), so 5.13× is the full-Max-Fury reading. A measured current Fury below 826 would shrink this factor. The ratio against the old 1.005 line is 5.13 / 1.005 = 5.1045, and the blended headline moves from 8,306,112,712.15 to 42,398,366,381.44 by that exact ratio.
+
+`sheetContext` is `town` or `combat`. The saved build is `town`. Every `combat` field is empty until in-combat screenshots are entered. In `combat` context a missing combat value uses the town value, and the result lists that fallback. The town context is the headline in the table below. The fields to fill are in `docs/combat-sheet-template.md`. Fury regeneration 85, generation 52.5%, cost reduction -30%, and Fury on kill 11 are stored as town readings for that template. They stay records.
 
 ## Factor table
 

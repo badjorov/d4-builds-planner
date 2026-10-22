@@ -77,6 +77,8 @@ function run() {
     critChance: num($('critChance').value),
     critDmg: num($('critDmg').value),
     maxFury: savedBuild?.maxFury ?? null,
+    sheetContext: savedBuild?.sheetContext ?? 'town',
+    currentFury: savedBuild?.currentFury ?? null,
     vulnPct: num($('vulnPct').value),
     overpowerPct: num($('overpowerPct').value),
     castsPerSecond: num($('castsPerSecond').value),

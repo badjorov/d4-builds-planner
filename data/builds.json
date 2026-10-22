@@ -673,28 +673,67 @@
         "missingPotions": 0
       },
       "defense": {
-        "life": 473,
-        "armor": 33715,
-        "resists": 21218,
-        "armorMitigationPct": 78.2,
-        "resistMitigationPct": 85.9,
+        "life": {
+          "town": 473,
+          "combat": null
+        },
+        "armor": {
+          "town": 33715,
+          "combat": null
+        },
+        "resists": {
+          "town": 21218,
+          "combat": null
+        },
+        "armorMitigationPct": {
+          "town": 78.2,
+          "combat": null
+        },
+        "resistMitigationPct": {
+          "town": 85.9,
+          "combat": null
+        },
         "dr": [
           50
         ],
         "armorMitigationScope": "direct and DoT",
         "mitigationCapPct": 90,
         "coldResistance": {
-          "gear": 18947,
-          "intelligence": 629,
-          "other": 1642,
+          "gear": {
+            "town": 18947,
+            "combat": null
+          },
+          "intelligence": {
+            "town": 629,
+            "combat": null
+          },
+          "other": {
+            "town": 1642,
+            "combat": null
+          },
           "note": "Cold breakdown with Stone of Jordan equipped. Every resistance is 21,218 and reduces 85.9%. These three parts are the cold line only."
         }
       },
-      "weaponDmg": 4596,
-      "mainStat": 4101,
-      "critChance": 100,
-      "critDmg": 7424.8,
-      "additivePct": 606.7,
+      "weaponDmg": {
+        "town": 4596,
+        "combat": null
+      },
+      "mainStat": {
+        "town": 4101,
+        "combat": null
+      },
+      "critChance": {
+        "town": 100,
+        "combat": null
+      },
+      "critDmg": {
+        "town": 7424.8,
+        "combat": null
+      },
+      "additivePct": {
+        "town": 606.7,
+        "combat": null
+      },
       "additiveAudit": {
         "verified": true,
         "source": "user screenshot 2026-10-22",
@@ -703,28 +742,103 @@
       "offensiveSheet": {
         "source": "user screenshot 2026-10-22",
         "verified": true,
-        "allDamage": 606.7,
-        "allDamageItemsAndParagon": 316.5,
-        "vulnerable": 208.8,
-        "physical": 250.5,
-        "fire": 120.5,
-        "lightning": 90.5,
-        "cold": 134.3,
-        "holy": 90.5,
-        "poison": 90.5,
-        "shadow": 90.5,
-        "vsElites": 133.5,
-        "vsHealthy": 26,
-        "vsInjured": 26,
-        "whileHealthy": 223.2,
-        "whileFortified": 35,
-        "thorns": 0,
+        "allDamage": {
+          "town": 606.7,
+          "combat": null
+        },
+        "allDamageItemsAndParagon": {
+          "town": 316.5,
+          "combat": null
+        },
+        "vulnerable": {
+          "town": 208.8,
+          "combat": null
+        },
+        "physical": {
+          "town": 250.5,
+          "combat": null
+        },
+        "fire": {
+          "town": 120.5,
+          "combat": null
+        },
+        "lightning": {
+          "town": 90.5,
+          "combat": null
+        },
+        "cold": {
+          "town": 134.3,
+          "combat": null
+        },
+        "holy": {
+          "town": 90.5,
+          "combat": null
+        },
+        "poison": {
+          "town": 90.5,
+          "combat": null
+        },
+        "shadow": {
+          "town": 90.5,
+          "combat": null
+        },
+        "vsElites": {
+          "town": 133.5,
+          "combat": null
+        },
+        "vsHealthy": {
+          "town": 26,
+          "combat": null
+        },
+        "vsInjured": {
+          "town": 26,
+          "combat": null
+        },
+        "whileHealthy": {
+          "town": 223.2,
+          "combat": null
+        },
+        "whileFortified": {
+          "town": 35,
+          "combat": null
+        },
+        "thorns": {
+          "town": 0,
+          "combat": null
+        },
         "note": "Screenshot offensive sheet. All Damage 606.7% includes the tooltip split +316.5% from items and Paragon. Vulnerable Damage 208.8% replaces the video 206.8 and 226.8. vs Elites 133.5% replaces the video 135.5%. while Fortified 35.0% replaces the video 55%. Fire 120.5% replaces the video 135.0%. vs Healthy 26.0% and vs Injured 26.0% are separate rows. while Healthy 223.2% is the player. Thorns 0."
       },
       "vulnerableDamageInAdditive": true,
-      "vulnPct": 208.8,
+      "vulnPct": {
+        "town": 208.8,
+        "combat": null
+      },
       "overpowerPct": 104,
-      "maxFury": 826,
+      "maxFury": {
+        "town": 826,
+        "combat": null
+      },
+      "sheetContext": "town",
+      "currentFury": {
+        "town": null,
+        "combat": null
+      },
+      "furyRegeneration": {
+        "town": 85,
+        "combat": null
+      },
+      "furyGenerationPct": {
+        "town": 52.5,
+        "combat": null
+      },
+      "furyCostReductionPct": {
+        "town": -30,
+        "combat": null
+      },
+      "furyOnKill": {
+        "town": 11,
+        "combat": null
+      },
       "resistanceCapPct": 80,
       "expertise": "polearm",
       "runes": [

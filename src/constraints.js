@@ -1,4 +1,5 @@
 import { slotIds } from './catalog.js';
+import { applySheetContext } from './sheet-context.js';
 
 export function furyBalance(catalog, build) {
   const rotation = build.rotation?.length
@@ -128,7 +129,7 @@ export function checkBuild(catalog, build, minimums = {}) {
     }
   }
   if (typeof mins.ehp === 'number') {
-    const hp = effectiveHp(build.defense);
+    const hp = effectiveHp(applySheetContext(build).build.defense);
     if (hp.ehp == null || hp.ehp < mins.ehp) {
       reject('ehp', hp.ehp == null
         ? `EHP is unknown (${hp.reason}) and the minimum is ${mins.ehp}.`

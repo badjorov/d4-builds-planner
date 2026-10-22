@@ -31,7 +31,8 @@ test('the sheet crit percent is additive and the weapon [x] lines sum', () => {
 });
 
 test('Ramaladni multiplies 0.5%[x] by the stored Max Fury', () => {
-  assert.equal(saved.maxFury, 826);
+  assert.equal(saved.maxFury.town, 826);
+  assert.equal(saved.maxFury.combat, null);
   const ram = catalog.uniques.find(entry => entry.id === 'ramaladni');
   const line = ram.effects.find(effect => effect.stat === 'damage per point of Fury');
   assert.equal(line.value, 0.5);
@@ -39,9 +40,44 @@ test('Ramaladni multiplies 0.5%[x] by the stored Max Fury', () => {
   const evaluated = evaluateBuild(catalog, whirlwindBuild());
   const applied = evaluated.input.modifiers.find(mod => mod.id === 'ramaladni' && mod.bucket === 'multiplicative');
   assert.equal(applied.value, 0.5 * 826);
-  const bare = evaluateBuild(catalog, { ...whirlwindBuild(), maxFury: null });
+  assert.ok(Math.abs(evaluated.result.total - 42398366381.44) < 0.01);
+  const bare = evaluateBuild(catalog, { ...whirlwindBuild(), maxFury: null, currentFury: { town: null, combat: null } });
   const once = bare.input.modifiers.find(mod => mod.id === 'ramaladni' && mod.bucket === 'multiplicative');
   assert.equal(once.value, 0.5);
+  assert.equal(bare.currentFuryEstimate, false);
+  assert.equal(evaluated.currentFuryEstimate, true);
+  assert.equal(evaluated.input.currentFury, 826);
+  assert.match(evaluated.input.notes.join('\n'), /estimate/);
+  assert.equal(saved.maxFury.town, 826);
+});
+
+test('sheetContext selects the combat reading and falls back to town', () => {
+  const build = {
+    ...whirlwindBuild(),
+    sheetContext: 'combat',
+    critDmg: { town: 7424.8, combat: 8000 },
+    weaponDmg: { town: 4596, combat: null },
+    currentFury: { town: null, combat: 400 }
+  };
+  const combat = evaluateBuild(catalog, build, { sheetContext: 'combat' });
+  assert.equal(combat.sheetContext, 'combat');
+  assert.equal(combat.input.critDmg, 8000);
+  assert.equal(combat.input.weaponDmg, 4596);
+  assert.equal(combat.sheetFallbacks.some(item => item.field === 'weaponDmg' && item.town === 4596), true);
+  assert.equal(combat.sheetFallbacks.some(item => item.field === 'critDmg'), false);
+  assert.match(combat.input.notes.join('\n'), /Weapon Damage/);
+  assert.match(combat.input.notes.join('\n'), /No combat value is stored/);
+  const ram = combat.input.modifiers.find(mod => mod.id === 'ramaladni' && mod.bucket === 'multiplicative');
+  assert.equal(ram.value, 0.5 * 400);
+  assert.equal(combat.currentFuryEstimate, false);
+  const town = evaluateBuild(catalog, build, { sheetContext: 'town' });
+  assert.equal(town.sheetContext, 'town');
+  assert.equal(town.input.critDmg, 7424.8);
+  assert.equal(town.input.weaponDmg, 4596);
+  assert.equal(town.sheetFallbacks.length, 0);
+  assert.equal(town.input.notes.some(note => note.includes('No combat value is stored')), false);
+  assert.equal(saved.weaponDmg.town, 4596);
+  assert.equal(saved.sheetContext, 'town');
 });
 
 test('critAudit.reading switches the gear crit lines', () => {

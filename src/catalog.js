@@ -1,4 +1,5 @@
 import { compute, marginal, SEPARATE_CRIT_KINDS } from './engine.js';
+import { applySheetContext, resolveReading, sheetContextOf } from './sheet-context.js';
 
 export const ENTITY_KEYS = {
   skill: 'skills',
@@ -259,9 +260,16 @@ export function damageEffects(entity, build, catalog) {
     const bucket = knownBucket(scoring.bucket) || (FORMULA_BUCKETS.has(scoring.bucket) ? scoring.bucket : null);
     if (value == null || !bucket) continue;
     let perPointOfFury = null;
-    if (/per point of fury/i.test(scoring.stat || '') && typeof build?.maxFury === 'number') {
-      perPointOfFury = { rate: value, fury: build.maxFury };
-      value = value * build.maxFury;
+    const fury = typeof build?.currentFury === 'number'
+      ? build.currentFury
+      : (typeof build?.maxFury === 'number' ? build.maxFury : null);
+    if (/per point of fury/i.test(scoring.stat || '') && fury != null) {
+      perPointOfFury = {
+        rate: value,
+        fury,
+        estimate: build?.currentFuryEstimate === true && typeof build?.currentFury === 'number'
+      };
+      value = value * fury;
     }
     const judged = build ? conditionState(scoring, build, catalog) : { state: scoring.conditions && scoring.conditions.length === 0 ? 'active' : 'unknown' };
     if (judged.state === 'inactive') continue;
@@ -340,7 +348,10 @@ function appendDamageModifiers(entity, build, catalog, modifiers, notes, label, 
     if (piece.when) modifier.when = piece.when;
     if (piece.perPointOfFury) {
       modifier.perPointOfFury = piece.perPointOfFury;
-      notes.push(`${label.name}: ${piece.perPointOfFury.rate}%[x] per point of Fury × Max Fury ${piece.perPointOfFury.fury} = ${piece.value}%. The tooltip is the per-point rate. Current Fury during a hit is not measured. The same tooltip drains 7% Fury per second in combat, so this uses the sheet Max Fury.`);
+      const basis = piece.perPointOfFury.estimate
+        ? `Current Fury was not measured, so Max Fury ${piece.perPointOfFury.fury} is used. That default is an estimate.`
+        : `Current Fury ${piece.perPointOfFury.fury}.`;
+      notes.push(`${label.name}: ${piece.perPointOfFury.rate}%[x] per point of Fury × ${piece.perPointOfFury.fury} = ${piece.value}%. The tooltip is the per-point rate. ${basis} The same tooltip drains 7% Fury per second in combat, so a full Max Fury reading is the upper reading.`);
     }
     modifiers.push(modifier);
   }
@@ -403,6 +414,8 @@ function applyOffensiveSheet(build, skills, modifiers, notes) {
 }
 
 export function engineInputFromBuild(catalog, build, opts = {}) {
+  const applied = applySheetContext(build, sheetContextOf(build, opts));
+  build = applied.build;
   const skills = (build.skills || []).map(id => skillById(catalog, id)).filter(Boolean);
   const coeffPct = skills.length === 1 ? skills[0].coeffPct : null;
   const dotKnown = skills.length > 0 && skills.every(skill => skill.dot === true || skill.dot === false);
@@ -518,6 +531,13 @@ export function engineInputFromBuild(catalog, build, opts = {}) {
     notes.push(`Vulnerable formula [A][B][C]: ×1.2 vs Vulnerable targets (high confidence), times (1 + sum of [x] Vulnerable Damage Multiplier) (medium confidence).${sheetText}`);
   }
   const mainStatPer10 = catalog.mainstat?.verified === true ? catalog.mainstat.percentPer10 : null;
+  if (applied.context === 'combat' && applied.fallbacks.length) {
+    const labels = applied.fallbacks.map(item => `${item.label} (${item.town})`).join(', ');
+    notes.push(`Sheet context is combat. No combat value is stored for: ${labels}. The town value is used.`);
+  }
+  if (applied.currentFuryEstimate && typeof build.currentFury === 'number') {
+    notes.push(`Current Fury defaults to Max Fury ${build.currentFury}. That default is an estimate.`);
+  }
   return {
     weaponDmg: build.weaponDmg,
     coeffPct,
@@ -535,7 +555,11 @@ export function engineInputFromBuild(catalog, build, opts = {}) {
     auras,
     additivePct: typeof build.additivePct === 'number' ? build.additivePct : null,
     vulnerableDamageInAdditive: build.vulnerableDamageInAdditive === true,
-    alternateCrit
+    alternateCrit,
+    sheetContext: applied.context,
+    sheetFallbacks: applied.fallbacks,
+    currentFuryEstimate: applied.currentFuryEstimate,
+    currentFury: typeof build.currentFury === 'number' ? build.currentFury : null
   };
 }
 
@@ -674,7 +698,7 @@ export function evaluateBuild(catalog, build, opts = {}) {
   const result = blendScore(input, uptime);
   let critAlternate = null;
   let conditionalCritAlternate = null;
-  if (typeof build.critChance === 'number' && build.critChance > 0 && typeof build.critDmg === 'number' && build.critDmg > 0 && opts.omitGearCritMult !== true && opts.omitCritMult !== true) {
+  if (typeof input.critChance === 'number' && input.critChance > 0 && typeof input.critDmg === 'number' && input.critDmg > 0 && opts.omitGearCritMult !== true && opts.omitCritMult !== true) {
     const gearInSheet = critReading === 'sheet-includes-gear-x' || critReading === 'sheet-includes-gear-x-active-weapon';
     const altReading = gearInSheet ? 'headline' : 'sheet-includes-gear-x';
     const alt = blendScore(applyFormulaOpts(engineInputFromBuild(catalog, build, opts), {
@@ -694,7 +718,17 @@ export function evaluateBuild(catalog, build, opts = {}) {
       };
     }
   }
-  return { input, result, marginal: marginal(input), critReading, critAlternate, conditionalCritAlternate };
+  return {
+    input,
+    result,
+    marginal: marginal(input),
+    critReading,
+    critAlternate,
+    conditionalCritAlternate,
+    sheetContext: input.sheetContext,
+    sheetFallbacks: input.sheetFallbacks,
+    currentFuryEstimate: input.currentFuryEstimate
+  };
 }
 
 export function verificationFields(catalog, build, opts = {}) {
@@ -728,7 +762,7 @@ export function verificationFields(catalog, build, opts = {}) {
   }
   const manual = opts.manualInputsVerified === true;
   for (const key of ['weaponDmg', 'mainStat', 'critChance', 'critDmg']) {
-    push(`input/${key}`, typeof build[key] === 'number' && manual);
+    push(`input/${key}`, resolveReading(build[key], sheetContextOf(build, opts)).value != null && manual);
   }
   return fields;
 }
