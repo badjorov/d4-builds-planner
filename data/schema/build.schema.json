@@ -59,6 +59,8 @@
     "critChance": { "type": ["number", "null"] },
     "critDmg": { "type": ["number", "null"] },
     "critAudit": { "$ref": "#/$defs/critAudit" },
+    "additivePct": { "type": ["number", "null"] },
+    "additiveAudit": { "$ref": "#/$defs/additiveAudit" },
     "vulnPct": { "type": ["number", "null"] },
     "overpowerPct": { "type": ["number", "null"] },
     "overpowerStacks": { "$ref": "#/$defs/overpowerStacks" },
@@ -197,6 +199,16 @@
         "note": { "type": "string" }
       }
     },
+    "additiveAudit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["verified", "source", "note"],
+      "properties": {
+        "verified": { "type": "boolean" },
+        "source": { "type": "string", "minLength": 1 },
+        "note": { "type": "string" }
+      }
+    },
     "overpowerStacks": {
       "type": "object",
       "additionalProperties": false,
@@ -225,6 +237,9 @@
         "furyAbove50": { "type": ["number", "null"] },
         "unstoppable": { "type": ["number", "null"] },
         "fortified": { "type": ["number", "null"] },
+        "healthyInjured": { "type": ["number", "null"] },
+        "dustDevil": { "type": ["number", "null"] },
+        "consecutiveWeapon": { "type": ["number", "null"] },
         "estimate": {
           "type": "object",
           "additionalProperties": false,
@@ -236,6 +251,9 @@
             "furyAbove50": { "type": "boolean" },
             "unstoppable": { "type": "boolean" },
             "fortified": { "type": "boolean" },
+            "healthyInjured": { "type": "boolean" },
+            "dustDevil": { "type": "boolean" },
+            "consecutiveWeapon": { "type": "boolean" },
             "note": { "type": "string" }
           }
         }

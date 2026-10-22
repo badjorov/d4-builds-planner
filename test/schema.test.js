@@ -292,12 +292,14 @@ test('video 1 keeps confirmed values and flags the conflicting readings', () => 
   assert.equal(might.suspect, undefined);
   assert.equal(might.effects.find(effect => effect.stat === 'bonus to Magic nodes in range').value, 360);
   assert.equal(might.effects.find(effect => effect.stat === 'legendary bonus vs Healthy and Injured').value, 26);
-  for (const id of ['twister', 'imbiber', 'marshal', 'wrath']) {
+  const screenshotGlyphs = { twister: 135, imbiber: 133, marshal: 131, wrath: 131 };
+  for (const [id, level] of Object.entries(screenshotGlyphs)) {
     const glyph = catalog.glyphs.find(entry => entry.id === id);
-    assert.equal(glyph.level, 133);
-    assert.equal(glyph.provisional, true);
-    assert.deepEqual(glyph.levelApproximate, [131, 135]);
-    assert.equal(glyph.levelVerified, false);
+    assert.equal(glyph.level, level);
+    assert.equal(glyph.provisional, undefined);
+    assert.equal(glyph.levelVerified, true);
+    assert.equal(glyph.verified, true);
+    assert.equal(glyph.source, 'user screenshot 2026-10-22');
     assert.equal(glyph.suspect, undefined);
   }
   assert.equal(catalog.glyphs.filter(glyph => !['might', 'twister', 'imbiber', 'marshal', 'wrath'].includes(glyph.id)).every(glyph => glyph.level === 0 && glyph.levelVerified === true), true);
@@ -306,7 +308,15 @@ test('video 1 keeps confirmed values and flags the conflicting readings', () => 
   assert.equal(saved.suspectReadings.every(reading => reading.suspect === true), true);
   assert.equal(saved.suspectReadings.some(reading => reading.field === 'glyph.level'), false);
   assert.equal(saved.glyphs.find(glyph => glyph.glyphId === 'might').level, 135);
-  assert.equal(saved.glyphs.filter(glyph => glyph.glyphId !== 'might').every(glyph => glyph.level === 133 && glyph.provisional === true && glyph.levelVerified === false && glyph.levelApproximate[0] === 131 && glyph.levelApproximate[1] === 135), true);
+  assert.equal(saved.glyphs.find(glyph => glyph.glyphId === 'twister').level, 135);
+  assert.equal(saved.glyphs.find(glyph => glyph.glyphId === 'imbiber').level, 133);
+  assert.equal(saved.glyphs.find(glyph => glyph.glyphId === 'marshal').level, 131);
+  assert.equal(saved.glyphs.find(glyph => glyph.glyphId === 'wrath').level, 131);
+  assert.equal(saved.glyphs.filter(glyph => glyph.glyphId !== 'might').every(glyph => glyph.levelVerified === true && glyph.provisional !== true), true);
+  assert.equal(saved.additivePct, 606.7);
+  assert.equal(saved.additiveAudit.verified, false);
+  assert.equal(saved.uptime.healthyInjured, 0.7);
+  assert.equal(saved.uptime.estimate.healthyInjured, true);
   const decimator = catalog.paragonNodes.find(node => node.id === 'decimator-legendary');
   assert.equal(decimator.effects[0].alignWithState, true);
   assert.deepEqual(decimator.effects[0].conditions, ['vs Vulnerable']);

@@ -133,7 +133,8 @@ function skillById(catalog, id) {
   return catalog.skills.find(skill => skill.id === id) || null;
 }
 
-const BLENDED_UPTIMES = new Set(['channeling', 'fortified', 'unstoppable', 'furyAbove50']);
+const BLENDED_UPTIMES = new Set(['channeling', 'fortified', 'unstoppable', 'furyAbove50', 'dustDevil']);
+const STATE_UPTIMES = new Set(['berserk', 'vulnerable', 'overpower', 'healthyInjured']);
 
 function singleSkill(build, catalog) {
   const skills = (build.skills || []).map(id => skillById(catalog, id)).filter(Boolean);
@@ -145,6 +146,8 @@ function isChanneledSkill(skill) {
 }
 
 function conditionUptimeKey(text) {
+  if (text.includes('healthy') && text.includes('injured')) return 'healthyInjured';
+  if (text.includes('consecutive') && text.includes('weapon')) return 'consecutiveWeapon';
   if (text.includes('berserk')) return 'berserk';
   if (text.includes('vulnerable')) return 'vulnerable';
   if (text.includes('overpower')) return 'overpower';
@@ -153,6 +156,13 @@ function conditionUptimeKey(text) {
   if (text.includes('unstoppable')) return 'unstoppable';
   if (/\babove\b/.test(text) && text.includes('50')) return 'furyAbove50';
   return null;
+}
+
+function createsDustDevils(skill) {
+  if (!skill) return false;
+  const listed = (skill.effects || []).some(effect => /dust devil/i.test(effect.stat || '') && pointValue(effect.value) != null);
+  const allocated = (skill.modifiers || []).some(mod => mod.allocated === true && /dust devil/i.test(mod.text || ''));
+  return listed || allocated;
 }
 
 function conditionState(effect, build, catalog) {
@@ -166,8 +176,26 @@ function conditionState(effect, build, catalog) {
   for (const raw of effect.conditions) {
     const text = String(raw).toLowerCase();
     if (text.includes('?')) return { state: 'unknown' };
+    if (text.includes('potion')) return { state: 'unknown' };
+    if (text.includes('dust devil')) {
+      if (!(text.includes('after') || text.includes('creating'))) return { state: 'inactive' };
+      if (!createsDustDevils(singleSkill(build, catalog))) return { state: 'inactive' };
+      const value = build.uptime?.dustDevil;
+      if (typeof value !== 'number') return { state: 'unknown' };
+      if (value <= 0) return { state: 'inactive' };
+      if (value < 1) partial = 'dustDevil';
+      continue;
+    }
     const key = conditionUptimeKey(text);
-    if (key === 'berserk' || key === 'vulnerable' || key === 'overpower') {
+    if (key === 'consecutiveWeapon') {
+      if (!isChanneledSkill(singleSkill(build, catalog))) return { state: 'inactive' };
+      const value = build.uptime?.consecutiveWeapon;
+      if (typeof value !== 'number') return { state: 'unknown' };
+      if (value <= 0) return { state: 'inactive' };
+      if (value < 1) partial = key;
+      continue;
+    }
+    if (STATE_UPTIMES.has(key)) {
       if (typeof build.uptime?.[key] !== 'number') return { state: 'unknown' };
       if (build.uptime[key] <= 0) return { state: 'inactive' };
       if (effect.alignWithState === true && build.uptime[key] < 1) partial = key;
@@ -244,14 +272,25 @@ function scaledGlyph(glyph, level) {
   return { glyph: { ...glyph, effects }, unscaled };
 }
 
-function appendDamageModifiers(entity, build, catalog, modifiers, notes, label) {
+function appendDamageModifiers(entity, build, catalog, modifiers, notes, label, alternateCrit) {
   for (const piece of damageEffects(entity, build, catalog)) {
+    if (piece.effect.alternateReading === true) {
+      if (piece.state === 'active' || piece.state === 'partial') {
+        alternateCrit.push({ name: label.name, value: piece.value });
+        notes.push(`${label.name}: +${piece.value}%[x] Critical Strike Damage is an alternate reading. The headline score leaves it out.`);
+      }
+      continue;
+    }
     if (piece.state === 'unknown') {
       const stat = piece.effect.stat || '';
-      if (/healthy|injured/i.test(stat)) notes.push(`${label.name}: Healthy and Injured share is pending, damage effect not applied.`);
+      const cond = (piece.effect.conditions || []).join(' ');
+      if (/potion/i.test(stat) || /potion/i.test(cond)) notes.push(`${label.name}: damage per missing potion needs a potion count. Needs input.`);
+      else if (/while you are healthy/i.test(cond)) notes.push(`${label.name}: ${piece.value}% while you are Healthy is the player's life. No player-healthy uptime is stored, so this line stays out of the score.`);
+      else if (/healthy|injured/i.test(stat) || /healthy|injured/i.test(cond)) notes.push(`${label.name}: Healthy and Injured share is pending, damage effect not applied.`);
       else notes.push(`${label.name}: condition unknown, damage effect not applied.`);
       continue;
     }
+    if (piece.bucket === 'additive' && typeof build.additivePct === 'number') continue;
     if (piece.bucket === 'overpower' && typeof build.overpowerPct === 'number') {
       notes.push(`${label.name}: Overpower per-stack line is included in overpowerPct and is not added again.`);
       continue;
@@ -276,6 +315,7 @@ export function engineInputFromBuild(catalog, build, opts = {}) {
   const overpower = typeof uptime.overpower === 'number' && uptime.overpower > 0;
   const modifiers = [];
   const notes = [];
+  const alternateCrit = [];
   if (skills.length > 1) notes.push('Multiple skills are not summed into one coefficient. Power uses no coeff until a single core skill is selected.');
   if (!dotKnown) notes.push('DoT flag is unknown for a selected skill. Crit was not removed.');
   for (const slot of build.gear || []) {
@@ -284,7 +324,7 @@ export function engineInputFromBuild(catalog, build, opts = {}) {
       if (!id) continue;
       const entity = (list || []).find(item => item.id === id);
       if (!entity) continue;
-      appendDamageModifiers(entity, build, catalog, modifiers, notes, { name: `${entity.name} (${slot.slotId})`, kind });
+      appendDamageModifiers(entity, build, catalog, modifiers, notes, { name: `${entity.name} (${slot.slotId})`, kind }, alternateCrit);
     }
   }
   for (const board of build.boards || []) {
@@ -294,7 +334,7 @@ export function engineInputFromBuild(catalog, build, opts = {}) {
         notes.push(`Paragon node ${nodeId} is not in the catalog.`);
         continue;
       }
-      appendDamageModifiers(node, build, catalog, modifiers, notes, { name: node.name, kind: 'paragon' });
+      appendDamageModifiers(node, build, catalog, modifiers, notes, { name: node.name, kind: 'paragon' }, alternateCrit);
     }
   }
   for (const placed of build.glyphs || []) {
@@ -317,7 +357,19 @@ export function engineInputFromBuild(catalog, build, opts = {}) {
       scoring = scaled.glyph;
       if (scaled.unscaled) notes.push(`${glyph.name}: provisional level ${placed.level} leaves ${scaled.unscaled} damage line${scaled.unscaled === 1 ? '' : 's'} unscored. No level-scaling formula is stored for ${scaled.unscaled === 1 ? 'it' : 'them'}. Needs input.`);
     }
-    appendDamageModifiers(scoring, build, catalog, modifiers, notes, { name: `${glyph.name} (glyph ${placed.level})`, kind: 'glyph' });
+    appendDamageModifiers(scoring, build, catalog, modifiers, notes, { name: `${glyph.name} (glyph ${placed.level})`, kind: 'glyph' }, alternateCrit);
+    for (const effect of scoring.effects || []) {
+      const stat = effect.stat || '';
+      if (/per 5/i.test(stat)) {
+        notes.push(`${glyph.name}: ${stat} shows ${effect.value} per 5. The paragon boards do not list attributes purchased in range, so this rate is not multiplied into a total. Flagged.`);
+      }
+      if (effect.scored === false && /dust devil/i.test(stat) && knownBucket(effect.bucket)) {
+        notes.push(`${glyph.name}: ${effect.value}% ${stat} stays off the skill coefficient. Dust Devil hits are not in that coefficient, and no Dust Devil hit rate is stored.`);
+      }
+    }
+  }
+  if (typeof build.additivePct === 'number') {
+    notes.push(`Additive audit: sheet All Damage ${build.additivePct}% is the additive input. Factor ${1 + build.additivePct / 100}. Video-read, unverified. Catalog +% Damage lines are not added on top. Physical damage and the conditional sheet lines stay separate.`);
   }
   const auras = [];
   for (const skill of skills) {
@@ -338,7 +390,7 @@ export function engineInputFromBuild(catalog, build, opts = {}) {
     notes.push(`Overpower is ${stacks.activeStacks} stacks × ${stacks.perStack}% = ${build.overpowerPct}%, including a ${stacks.lingerSeconds}s linger. The uptime is an estimate.`);
   }
   const estimate = uptime.estimate || {};
-  for (const [key, label] of [['channeling', 'Channeling'], ['furyAbove50', 'Fury above 50'], ['unstoppable', 'Unstoppable'], ['fortified', 'Fortified']]) {
+  for (const [key, label] of [['channeling', 'Channeling'], ['furyAbove50', 'Fury above 50'], ['unstoppable', 'Unstoppable'], ['fortified', 'Fortified'], ['healthyInjured', 'Healthy or Injured'], ['dustDevil', 'Dust Devil'], ['consecutiveWeapon', 'Consecutive weapon']]) {
     if (estimate[key] === true && typeof uptime[key] === 'number') {
       notes.push(`${label} uptime ${uptime[key]} is an estimate.`);
     }
@@ -363,7 +415,9 @@ export function engineInputFromBuild(catalog, build, opts = {}) {
     isDot,
     modifiers,
     notes,
-    auras
+    auras,
+    additivePct: typeof build.additivePct === 'number' ? build.additivePct : null,
+    alternateCrit
   };
 }
 
@@ -393,7 +447,7 @@ function blendFlags(input, uptime) {
   const flags = [];
   if (typeof uptime.vulnerable === 'number') flags.push(['vulnerable', uptime.vulnerable]);
   if (typeof uptime.overpower === 'number') flags.push(['overpower', uptime.overpower]);
-  for (const key of BLENDED_UPTIMES) {
+  for (const key of [...BLENDED_UPTIMES, 'healthyInjured']) {
     const raw = uptime[key];
     if (typeof raw === 'number' && raw > 0 && raw < 1 && (input.modifiers || []).some(mod => mod.when === key)) {
       flags.push([key, raw]);
@@ -434,6 +488,7 @@ export function evaluateBuild(catalog, build, opts = {}) {
   const uptime = build.uptime || blankUptime();
   const result = blendScore(input, uptime);
   let critAlternate = null;
+  let conditionalCritAlternate = null;
   if (typeof build.critChance === 'number' && build.critChance > 0 && typeof build.critDmg === 'number' && build.critDmg > 0) {
     const alt = blendScore({ ...input, critMode: 'full' }, uptime);
     critAlternate = {
@@ -442,8 +497,21 @@ export function evaluateBuild(catalog, build, opts = {}) {
       bonusFactor: 1 + (build.critChance / 100) * (build.critDmg / 100),
       verified: false
     };
+    const critMult = (input.alternateCrit || []).reduce((product, item) => product * (1 + item.value / 100), 1);
+    if (critMult !== 1) {
+      const conditional = blendScore({ ...input, critDamageMultiplier: critMult }, uptime);
+      const sheet = build.critDmg / 100;
+      const chance = build.critChance / 100;
+      conditionalCritAlternate = {
+        total: conditional.total,
+        multiplier: critMult,
+        critFactor: 1 + chance * sheet * critMult,
+        estimate: true,
+        verified: false
+      };
+    }
   }
-  return { input, result, marginal: marginal(input), critAlternate };
+  return { input, result, marginal: marginal(input), critAlternate, conditionalCritAlternate };
 }
 
 export function verificationFields(catalog, build, opts = {}) {

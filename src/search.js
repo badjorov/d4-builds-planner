@@ -205,6 +205,7 @@ export function buildFromCore(catalog, skills, opts = {}) {
     critDmg: opts.critDmg ?? null,
     vulnPct: opts.vulnPct ?? null,
     overpowerPct: opts.overpowerPct ?? null,
+    additivePct: opts.additivePct ?? null,
     boards: opts.boards || [],
     glyphs: opts.glyphs || [],
     gear: emptyGear(catalog).map(slot => ({
@@ -236,6 +237,10 @@ export function explain(result) {
   if (result.unverifiedFields?.length) lines.push(`Unverified fields: ${result.unverifiedFields.map(field => field.path).join(', ')}`);
   if (result.critAlternate) {
     lines.push(`Crit alternate (sheet % as the full multiplier) = ${result.critAlternate.factor.toFixed(4)}, power ${result.critAlternate.total.toFixed(4)}. Working factor ${result.critAlternate.bonusFactor.toFixed(4)}. Unverified.`);
+  }
+  if (result.conditionalCritAlternate) {
+    const alt = result.conditionalCritAlternate;
+    lines.push(`Conditional crit-damage alternate ×${alt.multiplier} = factor ${alt.critFactor.toFixed(4)}, power ${alt.total.toFixed(4)}. Estimate. The headline score leaves this buff out.`);
   }
   return lines.join('\n');
 }
@@ -282,7 +287,8 @@ export function optimize(catalog, opts = {}) {
       unverifiedFields: fields.filter(field => !field.ok),
       novelty: novelty.novelty,
       noveltyDetail: novelty,
-      critAlternate: evaluation.critAlternate
+      critAlternate: evaluation.critAlternate,
+      conditionalCritAlternate: evaluation.conditionalCritAlternate
     });
   }
   const ranked = rankByPowerNovelty(considered, opts).map(result => ({ ...result, why: explain({ ...result, score: result.power * result.novelty }) }));

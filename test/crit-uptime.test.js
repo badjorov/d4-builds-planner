@@ -75,12 +75,26 @@ test('Decimator joins the Vulnerable and Overpower states, and Might 8% is on fo
   const earth = evaluated.input.modifiers.find(mod => mod.name.startsWith('Earthstriker'));
   assert.equal(earth.value, 19.5);
   assert.equal(earth.when, undefined);
-  for (const id of ['weapons-master-legendary', 'flawless-technique', 'twister', 'imbiber', 'marshal', 'wrath']) {
-    assert.equal(evaluated.input.modifiers.some(mod => mod.id === id), false);
+  for (const id of ['flawless-technique', 'imbiber', 'wrath']) {
+    assert.equal(evaluated.input.modifiers.some(mod => mod.id === id), false, id);
   }
-  assert.equal(evaluated.input.notes.some(note => note.includes('Twister') && note.includes('level-scaling formula')), true);
-  assert.equal(evaluated.input.notes.some(note => note.includes('Healthy and Injured share is pending')), true);
+  const twister = evaluated.input.modifiers.find(mod => mod.id === 'twister');
+  assert.equal(twister.value, 13);
+  assert.equal(twister.when, undefined);
+  const marshal = evaluated.input.modifiers.find(mod => mod.id === 'marshal');
+  assert.equal(marshal.value, 13.5);
+  assert.equal(marshal.when, undefined);
+  const healthy = evaluated.input.modifiers.filter(mod => mod.when === 'healthyInjured');
+  assert.deepEqual(healthy.map(mod => mod.value).sort((a, b) => a - b), [26, 75]);
+  assert.equal(evaluated.input.modifiers.some(mod => mod.value === 39.9 || mod.value === 39.8 || mod.value === 17.8 || mod.value === 16), false);
+  assert.equal(evaluated.input.notes.some(note => note.includes('Twister') && note.includes('not multiplied')), true);
+  assert.equal(evaluated.input.notes.some(note => note.includes('Imbiber') && note.includes('potion count')), true);
+  assert.equal(evaluated.input.notes.some(note => note.includes('while you are Healthy')), true);
+  assert.equal(evaluated.input.notes.some(note => note.includes('Wrath') && note.includes('7424.8')), true);
   assert.equal(evaluated.input.notes.some(note => note.includes('Flawless Technique') && note.includes('condition unknown')), true);
+  assert.equal(evaluated.input.notes.some(note => note.includes('alternate reading')), true);
+  const add = evaluated.result.terms.find(term => term.label === 'Additive');
+  assert.equal(add.value, 1 + 606.7 / 100);
   const skill = catalog.skills.find(entry => entry.id === 'whirlwind');
   const hands = Object.fromEntries((saved.gear || []).filter(slot => slot.hands).map(slot => [slot.slotId, slot.hands]));
   const copied = buildFromCore(catalog, [skill], {
@@ -99,6 +113,15 @@ test('Decimator joins the Vulnerable and Overpower states, and Might 8% is on fo
     uptime: { ...saved.uptime, vulnerable: 0, overpower: 0 }
   });
   assert.equal(off.input.modifiers.some(mod => mod.id === 'decimator-legendary'), false);
+  const on = evaluateBuild(catalog, { ...whirlwindBuild(), uptime: { ...saved.uptime, healthyInjured: 1 } });
+  const down = evaluateBuild(catalog, { ...whirlwindBuild(), uptime: { ...saved.uptime, healthyInjured: 0 } });
+  const blended = 0.7 * on.result.total + 0.3 * down.result.total;
+  assert.ok(Math.abs(evaluated.result.total - blended) / blended < 1e-9);
+  assert.equal(evaluated.conditionalCritAlternate.multiplier, 1.45);
+  assert.ok(evaluated.conditionalCritAlternate.total > evaluated.result.total);
+  const wrathOnly = evaluateBuild(catalog, { ...saved, skills: ['wrath-of-the-berserker'] });
+  assert.equal(wrathOnly.input.modifiers.some(mod => mod.id === 'twister'), false);
+  assert.equal(wrathOnly.conditionalCritAlternate, null);
 });
 
 test('a provisional glyph scores only from a stored level-scaling formula', () => {

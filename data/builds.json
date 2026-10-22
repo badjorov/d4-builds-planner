@@ -613,43 +613,23 @@
         },
         {
           "glyphId": "twister",
-          "level": 133,
-          "levelVerified": false,
-          "provisional": true,
-          "levelApproximate": [
-            131,
-            135
-          ]
+          "level": 135,
+          "levelVerified": true
         },
         {
           "glyphId": "imbiber",
           "level": 133,
-          "levelVerified": false,
-          "provisional": true,
-          "levelApproximate": [
-            131,
-            135
-          ]
+          "levelVerified": true
         },
         {
           "glyphId": "marshal",
-          "level": 133,
-          "levelVerified": false,
-          "provisional": true,
-          "levelApproximate": [
-            131,
-            135
-          ]
+          "level": 131,
+          "levelVerified": true
         },
         {
           "glyphId": "wrath",
-          "level": 133,
-          "levelVerified": false,
-          "provisional": true,
-          "levelApproximate": [
-            131,
-            135
-          ]
+          "level": 131,
+          "levelVerified": true
         }
       ],
       "talismans": [
@@ -669,16 +649,22 @@
         "estimate": {
           "vulnerable": true,
           "overpower": true,
-          "note": "Estimated from the screenshot, not measured. The Vulnerable and Wrath-active figures were accepted. Vulnerable: War Cry makes enemies Vulnerable for 4s on a 15.09s cooldown (4/15.09 = 0.265076). Stone of Jordan makes a touched enemy Vulnerable for 10s and the screenshot gives no touch interval. The estimate uses War Cry's cooldown as the only printed cycle and one touch per cycle. The 4s War Cry window sits inside the 10s touch window, so the union is 10/15.09 = 0.662691. A faster touch rate is not in the screenshot and would raise this toward 1. Overpower: Wrath grants 1 stack per second for 15.8s on a 54.32s cooldown (15.8/54.32 = 0.290869). Each stack is 26%[+] and lasts 4s, up to 4 stacks. Full 4 stacks during Wrath is the working assumption. Stacks linger 4s after Wrath ends, still counted at 4 stacks. Overpower is on for (15.8+4)/54.32 = 0.364507. Earthstriker weapon-swap stacks are not added. Berserk uptime is not estimated. Channeling uptime is 1 while the scored skill is channeled. Whirlwind's channel bonus is 1%[x] per hit up to 25, and those stacks are reached fast, so the uptime is 1. The scored line is Aspect of Channeling 138%[x]. The codex 69%[x] effect stays on the aspect and is not applied with the imprint. The skill's 1%[x] per hit is not added on top of the 138%. Fury above 50 is 1, confirmed by the user, and is no longer an estimate. Max Fury 826, Fury regeneration 85, and +52.5% Fury generation are town values and may be higher in combat. Melted Heart's 30%[x] uses that uptime. The x35% Vulnerable multiplier stays a separate always-on line. Unstoppable for Tibault's 26%[x] includes the 5s after Unstoppable ends. Iron Skin's 3s duration is the estimate input; the screenshot shows Unstoppable and cooldown 8.45s and does not show the seconds. The Iron Skin window is (3+5)/8.45 = 0.946746. Wrath is Unstoppable for 15.8s on a 54.32s cooldown, so its window is (15.8+5)/54.32 = 0.382916. No phase between the two cycles is stored, so the union is 1 - (1 - 8/8.45) × (1 - 20.8/54.32) = 0.967138. Fortified uptime is 1. The user confirmed the character is almost always Fortified, so this value is no longer an estimate. The earlier stacking check stays as history: Rallying Cry grants Fortify equal to 15% of Maximum Life per cast. Life 473, so one cast is 70.95 Fortify. The Fortified rule used for that check is an assumption: Fortify is at least current Life. One cast is below 473. No decay rate is stored, so the grants stack and persist. 7 × 70.95 = 496.65, which clears 473. The screenshot does not restate Rallying Cry's cooldown. The video transcription of 25s is the ramp clock only: the 7th cast is 150s after the first. The +20% effectiveness line is not applied to the Fortify grant. Channeling and Unstoppable remain estimates. Vulnerable and Overpower remain estimates. Berserk stays unset.",
+          "note": "Estimated from the screenshot, not measured. The Vulnerable and Wrath-active figures were accepted. Vulnerable: War Cry makes enemies Vulnerable for 4s on a 15.09s cooldown (4/15.09 = 0.265076). Stone of Jordan makes a touched enemy Vulnerable for 10s and the screenshot gives no touch interval. The estimate uses War Cry's cooldown as the only printed cycle and one touch per cycle. The 4s War Cry window sits inside the 10s touch window, so the union is 10/15.09 = 0.662691. A faster touch rate is not in the screenshot and would raise this toward 1. Overpower: Wrath grants 1 stack per second for 15.8s on a 54.32s cooldown (15.8/54.32 = 0.290869). Each stack is 26%[+] and lasts 4s, up to 4 stacks. Full 4 stacks during Wrath is the working assumption. Stacks linger 4s after Wrath ends, still counted at 4 stacks. Overpower is on for (15.8+4)/54.32 = 0.364507. Earthstriker weapon-swap stacks are not added. Berserk uptime is not estimated. Channeling uptime is 1 while the scored skill is channeled. Whirlwind's channel bonus is 1%[x] per hit up to 25, and those stacks are reached fast, so the uptime is 1. The scored line is Aspect of Channeling 138%[x]. The codex 69%[x] effect stays on the aspect and is not applied with the imprint. The skill's 1%[x] per hit is not added on top of the 138%. Fury above 50 is 1, confirmed by the user, and is no longer an estimate. Max Fury 826, Fury regeneration 85, and +52.5% Fury generation are town values and may be higher in combat. Melted Heart's 30%[x] uses that uptime. The x35% Vulnerable multiplier stays a separate always-on line. Unstoppable for Tibault's 26%[x] includes the 5s after Unstoppable ends. Iron Skin's 3s duration is the estimate input; the screenshot shows Unstoppable and cooldown 8.45s and does not show the seconds. The Iron Skin window is (3+5)/8.45 = 0.946746. Wrath is Unstoppable for 15.8s on a 54.32s cooldown, so its window is (15.8+5)/54.32 = 0.382916. No phase between the two cycles is stored, so the union is 1 - (1 - 8/8.45) × (1 - 20.8/54.32) = 0.967138. Fortified uptime is 1. The user confirmed the character is almost always Fortified, so this value is no longer an estimate. The earlier stacking check stays as history: Rallying Cry grants Fortify equal to 15% of Maximum Life per cast. Life 473, so one cast is 70.95 Fortify. The Fortified rule used for that check is an assumption: Fortify is at least current Life. One cast is below 473. No decay rate is stored, so the grants stack and persist. 7 × 70.95 = 496.65, which clears 473. The screenshot does not restate Rallying Cry's cooldown. The video transcription of 25s is the ramp clock only: the 7th cast is 150s after the first. The +20% effectiveness line is not applied to the Fortify grant. Channeling and Unstoppable remain estimates. Vulnerable and Overpower remain estimates. Berserk stays unset. Healthy or Injured uptime is 0.7 and is an estimate. Healthy means the enemy is above 80% life, which is 20% of the life bar. Injured means the enemy is below 35% life, which is 35% of the life bar. The band from 35% to 80% gets neither Weapons Master nor Might. A boss taking damage uniformly over its life spends 0.20 + 0.35 = 0.55 of the fight in one of those two windows. Trash dies fast, so most of its time is still Healthy and a short slice is Injured. The working trash share is 0.85. An equal mix of that trash reading and the boss life-bar fraction is 0.5 × 0.85 + 0.5 × 0.55 = 0.70. Weapons Master 75%[x] and Might 26%[x] use this one uptime together. The video sheet's separate vs Healthy/Injured 26% is not added on top. Dust Devil uptime is 1 while the scored skill is Whirlwind. The catalog tooltip and the allocated Tornado upgrade say Whirlwind creates 2 Dust Devils at 510% each. The channel creates them continuously, so Twister's 4s buff stays up. That uptime is an estimate. Twister's 13%[x] uses it. Twister's 39.9%[x] Dust Devil damage and the 39.8%[+] per 5 Strength rate are not applied to the 386% hit. Consecutive same-weapon uptime is 1 for a channeled Whirlwind and is an estimate. It is used only for the alternate Flawless Technique reading of +45%[x] Critical Strike Damage for 4s. The headline score does not apply that 45%[x]. Marshal's screenshot reduces the active cooldown of other non-Shout skills by 2.0s. It does not reduce War Cry, so Vulnerable stays 10/15.09 = 0.662691. The level-70 video line that reduced other Shout cooldowns is not applied. Wrath 54.32s and Iron Skin 8.45s stay the tooltip cooldowns because a shout-cast rate is not stored.",
           "channeling": true,
           "furyAbove50": false,
           "unstoppable": true,
-          "fortified": false
+          "fortified": false,
+          "healthyInjured": true,
+          "dustDevil": true,
+          "consecutiveWeapon": true
         },
         "channeling": 1,
         "furyAbove50": 1,
         "unstoppable": 0.967138,
-        "fortified": 1
+        "fortified": 1,
+        "healthyInjured": 0.7,
+        "dustDevil": 1,
+        "consecutiveWeapon": 1
       },
       "defense": {
         "life": 473,
@@ -702,6 +688,12 @@
       "mainStat": 4101,
       "critChance": 100,
       "critDmg": 7424.8,
+      "additivePct": 606.7,
+      "additiveAudit": {
+        "verified": false,
+        "source": "user video 1 (watchVideo 2026-10-22)",
+        "note": "Video character sheet All Damage 606.7%. The defence screenshot did not restate All Damage, so this is lower trust than the screenshot crit total. It is the single additive input. Factor 1 + 6.067 = 7.067. Physical 250.5% and the conditional sheet lines (vs Elites 135.5%, vs Healthy/Injured 26%, while Healthy 223.2%, while Fortified 55%) are separate and are not added on top. Untagged paragon +% Damage lines are not added again. Affix x66% and x25% All Damage Multiplier stay multiplicative and the engine does not read affixes."
+      },
       "vulnPct": 206.8,
       "overpowerPct": 104,
       "maxFury": 826,
@@ -716,7 +708,7 @@
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
       "manualInputsVerified": false,
-      "note": "Based on the Whirlwind Barb (S15) Immortal Speed 130 name list. User-confirmed differences: Leoric's Crown is the helm and Tuskhelm of Joritz the Mighty is a charm; Stone of Jordan replaces Ring of Starless Skies; 2H Bludgeoning is the Deathshead mace with Aspect of Channeling; Endurant Faith and Seal of the Epiphany replace Blood-Mad Idol and The Furnace; the arsenal is 2 two-handed weapons and 2 one-handed weapons. The character sheet was confirmed from the user's screenshot: level 70, Strength 4101, Intelligence 981, Willpower 1333, Dexterity 1320, Armor 32183, Toughness 24910 for all damage types, Weapon Damage 4596, Max Life 473. The defence sheet confirms Critical Strike Chance 100%, Critical Strike Damage 7,424.8%, and Max Fury 826. Vulnerable damage 206.8% and the 80% resistance cap stay as the earlier video readings. The 80% figure is the cap that was read, not an EHP resist mitigation percent. Screenshot with Stone of Jordan equipped: Armor 33,715 reduces 78.2% of direct and damage-over-time damage, and every resistance of 21,218 reduces 85.9%. The mitigation cap is 90% against enemies at his level. Cold is 18,947 from gear, 629 from Intelligence, and 1,642 other. A separate snapshot without Stone of Jordan is stored on comparisons and is not this build. Life numbers implied by skill tooltips are ignored. Confirmed skill allocation, 2026-10-22: Whirlwind, War Cry, Challenging Shout, Rallying Cry, Wrath of the Berserker, and Iron Skin. Flay is not active. The upgrade list on this build is the confirmed allocation. Upgrade numbers stay on the catalog rows and stay unverified. Video 1 (user video 1 (watchVideo 2026-10-22)) added the equipped item rolls, paragon boards, glyph levels from the user rule: Might 135 verified, the other equipped glyphs approximately 131-135 unverified, and every unequipped glyph at 0, charms, Prime Evil powers, and polearm expertise. User rule 2026-10-22: 2H Bludgeoning is Deathshead with Aspect of Channeling at 0.90 attacks per second; 2H Slashing is Insight, a polearm, at 0.90 attacks per second with +94.3% crit chance and x310% crit damage; the two 1H swords are Spirit and Ramaladni's Magnum Opus, both at 1.10 attacks per second. Weapon type, slot, and attacks per second are verified. Armor 32183, Life 473, and the rank model with Whirlwind at 41 stay. The video's conflicting readings are suspect. Flay stays inactive. Screenshot 2026-10-22 replaces weapon damage 4566 with 4596 and toughness 29309 with 24910. Screenshot 2026-10-22 defence sheet replaces Armor 32,183 with 33,715, Toughness 24,910 with 25,600, and Critical Strike Damage 7,414.8% with 7,424.8%. All resistances are 21,218. All Damage Reduction is 50%. Vulnerable and Overpower uptime are estimates flagged on the uptime object. Overpower uptime now includes the 4s stack linger: (15.8+4)/54.32 = 0.364507. overpowerPct is 4 stacks × 26% = 104. Both uptimes stay estimates. Crit audit: the sheet Critical Strike Chance 100% and Critical Strike Damage 7,424.8% are the only crit inputs, and the reading is unverified. Fury above 50 is 1 and Fortified is 1, both user-confirmed. Channeling and Unstoppable remain estimates on the uptime object. Max Fury 826, Fury regeneration 85, and +52.5% Fury generation are town values and may be higher in combat. Warbringer's 45%[x] applies while Fortified. Decimator's 20%[x] vs Vulnerable and 20%[x] while having Overpower use those uptime states. Might's 8%[x] with a Two-Handed weapon is always on for this 2H arsenal. Twister, Imbiber, Marshal, and Wrath are provisional level 133. Their level-scaling formulas are not in the catalog, so those damage lines stay unscored. Flawless Technique's condition and the Healthy/Injured share stay pending.",
+      "note": "Based on the Whirlwind Barb (S15) Immortal Speed 130 name list. User-confirmed differences: Leoric's Crown is the helm and Tuskhelm of Joritz the Mighty is a charm; Stone of Jordan replaces Ring of Starless Skies; 2H Bludgeoning is the Deathshead mace with Aspect of Channeling; Endurant Faith and Seal of the Epiphany replace Blood-Mad Idol and The Furnace; the arsenal is 2 two-handed weapons and 2 one-handed weapons. The character sheet was confirmed from the user's screenshot: level 70, Strength 4101, Intelligence 981, Willpower 1333, Dexterity 1320, Armor 32183, Toughness 24910 for all damage types, Weapon Damage 4596, Max Life 473. The defence sheet confirms Critical Strike Chance 100%, Critical Strike Damage 7,424.8%, and Max Fury 826. Vulnerable damage 206.8% and the 80% resistance cap stay as the earlier video readings. The 80% figure is the cap that was read, not an EHP resist mitigation percent. Screenshot with Stone of Jordan equipped: Armor 33,715 reduces 78.2% of direct and damage-over-time damage, and every resistance of 21,218 reduces 85.9%. The mitigation cap is 90% against enemies at his level. Cold is 18,947 from gear, 629 from Intelligence, and 1,642 other. A separate snapshot without Stone of Jordan is stored on comparisons and is not this build. Life numbers implied by skill tooltips are ignored. Confirmed skill allocation, 2026-10-22: Whirlwind, War Cry, Challenging Shout, Rallying Cry, Wrath of the Berserker, and Iron Skin. Flay is not active. The upgrade list on this build is the confirmed allocation. Upgrade numbers stay on the catalog rows and stay unverified. Video 1 (user video 1 (watchVideo 2026-10-22)) added the equipped item rolls, paragon boards, glyph levels from the user rule: Might 135 verified, the other equipped glyphs approximately 131-135 unverified, and every unequipped glyph at 0, charms, Prime Evil powers, and polearm expertise. User rule 2026-10-22: 2H Bludgeoning is Deathshead with Aspect of Channeling at 0.90 attacks per second; 2H Slashing is Insight, a polearm, at 0.90 attacks per second with +94.3% crit chance and x310% crit damage; the two 1H swords are Spirit and Ramaladni's Magnum Opus, both at 1.10 attacks per second. Weapon type, slot, and attacks per second are verified. Armor 32183, Life 473, and the rank model with Whirlwind at 41 stay. The video's conflicting readings are suspect. Flay stays inactive. Screenshot 2026-10-22 replaces weapon damage 4566 with 4596 and toughness 29309 with 24910. Screenshot 2026-10-22 defence sheet replaces Armor 32,183 with 33,715, Toughness 24,910 with 25,600, and Critical Strike Damage 7,414.8% with 7,424.8%. All resistances are 21,218. All Damage Reduction is 50%. Vulnerable and Overpower uptime are estimates flagged on the uptime object. Overpower uptime now includes the 4s stack linger: (15.8+4)/54.32 = 0.364507. overpowerPct is 4 stacks × 26% = 104. Both uptimes stay estimates. Crit audit: the sheet Critical Strike Chance 100% and Critical Strike Damage 7,424.8% are the only crit inputs, and the reading is unverified. Fury above 50 is 1 and Fortified is 1, both user-confirmed. Channeling and Unstoppable remain estimates on the uptime object. Max Fury 826, Fury regeneration 85, and +52.5% Fury generation are town values and may be higher in combat. Warbringer's 45%[x] applies while Fortified. Decimator's 20%[x] vs Vulnerable and 20%[x] while having Overpower use those uptime states. Might's 8%[x] with a Two-Handed weapon is always on for this 2H arsenal. Screenshot glyphs: Twister L135, Imbiber L133, Marshal L131, Wrath L131, all verified. Those replace the level-70 video values. Marshal's legendary +13.5%[x] damage is unconditional. Twister's +13%[x] for 4s after a Dust Devil is scored on Whirlwind. Twister's Dust Devil damage lines are not applied to the 386% coefficient. Imbiber's while-Healthy lines are the player's life and stay unscored. Imbiber's 5%[x] per missing potion needs a potion count. Wrath's crit-damage lines stay out of sheet 7,424.8%. The video's 19%[x] on Might is discarded. Healthy or Injured uptime is 0.7, an estimate shared by Weapons Master 75%[x] and Might 26%[x]. Sheet All Damage 606.7% is the additive input and is a video read.",
       "sheet": {
         "level": 70,
         "strength": 4101,
@@ -1085,7 +1077,7 @@
         "bonusFactor": 75.248,
         "fullFactor": 74.248,
         "source": "user screenshot 2026-10-22",
-        "note": "Sheet Critical Strike Chance 100% and Critical Strike Damage 7,424.8% are the single crit source. The working factor is 1 + 1 × 74.248 = 75.248. The alternate treats 7,424.8% as the full multiplier, factor 74.248. No base crit percent is stored in this repo, so a separate base is not added. Equipped additive Critical Strike Damage lines stay out of the term: Gohr's gloves +50%, Stone of Jordan +65%, Insight +180%, Spirit +78%, Ramaladni's Magnum Opus +75%. Equipped Critical Strike Chance lines stay out of the chance: gloves +16%, Stone of Jordan +5.5%, Insight +94.3%, Deathshead +7.5%. Equipped [x] Critical Strike Damage Multiplier lines stay out of both readings: Insight x310%, Deathshead x88%, Ramaladni's Magnum Opus x44%. The sheet is the aggregate the additive lines feed. The screenshot does not separate those [x] multipliers from the 7,424.8% total."
+        "note": "Sheet Critical Strike Chance 100% and Critical Strike Damage 7,424.8% are the single crit source. The working factor is 1 + 1 × 74.248 = 75.248. The alternate treats 7,424.8% as the full multiplier, factor 74.248. No base crit percent is stored in this repo, so a separate base is not added. Equipped additive Critical Strike Damage lines stay out of the term: Gohr's gloves +50%, Stone of Jordan +65%, Insight +180%, Spirit +78%, Ramaladni's Magnum Opus +75%. Equipped Critical Strike Chance lines stay out of the chance: gloves +16%, Stone of Jordan +5.5%, Insight +94.3%, Deathshead +7.5%. Equipped [x] Critical Strike Damage Multiplier lines stay out of both readings: Insight x310%, Deathshead x88%, Ramaladni's Magnum Opus x44%. The sheet is the aggregate the additive lines feed. The screenshot does not separate those [x] multipliers from the 7,424.8% total. Wrath glyph screenshot: +16.0% Critical Strike Damage per 5 Dexterity is not multiplied, because the board does not list Dexterity in range, and it is not added to the sheet. Legendary +17.8%[x] Critical Strike Damage is probably already inside 7,424.8% and is not added again. Flawless Technique's +45%[x] Critical Strike Damage for 4s is an alternate reading only. The headline score leaves it out. The +3% Critical Strike Chance on that node is not added on top of sheet 100%."
       }
     }
   ]

@@ -106,7 +106,8 @@
         "count": { "type": ["number", "null"] },
         "slotType": { "type": ["string", "null"] },
         "scored": { "type": "boolean" },
-        "alignWithState": { "type": "boolean" }
+        "alignWithState": { "type": "boolean" },
+        "alternateReading": { "type": "boolean" }
       }
     },
     "meta": {

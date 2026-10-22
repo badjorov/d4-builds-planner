@@ -7,6 +7,7 @@ const ex={weaponDmg:120,coeffPct:185,critChance:50,critDmg:60,vulnerable:true,vu
  {name:'AspA',bucket:'multiplicative',value:25},{name:'Leg',bucket:'multiplicative',value:15}]};
 test('plan 4.2 example',()=>near(compute(ex).total,120*1.85*1.95*1.25*1.15*1.3*1.2));
 test('additive sums, multiplicative multiplies',()=>{const r=compute(ex);near(r.buckets.additive,1.95);near(r.buckets.multiplicative,1.4375);});
+test('a sheet All Damage percent replaces additive modifiers',()=>{const r=compute({...ex,additivePct:606.7});near(r.buckets.additive,7.067);assert.equal(r.terms.find(t=>t.label==='Additive').expr.includes('sheet All Damage'),true);});
 test('null values skipped and reported',()=>{const r=compute({weaponDmg:100,coeffPct:100,modifiers:[{name:'x',bucket:'multiplicative',value:null}]});near(r.total,100);assert.deepEqual(r.skipped,['x']);});
 test('mainstat 0.8 per 10',()=>near(compute({weaponDmg:100,coeffPct:100,mainStat:1000,mainStatPer10:0.8}).total,180));
 test('dot no crit',()=>near(compute({weaponDmg:100,coeffPct:100,critChance:100,critDmg:100,isDot:true}).total,100));

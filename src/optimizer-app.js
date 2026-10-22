@@ -81,8 +81,13 @@ function run() {
       channeling: num($('upChanneling').value),
       furyAbove50: num($('upFury').value),
       unstoppable: num($('upUnstoppable').value),
-      fortified: num($('upFortified').value)
+      fortified: num($('upFortified').value),
+      healthyInjured: savedBuild?.uptime?.healthyInjured ?? null,
+      dustDevil: savedBuild?.uptime?.dustDevil ?? null,
+      consecutiveWeapon: savedBuild?.uptime?.consecutiveWeapon ?? null,
+      estimate: savedBuild?.uptime?.estimate
     },
+    additivePct: savedBuild?.additivePct ?? null,
     defense,
     minimums: {
       furyPerSecond: num($('minFury').value),

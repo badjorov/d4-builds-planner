@@ -9471,7 +9471,19 @@
           "source": "user video 1 (watchVideo 2026-10-22)",
           "verified": false,
           "unit": "%",
-          "note": "Video 1 legendary node: consecutive attacks with the same weapon, for 4s. The +45%[x] Critical Strike Damage in that sentence matches the stored patch-note value and was not added again."
+          "note": "Video 1 legendary node: consecutive attacks with the same weapon, for 4s, +3% Critical Strike Chance. The +3% is not added on top of sheet 100%. The +45%[x] Critical Strike Damage in that sentence is the separate alternate reading."
+        },
+        {
+          "stat": "Critical Strike Damage for 4s",
+          "bucket": "crit",
+          "value": 45,
+          "conditions": ["consecutive attacks with the same weapon"],
+          "stacking": null,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "verified": false,
+          "unit": "%",
+          "alternateReading": true,
+          "note": "Video sentence: consecutive attacks with the same weapon give +45%[x] Critical Strike Damage for 4s. The patch-note effect stays generic damage 45%[x] with null conditions and stays out of the headline. This alternate reading applies only when the scored skill is channeled. Whirlwind's channel is consecutive, so that uptime is 1 and is an estimate. It is not added on top of the headline sheet crit term."
         }
       ],
       "source": "https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy",
@@ -10050,12 +10062,13 @@
           "stat": "damage vs Injured and Healthy",
           "bucket": "multiplicative",
           "value": 75,
-          "conditions": null,
+          "conditions": ["vs Healthy and Injured"],
+          "alignWithState": true,
           "stacking": null,
           "source": "user video 1 (watchVideo 2026-10-22)",
           "verified": false,
           "unit": "%",
-          "note": "Healthy and Injured share is pending. Needs input. This 75%[x] line stays out of the score."
+          "note": "75%[x] vs Injured and Healthy. Healthy is an enemy above 80% life and Injured is an enemy below 35% life. The 35% to 80% band gets neither. This line shares the Healthy or Injured uptime with Might's 26%[x]. The uptime is an estimate."
         }
       ],
       "source": "user video 1 (watchVideo 2026-10-22)",
@@ -10368,18 +10381,19 @@
           "source": "user screenshot 2026-10-22",
           "verified": true,
           "unit": "%",
-          "note": "Screenshot additional: 8%[x] with Two-Handed, 60/+40 Strength in range. Video read 19 while wielding 2H, and an earlier additional line said 40 Str. Always on for Whirlwind on the 2H arsenal. Uptime 1."
+          "note": "Screenshot additional: 8%[x] with Two-Handed, 60/+40 Strength in range. The video's 19%[x] while wielding a Two-Handed weapon is discarded. It is the level-70 video or a misread. This 8%[x] stays the scored line. Always on for Whirlwind on the 2H arsenal. Uptime 1."
         },
         {
           "stat": "legendary bonus vs Healthy and Injured",
           "bucket": "multiplicative",
           "value": 26,
-          "conditions": null,
+          "conditions": ["vs Healthy and Injured"],
+          "alignWithState": true,
           "stacking": null,
           "source": "user screenshot 2026-10-22",
           "verified": true,
           "unit": "%",
-          "note": "Screenshot legendary 26.0%[x]. Video read 28% vs Elites, Healthy and Injured, and an earlier legendary line said 20.0%[x] vs Healthy. Healthy and Injured share is pending. Needs input. This line stays out of the score."
+          "note": "Screenshot legendary 26.0%[x]. The video 28% and the earlier 20.0%[x] are not scored. Healthy is an enemy above 80% life and Injured is an enemy below 35% life. Both share one uptime with Weapons Master. The uptime is an estimate on the build."
         }
       ],
       "source": "user screenshot 2026-10-22",
@@ -10391,7 +10405,7 @@
       "additional": "8%[x] dmg with Two-Handed (60/+40 Str in range)",
       "legendary": "26.0%[x] dmg to Healthy and Injured",
       "transcribed": "Might L115: +160.0% to Magic nodes. Add: 8.0%[x] dmg with 2H (40 Str). Leg: 20.0%[x] vs Healthy.",
-      "note": "Screenshot L135, radius 5. +360.0% to Magic nodes has no [+] or [x] tag. Additional 8%[x] and legendary 26.0%[x] are multiplicative. Video effects not on this tooltip: Damage 56, damage vs Elites/Healthy/Injured 28, Dexterity 90, Willpower 90, and damage while wielding 2H 19. Earlier additional text said 8.0%[x] at 40 Str.",
+      "note": "Screenshot L135, radius 5. +360.0% to Magic nodes has no [+] or [x] tag. Additional 8%[x] and legendary 26.0%[x] are multiplicative. The video's 19%[x] while wielding a Two-Handed weapon is discarded. Video effects not on this tooltip: Damage 56, damage vs Elites/Healthy/Injured 28, Dexterity 90, and Willpower 90. Earlier additional text said 8.0%[x] at 40 Str.",
       "levelVerified": true
     },
     {
@@ -10399,114 +10413,114 @@
       "name": "Twister",
       "effects": [
         {
-          "stat": "Dust Devil damage",
-          "bucket": "multiplicative",
-          "value": 39.5,
-          "conditions": null,
+          "stat": "Dust Devil damage per 5 Strength",
+          "bucket": "additive",
+          "value": 39.8,
+          "conditions": ["Dust Devils"],
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "unit": "%"
-        },
-        {
-          "stat": "Dust Devil damage",
-          "bucket": null,
-          "value": 874.8,
-          "conditions": null,
-          "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "unit": "%"
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "scored": false,
+          "note": "Screenshot: per 5 Strength in range, Dust Devils +39.8%[+]. The boards do not list Strength purchased in range, so this rate is not multiplied into a total. The additional line shows 110/+40 Strength. That count is glyph-tooltip text, not board data, so it is not used. This is Dust Devil damage and is not applied to Whirlwind's 386% coefficient. Flagged."
         },
         {
           "stat": "damage for 4s after creating a Dust Devil",
           "bucket": "multiplicative",
-          "value": 15,
-          "conditions": null,
+          "value": 13,
+          "conditions": ["for 4s after creating a Dust Devil"],
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "unit": "%"
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "Screenshot additional +13%[x] for 4s after creating a Dust Devil. 110 Strength in range meets the +40 Strength threshold, so the line is active. Whirlwind's channel creates Dust Devils continuously, so the uptime used for this line is 1 and is an estimate."
+        },
+        {
+          "stat": "Dust Devil damage",
+          "bucket": "multiplicative",
+          "value": 39.9,
+          "conditions": ["Dust Devil damage"],
+          "stacking": null,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "scored": false,
+          "note": "Screenshot legendary Dust Devil damage +39.9%[x]. It multiplies Dust Devil hits. Whirlwind's 510% Dust Devils are not part of the 386% coefficient and have no hit rate, so this line is not applied to that coefficient."
         }
       ],
-      "source": "user video 2026-10-21 batch2 (transcribed)",
-      "verified": false,
-      "level": 133,
-      "provisional": true,
+      "source": "user screenshot 2026-10-22",
+      "verified": true,
+      "level": 135,
       "rarity": "Legendary",
       "radius": 5,
-      "base": "per 5 Str, Dust Devils +90.3%[+]",
-      "additional": "8.0%[x] dmg 4s after creating Dust Devil (40 Str)",
-      "legendary": "Dust Devil dmg +20.0%[x]",
+      "base": "per 5 Str, Dust Devils +39.8%[+]",
+      "additional": "+13%[x] damage for 4s after creating a Dust Devil (110/+40 Str)",
+      "legendary": "Dust Devil damage +39.9%[x]",
       "transcribed": "Twister L115: per 5 Str, Dust Devils +90.3%[+]. Add: 8.0%[x] dmg 4s after creating Dust Devil (40 Str). Leg: Dust Devil dmg +20.0%[x].",
-      "note": "Provisional level 133. The user said the equipped glyphs are about 131-135. Might is 135 and verified. No level-scaling formula is stored, so the damage lines stay unscored. Needs input. The 70, 115, and 155 readings are dropped. Earlier base, additional, and legendary strings are kept.",
-      "levelVerified": false,
-      "levelApproximate": [
-        131,
-        135
-      ]
+      "note": "Screenshot L135, verified. This replaces the level-70 video values (39.5%[x], 874.8%, and 15%[x]). Those video numbers are not scored. The L115 transcription is not used. Provisional level 133 was the 131-135 midpoint and conflicts with this screenshot level of 135. The per-5 Dust Devil rate is flagged because the board does not list Strength in range.",
+      "levelVerified": true
     },
     {
       "id": "imbiber",
       "name": "Imbiber",
       "effects": [
         {
-          "stat": "damage while Healthy",
+          "stat": "damage while Healthy per 5 Willpower",
           "bucket": null,
-          "value": 56,
-          "conditions": null,
+          "value": 10.3,
+          "conditions": ["while you are Healthy"],
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "unit": "%"
-        },
-        {
-          "stat": "damage while Healthy",
-          "bucket": null,
-          "value": 54.6,
-          "conditions": null,
-          "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "unit": "%"
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "Screenshot: per 5 Willpower in range, +10.3% damage while Healthy. No [+] or [x] tag. This is the player's life, not the enemy Healthy/Injured window. The boards do not list Willpower purchased in range, so this rate is not multiplied. The additional line shows 69/+25 Willpower. That count is not board data. No player-healthy uptime is stored. Flagged."
         },
         {
           "stat": "damage per missing potion",
           "bucket": "multiplicative",
           "value": 5,
-          "conditions": null,
+          "conditions": ["per missing potion"],
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "unit": "%"
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "Screenshot additional: +5%[x] damage per missing potion, up to 20%[x]. 69 Willpower meets +25. A potion count is not stored. Needs input."
         },
         {
           "stat": "Potion Healing per missing potion",
-          "bucket": null,
+          "kind": "defense",
+          "bucket": "multiplicative",
           "value": 5,
-          "conditions": null,
+          "conditions": ["per missing potion"],
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "unit": "%"
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "Screenshot additional: +5%[x] potion healing per missing potion, up to 20%[x]. Healing is not a damage line."
+        },
+        {
+          "stat": "damage while Healthy",
+          "bucket": "multiplicative",
+          "value": 16,
+          "conditions": ["while you are Healthy"],
+          "stacking": null,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "Screenshot legendary +16.0%[x] damage while Healthy. This is the player's life. No player-healthy uptime is stored, so the line stays out of the score."
         }
       ],
-      "source": "user video 2026-10-21 batch2 (transcribed)",
-      "verified": false,
+      "source": "user screenshot 2026-10-22",
+      "verified": true,
       "level": 133,
-      "provisional": true,
       "rarity": "Legendary",
       "radius": 5,
-      "base": "per 5 Will, +30.1%[+] dmg and +5.2%[+] potion healing per missing potion, up to 25%[+] each",
-      "additional": null,
-      "legendary": "dmg while Healthy +16.0%[x]",
+      "base": "per 5 Will, +10.3% damage while Healthy",
+      "additional": "+5%[x] dmg and +5%[x] potion healing per missing potion, up to 20%[x] each (69/+25 Will)",
+      "legendary": "+16.0%[x] damage while Healthy",
       "transcribed": "Imbiber L115: per 5 Will, +30.1%[+] dmg and +5.2%[+] potion healing per missing potion, up to 25%[+] each. Leg: dmg while Healthy +16.0%[x].",
-      "note": "Provisional level 133. The user said the equipped glyphs are about 131-135. Might is 135 and verified. No level-scaling formula is stored, so the damage lines stay unscored. Needs input. The 70, 115, and 155 readings are dropped. Earlier base, additional, and legendary strings are kept.",
-      "levelVerified": false,
-      "levelApproximate": [
-        131,
-        135
-      ]
+      "note": "Screenshot L133, verified. This replaces the level-70 video values (56%, 54.6%, and 5%[x] per missing potion from that video). Those video numbers are not scored. The L115 transcription is not used. Provisional 133 was the 131-135 midpoint. The screenshot confirms level 133. The per-5 rate is flagged because the board does not list Willpower in range.",
+      "levelVerified": true
     },
     {
       "id": "exploit",
@@ -10545,130 +10559,113 @@
       "name": "Wrath",
       "effects": [
         {
-          "stat": "Critical Strike Damage",
+          "stat": "Critical Strike Damage per 5 Dexterity",
           "bucket": null,
-          "value": 118,
-          "conditions": null,
+          "value": 16,
+          "conditions": [],
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "unit": "%"
-        },
-        {
-          "stat": "Critical Strike Damage",
-          "bucket": null,
-          "value": 172,
-          "conditions": null,
-          "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "unit": "%"
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "Screenshot: per 5 Dexterity in range, +16.0% Critical Strike Damage. No [+] or [x] tag. The boards do not list Dexterity purchased in range, so this rate is not multiplied. The additional line shows 54/+25 Dexterity. That count is not board data. This crit damage is not added on top of sheet 7,424.8%. Flagged."
         },
         {
           "stat": "Fury generated by Critical Strikes",
+          "kind": "resource",
           "bucket": null,
-          "value": 5,
-          "conditions": null,
+          "value": 3,
+          "conditions": [],
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "note": "Screenshot additional: critical strikes generate 3 Fury. 54 Dexterity meets +25."
+        },
+        {
+          "stat": "Critical Strike Damage",
+          "bucket": "crit",
+          "value": 17.8,
+          "conditions": [],
+          "stacking": null,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "Screenshot legendary Critical Strike Damage +17.8%[x]. This is probably already inside sheet 7,424.8%, so it is not added again."
         }
       ],
-      "source": "user video 2026-10-21 batch2 (transcribed)",
-      "verified": false,
-      "level": 133,
-      "provisional": true,
+      "source": "user screenshot 2026-10-22",
+      "verified": true,
+      "level": 131,
       "rarity": "Legendary",
       "radius": 5,
-      "base": "per 5 Dex, +14.2% Crit Dmg",
-      "additional": "crits generate 3 Fury (25 Dex)",
-      "legendary": "Crit Dmg +17.0%[x]",
+      "base": "per 5 Dex, +16.0% Crit Damage",
+      "additional": "crits generate 3 Fury (54/+25 Dex)",
+      "legendary": "Crit Damage +17.8%[x]",
       "transcribed": "Wrath L115: per 5 Dex, +14.2% Crit Dmg. Add: crits generate 3 Fury (25 Dex). Leg: Crit Dmg +17.0%[x].",
-      "note": "Provisional level 133. The user said the equipped glyphs are about 131-135. Might is 135 and verified. No level-scaling formula is stored, so the damage lines stay unscored. Needs input. The 70, 115, and 155 readings are dropped. Earlier base, additional, and legendary strings are kept.",
-      "levelVerified": false,
-      "levelApproximate": [
-        131,
-        135
-      ]
+      "note": "Screenshot L131, verified. This replaces the level-70 video values (+118% and +172% Critical Strike Damage, and 5 Fury). Those video numbers are not scored. The L115 transcription is not used. Provisional level was 133. The screenshot level is 131. Legendary +17.8%[x] Critical Strike Damage stays out of the sheet total.",
+      "levelVerified": true
     },
     {
       "id": "marshal",
       "name": "Marshal",
       "effects": [
         {
-          "stat": "Damage",
+          "stat": "bonus to Magic nodes in range",
           "bucket": null,
-          "value": 15,
-          "conditions": null,
+          "value": 350,
+          "conditions": [],
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "unit": "%"
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "Screenshot +350.0% Magic nodes in range. No [+] or [x] tag."
         },
         {
-          "stat": "Damage",
-          "bucket": null,
-          "value": 57,
-          "conditions": null,
-          "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "unit": "%"
-        },
-        {
-          "stat": "Max Fury",
-          "bucket": null,
-          "value": 4,
-          "conditions": null,
-          "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false
-        },
-        {
-          "stat": "Dexterity",
-          "bucket": null,
-          "value": 45,
-          "conditions": null,
-          "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false
-        },
-        {
-          "stat": "Willpower",
-          "bucket": null,
-          "value": 45,
-          "conditions": null,
-          "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false
-        },
-        {
-          "stat": "other Shout cooldown reduction on casting a Shout",
+          "stat": "active cooldown of other non-Shout skills",
+          "kind": "utility",
           "bucket": null,
           "value": 2,
-          "conditions": null,
+          "conditions": ["after casting a Shout"],
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "unit": "s"
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "s",
+          "note": "Screenshot: after casting a Shout, the active cooldown of every other non-Shout skill is reduced by 2.0s. 40 Strength meets +40. This does not reduce Shout cooldowns. War Cry's 15.09s Vulnerable cycle is unchanged. Wrath 54.32s and Iron Skin 8.45s are non-Shout cooldowns. The uptime math keeps those tooltip cooldowns. A shout-cast rate is not stored, so the 2.0s is not subtracted. The level-70 video line that reduced other Shout cooldowns is replaced by this screenshot and is not applied."
+        },
+        {
+          "stat": "Core Skill Fury cost after Rallying Cry",
+          "kind": "resource",
+          "bucket": null,
+          "value": 20,
+          "conditions": ["if Rallying Cry is used"],
+          "stacking": null,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "Screenshot: if Rallying Cry is used, the next Core Skill's Fury cost is reduced by 20% instead. Not a damage line."
+        },
+        {
+          "stat": "damage",
+          "bucket": "multiplicative",
+          "value": 13.5,
+          "conditions": [],
+          "stacking": null,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "Screenshot legendary +13.5%[x] damage. The tooltip states no condition."
         }
       ],
-      "source": "user video 2026-10-21 batch2 (transcribed)",
-      "verified": false,
-      "level": 133,
-      "provisional": true,
+      "source": "user screenshot 2026-10-22",
+      "verified": true,
+      "level": 131,
       "rarity": "Legendary",
       "radius": 5,
-      "base": "+133.3% Magic nodes",
-      "additional": "casting Shout reduces other Shout CDs by 2.0s; while Shout active next Core Skill Fury cost -10% (40 Str)",
-      "legendary": "+15.6%[x]",
+      "base": "+350.0% Magic nodes in range",
+      "additional": "after casting a Shout, active CD of every other non-Shout skill -2.0s; if Rallying Cry used, next Core Skill Fury cost -20% instead (40/+40 Str)",
+      "legendary": "+13.5%[x] damage",
       "transcribed": "Marshal L115: +133.3% Magic nodes. Add: casting Shout reduces other Shout CDs by 2.0s; while Shout active next Core Skill Fury cost -10% (40 Str). Leg: +15.6%[x].",
-      "note": "Provisional level 133. The user said the equipped glyphs are about 131-135. Might is 135 and verified. No level-scaling formula is stored, so the damage lines stay unscored. Needs input. The 70, 115, and 155 readings are dropped. Earlier base, additional, and legendary strings are kept.",
-      "levelVerified": false,
-      "levelApproximate": [
-        131,
-        135
-      ]
+      "note": "Screenshot L131, verified. This replaces the level-70 video values (+15% Damage, +57% Damage, +4 Max Fury, +45 Dexterity, +45 Willpower, and other Shout cooldowns reduced by 2.0s). Those video numbers are not scored. The L115 transcription is not used. Provisional level was 133. The screenshot level is 131.",
+      "levelVerified": true
     },
     {
       "id": "challenger",
