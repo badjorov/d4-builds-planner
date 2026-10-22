@@ -33,7 +33,7 @@ test('synthetic fixture and meta builds match their schemas', () => {
   assert.equal(saved.builds[0].sheet.maxLife, 473);
   assert.equal(saved.builds[0].sheet.armor, 32183);
   assert.equal(saved.builds[0].defense.life, 473);
-  assert.equal(saved.builds[0].weaponDmg, 4566);
+  assert.equal(saved.builds[0].weaponDmg, 4596);
   assert.equal(validate(buildSchema, saved.builds[0]).ok, true);
   assert.equal(meta.builds.some(build => build.name === "user's current build"), false);
 });
@@ -222,11 +222,14 @@ test('video 1 keeps confirmed values and flags the conflicting readings', () => 
   assert.equal(gear['weapon-1'].critDamageMultiplier, 310);
   assert.equal(gear['weapon-1'].critDamageMultiplierBucket, 'multiplicative');
   assert.equal(gear['weapon-1'].uniqueId, 'insight');
-  assert.deepEqual(gear['weapon-1'].sockets, [{ gemId: 'grand-skull', slotType: 'weapon' }]);
+  assert.deepEqual(gear['weapon-1'].sockets, [
+    { gemId: 'grand-skull', slotType: 'weapon', value: 28, bucket: 'multiplicative' },
+    { gemId: 'grand-skull', slotType: 'weapon', value: 28, bucket: 'multiplicative' },
+  ]);
   assert.equal(gear['weapon-1'].verifiedFacts.includes('weaponType'), true);
   assert.equal(gear['weapon-1'].verifiedFacts.includes('arsenalSlot'), true);
   assert.equal(gear['weapon-1'].verifiedFacts.includes('attacksPerSecond'), true);
-  assert.equal(gear['weapon-2'].itemName, 'Deathshead');
+  assert.equal(gear['weapon-2'].itemName, 'Deathshead of Channeling');
   assert.equal(gear['weapon-2'].arsenalSlot, '2H Bludgeoning');
   assert.equal(gear['weapon-2'].weaponType, 'mace');
   assert.equal(gear['weapon-2'].attacksPerSecond, 0.9);
@@ -270,7 +273,11 @@ test('video 1 keeps confirmed values and flags the conflicting readings', () => 
   const might = catalog.glyphs.find(glyph => glyph.id === 'might');
   assert.equal(might.level, 135);
   assert.equal(might.levelVerified, true);
-  assert.equal(might.verified, false);
+  assert.equal(might.verified, true);
+  assert.equal(might.effects.find(effect => effect.stat === 'legendary bonus vs Healthy and Injured').bucket, 'multiplicative');
+  assert.equal(might.effects.find(effect => effect.stat === 'damage with Two-Handed').value, 8);
+  assert.equal(might.effects.find(effect => effect.stat === 'damage with Two-Handed').bucket, 'multiplicative');
+  assert.equal(might.effects.find(effect => effect.stat === 'bonus to Magic nodes in range').bucket, null);
   assert.equal(might.suspect, undefined);
   assert.equal(might.effects.find(effect => effect.stat === 'bonus to Magic nodes in range').value, 360);
   assert.equal(might.effects.find(effect => effect.stat === 'legendary bonus vs Healthy and Injured').value, 26);

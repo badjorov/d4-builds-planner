@@ -130,7 +130,11 @@
             "required": ["gemId", "slotType"],
             "properties": {
               "gemId": { "type": "string", "minLength": 1 },
-              "slotType": { "type": "string", "minLength": 1 }
+              "slotType": { "type": "string", "minLength": 1 },
+              "value": { "type": ["number", "null"] },
+              "bucket": {
+                "enum": ["additive", "multiplicative", "crit", "vuln", "overpower", "mainstat", "special", "none", "additive?", "vuln?", null]
+              }
             }
           }
         }

@@ -40,6 +40,11 @@
         "url": "user rule 2026-10-22",
         "title": "User rules for the arsenal, glyphs, masterworking, and Grand Skull",
         "license": "User correction. Weapon type, arsenal slot, and attacks per second are verified. Might's level 135 is verified. Other numbers from this source are verified only where the rule says so."
+      },
+      {
+        "url": "user screenshot 2026-10-22",
+        "title": "User item, gem, glyph, and stat screenshots",
+        "license": "User screenshots transcribed 2026-10-22. The transcribed lines are verified. A line with no [+] or [x] tag has a null bucket. An x prefix is the [x] tag."
       }
     ]
   },
@@ -3180,22 +3185,26 @@
           "unit": "%"
         },
         {
-          "stat": "damage while Channeling a Skill",
-          "bucket": null,
-          "value": 150,
+          "stat": "damage while channeling a Skill",
+          "bucket": "multiplicative",
+          "value": 138,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
           "unit": "%",
-          "note": "The bracket shows a single number, 150. No second endpoint was stored."
+          "note": "Screenshot imprint: While channeling a Skill, all damage is increased by 138%[x] [100-140]%. Video item power read 150. Codex frames read 69%[x] [50-70].",
+          "range": [
+            100,
+            140
+          ]
         }
       ],
       "source": "video-frames",
       "verified": false,
       "available": true,
       "userConfirmed": true,
-      "note": "Video 1 item power on the 2H mace (video name Beatsmash of Channeling). It does not match the confirmed codex roll of 69%[x] [50-70], so this reading is suspect and the codex effect is unchanged. 4,560 DPS, per hit 3,648-5,472, 1.00 Attacks per Second."
+      "note": "Equipped imprint from the screenshot is 138%[x] [100-140] while channeling. Codex frames read 69%[x] [50-70] at rank 20/21 and that effect is kept. Video item power read +150% with a single bracket endpoint."
     },
     {
       "id": "aspect-of-elemental-fate",
@@ -5212,8 +5221,8 @@
           "value": 19.5,
           "conditions": null,
           "stacking": null,
-          "source": "video-frames",
-          "verified": false,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
           "upgrade": {
             "level": 9,
             "maxLevel": 11,
@@ -5227,34 +5236,26 @@
             15.5,
             20.5
           ],
-          "unit": "%"
+          "unit": "%",
+          "note": "Screenshot imprint matches this codex line: 19.5%[x] [15.5-20.5] while you have Overpower, plus 1 Overpower stack on weapon swap. Video item power read +45% Movement Speed for 3s on weapon swap and +25% damage while you have Overpower. Those video lines are not on the tooltip."
         },
         {
-          "stat": "Movement Speed for 3s on weapon swap",
-          "bucket": null,
-          "value": 45,
+          "stat": "Overpower damage per stack",
+          "bucket": "additive",
+          "value": 26,
           "conditions": null,
-          "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "unit": "%"
-        },
-        {
-          "stat": "damage while you have Overpower",
-          "bucket": null,
-          "value": 25,
-          "conditions": null,
-          "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "unit": "%"
+          "stacking": "up to 4, each lasts 4s",
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "Screenshot: +26%[+] damage per stack, stacks up to 4, each lasts 4s."
         }
       ],
       "source": "video-frames",
       "verified": false,
       "available": true,
       "userConfirmed": true,
-      "note": "Video 1 item power on Earthstriker's Boneweave boots. It does not match the confirmed codex text, so this reading is suspect and the codex effect is unchanged. Armor on the item is 1,001. Legendary, 900 Item Power."
+      "note": "Screenshot imprint is the codex line 19.5%[x] [15.5-20.5] plus Overpower +26%[+] per stack. Video item power +45% Movement Speed and +25% damage were not on the tooltip."
     },
     {
       "id": "eluding-aspect",
@@ -6106,23 +6107,25 @@
       ],
       "effects": [
         {
-          "stat": null,
-          "bucket": "special",
-          "value": null,
+          "stat": "Fury drain per second while in combat",
+          "bucket": null,
+          "value": 7,
           "conditions": null,
           "stacking": null,
-          "source": "https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy",
-          "verified": false,
-          "note": "Drains 7% max Fury in combat."
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "note": "Screenshot: 7% Fury drains per second while in combat. The tooltip line has no bucket tag, so the bucket is null. The patch note said the same 7% and had been stored with bucket special. Video read 2 Fury per second.",
+          "unit": "%"
         },
         {
           "stat": "DPS",
           "bucket": null,
-          "value": 2350,
+          "value": 2330,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "note": "Screenshot 2,330 DPS. Video read 2,350."
         },
         {
           "stat": "damage per hit",
@@ -6130,42 +6133,33 @@
           "value": null,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
           "range": [
-            1566,
-            3133
+            1805,
+            2433
           ],
-          "note": "Shown as a per-hit range next to DPS."
+          "note": "Screenshot [1,805-2,433]. Video read [1,566-3,133]."
         },
         {
           "stat": "damage per point of Fury",
-          "bucket": null,
+          "bucket": "multiplicative",
           "value": 0.5,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
           "range": [
-            0.2,
+            0.35,
             0.5
           ],
-          "unit": "%"
-        },
-        {
-          "stat": "Fury lost per second in combat",
-          "bucket": null,
-          "value": 2,
-          "conditions": null,
-          "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "note": "The stored patch note says this unique drains 7% max Fury. Both readings are kept."
+          "unit": "%",
+          "note": "Screenshot: Skills deal 0.50%[x] [0.35-0.50]% increased damage per point of Fury you have. Video range was [0.2-0.5]."
         }
       ],
       "source": "https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy",
       "verified": false,
-      "note": "Drains 7% max Fury in combat. Video 1: 1H Slashing, 900 Item Power, 2,350 DPS, 1.10 Attacks per Second. user video 1 (watchVideo 2026-10-22). verified stays false. User rule 2026-10-22: 1H sword at 1.10 attacks per second. Weapon type, slot, and attacks per second are verified on the build slot."
+      "note": "Ancestral Unique Sword, 1H Slashing, 900 Item Power, Quality 25 (+25), Transfigured, 1.10 attacks per second. Screenshot unique power is 0.50%[x] [0.35-0.50] per Fury and 7% Fury drain per second. Video DPS was 2,350, per hit [1,566-3,133], and the drain was 2 Fury per second."
     },
     {
       "id": "harrogath",
@@ -6410,11 +6404,12 @@
         {
           "stat": "DPS",
           "bucket": null,
-          "value": 3040,
+          "value": 4615,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "note": "Screenshot 4,615 DPS. Video read 3,040."
         },
         {
           "stat": "damage per hit",
@@ -6422,23 +6417,13 @@
           "value": null,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
           "range": [
-            2432,
-            3648
+            4360,
+            5896
           ],
-          "note": "Shown as a per-hit range next to DPS."
-        },
-        {
-          "stat": "video Attacks per Second",
-          "bucket": null,
-          "value": 1,
-          "conditions": null,
-          "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "note": "Suspect. The user says 0.9 on a 2H polearm. The video read 1.00 in a 1H slot."
+          "note": "Screenshot [4,360-5,896]. Video read [2,432-3,648]."
         },
         {
           "stat": "Rune Ral: Enduring Spirit, Damage Reduction",
@@ -6456,7 +6441,7 @@
       "verified": false,
       "id": "insight",
       "name": "Insight",
-      "note": "Runeword RalTirTalSol. User rule 2026-10-22: 2H Slashing polearm, 0.90 attacks per second, +94.3% crit chance, x310% crit damage multiplier. Those weapon facts are verified on the build slot. 3,040 DPS. Per hit 2,432-3,648."
+      "note": "Runeword RalTirTalSol. Ancestral Unique Polearm, 2H Slashing, 900 Item Power, Quality 55 (+25), Transfigured, 0.90 attacks per second. Screenshot DPS 4,615 and per hit [4,360-5,896]. Video DPS was 3,040 and per hit [2,432-3,648]. Video 1.00 attacks per second in a 1H slot is overridden. Rune effect text after 10% Damage Reduction stays cut off."
     },
     {
       "slots": [
@@ -6469,8 +6454,9 @@
           "value": 2264,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "note": "Screenshot 2,264 DPS. Matches the earlier video reading."
         },
         {
           "stat": "damage per hit",
@@ -6478,13 +6464,13 @@
           "value": null,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
           "range": [
             1745,
-            2783
+            2373
           ],
-          "note": "Shown as a per-hit range next to DPS."
+          "note": "Screenshot [1,745-2,373]. Video read [1,745-2,783]."
         },
         {
           "stat": "Rune Tal: Lord of Hatred",
@@ -6501,7 +6487,7 @@
       "verified": false,
       "id": "spirit",
       "name": "Spirit",
-      "note": "Runeword TalThulOrtAmn. User rule 2026-10-22: 1H sword at 1.10 attacks per second. Weapon type, slot, and attacks per second are verified on the build slot. 2,264 DPS. Per hit 1,745-2,783. Rune Tal text stays cut off."
+      "note": "Runeword TalThulOrtAmn. Ancestral Unique Sword, 1H Slashing, 900 Item Power, Quality 31 (+25), Transfigured, 1.10 attacks per second. Screenshot per hit [1,745-2,373]. Video high end was 2,783. Rune Tal text stays cut off."
     },
     {
       "slots": [
@@ -7830,90 +7816,90 @@
     },
     {
       "id": "v1-ramaladni-weapon-damage",
-      "name": "+108 Weapon Damage",
+      "name": "+235 Weapon Damage",
       "slot": "weapon-4",
       "effects": [
         {
-          "stat": "+108 Weapon Damage",
+          "stat": "Weapon Damage",
           "bucket": null,
-          "value": 108,
+          "value": 235,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "note": "Screenshot. No range was shown. Video read +108."
         }
       ],
-      "source": "user video 1 (watchVideo 2026-10-22)",
-      "verified": false
+      "source": "user screenshot 2026-10-22",
+      "verified": true,
+      "note": "Screenshot. No range was shown. Video read +108."
     },
     {
       "id": "v1-ramaladni-strength",
-      "name": "Greater Affix +110 Strength",
+      "name": "+200 Strength",
       "slot": "weapon-4",
       "effects": [
         {
-          "stat": "Greater Affix +110 Strength",
+          "stat": "Strength",
           "bucket": null,
-          "value": 110,
+          "value": 200,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
           "range": [
-            83,
-            110
-          ]
+            150,
+            180
+          ],
+          "note": "Screenshot. Video read Greater Affix +110 Strength [83-110]."
         }
       ],
-      "source": "user video 1 (watchVideo 2026-10-22)",
-      "verified": false,
-      "rarity": "Greater Affix"
+      "source": "user screenshot 2026-10-22",
+      "verified": true,
+      "rarity": "Greater Affix",
+      "note": "Screenshot. Video read Greater Affix +110 Strength [83-110]."
     },
     {
       "id": "v1-ramaladni-dexterity",
-      "name": "Greater Affix +110 Dexterity",
+      "name": "+30 Maximum Resource",
       "slot": "weapon-4",
       "effects": [
         {
-          "stat": "Greater Affix +110 Dexterity",
+          "stat": "Maximum Resource",
           "bucket": null,
-          "value": 110,
+          "value": 30,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "range": [
-            83,
-            110
-          ]
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "note": "Screenshot. No range was shown. Video read Greater Affix +110 Dexterity [83-110]."
         }
       ],
-      "source": "user video 1 (watchVideo 2026-10-22)",
-      "verified": false,
-      "rarity": "Greater Affix"
+      "source": "user screenshot 2026-10-22",
+      "verified": true,
+      "rarity": "Greater Affix",
+      "note": "Screenshot. No range was shown. Video read Greater Affix +110 Dexterity [83-110]."
     },
     {
       "id": "v1-ramaladni-crit-damage",
-      "name": "+65.0% Critical Strike Damage",
+      "name": "+75% Critical Strike Damage",
       "slot": "weapon-4",
       "effects": [
         {
-          "stat": "+65.0% Critical Strike Damage",
+          "stat": "Critical Strike Damage",
           "bucket": null,
-          "value": 65,
+          "value": 75,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "range": [
-            50,
-            65
-          ],
-          "unit": "%"
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "Screenshot. No [+] or [x] tag. Video read +65% [50-65]."
         }
       ],
-      "source": "user video 1 (watchVideo 2026-10-22)",
-      "verified": false
+      "source": "user screenshot 2026-10-22",
+      "verified": true,
+      "note": "Screenshot. No [+] or [x] tag. Video read +65% [50-65]."
     },
     {
       "id": "v1-ramaladni-crit-chance",
@@ -7937,7 +7923,8 @@
       ],
       "source": "user video 1 (watchVideo 2026-10-22)",
       "verified": false,
-      "rarity": "Greater Affix"
+      "rarity": "Greater Affix",
+      "note": "Not on the screenshot tooltip. Video read Greater Affix +5.5% Critical Strike Chance [4-5.5]. Removed from the equipped slot."
     },
     {
       "id": "v1-ramaladni-dual-wield",
@@ -7960,214 +7947,215 @@
       ],
       "source": "user video 1 (watchVideo 2026-10-22)",
       "verified": false,
-      "rarity": "Greater Affix"
+      "rarity": "Greater Affix",
+      "note": "Not on the screenshot tooltip. Video read Greater Affix +10 to Dual-Wield Skills [8-10]. Removed from the equipped slot."
     },
     {
       "id": "v1-ramaladni-max-life",
-      "name": "+36.0% Maximum Life",
+      "name": "+5.0% Strength",
       "slot": "weapon-4",
       "effects": [
         {
-          "stat": "+36.0% Maximum Life",
+          "stat": "Strength",
           "bucket": null,
-          "value": 36,
+          "value": 5,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
           "range": [
-            28,
-            36
+            4,
+            5
           ],
-          "unit": "%"
+          "unit": "%",
+          "note": "Screenshot percent Strength. Video read +36% Maximum Life [28-36]."
         }
       ],
-      "source": "user video 1 (watchVideo 2026-10-22)",
-      "verified": false
+      "source": "user screenshot 2026-10-22",
+      "verified": true,
+      "note": "Screenshot percent Strength. Video read +36% Maximum Life [28-36]."
     },
     {
       "id": "v1-insight-weapon-damage",
-      "name": "+107 Weapon Damage",
+      "name": "+522 Weapon Damage",
       "slot": "weapon-1",
       "effects": [
         {
-          "stat": "+107 Weapon Damage",
+          "stat": "Weapon Damage",
           "bucket": null,
-          "value": 107,
+          "value": 522,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
           "range": [
-            83,
-            107
-          ]
+            207,
+            345
+          ],
+          "note": "Screenshot. Video read +107 [83-107]."
         }
       ],
-      "source": "user video 1 (watchVideo 2026-10-22)",
-      "verified": false
+      "source": "user screenshot 2026-10-22",
+      "verified": true,
+      "note": "Screenshot. Video read +107 [83-107]."
     },
     {
       "id": "v1-insight-strength",
-      "name": "Greater Affix +412 Strength",
+      "name": "+555 All Stats",
       "slot": "weapon-1",
       "effects": [
         {
-          "stat": "Greater Affix +412 Strength",
+          "stat": "All Stats",
           "bucket": null,
-          "value": 412,
+          "value": 555,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
           "range": [
-            310,
-            412
-          ]
+            300,
+            360
+          ],
+          "note": "Screenshot. Video read Greater Affix +412 Strength [310-412]."
         }
       ],
-      "source": "user video 1 (watchVideo 2026-10-22)",
-      "verified": false,
-      "rarity": "Greater Affix"
+      "source": "user screenshot 2026-10-22",
+      "verified": true,
+      "rarity": "Greater Affix",
+      "note": "Screenshot. Video read Greater Affix +412 Strength [310-412]."
     },
     {
       "id": "v1-insight-fury-regen",
-      "name": "+85 Fury Regeneration",
+      "name": "+47 Fury Regeneration",
       "slot": "weapon-1",
       "effects": [
         {
-          "stat": "+85 Fury Regeneration",
+          "stat": "Fury Regeneration",
           "bucket": null,
-          "value": 85,
+          "value": 47,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "range": [
-            65,
-            85
-          ]
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "note": "Screenshot. A single endpoint +[30] was shown. Video read +85 [65-85]."
         }
       ],
-      "source": "user video 1 (watchVideo 2026-10-22)",
-      "verified": false
+      "source": "user screenshot 2026-10-22",
+      "verified": true,
+      "note": "Screenshot. A single endpoint +[30] was shown. Video read +85 [65-85]."
     },
     {
       "id": "v1-insight-attack-speed",
-      "name": "+115.0% Attack Speed",
+      "name": "+54.2% Attack Speed",
       "slot": "weapon-1",
       "effects": [
         {
-          "stat": "+115.0% Attack Speed",
+          "stat": "Attack Speed",
           "bucket": null,
-          "value": 115,
+          "value": 54.2,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "range": [
-            75,
-            115
-          ],
-          "unit": "%"
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "Screenshot. A single endpoint [35.0]% was shown. Video read +115% [75-115]."
         }
       ],
-      "source": "user video 1 (watchVideo 2026-10-22)",
-      "verified": false
+      "source": "user screenshot 2026-10-22",
+      "verified": true,
+      "note": "Screenshot. A single endpoint [35.0]% was shown. Video read +115% [75-115]."
     },
     {
       "id": "v1-insight-crit-chance",
-      "name": "Greater Affix +16.0% Critical Strike Chance",
+      "name": "+94.3% Critical Strike Chance",
       "slot": "weapon-1",
       "effects": [
         {
-          "stat": "Greater Affix +16.0% Critical Strike Chance",
+          "stat": "Critical Strike Chance",
           "bucket": null,
-          "value": 16,
+          "value": 94.3,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
           "range": [
-            11,
-            16
+            16,
+            46
           ],
-          "unit": "%"
+          "unit": "%",
+          "note": "Screenshot. Video read Greater Affix +16% [11-16]."
         }
       ],
-      "source": "user video 1 (watchVideo 2026-10-22)",
-      "verified": false,
+      "source": "user screenshot 2026-10-22",
+      "verified": true,
       "rarity": "Greater Affix",
-      "note": "Video greater-affix line of +16% Critical Strike Chance. The weapon crit chance on the 2H Slashing slot is +94.3% and is stored on the build slot. This line stays unverified."
+      "note": "Screenshot. Video read Greater Affix +16% [11-16]."
     },
     {
       "id": "v1-insight-crit-damage",
-      "name": "+75.0% Critical Strike Damage",
+      "name": "+180% Critical Strike Damage",
       "slot": "weapon-1",
       "effects": [
         {
-          "stat": "+75.0% Critical Strike Damage",
+          "stat": "Critical Strike Damage",
           "bucket": null,
-          "value": 75,
+          "value": 180,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "range": [
-            50,
-            75
-          ],
-          "unit": "%"
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "Screenshot. No [+] or [x] tag. Video read +75% [50-75]."
         }
       ],
-      "source": "user video 1 (watchVideo 2026-10-22)",
-      "verified": false
+      "source": "user screenshot 2026-10-22",
+      "verified": true,
+      "note": "Screenshot. No [+] or [x] tag. Video read +75% [50-75]."
     },
     {
       "id": "v1-insight-damage",
-      "name": "+320% Damage",
+      "name": "x310% Critical Strike Damage Multiplier",
       "slot": "weapon-1",
       "effects": [
         {
-          "stat": "+320% Damage",
-          "bucket": null,
-          "value": 320,
+          "stat": "Critical Strike Damage Multiplier",
+          "bucket": "multiplicative",
+          "value": 310,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "range": [
-            260,
-            320
-          ],
-          "unit": "%"
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "Screenshot. The x prefix is the [x] tag. A single endpoint [200]% was shown. Video read +320% Damage [260-320]."
         }
       ],
-      "source": "user video 1 (watchVideo 2026-10-22)",
-      "verified": false
+      "source": "user screenshot 2026-10-22",
+      "verified": true,
+      "note": "Screenshot. The x prefix is the [x] tag. A single endpoint [200]% was shown. Video read +320% Damage [260-320]."
     },
     {
       "id": "v1-insight-item-quality",
-      "name": "+30% Item Quality",
+      "name": "+30 Item Quality",
       "slot": "weapon-1",
       "effects": [
         {
-          "stat": "+30% Item Quality",
+          "stat": "Item Quality",
           "bucket": null,
           "value": 30,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
           "range": [
-            24,
+            2,
             30
           ],
-          "unit": "%"
+          "note": "Screenshot. Video range was [24-30]. The rolled value 30 is unchanged."
         }
       ],
-      "source": "user video 1 (watchVideo 2026-10-22)",
-      "verified": false
+      "source": "user screenshot 2026-10-22",
+      "verified": true,
+      "note": "Screenshot. Video range was [24-30]. The rolled value 30 is unchanged."
     },
     {
       "id": "v1-insight-ga-crit-damage",
@@ -8191,7 +8179,8 @@
       ],
       "source": "user video 1 (watchVideo 2026-10-22)",
       "verified": false,
-      "rarity": "Greater Affix"
+      "rarity": "Greater Affix",
+      "note": "Not on the screenshot tooltip. Video read Greater Affix +34% Critical Strike Damage [26-34]. Removed from the equipped slot."
     },
     {
       "id": "v1-spirit-weapon-damage",
@@ -8199,86 +8188,93 @@
       "slot": "weapon-3",
       "effects": [
         {
-          "stat": "+175 Weapon Damage",
+          "stat": "Weapon Damage",
           "bucket": null,
           "value": 175,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
           "range": [
-            84,
-            175
-          ]
+            94,
+            157
+          ],
+          "note": "Screenshot. The rolled 175 is unchanged. Video range was [84-175]."
         }
       ],
-      "source": "user video 1 (watchVideo 2026-10-22)",
-      "verified": false
+      "source": "user screenshot 2026-10-22",
+      "verified": true,
+      "note": "Screenshot. The rolled 175 is unchanged. Video range was [84-175]."
     },
     {
       "id": "v1-spirit-strength",
-      "name": "+262 Strength",
+      "name": "+101 Maximum Resource",
       "slot": "weapon-3",
       "effects": [
         {
-          "stat": "+262 Strength",
+          "stat": "Maximum Resource",
           "bucket": null,
-          "value": 262,
+          "value": 101,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
           "range": [
-            232,
-            262
-          ]
+            20,
+            56
+          ],
+          "note": "Screenshot. Video read +262 Strength [232-262]."
         }
       ],
-      "source": "user video 1 (watchVideo 2026-10-22)",
-      "verified": false
+      "source": "user screenshot 2026-10-22",
+      "verified": true,
+      "note": "Screenshot. Video read +262 Strength [232-262]."
     },
     {
       "id": "v1-spirit-all-damage",
-      "name": "+80% All Damage Multiplier",
+      "name": "x66% All Damage Multiplier",
       "slot": "weapon-3",
       "effects": [
         {
-          "stat": "+80% All Damage Multiplier",
-          "bucket": null,
-          "value": 80,
+          "stat": "All Damage Multiplier",
+          "bucket": "multiplicative",
+          "value": 66,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "unit": "%"
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "Screenshot. The x prefix is the [x] tag. A single endpoint [50]% was shown. Video read +80% All Damage Multiplier."
         }
       ],
-      "source": "user video 1 (watchVideo 2026-10-22)",
-      "verified": false,
-      "note": "The bracket shows a single number, 80. No second endpoint was stored."
+      "source": "user screenshot 2026-10-22",
+      "verified": true,
+      "note": "Screenshot. The x prefix is the [x] tag. A single endpoint [50]% was shown. Video read +80% All Damage Multiplier."
     },
     {
       "id": "v1-spirit-attack-speed",
-      "name": "+32.5% Attack Speed",
+      "name": "+45.8% Attack Speed",
       "slot": "weapon-3",
       "effects": [
         {
-          "stat": "+32.5% Attack Speed",
+          "stat": "Attack Speed",
           "bucket": null,
-          "value": 32.5,
+          "value": 45.8,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
           "range": [
             25,
-            32.5
+            35
           ],
-          "unit": "%"
+          "unit": "%",
+          "note": "Screenshot. Video read +32.5% [25-32.5]."
         }
       ],
-      "source": "user video 1 (watchVideo 2026-10-22)",
-      "verified": false
+      "source": "user screenshot 2026-10-22",
+      "verified": true,
+      "note": "Screenshot. Video read +32.5% [25-32.5]."
     },
     {
       "id": "v1-spirit-impairment",
@@ -8286,44 +8282,40 @@
       "slot": "weapon-3",
       "effects": [
         {
-          "stat": "65.5% Impairment Reduction",
+          "stat": "Impairment Reduction",
           "bucket": null,
           "value": 65.5,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "range": [
-            50,
-            65.5
-          ],
-          "unit": "%"
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "Screenshot. No [+] or [x] tag. A single endpoint [50.0]% was shown. Video range was [50-65.5]. The rolled 65.5 is unchanged."
         }
       ],
-      "source": "user video 1 (watchVideo 2026-10-22)",
-      "verified": false
+      "source": "user screenshot 2026-10-22",
+      "verified": true,
+      "note": "Screenshot. No [+] or [x] tag. A single endpoint [50.0]% was shown. Video range was [50-65.5]. The rolled 65.5 is unchanged."
     },
     {
       "id": "v1-spirit-all-skills",
-      "name": "+4 to All Skills",
+      "name": "+6 to All Skills",
       "slot": "weapon-3",
       "effects": [
         {
-          "stat": "+4 to All Skills",
+          "stat": "All Skills",
           "bucket": null,
-          "value": 4,
+          "value": 6,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "range": [
-            3,
-            4
-          ]
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "note": "Screenshot. A single endpoint [5] was shown. Video read +4 [3-4]."
         }
       ],
-      "source": "user video 1 (watchVideo 2026-10-22)",
-      "verified": false
+      "source": "user screenshot 2026-10-22",
+      "verified": true,
+      "note": "Screenshot. A single endpoint [5] was shown. Video read +4 [3-4]."
     },
     {
       "id": "v1-spirit-item-quality",
@@ -8331,40 +8323,44 @@
       "slot": "weapon-3",
       "effects": [
         {
-          "stat": "+6 Item Quality",
+          "stat": "Item Quality",
           "bucket": null,
           "value": 6,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
           "range": [
-            4,
-            6
-          ]
+            1,
+            15
+          ],
+          "note": "Screenshot. The rolled 6 is unchanged. Video range was [4-6]."
         }
       ],
-      "source": "user video 1 (watchVideo 2026-10-22)",
-      "verified": false
+      "source": "user screenshot 2026-10-22",
+      "verified": true,
+      "note": "Screenshot. The rolled 6 is unchanged. Video range was [4-6]."
     },
     {
       "id": "v1-spirit-crit-damage",
-      "name": "+75% Critical Strike Damage",
+      "name": "+78% Critical Strike Damage",
       "slot": "weapon-3",
       "effects": [
         {
-          "stat": "+75% Critical Strike Damage",
+          "stat": "Critical Strike Damage",
           "bucket": null,
-          "value": 75,
+          "value": 78,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "unit": "%"
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "Screenshot. No [+] or [x] tag. Video read +75%."
         }
       ],
-      "source": "user video 1 (watchVideo 2026-10-22)",
-      "verified": false
+      "source": "user screenshot 2026-10-22",
+      "verified": true,
+      "note": "Screenshot. No [+] or [x] tag. Video read +75%."
     },
     {
       "id": "v1-spirit-damage-mult",
@@ -8384,7 +8380,8 @@
       ],
       "source": "user video 1 (watchVideo 2026-10-22)",
       "verified": false,
-      "rarity": "Greater Affix"
+      "rarity": "Greater Affix",
+      "note": "Not on the screenshot tooltip. Video read Greater Affix +25% Damage Multiplier. Removed from the equipped slot."
     },
     {
       "id": "v1-soj-strength",
@@ -8616,25 +8613,27 @@
     },
     {
       "id": "v1-boots-all-stats",
-      "name": "+42 All Stats",
+      "name": "+151 Strength",
       "slot": "boots",
       "effects": [
         {
-          "stat": "+42 All Stats",
+          "stat": "Strength",
           "bucket": null,
-          "value": 42,
+          "value": 151,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
           "range": [
-            34,
-            42
-          ]
+            100,
+            121
+          ],
+          "note": "Screenshot. Video read +42 All Stats [34-42]."
         }
       ],
-      "source": "user video 1 (watchVideo 2026-10-22)",
-      "verified": false
+      "source": "user screenshot 2026-10-22",
+      "verified": true,
+      "note": "Screenshot. Video read +42 All Stats [34-42]."
     },
     {
       "id": "v1-boots-fury-regen",
@@ -8642,21 +8641,23 @@
       "slot": "boots",
       "effects": [
         {
-          "stat": "+5 Fury Regeneration",
+          "stat": "Fury Regeneration",
           "bucket": null,
           "value": 5,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
           "range": [
-            4,
-            5
-          ]
+            3,
+            4
+          ],
+          "note": "Screenshot. The rolled 5 is unchanged. Video range was [4-5]."
         }
       ],
-      "source": "user video 1 (watchVideo 2026-10-22)",
-      "verified": false
+      "source": "user screenshot 2026-10-22",
+      "verified": true,
+      "note": "Screenshot. The rolled 5 is unchanged. Video range was [4-5]."
     },
     {
       "id": "v1-boots-move-speed",
@@ -8664,43 +8665,48 @@
       "slot": "boots",
       "effects": [
         {
-          "stat": "+28% Movement Speed",
+          "stat": "Movement Speed",
           "bucket": null,
           "value": 28,
           "conditions": null,
           "stacking": null,
-          "source": "user rule 2026-10-22",
+          "source": "user screenshot 2026-10-22",
           "verified": true,
           "unit": "%",
-          "note": "Separate from the tempered Movement Speed. The video read +29% [21-29]. The confirmed value is +28%."
+          "note": "Screenshot. No [+] or [x] tag. The rolled 28 was already confirmed. The tooltip range is [20-24].",
+          "range": [
+            20,
+            24
+          ]
         }
       ],
-      "source": "user rule 2026-10-22",
+      "source": "user screenshot 2026-10-22",
       "verified": true,
-      "note": "Separate from the tempered Movement Speed. The video read +29% [21-29]. The confirmed value is +28%."
+      "note": "Screenshot. No [+] or [x] tag. The rolled 28 was already confirmed. The tooltip range is [20-24]."
     },
     {
       "id": "v1-boots-all-res",
-      "name": "+42.0% Resistance to All Elements",
+      "name": "+426 Resistance to All Elements",
       "slot": "boots",
       "effects": [
         {
-          "stat": "+42.0% Resistance to All Elements",
+          "stat": "Resistance to All Elements",
           "bucket": null,
-          "value": 42,
+          "value": 426,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
           "range": [
-            34,
-            42
+            325,
+            400
           ],
-          "unit": "%"
+          "note": "Screenshot. Video read +42% [34-42]."
         }
       ],
-      "source": "user video 1 (watchVideo 2026-10-22)",
-      "verified": false
+      "source": "user screenshot 2026-10-22",
+      "verified": true,
+      "note": "Screenshot. Video read +42% [34-42]."
     },
     {
       "id": "v1-boots-temper-move-speed",
@@ -8708,161 +8714,168 @@
       "slot": "boots",
       "effects": [
         {
-          "stat": "Tempered +43% Movement Speed",
+          "stat": "Tempered Movement Speed",
           "bucket": null,
           "value": 43,
           "conditions": null,
           "stacking": null,
-          "source": "user rule 2026-10-22",
+          "source": "user screenshot 2026-10-22",
           "verified": true,
           "range": [
             15,
             25
           ],
           "unit": "%",
-          "note": "43% on the base range [15-25]. The roll is above that range. Masterworking, up to 25 with one affix boosted again at the cap, and Horadric Cube transfiguration can raise a roll above its base range. The video read 39.5% against [25-35]."
+          "note": "Screenshot. No [+] or [x] tag. 43% on [15-25] was already confirmed. The roll is above the base range."
         }
       ],
-      "source": "user rule 2026-10-22",
+      "source": "user screenshot 2026-10-22",
       "verified": true,
       "category": "Tempered",
-      "note": "43% on the base range [15-25]. The roll is above that range. Masterworking, up to 25 with one affix boosted again at the cap, and Horadric Cube transfiguration can raise a roll above its base range. The video read 39.5% against [25-35]."
+      "note": "Screenshot. No [+] or [x] tag. 43% on [15-25] was already confirmed. The roll is above the base range."
     },
     {
       "id": "v1-channel-weapon-damage",
-      "name": "+667 Weapon Damage",
+      "name": "+467 Weapon Damage",
       "slot": "weapon-2",
       "effects": [
         {
-          "stat": "+667 Weapon Damage",
+          "stat": "Weapon Damage",
           "bucket": null,
-          "value": 667,
+          "value": 467,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
           "range": [
-            500,
-            667
-          ]
+            230,
+            383
+          ],
+          "note": "Screenshot. Video read +667 [500-667]."
         }
       ],
-      "source": "user video 1 (watchVideo 2026-10-22)",
-      "verified": false
+      "source": "user screenshot 2026-10-22",
+      "verified": true,
+      "note": "Screenshot. Video read +667 [500-667]."
     },
     {
       "id": "v1-channel-strength",
-      "name": "+110 Strength",
+      "name": "+448 Strength",
       "slot": "weapon-2",
       "effects": [
         {
-          "stat": "+110 Strength",
+          "stat": "Strength",
           "bucket": null,
-          "value": 110,
+          "value": 448,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
           "range": [
-            83,
-            110
-          ]
+            300,
+            360
+          ],
+          "note": "Screenshot. Video read +110 Strength [83-110]."
         }
       ],
-      "source": "user video 1 (watchVideo 2026-10-22)",
-      "verified": false
+      "source": "user screenshot 2026-10-22",
+      "verified": true,
+      "note": "Screenshot. Video read +110 Strength [83-110]."
     },
     {
       "id": "v1-channel-all-damage",
-      "name": "+12.0% All Damage Multiplier",
+      "name": "x25% All Damage Multiplier",
       "slot": "weapon-2",
       "effects": [
         {
-          "stat": "+12.0% All Damage Multiplier",
-          "bucket": null,
-          "value": 12,
+          "stat": "All Damage Multiplier",
+          "bucket": "multiplicative",
+          "value": 25,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
           "range": [
             12,
-            18
+            20
           ],
-          "unit": "%"
+          "unit": "%",
+          "note": "Screenshot. The x prefix is the [x] tag. Video read +12% [12-18]."
         }
       ],
-      "source": "user video 1 (watchVideo 2026-10-22)",
-      "verified": false
+      "source": "user screenshot 2026-10-22",
+      "verified": true,
+      "note": "Screenshot. The x prefix is the [x] tag. Video read +12% [12-18]."
     },
     {
       "id": "v1-channel-crit-damage",
-      "name": "+65.0% Critical Strike Damage",
+      "name": "x88% Critical Strike Damage Multiplier",
       "slot": "weapon-2",
       "effects": [
         {
-          "stat": "+65.0% Critical Strike Damage",
-          "bucket": null,
-          "value": 65,
+          "stat": "Critical Strike Damage Multiplier",
+          "bucket": "multiplicative",
+          "value": 88,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
           "range": [
-            50,
-            65
+            26,
+            50
           ],
-          "unit": "%"
+          "unit": "%",
+          "note": "Screenshot. The x prefix is the [x] tag. Video read +65% Critical Strike Damage [50-65]."
         }
       ],
-      "source": "user video 1 (watchVideo 2026-10-22)",
-      "verified": false
+      "source": "user screenshot 2026-10-22",
+      "verified": true,
+      "note": "Screenshot. The x prefix is the [x] tag. Video read +65% Critical Strike Damage [50-65]."
     },
     {
       "id": "v1-channel-vuln",
-      "name": "+23.0% Vulnerable Damage",
+      "name": "+388 Strength",
       "slot": "weapon-2",
       "effects": [
         {
-          "stat": "+23.0% Vulnerable Damage",
+          "stat": "Strength",
           "bucket": null,
-          "value": 23,
+          "value": 388,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
           "range": [
-            17.5,
-            23
+            300,
+            360
           ],
-          "unit": "%"
+          "note": "Screenshot, the second Strength line. Video read +23% Vulnerable Damage [17.5-23]."
         }
       ],
-      "source": "user video 1 (watchVideo 2026-10-22)",
-      "verified": false
+      "source": "user screenshot 2026-10-22",
+      "verified": true,
+      "note": "Screenshot, the second Strength line. Video read +23% Vulnerable Damage [17.5-23]."
     },
     {
       "id": "v1-channel-crit-chance",
-      "name": "+5.5% Critical Strike Chance",
+      "name": "+7.5% Critical Strike Chance",
       "slot": "weapon-2",
       "effects": [
         {
-          "stat": "+5.5% Critical Strike Chance",
+          "stat": "Critical Strike Chance",
           "bucket": null,
-          "value": 5.5,
+          "value": 7.5,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "range": [
-            4,
-            5.5
-          ],
-          "unit": "%"
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "Screenshot. No [+] or [x] tag. Video read +5.5% [4-5.5]."
         }
       ],
-      "source": "user video 1 (watchVideo 2026-10-22)",
-      "verified": false
+      "source": "user screenshot 2026-10-22",
+      "verified": true,
+      "note": "Screenshot. No [+] or [x] tag. Video read +5.5% [4-5.5]."
     },
     {
       "id": "v1-crush-all-res",
@@ -8996,6 +9009,31 @@
       ],
       "source": "user video 1 (watchVideo 2026-10-22)",
       "verified": false
+    },
+    {
+      "id": "v1-ramaladni-crit-mult",
+      "name": "x44% Critical Strike Damage Multiplier",
+      "slot": "weapon-4",
+      "effects": [
+        {
+          "stat": "Critical Strike Damage Multiplier",
+          "bucket": "multiplicative",
+          "value": 44,
+          "conditions": null,
+          "stacking": null,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "range": [
+            13,
+            25
+          ],
+          "unit": "%",
+          "note": "Screenshot. The x prefix is the [x] tag."
+        }
+      ],
+      "source": "user screenshot 2026-10-22",
+      "verified": true,
+      "note": "Screenshot. The x prefix is the [x] tag."
     }
   ],
   "paragonBoards": [
@@ -10009,76 +10047,49 @@
       "name": "Might",
       "effects": [
         {
-          "stat": "Damage",
-          "bucket": null,
-          "value": 56,
-          "conditions": null,
-          "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "unit": "%"
-        },
-        {
-          "stat": "legendary bonus vs Healthy and Injured",
-          "bucket": null,
-          "value": 26,
-          "conditions": null,
-          "stacking": null,
-          "source": "user rule 2026-10-22",
-          "verified": true,
-          "unit": "%",
-          "note": "Confirmed legendary bonus, 26% vs Healthy and Injured. The video read 28% vs Elites, Healthy and Injured, and an earlier legendary line said 20.0%[x] vs Healthy. The bracket tag is pending a screenshot."
-        },
-        {
-          "stat": "Dexterity",
-          "bucket": null,
-          "value": 90,
-          "conditions": null,
-          "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false
-        },
-        {
-          "stat": "Willpower",
-          "bucket": null,
-          "value": 90,
-          "conditions": null,
-          "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false
-        },
-        {
-          "stat": "damage while wielding 2H",
-          "bucket": "multiplicative",
-          "value": 19,
-          "conditions": null,
-          "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "unit": "%"
-        },
-        {
           "stat": "bonus to Magic nodes in range",
           "bucket": null,
           "value": 360,
           "conditions": null,
           "stacking": null,
-          "source": "user rule 2026-10-22",
+          "source": "user screenshot 2026-10-22",
           "verified": true,
           "unit": "%",
-          "note": "Confirmed +360%. The video read 80. The [+] or [x] tag is pending a screenshot."
+          "note": "Screenshot +360.0%. No [+] or [x] tag."
+        },
+        {
+          "stat": "damage with Two-Handed",
+          "bucket": "multiplicative",
+          "value": 8,
+          "conditions": null,
+          "stacking": null,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "Screenshot additional: 8%[x] with Two-Handed, 60/+40 Strength in range. Video read 19 while wielding 2H, and an earlier additional line said 40 Str."
+        },
+        {
+          "stat": "legendary bonus vs Healthy and Injured",
+          "bucket": "multiplicative",
+          "value": 26,
+          "conditions": null,
+          "stacking": null,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "Screenshot legendary 26.0%[x]. Video read 28% vs Elites, Healthy and Injured, and an earlier legendary line said 20.0%[x] vs Healthy."
         }
       ],
-      "source": "user video 2026-10-21 batch2 (transcribed)",
-      "verified": false,
+      "source": "user screenshot 2026-10-22",
+      "verified": true,
       "level": 135,
       "rarity": "Legendary",
       "radius": 5,
-      "base": "+160.0% to Magic nodes",
-      "additional": "8.0%[x] dmg with 2H (40 Str)",
-      "legendary": "26% vs Healthy and Injured",
+      "base": "+360.0% to Magic nodes",
+      "additional": "8%[x] dmg with Two-Handed (60/+40 Str in range)",
+      "legendary": "26.0%[x] dmg to Healthy and Injured",
       "transcribed": "Might L115: +160.0% to Magic nodes. Add: 8.0%[x] dmg with 2H (40 Str). Leg: 20.0%[x] vs Healthy.",
-      "note": "Level 135 is verified. +360% bonus to Magic nodes in range, and the legendary bonus is 26% vs Healthy and Injured. The 70, 115, and 155 level readings are dropped. Bracket tags on these bonuses are pending screenshots. Earlier base and additional strings are kept as reference text.",
+      "note": "Screenshot L135, radius 5. +360.0% to Magic nodes has no [+] or [x] tag. Additional 8%[x] and legendary 26.0%[x] are multiplicative. Video effects not on this tooltip: Damage 56, damage vs Elites/Healthy/Injured 28, Dexterity 90, Willpower 90, and damage while wielding 2H 19. Earlier additional text said 8.0%[x] at 40 Str.",
       "levelVerified": true
     },
     {
@@ -11063,10 +11074,10 @@
           "value": 24,
           "conditions": null,
           "stacking": null,
-          "source": "user rule 2026-10-22",
+          "source": "user screenshot 2026-10-22",
           "verified": true,
           "unit": "%",
-          "note": "x24%. Item lines such as x24% or x28% Physical Damage Multiplier are this gem, not an affix."
+          "note": "Screenshot: Weapon x24% Physical Damage Multiplier. The x prefix is the [x] tag."
         },
         {
           "slotType": "armor",
@@ -11075,10 +11086,10 @@
           "value": 22.5,
           "conditions": null,
           "stacking": null,
-          "source": "user rule 2026-10-22",
-          "verified": false,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
           "unit": "%",
-          "note": "+22.5%. The number is confirmed. The [+] or [x] tag is pending a screenshot."
+          "note": "Screenshot: Armor +22.5% Healing Received. No [+] or [x] tag."
         },
         {
           "slotType": "jewelry",
@@ -11087,15 +11098,15 @@
           "value": 2625,
           "conditions": null,
           "stacking": null,
-          "source": "user rule 2026-10-22",
-          "verified": false,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
           "unit": null,
-          "note": "+2,625. The number is confirmed. The [+] or [x] tag is pending a screenshot."
+          "note": "Screenshot: Jewelry +2,625 Physical Resistance. No [+] or [x] tag."
         }
       ],
-      "source": "user rule 2026-10-22",
+      "source": "user screenshot 2026-10-22",
       "verified": false,
-      "note": "Grand is the named rank. The numeric upgrade level was not given. Weapon damage is an [x] multiplier. Armor and jewelry brackets are pending screenshots."
+      "note": "Heading reads Grand Skull (3). The (3) is not stored as the upgrade level. Weapon x24% keeps the multiplicative bucket because the x prefix is the [x] tag. Armor +22.5% and jewelry +2,625 have no [+] or [x] tag, so those buckets stay null. The user rule 2026-10-22 gave the same three numbers."
     }
   ]
 }
