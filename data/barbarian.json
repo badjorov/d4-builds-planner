@@ -25,6 +25,11 @@
         "url": "user video 2026-10-21 batch2 (transcribed)",
         "title": "User in-game video transcription, 2026-10-21 batch 2",
         "license": "User's own gameplay footage, transcribed by hand. Not an open-license dataset. Every value from this source stays verified false."
+      },
+      {
+        "url": "user video codex (frames)",
+        "title": "Codex of Power, read from the user video frames",
+        "license": "User's own gameplay footage. Not an open-license dataset. Every value from this source stays verified false."
       }
     ]
   },
@@ -1852,11 +1857,38 @@
           "source": "https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy",
           "verified": false,
           "note": "6-9%[x] per 3.2.1. Enter your roll; trigger condition not in notes."
+        },
+        {
+          "stat": "9.0% [6.0-9.0]",
+          "bucket": null,
+          "value": 9,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 11,
+            "maxLevel": 11,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 9,
+            "observed": 9,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            6,
+            9
+          ],
+          "unit": "%"
         }
       ],
-      "source": "https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy",
+      "source": "user video codex (frames)",
       "verified": false,
-      "note": "6-9%[x] per 3.2.1. Enter your roll; trigger condition not in notes."
+      "note": "6-9%[x] per 3.2.1. Enter your roll; trigger condition not in notes. Frame reading merged into the existing row. Earlier effects and their sources are kept.",
+      "priorSource": "https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy",
+      "rank": "11/11",
+      "category": "Offensive",
+      "description": "Enemies take 9.0% [6.0 - 9.0]% increased Damage Over Time for every second they've been affected by a Damage Over Time, up to 10 seconds."
     },
     {
       "id": "battle-mad",
@@ -1875,11 +1907,38 @@
           "source": "https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy",
           "verified": false,
           "note": "10-15% (no [x] marker in notes) - bucket unverified."
+        },
+        {
+          "stat": "15.0% [10.0-15.0]",
+          "bucket": "multiplicative",
+          "value": 15,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 11,
+            "maxLevel": 11,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 15,
+            "observed": 15,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            10,
+            15
+          ],
+          "unit": "%"
         }
       ],
-      "source": "https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy",
+      "source": "user video codex (frames)",
       "verified": false,
-      "note": "10-15% (no [x] marker in notes) - bucket unverified."
+      "note": "10-15% (no [x] marker in notes) - bucket unverified. Frame reading merged into the existing row. Earlier effects and their sources are kept.",
+      "priorSource": "https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy",
+      "rank": "11/11",
+      "category": "Utility",
+      "description": "After swapping weapons 5 times gain Berserking for 4 seconds. Additionally, you deal 15.0%[x] [10.0 - 15.0]% increased damage while Berserking."
     },
     {
       "id": "raid-leader",
@@ -1898,57 +1957,147 @@
           "source": "https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy",
           "verified": false,
           "note": "Also grants 7-10% DR; main effect not in notes."
+        },
+        {
+          "stat": "10% [7-10]",
+          "bucket": "multiplicative",
+          "value": 10,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 21,
+            "maxLevel": 21,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 10,
+            "observed": 10,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            7,
+            10
+          ],
+          "unit": "%"
+        },
+        {
+          "stat": "6.0% [4.0-6.0]",
+          "bucket": "multiplicative",
+          "value": 6,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 21,
+            "maxLevel": 21,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 6,
+            "observed": 6,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            4,
+            6
+          ],
+          "unit": "%"
         }
       ],
-      "source": "https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy",
+      "source": "user video codex (frames)",
       "verified": false,
-      "note": "Also grants 7-10% DR; main effect not in notes."
+      "note": "Also grants 7-10% DR; main effect not in notes. Frame reading merged into the existing row. Earlier effects and their sources are kept.",
+      "priorSource": "https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy",
+      "rank": "21/21",
+      "category": "Utility",
+      "description": "Your Shouts grant you 10%[x] [7 - 10]% Damage Reduction and also Heal allies for 6.0%[x] [4.0 - 6.0]% of their Maximum Life per second."
     },
     {
       "id": "walloping",
-      "name": "Walloping Aspect",
+      "name": "Aspect of Walloping",
       "slots": null,
       "effects": [
         {
-          "stat": null,
-          "bucket": null,
-          "value": null,
+          "stat": "59% [40-60]",
+          "bucket": "multiplicative",
+          "value": 59,
           "conditions": null,
           "stacking": null,
-          "source": "https://news.blizzard.com/en-us/article/24292852/the-3-2-0-ptr-what-you-need-to-know",
-          "verified": false
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 20,
+            "maxLevel": 21,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 59,
+            "observed": 59,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            40,
+            60
+          ],
+          "unit": "%",
+          "note": "Replaces a placeholder effect that had no number. Previous effect source: https://news.blizzard.com/en-us/article/24292852/the-3-2-0-ptr-what-you-need-to-know."
         }
       ],
-      "source": "https://news.blizzard.com/en-us/article/24292852/the-3-2-0-ptr-what-you-need-to-know",
-      "verified": false
+      "source": "user video codex (frames)",
+      "verified": false,
+      "priorSource": "https://news.blizzard.com/en-us/article/24292852/the-3-2-0-ptr-what-you-need-to-know",
+      "rank": "20/21",
+      "category": "Offensive",
+      "description": "Your Skills while wielding a Bludgeoning weapon deal 59%[x] [40 - 60]% increased damage if the enemy is Incapacitated or Vulnerable.",
+      "note": "Frame reading merged into the existing row. The PTR placeholder had no number and was replaced by this frame point. Previous name: Walloping Aspect."
     },
     {
       "id": "warpath",
-      "name": "Warpath Aspect",
+      "name": "Aspect of the Warpath",
       "slots": null,
       "effects": [
         {
-          "stat": null,
-          "bucket": null,
-          "value": null,
+          "stat": "60% [40-60]",
+          "bucket": "multiplicative",
+          "value": 60,
           "conditions": null,
           "stacking": null,
-          "source": "https://news.blizzard.com/en-us/article/24292852/the-3-2-0-ptr-what-you-need-to-know",
-          "verified": false
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 21,
+            "maxLevel": 21,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 60,
+            "observed": 60,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            40,
+            60
+          ],
+          "unit": "%",
+          "note": "Replaces a placeholder effect that had no number. Previous effect source: https://news.blizzard.com/en-us/article/24292852/the-3-2-0-ptr-what-you-need-to-know."
         }
       ],
-      "source": "https://news.blizzard.com/en-us/article/24292852/the-3-2-0-ptr-what-you-need-to-know",
-      "verified": false
+      "source": "user video codex (frames)",
+      "verified": false,
+      "priorSource": "https://news.blizzard.com/en-us/article/24292852/the-3-2-0-ptr-what-you-need-to-know",
+      "rank": "21/21",
+      "category": "Offensive",
+      "description": "While you have Overpower charges, your attacks while wielding a Bludgeoning weapon deal 60%[x] [40 - 60]% increased damage.",
+      "note": "Frame reading merged into the existing row. The PTR placeholder had no number and was replaced by this frame point. Previous name: Warpath Aspect."
     },
     {
       "id": "aspect-of-coagulation",
       "name": "Aspect of Coagulation",
       "slots": null,
-      "rank": "5/16",
-      "category": "aspect",
+      "rank": "5/6",
+      "category": "Defensive",
       "potencyNote": "Aspects get 50%/100% potency on Amulets / Two-Handed weapons",
       "transcribed": "Aspect of Coagulation, RANK 5/16: 20% [20-30]% increased Fortify generation and 1.9% [1.5-2.0]% DR while Fortified. Aspects get 50%/100% potency on Amulets / Two-Handed weapons. (only tooltip shown)",
-      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "source": "user video codex (frames)",
       "verified": false,
       "effects": [
         {
@@ -2000,21 +2149,48 @@
             "verified": false
           },
           "note": "Linear upgrade interpolation does not reproduce this transcribed point. value stays the observed point, and this formula application is unverified."
+        },
+        {
+          "stat": "19% [15-20]",
+          "bucket": null,
+          "value": 19,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 5,
+            "maxLevel": 6,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 19,
+            "observed": 19,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            15,
+            20
+          ],
+          "unit": "%"
         }
-      ]
+      ],
+      "priorSource": "user video 2026-10-21 batch2 (transcribed)",
+      "priorRank": "5/16",
+      "description": "Gain 30%[+] increased Fortify generation and 19% [15 - 20]% Damage Reduction while Fortified.",
+      "note": "Frame reading merged into the existing row. Earlier effects and their sources are kept. Previous rank: 5/16."
     },
     {
       "id": "accelerating",
       "name": "Accelerating Aspect",
       "slots": null,
       "rank": "21/21",
-      "source": "user correction 2026-10-22",
+      "source": "user video codex (frames)",
       "verified": false,
-      "note": "Unverified codex entry. The user supplied the upgrade rank, the roll range, and the value at that rank. Affix text was not provided.",
+      "note": "Unverified codex entry. The user supplied the upgrade rank, the roll range, and the value at that rank. Affix text was not provided. Frame reading merged into the existing row. Earlier effects and their sources are kept.",
       "effects": [
         {
-          "stat": null,
-          "bucket": null,
+          "stat": "50.0% [30.0-50.0]",
+          "bucket": "additive",
           "value": 50,
           "range": [
             30,
@@ -2032,22 +2208,26 @@
             "observed": 50,
             "matches": true,
             "verified": true
-          }
+          },
+          "unit": "%"
         }
-      ]
+      ],
+      "priorSource": "user correction 2026-10-22",
+      "category": "Offensive",
+      "description": "Critical Strikes with Core Skills increase your Attack Speed by 50.0%[+] [30.0 - 50.0]%."
     },
     {
       "id": "anger-management",
-      "name": "Anger Management",
+      "name": "Aspect of Anger Management",
       "slots": null,
       "rank": "9/11",
-      "source": "user correction 2026-10-22",
+      "source": "user video codex (frames)",
       "verified": false,
-      "note": "Unverified codex entry. The user supplied the upgrade rank, the roll range, and the value at that rank. Affix text was not provided.",
+      "note": "Unverified codex entry. The user supplied the upgrade rank, the roll range, and the value at that rank. Affix text was not provided. Frame reading merged into the existing row. Earlier effects and their sources are kept. Previous name: Anger Management.",
       "effects": [
         {
-          "stat": null,
-          "bucket": null,
+          "stat": "19.0% [15.0-20.0]",
+          "bucket": "multiplicative",
           "value": 19,
           "range": [
             15,
@@ -2065,9 +2245,3381 @@
             "observed": 19,
             "matches": true,
             "verified": true
-          }
+          },
+          "unit": "%"
         }
-      ]
+      ],
+      "priorSource": "user correction 2026-10-22",
+      "category": "Utility",
+      "description": "While above 50 Primary Resource, deal 19.0%[x] [15.0 - 20.0]% increased damage and gain Berserking, but lose 3 Primary Resource Regeneration."
+    },
+    {
+      "id": "aspect-of-disobedience",
+      "name": "Aspect of Disobedience",
+      "slots": null,
+      "rank": "6/6",
+      "category": "Defensive",
+      "description": "Your Damage over Time grants you 1.5% [1.0 - 1.5]% Damage Reduction for 2 seconds, stacking up to 30 times.",
+      "effects": [
+        {
+          "stat": "1.5% [1.0-1.5]",
+          "bucket": null,
+          "value": 1.5,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 6,
+            "maxLevel": 6,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 1.5,
+            "observed": 1.5,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            1,
+            1.5
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "aspect-of-glynns-anvil",
+      "name": "Aspect of Glynn's Anvil",
+      "slots": null,
+      "rank": "16/16",
+      "category": "Defensive",
+      "description": "Your maximum Resolve is increased by 2 and you gain 4.0% [2.5 - 4.0]% Damage Reduction per Resolve, up to 40% [25 - 40]%.",
+      "effects": [
+        {
+          "stat": "4.0% [2.5-4.0]",
+          "bucket": null,
+          "value": 4,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 16,
+            "maxLevel": 16,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 4,
+            "observed": 4,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            2.5,
+            4
+          ],
+          "unit": "%"
+        },
+        {
+          "stat": "40% [25-40]",
+          "bucket": null,
+          "value": 40,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 16,
+            "maxLevel": 16,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 40,
+            "observed": 40,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            25,
+            40
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "aspect-of-heavenly-strength",
+      "name": "Aspect of Heavenly Strength",
+      "slots": null,
+      "rank": "9/11",
+      "category": "Defensive",
+      "description": "While wielding a Two-Handed Weapon, gain 28% [20 - 30]% Damage Reduction.",
+      "effects": [
+        {
+          "stat": "28% [20-30]",
+          "bucket": null,
+          "value": 28,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 9,
+            "maxLevel": 11,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 28,
+            "observed": 28,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            20,
+            30
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "aspect-of-might",
+      "name": "Aspect of Might",
+      "slots": null,
+      "rank": "11/11",
+      "category": "Defensive",
+      "description": "Basic Skills grant 30% [20 - 30]% Damage Reduction for 4 seconds.",
+      "effects": [
+        {
+          "stat": "30% [20-30]",
+          "bucket": null,
+          "value": 30,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 11,
+            "maxLevel": 11,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 30,
+            "observed": 30,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            20,
+            30
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "aspect-of-shelter",
+      "name": "Aspect of Shelter",
+      "slots": null,
+      "rank": "19/21",
+      "category": "Defensive",
+      "description": "Casting a Defensive Skill grants you 48%[+] [30 - 50]% increased All Resistances for 10 seconds.",
+      "effects": [
+        {
+          "stat": "48% [30-50]",
+          "bucket": "additive",
+          "value": 48,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 19,
+            "maxLevel": 21,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 48,
+            "observed": 48,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            30,
+            50
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "aspect-of-tempering-blows",
+      "name": "Aspect of Tempering Blows",
+      "slots": null,
+      "rank": "11/11",
+      "category": "Defensive",
+      "description": "After swapping weapons 5 times, gain 30% [20 - 30]% Damage Reduction for 10 seconds.",
+      "effects": [
+        {
+          "stat": "30% [20-30]",
+          "bucket": null,
+          "value": 30,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 11,
+            "maxLevel": 11,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 30,
+            "observed": 30,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            20,
+            30
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "aspect-of-the-fortress",
+      "name": "Aspect of the Fortress",
+      "slots": null,
+      "rank": "20/21",
+      "category": "Defensive",
+      "description": "Gain up to 59% [40 - 60]% Damage Reduction based on how Injured you are.",
+      "effects": [
+        {
+          "stat": "59% [40-60]",
+          "bucket": null,
+          "value": 59,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 20,
+            "maxLevel": 21,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 59,
+            "observed": 59,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            40,
+            60
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "aspect-of-the-protector",
+      "name": "Aspect of the Protector",
+      "slots": null,
+      "rank": "15/16",
+      "category": "Defensive",
+      "description": "Damaging an Elite enemy grants you a Barrier for 98% [70 - 100]% of your Maximum Life.",
+      "effects": [
+        {
+          "stat": "98% [70-100]",
+          "bucket": null,
+          "value": 98,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 15,
+            "maxLevel": 16,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 98,
+            "observed": 98,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            70,
+            100
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "bruisers-aspect",
+      "name": "Bruiser's Aspect",
+      "slots": null,
+      "rank": "5/5",
+      "category": "Defensive",
+      "description": "Gain 4%[+] increased Armor and 230 [154 - 230] Thorns per 1% missing Maximum Life.",
+      "effects": [
+        {
+          "stat": "230 [154-230]",
+          "bucket": null,
+          "value": 230,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 5,
+            "maxLevel": 5,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 230,
+            "observed": 230,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            154,
+            230
+          ]
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "enshrouding-aspect",
+      "name": "Enshrouding Aspect",
+      "slots": null,
+      "rank": "20/21",
+      "category": "Defensive",
+      "description": "Using a Healing Potion increases your Resistance to All Elements by 29%[+] [20 - 30]% for 8 seconds. You may now drink your Healing Potion while at full Life.",
+      "effects": [
+        {
+          "stat": "29% [20-30]",
+          "bucket": "additive",
+          "value": 29,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 20,
+            "maxLevel": 21,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 29.5,
+            "observed": 29,
+            "matches": false,
+            "verified": false
+          },
+          "range": [
+            20,
+            30
+          ],
+          "unit": "%",
+          "note": "Linear upgrade interpolation does not reproduce this observed point. value stays the observed point, and this formula application is unverified."
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "everliving-aspect",
+      "name": "Everliving Aspect",
+      "slots": null,
+      "rank": "11/11",
+      "category": "Defensive",
+      "description": "Each Crowd Controlled enemy Nearby grants 3.0% [2.0 - 3.0]% Damage Reduction, up to 13 enemies.",
+      "effects": [
+        {
+          "stat": "3.0% [2.0-3.0]",
+          "bucket": null,
+          "value": 3,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 11,
+            "maxLevel": 11,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 3,
+            "observed": 3,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            2,
+            3
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "iron-blood-aspect",
+      "name": "Iron Blood Aspect",
+      "slots": null,
+      "rank": "21/21",
+      "category": "Defensive",
+      "description": "Gain up to 30% [20 - 30]% Damage Reduction for each Nearby Bleeding enemy.",
+      "effects": [
+        {
+          "stat": "30% [20-30]",
+          "bucket": null,
+          "value": 30,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 21,
+            "maxLevel": 21,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 30,
+            "observed": 30,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            20,
+            30
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "irrepressible-aspect",
+      "name": "Irrepressible Aspect",
+      "slots": null,
+      "rank": "16/16",
+      "category": "Defensive",
+      "description": "Casting a Weapon Mastery Skill Fortifies you for 5% of your Maximum Life. Increase your Maximum Life by 45%[+] [30 - 45]%.",
+      "effects": [
+        {
+          "stat": "45% [30-45]",
+          "bucket": "additive",
+          "value": 45,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 16,
+            "maxLevel": 16,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 45,
+            "observed": 45,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            30,
+            45
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "juggernauts-aspect",
+      "name": "Juggernaut's Aspect",
+      "slots": null,
+      "rank": "46/51",
+      "category": "Defensive",
+      "description": "You gain 145%[+] [100 - 150]% Total Armor, but your Evade has 100% increased Cooldown.",
+      "effects": [
+        {
+          "stat": "145% [100-150]",
+          "bucket": "additive",
+          "value": 145,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 46,
+            "maxLevel": 51,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 145,
+            "observed": 145,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            100,
+            150
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "protecting-aspect",
+      "name": "Protecting Aspect",
+      "slots": null,
+      "rank": "5/5",
+      "category": "Defensive",
+      "description": "Being hit while not Healthy forms a bubble that grants Immune for 6.0 [4.0 - 6.0] seconds.",
+      "effects": [
+        {
+          "stat": "6.0 [4.0-6.0]",
+          "bucket": null,
+          "value": 6,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 5,
+            "maxLevel": 5,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 6,
+            "observed": 6,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            4,
+            6
+          ]
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "snowveiled-aspect",
+      "name": "Snowveiled Aspect",
+      "slots": null,
+      "rank": "11/11",
+      "category": "Defensive",
+      "description": "While you have a Barrier, gain 30% [20 - 30]% Damage Reduction.",
+      "effects": [
+        {
+          "stat": "30% [20-30]",
+          "bucket": null,
+          "value": 30,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 11,
+            "maxLevel": 11,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 30,
+            "observed": 30,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            20,
+            30
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "aspect-of-berserk-ripping",
+      "name": "Aspect of Berserk Ripping",
+      "slots": null,
+      "rank": "21/21",
+      "category": "Offensive",
+      "description": "While Berserking, your direct damage inflicts 60% [40 - 60]% bonus Bleeding damage over 5 seconds.",
+      "effects": [
+        {
+          "stat": "60% [40-60]",
+          "bucket": null,
+          "value": 60,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 21,
+            "maxLevel": 21,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 60,
+            "observed": 60,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            40,
+            60
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "aspect-of-binding-morass",
+      "name": "Aspect of Binding Morass",
+      "slots": null,
+      "rank": "10/11",
+      "category": "Offensive",
+      "description": "Close enemies or those you deal indirect damage to are Slowed by 68% [50 - 70]% for 3 seconds. You deal 53% [40 - 55]% increased damage to Slowed enemies.",
+      "effects": [
+        {
+          "stat": "68% [50-70]",
+          "bucket": null,
+          "value": 68,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 10,
+            "maxLevel": 11,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 68,
+            "observed": 68,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            50,
+            70
+          ],
+          "unit": "%"
+        },
+        {
+          "stat": "53% [40-55]",
+          "bucket": null,
+          "value": 53,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 10,
+            "maxLevel": 11,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 53.5,
+            "observed": 53,
+            "matches": false,
+            "verified": false
+          },
+          "range": [
+            40,
+            55
+          ],
+          "unit": "%",
+          "note": "Linear upgrade interpolation does not reproduce this observed point. value stays the observed point, and this formula application is unverified."
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "aspect-of-channeling",
+      "name": "Aspect of Channeling",
+      "slots": null,
+      "rank": "20/21",
+      "category": "Offensive",
+      "description": "While channeling a Skill, all damage is increased by 69%[x] [50 - 70]%.",
+      "effects": [
+        {
+          "stat": "69% [50-70]",
+          "bucket": "multiplicative",
+          "value": 69,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 20,
+            "maxLevel": 21,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 69,
+            "observed": 69,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            50,
+            70
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "aspect-of-elemental-fate",
+      "name": "Aspect of Elemental Fate",
+      "slots": null,
+      "rank": "21/21",
+      "category": "Offensive",
+      "description": "Randomly alternate 60%[x] [40 - 60]% increased damage between Fire, Lightning, and Physical, or Cold, Poison, and Shadow. This bonus can stack.",
+      "effects": [
+        {
+          "stat": "60% [40-60]",
+          "bucket": "multiplicative",
+          "value": 60,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 21,
+            "maxLevel": 21,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 60,
+            "observed": 60,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            40,
+            60
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "aspect-of-encroaching-wrath",
+      "name": "Aspect of Encroaching Wrath",
+      "slots": null,
+      "rank": "21/21",
+      "category": "Offensive",
+      "description": "After spending 100 Fury, you deal 60%[x] [40 - 60]% increased Brawling Skill damage for 4 seconds.",
+      "effects": [
+        {
+          "stat": "60% [40-60]",
+          "bucket": "multiplicative",
+          "value": 60,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 21,
+            "maxLevel": 21,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 60,
+            "observed": 60,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            40,
+            60
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "aspect-of-exorcism",
+      "name": "Aspect of Exorcism",
+      "slots": null,
+      "rank": "15/16",
+      "category": "Offensive",
+      "description": "Lucky Hit: Up to a 44% [30 - 45]% chance to Execute enemies.",
+      "effects": [
+        {
+          "stat": "44% [30-45]",
+          "bucket": null,
+          "value": 44,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 15,
+            "maxLevel": 16,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 44,
+            "observed": 44,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            30,
+            45
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "aspect-of-frenzied-onslaught",
+      "name": "Aspect of Frenzied Onslaught",
+      "slots": null,
+      "rank": "12/16",
+      "category": "Offensive",
+      "description": "Your Summons gain 46%[+] [35 - 50]% Attack Speed.",
+      "effects": [
+        {
+          "stat": "46% [35-50]",
+          "bucket": "additive",
+          "value": 46,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 12,
+            "maxLevel": 16,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 46,
+            "observed": 46,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            35,
+            50
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "aspect-of-incendiary-fissures",
+      "name": "Aspect of Incendiary Fissures",
+      "slots": null,
+      "rank": "21/21",
+      "category": "Offensive",
+      "description": "Your Earthquakes deal 60%[x] [40 - 60]% increased damage and their damage is converted into Fire.",
+      "effects": [
+        {
+          "stat": "60% [40-60]",
+          "bucket": "multiplicative",
+          "value": 60,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 21,
+            "maxLevel": 21,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 60,
+            "observed": 60,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            40,
+            60
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "aspect-of-inner-calm",
+      "name": "Aspect of Inner Calm",
+      "slots": null,
+      "rank": "24/26",
+      "category": "Offensive",
+      "description": "While standing still, deal up to 73%[x] [50 - 75]% increased damage.",
+      "effects": [
+        {
+          "stat": "73% [50-75]",
+          "bucket": "multiplicative",
+          "value": 73,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 24,
+            "maxLevel": 26,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 73,
+            "observed": 73,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            50,
+            75
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "aspect-of-limitless-rage",
+      "name": "Aspect of Limitless Rage",
+      "slots": null,
+      "rank": "21/21",
+      "category": "Offensive",
+      "description": "Each point of Fury you generate increases your damage by 0.20%[x] [0.15 - 0.20]%, up to 350 Fury. This bonus is lost after 4 seconds.",
+      "effects": [
+        {
+          "stat": "0.20% [0.15-0.20]",
+          "bucket": "multiplicative",
+          "value": 0.2,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 21,
+            "maxLevel": 21,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 0.2,
+            "observed": 0.2,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            0.15,
+            0.2
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "aspect-of-reanimation",
+      "name": "Aspect of Reanimation",
+      "slots": null,
+      "rank": "29/31",
+      "category": "Offensive",
+      "description": "Your Summons gain increased damage while alive, up to 88%[x] [60 - 90]% after 10 seconds.",
+      "effects": [
+        {
+          "stat": "88% [60-90]",
+          "bucket": "multiplicative",
+          "value": 88,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 29,
+            "maxLevel": 31,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 88,
+            "observed": 88,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            60,
+            90
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "aspect-of-the-expectant",
+      "name": "Aspect of the Expectant",
+      "slots": null,
+      "rank": "21/21",
+      "category": "Offensive",
+      "description": "Basic Skills grant 8.0%[x] [6.0 - 8.0]% increased damage for 4 seconds, stacking up to 10 times.",
+      "effects": [
+        {
+          "stat": "8.0% [6.0-8.0]",
+          "bucket": "multiplicative",
+          "value": 8,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 21,
+            "maxLevel": 21,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 8,
+            "observed": 8,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            6,
+            8
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "aspect-of-the-moonrise",
+      "name": "Aspect of the Moonrise",
+      "slots": null,
+      "rank": "19/21",
+      "category": "Offensive",
+      "description": "Basic Skills grant you a stacking Attack Speed bonus. At maximum stacks, you gain 58%[x] [40 - 60]% increased Basic Skill damage and Movement Speed.",
+      "effects": [
+        {
+          "stat": "58% [40-60]",
+          "bucket": "multiplicative",
+          "value": 58,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 19,
+            "maxLevel": 21,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 58,
+            "observed": 58,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            40,
+            60
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "conceited-aspect",
+      "name": "Conceited Aspect",
+      "slots": null,
+      "rank": "21/21",
+      "category": "Offensive",
+      "description": "Deal 60%[x] [40 - 60]% increased damage while you have a Barrier active.",
+      "effects": [
+        {
+          "stat": "60% [40-60]",
+          "bucket": "multiplicative",
+          "value": 60,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 21,
+            "maxLevel": 21,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 60,
+            "observed": 60,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            40,
+            60
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "cremators-aspect",
+      "name": "Cremator's Aspect",
+      "slots": null,
+      "rank": "31/31",
+      "category": "Offensive",
+      "description": "While you have 4 or more Overpower, your Fire Skill Casts deal 65%[x] [45 - 65]% increased damage.",
+      "effects": [
+        {
+          "stat": "65% [45-65]",
+          "bucket": "multiplicative",
+          "value": 65,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 31,
+            "maxLevel": 31,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 65,
+            "observed": 65,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            45,
+            65
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "crushing-aspect",
+      "name": "Crushing Aspect",
+      "slots": null,
+      "rank": "20/21",
+      "category": "Offensive",
+      "description": "While Fortified, you deal 64%[x] [45 - 65]% increased damage.",
+      "effects": [
+        {
+          "stat": "64% [45-65]",
+          "bucket": "multiplicative",
+          "value": 64,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 20,
+            "maxLevel": 21,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 64,
+            "observed": 64,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            45,
+            65
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "cut-to-the-bone-aspect",
+      "name": "Cut to the Bone Aspect",
+      "slots": null,
+      "rank": "21/21",
+      "category": "Offensive",
+      "description": "Your Damage Over Time effects deal 60.0%[x] [40.0 - 60.0]% increased damage to Vulnerable enemies.",
+      "effects": [
+        {
+          "stat": "60.0% [40.0-60.0]",
+          "bucket": "multiplicative",
+          "value": 60,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 21,
+            "maxLevel": 21,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 60,
+            "observed": 60,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            40,
+            60
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "duelists-aspect",
+      "name": "Duelist's Aspect",
+      "slots": null,
+      "rank": "21/21",
+      "category": "Offensive",
+      "description": "While using a One-Handed weapon, attacks increase your Weapon Damage by 6.5% [4.5 - 6.5]%, up to 10 times. This bonus is lost when swapping weapons.",
+      "effects": [
+        {
+          "stat": "6.5% [4.5-6.5]",
+          "bucket": null,
+          "value": 6.5,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 21,
+            "maxLevel": 21,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 6.5,
+            "observed": 6.5,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            4.5,
+            6.5
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "edgemasters-aspect",
+      "name": "Edgemaster's Aspect",
+      "slots": null,
+      "rank": "20/21",
+      "category": "Offensive",
+      "description": "Skills deal up to 59%[x] [40 - 60]% increased damage based on your available Primary Resource when cast.",
+      "effects": [
+        {
+          "stat": "59% [40-60]",
+          "bucket": "multiplicative",
+          "value": 59,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 20,
+            "maxLevel": 21,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 59,
+            "observed": 59,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            40,
+            60
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "ferocious-aspect",
+      "name": "Ferocious Aspect",
+      "slots": null,
+      "rank": "3/3",
+      "category": "Offensive",
+      "description": "Your Maximum Ferocity stacks are increased by 6 [4 - 6].",
+      "effects": [
+        {
+          "stat": "6 [4-6]",
+          "bucket": null,
+          "value": 6,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 3,
+            "maxLevel": 3,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 6,
+            "observed": 6,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            4,
+            6
+          ]
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "heavy-hitting-aspect",
+      "name": "Heavy Hitting Aspect",
+      "slots": null,
+      "rank": "21/21",
+      "category": "Offensive",
+      "description": "Your skills that create Iron Shrapnel, Earthquakes, or Dust Devils deal 60.0%[x] [40.0 - 60.0]% increased damage.",
+      "effects": [
+        {
+          "stat": "60.0% [40.0-60.0]",
+          "bucket": "multiplicative",
+          "value": 60,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 21,
+            "maxLevel": 21,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 60,
+            "observed": 60,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            40,
+            60
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "hellbent-commander-aspect",
+      "name": "Hellbent Commander Aspect",
+      "slots": null,
+      "rank": "21/21",
+      "category": "Offensive",
+      "description": "You deal 60%[x] [40 - 60]% increased Summon damage.",
+      "effects": [
+        {
+          "stat": "60% [40-60]",
+          "bucket": "multiplicative",
+          "value": 60,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 21,
+            "maxLevel": 21,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 60,
+            "observed": 60,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            40,
+            60
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "needleflare-aspect",
+      "name": "Needleflare Aspect",
+      "slots": null,
+      "rank": "19/21",
+      "category": "Offensive",
+      "description": "Thorns have a 58% [40 - 60]% chance to deal damage to all enemies around you and your Minions.",
+      "effects": [
+        {
+          "stat": "58% [40-60]",
+          "bucket": null,
+          "value": 58,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 19,
+            "maxLevel": 21,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 58,
+            "observed": 58,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            40,
+            60
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "progenitors-aspect",
+      "name": "Progenitor's Aspect",
+      "slots": null,
+      "rank": "20/21",
+      "category": "Offensive",
+      "description": "Your skills that summon Ancients deal 59.0%[x] [40.0 - 60.0]% increased damage.",
+      "effects": [
+        {
+          "stat": "59.0% [40.0-60.0]",
+          "bucket": "multiplicative",
+          "value": 59,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 20,
+            "maxLevel": 21,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 59,
+            "observed": 59,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            40,
+            60
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "skullbreakers-aspect",
+      "name": "Skullbreaker's Aspect",
+      "slots": null,
+      "rank": "20/21",
+      "category": "Offensive",
+      "description": "Incapacitating a Bleeding enemy deals 59% [40 - 60]% of their total Bleeding amount as Physical damage.",
+      "effects": [
+        {
+          "stat": "59% [40-60]",
+          "bucket": null,
+          "value": 59,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 20,
+            "maxLevel": 21,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 59,
+            "observed": 59,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            40,
+            60
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "unrelenting-aspect",
+      "name": "Unrelenting Aspect",
+      "slots": null,
+      "rank": "11/11",
+      "category": "Offensive",
+      "description": "Your Knock Downs cause enemies to take 60%[x] [50 - 60]% damage from you for 6 seconds.",
+      "effects": [
+        {
+          "stat": "60% [50-60]",
+          "bucket": "multiplicative",
+          "value": 60,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 11,
+            "maxLevel": 11,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 60,
+            "observed": 60,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            50,
+            60
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "vanquishing-aspect",
+      "name": "Vanquishing Aspect",
+      "slots": null,
+      "rank": "29/31",
+      "category": "Offensive",
+      "description": "You deal 88%[x] [60 - 90]% more damage to Incapacitated enemies.",
+      "effects": [
+        {
+          "stat": "88% [60-90]",
+          "bucket": "multiplicative",
+          "value": 88,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 29,
+            "maxLevel": 31,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 88,
+            "observed": 88,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            60,
+            90
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "vehement-brawlers-aspect",
+      "name": "Vehement Brawler's Aspect",
+      "slots": null,
+      "rank": "21/21",
+      "category": "Offensive",
+      "description": "Casting an Ultimate Skill increases your damage by 55%[x] [35 - 55]% for 8 seconds. Gain 2 additional Ultimate Skill Ranks.",
+      "effects": [
+        {
+          "stat": "55% [35-55]",
+          "bucket": "multiplicative",
+          "value": 55,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 21,
+            "maxLevel": 21,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 55,
+            "observed": 55,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            35,
+            55
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "wanton-rupture-aspect",
+      "name": "Wanton Rupture Aspect",
+      "slots": null,
+      "rank": "21/21",
+      "category": "Offensive",
+      "description": "All Damage Over Time durations and damage is increased by 30%[x] [20 - 30]%.",
+      "effects": [
+        {
+          "stat": "30% [20-30]",
+          "bucket": "multiplicative",
+          "value": 30,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 21,
+            "maxLevel": 21,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 30,
+            "observed": 30,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            20,
+            30
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "aspect-of-adaptability",
+      "name": "Aspect of Adaptability",
+      "slots": null,
+      "rank": "10/11",
+      "category": "Resource",
+      "description": "Basic Skills generate 24 [15 - 25] additional Primary Resource, once per Skill.",
+      "effects": [
+        {
+          "stat": "24 [15-25]",
+          "bucket": null,
+          "value": 24,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 10,
+            "maxLevel": 11,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 24,
+            "observed": 24,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            15,
+            25
+          ]
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "aspect-of-alacrity",
+      "name": "Aspect of Alacrity",
+      "slots": null,
+      "rank": "11/26",
+      "category": "Resource",
+      "description": "Your Defensive and Mobility Skills gain 60% [50 - 75]% Cooldown Rate while moving.",
+      "effects": [
+        {
+          "stat": "60% [50-75]",
+          "bucket": null,
+          "value": 60,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 11,
+            "maxLevel": 26,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 60,
+            "observed": 60,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            50,
+            75
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "aspect-of-apogeic-furor",
+      "name": "Aspect of Apogeic Furor",
+      "slots": null,
+      "rank": "7/8",
+      "category": "Resource",
+      "description": "Casting an Ultimate Skill reduces the Cooldowns of your other Skills by 9.5 [6.5 - 10.0] seconds.",
+      "effects": [
+        {
+          "stat": "9.5 [6.5-10.0]",
+          "bucket": null,
+          "value": 9.5,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 7,
+            "maxLevel": 8,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 9.5,
+            "observed": 9.5,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            6.5,
+            10
+          ]
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "aspect-of-berserk-fury",
+      "name": "Aspect of Berserk Fury",
+      "slots": null,
+      "rank": "21/21",
+      "category": "Resource",
+      "description": "You gain 11.0 [7.0 - 11.0] Fury per second while Berserking.",
+      "effects": [
+        {
+          "stat": "11.0 [7.0-11.0]",
+          "bucket": null,
+          "value": 11,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 21,
+            "maxLevel": 21,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 11,
+            "observed": 11,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            7,
+            11
+          ]
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "aspect-of-deluge",
+      "name": "Aspect of Deluge",
+      "slots": null,
+      "rank": "2/3",
+      "category": "Resource",
+      "description": "Overpower stacks increase your Primary Maximum Resource by 7 [6 - 8] and regeneration by 2.",
+      "effects": [
+        {
+          "stat": "7 [6-8]",
+          "bucket": null,
+          "value": 7,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 2,
+            "maxLevel": 3,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 7,
+            "observed": 7,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            6,
+            8
+          ]
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "aspect-of-efficiency",
+      "name": "Aspect of Efficiency",
+      "slots": null,
+      "rank": "15/16",
+      "category": "Resource",
+      "description": "Lucky Hit: Cast Basic Skills have up to a 49.0% [35.0 - 50.0]% chance to make your next Core Skill cost no Primary Resource, stacks up to 3 times.",
+      "effects": [
+        {
+          "stat": "49.0% [35.0-50.0]",
+          "bucket": null,
+          "value": 49,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 15,
+            "maxLevel": 16,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 49,
+            "observed": 49,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            35,
+            50
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "aspect-of-furious-impulse",
+      "name": "Aspect of Furious Impulse",
+      "slots": null,
+      "rank": "7/8",
+      "category": "Resource",
+      "description": "Each time you swap weapons, gain 10 [7 - 11] Fury.",
+      "effects": [
+        {
+          "stat": "10 [7-11]",
+          "bucket": null,
+          "value": 10,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 7,
+            "maxLevel": 8,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 10.428571428571429,
+            "observed": 10,
+            "matches": false,
+            "verified": false
+          },
+          "range": [
+            7,
+            11
+          ],
+          "note": "Linear upgrade interpolation does not reproduce this observed point. value stays the observed point, and this formula application is unverified."
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "aspect-of-the-orange-herald",
+      "name": "Aspect of the Orange Herald",
+      "slots": null,
+      "rank": "4/4",
+      "category": "Resource",
+      "description": "Cast Core Skill damage reduces the Cooldown of one of your Skills by 1.0 [0.7 - 1.0] second.",
+      "effects": [
+        {
+          "stat": "1.0 [0.7-1.0]",
+          "bucket": null,
+          "value": 1,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 4,
+            "maxLevel": 4,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 1,
+            "observed": 1,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            0.7,
+            1
+          ]
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "aspect-of-the-umbral",
+      "name": "Aspect of the Umbral",
+      "slots": null,
+      "rank": "5/5",
+      "category": "Resource",
+      "description": "Incapacitating enemies generates 6.0 [4.0 - 6.0] Primary Resource.",
+      "effects": [
+        {
+          "stat": "6.0 [4.0-6.0]",
+          "bucket": null,
+          "value": 6,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 5,
+            "maxLevel": 5,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 6,
+            "observed": 6,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            4,
+            6
+          ]
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "aspect-of-vocalized-empowerment",
+      "name": "Aspect of Vocalized Empowerment",
+      "slots": null,
+      "rank": "8/11",
+      "category": "Resource",
+      "description": "Your Shout Skills grant you 13.5 [10.0 - 15.0] Primary Resource Regeneration while active.",
+      "effects": [
+        {
+          "stat": "13.5 [10.0-15.0]",
+          "bucket": null,
+          "value": 13.5,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 8,
+            "maxLevel": 11,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 13.5,
+            "observed": 13.5,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            10,
+            15
+          ]
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "aspect-of-voracious-rage",
+      "name": "Aspect of Voracious Rage",
+      "slots": null,
+      "rank": "18/21",
+      "category": "Resource",
+      "description": "Killing an enemy with a Core Skill refunds 28.5% [20.0 - 30.0]% of base cost.",
+      "effects": [
+        {
+          "stat": "28.5% [20.0-30.0]",
+          "bucket": null,
+          "value": 28.5,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 18,
+            "maxLevel": 21,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 28.5,
+            "observed": 28.5,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            20,
+            30
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "bear-clan-berserkers-aspect",
+      "name": "Bear Clan Berserker's Aspect",
+      "slots": null,
+      "rank": "25/26",
+      "category": "Resource",
+      "description": "Kills while Berserking increases the Cooldown Rate of your Brawling Skills by 74% [50 - 75]% for 2 seconds.",
+      "effects": [
+        {
+          "stat": "74% [50-75]",
+          "bucket": null,
+          "value": 74,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 25,
+            "maxLevel": 26,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 74,
+            "observed": 74,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            50,
+            75
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "bold-chieftains-aspect",
+      "name": "Bold Chieftain's Aspect",
+      "slots": null,
+      "rank": "5/5",
+      "category": "Resource",
+      "description": "Your Shout Skill Cooldowns are reduced by 10.0 [8.0 - 10.0] seconds.",
+      "effects": [
+        {
+          "stat": "10.0 [8.0-10.0]",
+          "bucket": null,
+          "value": 10,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 5,
+            "maxLevel": 5,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 10,
+            "observed": 10,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            8,
+            10
+          ]
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "sapping-aspect",
+      "name": "Sapping Aspect",
+      "slots": null,
+      "rank": "6/6",
+      "category": "Resource",
+      "description": "Gain 1.5 [1.0 - 1.5] Primary Resource per second for each Nearby enemy affected by your Damage Over Time effects.",
+      "effects": [
+        {
+          "stat": "1.5 [1.0-1.5]",
+          "bucket": null,
+          "value": 1.5,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 6,
+            "maxLevel": 6,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 1.5,
+            "observed": 1.5,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            1,
+            1.5
+          ]
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "starlight-aspect",
+      "name": "Starlight Aspect",
+      "slots": null,
+      "rank": "9/11",
+      "category": "Resource",
+      "description": "Every 10% of your Life that you Heal grants you 28% [20 - 30]% Primary Resource Cost Reduction for 2 seconds, up to 6 seconds.",
+      "effects": [
+        {
+          "stat": "28% [20-30]",
+          "bucket": null,
+          "value": 28,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 9,
+            "maxLevel": 11,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 28,
+            "observed": 28,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            20,
+            30
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "vulpines-aspect",
+      "name": "Vulpine's Aspect",
+      "slots": null,
+      "rank": "8/11",
+      "category": "Resource",
+      "description": "Gain 22 [15 - 25] Primary Resource per second while you have a Barrier.",
+      "effects": [
+        {
+          "stat": "22 [15-25]",
+          "bucket": null,
+          "value": 22,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 8,
+            "maxLevel": 11,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 22,
+            "observed": 22,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            15,
+            25
+          ]
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "aspect-of-accursed-touch",
+      "name": "Aspect of Accursed Touch",
+      "slots": null,
+      "rank": "11/11",
+      "category": "Utility",
+      "description": "Up to a 40.0% [30.0 - 40.0]% chance to inflict Vampiric Curse. Enemies with Vampiric Curse are Vulnerable.",
+      "effects": [
+        {
+          "stat": "40.0% [30.0-40.0]",
+          "bucket": null,
+          "value": 40,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 11,
+            "maxLevel": 11,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 40,
+            "observed": 40,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            30,
+            40
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "aspect-of-anemia",
+      "name": "Aspect of Anemia",
+      "slots": null,
+      "rank": "21/21",
+      "category": "Utility",
+      "description": "Direct damage against enemies affected by Damage over Time or Vulnerable enemies has a 30% [20 - 30]% chance to Stun.",
+      "effects": [
+        {
+          "stat": "30% [20-30]",
+          "bucket": null,
+          "value": 30,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 21,
+            "maxLevel": 21,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 30,
+            "observed": 30,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            20,
+            30
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "aspect-of-audacity",
+      "name": "Aspect of Audacity",
+      "slots": null,
+      "rank": "20/21",
+      "category": "Utility",
+      "description": "Gain 14.8% [10.0 - 15.0]% Damage Reduction against Close enemies. When there are at least 5 Close enemies, Stun them for 5 seconds.",
+      "effects": [
+        {
+          "stat": "14.8% [10.0-15.0]",
+          "bucket": null,
+          "value": 14.8,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 20,
+            "maxLevel": 21,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 14.75,
+            "observed": 14.8,
+            "matches": false,
+            "verified": false
+          },
+          "range": [
+            10,
+            15
+          ],
+          "unit": "%",
+          "note": "Linear upgrade interpolation does not reproduce this observed point. value stays the observed point, and this formula application is unverified."
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "aspect-of-booming-voice",
+      "name": "Aspect of Booming Voice",
+      "slots": null,
+      "rank": "11/11",
+      "category": "Utility",
+      "description": "Your Shout Skill effect durations are increased by 30%[+] [20 - 30]% and Weaken enemies for 5 seconds.",
+      "effects": [
+        {
+          "stat": "30% [20-30]",
+          "bucket": "additive",
+          "value": 30,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 11,
+            "maxLevel": 11,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 30,
+            "observed": 30,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            20,
+            30
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "aspect-of-dominance",
+      "name": "Aspect of Dominance",
+      "slots": null,
+      "rank": "2/2",
+      "category": "Utility",
+      "description": "Crowd Controlling an enemy grants 2 [1 - 2] Resolve.",
+      "effects": [
+        {
+          "stat": "2 [1-2]",
+          "bucket": null,
+          "value": 2,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 2,
+            "maxLevel": 2,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 2,
+            "observed": 2,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            1,
+            2
+          ]
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "aspect-of-elusive-menace",
+      "name": "Aspect of Elusive Menace",
+      "slots": null,
+      "rank": "10/11",
+      "category": "Utility",
+      "description": "Your Dodge Chance increases by 29%[+] [20 - 30]% whenever you take damage. Successfully Dodging resets this bonus.",
+      "effects": [
+        {
+          "stat": "29% [20-30]",
+          "bucket": "additive",
+          "value": 29,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 10,
+            "maxLevel": 11,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 29,
+            "observed": 29,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            20,
+            30
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "aspect-of-fortune",
+      "name": "Aspect of Fortune",
+      "slots": null,
+      "rank": "11/11",
+      "category": "Utility",
+      "description": "You gain 20.0%[x] [15.0 - 20.0]% Lucky Hit Chance against Elite enemies.",
+      "effects": [
+        {
+          "stat": "20.0% [15.0-20.0]",
+          "bucket": "multiplicative",
+          "value": 20,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 11,
+            "maxLevel": 11,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 20,
+            "observed": 20,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            15,
+            20
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "aspect-of-rallying-reversal",
+      "name": "Aspect of Rallying Reversal",
+      "slots": null,
+      "rank": "21/21",
+      "category": "Utility",
+      "description": "When you Crowd Control an enemy or apply any Stagger to a Boss, gain 1 Ferocity and 15.0% [10.0 - 15.0]% Damage Reduction for 4 seconds.",
+      "effects": [
+        {
+          "stat": "15.0% [10.0-15.0]",
+          "bucket": null,
+          "value": 15,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 21,
+            "maxLevel": 21,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 15,
+            "observed": 15,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            10,
+            15
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "aspect-of-retribution",
+      "name": "Aspect of Retribution",
+      "slots": null,
+      "rank": "9/11",
+      "category": "Utility",
+      "description": "Distant enemies have a 20% chance to be Stunned when hitting you. You deal 23%[x] [15 - 25]% increased damage to Stunned or Knocked Down enemies.",
+      "effects": [
+        {
+          "stat": "23% [15-25]",
+          "bucket": "multiplicative",
+          "value": 23,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 9,
+            "maxLevel": 11,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 23,
+            "observed": 23,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            15,
+            25
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "aspect-of-warmth",
+      "name": "Aspect of Warmth",
+      "slots": null,
+      "rank": "9/11",
+      "category": "Utility",
+      "description": "Each Nearby Burning enemy Heals you for 2.8% [2.0 - 3.0]% of your Maximum Life every second.",
+      "effects": [
+        {
+          "stat": "2.8% [2.0-3.0]",
+          "bucket": null,
+          "value": 2.8,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 9,
+            "maxLevel": 11,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 2.8,
+            "observed": 2.8,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            2,
+            3
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "battle-fervors-aspect",
+      "name": "Battle Fervor's Aspect",
+      "slots": null,
+      "rank": "11/11",
+      "category": "Utility",
+      "description": "Brawling Skills grant Berserking for 5 seconds on their first hit. Gain 15.0% [10.0 - 15.0]% Damage Reduction while Berserking.",
+      "effects": [
+        {
+          "stat": "15.0% [10.0-15.0]",
+          "bucket": null,
+          "value": 15,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 11,
+            "maxLevel": 11,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 15,
+            "observed": 15,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            10,
+            15
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "blood-boiling-aspect",
+      "name": "Blood Boiling Aspect",
+      "slots": null,
+      "rank": "16/16",
+      "category": "Utility",
+      "description": "You gain Overpower and spawn Volatile Blood Drops when spending stacks. Collecting Volatile Blood Drops deals 31,215 [21,627 - 31,215] Physical damage.",
+      "effects": [
+        {
+          "stat": "31,215 [21,627-31,215]",
+          "bucket": null,
+          "value": 31215,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 16,
+            "maxLevel": 16,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 31215,
+            "observed": 31215,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            21627,
+            31215
+          ]
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "earthstrikers-aspect",
+      "name": "Earthstriker's Aspect",
+      "slots": null,
+      "rank": "9/11",
+      "category": "Utility",
+      "description": "Gain 1 Overpower stack each time you swap weapons. You deal 19.5%[x] [15.5 - 20.5]% increased damage while you have Overpower.",
+      "effects": [
+        {
+          "stat": "19.5% [15.5-20.5]",
+          "bucket": "multiplicative",
+          "value": 19.5,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 9,
+            "maxLevel": 11,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 19.5,
+            "observed": 19.5,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            15.5,
+            20.5
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "eluding-aspect",
+      "name": "Eluding Aspect",
+      "slots": null,
+      "rank": "5/6",
+      "category": "Utility",
+      "description": "Becoming Crowd Controlled grants you Unstoppable and 14% [10 - 15]% Damage Reduction for 4 seconds. This effect has a 6 second Cooldown.",
+      "effects": [
+        {
+          "stat": "14% [10-15]",
+          "bucket": null,
+          "value": 14,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 5,
+            "maxLevel": 6,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 14,
+            "observed": 14,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            10,
+            15
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "embattled-aspect",
+      "name": "Embattled Aspect",
+      "slots": null,
+      "rank": "50/51",
+      "category": "Utility",
+      "description": "Fortify's Drain Rate is increased by 199%[+] [150 - 200]%.",
+      "effects": [
+        {
+          "stat": "199% [150-200]",
+          "bucket": "additive",
+          "value": 199,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 50,
+            "maxLevel": 51,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 199,
+            "observed": 199,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            150,
+            200
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "exploiters-aspect",
+      "name": "Exploiter's Aspect",
+      "slots": null,
+      "rank": "20/21",
+      "category": "Utility",
+      "description": "You have 50%[+] increased Crowd Control Duration. You deal 49%[x] [30 - 50]% increased damage to Unstoppable enemies.",
+      "effects": [
+        {
+          "stat": "49% [30-50]",
+          "bucket": "multiplicative",
+          "value": 49,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 20,
+            "maxLevel": 21,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 49,
+            "observed": 49,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            30,
+            50
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "overheating-aspect",
+      "name": "Overheating Aspect",
+      "slots": null,
+      "rank": "11/11",
+      "category": "Utility",
+      "description": "Slain Burning enemies have a 10% chance to grant Overpower. Your Fire damage is increased by 20.0%[x] [15.0 - 20.0]%.",
+      "effects": [
+        {
+          "stat": "20.0% [15.0-20.0]",
+          "bucket": "multiplicative",
+          "value": 20,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 11,
+            "maxLevel": 11,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 20,
+            "observed": 20,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            15,
+            20
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "steadfast-berserkers-aspect",
+      "name": "Steadfast Berserker's Aspect",
+      "slots": null,
+      "rank": "20/21",
+      "category": "Utility",
+      "description": "Gain 5.9% [4.0 - 6.0]% of your Maximum Life as Fortify whenever you deal direct damage while Berserking.",
+      "effects": [
+        {
+          "stat": "5.9% [4.0-6.0]",
+          "bucket": null,
+          "value": 5.9,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 20,
+            "maxLevel": 21,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 5.9,
+            "observed": 5.9,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            4,
+            6
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "sticker-thought-aspect",
+      "name": "Sticker-Thought Aspect",
+      "slots": null,
+      "rank": "20/21",
+      "category": "Utility",
+      "description": "Gain 5,568 [1,920 - 5,760] Thorns while Channeling and for 3 seconds afterwards.",
+      "effects": [
+        {
+          "stat": "5,568 [1,920-5,760]",
+          "bucket": null,
+          "value": 5568,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 20,
+            "maxLevel": 21,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 5568,
+            "observed": 5568,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            1920,
+            5760
+          ]
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "tidal-aspect",
+      "name": "Tidal Aspect",
+      "slots": null,
+      "rank": "3/3",
+      "category": "Utility",
+      "description": "Your Maximum Overpower is increased by 3 [1 - 3] while you are Fortified.",
+      "effects": [
+        {
+          "stat": "3 [1-3]",
+          "bucket": null,
+          "value": 3,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 3,
+            "maxLevel": 3,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 3,
+            "observed": 3,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            1,
+            3
+          ]
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "undying-aspect",
+      "name": "Undying Aspect",
+      "slots": null,
+      "rank": "11/11",
+      "category": "Utility",
+      "description": "Casting a Skill Heals you for 3.0% [2.0 - 3.0]% of your Maximum Life. Double this bonus while Injured.",
+      "effects": [
+        {
+          "stat": "3.0% [2.0-3.0]",
+          "bucket": null,
+          "value": 3,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 11,
+            "maxLevel": 11,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 3,
+            "observed": 3,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            2,
+            3
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "weapon-masters-aspect",
+      "name": "Weapon Master's Aspect",
+      "slots": null,
+      "rank": "6/6",
+      "category": "Utility",
+      "description": "Weapon Mastery Skills Stun enemies for 1.5 [1.0 - 1.5] seconds. Your Weapon Mastery Skills have an additional Charge and deal 15%[x] [10 - 15]% increased damage.",
+      "effects": [
+        {
+          "stat": "1.5 [1.0-1.5]",
+          "bucket": null,
+          "value": 1.5,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 6,
+            "maxLevel": 6,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 1.5,
+            "observed": 1.5,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            1,
+            1.5
+          ]
+        },
+        {
+          "stat": "15% [10-15]",
+          "bucket": "multiplicative",
+          "value": 15,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 6,
+            "maxLevel": 6,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 15,
+            "observed": 15,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            10,
+            15
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "wildbolt-aspect",
+      "name": "Wildbolt Aspect",
+      "slots": null,
+      "rank": "21/21",
+      "category": "Utility",
+      "description": "Every 1.5 [3.5 - 1.5] seconds, Distant enemies are Pulled In to you and take 15%[x] increased damage from you for 3 seconds. This effect cannot occur while you are in Stealth.",
+      "effects": [
+        {
+          "stat": "1.5 [3.5-1.5]",
+          "bucket": null,
+          "value": 1.5,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 21,
+            "maxLevel": 21,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 1.5,
+            "observed": 1.5,
+            "matches": true,
+            "verified": false
+          },
+          "range": [
+            3.5,
+            1.5
+          ],
+          "note": "Range is stored as shown, high to low. The formula application is unverified."
+        },
+        {
+          "stat": "15%",
+          "bucket": "multiplicative",
+          "value": 15,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 21,
+            "maxLevel": 21,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": null,
+            "observed": 15,
+            "matches": false,
+            "verified": false
+          },
+          "unit": "%",
+          "note": "No bracket range was shown, so the upgrade curve was not applied."
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false,
+      "suspect": true,
+      "note": "Suspect: the range is shown high to low, and this may be a Druid aspect."
+    },
+    {
+      "id": "aspect-of-forward-momentum",
+      "name": "Aspect of Forward Momentum",
+      "slots": null,
+      "rank": "21/21",
+      "category": "Mobility",
+      "description": "Your Knock Back and Pull effects grant you 35%[x] [25 - 35]% Movement Speed for 4 seconds.",
+      "effects": [
+        {
+          "stat": "35% [25-35]",
+          "bucket": "multiplicative",
+          "value": 35,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 21,
+            "maxLevel": 21,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 35,
+            "observed": 35,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            25,
+            35
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "aspect-of-metamorphosis",
+      "name": "Aspect of Metamorphosis",
+      "slots": null,
+      "rank": "12/13",
+      "category": "Mobility",
+      "description": "Evade transforms you into a cloud of bats, dealing 9,612 Physical damage and inflicting Vampiric Curse to enemies in your path. Evade's Cooldown is increased by 4.5 [10.0 - 4.0] seconds.",
+      "effects": [
+        {
+          "stat": "4.5 [10.0-4.0]",
+          "bucket": null,
+          "value": 4.5,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 12,
+            "maxLevel": 13,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 4.5,
+            "observed": 4.5,
+            "matches": true,
+            "verified": false
+          },
+          "range": [
+            10,
+            4
+          ],
+          "note": "Range is stored as shown, high to low. The formula application is unverified."
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false,
+      "suspect": true,
+      "note": "Suspect: the range is shown high to low, and this may be a Druid aspect."
+    },
+    {
+      "id": "aspect-of-nebulous-brews",
+      "name": "Aspect of Nebulous Brews",
+      "slots": null,
+      "rank": "21/21",
+      "category": "Mobility",
+      "description": "Healing Potions grant 30%[x] [20 - 30]% Movement Speed for 8 seconds. Every 80 meters you travel refills a Healing Potion.",
+      "effects": [
+        {
+          "stat": "30% [20-30]",
+          "bucket": "multiplicative",
+          "value": 30,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 21,
+            "maxLevel": 21,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 30,
+            "observed": 30,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            20,
+            30
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "aspect-of-slaughter",
+      "name": "Aspect of Slaughter",
+      "slots": null,
+      "rank": "15/16",
+      "category": "Mobility",
+      "description": "You gain 44.0%[+] [30.0 - 45.0]% increased Movement Speed. Taking damage from Close enemies Slows you by 30% for 2 seconds.",
+      "effects": [
+        {
+          "stat": "44.0% [30.0-45.0]",
+          "bucket": "additive",
+          "value": 44,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 15,
+            "maxLevel": 16,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 44,
+            "observed": 44,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            30,
+            45
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "aspect-of-swift-spirit",
+      "name": "Aspect of Swift Spirit",
+      "slots": null,
+      "rank": "16/21",
+      "category": "Mobility",
+      "description": "Losing Resolve grants 4.5%[x] [3.0 - 5.0]% Movement Speed for 10 seconds, stacking up to 5 times.",
+      "effects": [
+        {
+          "stat": "4.5% [3.0-5.0]",
+          "bucket": "multiplicative",
+          "value": 4.5,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 16,
+            "maxLevel": 21,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 4.5,
+            "observed": 4.5,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            3,
+            5
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "aspect-of-the-unholy-confederate",
+      "name": "Aspect of the Unholy Confederate",
+      "slots": null,
+      "rank": "6/6",
+      "category": "Mobility",
+      "description": "You gain 1.5%[+] [1.0 - 1.5]% increased Movement Speed per active Summon. Casting a Summon Skill doubles this bonus for 3 seconds.",
+      "effects": [
+        {
+          "stat": "1.5% [1.0-1.5]",
+          "bucket": "additive",
+          "value": 1.5,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 6,
+            "maxLevel": 6,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 1.5,
+            "observed": 1.5,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            1,
+            1.5
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "craven-aspect",
+      "name": "Craven Aspect",
+      "slots": null,
+      "rank": "3/6",
+      "category": "Mobility",
+      "description": "Each Nearby Hindered enemy grants you 1.2%[+] [1.0 - 1.5]% increased Movement Speed.",
+      "effects": [
+        {
+          "stat": "1.2% [1.0-1.5]",
+          "bucket": "additive",
+          "value": 1.2,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 3,
+            "maxLevel": 6,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 1.2,
+            "observed": 1.2,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            1,
+            1.5
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "ghostwalker-aspect",
+      "name": "Ghostwalker Aspect",
+      "slots": null,
+      "rank": "19/21",
+      "category": "Mobility",
+      "description": "Unstoppable grants 19.0%[x] [10.0 - 20.0]% Movement Speed and are Unhindered.",
+      "effects": [
+        {
+          "stat": "19.0% [10.0-20.0]",
+          "bucket": "multiplicative",
+          "value": 19,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 19,
+            "maxLevel": 21,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 19,
+            "observed": 19,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            10,
+            20
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "sickfoots-aspect",
+      "name": "Sickfoot's Aspect",
+      "slots": null,
+      "rank": "6/6",
+      "category": "Mobility",
+      "description": "Gain up to 1.5%[+] [1.0 - 1.5]% increased Movement and Damage over Time Speed for each Nearby enemy affected by your Damage over Time effects, stacks up to 25 times.",
+      "effects": [
+        {
+          "stat": "1.5% [1.0-1.5]",
+          "bucket": "additive",
+          "value": 1.5,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 6,
+            "maxLevel": 6,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 1.5,
+            "observed": 1.5,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            1,
+            1.5
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
+    },
+    {
+      "id": "wind-striker-aspect",
+      "name": "Wind Striker Aspect",
+      "slots": null,
+      "rank": "21/21",
+      "category": "Mobility",
+      "description": "Critical Strikes grant 50.0%[+] [30.0 - 50.0]% Movement Speed.",
+      "effects": [
+        {
+          "stat": "50.0% [30.0-50.0]",
+          "bucket": "additive",
+          "value": 50,
+          "conditions": null,
+          "stacking": null,
+          "source": "user video codex (frames)",
+          "verified": false,
+          "upgrade": {
+            "level": 21,
+            "maxLevel": 21,
+            "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
+            "interpolated": 50,
+            "observed": 50,
+            "matches": true,
+            "verified": true
+          },
+          "range": [
+            30,
+            50
+          ],
+          "unit": "%"
+        }
+      ],
+      "source": "user video codex (frames)",
+      "verified": false
     }
   ],
   "uniques": [
