@@ -154,6 +154,8 @@ function conditionState(effect, build, catalog) {
       if (build.uptime.overpower <= 0) return 'inactive';
     } else if (text.includes('channel') || text.includes('fortif')) {
       return 'unknown';
+    } else if (/\b(while|above|below)\b/.test(text)) {
+      return 'unknown';
     } else if (!tags.has(text.replace(/\?$/, ''))) {
       return 'inactive';
     }
@@ -161,9 +163,12 @@ function conditionState(effect, build, catalog) {
   return 'active';
 }
 
+const NON_DAMAGE_KINDS = new Set(['defense', 'resource', 'mobility', 'utility', 'base-weapon']);
+
 export function damageEffects(entity, build, catalog) {
   const active = [];
   for (const effect of entity.effects || []) {
+    if (NON_DAMAGE_KINDS.has(effect.kind)) continue;
     const value = pointValue(effect.value);
     const bucket = knownBucket(effect.bucket);
     if (value == null || !bucket) continue;

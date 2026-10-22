@@ -1,4 +1,4 @@
-const EMPTY_COLLECTIONS = ['skillVariants', 'affixes', 'paragonBoards', 'talismans', 'passives'];
+const EMPTY_COLLECTIONS = ['skillVariants', 'affixes', 'paragonBoards', 'talismans'];
 
 export function needsInput(catalog, root = '') {
   const items = [];

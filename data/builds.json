@@ -660,21 +660,28 @@
       "rotation": [],
       "uptime": {
         "berserk": null,
-        "vulnerable": null,
-        "overpower": null
+        "vulnerable": 0.662691,
+        "overpower": 0.290869,
+        "estimate": {
+          "vulnerable": true,
+          "overpower": true,
+          "note": "Estimated from the screenshot, not measured. Vulnerable: War Cry makes enemies Vulnerable for 4s on a 15.09s cooldown (4/15.09 = 0.265076). Stone of Jordan makes a touched enemy Vulnerable for 10s and the screenshot gives no touch interval. The estimate uses War Cry's cooldown as the only printed cycle and one touch per cycle. The 4s War Cry window sits inside the 10s touch window, so the union is 10/15.09 = 0.662691. A faster touch rate is not in the screenshot and would raise this toward 1. Overpower: Wrath of the Berserker grants Unstoppable for 15.8s and 1 Overpower per second, on a 54.32s cooldown. 15.8/54.32 = 0.290869. The 4s stack duration and Earthstriker's weapon-swap stacks are not added, because the screenshot gives no extra rate. Berserk uptime is not estimated."
+        }
       },
       "defense": {
         "life": 473,
-        "armor": 32183,
-        "resists": null,
+        "armor": 33715,
+        "resists": 21218,
         "armorMitigationPct": null,
         "resistMitigationPct": null,
-        "dr": null
+        "dr": [
+          50
+        ]
       },
       "weaponDmg": 4596,
       "mainStat": 4101,
       "critChance": 100,
-      "critDmg": 7414.8,
+      "critDmg": 7424.8,
       "vulnPct": 206.8,
       "overpowerPct": null,
       "maxFury": 826,
@@ -689,21 +696,21 @@
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
       "manualInputsVerified": false,
-      "note": "Based on the Whirlwind Barb (S15) Immortal Speed 130 name list. User-confirmed differences: Leoric's Crown is the helm and Tuskhelm of Joritz the Mighty is a charm; Stone of Jordan replaces Ring of Starless Skies; 2H Bludgeoning is the Deathshead mace with Aspect of Channeling; Endurant Faith and Seal of the Epiphany replace Blood-Mad Idol and The Furnace; the arsenal is 2 two-handed weapons and 2 one-handed weapons. The character sheet was confirmed from the user's screenshot: level 70, Strength 4101, Intelligence 981, Willpower 1333, Dexterity 1320, Armor 32183, Toughness 24910 for all damage types, Weapon Damage 4596, Max Life 473. Video readings that the screenshot did not confirm stay unverified: crit chance 100%, crit damage 7414.8%, Vulnerable damage 206.8%, max Fury 826, resistances capped at 80%. The 80% figure is the cap that was read, not an EHP resist mitigation percent. Armor mitigation was not shown. Life numbers implied by skill tooltips are ignored. Confirmed skill allocation, 2026-10-22: Whirlwind, War Cry, Challenging Shout, Rallying Cry, Wrath of the Berserker, and Iron Skin. Flay is not active. The upgrade list on this build is the confirmed allocation. Upgrade numbers stay on the catalog rows and stay unverified. Video 1 (user video 1 (watchVideo 2026-10-22)) added the equipped item rolls, paragon boards, glyph levels from the user rule: Might 135 verified, the other equipped glyphs approximately 131-135 unverified, and every unequipped glyph at 0, charms, Prime Evil powers, and polearm expertise. User rule 2026-10-22: 2H Bludgeoning is Deathshead with Aspect of Channeling at 0.90 attacks per second; 2H Slashing is Insight, a polearm, at 0.90 attacks per second with +94.3% crit chance and x310% crit damage; the two 1H swords are Spirit and Ramaladni's Magnum Opus, both at 1.10 attacks per second. Weapon type, slot, and attacks per second are verified. Armor 32183, Life 473, and the rank model with Whirlwind at 41 stay. The video's conflicting readings are suspect. Flay stays inactive. Screenshot 2026-10-22 replaces weapon damage 4566 with 4596 and toughness 29309 with 24910.",
+      "note": "Based on the Whirlwind Barb (S15) Immortal Speed 130 name list. User-confirmed differences: Leoric's Crown is the helm and Tuskhelm of Joritz the Mighty is a charm; Stone of Jordan replaces Ring of Starless Skies; 2H Bludgeoning is the Deathshead mace with Aspect of Channeling; Endurant Faith and Seal of the Epiphany replace Blood-Mad Idol and The Furnace; the arsenal is 2 two-handed weapons and 2 one-handed weapons. The character sheet was confirmed from the user's screenshot: level 70, Strength 4101, Intelligence 981, Willpower 1333, Dexterity 1320, Armor 32183, Toughness 24910 for all damage types, Weapon Damage 4596, Max Life 473. The defence sheet confirms Critical Strike Chance 100%, Critical Strike Damage 7,424.8%, and Max Fury 826. Vulnerable damage 206.8% and the 80% resistance cap stay as the earlier video readings. The 80% figure is the cap that was read, not an EHP resist mitigation percent. Armor mitigation was not shown. Life numbers implied by skill tooltips are ignored. Confirmed skill allocation, 2026-10-22: Whirlwind, War Cry, Challenging Shout, Rallying Cry, Wrath of the Berserker, and Iron Skin. Flay is not active. The upgrade list on this build is the confirmed allocation. Upgrade numbers stay on the catalog rows and stay unverified. Video 1 (user video 1 (watchVideo 2026-10-22)) added the equipped item rolls, paragon boards, glyph levels from the user rule: Might 135 verified, the other equipped glyphs approximately 131-135 unverified, and every unequipped glyph at 0, charms, Prime Evil powers, and polearm expertise. User rule 2026-10-22: 2H Bludgeoning is Deathshead with Aspect of Channeling at 0.90 attacks per second; 2H Slashing is Insight, a polearm, at 0.90 attacks per second with +94.3% crit chance and x310% crit damage; the two 1H swords are Spirit and Ramaladni's Magnum Opus, both at 1.10 attacks per second. Weapon type, slot, and attacks per second are verified. Armor 32183, Life 473, and the rank model with Whirlwind at 41 stay. The video's conflicting readings are suspect. Flay stays inactive. Screenshot 2026-10-22 replaces weapon damage 4566 with 4596 and toughness 29309 with 24910. Screenshot 2026-10-22 defence sheet replaces Armor 32,183 with 33,715, Toughness 24,910 with 25,600, and Critical Strike Damage 7,414.8% with 7,424.8%. All resistances are 21,218. All Damage Reduction is 50%. Vulnerable and Overpower uptime are estimates flagged on the uptime object.",
       "sheet": {
         "level": 70,
         "strength": 4101,
         "intelligence": 981,
         "willpower": 1333,
         "dexterity": 1320,
-        "armor": 32183,
-        "toughness": 24910,
+        "armor": 33715,
+        "toughness": 25600,
         "toughnessScope": "all damage types",
         "weaponDamage": 4596,
         "maxLife": 473,
         "source": "user screenshot 2026-10-22",
         "verified": true,
-        "note": "Latest screenshot: Strength 4,101, Intelligence 981, Willpower 1,333, Dexterity 1,320, Weapon Damage 4,596, Toughness 24,910. Weapon Damage replaces 4,566. Toughness replaces 29,309. The earlier confirmed sheet still has Armor 32,183 and Max Life 473. The latest screenshot does not restate the toughness scope. Attributes match the earlier confirmation.",
+        "note": "Latest screenshot: Strength 4,101, Intelligence 981, Willpower 1,333, Dexterity 1,320, Weapon Damage 4,596, Toughness 24,910. Weapon Damage replaces 4,566. Toughness replaces 29,309. The earlier confirmed sheet still has Armor 32,183 and Max Life 473. The latest screenshot does not restate the toughness scope. Attributes match the earlier confirmation. Defence sheet from the same screenshot source: Toughness 25,600 replaces 24,910. Armor 33,715 replaces 32,183. All resistances 21,218 replace the video reading 19,446. All Damage Reduction 50.0% is stored as the DR list. Block reduction 15% and Dodge 7.9% are not DR layers and are not folded into that list. Max Life stays 473. Healing received 67.7% replaces the video 67.1%. Life regeneration 276. Max Fury 826, Fury cost reduction -30%, Fury regeneration 85, Fury generation 52.5%, Fury on kill 11. Movement Speed 200%, attack speed bonus 100%, Critical Strike Chance 100%, Critical Strike Damage 7,424.8% replaces 7,414.8%. Weapon speed 1.10. Base weapon damage: Bludgeoning 5,073 replaces the video 5,010, Dual-Wield 4,178, Slashing 5,128. These bases do not replace sheet Weapon Damage 4,596, which this defence sheet does not restate. Armor and resistance figures are ratings. The sheet does not show armor or resist mitigation percents, so those stay unset.",
         "videoReadings": [
           {
             "stat": "armor mitigation shown with the video armor",

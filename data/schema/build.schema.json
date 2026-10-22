@@ -182,7 +182,17 @@
       "properties": {
         "berserk": { "type": ["number", "null"] },
         "vulnerable": { "type": ["number", "null"] },
-        "overpower": { "type": ["number", "null"] }
+        "overpower": { "type": ["number", "null"] },
+        "estimate": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "berserk": { "type": "boolean" },
+            "vulnerable": { "type": "boolean" },
+            "overpower": { "type": "boolean" },
+            "note": { "type": "string" }
+          }
+        }
       }
     },
     "defense": {

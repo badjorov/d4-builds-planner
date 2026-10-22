@@ -198,7 +198,7 @@
       "total": 83,
       "source": "user correction 2026-10-22",
       "verified": true,
-      "note": "All 83 points are spent. The confirmed active skills are Whirlwind, War Cry, Challenging Shout, Rallying Cry, Wrath of the Berserker, and Iron Skin, plus the upgrades named on those skills. allocationVerified on a skill, and verified on an upgrade, confirm the allocation only. Numeric values stay unverified unless they already were. Flay is inactive. Every other non-passive skill and upgrade is inactive. passives is empty: no passive name is present in the sourced repo data, so none were added."
+      "note": "All 83 points are spent. The confirmed active skills are Whirlwind, War Cry, Challenging Shout, Rallying Cry, Wrath of the Berserker, and Iron Skin, plus the upgrades named on those skills. allocationVerified on a skill, and verified on an upgrade, confirm the allocation only. Numeric values stay unverified unless they already were. Flay is inactive. Every other skill and upgrade is inactive. The current skill tree has no separate passives. These six skills and their upgrades are the complete skill setup."
     },
     "tooltipLifeNote": "Max Life on the user build is 473. That is a minimum-life setup with Melted Heart of Selig and Endurant Faith. Life numbers implied by skill tooltips are not Max Life and are ignored.",
     "rankNote": "A skill rank is base ranks, capped by maxRank (15), plus bonus ranks from gear, talismans, and paragon. rank and rankTotal store the shown total. baseRank and bonusRank stay null when the split was not shown."
@@ -290,9 +290,9 @@
         "Core",
         "Channeled"
       ],
-      "coeffPct": 18,
+      "coeffPct": 386,
       "rank": 41,
-      "dot": null,
+      "dot": false,
       "furyGeneratePerCast": null,
       "furySpendPerCast": null,
       "variantOf": null,
@@ -300,18 +300,30 @@
         {
           "stat": "coefficient",
           "bucket": null,
-          "value": 18,
+          "value": 386,
           "conditions": null,
           "stacking": null,
-          "source": "user video 2026-10-21 batch2 (transcribed)",
-          "verified": false,
-          "note": "Tooltip coefficient transcribed from user video. Unverified."
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "note": "Tooltip coefficient transcribed from user video. Unverified. Screenshot coefficient 386%. The earlier value was 18. Tooltip damage 3,717,620 is not a second coefficient."
+        },
+        {
+          "stat": "Dust Devils",
+          "kind": "damage",
+          "bucket": null,
+          "value": 510,
+          "conditions": [],
+          "stacking": null,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "Screenshot: 2 Dust Devils at 510% each. No [+] or [x] tag, so the bucket is null."
         }
       ],
       "source": "manual-entry",
       "verified": false,
       "maxRank": 15,
-      "tooltip": "25 Fury/s, 3,217,620 (18%)",
+      "tooltip": "386% (3,717,620), 2 Dust Devils 510% each; 40%[x] +10 Fury cost; channel 1%[x]/hit up to 25; 32 Fury/s; Lucky Hit 20%; Physical; arsenal Bludgeoning (Deathshead).",
       "modifiers": [
         {
           "text": "MS +15%[+]",
@@ -321,7 +333,9 @@
           "text": "Cost Damage Bonus +40%[x] +10 Fury",
           "allocated": true,
           "verified": true,
-          "note": "Allocation confirmed 2026-10-22. verified is the allocation fact. Numbers in the text stay unverified."
+          "note": "Allocation confirmed 2026-10-22. verified is the allocation fact. Numbers in the text stay unverified. Screenshot confirms +40%[x] and +10 Fury cost. value is the 40% damage term.",
+          "value": 40,
+          "source": "user screenshot 2026-10-22"
         },
         {
           "text": "Channel +10%[x] per 3 hits x25",
@@ -332,10 +346,12 @@
           "allocated": false
         },
         {
-          "text": "Tornado Dust Devil 4,915,123 (131%)",
+          "text": "2 Dust Devils 510% each",
           "allocated": true,
           "verified": true,
-          "note": "Allocation confirmed 2026-10-22. verified is the allocation fact. Numbers in the text stay unverified."
+          "note": "Allocation confirmed 2026-10-22. verified is the allocation fact. Numbers in the text stay unverified. Screenshot replaces the video line Tornado Dust Devil 4,915,123 (131%).",
+          "value": 510,
+          "source": "user screenshot 2026-10-22"
         },
         {
           "text": "Bursting 732,680 (317%) Fire + 3,227,293 (1,068%) burn",
@@ -349,14 +365,14 @@
           "text": "Channel Damage Bonus",
           "allocated": true,
           "verified": true,
-          "value": null,
-          "source": "user confirmation 2026-10-22",
-          "note": "Added because \"Channel Damage Bonus\" did not match a catalog upgrade row. Allocation confirmed 2026-10-22. verified is the allocation fact. Numbers in the text stay unverified. value is null because no number was supplied."
+          "value": 1,
+          "source": "user screenshot 2026-10-22",
+          "note": "Added because \"Channel Damage Bonus\" did not match a catalog upgrade row. Allocation confirmed 2026-10-22. verified is the allocation fact. Numbers in the text stay unverified. value is null because no number was supplied. Screenshot: channel 1%[x] per hit, up to 25. value is the 1% per hit. The stack cap is 25."
         }
       ],
       "transcribed": "25 Fury/s, 3,217,620 (18%). MS +15%[+]; Cost Damage Bonus +40%[x] +10 Fury; Channel +10%[x] per 3 hits x25; Weaken on crit 4s; Tornado Dust Devil 4,915,123 (131%); Bursting 732,680 (317%) Fire + 3,227,293 (1,068%) burn; Winding (other skills grant 4 charges up to 20, +15%[x] dmg & +10%[+] MS per stack, shrapnel 1,839,460 (106%) + 893,293 (115%) bleed).",
       "recordedSource": "user video 2026-10-21 batch2 (transcribed)",
-      "note": "Shown rank is 41/15. rank is the total. maxRank 15 is the base-rank cap. baseRank and bonusRank were not shown, so the split across gear, talismans, and paragon stays unknown. This replaces the earlier suspect reading of 1/15. Video 1, ranks misread as 11/5 and not applied: 32 Fury per second; 5,727,105 [189%]; 2 Dust Devils for 4,933,123; +40%[x] damage at +10 Fury cost; +1%[x] per hit, stacking to 25.",
+      "note": "Shown rank is 41/15. rank is the total. maxRank 15 is the base-rank cap. baseRank and bonusRank were not shown, so the split across gear, talismans, and paragon stays unknown. This replaces the earlier suspect reading of 1/15. Video 1, ranks misread as 11/5 and not applied: 32 Fury per second; 5,727,105 [189%]; 2 Dust Devils for 4,933,123; +40%[x] damage at +10 Fury cost; +1%[x] per hit, stacking to 25. Screenshot: 386% (3,717,620), 2 Dust Devils at 510% each, 40%[x] at +10 Fury cost, channel 1%[x] per hit up to 25, 32 Fury per second, Lucky Hit 20%, Physical, arsenal Bludgeoning (Deathshead). The earlier coefficient was 18.",
       "allocated": true,
       "rankTotal": 41,
       "baseRank": null,
@@ -1075,9 +1091,9 @@
       "name": "Rallying Cry",
       "category": null,
       "tags": null,
-      "dot": null,
+      "dot": false,
       "furyGeneratePerCast": null,
-      "furySpendPerCast": null,
+      "furySpendPerCast": 45,
       "variantOf": null,
       "effects": [
         {
@@ -1088,14 +1104,74 @@
           "value": null,
           "verified": false,
           "source": "user video 2026-10-21 batch2 (transcribed)"
+        },
+        {
+          "stat": "Movement Speed",
+          "kind": "mobility",
+          "bucket": "multiplicative",
+          "value": 50,
+          "conditions": [],
+          "stacking": null,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "Screenshot: 50%[x] Movement Speed for 4s."
+        },
+        {
+          "stat": "Resource Generation",
+          "kind": "resource",
+          "bucket": "multiplicative",
+          "value": 77,
+          "conditions": [],
+          "stacking": null,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "Screenshot: resource generation 77%[x]."
+        },
+        {
+          "stat": "Movement Speed",
+          "kind": "mobility",
+          "bucket": null,
+          "value": 10,
+          "conditions": [],
+          "stacking": null,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "Screenshot: +10% Movement Speed. No bucket tag."
+        },
+        {
+          "stat": "Fortify",
+          "kind": "defense",
+          "bucket": null,
+          "value": 15,
+          "conditions": [],
+          "stacking": null,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "Screenshot: Fortify 15% of Maximum Life. No bucket tag."
+        },
+        {
+          "stat": "effectiveness",
+          "kind": "utility",
+          "bucket": null,
+          "value": 20,
+          "conditions": [],
+          "stacking": null,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "Screenshot: +20% effectiveness. No bucket tag."
         }
       ],
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
       "coeffPct": null,
-      "rank": 15,
+      "rank": 29,
       "maxRank": 15,
-      "tooltip": "CD 25.00s, MS +30%[+] 4.0s, Resource Gen +17%[x], MS +10%[+], Fortify 15% max life, +20%[x] +20%/ally",
+      "tooltip": "45 Fury, Movement Speed 50%[x] 4s, resource generation 77%[x], +10% Movement Speed, Fortify 15% Maximum Life, +20% effectiveness.",
       "modifiers": [
         {
           "text": "Duration 7s",
@@ -1140,19 +1216,20 @@
       ],
       "transcribed": "CD 25.00s, MS +30%[+] 4.0s, Resource Gen +17%[x], MS +10%[+], Fortify 15% max life, +20%[x] +20%/ally. Duration 7s; Fury Gain 3 per 5m; The World (Daze+Slow 124% 4s, AS instead of MS, 2.5s CD); Madawc (Fury -10, Madawc 6,480,735 (556%)).",
       "allocated": true,
-      "rankTotal": 15,
+      "rankTotal": 29,
       "baseRank": null,
       "bonusRank": null,
       "allocationVerified": true,
       "allocationSource": "user confirmation 2026-10-22",
-      "note": "Video 1, ranks misread as 11/5 and not applied: +52% Movement Speed for 4s; +77% Resource Generation, +10% Movement Speed; Fortify for 15% of Max Life; +20% effectiveness plus 2% per ally."
+      "note": "Video 1, ranks misread as 11/5 and not applied: +52% Movement Speed for 4s; +77% Resource Generation, +10% Movement Speed; Fortify for 15% of Max Life; +20% effectiveness plus 2% per ally. Screenshot rank is 29/15. The earlier stored rank was 15. Screenshot: rank 29/15, 45 Fury, Movement Speed 50%[x] for 4s, resource generation 77%[x], +10% Movement Speed, Fortify 15% of Maximum Life, +20% effectiveness. The screenshot does not restate a cooldown, so the earlier 25s cooldown is not confirmed. 50%[x] Movement Speed replaces the video's +52%.",
+      "duration": 4
     },
     {
       "id": "iron-skin",
       "name": "Iron Skin",
       "category": null,
       "tags": null,
-      "dot": null,
+      "dot": false,
       "furyGeneratePerCast": null,
       "furySpendPerCast": null,
       "variantOf": null,
@@ -1165,14 +1242,50 @@
           "value": null,
           "verified": false,
           "source": "user video 2026-10-21 batch2 (transcribed)"
+        },
+        {
+          "stat": "Maximum Life",
+          "kind": "defense",
+          "bucket": null,
+          "value": 10,
+          "conditions": [],
+          "stacking": null,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "Screenshot: +10% Maximum Life. No bucket tag."
+        },
+        {
+          "stat": "barrier",
+          "kind": "defense",
+          "bucket": null,
+          "value": 87.6,
+          "conditions": [],
+          "stacking": null,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "Screenshot: barrier 87.6% (414). No bucket tag. 414 is not copied onto Max Life."
+        },
+        {
+          "stat": "Movement Speed",
+          "kind": "mobility",
+          "bucket": "multiplicative",
+          "value": 15,
+          "conditions": [],
+          "stacking": null,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "Screenshot: 15%[x] Movement Speed."
         }
       ],
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
       "coeffPct": null,
-      "rank": 14,
+      "rank": 18,
       "maxRank": 15,
-      "tooltip": "CD 14.00s, DR +30%, Barrier 83% missing life 5s",
+      "tooltip": "CD 8.45s, +10% Maximum Life, barrier 87.6% (414), Unstoppable, knockback, 15%[x] Movement Speed, 2 Resolve (25%[+] armor per stack).",
       "modifiers": [
         {
           "text": "MS +15%[+]",
@@ -1204,34 +1317,35 @@
           "text": "Movement Speed",
           "allocated": true,
           "verified": true,
-          "value": null,
-          "source": "user confirmation 2026-10-22",
-          "note": "Added because \"Movement Speed\" did not match a catalog upgrade row. Allocation confirmed 2026-10-22. verified is the allocation fact. Numbers in the text stay unverified. value is null because no number was supplied."
+          "value": 15,
+          "source": "user screenshot 2026-10-22",
+          "note": "Added because \"Movement Speed\" did not match a catalog upgrade row. Allocation confirmed 2026-10-22. verified is the allocation fact. Numbers in the text stay unverified. value is null because no number was supplied. Screenshot: 15%[x] Movement Speed."
         },
         {
           "text": "Resolve",
           "allocated": true,
           "verified": true,
-          "value": null,
-          "source": "user confirmation 2026-10-22",
-          "note": "Added because \"Resolve\" did not match a catalog upgrade row. Allocation confirmed 2026-10-22. verified is the allocation fact. Numbers in the text stay unverified. value is null because no number was supplied. The 2026-10-21 transcription read \"2 Resolve\" and that line was removed in the Paladin cleanup. That count is not restored."
+          "value": 25,
+          "source": "user screenshot 2026-10-22",
+          "note": "Added because \"Resolve\" did not match a catalog upgrade row. Allocation confirmed 2026-10-22. verified is the allocation fact. Numbers in the text stay unverified. value is null because no number was supplied. The 2026-10-21 transcription read \"2 Resolve\" and that line was removed in the Paladin cleanup. That count is not restored. Screenshot: 2 Resolve, 25%[+] armor per stack. value is the 25% armor per stack."
         }
       ],
       "transcribed": "CD 14.00s, DR +30%, Barrier 83% missing life 5s. MS +15%[+]; Weaken 5s; Max Life +15%; Juggernaut (Unstoppable, damage/knockback attackers); Endure (no barrier, can't drop below 1, heal 21.5%); Retaliation (3x duration, shrapnel).",
-      "note": "Resolve is a Barbarian Iron Skin upgrade. The 2026-10-21 transcription read \"2 Resolve\" and that line was removed in the Paladin cleanup. The upgrade is allocated again with no numeric value. Video 1, ranks misread as 11/5 and not applied: barrier for 22.8% of Max Life; Unstoppable; 1% Max Life per second; +15% Movement Speed; 2 stacks of Resolve. The Resolve count stays off the upgrade, which remains name-only.",
+      "note": "Resolve is a Barbarian Iron Skin upgrade. The 2026-10-21 transcription read \"2 Resolve\" and that line was removed in the Paladin cleanup. The upgrade is allocated again with no numeric value. Video 1, ranks misread as 11/5 and not applied: barrier for 22.8% of Max Life; Unstoppable; 1% Max Life per second; +15% Movement Speed; 2 stacks of Resolve. The Resolve count stays off the upgrade, which remains name-only. Screenshot rank is 18/15. The earlier stored rank was 14. Screenshot: rank 18/15, CD 8.45s, +10% Maximum Life, barrier 87.6% (414), Unstoppable, knockback, 15%[x] Movement Speed, 2 Resolve at 25%[+] armor per stack. The barrier's 414 is the tooltip amount, not Max Life. Max Life stays 473. No duration in seconds was shown.",
       "allocated": true,
-      "rankTotal": 14,
+      "rankTotal": 18,
       "baseRank": null,
       "bonusRank": null,
       "allocationVerified": true,
-      "allocationSource": "user confirmation 2026-10-22"
+      "allocationSource": "user confirmation 2026-10-22",
+      "cooldown": 8.45
     },
     {
       "id": "challenging-shout",
       "name": "Challenging Shout",
       "category": null,
       "tags": null,
-      "dot": null,
+      "dot": true,
       "furyGeneratePerCast": null,
       "furySpendPerCast": null,
       "variantOf": null,
@@ -1241,17 +1355,45 @@
           "bucket": null,
           "conditions": null,
           "stacking": null,
-          "value": null,
-          "verified": false,
-          "source": "user video 2026-10-21 batch2 (transcribed)"
+          "value": 2430,
+          "verified": true,
+          "source": "user screenshot 2026-10-22",
+          "kind": "damage",
+          "note": "Screenshot: burn 2,430% over 8s, Fire, DoT. The earlier tooltip was 4,030% over 4s."
+        },
+        {
+          "stat": "damage vs Burning",
+          "kind": "damage",
+          "bucket": "multiplicative",
+          "value": 20,
+          "conditions": [
+            "against Burning"
+          ],
+          "stacking": null,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "Screenshot: 20%[x] vs Burning."
+        },
+        {
+          "stat": "damage taken by the first 5 taunted",
+          "kind": "damage",
+          "bucket": "multiplicative",
+          "value": 20,
+          "conditions": [],
+          "stacking": null,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "Screenshot: the first 5 taunted take 20%[x]. No separate duration was shown."
         }
       ],
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
-      "coeffPct": null,
-      "rank": 11,
+      "coeffPct": 2430,
+      "rank": 15,
       "maxRank": 15,
-      "tooltip": "CD 14.28s, Taunt, 20.6% DR 6.0s; burn 12,112,596 (4,030%) Fire/4s; no DR instead +20%[x] vs Burning; Weakens",
+      "tooltip": "CD 15.09s, burn 2,430% over 8s (Fire, DoT); 20%[x] vs Burning; Weaken; first 5 taunted take 20%[x].",
       "modifiers": [
         {
           "text": "Duration +2s",
@@ -1299,20 +1441,22 @@
         }
       ],
       "transcribed": "CD 14.28s, Taunt, 20.6% DR 6.0s; burn 12,112,596 (4,030%) Fire/4s; no DR instead +20%[x] vs Burning; Weakens. Duration +2s; first 5 taunted +20%[x]; taking dmg +5 Fury; Bawl +20% decaying DR; Talic 1,676,546 (523%).",
-      "note": "no direct-hit coefficient shown; percentages in tooltip are burn/secondary effects Video 1, ranks misread as 11/5 and not applied: 26.0% Damage Reduction for 6s; burn for 12,232,596 over 5s; no Damage Reduction but +20% damage vs Burning; Weaken; the first 5 taunted enemies take +20% damage.",
+      "note": "no direct-hit coefficient shown; percentages in tooltip are burn/secondary effects Video 1, ranks misread as 11/5 and not applied: 26.0% Damage Reduction for 6s; burn for 12,232,596 over 5s; no Damage Reduction but +20% damage vs Burning; Weaken; the first 5 taunted enemies take +20% damage. Screenshot rank is 15/15. The earlier stored rank was 11. Screenshot: rank 15/15, CD 15.09s, burn 2,430% over 8s (Fire, DoT), 20%[x] vs Burning, Weaken, first 5 taunted take 20%[x].",
       "allocated": true,
-      "rankTotal": 11,
+      "rankTotal": 15,
       "baseRank": null,
       "bonusRank": null,
       "allocationVerified": true,
-      "allocationSource": "user confirmation 2026-10-22"
+      "allocationSource": "user confirmation 2026-10-22",
+      "cooldown": 15.09,
+      "duration": 8
     },
     {
       "id": "war-cry",
       "name": "War Cry",
       "category": null,
       "tags": null,
-      "dot": null,
+      "dot": false,
       "furyGeneratePerCast": null,
       "furySpendPerCast": null,
       "variantOf": null,
@@ -1325,14 +1469,26 @@
           "value": null,
           "verified": false,
           "source": "user video 2026-10-21 batch2 (transcribed)"
+        },
+        {
+          "stat": "damage",
+          "kind": "damage",
+          "bucket": "multiplicative",
+          "value": 38.5,
+          "conditions": [],
+          "stacking": null,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "Screenshot: 38.5%[x] for 4s. Buff duration is the skill duration, 4s."
         }
       ],
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
       "coeffPct": null,
-      "rank": 15,
+      "rank": 29,
       "maxRank": 15,
-      "tooltip": "CD 15.00s, +28.5%[x] dmg 4.0s, +15% bonus, full to allies, Berserking 4s, Vulnerable 4s",
+      "tooltip": "CD 15.09s, 38.5%[x] 4s, Berserking 4s, 2 Ferocity, Vulnerable 4s. Berserking 75%[x] damage, 15%[x] Movement Speed. Vulnerable 20%.",
       "modifiers": [
         {
           "text": "Slow 20%",
@@ -1375,12 +1531,14 @@
       ],
       "transcribed": "CD 15.00s, +28.5%[x] dmg 4.0s, +15% bonus, full to allies, Berserking 4s, Vulnerable 4s. Slow 20%; 2 Ferocity; duration 6s; The Scream (Fear, +3.43%[x] per feared up to 34.30%[x]); Korlic 1,309,671 (460%).",
       "allocated": true,
-      "rankTotal": 15,
+      "rankTotal": 29,
       "baseRank": null,
       "bonusRank": null,
       "allocationVerified": true,
       "allocationSource": "user confirmation 2026-10-22",
-      "note": "Video 1, ranks misread as 11/5 and not applied: +38.5% damage for 4s; +10% bonus and Berserking for 4s; 2 stacks of Ferocity; Vulnerable for 4s."
+      "note": "Video 1, ranks misread as 11/5 and not applied: +38.5% damage for 4s; +10% bonus and Berserking for 4s; 2 stacks of Ferocity; Vulnerable for 4s. Screenshot rank is 29/15. The earlier stored rank was 15. Screenshot: CD 15.09s, 38.5%[x] for 4s, Berserking 4s, 2 Ferocity, Vulnerable 4s. Keyword text on the same tooltip: Berserking 75%[x] damage and 15%[x] Movement Speed, Vulnerable 20%. Those keyword lines are not copied onto the sheet Vulnerable total. 38.5%[x] is a buff, so coeffPct stays unset.",
+      "cooldown": 15.09,
+      "duration": 4
     },
     {
       "id": "leap",
@@ -1703,7 +1861,7 @@
       "name": "Wrath of the Berserker",
       "category": null,
       "tags": null,
-      "dot": null,
+      "dot": true,
       "furyGeneratePerCast": null,
       "furySpendPerCast": null,
       "variantOf": null,
@@ -1716,14 +1874,62 @@
           "value": null,
           "verified": false,
           "source": "user video 2026-10-21 batch2 (transcribed)"
+        },
+        {
+          "stat": "damage",
+          "kind": "damage",
+          "bucket": "multiplicative",
+          "value": 30,
+          "conditions": [],
+          "stacking": null,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "Screenshot: 30%[x]."
+        },
+        {
+          "stat": "fire aura",
+          "kind": "damage",
+          "bucket": null,
+          "value": 560,
+          "conditions": [],
+          "stacking": null,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "Screenshot: fire aura 560%. No [+] or [x] tag."
+        },
+        {
+          "stat": "burn",
+          "kind": "damage",
+          "bucket": null,
+          "value": 56,
+          "conditions": [],
+          "stacking": null,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "Screenshot: burn 56% over 5s, DoT. No [+] or [x] tag. Duration of the burn is 5s."
+        },
+        {
+          "stat": "all resistance",
+          "kind": "defense",
+          "bucket": null,
+          "value": 50,
+          "conditions": [],
+          "stacking": null,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "Screenshot: +50% all resistance. No bucket tag."
         }
       ],
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
       "coeffPct": null,
-      "rank": 11,
+      "rank": 29,
       "maxRank": 15,
-      "tooltip": "CD 34.32s, +50%[+] dmg, Unstoppable 15.0s, Basic +560%[+], burn 279,568 (32%), +10% All Res, Berserking base doubled, 1 Overpower/s",
+      "tooltip": "CD 54.32s, 30%[x], Berserking, Unstoppable 15.8s; fire aura 560% + burn 56% over 5s (DoT); +50% all resistance; Berserking base doubled; 1 Overpower/s.",
       "modifiers": [
         {
           "text": "+20%[+] AS & +30%[+] Fury gen",
@@ -1765,13 +1971,15 @@
         }
       ],
       "transcribed": "CD 34.32s, +50%[+] dmg, Unstoppable 15.0s, Basic +560%[+], burn 279,568 (32%), +10% All Res, Berserking base doubled, 1 Overpower/s. +20%[+] AS & +30%[+] Fury gen; duration 18.0s; Full Throttle aura 2,750,484 (360%) + burn 279,568 (32%), +10% All Res; Deep Impact 2,095,283 (256%) Fire; Maximum Carnage +1s per 25 Fury up to 5.",
-      "note": "no direct-hit coefficient shown; percentages in tooltip are burn/secondary effects Video 1, ranks misread as 11/5 and not applied: +50% damage, Berserking and Unstoppable for 15s; Fire aura for 2,759,584, burn 279,568, +50% All Resistance; Berserking's base bonus doubled; 1 stack of Overpower per second.",
+      "note": "no direct-hit coefficient shown; percentages in tooltip are burn/secondary effects Video 1, ranks misread as 11/5 and not applied: +50% damage, Berserking and Unstoppable for 15s; Fire aura for 2,759,584, burn 279,568, +50% All Resistance; Berserking's base bonus doubled; 1 stack of Overpower per second. Screenshot rank is 29/15. The earlier stored rank was 11. Screenshot: rank 29/15, CD 54.32s, 30%[x], Berserking, Unstoppable 15.8s, fire aura 560% and burn 56% over 5s (DoT), +50% all resistance, Berserking's base is doubled, 1 Overpower per second. Overpower 26%[+] per stack, max 4, 4s each, matches the Earthstriker line and is not stored again. dot is true because the burn is a DoT. 30%[x] is a buff, and 560% and 56% are two damage figures, so coeffPct stays unset.",
       "allocated": true,
-      "rankTotal": 11,
+      "rankTotal": 29,
       "baseRank": null,
       "bonusRank": null,
       "allocationVerified": true,
-      "allocationSource": "user confirmation 2026-10-22"
+      "allocationSource": "user confirmation 2026-10-22",
+      "cooldown": 54.32,
+      "duration": 15.8
     },
     {
       "id": "iron-maelstrom",
@@ -3672,8 +3880,8 @@
             "while Fortified"
           ],
           "stacking": null,
-          "source": "video-frames",
-          "verified": false,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
           "upgrade": {
             "level": 20,
             "maxLevel": 21,
@@ -3688,29 +3896,15 @@
             65
           ],
           "unit": "%",
-          "kind": "damage"
-        },
-        {
-          "stat": "damage for 5s after dealing Vulnerable damage",
-          "bucket": null,
-          "value": 45,
-          "conditions": null,
-          "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "range": [
-            30,
-            45
-          ],
-          "unit": "%",
-          "kind": "damage"
+          "kind": "damage",
+          "note": "Screenshot confirms 64%[x] [45-65] while Fortified at rank 20/21."
         }
       ],
       "source": "video-frames",
       "verified": false,
       "available": true,
       "userConfirmed": true,
-      "note": "Video 1 item power on the Crushing Aspect ring (the video name Crushing Spiritmachy). It does not match the confirmed codex text, so this reading is suspect and the codex effect is unchanged."
+      "note": "Video 1 item power on the Crushing Aspect ring (the video name Crushing Spiritmachy). It does not match the confirmed codex text, so this reading is suspect and the codex effect is unchanged. Screenshot confirms 64%[x] while Fortified, rank 20/21, range 45-65. The video line 45 [30-45] damage for 5s after Vulnerable damage was removed."
     },
     {
       "id": "cut-to-the-bone-aspect",
@@ -6164,7 +6358,7 @@
           "stat": "damage per point of Fury",
           "bucket": "multiplicative",
           "value": 0.5,
-          "conditions": null,
+          "conditions": [],
           "stacking": null,
           "source": "user screenshot 2026-10-22",
           "verified": true,
@@ -6173,7 +6367,7 @@
             0.5
           ],
           "unit": "%",
-          "note": "Screenshot: Skills deal 0.50%[x] [0.35-0.50]% increased damage per point of Fury you have. Video range was [0.2-0.5].",
+          "note": "Screenshot: Skills deal 0.50%[x] [0.35-0.50]% increased damage per point of Fury you have. Video range was [0.2-0.5]. Screenshot: 0.5%[x] per Fury point, and it applies to all skills.",
           "kind": "damage"
         }
       ],
@@ -6218,29 +6412,27 @@
         },
         {
           "stat": "gem effect",
-          "bucket": null,
-          "value": 150,
-          "conditions": null,
+          "bucket": "multiplicative",
+          "value": 65,
+          "conditions": [],
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "range": [
-            50,
-            150
-          ],
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
           "unit": "%",
-          "kind": "utility"
+          "kind": "utility",
+          "note": "Screenshot: gem effect +65%[x]. The earlier stored value was 150 [50-150]."
         },
         {
           "stat": "Damage Reduction",
           "bucket": null,
-          "value": 50,
+          "value": 41,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
           "unit": "%",
-          "kind": "defense"
+          "kind": "defense",
+          "note": "Screenshot: 41% Damage Reduction. The earlier stored value was 50. No bucket tag."
         },
         {
           "stat": "Movement Speed",
@@ -6248,38 +6440,39 @@
           "value": -30,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
           "unit": "%",
-          "note": "Lose 30% Movement Speed.",
+          "note": "Lose 30% Movement Speed. Screenshot confirms -30% Movement Speed. No bucket tag.",
           "kind": "mobility"
         },
         {
           "stat": "damage per soul",
-          "bucket": null,
+          "bucket": "multiplicative",
           "value": 4.1,
-          "conditions": null,
-          "stacking": "up to 100, no refresh",
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
+          "conditions": [],
+          "stacking": "up to 200 stacks",
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
           "range": [
             1,
             5
           ],
           "unit": "%",
-          "note": "Life absorbs a soul for 10s. Counts as Jewelry.",
+          "note": "Life absorbs a soul for 10s. Counts as Jewelry. Screenshot: 4.1%[x] per soul, up to 200 stacks. The value is the per-soul rate. The soul count is not in the screenshot, so the total is not multiplied by an assumed stack count.",
           "kind": "damage"
         },
         {
           "stat": "damage taken per soul",
           "bucket": null,
-          "value": -1,
+          "value": 1,
           "conditions": null,
-          "stacking": "up to 100, no refresh",
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
+          "stacking": "up to 200 stacks",
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
           "unit": "%",
-          "kind": "defense"
+          "kind": "defense",
+          "note": "Screenshot: +1% damage taken per soul, up to 200 stacks. The earlier stored value was -1."
         }
       ],
       "source": "user video 1 (watchVideo 2026-10-22)",
@@ -6350,18 +6543,18 @@
         },
         {
           "stat": "Whirlwind increased damage",
-          "bucket": null,
-          "value": 111,
-          "conditions": null,
+          "bucket": "multiplicative",
+          "value": 117,
+          "conditions": [],
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
           "range": [
-            90,
-            135
+            98,
+            117
           ],
           "unit": "%",
-          "note": "Pulls enemies every 3s.",
+          "note": "Pulls enemies every 3s. Screenshot replaces 111 [90-135] and pulls every 3s. Whirlwind increased damage is 117%[x] [98-117], and it pulls enemies every 2s.",
           "kind": "damage"
         }
       ],
@@ -6388,29 +6581,28 @@
         },
         {
           "stat": "damage while Unstoppable",
-          "bucket": null,
-          "value": 20,
-          "conditions": null,
-          "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "range": [
-            10,
-            20
+          "bucket": "multiplicative",
+          "value": 26,
+          "conditions": [
+            "while Unstoppable"
           ],
+          "stacking": null,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
           "unit": "%",
-          "note": "And for 5s after.",
+          "note": "And for 5s after. Screenshot: 26%[x] while Unstoppable and for 5s after. The earlier value was 20 [10-20].",
           "kind": "damage"
         },
         {
-          "stat": "Primary Resource on becoming Unstoppable",
+          "stat": "Fury Regeneration",
           "bucket": null,
-          "value": 50,
+          "value": 25,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "kind": "resource"
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "kind": "resource",
+          "note": "Screenshot: +25 Fury regeneration. The earlier line was 50 Primary Resource on becoming Unstoppable. No bucket tag."
         },
         {
           "stat": "Rune Mal (0/50) Prime Bulwark",
@@ -6511,23 +6703,13 @@
           ],
           "note": "Screenshot [1,745-2,373]. Video read [1,745-2,783]. The shown range is kept. The midpoint is not stored, because the damage formula multiplies weapon damage by the skill coefficient and does not average a per-hit range.",
           "kind": "base-weapon"
-        },
-        {
-          "stat": "Rune Tal: Lord of Hatred",
-          "bucket": null,
-          "value": null,
-          "conditions": null,
-          "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "note": "Text cut off. No further rune text was stored."
         }
       ],
       "source": "user video 1 (watchVideo 2026-10-22)",
       "verified": false,
       "id": "spirit",
       "name": "Spirit",
-      "note": "Runeword TalThulOrtAmn. Ancestral Unique Sword, 1H Slashing, 900 Item Power, Quality 31 (+25), Transfigured, 1.10 attacks per second. Screenshot per hit [1,745-2,373]. Video high end was 2,783. Rune Tal text stays cut off."
+      "note": "Runeword TalThulOrtAmn. Ancestral Unique Sword, 1H Slashing, 900 Item Power, Quality 31 (+25), Transfigured, 1.10 attacks per second. Screenshot per hit [1,745-2,373]. Video high end was 2,783. Screenshot: Spirit is the runeword Tal Thul Ort Amn and has no separate Tal rune. The cut-off Rune Tal field from the video was removed."
     },
     {
       "slots": [
@@ -6546,18 +6728,14 @@
         },
         {
           "stat": "damage of the highest element",
-          "bucket": null,
-          "value": 25,
-          "conditions": null,
+          "bucket": "multiplicative",
+          "value": 23,
+          "conditions": [],
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "range": [
-            15,
-            25
-          ],
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
           "unit": "%",
-          "note": "Each resistance equals your highest.",
+          "note": "Each resistance equals your highest. Screenshot: 23%[x] damage to the highest element. The earlier value was 25 [15-25]. Resistances equal the highest.",
           "kind": "damage"
         },
         {
@@ -6609,36 +6787,87 @@
           "value": 100,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
           "unit": "%",
-          "kind": "resource"
+          "kind": "resource",
+          "note": "Screenshot confirms Fury +100%. No bucket tag."
         },
         {
           "stat": "Maximum Life",
           "bucket": null,
-          "value": -20,
+          "value": -75,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
           "unit": "%",
-          "kind": "defense"
+          "kind": "defense",
+          "note": "Screenshot: Maximum Life -75%. The earlier stored value was -20."
         },
         {
           "stat": "damage while above 50 Primary Resource",
-          "bucket": null,
-          "value": 45,
-          "conditions": null,
-          "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "range": [
-            25,
-            45
+          "bucket": "multiplicative",
+          "value": 30,
+          "conditions": [
+            "above 50 Fury"
           ],
+          "stacking": null,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
           "unit": "%",
-          "kind": "damage"
+          "kind": "damage",
+          "note": "Screenshot: 30%[x] above 50 Fury. The earlier value was 45 [25-45]. Also gain Berserking and -3 Fury regeneration while above 50 Fury."
+        },
+        {
+          "stat": "Vulnerable Damage Multiplier",
+          "kind": "damage",
+          "bucket": "multiplicative",
+          "value": 35,
+          "conditions": [],
+          "stacking": null,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "Screenshot: x35% Vulnerable damage multiplier. The x prefix is the [x] tag."
+        },
+        {
+          "stat": "Attack Speed and Critical Strike Chance",
+          "kind": "utility",
+          "bucket": "additive",
+          "value": 15,
+          "conditions": [],
+          "stacking": null,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "Screenshot: 15%[+] Attack Speed and Critical Strike Chance. Recorded as utility so it is not added to the damage formula as a damage bucket."
+        },
+        {
+          "stat": "Fury cost",
+          "kind": "resource",
+          "bucket": null,
+          "value": 30,
+          "conditions": [],
+          "stacking": null,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "Screenshot: Fury costs +30%. The leading plus is not a bucket tag."
+        },
+        {
+          "stat": "Fury Regeneration",
+          "kind": "resource",
+          "bucket": null,
+          "value": -3,
+          "conditions": [
+            "above 50 Fury"
+          ],
+          "stacking": null,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "Screenshot: -3 Fury regeneration while above 50 Fury. No bucket tag."
         }
       ],
       "source": "user video 1 (watchVideo 2026-10-22)",
@@ -11106,7 +11335,6 @@
     "verified": true,
     "note": "Linear interpolation matches Accelerating Aspect at 21/21 (50 on a 30-50 range) and Anger Management at 9/11 (19 on a 15-20 range). The left endpoint is rank 1 and the right endpoint is the cap, including when the range is printed high to low. Aspect rows stay unverified. A row whose observed point does not match this curve keeps the observed point and marks that formula application unverified."
   },
-  "passives": [],
   "gems": [
     {
       "id": "grand-skull",

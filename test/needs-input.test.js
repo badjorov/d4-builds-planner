@@ -31,6 +31,7 @@ test('transcribed coefficients stay unverified and the sourced scalar stays put'
   assert.equal(text.includes('/skills/flay/'), false);
   assert.match(text, /\/aspects\/writhing\/effects\/0\/value — range/);
   assert.match(text, /\/skillVariants — empty/);
+  assert.equal(text.includes('/passives'), false);
   assert.equal(text.includes('/talismans — empty'), false);
   assert.match(text, /\/talismans\/tuskhelm-of-joritz-the-mighty\/verified — unverified/);
   assert.equal(text.includes('/affixes — empty'), false);
@@ -56,7 +57,7 @@ test('transcribed coefficients stay unverified and the sourced scalar stays put'
 test('inactive skills and upgrades stay out of needs-input, and the remaining skill fields are active', () => {
   const items = needsInput(catalog).filter(item => item.path.startsWith('/skills/'));
   const active = new Set(catalog.skills.filter(skill => skill.allocated === true).map(skill => skill.id));
-  assert.equal(items.length, 99);
+  assert.equal(items.length, 110);
   for (const item of items) {
     const id = item.path.split('/')[2];
     assert.equal(active.has(id), true, item.path);
@@ -91,16 +92,17 @@ test('needs-input splits the user build into engine-blocking, required, and nice
   assert.equal(split.niceToHave.some(item => item.path.includes('/aspects/crushing-aspect/effects/') && item.path.endsWith('/stacking')), true);
   const overpower = split.required.find(item => item.path === '/builds.json/builds/users-current-build/overpowerPct');
   assert.equal(overpower.provenance, 'user-only');
-  const dot = split.engineBlocking.find(item => item.path === '/skills/whirlwind/dot');
-  assert.equal(dot.reason, 'null');
-  assert.equal(dot.provenance, 'user-only');
+  assert.equal(catalog.skills.find(skill => skill.id === 'whirlwind').dot, false);
+  assert.equal(split.engineBlocking.some(item => item.path === '/skills/whirlwind/dot'), false);
   const crushingConditions = split.engineBlocking.filter(item => item.path.startsWith('/aspects/crushing-aspect/effects/') && item.path.endsWith('/conditions'));
   assert.equal(crushingConditions.length, 0);
   const crushing = catalog.aspects.find(aspect => aspect.id === 'crushing-aspect');
   assert.deepEqual(crushing.effects[0].conditions, ['while Fortified']);
   assert.equal(crushing.effects[0].kind, 'damage');
-  const whirlwindDamage = split.engineBlocking.find(item => item.path === '/uniques/gohrs-devastating-grips/effects/1/bucket');
-  assert.equal(whirlwindDamage.provenance, 'user-only');
+  const gohr = catalog.uniques.find(item => item.id === 'gohrs-devastating-grips').effects[1];
+  assert.equal(gohr.bucket, 'multiplicative');
+  assert.equal(gohr.value, 117);
+  assert.equal(split.engineBlocking.some(item => item.path === '/uniques/gohrs-devastating-grips/effects/1/bucket'), false);
   assert.equal(split.engineBlocking.some(item => item.path === '/uniques/ramaladni/effects/1/bucket'), false);
   const perHit = catalog.uniques.find(item => item.id === 'insight').effects.find(effect => effect.stat === 'damage per hit');
   assert.equal(perHit.kind, 'base-weapon');

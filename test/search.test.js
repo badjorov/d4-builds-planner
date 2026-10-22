@@ -86,10 +86,20 @@ test('real catalog does not rank an unverified build unless asked', () => {
     manualInputsVerified: true, powerFloor: 1, maxSkills: 1, metaBuilds: realMeta
   });
   assert.ok(shown.ranked.length > 0);
-  assert.equal(shown.ranked[0].skills[0], 'whirlwind');
-  assert.equal(shown.ranked[0].power, 18);
+  assert.equal(shown.ranked[0].skills[0], 'challenging-shout');
+  const gearIds = shown.ranked[0].gear.map(item => item.id).sort();
+  assert.deepEqual(gearIds, [
+    'gohrs-devastating-grips',
+    'leorics-crown',
+    'melted-heart-of-selig',
+    'ramaladni',
+    'stone-of-jordan'
+  ]);
+  const multipliers = [117, 35, 23, 4.1, 0.5];
+  const expected = 100 * 24.3 * multipliers.reduce((product, value) => product * (1 + value / 100), 1);
+  near(shown.ranked[0].power, expected);
   assert.equal(shown.ranked.some(result => result.skills.includes('death-blow') || result.skills.includes('flay')), false);
   assert.equal(real.skills.find(skill => skill.id === 'cota-madawc').coeffPct, 120);
+  assert.equal(shown.ranked[0].why.toLowerCase().includes('passive'), false);
   assert.ok(shown.ranked.every(result => result.unverifiedShare > 0));
-  assert.equal(shown.ranked.some(result => result.gear.some(item => item.kind === 'aspect' || item.kind === 'unique')), false);
 });

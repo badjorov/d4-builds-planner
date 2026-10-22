@@ -31,7 +31,7 @@ test('synthetic fixture and meta builds match their schemas', () => {
   assert.equal(saved.builds[0].verified, false);
   assert.equal(saved.builds[0].sheet.verified, true);
   assert.equal(saved.builds[0].sheet.maxLife, 473);
-  assert.equal(saved.builds[0].sheet.armor, 32183);
+  assert.equal(saved.builds[0].sheet.armor, 33715);
   assert.equal(saved.builds[0].defense.life, 473);
   assert.equal(saved.builds[0].weaponDmg, 4596);
   assert.equal(validate(buildSchema, saved.builds[0]).ok, true);
@@ -60,7 +60,7 @@ test('schema rejects a missing source, an unknown field, and a 12-slot build', (
 test('migration keeps sourced numbers and stores transcribed coefficients unverified', () => {
   const coeff = Object.fromEntries(catalog.skills.map(skill => [skill.id, skill.coeffPct]));
   assert.equal(coeff.hota, 170);
-  assert.equal(coeff.whirlwind, 18);
+  assert.equal(coeff.whirlwind, 386);
   assert.equal(coeff.rend, 86);
   assert.equal(coeff['rallying-cry-madawc'], 100);
   assert.equal(coeff['cota-madawc'], 120);
@@ -79,19 +79,20 @@ test('migration keeps sourced numbers and stores transcribed coefficients unveri
   assert.equal(whirlwind.allocated, true);
   assert.equal(whirlwind.allocationVerified, true);
   assert.equal(whirlwind.verified, false);
-  assert.equal(whirlwind.effects[0].verified, false);
+  assert.equal(whirlwind.effects[0].verified, true);
   const wwMods = Object.fromEntries(whirlwind.modifiers.map(modifier => [modifier.text, modifier]));
   assert.equal(wwMods['Cost Damage Bonus +40%[x] +10 Fury'].allocated, true);
   assert.equal(wwMods['Cost Damage Bonus +40%[x] +10 Fury'].verified, true);
-  assert.equal(wwMods['Tornado Dust Devil 4,915,123 (131%)'].allocated, true);
+  assert.equal(wwMods['2 Dust Devils 510% each'].allocated, true);
+  assert.equal(wwMods['2 Dust Devils 510% each'].value, 510);
   assert.equal(wwMods['Channel Damage Bonus'].allocated, true);
-  assert.equal(wwMods['Channel Damage Bonus'].value, null);
+  assert.equal(wwMods['Channel Damage Bonus'].value, 1);
   assert.equal(wwMods['Channel +10%[x] per 3 hits x25'].allocated, false);
   const iron = catalog.skills.find(skill => skill.id === 'iron-skin');
   const resolve = iron.modifiers.find(modifier => modifier.text === 'Resolve');
   assert.equal(resolve.allocated, true);
   assert.equal(resolve.verified, true);
-  assert.equal(resolve.value, null);
+  assert.equal(resolve.value, 25);
   assert.equal(iron.verified, false);
   assert.equal(catalog.skills.find(skill => skill.id === 'flay').allocated, false);
   assert.equal(catalog.skills.filter(skill => skill.allocated === null).length, 0);
@@ -110,7 +111,7 @@ test('migration keeps sourced numbers and stores transcribed coefficients unveri
   assert.equal(catalog.aspects.length, 102);
   assert.equal(catalog.aspects.every(aspect => aspect.source === 'video-frames' && aspect.userConfirmed === true && aspect.verified === false), true);
   assert.equal(catalog.aspects.every(aspect => typeof aspect.description === 'string' && aspect.description.length > 0 && /^\d+\/\d+$/.test(String(aspect.rank))), true);
-  assert.deepEqual(catalog.passives, []);
+  assert.equal(Object.hasOwn(catalog, 'passives'), false);
   const coagulation = catalog.aspects.find(aspect => aspect.id === 'aspect-of-coagulation');
   assert.equal(coagulation.verified, false);
   assert.equal(coagulation.slots, null);
@@ -209,9 +210,9 @@ test('migration keeps sourced numbers and stores transcribed coefficients unveri
 test('video 1 keeps confirmed values and flags the conflicting readings', () => {
   const saved = read('../data/builds.json').builds[0];
   const gear = Object.fromEntries(saved.gear.map(slot => [slot.slotId, slot]));
-  assert.equal(saved.sheet.armor, 32183);
+  assert.equal(saved.sheet.armor, 33715);
   assert.equal(saved.sheet.maxLife, 473);
-  assert.equal(saved.defense.armor, 32183);
+  assert.equal(saved.defense.armor, 33715);
   assert.equal(saved.defense.life, 473);
   assert.equal(gear['weapon-1'].itemName, 'Insight');
   assert.equal(gear['weapon-1'].arsenalSlot, '2H Slashing');
@@ -267,7 +268,7 @@ test('video 1 keeps confirmed values and flags the conflicting readings', () => 
   outside.affixes.find(affix => affix.id === 'v1-boots-temper-move-speed').effects[0].value = 99;
   assert.equal(validate(catalogSchema, outside).ok, true);
   const spirit = catalog.uniques.find(item => item.id === 'spirit');
-  assert.equal(spirit.effects.find(item => item.stat === 'Rune Tal: Lord of Hatred').value, null);
+  assert.equal(spirit.effects.some(item => item.stat === 'Rune Tal: Lord of Hatred'), false);
   const insight = catalog.uniques.find(item => item.id === 'insight');
   assert.equal(insight.effects.find(item => item.stat.startsWith('Rune Ral')).note.includes('cut off'), true);
   assert.equal(insight.effects.find(item => item.stat === 'DPS').kind, 'base-weapon');
