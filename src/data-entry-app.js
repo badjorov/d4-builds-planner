@@ -54,11 +54,14 @@ function textInput(name, value) {
   return `<input name="${esc(name)}" type="text" value="${esc(value ?? '')}">`;
 }
 
+const EFFECT_KINDS = ['', 'damage', 'defense', 'resource', 'mobility', 'utility', 'base-weapon'];
+
 function effectRows(effects) {
   const rows = effects?.length ? effects : [];
   return rows.map((effect, index) => `<fieldset data-effect="${index}"><legend>Effect ${index + 1}</legend>
     ${type === 'gem' ? field('Slot type', textInput(`slotType-${index}`, effect.slotType)) : ''}
     ${field('Stat', textInput(`stat-${index}`, effect.stat))}
+    ${field('Kind', `<select name="kind-${index}">${EFFECT_KINDS.map(kind => `<option ${effect.kind === kind || (effect.kind == null && kind === '') ? 'selected' : ''}>${esc(kind)}</option>`).join('')}</select>`)}
     ${field('Bucket', `<select name="bucket-${index}">${['', 'additive', 'multiplicative', 'crit', 'vuln', 'overpower', 'mainstat', 'special', 'none', 'additive?', 'vuln?'].map(bucket => `<option ${effect.bucket === bucket || (effect.bucket == null && bucket === '') ? 'selected' : ''}>${esc(bucket)}</option>`).join('')}</select>`)}
     ${field('Value or min,max', textInput(`value-${index}`, Array.isArray(effect.value) ? effect.value.join(',') : effect.value ?? ''))}
     ${field('Conditions (blank = unknown, - = none)', textInput(`conditions-${index}`, effect.conditions == null ? '' : effect.conditions.length ? effect.conditions.join(', ') : '-'))}
@@ -161,6 +164,7 @@ function readForm(form) {
         ...(previous[index] || {}),
         ...(type === 'gem' ? { slotType: String(data.get(`slotType-${index}`) || '').trim() || null } : {}),
         stat: String(data.get(`stat-${index}`) || '').trim() || null,
+        kind: String(data.get(`kind-${index}`) || '').trim() || null,
         bucket: String(data.get(`bucket-${index}`) || '').trim() || null,
         value: readValue(data.get(`value-${index}`)),
         conditions: readConditions(data.get(`conditions-${index}`)),
@@ -220,7 +224,7 @@ $('entityForm').addEventListener('click', (event) => {
   }
   if (event.target?.id === 'addEffect' && draft) {
     draft = readForm($('entityForm'));
-    const added = { stat: null, bucket: null, value: null, conditions: null, stacking: null, source: draft.source || 'manual-entry', verified: false };
+    const added = { stat: null, kind: null, bucket: null, value: null, conditions: null, stacking: null, source: draft.source || 'manual-entry', verified: false };
     if (type === 'gem') added.slotType = null;
     draft.effects.push(added);
     renderForm();

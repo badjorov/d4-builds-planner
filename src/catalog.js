@@ -152,6 +152,8 @@ function conditionState(effect, build, catalog) {
     } else if (text.includes('overpower')) {
       if (typeof build.uptime?.overpower !== 'number') return 'unknown';
       if (build.uptime.overpower <= 0) return 'inactive';
+    } else if (text.includes('channel') || text.includes('fortif')) {
+      return 'unknown';
     } else if (!tags.has(text.replace(/\?$/, ''))) {
       return 'inactive';
     }

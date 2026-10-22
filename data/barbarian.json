@@ -9,17 +9,17 @@
       {
         "url": "https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy",
         "title": "Celebrate 30 Years of Diablo in Season of Hell's Legacy",
-        "license": "© Blizzard Entertainment. Official patch notes. Not an open-license dataset."
+        "license": "\u00a9 Blizzard Entertainment. Official patch notes. Not an open-license dataset."
       },
       {
         "url": "https://news.blizzard.com/en-us/article/24292852/the-3-2-0-ptr-what-you-need-to-know",
         "title": "The 3.2.0 PTR: What You Need to Know",
-        "license": "© Blizzard Entertainment. Official PTR notes. Not an open-license dataset."
+        "license": "\u00a9 Blizzard Entertainment. Official PTR notes. Not an open-license dataset."
       },
       {
         "url": "https://news.blizzard.com/en-us/article/23189677/diablo-iv-feature-overview",
         "title": "Diablo IV Feature Overview",
-        "license": "© Blizzard Entertainment. Official feature overview, cited only for the statement that Barbarians carry four weapons. Not an open-license dataset."
+        "license": "\u00a9 Blizzard Entertainment. Official feature overview, cited only for the statement that Barbarians carry four weapons. Not an open-license dataset."
       },
       {
         "url": "user video 2026-10-21 batch2 (transcribed)",
@@ -3165,7 +3165,9 @@
           "stat": "69% [50-70]",
           "bucket": "multiplicative",
           "value": 69,
-          "conditions": null,
+          "conditions": [
+            "while channeling a Skill"
+          ],
           "stacking": null,
           "source": "video-frames",
           "verified": false,
@@ -3182,13 +3184,16 @@
             50,
             70
           ],
-          "unit": "%"
+          "unit": "%",
+          "kind": "damage"
         },
         {
           "stat": "damage while channeling a Skill",
           "bucket": "multiplicative",
           "value": 138,
-          "conditions": null,
+          "conditions": [
+            "while channeling a Skill"
+          ],
           "stacking": null,
           "source": "user screenshot 2026-10-22",
           "verified": true,
@@ -3197,7 +3202,8 @@
           "range": [
             100,
             140
-          ]
+          ],
+          "kind": "damage"
         }
       ],
       "source": "video-frames",
@@ -3662,7 +3668,9 @@
           "stat": "64% [45-65]",
           "bucket": "multiplicative",
           "value": 64,
-          "conditions": null,
+          "conditions": [
+            "while Fortified"
+          ],
           "stacking": null,
           "source": "video-frames",
           "verified": false,
@@ -3679,7 +3687,8 @@
             45,
             65
           ],
-          "unit": "%"
+          "unit": "%",
+          "kind": "damage"
         },
         {
           "stat": "damage for 5s after dealing Vulnerable damage",
@@ -3693,7 +3702,8 @@
             30,
             45
           ],
-          "unit": "%"
+          "unit": "%",
+          "kind": "damage"
         }
       ],
       "source": "video-frames",
@@ -5219,7 +5229,9 @@
           "stat": "19.5% [15.5-20.5]",
           "bucket": "multiplicative",
           "value": 19.5,
-          "conditions": null,
+          "conditions": [
+            "while you have Overpower"
+          ],
           "stacking": null,
           "source": "user screenshot 2026-10-22",
           "verified": true,
@@ -5237,18 +5249,22 @@
             20.5
           ],
           "unit": "%",
-          "note": "Screenshot imprint matches this codex line: 19.5%[x] [15.5-20.5] while you have Overpower, plus 1 Overpower stack on weapon swap. Video item power read +45% Movement Speed for 3s on weapon swap and +25% damage while you have Overpower. Those video lines are not on the tooltip."
+          "note": "Screenshot imprint matches this codex line: 19.5%[x] [15.5-20.5] while you have Overpower, plus 1 Overpower stack on weapon swap. Video item power read +45% Movement Speed for 3s on weapon swap and +25% damage while you have Overpower. Those video lines are not on the tooltip.",
+          "kind": "damage"
         },
         {
           "stat": "Overpower damage per stack",
           "bucket": "additive",
           "value": 26,
-          "conditions": null,
+          "conditions": [
+            "while you have Overpower"
+          ],
           "stacking": "up to 4, each lasts 4s",
           "source": "user screenshot 2026-10-22",
           "verified": true,
           "unit": "%",
-          "note": "Screenshot: +26%[+] damage per stack, stacks up to 4, each lasts 4s."
+          "note": "Screenshot: +26%[+] damage per stack, stacks up to 4, each lasts 4s. Condition copied from the aspect description: increased damage while you have Overpower.",
+          "kind": "damage"
         }
       ],
       "source": "video-frames",
@@ -6115,7 +6131,8 @@
           "source": "user screenshot 2026-10-22",
           "verified": true,
           "note": "Screenshot: 7% Fury drains per second while in combat. The tooltip line has no bucket tag, so the bucket is null. The patch note said the same 7% and had been stored with bucket special. Video read 2 Fury per second.",
-          "unit": "%"
+          "unit": "%",
+          "kind": "resource"
         },
         {
           "stat": "DPS",
@@ -6125,7 +6142,8 @@
           "stacking": null,
           "source": "user screenshot 2026-10-22",
           "verified": true,
-          "note": "Screenshot 2,330 DPS. Video read 2,350."
+          "note": "Screenshot 2,330 DPS. Video read 2,350.",
+          "kind": "base-weapon"
         },
         {
           "stat": "damage per hit",
@@ -6139,7 +6157,8 @@
             1805,
             2433
           ],
-          "note": "Screenshot [1,805-2,433]. Video read [1,566-3,133]."
+          "note": "Screenshot [1,805-2,433]. Video read [1,566-3,133]. The shown range is kept. The midpoint is not stored, because the damage formula multiplies weapon damage by the skill coefficient and does not average a per-hit range.",
+          "kind": "base-weapon"
         },
         {
           "stat": "damage per point of Fury",
@@ -6154,7 +6173,8 @@
             0.5
           ],
           "unit": "%",
-          "note": "Screenshot: Skills deal 0.50%[x] [0.35-0.50]% increased damage per point of Fury you have. Video range was [0.2-0.5]."
+          "note": "Screenshot: Skills deal 0.50%[x] [0.35-0.50]% increased damage per point of Fury you have. Video range was [0.2-0.5].",
+          "kind": "damage"
         }
       ],
       "source": "https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy",
@@ -6193,7 +6213,8 @@
           "conditions": null,
           "stacking": null,
           "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false
+          "verified": false,
+          "kind": "defense"
         },
         {
           "stat": "gem effect",
@@ -6207,7 +6228,8 @@
             50,
             150
           ],
-          "unit": "%"
+          "unit": "%",
+          "kind": "utility"
         },
         {
           "stat": "Damage Reduction",
@@ -6217,7 +6239,8 @@
           "stacking": null,
           "source": "user video 1 (watchVideo 2026-10-22)",
           "verified": false,
-          "unit": "%"
+          "unit": "%",
+          "kind": "defense"
         },
         {
           "stat": "Movement Speed",
@@ -6228,7 +6251,8 @@
           "source": "user video 1 (watchVideo 2026-10-22)",
           "verified": false,
           "unit": "%",
-          "note": "Lose 30% Movement Speed."
+          "note": "Lose 30% Movement Speed.",
+          "kind": "mobility"
         },
         {
           "stat": "damage per soul",
@@ -6243,7 +6267,8 @@
             5
           ],
           "unit": "%",
-          "note": "Life absorbs a soul for 10s. Counts as Jewelry."
+          "note": "Life absorbs a soul for 10s. Counts as Jewelry.",
+          "kind": "damage"
         },
         {
           "stat": "damage taken per soul",
@@ -6253,7 +6278,8 @@
           "stacking": "up to 100, no refresh",
           "source": "user video 1 (watchVideo 2026-10-22)",
           "verified": false,
-          "unit": "%"
+          "unit": "%",
+          "kind": "defense"
         }
       ],
       "source": "user video 1 (watchVideo 2026-10-22)",
@@ -6274,7 +6300,8 @@
           "conditions": null,
           "stacking": null,
           "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false
+          "verified": false,
+          "kind": "defense"
         },
         {
           "stat": "Teleport Primary Resource cost",
@@ -6284,7 +6311,8 @@
           "stacking": null,
           "source": "user video 1 (watchVideo 2026-10-22)",
           "verified": false,
-          "note": "You can use Sorcerer's Teleport."
+          "note": "You can use Sorcerer's Teleport.",
+          "kind": "utility"
         },
         {
           "stat": "Rune Ign (0/150) Bomber Shadow",
@@ -6295,7 +6323,8 @@
           "source": "user video 1 (watchVideo 2026-10-22)",
           "verified": false,
           "unit": "%",
-          "note": "At a cost of 150 Offering, cast a Shadow that reduces Damage Taken by 10% for 10s."
+          "note": "At a cost of 150 Offering, cast a Shadow that reduces Damage Taken by 10% for 10s.",
+          "kind": "defense"
         }
       ],
       "source": "user video 1 (watchVideo 2026-10-22)",
@@ -6316,7 +6345,8 @@
           "conditions": null,
           "stacking": null,
           "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false
+          "verified": false,
+          "kind": "defense"
         },
         {
           "stat": "Whirlwind increased damage",
@@ -6331,7 +6361,8 @@
             135
           ],
           "unit": "%",
-          "note": "Pulls enemies every 3s."
+          "note": "Pulls enemies every 3s.",
+          "kind": "damage"
         }
       ],
       "source": "user video 1 (watchVideo 2026-10-22)",
@@ -6352,7 +6383,8 @@
           "conditions": null,
           "stacking": null,
           "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false
+          "verified": false,
+          "kind": "defense"
         },
         {
           "stat": "damage while Unstoppable",
@@ -6367,7 +6399,8 @@
             20
           ],
           "unit": "%",
-          "note": "And for 5s after."
+          "note": "And for 5s after.",
+          "kind": "damage"
         },
         {
           "stat": "Primary Resource on becoming Unstoppable",
@@ -6376,7 +6409,8 @@
           "conditions": null,
           "stacking": null,
           "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false
+          "verified": false,
+          "kind": "resource"
         },
         {
           "stat": "Rune Mal (0/50) Prime Bulwark",
@@ -6387,7 +6421,8 @@
           "source": "user video 1 (watchVideo 2026-10-22)",
           "verified": false,
           "unit": "%",
-          "note": "15% Damage Reduction for 10s."
+          "note": "15% Damage Reduction for 10s.",
+          "kind": "defense"
         }
       ],
       "source": "user video 1 (watchVideo 2026-10-22)",
@@ -6409,7 +6444,8 @@
           "stacking": null,
           "source": "user screenshot 2026-10-22",
           "verified": true,
-          "note": "Screenshot 4,615 DPS. Video read 3,040."
+          "note": "Screenshot 4,615 DPS. Video read 3,040.",
+          "kind": "base-weapon"
         },
         {
           "stat": "damage per hit",
@@ -6423,7 +6459,8 @@
             4360,
             5896
           ],
-          "note": "Screenshot [4,360-5,896]. Video read [2,432-3,648]."
+          "note": "Screenshot [4,360-5,896]. Video read [2,432-3,648]. The shown range is kept. The midpoint is not stored, because the damage formula multiplies weapon damage by the skill coefficient and does not average a per-hit range.",
+          "kind": "base-weapon"
         },
         {
           "stat": "Rune Ral: Enduring Spirit, Damage Reduction",
@@ -6434,7 +6471,8 @@
           "source": "user video 1 (watchVideo 2026-10-22)",
           "verified": false,
           "unit": "%",
-          "note": "Text cut off after \"10% Damage Reduction\". The rest is null."
+          "note": "Text cut off after \"10% Damage Reduction\". The rest is null.",
+          "kind": "defense"
         }
       ],
       "source": "user video 1 (watchVideo 2026-10-22)",
@@ -6456,7 +6494,8 @@
           "stacking": null,
           "source": "user screenshot 2026-10-22",
           "verified": true,
-          "note": "Screenshot 2,264 DPS. Matches the earlier video reading."
+          "note": "Screenshot 2,264 DPS. Matches the earlier video reading.",
+          "kind": "base-weapon"
         },
         {
           "stat": "damage per hit",
@@ -6470,7 +6509,8 @@
             1745,
             2373
           ],
-          "note": "Screenshot [1,745-2,373]. Video read [1,745-2,783]."
+          "note": "Screenshot [1,745-2,373]. Video read [1,745-2,783]. The shown range is kept. The midpoint is not stored, because the damage formula multiplies weapon damage by the skill coefficient and does not average a per-hit range.",
+          "kind": "base-weapon"
         },
         {
           "stat": "Rune Tal: Lord of Hatred",
@@ -6501,7 +6541,8 @@
           "conditions": null,
           "stacking": null,
           "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false
+          "verified": false,
+          "kind": "defense"
         },
         {
           "stat": "damage of the highest element",
@@ -6516,7 +6557,8 @@
             25
           ],
           "unit": "%",
-          "note": "Each resistance equals your highest."
+          "note": "Each resistance equals your highest.",
+          "kind": "damage"
         },
         {
           "stat": "Unhindered; touching an enemy makes it Vulnerable for 10s",
@@ -6525,7 +6567,8 @@
           "conditions": null,
           "stacking": null,
           "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false
+          "verified": false,
+          "kind": "mobility"
         },
         {
           "stat": "Primary Resource after touching 500 enemies",
@@ -6534,7 +6577,8 @@
           "conditions": null,
           "stacking": null,
           "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false
+          "verified": false,
+          "kind": "resource"
         }
       ],
       "source": "user video 1 (watchVideo 2026-10-22)",
@@ -6556,7 +6600,8 @@
           "stacking": null,
           "source": "user video 1 (watchVideo 2026-10-22)",
           "verified": false,
-          "note": "Described as drastically reduced. No separate reduction number was shown."
+          "note": "Described as drastically reduced. No separate reduction number was shown.",
+          "kind": "defense"
         },
         {
           "stat": "Primary Resource",
@@ -6566,7 +6611,8 @@
           "stacking": null,
           "source": "user video 1 (watchVideo 2026-10-22)",
           "verified": false,
-          "unit": "%"
+          "unit": "%",
+          "kind": "resource"
         },
         {
           "stat": "Maximum Life",
@@ -6576,7 +6622,8 @@
           "stacking": null,
           "source": "user video 1 (watchVideo 2026-10-22)",
           "verified": false,
-          "unit": "%"
+          "unit": "%",
+          "kind": "defense"
         },
         {
           "stat": "damage while above 50 Primary Resource",
@@ -6590,7 +6637,8 @@
             25,
             45
           ],
-          "unit": "%"
+          "unit": "%",
+          "kind": "damage"
         }
       ],
       "source": "user video 1 (watchVideo 2026-10-22)",

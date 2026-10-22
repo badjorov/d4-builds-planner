@@ -270,6 +270,15 @@ test('video 1 keeps confirmed values and flags the conflicting readings', () => 
   assert.equal(spirit.effects.find(item => item.stat === 'Rune Tal: Lord of Hatred').value, null);
   const insight = catalog.uniques.find(item => item.id === 'insight');
   assert.equal(insight.effects.find(item => item.stat.startsWith('Rune Ral')).note.includes('cut off'), true);
+  assert.equal(insight.effects.find(item => item.stat === 'DPS').kind, 'base-weapon');
+  assert.equal(insight.effects.find(item => item.stat === 'damage per hit').value, null);
+  assert.equal(insight.effects.find(item => item.stat.startsWith('Rune Ral')).kind, 'defense');
+  const channeling = catalog.aspects.find(aspect => aspect.id === 'aspect-of-channeling');
+  assert.deepEqual(channeling.effects[0].conditions, ['while channeling a Skill']);
+  assert.deepEqual(channeling.effects[1].conditions, ['while channeling a Skill']);
+  const earth = catalog.aspects.find(aspect => aspect.id === 'earthstrikers-aspect');
+  assert.deepEqual(earth.effects[0].conditions, ['while you have Overpower']);
+  assert.deepEqual(earth.effects[1].conditions, ['while you have Overpower']);
   const might = catalog.glyphs.find(glyph => glyph.id === 'might');
   assert.equal(might.level, 135);
   assert.equal(might.levelVerified, true);

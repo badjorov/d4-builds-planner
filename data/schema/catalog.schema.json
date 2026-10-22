@@ -76,6 +76,9 @@
       "required": ["stat", "bucket", "value", "conditions", "stacking", "source", "verified"],
       "properties": {
         "stat": { "type": ["string", "null"] },
+        "kind": {
+          "enum": ["damage", "defense", "resource", "mobility", "utility", "base-weapon", null]
+        },
         "bucket": { "$ref": "#/$defs/bucket" },
         "value": { "$ref": "#/$defs/effectValue" },
         "conditions": {

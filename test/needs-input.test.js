@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
+import { damageEffects } from '../src/catalog.js';
 import { countProvenance, formatNeedsInput, needsInput, openNeeds, pendingAllocation, splitForBuild, topFieldNames } from '../src/needs-input.js';
 
 const catalog = JSON.parse(readFileSync(new URL('../data/barbarian.json', import.meta.url), 'utf8'));
@@ -94,9 +95,17 @@ test('needs-input splits the user build into engine-blocking, required, and nice
   assert.equal(dot.reason, 'null');
   assert.equal(dot.provenance, 'user-only');
   const crushingConditions = split.engineBlocking.filter(item => item.path.startsWith('/aspects/crushing-aspect/effects/') && item.path.endsWith('/conditions'));
-  assert.equal(crushingConditions.some(item => item.provenance === 'sourceable'), true);
-  const ramaladniBucket = split.engineBlocking.find(item => item.path === '/uniques/ramaladni/effects/1/bucket');
-  assert.equal(ramaladniBucket.provenance, 'user-only');
+  assert.equal(crushingConditions.length, 0);
+  const crushing = catalog.aspects.find(aspect => aspect.id === 'crushing-aspect');
+  assert.deepEqual(crushing.effects[0].conditions, ['while Fortified']);
+  assert.equal(crushing.effects[0].kind, 'damage');
+  const whirlwindDamage = split.engineBlocking.find(item => item.path === '/uniques/gohrs-devastating-grips/effects/1/bucket');
+  assert.equal(whirlwindDamage.provenance, 'user-only');
+  assert.equal(split.engineBlocking.some(item => item.path === '/uniques/ramaladni/effects/1/bucket'), false);
+  const perHit = catalog.uniques.find(item => item.id === 'insight').effects.find(effect => effect.stat === 'damage per hit');
+  assert.equal(perHit.kind, 'base-weapon');
+  assert.equal(perHit.value, null);
+  assert.equal(split.niceToHave.some(item => item.path === '/uniques/insight/effects/0/bucket'), true);
   assert.equal(split.engineBlocking.every(item => item.provenance === 'user-only' || item.provenance === 'sourceable'), true);
   assert.equal(split.required.every(item => item.provenance === 'user-only' || item.provenance === 'sourceable'), true);
   assert.equal(split.niceToHave.every(item => item.provenance == null), true);
@@ -104,4 +113,29 @@ test('needs-input splits the user build into engine-blocking, required, and nice
   assert.equal(blocking['user-only'] + blocking.sourceable, split.engineBlocking.length);
   assert.ok(topFieldNames(split.engineBlocking).length > 0);
   assert.ok(topFieldNames(split.engineBlocking).length <= 20);
+});
+
+test('channeling and fortified conditions stay unknown, and a skill tag still matches', () => {
+  const catalogTags = { skills: [{ id: 'whirlwind', tags: ['Core', 'bleed'] }] };
+  const build = { skills: ['whirlwind'], uptime: { overpower: 1 } };
+  const channel = damageEffects({
+    effects: [{ stat: 'damage', bucket: 'multiplicative', value: 69, conditions: ['while channeling a Skill'] }]
+  }, build, catalogTags);
+  assert.equal(channel[0].state, 'unknown');
+  const fortified = damageEffects({
+    effects: [{ stat: 'damage', bucket: 'multiplicative', value: 64, conditions: ['while Fortified'] }]
+  }, build, catalogTags);
+  assert.equal(fortified[0].state, 'unknown');
+  const overpower = damageEffects({
+    effects: [{ stat: 'damage', bucket: 'multiplicative', value: 19.5, conditions: ['while you have Overpower'] }]
+  }, build, catalogTags);
+  assert.equal(overpower[0].state, 'active');
+  const bleed = damageEffects({
+    effects: [{ stat: 'damage', bucket: 'multiplicative', value: 15, conditions: ['bleed'] }]
+  }, build, catalogTags);
+  assert.equal(bleed[0].state, 'active');
+  const other = damageEffects({
+    effects: [{ stat: 'damage', bucket: 'multiplicative', value: 15, conditions: ['burn'] }]
+  }, build, catalogTags);
+  assert.equal(other.length, 0);
 });

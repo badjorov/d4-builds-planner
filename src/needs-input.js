@@ -98,6 +98,11 @@ export function summarizeNeeds(items) {
 }
 
 const KNOWN_BUCKETS = new Set(['additive', 'multiplicative', 'crit', 'vuln', 'overpower']);
+const NON_DAMAGE_KINDS = new Set(['defense', 'resource', 'mobility', 'utility', 'base-weapon']);
+
+function scoresDamage(effect) {
+  return !NON_DAMAGE_KINDS.has(effect?.kind);
+}
 
 function entityById(list, id) {
   return (list || []).find(entry => entry.id === id) || null;
@@ -192,6 +197,7 @@ function classifyScoringField(item, ctx) {
   const fact = effectAt(entity, Number(match[3]));
   if (!fact) return { tier: 'nice-to-have' };
   const key = match[4];
+  if (!scoresDamage(fact.effect)) return { tier: 'nice-to-have' };
   if (key === 'conditions') {
     if (!fact.conditionsRead || item.reason !== 'null') return { tier: 'nice-to-have' };
     return { tier: 'engine-blocking', provenance: conditionsSourceable(entity, fact.effect) ? 'sourceable' : 'user-only' };
