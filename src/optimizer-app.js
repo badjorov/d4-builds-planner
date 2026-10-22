@@ -76,6 +76,7 @@ function run() {
     mainStat: num($('mainStat').value),
     critChance: num($('critChance').value),
     critDmg: num($('critDmg').value),
+    maxFury: savedBuild?.maxFury ?? null,
     vulnPct: num($('vulnPct').value),
     overpowerPct: num($('overpowerPct').value),
     castsPerSecond: num($('castsPerSecond').value),

@@ -214,6 +214,7 @@ export function buildFromCore(catalog, skills, opts = {}) {
     mainStat: opts.mainStat ?? null,
     critChance: opts.critChance ?? null,
     critDmg: opts.critDmg ?? null,
+    maxFury: opts.maxFury ?? null,
     vulnPct: opts.vulnPct ?? null,
     overpowerPct: opts.overpowerPct ?? null,
     additivePct: opts.additivePct ?? null,

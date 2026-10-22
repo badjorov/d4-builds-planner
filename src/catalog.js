@@ -255,9 +255,14 @@ export function damageEffects(entity, build, catalog) {
     if (effect.scored === false) continue;
     if (NON_DAMAGE_KINDS.has(effect.kind)) continue;
     const scoring = formulaEffect(effect);
-    const value = pointValue(scoring.value);
+    let value = pointValue(scoring.value);
     const bucket = knownBucket(scoring.bucket) || (FORMULA_BUCKETS.has(scoring.bucket) ? scoring.bucket : null);
     if (value == null || !bucket) continue;
+    let perPointOfFury = null;
+    if (/per point of fury/i.test(scoring.stat || '') && typeof build?.maxFury === 'number') {
+      perPointOfFury = { rate: value, fury: build.maxFury };
+      value = value * build.maxFury;
+    }
     const judged = build ? conditionState(scoring, build, catalog) : { state: scoring.conditions && scoring.conditions.length === 0 ? 'active' : 'unknown' };
     if (judged.state === 'inactive') continue;
     let when = judged.when || null;
@@ -265,7 +270,7 @@ export function damageEffects(entity, build, catalog) {
       const up = build.uptime?.vulnerable;
       if (typeof up === 'number' && up > 0 && up < 1) when = 'vulnerable';
     }
-    active.push({ effect: scoring, value, bucket, state: judged.state, when });
+    active.push({ effect: scoring, value, bucket, state: judged.state, when, perPointOfFury });
   }
   return active;
 }
@@ -333,6 +338,10 @@ function appendDamageModifiers(entity, build, catalog, modifiers, notes, label, 
     const modifier = { name: label.name, bucket: piece.bucket, value: piece.value, active: true, kind: label.kind, id: entity.id };
     if (label.slotId) modifier.slotId = label.slotId;
     if (piece.when) modifier.when = piece.when;
+    if (piece.perPointOfFury) {
+      modifier.perPointOfFury = piece.perPointOfFury;
+      notes.push(`${label.name}: ${piece.perPointOfFury.rate}%[x] per point of Fury × Max Fury ${piece.perPointOfFury.fury} = ${piece.value}%. The tooltip is the per-point rate. Current Fury during a hit is not measured. The same tooltip drains 7% Fury per second in combat, so this uses the sheet Max Fury.`);
+    }
     modifiers.push(modifier);
   }
 }
@@ -464,6 +473,9 @@ export function engineInputFromBuild(catalog, build, opts = {}) {
     }
   }
   applyOffensiveSheet(build, skills, modifiers, notes);
+  for (const extra of opts.extraModifiers || []) {
+    if (typeof extra?.value === 'number') modifiers.push({ active: true, ...extra });
+  }
   if (typeof build.additivePct === 'number') {
     const verified = build.additiveAudit?.verified === true ? 'Screenshot-verified' : 'Video-read, unverified';
     notes.push(`Additive audit: sheet All Damage ${build.additivePct}% is the unconditional additive base. ${verified}. The conditional sheet rows join that same sum. Catalog +% Damage lines stay out of the sum.`);
@@ -559,6 +571,11 @@ function blendFlags(input, uptime) {
       flags.push([key, raw]);
     }
   }
+  for (const mod of input.modifiers || []) {
+    if (!mod.when || flags.some(flag => flag[0] === mod.when)) continue;
+    const raw = uptime[mod.when];
+    if (typeof raw === 'number' && raw > 0 && raw < 1) flags.push([mod.when, raw]);
+  }
   return flags;
 }
 
@@ -626,6 +643,10 @@ function applyFormulaOpts(input, opts = {}) {
   if (opts.vulnerableBaseInSheet === true) {
     modifiers = modifiers.map(mod => (mod.name === 'Vulnerable Damage' ? { ...mod, value: mod.value - 20 } : mod));
   }
+  if (opts.gearCritAsProduct === true) {
+    modifiers = modifiers.map(mod => (mod.bucket === 'crit-mult' && !SEPARATE_CRIT_KINDS.has(mod.kind) ? { ...mod, kind: 'aspect' } : mod));
+  }
+  if (typeof opts.omitModifier === 'function') modifiers = modifiers.filter(mod => !opts.omitModifier(mod));
   if (typeof opts.addCritMult === 'number') {
     modifiers = [...modifiers, {
       name: opts.addCritMultName || 'extra crit multiplier',

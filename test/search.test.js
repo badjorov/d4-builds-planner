@@ -113,6 +113,7 @@ test('a candidate with the equipped layout scores the equipped power', () => {
     mainStat: saved.mainStat,
     critChance: saved.critChance,
     critDmg: saved.critDmg,
+    maxFury: saved.maxFury,
     vulnPct: saved.vulnPct,
     overpowerPct: saved.overpowerPct,
     additivePct: saved.additivePct,

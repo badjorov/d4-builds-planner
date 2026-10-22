@@ -30,6 +30,20 @@ test('the sheet crit percent is additive and the weapon [x] lines sum', () => {
   assert.ok(Math.abs(vuln.value - 1.2 * 1.35) < 1e-9);
 });
 
+test('Ramaladni multiplies 0.5%[x] by the stored Max Fury', () => {
+  assert.equal(saved.maxFury, 826);
+  const ram = catalog.uniques.find(entry => entry.id === 'ramaladni');
+  const line = ram.effects.find(effect => effect.stat === 'damage per point of Fury');
+  assert.equal(line.value, 0.5);
+  assert.match(line.note, /per point of Fury/);
+  const evaluated = evaluateBuild(catalog, whirlwindBuild());
+  const applied = evaluated.input.modifiers.find(mod => mod.id === 'ramaladni' && mod.bucket === 'multiplicative');
+  assert.equal(applied.value, 0.5 * 826);
+  const bare = evaluateBuild(catalog, { ...whirlwindBuild(), maxFury: null });
+  const once = bare.input.modifiers.find(mod => mod.id === 'ramaladni' && mod.bucket === 'multiplicative');
+  assert.equal(once.value, 0.5);
+});
+
 test('critAudit.reading switches the gear crit lines', () => {
   const build = whirlwindBuild();
   const headline = evaluateBuild(catalog, build, { critReading: 'headline' });
