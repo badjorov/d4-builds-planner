@@ -24,18 +24,25 @@ test('needs-input lists nulls, unverified flags, ranges, and empty collections',
 test('transcribed coefficients stay unverified and the sourced scalar stays put', () => {
   const items = needsInput(catalog);
   const text = formatNeedsInput(items);
-  assert.match(text, /\/skills\/hota\/verified — unverified/);
-  assert.equal(text.includes('/skills/hota/coeffPct — null'), false);
+  assert.match(text, /\/skills\/whirlwind\/verified — unverified/);
+  assert.equal(text.includes('/skills/hota/'), false);
+  assert.equal(text.includes('/skills/flay/'), false);
   assert.match(text, /\/aspects\/writhing\/effects\/0\/value — range/);
   assert.match(text, /\/skillVariants — empty/);
   assert.match(text, /\/talismans — empty/);
   assert.equal(text.includes('/affixes — empty'), false);
   assert.equal(text.includes('/affixes/guardian-finesse/'), false);
-  assert.match(text, /\/skills\/hota\/allocated — pending-allocation/);
-  assert.equal(items.some(item => item.path === '/skills/hota/allocated' && item.reason === 'null'), false);
-  assert.equal(catalog.skills.find(skill => skill.id === 'flay').allocated, true);
+  assert.equal(catalog.skills.find(skill => skill.id === 'hota').allocated, false);
+  assert.equal(catalog.skills.find(skill => skill.id === 'flay').allocated, false);
+  assert.equal(catalog.skills.find(skill => skill.id === 'whirlwind').allocationVerified, true);
+  assert.equal(catalog.skills.find(skill => skill.id === 'whirlwind').verified, false);
   assert.equal(openNeeds(items).some(item => item.reason === 'pending-allocation'), false);
-  assert.ok(pendingAllocation(items).length > 0);
+  assert.equal(pendingAllocation(items).length, 0);
+  const pending = needsInput({
+    skills: [{ id: 'key-passive', category: 'Passive', allocated: null, coeffPct: null, verified: false }]
+  });
+  assert.equal(pendingAllocation(pending).length, 1);
+  assert.equal(pendingAllocation(pending)[0].path, '/skills/key-passive/allocated');
   assert.equal(items.some(item => item.path === '/mainstat/percentPer10'), false);
   assert.equal(items.some(item => item.path === '/glyphs/disembowel/effects/0/value'), false);
   assert.equal(catalog.skills.find(skill => skill.id === 'hota').coeffPct, 170);

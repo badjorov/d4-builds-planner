@@ -29,6 +29,18 @@
     "name": { "type": "string" },
     "class": { "type": "string" },
     "skills": { "type": "array", "items": { "type": "string" } },
+    "upgrades": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["skillId", "name"],
+        "properties": {
+          "skillId": { "type": "string", "minLength": 1 },
+          "name": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
     "variants": { "type": "array", "items": { "type": "string" } },
     "gear": {
       "type": "array",

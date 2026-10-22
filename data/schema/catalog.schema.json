@@ -210,6 +210,8 @@
         "bonusRank": { "type": ["number", "null"] },
         "maxRank": { "type": ["number", "null"] },
         "allocated": { "type": ["boolean", "null"] },
+        "allocationVerified": { "type": "boolean" },
+        "allocationSource": { "type": "string", "minLength": 1 },
         "tooltip": { "type": ["string", "null"] },
         "modifiers": { "type": "array", "items": { "$ref": "#/$defs/upgradeNode" } },
         "transcribed": { "type": ["string", "null"] },
@@ -387,7 +389,11 @@
       "required": ["text", "allocated"],
       "properties": {
         "text": { "type": "string" },
-        "allocated": { "type": ["boolean", "null"] }
+        "allocated": { "type": ["boolean", "null"] },
+        "verified": { "type": "boolean" },
+        "value": { "type": ["number", "null"] },
+        "source": { "type": "string", "minLength": 1 },
+        "note": { "type": ["string", "null"] }
       }
     },
     "skillPoints": {

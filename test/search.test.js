@@ -86,8 +86,9 @@ test('real catalog does not rank an unverified build unless asked', () => {
     manualInputsVerified: true, powerFloor: 1, maxSkills: 1, metaBuilds: realMeta
   });
   assert.ok(shown.ranked.length > 0);
-  assert.equal(shown.ranked[0].skills[0], 'death-blow');
-  assert.equal(shown.ranked[0].power, 737);
+  assert.equal(shown.ranked[0].skills[0], 'whirlwind');
+  assert.equal(shown.ranked[0].power, 18);
+  assert.equal(shown.ranked.some(result => result.skills.includes('death-blow') || result.skills.includes('flay')), false);
   assert.equal(real.skills.find(skill => skill.id === 'cota-madawc').coeffPct, 120);
   assert.ok(shown.ranked.every(result => result.unverifiedShare > 0));
   assert.equal(shown.ranked.some(result => result.gear.some(item => item.kind === 'aspect' || item.kind === 'unique')), false);

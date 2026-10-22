@@ -183,7 +183,7 @@
       "total": 83,
       "source": "user correction 2026-10-22",
       "verified": true,
-      "note": "All 83 points are spent. Only allocated skills and upgrades are active. Allocation is unknown except for the skills on the user build, plus Flay."
+      "note": "All 83 points are spent. The confirmed active skills are Whirlwind, War Cry, Challenging Shout, Rallying Cry, Wrath of the Berserker, and Iron Skin, plus the upgrades named on those skills. allocationVerified on a skill, and verified on an upgrade, confirm the allocation only. Numeric values stay unverified unless they already were. Flay is inactive. Every other non-passive skill and upgrade is inactive. Passive skills remain pending; this catalog has no passive rows."
     },
     "tooltipLifeNote": "Max Life on the user build is 473. That is a minimum-life setup with Melted Heart of Selig and Endurant Faith. Life numbers implied by skill tooltips are not Max Life and are ignored.",
     "rankNote": "A skill rank is base ranks, capped by maxRank (15), plus bonus ranks from gear, talismans, and paragon. rank and rankTotal store the shown total. baseRank and bonusRank stay null when the split was not shown."
@@ -232,37 +232,37 @@
       "modifiers": [
         {
           "text": "Crit +3%[+]/20 max Fury up to 20%[+]",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "+25%[+] size +20%[x]",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Fury gen +3%[+]/enemy up to 30% 5s",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "+20%[x] with Overpower",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Ancestral (Fire, 2 Ancients 1,608,125 (52%), burning explode 424,457 (13%))",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Fissure 11,559,324 (1,515%) slow 80% 4s",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Explosive 10,769,853 (3,558%)",
-          "allocated": null
+          "allocated": false
         }
       ],
       "transcribed": "35 Fury, 4,680,287 (170%). Crit +3%[+]/20 max Fury up to 20%[+]; +25%[+] size +20%[x]; Fury gen +3%[+]/enemy up to 30% 5s; +20%[x] with Overpower; Ancestral (Fire, 2 Ancients 1,608,125 (52%), burning explode 424,457 (13%)); Fissure 11,559,324 (1,515%) slow 80% 4s; Explosive 10,769,853 (3,558%).",
       "transcriptionId": "hammer-of-the-ancients",
       "recordedSource": "user video 2026-10-21 batch2 (transcribed)",
-      "allocated": null,
+      "allocated": false,
       "rankTotal": 11,
       "baseRank": null,
       "bonusRank": null
@@ -300,31 +300,43 @@
       "modifiers": [
         {
           "text": "MS +15%[+]",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Cost Damage Bonus +40%[x] +10 Fury",
-          "allocated": null
+          "allocated": true,
+          "verified": true,
+          "note": "Allocation confirmed 2026-10-22. verified is the allocation fact. Numbers in the text stay unverified."
         },
         {
           "text": "Channel +10%[x] per 3 hits x25",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Weaken on crit 4s",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Tornado Dust Devil 4,915,123 (131%)",
-          "allocated": null
+          "allocated": true,
+          "verified": true,
+          "note": "Allocation confirmed 2026-10-22. verified is the allocation fact. Numbers in the text stay unverified."
         },
         {
           "text": "Bursting 732,680 (317%) Fire + 3,227,293 (1,068%) burn",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Winding (other skills grant 4 charges up to 20, +15%[x] dmg & +10%[+] MS per stack, shrapnel 1,839,460 (106%) + 893,293 (115%) bleed)",
-          "allocated": null
+          "allocated": false
+        },
+        {
+          "text": "Channel Damage Bonus",
+          "allocated": true,
+          "verified": true,
+          "value": null,
+          "source": "user confirmation 2026-10-22",
+          "note": "Added because \"Channel Damage Bonus\" did not match a catalog upgrade row. Allocation confirmed 2026-10-22. verified is the allocation fact. Numbers in the text stay unverified. value is null because no number was supplied."
         }
       ],
       "transcribed": "25 Fury/s, 3,217,620 (18%). MS +15%[+]; Cost Damage Bonus +40%[x] +10 Fury; Channel +10%[x] per 3 hits x25; Weaken on crit 4s; Tornado Dust Devil 4,915,123 (131%); Bursting 732,680 (317%) Fire + 3,227,293 (1,068%) burn; Winding (other skills grant 4 charges up to 20, +15%[x] dmg & +10%[+] MS per stack, shrapnel 1,839,460 (106%) + 893,293 (115%) bleed).",
@@ -333,7 +345,9 @@
       "allocated": true,
       "rankTotal": 41,
       "baseRank": null,
-      "bonusRank": null
+      "bonusRank": null,
+      "allocationVerified": true,
+      "allocationSource": "user confirmation 2026-10-22"
     },
     {
       "id": "rend",
@@ -368,36 +382,36 @@
       "modifiers": [
         {
           "text": "+20%[x] vs moving",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "+20%[x] vs Vulnerable",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "+20%[+] cast speed",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "heal 1%/s per bleeding",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Scorching 1,058,164 (138%) + 4,375,932 (507%) burn",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Blood Sworn (spread 50% bleed on death)",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Flaying +40%[+] size/dmg, +20% per slash up to 60%",
-          "allocated": null
+          "allocated": false
         }
       ],
       "transcribed": "35 Fury, 663,015 (86%) + 3,564,785 (184%) bleed/5s. +20%[x] vs moving; +20%[x] vs Vulnerable; +20%[+] cast speed; heal 1%/s per bleeding; Scorching 1,058,164 (138%) + 4,375,932 (507%) burn; Blood Sworn (spread 50% bleed on death); Flaying +40%[+] size/dmg, +20% per slash up to 60%.",
       "recordedSource": "user video 2026-10-21 batch2 (transcribed)",
-      "allocated": null,
+      "allocated": false,
       "rankTotal": 11,
       "baseRank": null,
       "bonusRank": null
@@ -430,7 +444,7 @@
       "source": "https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy",
       "verified": true,
       "note": "Patch 3.2.1: damage 200% -> 100%. Rank scaling unknown [VERIFY tooltip].",
-      "allocated": null
+      "allocated": false
     },
     {
       "id": "cota-madawc",
@@ -461,7 +475,7 @@
       "source": "https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy",
       "verified": true,
       "note": "Patch 3.2.1: Madawc damage 240% -> 120%.",
-      "allocated": null
+      "allocated": false
     },
     {
       "id": "charge",
@@ -496,36 +510,36 @@
       "modifiers": [
         {
           "text": "Unstoppable",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "up to +20%[x] by distance",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "+5%[x]/enemy up to 30%[x]",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "CD -1s/enemy up to 5",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Battering Ram Fire 1,375,560 (105%) knockdown 3s, trail 2,875,662 (391%)",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Phalanx 2 Ancients 2,134,315 (261%)",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Merciless Assault 3 charges",
-          "allocated": null
+          "allocated": false
         }
       ],
       "transcribed": "+15 Fury, CD 16.00s, 4,304,672 (652%). Unstoppable; up to +20%[x] by distance; +5%[x]/enemy up to 30%[x]; CD -1s/enemy up to 5; Battering Ram Fire 1,375,560 (105%) knockdown 3s, trail 2,875,662 (391%); Phalanx 2 Ancients 2,134,315 (261%); Merciless Assault 3 charges.",
       "recordedSource": "user video 2026-10-21 batch2 (transcribed)",
-      "allocated": null,
+      "allocated": false,
       "rankTotal": 11,
       "baseRank": null,
       "bonusRank": null
@@ -563,36 +577,36 @@
       "modifiers": [
         {
           "text": "Moving +20%[x]",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Vulnerable 4s",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Mobility CD -2s",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Collide 426,453 (55%)",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Madness dash 5,483,517 (675%) knockdown 4s (Mobility)",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Crimson 783,959 (101%) fire, explode 2,259,230 (291%)",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Power (Core, 30 Fury, 3,132,328 (385%), +8.0%[x]/max Fury up to 150)",
-          "allocated": null
+          "allocated": false
         }
       ],
       "transcribed": "2 charges, CD 5.43s, 1,983,100 (148%), knockback, terrain 903,190 (110%) stun 3s. Moving +20%[x]; Vulnerable 4s; Mobility CD -2s; Collide 426,453 (55%); Madness dash 5,483,517 (675%) knockdown 4s (Mobility); Crimson 783,959 (101%) fire, explode 2,259,230 (291%); Power (Core, 30 Fury, 3,132,328 (385%), +8.0%[x]/max Fury up to 150).",
       "recordedSource": "user video 2026-10-21 batch2 (transcribed)",
-      "allocated": null,
+      "allocated": false,
       "rankTotal": 15,
       "baseRank": null,
       "bonusRank": null
@@ -627,35 +641,35 @@
       "modifiers": [
         {
           "text": "Slow 20%",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Duration +5s",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Anemia (bleed -2s, Vulnerable)",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Hemorrhaging (+2s if enemy moves far)",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "The Flayer (blood explosion 326,944 (114%) bleed/5s)",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Healing 1% max life (1,475)/s per bleeding nearby enemy up to 5%",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Weaken (20%/15%/10%)",
-          "allocated": null
+          "allocated": false
         }
       ],
       "transcribed": "+15 Fury, LH 50%, 128,476 (15%) + 386,013 (45%) bleed/5s. Slow 20%; Duration +5s; Anemia (bleed -2s, Vulnerable); Hemorrhaging (+2s if enemy moves far); The Flayer (blood explosion 326,944 (114%) bleed/5s); Healing 1% max life (1,475)/s per bleeding nearby enemy up to 5%; Weaken (20%/15%/10%).",
-      "allocated": true,
+      "allocated": false,
       "rankTotal": 10,
       "baseRank": null,
       "bonusRank": null
@@ -690,35 +704,35 @@
       "modifiers": [
         {
           "text": "Unhindered at max",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Ferocity per stack (5% AS, x4)",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "+2 Fury",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "+2 stacks",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Raging (Fire, 15% explosion 3,448,854 (451%) burn/5s)",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Throwing (ranged pierce 3,032,000 (88%), 20% at max shrapnel 1,885,729 (55%) + 1,796,351 (51%) bleed)",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Barrage (+5 stacks, Berserking 5s at max)",
-          "allocated": null
+          "allocated": false
         }
       ],
       "transcribed": "+7 Fury, LH 30%, 1,321,228 (168%) per pair, AS +10%[+] up to 30%[+]. Unhindered at max; Ferocity per stack (5% AS, x4); +2 Fury; +2 stacks; Raging (Fire, 15% explosion 3,448,854 (451%) burn/5s); Throwing (ranged pierce 3,032,000 (88%), 20% at max shrapnel 1,885,729 (55%) + 1,796,351 (51%) bleed); Barrage (+5 stacks, Berserking 5s at max).",
-      "allocated": null,
+      "allocated": false,
       "rankTotal": 11,
       "baseRank": null,
       "bonusRank": null
@@ -753,32 +767,32 @@
       "modifiers": [
         {
           "text": "Clobber +10 Fury",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Clobber +1 Overpower",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "threshold -2",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Atomic Blast 2,210,845 (344%) Fire",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Violent Swings 25% clobber chance",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Heavy Knuckles (clobber 100% crit, Vulnerable 4s)",
-          "allocated": null
+          "allocated": false
         }
       ],
       "transcribed": "+15 Fury, LH 50%, 2,059,707 (316%), every 5th clobbers (stun 1.5s). Clobber +10 Fury; Clobber +1 Overpower; threshold -2; Atomic Blast 2,210,845 (344%) Fire; Violent Swings 25% clobber chance; Heavy Knuckles (clobber 100% crit, Vulnerable 4s).",
       "note": "Dropped the Resolve upgrade from the 2026-10-21 transcription. Resolve is Paladin-only. The other Bash upgrades stay.",
-      "allocated": null,
+      "allocated": false,
       "rankTotal": 12,
       "baseRank": null,
       "bonusRank": null
@@ -813,31 +827,31 @@
       "modifiers": [
         {
           "text": "Range +2",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "+1 Fury per enemy",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Berserking 2s on crit, +15%[+] crit",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Healing 2% max life (0)",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Whirling Dust Devil 304,771 (10%)",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Impaling (2s CD, path dmg)",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Skewer 15%[x] +10%[x]/target up to 100%[x]",
-          "allocated": null
+          "allocated": false
         }
       ],
       "transcribed": "+12 Fury, 3,382,384 (113%) (next rank read 3,222,723 (123%) SUSPECT). Range +2; +1 Fury per enemy; Berserking 2s on crit, +15%[+] crit; Healing 2% max life (0); Whirling Dust Devil 304,771 (10%); Impaling (2s CD, path dmg); Skewer 15%[x] +10%[x]/target up to 100%[x].",
@@ -847,7 +861,7 @@
         "coeffPct": 123
       },
       "note": "Next-rank value read as 3,222,723 (123%), lower absolute than current 3,382,384 (113%) while % is higher; re-check.",
-      "allocated": null,
+      "allocated": false,
       "rankTotal": 11,
       "baseRank": null,
       "bonusRank": null
@@ -882,35 +896,35 @@
       "modifiers": [
         {
           "text": "+30%[x] first 5 enemies",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "cost 25",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Free Cast per 100 Fury spent (stack 300)",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Overpower consume +20%[+] size +20%[x]",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Suppress +75%[x] range-based",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Iron Burst 1,462,254 (182%) + 2,759,752 (3,238%) bleed",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Trailblazing 5,329,385 (56%) Fire + trail 2,875,662 (391%) burn/3s",
-          "allocated": null
+          "allocated": false
         }
       ],
       "transcribed": "45 Fury, 5,547,851 (278%). +30%[x] first 5 enemies; cost 25; Free Cast per 100 Fury spent (stack 300); Overpower consume +20%[+] size +20%[x]; Suppress +75%[x] range-based; Iron Burst 1,462,254 (182%) + 2,759,752 (3,238%) bleed; Trailblazing 5,329,385 (56%) Fire + trail 2,875,662 (391%) burn/3s.",
-      "allocated": null,
+      "allocated": false,
       "rankTotal": 11,
       "baseRank": null,
       "bonusRank": null
@@ -945,35 +959,35 @@
       "modifiers": [
         {
           "text": "Fortify 3% per enemy hit by both",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "20% hit twice",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "cost -2/hit",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "+2%[x]/enemy 3s",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Flurry +1 hit 1,462,254 (112%), +2 while Berserking",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Twister Dust Devils 1,462,254 (112%)",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Slice and Dice (+20% size, -40% cast speed, edge 2 cuts 3,461,409 (266%), +10%[+] cast speed x5)",
-          "allocated": null
+          "allocated": false
         }
       ],
       "transcribed": "30 Fury, 1,485,023 (114%) per weapon. Fortify 3% per enemy hit by both; 20% hit twice; cost -2/hit; +2%[x]/enemy 3s; Flurry +1 hit 1,462,254 (112%), +2 while Berserking; Twister Dust Devils 1,462,254 (112%); Slice and Dice (+20% size, -40% cast speed, edge 2 cuts 3,461,409 (266%), +10%[+] cast speed x5).",
-      "allocated": null,
+      "allocated": false,
       "rankTotal": 10,
       "baseRank": null,
       "bonusRank": null
@@ -1008,35 +1022,35 @@
       "modifiers": [
         {
           "text": "+2 charges",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "+20 Fury",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "+30%[x]",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "+30%[+] size",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Breach Fire fissure 9,102,961 (1,180%), burning +30%[x] taken",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Seismic Earthquake 4,438,477 (575%) slow 50%",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Stomping Grounds extra stomps 559,599 (14%) for 5s",
-          "allocated": null
+          "allocated": false
         }
       ],
       "transcribed": "CD 14.28s, 1,784,232 (184%), stun 3s. +2 charges; +20 Fury; +30%[x]; +30%[+] size; Breach Fire fissure 9,102,961 (1,180%), burning +30%[x] taken; Seismic Earthquake 4,438,477 (575%) slow 50%; Stomping Grounds extra stomps 559,599 (14%) for 5s.",
-      "allocated": null,
+      "allocated": false,
       "rankTotal": 11,
       "baseRank": null,
       "bonusRank": null
@@ -1070,26 +1084,52 @@
       "modifiers": [
         {
           "text": "Duration 7s",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Fury Gain 3 per 5m",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "The World (Daze+Slow 124% 4s, AS instead of MS, 2.5s CD)",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Madawc (Fury -10, Madawc 6,480,735 (556%))",
-          "allocated": null
+          "allocated": false
+        },
+        {
+          "text": "Fortify",
+          "allocated": true,
+          "verified": true,
+          "value": null,
+          "source": "user confirmation 2026-10-22",
+          "note": "Added because \"Fortify\" did not match a catalog upgrade row. Allocation confirmed 2026-10-22. verified is the allocation fact. Numbers in the text stay unverified. value is null because no number was supplied."
+        },
+        {
+          "text": "Booming",
+          "allocated": true,
+          "verified": true,
+          "value": null,
+          "source": "user confirmation 2026-10-22",
+          "note": "Added because \"Booming\" did not match a catalog upgrade row. Allocation confirmed 2026-10-22. verified is the allocation fact. Numbers in the text stay unverified. value is null because no number was supplied."
+        },
+        {
+          "text": "Potency",
+          "allocated": true,
+          "verified": true,
+          "value": null,
+          "source": "user confirmation 2026-10-22",
+          "note": "Added because \"Potency\" did not match a catalog upgrade row. Allocation confirmed 2026-10-22. verified is the allocation fact. Numbers in the text stay unverified. value is null because no number was supplied."
         }
       ],
       "transcribed": "CD 25.00s, MS +30%[+] 4.0s, Resource Gen +17%[x], MS +10%[+], Fortify 15% max life, +20%[x] +20%/ally. Duration 7s; Fury Gain 3 per 5m; The World (Daze+Slow 124% 4s, AS instead of MS, 2.5s CD); Madawc (Fury -10, Madawc 6,480,735 (556%)).",
       "allocated": true,
       "rankTotal": 15,
       "baseRank": null,
-      "bonusRank": null
+      "bonusRank": null,
+      "allocationVerified": true,
+      "allocationSource": "user confirmation 2026-10-22"
     },
     {
       "id": "iron-skin",
@@ -1120,35 +1160,55 @@
       "modifiers": [
         {
           "text": "MS +15%[+]",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Weaken 5s",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Max Life +15%",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Juggernaut (Unstoppable, damage/knockback attackers)",
-          "allocated": null
+          "allocated": true,
+          "verified": true,
+          "note": "Allocation confirmed 2026-10-22. verified is the allocation fact. Numbers in the text stay unverified."
         },
         {
           "text": "Endure (no barrier, can't drop below 1, heal 21.5%)",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Retaliation (3x duration, shrapnel)",
-          "allocated": null
+          "allocated": false
+        },
+        {
+          "text": "Movement Speed",
+          "allocated": true,
+          "verified": true,
+          "value": null,
+          "source": "user confirmation 2026-10-22",
+          "note": "Added because \"Movement Speed\" did not match a catalog upgrade row. Allocation confirmed 2026-10-22. verified is the allocation fact. Numbers in the text stay unverified. value is null because no number was supplied."
+        },
+        {
+          "text": "Resolve",
+          "allocated": true,
+          "verified": true,
+          "value": null,
+          "source": "user confirmation 2026-10-22",
+          "note": "Added because \"Resolve\" did not match a catalog upgrade row. Allocation confirmed 2026-10-22. verified is the allocation fact. Numbers in the text stay unverified. value is null because no number was supplied. The 2026-10-21 transcription read \"2 Resolve\" and that line was removed in the Paladin cleanup. That count is not restored."
         }
       ],
       "transcribed": "CD 14.00s, DR +30%, Barrier 83% missing life 5s. MS +15%[+]; Weaken 5s; Max Life +15%; Juggernaut (Unstoppable, damage/knockback attackers); Endure (no barrier, can't drop below 1, heal 21.5%); Retaliation (3x duration, shrapnel).",
-      "note": "Dropped the Resolve upgrade from the 2026-10-21 transcription. Resolve is Paladin-only. The other Iron Skin upgrades stay.",
+      "note": "Resolve is a Barbarian Iron Skin upgrade. The 2026-10-21 transcription read \"2 Resolve\" and that line was removed in the Paladin cleanup. The upgrade is allocated again with no numeric value.",
       "allocated": true,
       "rankTotal": 14,
       "baseRank": null,
-      "bonusRank": null
+      "bonusRank": null,
+      "allocationVerified": true,
+      "allocationSource": "user confirmation 2026-10-22"
     },
     {
       "id": "challenging-shout",
@@ -1179,23 +1239,47 @@
       "modifiers": [
         {
           "text": "Duration +2s",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "first 5 taunted +20%[x]",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "taking dmg +5 Fury",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Bawl +20% decaying DR",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Talic 1,676,546 (523%)",
-          "allocated": null
+          "allocated": false
+        },
+        {
+          "text": "Weaken",
+          "allocated": true,
+          "verified": true,
+          "value": null,
+          "source": "user confirmation 2026-10-22",
+          "note": "Added because \"Weaken\" did not match a catalog upgrade row. Allocation confirmed 2026-10-22. verified is the allocation fact. Numbers in the text stay unverified. value is null because no number was supplied."
+        },
+        {
+          "text": "Raging",
+          "allocated": true,
+          "verified": true,
+          "value": null,
+          "source": "user confirmation 2026-10-22",
+          "note": "Added because \"Raging\" did not match a catalog upgrade row. Allocation confirmed 2026-10-22. verified is the allocation fact. Numbers in the text stay unverified. value is null because no number was supplied."
+        },
+        {
+          "text": "Damage Bonus",
+          "allocated": true,
+          "verified": true,
+          "value": null,
+          "source": "user confirmation 2026-10-22",
+          "note": "Added because \"Damage Bonus\" did not match a catalog upgrade row. Allocation confirmed 2026-10-22. verified is the allocation fact. Numbers in the text stay unverified. value is null because no number was supplied."
         }
       ],
       "transcribed": "CD 14.28s, Taunt, 20.6% DR 6.0s; burn 12,112,596 (4,030%) Fire/4s; no DR instead +20%[x] vs Burning; Weakens. Duration +2s; first 5 taunted +20%[x]; taking dmg +5 Fury; Bawl +20% decaying DR; Talic 1,676,546 (523%).",
@@ -1203,7 +1287,9 @@
       "allocated": true,
       "rankTotal": 11,
       "baseRank": null,
-      "bonusRank": null
+      "bonusRank": null,
+      "allocationVerified": true,
+      "allocationSource": "user confirmation 2026-10-22"
     },
     {
       "id": "war-cry",
@@ -1234,30 +1320,50 @@
       "modifiers": [
         {
           "text": "Slow 20%",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "2 Ferocity",
-          "allocated": null
+          "allocated": true,
+          "verified": true,
+          "note": "Allocation confirmed 2026-10-22. verified is the allocation fact. Numbers in the text stay unverified."
         },
         {
           "text": "duration 6s",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "The Scream (Fear, +3.43%[x] per feared up to 34.30%[x])",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Korlic 1,309,671 (460%)",
-          "allocated": null
+          "allocated": false
+        },
+        {
+          "text": "Vulnerable",
+          "allocated": true,
+          "verified": true,
+          "value": null,
+          "source": "user confirmation 2026-10-22",
+          "note": "Added because \"Vulnerable\" did not match a catalog upgrade row. Allocation confirmed 2026-10-22. verified is the allocation fact. Numbers in the text stay unverified. value is null because no number was supplied."
+        },
+        {
+          "text": "Mighty Roar",
+          "allocated": true,
+          "verified": true,
+          "value": null,
+          "source": "user confirmation 2026-10-22",
+          "note": "Added because \"Mighty Roar\" did not match a catalog upgrade row. Allocation confirmed 2026-10-22. verified is the allocation fact. Numbers in the text stay unverified. value is null because no number was supplied."
         }
       ],
       "transcribed": "CD 15.00s, +28.5%[x] dmg 4.0s, +15% bonus, full to allies, Berserking 4s, Vulnerable 4s. Slow 20%; 2 Ferocity; duration 6s; The Scream (Fear, +3.43%[x] per feared up to 34.30%[x]); Korlic 1,309,671 (460%).",
       "allocated": true,
       "rankTotal": 15,
       "baseRank": null,
-      "bonusRank": null
+      "bonusRank": null,
+      "allocationVerified": true,
+      "allocationSource": "user confirmation 2026-10-22"
     },
     {
       "id": "leap",
@@ -1289,36 +1395,36 @@
       "modifiers": [
         {
           "text": "Arsenal Bonus (DW 2s Berserking, Bludg 1 Overpower)",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "20 Fury",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "+20%[x] & knockdown 3s",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Pull",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Mosh 3 Ancients 430,079 (54%)",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Earthshatter 682,021 (75%), recast 5s, quake 2,411,865 (311%)/4s",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Death From Above up to 30% size & 3,014,036 (351%).",
-          "allocated": null
+          "allocated": false
         }
       ],
       "transcribed": "+15 Fury, CD 14.28s, 1,286,746 (132%), slow 70% 3s.",
       "note": "modifiers transcribed in clip 6 (Skill tree 3) Dropped 'Slash 1 Resolve' from the Arsenal Bonus upgrade. Berserking and Overpower stay.",
-      "allocated": null,
+      "allocated": false,
       "rankTotal": 11,
       "baseRank": null,
       "bonusRank": null
@@ -1353,35 +1459,35 @@
       "modifiers": [
         {
           "text": "Barrier 15% max life (737) 4s",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "radius +20%",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "2 Ferocity",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Overpower +10%[x]",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Mightiest (Ultimate, 16,592,826 (2,143%), 6s CD)",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Rapid swap pulse 1,568,539 (181%)",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Spares 2 weapons 1,353,424 (160%) + pulse 2,656,867 (312%)",
-          "allocated": null
+          "allocated": false
         }
       ],
       "transcribed": "CD 12.24s, impact 10%[x], pulse 3,222,034 (154%)/s 4s. Barrier 15% max life (737) 4s; radius +20%; 2 Ferocity; Overpower +10%[x]; Mightiest (Ultimate, 16,592,826 (2,143%), 6s CD); Rapid swap pulse 1,568,539 (181%); Spares 2 weapons 1,353,424 (160%) + pulse 2,656,867 (312%).",
-      "allocated": null,
+      "allocated": false,
       "rankTotal": 11,
       "baseRank": null,
       "bonusRank": null
@@ -1416,35 +1522,35 @@
       "modifiers": [
         {
           "text": "Size +25%",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "+20%[x] -5%/extra enemy",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "CD -1s",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "heal 22% on hit",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "All For One 2 Ancients 426,065 (55%) + rip 4,385,244 (519%)",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Blood Pool 5,164,191 (583%) bleed, +15% AS allies",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Gore 1,386,119 (181%) bleed",
-          "allocated": null
+          "allocated": false
         }
       ],
       "transcribed": "CD 8.64s, 663,015 (86%) + 3,564,785 (184%) bleed. Size +25%; +20%[x] -5%/extra enemy; CD -1s; heal 22% on hit; All For One 2 Ancients 426,065 (55%) + rip 4,385,244 (519%); Blood Pool 5,164,191 (583%) bleed, +15% AS allies; Gore 1,386,119 (181%) bleed.",
-      "allocated": null,
+      "allocated": false,
       "rankTotal": 11,
       "baseRank": null,
       "bonusRank": null
@@ -1479,35 +1585,35 @@
       "modifiers": [
         {
           "text": "+1 charge",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Berserking 2s",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Vulnerable 4s",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Weaken 4s",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Solo Chain (Basic, 15 Fury, no CD)",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Devil's Chain 2 charges, 3 Dust Devils 783,959 (101%)",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Chain Whip (Brawling, 2 extra chains 2,056,007 (251%))",
-          "allocated": null
+          "allocated": false
         }
       ],
       "transcribed": "2 charges, CD 8.64s, 3 chains 1,063,348 (139%), pull. +1 charge; Berserking 2s; Vulnerable 4s; Weaken 4s; Solo Chain (Basic, 15 Fury, no CD); Devil's Chain 2 charges, 3 Dust Devils 783,959 (101%); Chain Whip (Brawling, 2 extra chains 2,056,007 (251%)).",
-      "allocated": null,
+      "allocated": false,
       "rankTotal": 11,
       "baseRank": null,
       "bonusRank": null
@@ -1542,35 +1648,35 @@
       "modifiers": [
         {
           "text": "Overpower on kill",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Execute 2s",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "2 charges",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "kill restores 100% Fury",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Blast Fire + 4,473,322 (47%) burn, explode 895,055 (117%)",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Sonic Boom 11,464,073 (221%)",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Consecutive (CD 5s, +25%[x] up to 75%[x])",
-          "allocated": null
+          "allocated": false
         }
       ],
       "transcribed": "CD 9.05s, 5,640,785 (737%), kill resets. Overpower on kill; Execute 2s; 2 charges; kill restores 100% Fury; Blast Fire + 4,473,322 (47%) burn, explode 895,055 (117%); Sonic Boom 11,464,073 (221%); Consecutive (CD 5s, +25%[x] up to 75%[x]).",
-      "allocated": null,
+      "allocated": false,
       "rankTotal": 11,
       "baseRank": null,
       "bonusRank": null
@@ -1604,23 +1710,41 @@
       "modifiers": [
         {
           "text": "+20%[+] AS & +30%[+] Fury gen",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "duration 18.0s",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Full Throttle aura 2,750,484 (360%) + burn 279,568 (32%), +10% All Res",
-          "allocated": null
+          "allocated": true,
+          "verified": true,
+          "note": "Allocation confirmed 2026-10-22. verified is the allocation fact. Numbers in the text stay unverified."
         },
         {
           "text": "Deep Impact 2,095,283 (256%) Fire",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Maximum Carnage +1s per 25 Fury up to 5",
-          "allocated": null
+          "allocated": false
+        },
+        {
+          "text": "Berserking",
+          "allocated": true,
+          "verified": true,
+          "value": null,
+          "source": "user confirmation 2026-10-22",
+          "note": "Added because \"Berserking\" did not match a catalog upgrade row. Allocation confirmed 2026-10-22. verified is the allocation fact. Numbers in the text stay unverified. value is null because no number was supplied."
+        },
+        {
+          "text": "Overpower",
+          "allocated": true,
+          "verified": true,
+          "value": null,
+          "source": "user confirmation 2026-10-22",
+          "note": "Added because \"Overpower\" did not match a catalog upgrade row. Allocation confirmed 2026-10-22. verified is the allocation fact. Numbers in the text stay unverified. value is null because no number was supplied."
         }
       ],
       "transcribed": "CD 34.32s, +50%[+] dmg, Unstoppable 15.0s, Basic +560%[+], burn 279,568 (32%), +10% All Res, Berserking base doubled, 1 Overpower/s. +20%[+] AS & +30%[+] Fury gen; duration 18.0s; Full Throttle aura 2,750,484 (360%) + burn 279,568 (32%), +10% All Res; Deep Impact 2,095,283 (256%) Fire; Maximum Carnage +1s per 25 Fury up to 5.",
@@ -1628,7 +1752,9 @@
       "allocated": true,
       "rankTotal": 11,
       "baseRank": null,
-      "bonusRank": null
+      "bonusRank": null,
+      "allocationVerified": true,
+      "allocationSource": "user confirmation 2026-10-22"
     },
     {
       "id": "iron-maelstrom",
@@ -1660,35 +1786,35 @@
       "modifiers": [
         {
           "text": "Swap CD -1s",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "activation -2s all CDs",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Weaken 4s",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Additional (Bludg +10%[+] CD, Slash +10%[+] Vuln, DW +20%[+] cast speed)",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Armageddon (quake 1,324,809 (171%); shrapnel 72,796 (10%) + 1,387,080 (193%); Dust Devils 206,170 (26%))",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Hidden Technique 3 charges +75%[x]",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Mastered Weapon (single Weapon Mastery skill, CD 15s)",
-          "allocated": null
+          "allocated": false
         }
       ],
       "transcribed": "CD 18.11s, Bludg 3,439,353 (173%) stun 2.0s; Slash 770,621 (112%) + 5,825,731 (745%) bleed; DW 1,368,074 (175%). Swap CD -1s; activation -2s all CDs; Weaken 4s; Additional (Bludg +10%[+] CD, Slash +10%[+] Vuln, DW +20%[+] cast speed); Armageddon (quake 1,324,809 (171%); shrapnel 72,796 (10%) + 1,387,080 (193%); Dust Devils 206,170 (26%)); Hidden Technique 3 charges +75%[x]; Mastered Weapon (single Weapon Mastery skill, CD 15s).",
-      "allocated": null,
+      "allocated": false,
       "rankTotal": 11,
       "baseRank": null,
       "bonusRank": null
@@ -1722,43 +1848,43 @@
       "modifiers": [
         {
           "text": "Korlic 2,669,215 (136%) & 879,422 (123%)",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Talic 1,732,464 (243%)",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Madawc 3,923,431 (176%). +5%[+] AS & +5%[x] per Ancient",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Ancients +15%[+] AS",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "5% DR per Ancient",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "+3%[x] mutual",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Highlander (1 permanent)",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "The Chosen (1 strong, 2x duration; Korlic 10 Fury, Talic slow 25%, Madawc 30% stun)",
-          "allocated": null
+          "allocated": false
         },
         {
           "text": "Empowered (Korlic quake 2,055,906 (122%), Talic DD 1,455,353 (188%), Madawc burn 2,223,553 (27%))",
-          "allocated": null
+          "allocated": false
         }
       ],
       "transcribed": "CD 34.28s, 3 Ancients 10s. Korlic 2,669,215 (136%) & 879,422 (123%); Talic 1,732,464 (243%); Madawc 3,923,431 (176%). +5%[+] AS & +5%[x] per Ancient; Ancients +15%[+] AS; 5% DR per Ancient; +3%[x] mutual; Highlander (1 permanent); The Chosen (1 strong, 2x duration; Korlic 10 Fury, Talic slow 25%, Madawc 30% stun); Empowered (Korlic quake 2,055,906 (122%), Talic DD 1,455,353 (188%), Madawc burn 2,223,553 (27%)).",
-      "allocated": null,
+      "allocated": false,
       "rankTotal": 11,
       "baseRank": null,
       "bonusRank": null
