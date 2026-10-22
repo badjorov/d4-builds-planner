@@ -133,34 +133,58 @@ function skillById(catalog, id) {
   return catalog.skills.find(skill => skill.id === id) || null;
 }
 
+const BLENDED_UPTIMES = new Set(['channeling', 'fortified', 'unstoppable', 'furyAbove50']);
+
+function singleSkill(build, catalog) {
+  const skills = (build.skills || []).map(id => skillById(catalog, id)).filter(Boolean);
+  return skills.length === 1 ? skills[0] : null;
+}
+
+function isChanneledSkill(skill) {
+  return (skill?.tags || []).some(tag => String(tag).toLowerCase().includes('channel'));
+}
+
+function conditionUptimeKey(text) {
+  if (text.includes('berserk')) return 'berserk';
+  if (text.includes('vulnerable')) return 'vulnerable';
+  if (text.includes('overpower')) return 'overpower';
+  if (text.includes('channel')) return 'channeling';
+  if (text.includes('fortif')) return 'fortified';
+  if (text.includes('unstoppable')) return 'unstoppable';
+  if (/\babove\b/.test(text) && text.includes('50')) return 'furyAbove50';
+  return null;
+}
+
 function conditionState(effect, build, catalog) {
-  if (effect.conditions == null) return 'unknown';
-  if (effect.conditions.length === 0) return 'active';
+  if (effect.conditions == null) return { state: 'unknown' };
+  if (effect.conditions.length === 0) return { state: 'active' };
   const tags = new Set();
   for (const id of build.skills || []) {
     for (const tag of skillById(catalog, id)?.tags || []) tags.add(String(tag).toLowerCase().replace(/\?$/, ''));
   }
+  let partial = null;
   for (const raw of effect.conditions) {
     const text = String(raw).toLowerCase();
-    if (text.includes('?')) return 'unknown';
-    if (text.includes('berserk')) {
-      if (typeof build.uptime?.berserk !== 'number') return 'unknown';
-      if (build.uptime.berserk <= 0) return 'inactive';
-    } else if (text.includes('vulnerable')) {
-      if (typeof build.uptime?.vulnerable !== 'number') return 'unknown';
-      if (build.uptime.vulnerable <= 0) return 'inactive';
-    } else if (text.includes('overpower')) {
-      if (typeof build.uptime?.overpower !== 'number') return 'unknown';
-      if (build.uptime.overpower <= 0) return 'inactive';
-    } else if (text.includes('channel') || text.includes('fortif')) {
-      return 'unknown';
-    } else if (/\b(while|above|below)\b/.test(text)) {
-      return 'unknown';
-    } else if (!tags.has(text.replace(/\?$/, ''))) {
-      return 'inactive';
+    if (text.includes('?')) return { state: 'unknown' };
+    const key = conditionUptimeKey(text);
+    if (key === 'berserk' || key === 'vulnerable' || key === 'overpower') {
+      if (typeof build.uptime?.[key] !== 'number') return { state: 'unknown' };
+      if (build.uptime[key] <= 0) return { state: 'inactive' };
+      continue;
     }
+    if (BLENDED_UPTIMES.has(key)) {
+      const value = build.uptime?.[key];
+      if (typeof value !== 'number') return { state: 'unknown' };
+      if (key === 'channeling' && !isChanneledSkill(singleSkill(build, catalog))) return { state: 'inactive' };
+      if (value <= 0) return { state: 'inactive' };
+      if (value < 1) partial = key;
+      continue;
+    }
+    if (/\b(while|above|below)\b/.test(text)) return { state: 'unknown' };
+    if (!tags.has(text.replace(/\?$/, ''))) return { state: 'inactive' };
   }
-  return 'active';
+  if (partial) return { state: 'partial', when: partial };
+  return { state: 'active' };
 }
 
 const NON_DAMAGE_KINDS = new Set(['defense', 'resource', 'mobility', 'utility', 'base-weapon']);
@@ -168,13 +192,14 @@ const NON_DAMAGE_KINDS = new Set(['defense', 'resource', 'mobility', 'utility', 
 export function damageEffects(entity, build, catalog) {
   const active = [];
   for (const effect of entity.effects || []) {
+    if (effect.scored === false) continue;
     if (NON_DAMAGE_KINDS.has(effect.kind)) continue;
     const value = pointValue(effect.value);
     const bucket = knownBucket(effect.bucket);
     if (value == null || !bucket) continue;
-    const state = build ? conditionState(effect, build, catalog) : (effect.conditions && effect.conditions.length === 0 ? 'active' : 'unknown');
-    if (state === 'inactive') continue;
-    active.push({ effect, value, bucket, state });
+    const judged = build ? conditionState(effect, build, catalog) : { state: effect.conditions && effect.conditions.length === 0 ? 'active' : 'unknown' };
+    if (judged.state === 'inactive') continue;
+    active.push({ effect, value, bucket, state: judged.state, when: judged.when || null });
   }
   return active;
 }
@@ -206,7 +231,13 @@ export function engineInputFromBuild(catalog, build, opts = {}) {
           notes.push(`${entity.name}: Overpower per-stack line is included in overpowerPct and is not added again.`);
           continue;
         }
-        modifiers.push({ name: `${entity.name} (${slot.slotId})`, bucket: piece.bucket, value: piece.value, active: true, kind, id: entity.id });
+        if (piece.bucket === 'crit' && typeof build.critDmg === 'number') {
+          notes.push(`${entity.name}: Critical Strike Damage ${piece.value} stays out of the crit term. The sheet total ${build.critDmg}% is the crit input.`);
+          continue;
+        }
+        const modifier = { name: `${entity.name} (${slot.slotId})`, bucket: piece.bucket, value: piece.value, active: true, kind, id: entity.id };
+        if (piece.state === 'partial' && piece.when) modifier.when = piece.when;
+        modifiers.push(modifier);
       }
     }
   }
@@ -228,6 +259,17 @@ export function engineInputFromBuild(catalog, build, opts = {}) {
     const stacks = build.overpowerStacks;
     notes.push(`Overpower is ${stacks.activeStacks} stacks × ${stacks.perStack}% = ${build.overpowerPct}%, including a ${stacks.lingerSeconds}s linger. The uptime is an estimate.`);
   }
+  const estimate = uptime.estimate || {};
+  for (const [key, label] of [['channeling', 'Channeling'], ['furyAbove50', 'Fury above 50'], ['unstoppable', 'Unstoppable'], ['fortified', 'Fortified']]) {
+    if (estimate[key] === true && typeof uptime[key] === 'number') {
+      notes.push(`${label} uptime ${uptime[key]} is an estimate.`);
+    }
+  }
+  if (typeof build.critChance === 'number' && typeof build.critDmg === 'number' && build.critDmg > 0) {
+    const bonusFactor = 1 + (build.critChance / 100) * (build.critDmg / 100);
+    const fullFactor = (build.critChance / 100) * (build.critDmg / 100);
+    notes.push(`Crit audit: sheet Critical Strike Chance ${build.critChance}% and Critical Strike Damage ${build.critDmg}% are the only crit inputs. Working factor ${bonusFactor.toFixed(4)} = 1 + chance × sheet. Alternate factor ${fullFactor.toFixed(4)} treats the sheet percent as the full multiplier. Gear crit lines are not added again. The reading is unverified.`);
+  }
   const mainStatPer10 = catalog.mainstat?.verified === true ? catalog.mainstat.percentPer10 : null;
   return {
     weaponDmg: build.weaponDmg,
@@ -247,12 +289,17 @@ export function engineInputFromBuild(catalog, build, opts = {}) {
   };
 }
 
+function modifiersFor(input, patch) {
+  return (input.modifiers || []).filter(mod => !mod.when || patch[mod.when] !== false);
+}
+
 function scoreWithAuras(input, patch) {
-  const direct = compute({ ...input, ...patch });
+  const modifiers = modifiersFor(input, patch);
+  const direct = compute({ ...input, ...patch, modifiers });
   let total = direct.total;
   const extra = [];
   for (const aura of input.auras || []) {
-    const part = compute({ ...input, ...patch, coeffPct: aura.coeffPct, isDot: aura.isDot });
+    const part = compute({ ...input, ...patch, modifiers, coeffPct: aura.coeffPct, isDot: aura.isDot });
     const scaled = part.total * aura.uptime;
     total += scaled;
     extra.push({ label: aura.name, value: scaled, expr: `${part.total} × ${aura.uptime}` });
@@ -264,13 +311,22 @@ function scoreWithAuras(input, patch) {
   };
 }
 
-export function evaluateBuild(catalog, build, opts = {}) {
-  const input = engineInputFromBuild(catalog, build, opts);
-  const uptime = build.uptime || blankUptime();
+function blendFlags(input, uptime) {
   const flags = [];
   if (typeof uptime.vulnerable === 'number') flags.push(['vulnerable', uptime.vulnerable]);
   if (typeof uptime.overpower === 'number') flags.push(['overpower', uptime.overpower]);
-  if (!flags.length) return { input, result: scoreWithAuras(input, {}), marginal: marginal(input) };
+  for (const key of BLENDED_UPTIMES) {
+    const raw = uptime[key];
+    if (typeof raw === 'number' && raw > 0 && raw < 1 && (input.modifiers || []).some(mod => mod.when === key)) {
+      flags.push([key, raw]);
+    }
+  }
+  return flags;
+}
+
+function blendScore(input, uptime) {
+  const flags = blendFlags(input, uptime);
+  if (!flags.length) return scoreWithAuras(input, {});
   let states = [{ patch: {}, weight: 1 }];
   for (const [key, raw] of flags) {
     const on = Math.min(1, Math.max(0, raw));
@@ -288,12 +344,28 @@ export function evaluateBuild(catalog, build, opts = {}) {
     total += result.total * state.weight;
     if (!shown || state.weight >= shown.weight) shown = { result, weight: state.weight };
   }
-  const result = {
+  return {
     ...shown.result,
     total,
-    terms: [...shown.result.terms, { label: 'Uptime blend', value: total, expr: 'expected value across Vulnerable and Overpower uptime' }]
+    terms: [...shown.result.terms, { label: 'Uptime blend', value: total, expr: `expected value across ${flags.map(([key]) => key).join(', ')} uptime` }]
   };
-  return { input, result, marginal: marginal(input) };
+}
+
+export function evaluateBuild(catalog, build, opts = {}) {
+  const input = engineInputFromBuild(catalog, build, opts);
+  const uptime = build.uptime || blankUptime();
+  const result = blendScore(input, uptime);
+  let critAlternate = null;
+  if (typeof build.critChance === 'number' && build.critChance > 0 && typeof build.critDmg === 'number' && build.critDmg > 0) {
+    const alt = blendScore({ ...input, critMode: 'full' }, uptime);
+    critAlternate = {
+      total: alt.total,
+      factor: (build.critChance / 100) * (build.critDmg / 100),
+      bonusFactor: 1 + (build.critChance / 100) * (build.critDmg / 100),
+      verified: false
+    };
+  }
+  return { input, result, marginal: marginal(input), critAlternate };
 }
 
 export function verificationFields(catalog, build, opts = {}) {

@@ -58,6 +58,7 @@
     "mainStat": { "type": ["number", "null"] },
     "critChance": { "type": ["number", "null"] },
     "critDmg": { "type": ["number", "null"] },
+    "critAudit": { "$ref": "#/$defs/critAudit" },
     "vulnPct": { "type": ["number", "null"] },
     "overpowerPct": { "type": ["number", "null"] },
     "overpowerStacks": { "$ref": "#/$defs/overpowerStacks" },
@@ -180,6 +181,21 @@
         "castsPerSecond": { "type": ["number", "null"] }
       }
     },
+    "critAudit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["verified", "reading", "sheetCritChance", "sheetCritDmg", "note"],
+      "properties": {
+        "verified": { "type": "boolean" },
+        "reading": { "enum": ["bonus", "full"] },
+        "sheetCritChance": { "type": "number" },
+        "sheetCritDmg": { "type": "number" },
+        "bonusFactor": { "type": "number" },
+        "fullFactor": { "type": "number" },
+        "source": { "type": "string" },
+        "note": { "type": "string" }
+      }
+    },
     "overpowerStacks": {
       "type": "object",
       "additionalProperties": false,
@@ -204,6 +220,10 @@
         "berserk": { "type": ["number", "null"] },
         "vulnerable": { "type": ["number", "null"] },
         "overpower": { "type": ["number", "null"] },
+        "channeling": { "type": ["number", "null"] },
+        "furyAbove50": { "type": ["number", "null"] },
+        "unstoppable": { "type": ["number", "null"] },
+        "fortified": { "type": ["number", "null"] },
         "estimate": {
           "type": "object",
           "additionalProperties": false,
@@ -211,6 +231,10 @@
             "berserk": { "type": "boolean" },
             "vulnerable": { "type": "boolean" },
             "overpower": { "type": "boolean" },
+            "channeling": { "type": "boolean" },
+            "furyAbove50": { "type": "boolean" },
+            "unstoppable": { "type": "boolean" },
+            "fortified": { "type": "boolean" },
             "note": { "type": "string" }
           }
         }

@@ -50,7 +50,7 @@ export function collectGearCandidates(catalog, build, opts = {}) {
     for (const entity of list) {
       if (kind === 'unique' && !Array.isArray(entity.slots)) continue;
       if (opts.includeUnverified !== true && !gearItemVerified(entity)) continue;
-      const pieces = damageEffects(entity, build, catalog).filter(piece => piece.state === 'active');
+      const pieces = damageEffects(entity, build, catalog).filter(piece => piece.state === 'active' || piece.state === 'partial');
       if (!pieces.length) continue;
       candidates.push({
         key: `${kind}:${entity.id}`,
@@ -228,6 +228,9 @@ export function explain(result) {
   lines.push(`Novelty nearest ${detail.nearestId || 'none'} — Jaccard ${fmt(detail.jaccard)}, bucket distance ${fmt(detail.bucket)}`);
   lines.push(`Unverified share ${(result.unverifiedShare * 100).toFixed(1)}%`);
   if (result.unverifiedFields?.length) lines.push(`Unverified fields: ${result.unverifiedFields.map(field => field.path).join(', ')}`);
+  if (result.critAlternate) {
+    lines.push(`Crit alternate (sheet % as the full multiplier) = ${result.critAlternate.factor.toFixed(4)}, power ${result.critAlternate.total.toFixed(4)}. Working factor ${result.critAlternate.bonusFactor.toFixed(4)}. Unverified.`);
+  }
   return lines.join('\n');
 }
 
@@ -272,7 +275,8 @@ export function optimize(catalog, opts = {}) {
       unverifiedShare: share,
       unverifiedFields: fields.filter(field => !field.ok),
       novelty: novelty.novelty,
-      noveltyDetail: novelty
+      noveltyDetail: novelty,
+      critAlternate: evaluation.critAlternate
     });
   }
   const ranked = rankByPowerNovelty(considered, opts).map(result => ({ ...result, why: explain({ ...result, score: result.power * result.novelty }) }));

@@ -104,7 +104,8 @@
         },
         "unit": { "type": ["string", "null"] },
         "count": { "type": ["number", "null"] },
-        "slotType": { "type": ["string", "null"] }
+        "slotType": { "type": ["string", "null"] },
+        "scored": { "type": "boolean" }
       }
     },
     "meta": {

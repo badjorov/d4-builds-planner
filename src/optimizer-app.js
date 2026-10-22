@@ -71,7 +71,11 @@ function run() {
     uptime: {
       berserk: num($('upBerserk').value),
       vulnerable: num($('upVulnerable').value),
-      overpower: num($('upOverpower').value)
+      overpower: num($('upOverpower').value),
+      channeling: num($('upChanneling').value),
+      furyAbove50: num($('upFury').value),
+      unstoppable: num($('upUnstoppable').value),
+      fortified: num($('upFortified').value)
     },
     defense,
     minimums: {

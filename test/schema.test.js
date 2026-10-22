@@ -316,4 +316,14 @@ test('video 1 keeps confirmed values and flags the conflicting readings', () => 
   assert.equal(Object.hasOwn(without.resistances, 'physicalMitigationPct'), false);
   assert.equal(saved.defense.armor, 33715);
   assert.equal(saved.defense.resists, 21218);
+  assert.equal(saved.critAudit.verified, false);
+  assert.equal(saved.critAudit.reading, 'bonus');
+  assert.equal(saved.critAudit.sheetCritDmg, 7424.8);
+  assert.equal(saved.uptime.channeling, 1);
+  assert.equal(saved.uptime.furyAbove50, 0.9);
+  assert.equal(saved.uptime.fortified, 1);
+  assert.equal(saved.uptime.estimate.channeling, true);
+  assert.equal(saved.uptime.estimate.unstoppable, true);
+  assert.equal(channeling.effects[0].scored, false);
+  assert.equal(channeling.effects[1].value, 138);
 });

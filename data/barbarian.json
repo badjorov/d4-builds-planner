@@ -3392,6 +3392,7 @@
             "while channeling a Skill"
           ],
           "stacking": null,
+          "scored": false,
           "source": "video-frames",
           "verified": false,
           "upgrade": {
@@ -3421,7 +3422,7 @@
           "source": "user screenshot 2026-10-22",
           "verified": true,
           "unit": "%",
-          "note": "Screenshot imprint: While channeling a Skill, all damage is increased by 138%[x] [100-140]%. Video item power read 150. Codex frames read 69%[x] [50-70].",
+          "note": "Screenshot imprint: While channeling a Skill, all damage is increased by 138%[x] [100-140]%. Video item power read 150. Codex frames read 69%[x] [50-70]. The scorer uses this 138%[x] line. The codex 69%[x] effect is kept and is not applied with it.",
           "range": [
             100,
             140
@@ -3433,7 +3434,7 @@
       "verified": false,
       "available": true,
       "userConfirmed": true,
-      "note": "Equipped imprint from the screenshot is 138%[x] [100-140] while channeling. Codex frames read 69%[x] [50-70] at rank 20/21 and that effect is kept. Video item power read +150% with a single bracket endpoint."
+      "note": "Equipped imprint from the screenshot is 138%[x] [100-140] while channeling. Codex frames read 69%[x] [50-70] at rank 20/21 and that effect is kept with scored false, so the two are not applied together. Video item power read +150% with a single bracket endpoint."
     },
     {
       "id": "aspect-of-elemental-fate",

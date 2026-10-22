@@ -13,8 +13,11 @@ export function compute(inp){
   const ms=1+((inp.mainStat??0)/10)*((inp.mainStatPer10??0)/100);
   terms.push({label:'Main stat',value:ms,expr:`1 + ${inp.mainStat}/10 × ${(inp.mainStatPer10??0)/100}`});
   const cd=(inp.critDmg??0)+mods.filter(m=>m.bucket==='crit').reduce((s,m)=>s+m.value,0);
-  const crit=inp.isDot?1:1+(inp.critChance??0)/100*cd/100;
-  terms.push({label:'Crit (expected)',value:crit,expr:inp.isDot?'DoT: no crit [VERIFY]':`1 + ${(inp.critChance??0)/100} × ${cd/100}`});
+  const chance=(inp.critChance??0)/100;
+  const bonus=chance*cd/100;
+  const crit=inp.isDot?1:(inp.critMode==='full'?bonus:1+bonus);
+  const critExpr=inp.isDot?'DoT: no crit [VERIFY]':inp.critMode==='full'?`${chance} × ${cd/100}`:`1 + ${chance} × ${cd/100}`;
+  terms.push({label:'Crit (expected)',value:crit,expr:critExpr});
   const vp=(inp.vulnPct??0)+mods.filter(m=>m.bucket==='vuln').reduce((s,m)=>s+m.value,0);
   const vuln=inp.vulnerable?1+vp/100:1;
   terms.push({label:'Vulnerable',value:vuln,expr:inp.vulnerable?`1 + ${vp/100}`:'inactive'});
