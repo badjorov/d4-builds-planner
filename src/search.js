@@ -24,7 +24,7 @@ export function enumerateSkillCores(catalog, opts = {}) {
   const tags = opts.tags || [];
   const cap = opts.maxSkills ?? catalog.constraints?.skillBarSize ?? 1;
   const limit = opts.coreLimit ?? 100;
-  const pool = (catalog.skills || []).filter(skill => tags.every(tag => (skill.tags || []).includes(tag)));
+  const pool = (catalog.skills || []).filter(skill => skill.allocated !== false && tags.every(tag => (skill.tags || []).includes(tag)));
   const cores = [];
   const max = Math.max(0, Math.min(cap, pool.length));
   for (let size = 1; size <= max; size += 1) {

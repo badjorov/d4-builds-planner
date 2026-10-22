@@ -1,6 +1,6 @@
 import { ENTITY_KEYS, entityTemplate, upsertEntity } from './catalog.js';
 import { validate } from './schema.js';
-import { formatNeedsInput, needsInput } from './needs-input.js';
+import { formatNeedsInput, needsInput, openNeeds, pendingAllocation } from './needs-input.js';
 import { esc } from './html.js';
 
 const $ = (id) => document.getElementById(id);
@@ -10,6 +10,7 @@ const TYPES = Object.keys(ENTITY_KEYS);
 let catalog = null;
 let bundled = null;
 let schema = null;
+let extraNeeds = [];
 let type = 'skill';
 let draft = null;
 
@@ -24,8 +25,8 @@ function list() {
 }
 
 function renderChecklist() {
-  const items = needsInput(catalog);
-  $('checklistCount').textContent = `(${items.length})`;
+  const items = [...needsInput(catalog), ...extraNeeds].sort((a, b) => a.path.localeCompare(b.path) || a.reason.localeCompare(b.reason));
+  $('checklistCount').textContent = `(${openNeeds(items).length} open, ${pendingAllocation(items).length} pending allocation)`;
   $('checklist').textContent = formatNeedsInput(items);
 }
 
@@ -268,6 +269,11 @@ $('resetCatalog').addEventListener('click', () => {
 
 bundled = await (await fetch('data/barbarian.json')).json();
 schema = await (await fetch('data/schema/catalog.schema.json')).json();
+const [savedBuilds, metaBuilds] = await Promise.all([
+  fetch('data/builds.json').then(response => response.json()),
+  fetch('data/meta-builds.json').then(response => response.json())
+]);
+extraNeeds = [...needsInput(savedBuilds, '/builds.json'), ...needsInput(metaBuilds, '/meta-builds.json')];
 catalog = structuredClone(bundled);
 if (localStorage[STORAGE]) $('status').textContent = 'Bundled catalog loaded. This browser also has a local edit; Reset clears it, or import a file. Showing the bundled file.';
 else $('status').textContent = 'Bundled catalog loaded.';

@@ -34,7 +34,8 @@
     "paragonNodes": { "type": "array", "items": { "$ref": "#/$defs/paragonNode" } },
     "glyphs": { "type": "array", "items": { "$ref": "#/$defs/glyph" } },
     "talismans": { "type": "array", "items": { "$ref": "#/$defs/namedEffects" } },
-    "seasonalMechanics": { "type": "array", "items": { "$ref": "#/$defs/namedEffects" } }
+    "seasonalMechanics": { "type": "array", "items": { "$ref": "#/$defs/namedEffects" } },
+    "codexCurve": { "$ref": "#/$defs/codexCurve" }
   },
   "$defs": {
     "source": { "type": "string", "minLength": 1 },
@@ -83,6 +84,7 @@
         "source": { "$ref": "#/$defs/source" },
         "verified": { "type": "boolean" },
         "note": { "type": ["string", "null"] },
+        "upgrade": { "$ref": "#/$defs/codexUpgrade" },
         "range": {
           "oneOf": [
             { "type": "null" },
@@ -167,7 +169,10 @@
             "minEhp": { "type": ["number", "null"] },
             "note": { "type": "string" }
           }
-        }
+        },
+        "skillPoints": { "$ref": "#/$defs/skillPoints" },
+        "tooltipLifeNote": { "type": "string" },
+        "rankNote": { "type": "string" }
       }
     },
     "mainstat": {
@@ -200,9 +205,13 @@
         },
         "coeffPct": { "type": ["number", "null"] },
         "rank": { "type": ["number", "null"] },
+        "rankTotal": { "type": ["number", "null"] },
+        "baseRank": { "type": ["number", "null"] },
+        "bonusRank": { "type": ["number", "null"] },
         "maxRank": { "type": ["number", "null"] },
+        "allocated": { "type": ["boolean", "null"] },
         "tooltip": { "type": ["string", "null"] },
-        "modifiers": { "type": "array", "items": { "type": "string" } },
+        "modifiers": { "type": "array", "items": { "$ref": "#/$defs/upgradeNode" } },
         "transcribed": { "type": ["string", "null"] },
         "suspect": { "type": "boolean" },
         "recordedSource": { "type": "string", "minLength": 1 },
@@ -367,6 +376,52 @@
         "source": { "$ref": "#/$defs/source" },
         "verified": { "type": "boolean" },
         "note": { "type": "string" }
+      }
+    },
+    "upgradeNode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text", "allocated"],
+      "properties": {
+        "text": { "type": "string" },
+        "allocated": { "type": ["boolean", "null"] }
+      }
+    },
+    "skillPoints": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["spent", "total", "source", "verified"],
+      "properties": {
+        "spent": { "type": "integer" },
+        "total": { "type": "integer" },
+        "source": { "$ref": "#/$defs/source" },
+        "verified": { "type": "boolean" },
+        "note": { "type": "string" }
+      }
+    },
+    "codexCurve": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["formula", "source", "verified"],
+      "properties": {
+        "formula": { "type": "string", "minLength": 1 },
+        "source": { "$ref": "#/$defs/source" },
+        "verified": { "type": "boolean" },
+        "note": { "type": "string" }
+      }
+    },
+    "codexUpgrade": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["level", "maxLevel", "formula", "interpolated", "observed", "matches", "verified"],
+      "properties": {
+        "level": { "type": "integer" },
+        "maxLevel": { "type": "integer" },
+        "formula": { "type": "string" },
+        "interpolated": { "type": ["number", "null"] },
+        "observed": { "type": ["number", "null"] },
+        "matches": { "type": "boolean" },
+        "verified": { "type": "boolean" }
       }
     }
   }

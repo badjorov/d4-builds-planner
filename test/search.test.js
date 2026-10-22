@@ -27,6 +27,10 @@ test('skill cores are pruned by tags and capped by the skill bar', () => {
   assert.ok(ids.includes('alpha+beta'));
   assert.equal(ids.some(id => id.includes('gamma')), false);
   assert.equal(cores.some(core => core.length > 2), false);
+  const copy = structuredClone(catalog);
+  copy.skills.find(skill => skill.id === 'alpha').allocated = false;
+  const withoutAlpha = enumerateSkillCores(copy, { tags: ['Core'] });
+  assert.equal(withoutAlpha.some(core => core.some(skill => skill.id === 'alpha')), false);
 });
 
 test('greedy ranks by marginal bucket value and will not place null, slotless, or paragon items', () => {

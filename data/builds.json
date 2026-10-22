@@ -1,5 +1,5 @@
 {
-  "note": "Saved builds are not meta baselines. The row below is the user's current build. Video sheet numbers stay unverified. Names the user confirmed are still unverified game data: verified is false on the build.",
+  "note": "Saved builds are not meta baselines. The row below is the user's current build. The character sheet block is verified from the user's screenshot. The rest of the build stays unverified.",
   "builds": [
     {
       "id": "users-current-build",
@@ -238,14 +238,14 @@
         "overpower": null
       },
       "defense": {
-        "life": null,
-        "armor": 52185,
+        "life": 473,
+        "armor": 32183,
         "resists": null,
         "armorMitigationPct": null,
         "resistMitigationPct": null,
         "dr": null
       },
-      "weaponDmg": null,
+      "weaponDmg": 4566,
       "mainStat": 4101,
       "critChance": 100,
       "critDmg": 7414.8,
@@ -263,7 +263,22 @@
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
       "manualInputsVerified": false,
-      "note": "Based on the Whirlwind Barb (S15) Immortal Speed 130 name list. User-confirmed differences: Leoric's Crown is the helm and Tuskhelm of Joritz the Mighty is a charm; Stone of Jordan replaces Ring of Starless Skies; the bludgeoning slot is a runeword polearm; Endurant Faith and Seal of the Epiphany replace Blood-Mad Idol and The Furnace; the arsenal is 2 two-handed weapons and 2 one-handed weapons. Sheet numbers transcribed from video and left unverified: Strength 4101, crit chance 100%, crit damage 7414.8%, Vulnerable damage 206.8%, max Fury 826, armor 52185, resistances capped at 80%. The 80% figure is the cap that was read, not an EHP resist mitigation percent. Life, weapon damage, and armor mitigation were not shown."
+      "note": "Based on the Whirlwind Barb (S15) Immortal Speed 130 name list. User-confirmed differences: Leoric's Crown is the helm and Tuskhelm of Joritz the Mighty is a charm; Stone of Jordan replaces Ring of Starless Skies; the bludgeoning slot is a runeword polearm; Endurant Faith and Seal of the Epiphany replace Blood-Mad Idol and The Furnace; the arsenal is 2 two-handed weapons and 2 one-handed weapons. The character sheet was confirmed from the user's screenshot: level 70, Strength 4101, Intelligence 981, Willpower 1333, Dexterity 1320, Armor 32183, Toughness 29309 for all damage types, Weapon Damage 4566, Max Life 473. Video readings that the screenshot did not confirm stay unverified: crit chance 100%, crit damage 7414.8%, Vulnerable damage 206.8%, max Fury 826, resistances capped at 80%. The 80% figure is the cap that was read, not an EHP resist mitigation percent. Armor mitigation was not shown. Life numbers implied by skill tooltips are ignored.",
+      "sheet": {
+        "level": 70,
+        "strength": 4101,
+        "intelligence": 981,
+        "willpower": 1333,
+        "dexterity": 1320,
+        "armor": 32183,
+        "toughness": 29309,
+        "toughnessScope": "all damage types",
+        "weaponDamage": 4566,
+        "maxLife": 473,
+        "source": "user screenshot, confirmed by Nikolay 2026-10-22",
+        "verified": true,
+        "note": "Max Life 473 is intentional: a minimum-life setup with Melted Heart of Selig and Endurant Faith. Life numbers implied by skill tooltips are ignored. Armor 32183 replaces the earlier video reading of 52185. Toughness 29309 was read for all damage types and is not an armor or resist mitigation percent."
+      }
     }
   ]
 }

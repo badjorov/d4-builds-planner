@@ -105,6 +105,7 @@ export function entityTemplate(type) {
       furyGeneratePerCast: null,
       furySpendPerCast: null,
       variantOf: null,
+      allocated: null,
       effects: [{ ...effect, stat: 'coefficient' }]
     };
   }

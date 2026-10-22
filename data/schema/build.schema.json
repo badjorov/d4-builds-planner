@@ -56,7 +56,8 @@
     "resistanceCapPct": { "type": ["number", "null"] },
     "expertise": { "type": ["string", "null"] },
     "runes": { "type": "array", "items": { "type": "string" } },
-    "manualInputsVerified": { "type": "boolean" }
+    "manualInputsVerified": { "type": "boolean" },
+    "sheet": { "$ref": "#/$defs/characterSheet" }
   },
   "$defs": {
     "slotAssignment": {
@@ -141,6 +142,26 @@
             { "type": "array", "items": { "type": ["number", "null"] } }
           ]
         }
+      }
+    },
+    "characterSheet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["level", "strength", "intelligence", "willpower", "dexterity", "armor", "toughness", "toughnessScope", "weaponDamage", "maxLife", "source", "verified"],
+      "properties": {
+        "level": { "type": "integer" },
+        "strength": { "type": "number" },
+        "intelligence": { "type": "number" },
+        "willpower": { "type": "number" },
+        "dexterity": { "type": "number" },
+        "armor": { "type": "number" },
+        "toughness": { "type": "number" },
+        "toughnessScope": { "type": "string" },
+        "weaponDamage": { "type": "number" },
+        "maxLife": { "type": "number" },
+        "source": { "type": "string", "minLength": 1 },
+        "verified": { "type": "boolean" },
+        "note": { "type": "string" }
       }
     }
   }
