@@ -57,6 +57,7 @@ function textInput(name, value) {
 function effectRows(effects) {
   const rows = effects?.length ? effects : [];
   return rows.map((effect, index) => `<fieldset data-effect="${index}"><legend>Effect ${index + 1}</legend>
+    ${type === 'gem' ? field('Slot type', textInput(`slotType-${index}`, effect.slotType)) : ''}
     ${field('Stat', textInput(`stat-${index}`, effect.stat))}
     ${field('Bucket', `<select name="bucket-${index}">${['', 'additive', 'multiplicative', 'crit', 'vuln', 'overpower', 'mainstat', 'special', 'none', 'additive?', 'vuln?'].map(bucket => `<option ${effect.bucket === bucket || (effect.bucket == null && bucket === '') ? 'selected' : ''}>${esc(bucket)}</option>`).join('')}</select>`)}
     ${field('Value or min,max', textInput(`value-${index}`, Array.isArray(effect.value) ? effect.value.join(',') : effect.value ?? ''))}
@@ -98,7 +99,7 @@ function renderForm() {
   if (type === 'affix') parts.push(field('Slot', textInput('slot', draft.slot)));
   if (type === 'paragonNode') parts.push(field('Board id', textInput('boardId', draft.boardId)));
   if (type === 'paragonBoard') parts.push(field('Node ids', textInput('nodeIds', (draft.nodeIds || []).join(', '))));
-  if (type === 'glyph') parts.push(field('Level', `<input name="level" type="number" value="${draft.level ?? ''}">`));
+  if (type === 'glyph' || type === 'gem') parts.push(field('Level', `<input name="level" type="number" value="${draft.level ?? ''}">`));
   if (draft.effects) parts.push(effectRows(draft.effects));
   parts.push('<p><button type="submit">Save</button> <button type="button" id="deleteEntity">Delete</button></p>');
   $('entityForm').innerHTML = parts.join('');
@@ -150,7 +151,7 @@ function readForm(form) {
   if (type === 'affix') next.slot = String(data.get('slot') || '').trim() || null;
   if (type === 'paragonNode') next.boardId = String(data.get('boardId') || '').trim() || null;
   if (type === 'paragonBoard') next.nodeIds = String(data.get('nodeIds') || '').split(',').map(id => id.trim()).filter(Boolean);
-  if (type === 'glyph') next.level = num(data.get('level'));
+  if (type === 'glyph' || type === 'gem') next.level = num(data.get('level'));
   if (next.effects) {
     const effects = [];
     let index = 0;
@@ -158,6 +159,7 @@ function readForm(form) {
     while (data.has(`effectSource-${index}`) || form.querySelector(`[data-effect="${index}"]`)) {
       const effect = {
         ...(previous[index] || {}),
+        ...(type === 'gem' ? { slotType: String(data.get(`slotType-${index}`) || '').trim() || null } : {}),
         stat: String(data.get(`stat-${index}`) || '').trim() || null,
         bucket: String(data.get(`bucket-${index}`) || '').trim() || null,
         value: readValue(data.get(`value-${index}`)),
@@ -218,7 +220,9 @@ $('entityForm').addEventListener('click', (event) => {
   }
   if (event.target?.id === 'addEffect' && draft) {
     draft = readForm($('entityForm'));
-    draft.effects.push({ stat: null, bucket: null, value: null, conditions: null, stacking: null, source: draft.source || 'manual-entry', verified: false });
+    const added = { stat: null, bucket: null, value: null, conditions: null, stacking: null, source: draft.source || 'manual-entry', verified: false };
+    if (type === 'gem') added.slotType = null;
+    draft.effects.push(added);
     renderForm();
   }
   if (event.target?.id === 'deleteEntity' && draft?.id) {

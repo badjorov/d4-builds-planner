@@ -35,6 +35,11 @@
         "url": "user video 1 (watchVideo 2026-10-22)",
         "title": "User video 1, gear, paragon, charms, and the character sheet",
         "license": "User's own gameplay footage, machine transcription. Not an open-license dataset. Every value from this source stays verified false. Conflicting readings are suspect."
+      },
+      {
+        "url": "user rule 2026-10-22",
+        "title": "User rules for the arsenal, glyphs, masterworking, and Grand Skull",
+        "license": "User correction. Weapon type, arsenal slot, and attacks per second are verified. Might's level 135 is verified. Other numbers from this source are verified only where the rule says so."
       }
     ]
   },
@@ -126,43 +131,43 @@
       },
       {
         "id": "weapon-1",
-        "name": "Arsenal weapon 1",
+        "name": "2H Slashing",
         "kind": "weapon",
         "acceptsAspect": true,
         "acceptsUnique": true,
         "source": "manual-entry",
-        "verified": false,
-        "note": "Planner label for one of four weapons. Official feature overview says Barbarians carry four weapons (https://news.blizzard.com/en-us/article/23189677/diablo-iv-feature-overview). It does not assign this id. VERIFY in game."
+        "verified": true,
+        "note": "Planner id for the verified 2H Slashing arsenal slot. Insight, a polearm, is equipped here. Weapon type, slot, and attacks per second were confirmed by user rule 2026-10-22."
       },
       {
         "id": "weapon-2",
-        "name": "Arsenal weapon 2",
+        "name": "2H Bludgeoning",
         "kind": "weapon",
         "acceptsAspect": true,
         "acceptsUnique": true,
         "source": "manual-entry",
-        "verified": false,
-        "note": "Planner label for one of four weapons. Official feature overview says Barbarians carry four weapons (https://news.blizzard.com/en-us/article/23189677/diablo-iv-feature-overview). It does not assign this id. VERIFY in game."
+        "verified": true,
+        "note": "Planner id for the verified 2H Bludgeoning arsenal slot. The Deathshead mace with Aspect of Channeling is equipped here. Weapon type, slot, and attacks per second were confirmed by user rule 2026-10-22."
       },
       {
         "id": "weapon-3",
-        "name": "Arsenal weapon 3",
+        "name": "1H",
         "kind": "weapon",
         "acceptsAspect": true,
         "acceptsUnique": true,
         "source": "manual-entry",
-        "verified": false,
-        "note": "Planner label for one of four weapons. Official feature overview says Barbarians carry four weapons (https://news.blizzard.com/en-us/article/23189677/diablo-iv-feature-overview). It does not assign this id. VERIFY in game."
+        "verified": true,
+        "note": "Planner id for a verified 1H arsenal slot. Spirit, a sword, is equipped here. Weapon type, slot, and attacks per second were confirmed by user rule 2026-10-22."
       },
       {
         "id": "weapon-4",
-        "name": "Arsenal weapon 4",
+        "name": "1H",
         "kind": "weapon",
         "acceptsAspect": true,
         "acceptsUnique": true,
         "source": "manual-entry",
-        "verified": false,
-        "note": "Planner label for one of four weapons. Official feature overview says Barbarians carry four weapons (https://news.blizzard.com/en-us/article/23189677/diablo-iv-feature-overview). It does not assign this id. VERIFY in game."
+        "verified": true,
+        "note": "Planner id for a verified 1H arsenal slot. Ramaladni's Magnum Opus, a sword, is equipped here. Weapon type, slot, and attacks per second were confirmed by user rule 2026-10-22."
       },
       {
         "id": "slot-13",
@@ -6160,7 +6165,7 @@
       ],
       "source": "https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy",
       "verified": false,
-      "note": "Drains 7% max Fury in combat. Video 1: 1H Slashing, 900 Item Power, 2,350 DPS, 1.10 Attacks per Second. user video 1 (watchVideo 2026-10-22). verified stays false."
+      "note": "Drains 7% max Fury in combat. Video 1: 1H Slashing, 900 Item Power, 2,350 DPS, 1.10 Attacks per Second. user video 1 (watchVideo 2026-10-22). verified stays false. User rule 2026-10-22: 1H sword at 1.10 attacks per second. Weapon type, slot, and attacks per second are verified on the build slot."
     },
     {
       "id": "harrogath",
@@ -6451,7 +6456,7 @@
       "verified": false,
       "id": "insight",
       "name": "Insight",
-      "note": "Runeword RalTirTalSol, 900 Item Power. User: this is the 2H polearm at 0.9 Attacks per Second, with 94.5% crit chance on the weapon. Video: polearm in a 1H slot at 1.00 Attacks per Second, and a +16% Critical Strike Chance affix. The video placement, attack speed, and crit-chance affix are suspect. 3,040 DPS. Per hit 2,432-3,648."
+      "note": "Runeword RalTirTalSol. User rule 2026-10-22: 2H Slashing polearm, 0.90 attacks per second, +94.3% crit chance, x310% crit damage multiplier. Those weapon facts are verified on the build slot. 3,040 DPS. Per hit 2,432-3,648."
     },
     {
       "slots": [
@@ -6482,26 +6487,6 @@
           "note": "Shown as a per-hit range next to DPS."
         },
         {
-          "stat": "video Attacks per Second",
-          "bucket": null,
-          "value": 1,
-          "conditions": null,
-          "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "note": "Suspect. Read on the video's 2H Sword placement. Not applied to the 1H slot."
-        },
-        {
-          "stat": "video weapon",
-          "bucket": null,
-          "value": null,
-          "conditions": null,
-          "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "note": "Suspect. The video read a 2H Sword. The user says Spirit is on the 1H. No sword stats were copied onto the slot."
-        },
-        {
           "stat": "Rune Tal: Lord of Hatred",
           "bucket": null,
           "value": null,
@@ -6516,7 +6501,7 @@
       "verified": false,
       "id": "spirit",
       "name": "Spirit",
-      "note": "Runeword TalThulOrtAmn, 900 Item Power. User: Spirit is on the 1H. The earlier list called it a 1H mace. Video: 2H Sword at 1.00 Attacks per Second. That placement and attack speed are suspect. 2,264 DPS. Per hit 1,745-2,783."
+      "note": "Runeword TalThulOrtAmn. User rule 2026-10-22: 1H sword at 1.10 attacks per second. Weapon type, slot, and attacks per second are verified on the build slot. 2,264 DPS. Per hit 1,745-2,783. Rune Tal text stays cut off."
     },
     {
       "slots": [
@@ -8001,25 +7986,6 @@
       "verified": false
     },
     {
-      "id": "v1-ramaladni-phys-mult",
-      "name": "+20.0% Physical Damage Multiplier",
-      "slot": "weapon-4",
-      "effects": [
-        {
-          "stat": "+20.0% Physical Damage Multiplier",
-          "bucket": null,
-          "value": 20,
-          "conditions": null,
-          "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "unit": "%"
-        }
-      ],
-      "source": "user video 1 (watchVideo 2026-10-22)",
-      "verified": false
-    },
-    {
       "id": "v1-insight-weapon-damage",
       "name": "+107 Weapon Damage",
       "slot": "weapon-1",
@@ -8132,8 +8098,7 @@
       "source": "user video 1 (watchVideo 2026-10-22)",
       "verified": false,
       "rarity": "Greater Affix",
-      "suspect": true,
-      "note": "Suspect. The user says the polearm crit chance is 94.5%, which does not match this 16% read."
+      "note": "Video greater-affix line of +16% Critical Strike Chance. The weapon crit chance on the 2H Slashing slot is +94.3% and is stored on the build slot. This line stays unverified."
     },
     {
       "id": "v1-insight-crit-damage",
@@ -8227,25 +8192,6 @@
       "source": "user video 1 (watchVideo 2026-10-22)",
       "verified": false,
       "rarity": "Greater Affix"
-    },
-    {
-      "id": "v1-insight-phys-mult",
-      "name": "+20.0% Physical Damage Multiplier",
-      "slot": "weapon-1",
-      "effects": [
-        {
-          "stat": "+20.0% Physical Damage Multiplier",
-          "bucket": null,
-          "value": 20,
-          "conditions": null,
-          "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "unit": "%"
-        }
-      ],
-      "source": "user video 1 (watchVideo 2026-10-22)",
-      "verified": false
     },
     {
       "id": "v1-spirit-weapon-damage",
@@ -8714,26 +8660,24 @@
     },
     {
       "id": "v1-boots-move-speed",
-      "name": "+29.0% Movement Speed",
+      "name": "+28% Movement Speed",
       "slot": "boots",
       "effects": [
         {
-          "stat": "+29.0% Movement Speed",
+          "stat": "+28% Movement Speed",
           "bucket": null,
-          "value": 29,
+          "value": 28,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "range": [
-            21,
-            29
-          ],
-          "unit": "%"
+          "source": "user rule 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "Separate from the tempered Movement Speed. The video read +29% [21-29]. The confirmed value is +28%."
         }
       ],
-      "source": "user video 1 (watchVideo 2026-10-22)",
-      "verified": false
+      "source": "user rule 2026-10-22",
+      "verified": true,
+      "note": "Separate from the tempered Movement Speed. The video read +29% [21-29]. The confirmed value is +28%."
     },
     {
       "id": "v1-boots-all-res",
@@ -8760,29 +8704,29 @@
     },
     {
       "id": "v1-boots-temper-move-speed",
-      "name": "Tempered +39.5% Movement Speed",
+      "name": "Tempered +43% Movement Speed",
       "slot": "boots",
       "effects": [
         {
-          "stat": "Tempered +39.5% Movement Speed",
+          "stat": "Tempered +43% Movement Speed",
           "bucket": null,
-          "value": 39.5,
+          "value": 43,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
+          "source": "user rule 2026-10-22",
+          "verified": true,
           "range": [
-            25,
-            35
+            15,
+            25
           ],
-          "unit": "%"
+          "unit": "%",
+          "note": "43% on the base range [15-25]. The roll is above that range. Masterworking, up to 25 with one affix boosted again at the cap, and Horadric Cube transfiguration can raise a roll above its base range. The video read 39.5% against [25-35]."
         }
       ],
-      "source": "user video 1 (watchVideo 2026-10-22)",
-      "verified": false,
+      "source": "user rule 2026-10-22",
+      "verified": true,
       "category": "Tempered",
-      "suspect": true,
-      "note": "Suspect. The video read Earthstriker's Boneweave with tempered Movement Speed 39.5% against [25-35]. The roll is outside that range."
+      "note": "43% on the base range [15-25]. The roll is above that range. Masterworking, up to 25 with one affix boosted again at the cap, and Horadric Cube transfiguration can raise a roll above its base range. The video read 39.5% against [25-35]."
     },
     {
       "id": "v1-channel-weapon-damage",
@@ -8919,29 +8863,6 @@
       ],
       "source": "user video 1 (watchVideo 2026-10-22)",
       "verified": false
-    },
-    {
-      "id": "v1-channel-temper-phys",
-      "name": "Tempered +20.0% Physical Damage Multiplier",
-      "slot": "weapon-2",
-      "effects": [
-        {
-          "stat": "Tempered +20.0% Physical Damage Multiplier",
-          "bucket": null,
-          "value": 20,
-          "conditions": null,
-          "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "unit": "%",
-          "count": 3
-        }
-      ],
-      "source": "user video 1 (watchVideo 2026-10-22)",
-      "verified": false,
-      "category": "Tempered",
-      "suspect": true,
-      "note": "Suspect. Listed 3 times. No bracket range was shown."
     },
     {
       "id": "v1-crush-all-res",
@@ -10030,7 +9951,7 @@
     {
       "id": "disembowel",
       "name": "Disembowel Glyph",
-      "level": 1,
+      "level": 0,
       "effects": [
         {
           "stat": "damage",
@@ -10045,19 +9966,20 @@
       ],
       "source": "https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy",
       "verified": false,
-      "note": "20%[x] -> 15%[x]; glyph level at which this applies not stated. Video transcription (unverified): rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3) The legendary line is stored on legendary and does not replace the patch-note effect.",
+      "note": "20%[x] -> 15%[x]; glyph level at which this applies not stated. Video transcription (unverified): rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3) The legendary line is stored on legendary and does not replace the patch-note effect. This character's level is 0 because the glyph is not equipped.",
       "rarity": "Rare",
       "radius": 3,
       "base": "per 5 Will +4.0% Bleeding",
       "additional": "killing Bleeding enemy 10% chance -1s non-Ultimate CDs",
       "legendary": "+5.5%[x]",
       "transcribed": "Disembowel L1: per 5 Will +4.0% Bleeding. Add: killing Bleeding enemy 10% chance -1s non-Ultimate CDs. Leg: +5.5%[x].",
-      "recordedSource": "user video 2026-10-21 batch2 (transcribed)"
+      "recordedSource": "user video 2026-10-21 batch2 (transcribed)",
+      "levelVerified": true
     },
     {
       "id": "crusher",
       "name": "Crusher Glyph",
-      "level": 1,
+      "level": 0,
       "effects": [
         {
           "stat": "damage",
@@ -10072,14 +9994,15 @@
       ],
       "source": "https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy",
       "verified": false,
-      "note": "20%[x] -> 15%[x]. Video transcription (unverified): rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3) The legendary line is stored on legendary and does not replace the patch-note effect.",
+      "note": "20%[x] -> 15%[x]. Video transcription (unverified): rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3) The legendary line is stored on legendary and does not replace the patch-note effect. This character's level is 0 because the glyph is not equipped.",
       "rarity": "Rare",
       "radius": 3,
       "base": "per 5 Str +6.6% with Mace",
       "additional": "Mace +30.0%[x] Overpower dmg",
       "legendary": "+5.5%[x]",
       "transcribed": "Crusher L1: per 5 Str +6.6% with Mace. Add: Mace +30.0%[x] Overpower dmg. Leg: +5.5%[x].",
-      "recordedSource": "user video 2026-10-21 batch2 (transcribed)"
+      "recordedSource": "user video 2026-10-21 batch2 (transcribed)",
+      "levelVerified": true
     },
     {
       "id": "might",
@@ -10096,14 +10019,15 @@
           "unit": "%"
         },
         {
-          "stat": "damage vs Elites, Healthy and Injured",
+          "stat": "legendary bonus vs Healthy and Injured",
           "bucket": null,
-          "value": 28,
+          "value": 26,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "unit": "%"
+          "source": "user rule 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "Confirmed legendary bonus, 26% vs Healthy and Injured. The video read 28% vs Elites, Healthy and Injured, and an earlier legendary line said 20.0%[x] vs Healthy. The bracket tag is pending a screenshot."
         },
         {
           "stat": "Dexterity",
@@ -10136,45 +10060,26 @@
         {
           "stat": "bonus to Magic nodes in range",
           "bucket": null,
-          "value": 80,
+          "value": 360,
           "conditions": null,
           "stacking": null,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "verified": false,
-          "unit": "%"
+          "source": "user rule 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "Confirmed +360%. The video read 80. The [+] or [x] tag is pending a screenshot."
         }
       ],
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
-      "level": 115,
-      "levelReadings": [
-        {
-          "value": 115,
-          "source": "user video 2026-10-21 batch2 (transcribed)",
-          "suspect": true,
-          "note": "Batch-2 glyph video. Working value. Unverified."
-        },
-        {
-          "value": 70,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "suspect": true,
-          "note": "Video 1 read of the equipped legendary glyphs."
-        },
-        {
-          "value": 155,
-          "source": "earlier glyph read, conflict noted in video 1",
-          "suspect": true,
-          "note": "Earlier read. No separate source text is stored in the repo."
-        }
-      ],
+      "level": 135,
       "rarity": "Legendary",
       "radius": 5,
       "base": "+160.0% to Magic nodes",
       "additional": "8.0%[x] dmg with 2H (40 Str)",
-      "legendary": "20.0%[x] vs Healthy",
+      "legendary": "26% vs Healthy and Injured",
       "transcribed": "Might L115: +160.0% to Magic nodes. Add: 8.0%[x] dmg with 2H (40 Str). Leg: 20.0%[x] vs Healthy.",
-      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3). Three level readings conflict and all stay suspect: 115 from the batch-2 glyph video, 70 from video 1, and 155 from an earlier read. None is verified. The working level is 115. Earlier base, additional, and legendary strings are kept.",
-      "suspect": true
+      "note": "Level 135 is verified. +360% bonus to Magic nodes in range, and the legendary bonus is 26% vs Healthy and Injured. The 70, 115, and 155 level readings are dropped. Bracket tags on these bonuses are pending screenshots. Earlier base and additional strings are kept as reference text.",
+      "levelVerified": true
     },
     {
       "id": "twister",
@@ -10213,35 +10118,19 @@
       ],
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
-      "level": 115,
-      "levelReadings": [
-        {
-          "value": 115,
-          "source": "user video 2026-10-21 batch2 (transcribed)",
-          "suspect": true,
-          "note": "Batch-2 glyph video. Working value. Unverified."
-        },
-        {
-          "value": 70,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "suspect": true,
-          "note": "Video 1 read of the equipped legendary glyphs."
-        },
-        {
-          "value": 155,
-          "source": "earlier glyph read, conflict noted in video 1",
-          "suspect": true,
-          "note": "Earlier read. No separate source text is stored in the repo."
-        }
-      ],
+      "level": null,
       "rarity": "Legendary",
       "radius": 5,
       "base": "per 5 Str, Dust Devils +90.3%[+]",
       "additional": "8.0%[x] dmg 4s after creating Dust Devil (40 Str)",
       "legendary": "Dust Devil dmg +20.0%[x]",
       "transcribed": "Twister L115: per 5 Str, Dust Devils +90.3%[+]. Add: 8.0%[x] dmg 4s after creating Dust Devil (40 Str). Leg: Dust Devil dmg +20.0%[x].",
-      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3). Three level readings conflict and all stay suspect: 115 from the batch-2 glyph video, 70 from video 1, and 155 from an earlier read. None is verified. The working level is 115. Earlier base, additional, and legendary strings are kept.",
-      "suspect": true
+      "note": "Equipped glyph level is approximately 131-135. Unverified, pending screenshots. The 70, 115, and 155 readings are dropped. Earlier base, additional, and legendary strings are kept.",
+      "levelVerified": false,
+      "levelApproximate": [
+        131,
+        135
+      ]
     },
     {
       "id": "imbiber",
@@ -10290,35 +10179,19 @@
       ],
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
-      "level": 115,
-      "levelReadings": [
-        {
-          "value": 115,
-          "source": "user video 2026-10-21 batch2 (transcribed)",
-          "suspect": true,
-          "note": "Batch-2 glyph video. Working value. Unverified."
-        },
-        {
-          "value": 70,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "suspect": true,
-          "note": "Video 1 read of the equipped legendary glyphs."
-        },
-        {
-          "value": 155,
-          "source": "earlier glyph read, conflict noted in video 1",
-          "suspect": true,
-          "note": "Earlier read. No separate source text is stored in the repo."
-        }
-      ],
+      "level": null,
       "rarity": "Legendary",
       "radius": 5,
       "base": "per 5 Will, +30.1%[+] dmg and +5.2%[+] potion healing per missing potion, up to 25%[+] each",
       "additional": null,
       "legendary": "dmg while Healthy +16.0%[x]",
       "transcribed": "Imbiber L115: per 5 Will, +30.1%[+] dmg and +5.2%[+] potion healing per missing potion, up to 25%[+] each. Leg: dmg while Healthy +16.0%[x].",
-      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3). Three level readings conflict and all stay suspect: 115 from the batch-2 glyph video, 70 from video 1, and 155 from an earlier read. None is verified. The working level is 115. Earlier base, additional, and legendary strings are kept.",
-      "suspect": true
+      "note": "Equipped glyph level is approximately 131-135. Unverified, pending screenshots. The 70, 115, and 155 readings are dropped. Earlier base, additional, and legendary strings are kept.",
+      "levelVerified": false,
+      "levelApproximate": [
+        131,
+        135
+      ]
     },
     {
       "id": "exploit",
@@ -10326,14 +10199,15 @@
       "effects": [],
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
-      "level": 115,
+      "level": 0,
       "rarity": "Legendary",
       "radius": 5,
       "base": "per 5 Dex, +25.8%[+] vs Vulnerable",
       "additional": "damaged enemies Vulnerable 3s, max once/5s (25 Dex)",
       "legendary": "+15.6%[x] vs Vulnerable",
       "transcribed": "Exploit L115: per 5 Dex, +25.8%[+] vs Vulnerable. Add: damaged enemies Vulnerable 3s, max once/5s (25 Dex). Leg: +15.6%[x] vs Vulnerable.",
-      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3)"
+      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3) This character's level is 0 because the glyph is not equipped.",
+      "levelVerified": true
     },
     {
       "id": "ambidextrous",
@@ -10341,14 +10215,15 @@
       "effects": [],
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
-      "level": 1,
+      "level": 0,
       "rarity": "Rare",
       "radius": 3,
       "base": "+25.0% Magic nodes",
       "additional": "8.0%[x] with 1H (40 Str)",
       "legendary": "+5.5%[x] (unlocks L46)",
       "transcribed": "Ambidextrous Rare L1: +25.0% Magic nodes. Add: 8.0%[x] with 1H (40 Str). Leg: +5.5%[x] (unlocks L46).",
-      "note": null
+      "note": "This character's level is 0 because the glyph is not equipped.",
+      "levelVerified": true
     },
     {
       "id": "wrath",
@@ -10386,35 +10261,19 @@
       ],
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
-      "level": 115,
-      "levelReadings": [
-        {
-          "value": 115,
-          "source": "user video 2026-10-21 batch2 (transcribed)",
-          "suspect": true,
-          "note": "Batch-2 glyph video. Working value. Unverified."
-        },
-        {
-          "value": 70,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "suspect": true,
-          "note": "Video 1 read of the equipped legendary glyphs."
-        },
-        {
-          "value": 155,
-          "source": "earlier glyph read, conflict noted in video 1",
-          "suspect": true,
-          "note": "Earlier read. No separate source text is stored in the repo."
-        }
-      ],
+      "level": null,
       "rarity": "Legendary",
       "radius": 5,
       "base": "per 5 Dex, +14.2% Crit Dmg",
       "additional": "crits generate 3 Fury (25 Dex)",
       "legendary": "Crit Dmg +17.0%[x]",
       "transcribed": "Wrath L115: per 5 Dex, +14.2% Crit Dmg. Add: crits generate 3 Fury (25 Dex). Leg: Crit Dmg +17.0%[x].",
-      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3). Three level readings conflict and all stay suspect: 115 from the batch-2 glyph video, 70 from video 1, and 155 from an earlier read. None is verified. The working level is 115. Earlier base, additional, and legendary strings are kept.",
-      "suspect": true
+      "note": "Equipped glyph level is approximately 131-135. Unverified, pending screenshots. The 70, 115, and 155 readings are dropped. Earlier base, additional, and legendary strings are kept.",
+      "levelVerified": false,
+      "levelApproximate": [
+        131,
+        135
+      ]
     },
     {
       "id": "marshal",
@@ -10480,35 +10339,19 @@
       ],
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
-      "level": 115,
-      "levelReadings": [
-        {
-          "value": 115,
-          "source": "user video 2026-10-21 batch2 (transcribed)",
-          "suspect": true,
-          "note": "Batch-2 glyph video. Working value. Unverified."
-        },
-        {
-          "value": 70,
-          "source": "user video 1 (watchVideo 2026-10-22)",
-          "suspect": true,
-          "note": "Video 1 read of the equipped legendary glyphs."
-        },
-        {
-          "value": 155,
-          "source": "earlier glyph read, conflict noted in video 1",
-          "suspect": true,
-          "note": "Earlier read. No separate source text is stored in the repo."
-        }
-      ],
+      "level": null,
       "rarity": "Legendary",
       "radius": 5,
       "base": "+133.3% Magic nodes",
       "additional": "casting Shout reduces other Shout CDs by 2.0s; while Shout active next Core Skill Fury cost -10% (40 Str)",
       "legendary": "+15.6%[x]",
       "transcribed": "Marshal L115: +133.3% Magic nodes. Add: casting Shout reduces other Shout CDs by 2.0s; while Shout active next Core Skill Fury cost -10% (40 Str). Leg: +15.6%[x].",
-      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3). Three level readings conflict and all stay suspect: 115 from the batch-2 glyph video, 70 from video 1, and 155 from an earlier read. None is verified. The working level is 115. Earlier base, additional, and legendary strings are kept.",
-      "suspect": true
+      "note": "Equipped glyph level is approximately 131-135. Unverified, pending screenshots. The 70, 115, and 155 readings are dropped. Earlier base, additional, and legendary strings are kept.",
+      "levelVerified": false,
+      "levelApproximate": [
+        131,
+        135
+      ]
     },
     {
       "id": "challenger",
@@ -10516,14 +10359,15 @@
       "effects": [],
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
-      "level": 115,
+      "level": 0,
       "rarity": "Legendary",
       "radius": 5,
       "base": "+133.3% Normal nodes",
       "additional": "10.0%[x] less dmg from Elites (40 Str)",
       "legendary": "+15.6%[x] vs Elites",
       "transcribed": "Challenger L115: +133.3% Normal nodes. Add: 10.0%[x] less dmg from Elites (40 Str). Leg: +15.6%[x] vs Elites.",
-      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3)"
+      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3) This character's level is 0 because the glyph is not equipped.",
+      "levelVerified": true
     },
     {
       "id": "bloodfeeder",
@@ -10531,14 +10375,15 @@
       "effects": [],
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
-      "level": 1,
+      "level": 0,
       "rarity": "Rare",
       "radius": 3,
       "base": "per 5 Dex, +4.0% vs Bleeding",
       "additional": "+5.0%[+] crit chance vs Bleeding",
       "legendary": "+5.5%[x]",
       "transcribed": "Bloodfeeder L1: per 5 Dex, +4.0% vs Bleeding. Add: +5.0%[+] crit chance vs Bleeding. Leg: +5.5%[x].",
-      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3)"
+      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3) This character's level is 0 because the glyph is not equipped.",
+      "levelVerified": true
     },
     {
       "id": "brawl",
@@ -10546,14 +10391,15 @@
       "effects": [],
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
-      "level": 1,
+      "level": 0,
       "rarity": "Rare",
       "radius": 3,
       "base": "+30.0% Rare nodes",
       "additional": "Brawling +18.0%[x]",
       "legendary": "Brawling +13.7%[x]",
       "transcribed": "Brawl L1: +30.0% Rare nodes. Add: Brawling +18.0%[x]. Leg: Brawling +13.7%[x].",
-      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3)"
+      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3) This character's level is 0 because the glyph is not equipped.",
+      "levelVerified": true
     },
     {
       "id": "cleaver",
@@ -10561,14 +10407,15 @@
       "effects": [],
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
-      "level": 1,
+      "level": 0,
       "rarity": "Rare",
       "radius": 3,
       "base": "per 5 Str +6.6% with Axe",
       "additional": "Axe +12.0%[x] Crit Dmg",
       "legendary": "+5.5%[x]",
       "transcribed": "Cleaver L1: per 5 Str +6.6% with Axe. Add: Axe +12.0%[x] Crit Dmg. Leg: +5.5%[x].",
-      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3)"
+      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3) This character's level is 0 because the glyph is not equipped.",
+      "levelVerified": true
     },
     {
       "id": "executioner",
@@ -10576,14 +10423,15 @@
       "effects": [],
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
-      "level": 1,
+      "level": 0,
       "rarity": "Rare",
       "radius": 3,
       "base": "per 5 Str +6.6% with Polearm",
       "additional": "Polearm +10.0%[x] vs Healthy or Injured",
       "legendary": "+5.5%[x]",
       "transcribed": "Executioner L1: per 5 Str +6.6% with Polearm. Add: Polearm +10.0%[x] vs Healthy or Injured. Leg: +5.5%[x].",
-      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3)"
+      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3) This character's level is 0 because the glyph is not equipped.",
+      "levelVerified": true
     },
     {
       "id": "dominate",
@@ -10591,14 +10439,15 @@
       "effects": [],
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
-      "level": 1,
+      "level": 0,
       "rarity": "Rare",
       "radius": 3,
       "base": "per 5 Will +6.6% Overpower dmg",
       "additional": "Overpower charge every 15s",
       "legendary": "+5.5%[x]",
       "transcribed": "Dominate L1: per 5 Will +6.6% Overpower dmg. Add: Overpower charge every 15s. Leg: +5.5%[x].",
-      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3)"
+      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3) This character's level is 0 because the glyph is not equipped.",
+      "levelVerified": true
     },
     {
       "id": "mortal-draw",
@@ -10606,14 +10455,15 @@
       "effects": [],
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
-      "level": 1,
+      "level": 0,
       "rarity": "Rare",
       "radius": 3,
       "base": "per 5 Dex +1.9% swap dmg",
       "additional": "swap 18% chance to crit",
       "legendary": "+5.5%[x]",
       "transcribed": "Mortal Draw L1: per 5 Dex +1.9% swap dmg. Add: swap 18% chance to crit. Leg: +5.5%[x].",
-      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3)"
+      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3) This character's level is 0 because the glyph is not equipped.",
+      "levelVerified": true
     },
     {
       "id": "revenge",
@@ -10621,14 +10471,15 @@
       "effects": [],
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
-      "level": 1,
+      "level": 0,
       "rarity": "Rare",
       "radius": 3,
       "base": "+30.0% Rare nodes",
       "additional": "Thorns dmg increases dmg taken from you 1.0%[x] up to 8.0%[x] for 10s",
       "legendary": "+5.5%[x]",
       "transcribed": "Revenge L1: +30.0% Rare nodes. Add: Thorns dmg increases dmg taken from you 1.0%[x] up to 8.0%[x] for 10s. Leg: +5.5%[x].",
-      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3)"
+      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3) This character's level is 0 because the glyph is not equipped.",
+      "levelVerified": true
     },
     {
       "id": "rumble",
@@ -10636,14 +10487,15 @@
       "effects": [],
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
-      "level": 1,
+      "level": 0,
       "rarity": "Rare",
       "radius": 3,
       "base": "per 5 Str +6.6% vs CC per active Earthquake",
       "additional": "10.0%[x] vs Bosses/CC per active Earthquake",
       "legendary": "Earthquake +16.4%[x]",
       "transcribed": "Rumble L1: per 5 Str +6.6% vs CC per active Earthquake. Add: 10.0%[x] vs Bosses/CC per active Earthquake. Leg: Earthquake +16.4%[x].",
-      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3)"
+      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3) This character's level is 0 because the glyph is not equipped.",
+      "levelVerified": true
     },
     {
       "id": "seeking",
@@ -10651,14 +10503,15 @@
       "effects": [],
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
-      "level": 1,
+      "level": 0,
       "rarity": "Rare",
       "radius": 3,
       "base": "per 5 Str +6.6% with Sword",
       "additional": "Sword 3 Fury on kill",
       "legendary": "+5.5%[x]",
       "transcribed": "Seeking L1: per 5 Str +6.6% with Sword. Add: Sword 3 Fury on kill. Leg: +5.5%[x].",
-      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3)"
+      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3) This character's level is 0 because the glyph is not equipped.",
+      "levelVerified": true
     },
     {
       "id": "territorial",
@@ -10666,14 +10519,15 @@
       "effects": [],
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
-      "level": 1,
+      "level": 0,
       "rarity": "Rare",
       "radius": 3,
       "base": "per 5 Dex +4.0% vs Close",
       "additional": "15.0%[+] DR vs Close",
       "legendary": "+5.5%[x] vs Vulnerable",
       "transcribed": "Territorial L1: per 5 Dex +4.0% vs Close. Add: 15.0%[+] DR vs Close. Leg: +5.5%[x] vs Vulnerable.",
-      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3)"
+      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3) This character's level is 0 because the glyph is not equipped.",
+      "levelVerified": true
     },
     {
       "id": "undaunted",
@@ -10681,14 +10535,15 @@
       "effects": [],
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
-      "level": 1,
+      "level": 0,
       "rarity": "Rare",
       "radius": 3,
       "base": "per 5 Will +4.0% while Fortified",
       "additional": "up to 10.0% DR with more Fortify",
       "legendary": "+5.5%[x]",
       "transcribed": "Undaunted L1: per 5 Will +4.0% while Fortified. Add: up to 10.0% DR with more Fortify. Leg: +5.5%[x].",
-      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3)"
+      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3) This character's level is 0 because the glyph is not equipped.",
+      "levelVerified": true
     },
     {
       "id": "weapon-master",
@@ -10696,15 +10551,15 @@
       "effects": [],
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
-      "level": null,
+      "level": 0,
       "rarity": null,
       "radius": null,
       "base": "+30.0% Rare nodes",
       "additional": null,
       "legendary": "Weapon Mastery +8.2%[x]",
       "transcribed": "Weapon Master: SUSPECT level (read L1, legendary border). +30.0% Rare nodes. Leg: Weapon Mastery +8.2%[x].",
-      "suspect": true,
-      "note": "Level unclear: read as L1 but with a legendary border; level/rarity left null."
+      "note": "Level unclear: read as L1 but with a legendary border; level/rarity left null. This character's level is 0 because the glyph is not equipped.",
+      "levelVerified": true
     }
   ],
   "talismans": [
@@ -11192,5 +11047,55 @@
     "verified": true,
     "note": "Linear interpolation matches Accelerating Aspect at 21/21 (50 on a 30-50 range) and Anger Management at 9/11 (19 on a 15-20 range). The left endpoint is rank 1 and the right endpoint is the cap, including when the range is printed high to low. Aspect rows stay unverified. A row whose observed point does not match this curve keeps the observed point and marks that formula application unverified."
   },
-  "passives": []
+  "passives": [],
+  "gems": [
+    {
+      "id": "grand-skull",
+      "name": "Grand Skull",
+      "level": null,
+      "maxLevel": null,
+      "rank": "Grand",
+      "effects": [
+        {
+          "slotType": "weapon",
+          "stat": "Physical Damage Multiplier",
+          "bucket": "multiplicative",
+          "value": 24,
+          "conditions": null,
+          "stacking": null,
+          "source": "user rule 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "note": "x24%. Item lines such as x24% or x28% Physical Damage Multiplier are this gem, not an affix."
+        },
+        {
+          "slotType": "armor",
+          "stat": "Healing Received",
+          "bucket": null,
+          "value": 22.5,
+          "conditions": null,
+          "stacking": null,
+          "source": "user rule 2026-10-22",
+          "verified": false,
+          "unit": "%",
+          "note": "+22.5%. The number is confirmed. The [+] or [x] tag is pending a screenshot."
+        },
+        {
+          "slotType": "jewelry",
+          "stat": "Physical Resistance",
+          "bucket": null,
+          "value": 2625,
+          "conditions": null,
+          "stacking": null,
+          "source": "user rule 2026-10-22",
+          "verified": false,
+          "unit": null,
+          "note": "+2,625. The number is confirmed. The [+] or [x] tag is pending a screenshot."
+        }
+      ],
+      "source": "user rule 2026-10-22",
+      "verified": false,
+      "note": "Grand is the named rank. The numeric upgrade level was not given. Weapon damage is an [x] multiplier. Armor and jewelry brackets are pending screenshots."
+    }
+  ]
 }

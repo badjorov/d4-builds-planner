@@ -7,6 +7,7 @@ export const ENTITY_KEYS = {
   aspect: 'aspects',
   unique: 'uniques',
   affix: 'affixes',
+  gem: 'gems',
   paragonBoard: 'paragonBoards',
   paragonNode: 'paragonNodes',
   glyph: 'glyphs',
@@ -115,6 +116,7 @@ export function entityTemplate(type) {
   if (type === 'paragonBoard') return { ...base, name: null, nodeIds: [] };
   if (type === 'paragonNode') return { ...base, boardId: null, effects: [{ ...effect }] };
   if (type === 'glyph') return { ...base, level: null, effects: [{ ...effect }] };
+  if (type === 'gem') return { ...base, level: null, maxLevel: null, effects: [{ ...effect, slotType: null }] };
   return { ...base, name: null, effects: [] };
 }
 

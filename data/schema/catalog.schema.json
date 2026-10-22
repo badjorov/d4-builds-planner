@@ -15,6 +15,7 @@
     "aspects",
     "uniques",
     "affixes",
+    "gems",
     "paragonBoards",
     "paragonNodes",
     "glyphs",
@@ -32,6 +33,7 @@
     "aspects": { "type": "array", "items": { "$ref": "#/$defs/aspect" } },
     "uniques": { "type": "array", "items": { "$ref": "#/$defs/unique" } },
     "affixes": { "type": "array", "items": { "$ref": "#/$defs/affix" } },
+    "gems": { "type": "array", "items": { "$ref": "#/$defs/gem" } },
     "paragonBoards": { "type": "array", "items": { "$ref": "#/$defs/paragonBoard" } },
     "paragonNodes": { "type": "array", "items": { "$ref": "#/$defs/paragonNode" } },
     "glyphs": { "type": "array", "items": { "$ref": "#/$defs/glyph" } },
@@ -88,6 +90,7 @@
         "note": { "type": ["string", "null"] },
         "upgrade": { "$ref": "#/$defs/codexUpgrade" },
         "range": {
+          "description": "Base roll range. A point value may sit outside it after masterworking or Horadric Cube transfiguration. That is not a schema error.",
           "oneOf": [
             { "type": "null" },
             {
@@ -99,7 +102,8 @@
           ]
         },
         "unit": { "type": ["string", "null"] },
-        "count": { "type": ["number", "null"] }
+        "count": { "type": ["number", "null"] },
+        "slotType": { "type": ["string", "null"] }
       }
     },
     "meta": {
@@ -379,6 +383,13 @@
         "id": { "type": "string", "minLength": 1 },
         "name": { "type": "string" },
         "level": { "type": ["number", "null"] },
+        "levelVerified": { "type": "boolean" },
+        "levelApproximate": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": { "type": "number" }
+        },
         "levelReadings": {
           "type": "array",
           "items": {
@@ -401,6 +412,22 @@
         "transcribed": { "type": ["string", "null"] },
         "suspect": { "type": "boolean" },
         "recordedSource": { "type": "string", "minLength": 1 },
+        "effects": { "type": "array", "items": { "$ref": "#/$defs/effect" } },
+        "source": { "$ref": "#/$defs/source" },
+        "verified": { "type": "boolean" },
+        "note": { "type": ["string", "null"] }
+      }
+    },
+    "gem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "level", "effects", "source", "verified"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "name": { "type": "string" },
+        "level": { "type": ["integer", "null"] },
+        "maxLevel": { "type": ["integer", "null"] },
+        "rank": { "type": ["string", "null"] },
         "effects": { "type": "array", "items": { "$ref": "#/$defs/effect" } },
         "source": { "$ref": "#/$defs/source" },
         "verified": { "type": "boolean" },
