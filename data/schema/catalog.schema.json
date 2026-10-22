@@ -280,6 +280,7 @@
         "potencyNote": { "type": ["string", "null"] },
         "transcribed": { "type": ["string", "null"] },
         "suspect": { "type": "boolean" },
+        "available": { "type": "boolean" },
         "recordedSource": { "type": "string", "minLength": 1 },
         "effects": { "type": "array", "items": { "$ref": "#/$defs/effect" } },
         "source": { "$ref": "#/$defs/source" },

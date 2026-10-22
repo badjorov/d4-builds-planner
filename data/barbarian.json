@@ -2014,7 +2014,8 @@
       "priorSource": "https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy",
       "rank": "11/11",
       "category": "Offensive",
-      "description": "Enemies take 9.0% [6.0 - 9.0]% increased Damage Over Time for every second they've been affected by a Damage Over Time, up to 10 seconds."
+      "description": "Enemies take 9.0% [6.0 - 9.0]% increased Damage Over Time for every second they've been affected by a Damage Over Time, up to 10 seconds.",
+      "available": true
     },
     {
       "id": "battle-mad",
@@ -2064,7 +2065,8 @@
       "priorSource": "https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy",
       "rank": "11/11",
       "category": "Utility",
-      "description": "After swapping weapons 5 times gain Berserking for 4 seconds. Additionally, you deal 15.0%[x] [10.0 - 15.0]% increased damage while Berserking."
+      "description": "After swapping weapons 5 times gain Berserking for 4 seconds. Additionally, you deal 15.0%[x] [10.0 - 15.0]% increased damage while Berserking.",
+      "available": true
     },
     {
       "id": "raid-leader",
@@ -2137,7 +2139,8 @@
       "priorSource": "https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy",
       "rank": "21/21",
       "category": "Utility",
-      "description": "Your Shouts grant you 10%[x] [7 - 10]% Damage Reduction and also Heal allies for 6.0%[x] [4.0 - 6.0]% of their Maximum Life per second."
+      "description": "Your Shouts grant you 10%[x] [7 - 10]% Damage Reduction and also Heal allies for 6.0%[x] [4.0 - 6.0]% of their Maximum Life per second.",
+      "available": true
     },
     {
       "id": "walloping",
@@ -2175,7 +2178,8 @@
       "rank": "20/21",
       "category": "Offensive",
       "description": "Your Skills while wielding a Bludgeoning weapon deal 59%[x] [40 - 60]% increased damage if the enemy is Incapacitated or Vulnerable.",
-      "note": "Frame reading merged into the existing row. The PTR placeholder had no number and was replaced by this frame point. Previous name: Walloping Aspect."
+      "note": "Frame reading merged into the existing row. The PTR placeholder had no number and was replaced by this frame point. Previous name: Walloping Aspect.",
+      "available": true
     },
     {
       "id": "warpath",
@@ -2213,7 +2217,8 @@
       "rank": "21/21",
       "category": "Offensive",
       "description": "While you have Overpower charges, your attacks while wielding a Bludgeoning weapon deal 60%[x] [40 - 60]% increased damage.",
-      "note": "Frame reading merged into the existing row. The PTR placeholder had no number and was replaced by this frame point. Previous name: Warpath Aspect."
+      "note": "Frame reading merged into the existing row. The PTR placeholder had no number and was replaced by this frame point. Previous name: Warpath Aspect.",
+      "available": true
     },
     {
       "id": "aspect-of-coagulation",
@@ -2303,7 +2308,8 @@
       "priorSource": "user video 2026-10-21 batch2 (transcribed)",
       "priorRank": "5/16",
       "description": "Gain 30%[+] increased Fortify generation and 19% [15 - 20]% Damage Reduction while Fortified.",
-      "note": "Frame reading merged into the existing row. Earlier effects and their sources are kept. Previous rank: 5/16."
+      "note": "Frame reading merged into the existing row. Earlier effects and their sources are kept. Previous rank: 5/16.",
+      "available": true
     },
     {
       "id": "accelerating",
@@ -2340,7 +2346,8 @@
       ],
       "priorSource": "user correction 2026-10-22",
       "category": "Offensive",
-      "description": "Critical Strikes with Core Skills increase your Attack Speed by 50.0%[+] [30.0 - 50.0]%."
+      "description": "Critical Strikes with Core Skills increase your Attack Speed by 50.0%[+] [30.0 - 50.0]%.",
+      "available": true
     },
     {
       "id": "anger-management",
@@ -2377,7 +2384,8 @@
       ],
       "priorSource": "user correction 2026-10-22",
       "category": "Utility",
-      "description": "While above 50 Primary Resource, deal 19.0%[x] [15.0 - 20.0]% increased damage and gain Berserking, but lose 3 Primary Resource Regeneration."
+      "description": "While above 50 Primary Resource, deal 19.0%[x] [15.0 - 20.0]% increased damage and gain Berserking, but lose 3 Primary Resource Regeneration.",
+      "available": true
     },
     {
       "id": "aspect-of-disobedience",
@@ -2412,7 +2420,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "aspect-of-glynns-anvil",
@@ -2470,7 +2479,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "aspect-of-heavenly-strength",
@@ -2505,7 +2515,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "aspect-of-might",
@@ -2540,7 +2551,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "aspect-of-shelter",
@@ -2575,7 +2587,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "aspect-of-tempering-blows",
@@ -2610,7 +2623,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "aspect-of-the-fortress",
@@ -2645,7 +2659,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "aspect-of-the-protector",
@@ -2680,7 +2695,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "bruisers-aspect",
@@ -2714,7 +2730,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "enshrouding-aspect",
@@ -2750,7 +2767,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "everliving-aspect",
@@ -2785,7 +2803,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "iron-blood-aspect",
@@ -2820,7 +2839,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "irrepressible-aspect",
@@ -2855,7 +2875,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "juggernauts-aspect",
@@ -2890,7 +2911,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "protecting-aspect",
@@ -2924,7 +2946,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "snowveiled-aspect",
@@ -2959,7 +2982,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "aspect-of-berserk-ripping",
@@ -2994,7 +3018,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "aspect-of-binding-morass",
@@ -3053,7 +3078,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "aspect-of-channeling",
@@ -3088,7 +3114,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "aspect-of-elemental-fate",
@@ -3123,7 +3150,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "aspect-of-encroaching-wrath",
@@ -3158,7 +3186,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "aspect-of-exorcism",
@@ -3193,7 +3222,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "aspect-of-frenzied-onslaught",
@@ -3228,7 +3258,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "aspect-of-incendiary-fissures",
@@ -3263,7 +3294,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "aspect-of-inner-calm",
@@ -3298,7 +3330,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "aspect-of-limitless-rage",
@@ -3333,7 +3366,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "aspect-of-reanimation",
@@ -3368,7 +3402,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "aspect-of-the-expectant",
@@ -3403,7 +3438,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "aspect-of-the-moonrise",
@@ -3438,7 +3474,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "conceited-aspect",
@@ -3473,7 +3510,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "cremators-aspect",
@@ -3508,7 +3546,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "crushing-aspect",
@@ -3543,7 +3582,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "cut-to-the-bone-aspect",
@@ -3578,7 +3618,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "duelists-aspect",
@@ -3613,7 +3654,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "edgemasters-aspect",
@@ -3648,7 +3690,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "ferocious-aspect",
@@ -3682,7 +3725,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "heavy-hitting-aspect",
@@ -3717,7 +3761,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "hellbent-commander-aspect",
@@ -3752,7 +3797,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "needleflare-aspect",
@@ -3787,7 +3833,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "progenitors-aspect",
@@ -3822,7 +3869,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "skullbreakers-aspect",
@@ -3857,7 +3905,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "unrelenting-aspect",
@@ -3892,7 +3941,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "vanquishing-aspect",
@@ -3927,7 +3977,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "vehement-brawlers-aspect",
@@ -3962,7 +4013,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "wanton-rupture-aspect",
@@ -3997,7 +4049,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "aspect-of-adaptability",
@@ -4031,7 +4084,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "aspect-of-alacrity",
@@ -4066,7 +4120,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "aspect-of-apogeic-furor",
@@ -4100,7 +4155,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "aspect-of-berserk-fury",
@@ -4134,7 +4190,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "aspect-of-deluge",
@@ -4168,7 +4225,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "aspect-of-efficiency",
@@ -4203,7 +4261,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "aspect-of-furious-impulse",
@@ -4238,7 +4297,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "aspect-of-the-orange-herald",
@@ -4272,7 +4332,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "aspect-of-the-umbral",
@@ -4306,7 +4367,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "aspect-of-vocalized-empowerment",
@@ -4340,7 +4402,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "aspect-of-voracious-rage",
@@ -4375,7 +4438,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "bear-clan-berserkers-aspect",
@@ -4410,7 +4474,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "bold-chieftains-aspect",
@@ -4444,7 +4509,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "sapping-aspect",
@@ -4478,7 +4544,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "starlight-aspect",
@@ -4513,7 +4580,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "vulpines-aspect",
@@ -4547,7 +4615,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "aspect-of-accursed-touch",
@@ -4582,7 +4651,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "aspect-of-anemia",
@@ -4617,7 +4687,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "aspect-of-audacity",
@@ -4653,7 +4724,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "aspect-of-booming-voice",
@@ -4688,7 +4760,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "aspect-of-dominance",
@@ -4722,7 +4795,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "aspect-of-elusive-menace",
@@ -4757,7 +4831,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "aspect-of-fortune",
@@ -4792,7 +4867,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "aspect-of-rallying-reversal",
@@ -4827,7 +4903,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "aspect-of-retribution",
@@ -4862,7 +4939,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "aspect-of-warmth",
@@ -4897,7 +4975,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "battle-fervors-aspect",
@@ -4932,7 +5011,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "blood-boiling-aspect",
@@ -4966,7 +5046,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "earthstrikers-aspect",
@@ -5001,7 +5082,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "eluding-aspect",
@@ -5036,7 +5118,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "embattled-aspect",
@@ -5071,7 +5154,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "exploiters-aspect",
@@ -5106,7 +5190,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "overheating-aspect",
@@ -5141,7 +5226,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "steadfast-berserkers-aspect",
@@ -5176,7 +5262,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "sticker-thought-aspect",
@@ -5210,7 +5297,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "tidal-aspect",
@@ -5244,7 +5332,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "undying-aspect",
@@ -5279,7 +5368,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "weapon-masters-aspect",
@@ -5336,7 +5426,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "wildbolt-aspect",
@@ -5361,13 +5452,13 @@
             "interpolated": 1.5,
             "observed": 1.5,
             "matches": true,
-            "verified": false
+            "verified": true
           },
           "range": [
             3.5,
             1.5
           ],
-          "note": "Range is stored as shown, high to low. The formula application is unverified."
+          "note": "Range is stored as shown, high to low. The left endpoint is rank 1 and the right endpoint is the cap."
         },
         {
           "stat": "15%",
@@ -5392,8 +5483,7 @@
       ],
       "source": "user video codex (frames)",
       "verified": false,
-      "suspect": true,
-      "note": "Suspect: the range is shown high to low, and this may be a Druid aspect."
+      "available": true
     },
     {
       "id": "aspect-of-forward-momentum",
@@ -5428,7 +5518,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "aspect-of-metamorphosis",
@@ -5453,19 +5544,18 @@
             "interpolated": 4.5,
             "observed": 4.5,
             "matches": true,
-            "verified": false
+            "verified": true
           },
           "range": [
             10,
             4
           ],
-          "note": "Range is stored as shown, high to low. The formula application is unverified."
+          "note": "Range is stored as shown, high to low. The left endpoint is rank 1 and the right endpoint is the cap."
         }
       ],
       "source": "user video codex (frames)",
       "verified": false,
-      "suspect": true,
-      "note": "Suspect: the range is shown high to low, and this may be a Druid aspect."
+      "available": true
     },
     {
       "id": "aspect-of-nebulous-brews",
@@ -5500,7 +5590,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "aspect-of-slaughter",
@@ -5535,7 +5626,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "aspect-of-swift-spirit",
@@ -5570,7 +5662,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "aspect-of-the-unholy-confederate",
@@ -5605,7 +5698,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "craven-aspect",
@@ -5640,7 +5734,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "ghostwalker-aspect",
@@ -5675,7 +5770,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "sickfoots-aspect",
@@ -5710,7 +5806,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     },
     {
       "id": "wind-striker-aspect",
@@ -5745,7 +5842,8 @@
         }
       ],
       "source": "user video codex (frames)",
-      "verified": false
+      "verified": false,
+      "available": true
     }
   ],
   "uniques": [
@@ -7044,6 +7142,6 @@
     "formula": "min + (max - min) * (level - 1) / (maxLevel - 1)",
     "source": "user correction 2026-10-22",
     "verified": true,
-    "note": "Linear interpolation matches Accelerating Aspect at 21/21 (50 on a 30-50 range) and Anger Management at 9/11 (19 on a 15-20 range). Aspect rows stay unverified. A row whose observed point does not match this curve keeps the observed point and marks that formula application unverified."
+    "note": "Linear interpolation matches Accelerating Aspect at 21/21 (50 on a 30-50 range) and Anger Management at 9/11 (19 on a 15-20 range). The left endpoint is rank 1 and the right endpoint is the cap, including when the range is printed high to low. Aspect rows stay unverified. A row whose observed point does not match this curve keeps the observed point and marks that formula application unverified."
   }
 }
