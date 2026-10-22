@@ -1102,13 +1102,13 @@
       ],
       "critAudit": {
         "verified": false,
-        "reading": "bonus",
+        "reading": "s2",
         "sheetCritChance": 100,
         "sheetCritDmg": 7424.8,
         "bonusFactor": 75.248,
         "fullFactor": 74.248,
         "source": "user screenshot 2026-10-22",
-        "note": "Sheet Critical Strike Chance 100% and Critical Strike Damage 7,424.8% are the single crit source. The working factor is 1 + 1 × 74.248 = 75.248. The alternate treats 7,424.8% as the full multiplier, factor 74.248. No base crit percent is stored in this repo, so a separate base is not added. Equipped additive Critical Strike Damage lines stay out of the term: Gohr's gloves +50%, Stone of Jordan +65%, Insight +180%, Spirit +78%, Ramaladni's Magnum Opus +75%. Equipped Critical Strike Chance lines stay out of the chance: gloves +16%, Stone of Jordan +5.5%, Insight +94.3%, Deathshead +7.5%. Equipped [x] Critical Strike Damage Multiplier lines stay out of both readings: Insight x310%, Deathshead x88%, Ramaladni's Magnum Opus x44%. The sheet is the aggregate the additive lines feed. The screenshot does not separate those [x] multipliers from the 7,424.8% total. Wrath glyph screenshot: +16.0% Critical Strike Damage per 5 Dexterity is not multiplied, because the board does not list Dexterity in range, and it is not added to the sheet. Legendary +17.8%[x] Critical Strike Damage is probably already inside 7,424.8% and is not added again. Flawless Technique's +45%[x] Critical Strike Damage for 4s is an alternate reading only. The headline score leaves it out. The +3% Critical Strike Chance on that node is not added on top of sheet 100%."
+        "note": "S2/S15 formula from the 2026-10-22 research note. Crit factor is (A + 74.248) / A × 1.5 × (1 + sum of Critical Strike Damage Multiplier [x]). A is the state's additive factor. At 100% crit chance that factor is used directly. Headline: sheet 7,424.8% is additive Critical Strike Damage. It does not include the base 50% and it does not include the [x] multipliers. Those [x] lines sum: Insight 310 + Deathshead 88 + Ramaladni 44 = 442%, factor 5.42. The earlier 1 + 74.248 = 75.248 and full-multiplier 74.248 readings are replaced. Equipped additive Critical Strike Damage lines stay inside the sheet: Gohr's gloves +50%, Stone of Jordan +65%, Insight +180%, Spirit +78%, Ramaladni's Magnum Opus +75%. Equipped Critical Strike Chance lines stay inside sheet 100%: gloves +16%, Stone of Jordan +5.5%, Insight +94.3%, Deathshead +7.5%. Wrath +17.8%[x] is not named Critical Strike Damage Multiplier; the stored note keeps it inside the sheet. Flawless Technique +45%[x] for 4s stays an alternate. Confidence is high for the mechanic and low for how the sheet displays the base 50% and the [x] lines. Sources: [A] https://d4guides.gg/en/guides/mechanics/damage-calculation-in-diablo-4-how-your-damage-works (Chrix1848, 2026-10-05, S15/3.2.2); [B] Blizzard season 2 note quoted at https://mobalytics.gg/diablo-4/guides/damage-buckets-deep-dive; [C] https://www.wowhead.com/diablo-4/news/breaking-down-the-critical-strike-and-vulnerable-damage-change-diablo-4-335487 (2023)."
       }
     }
   ]

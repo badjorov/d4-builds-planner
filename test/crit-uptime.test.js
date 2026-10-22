@@ -12,17 +12,20 @@ function whirlwindBuild() {
   return { ...saved, id: 'users-whirlwind-only', name: 'Whirlwind', skills: ['whirlwind'] };
 }
 
-test('the sheet crit total is the only crit input, and both readings are reported', () => {
+test('the sheet crit percent is additive and the weapon [x] lines sum', () => {
   const evaluated = evaluateBuild(catalog, whirlwindBuild());
   const crit = evaluated.result.terms.find(term => term.label === 'Crit (expected)');
-  assert.equal(crit.value, 75.248);
   assert.equal(evaluated.input.modifiers.some(mod => mod.bucket === 'crit'), false);
-  assert.equal(evaluated.input.modifiers.some(mod => mod.value === 310 || mod.value === 88 || mod.value === 44), false);
-  assert.equal(evaluated.critAlternate.verified, false);
-  assert.equal(evaluated.critAlternate.factor, 74.248);
-  assert.equal(evaluated.critAlternate.bonusFactor, 75.248);
-  const ratio = evaluated.critAlternate.total / evaluated.result.total;
-  assert.ok(Math.abs(ratio - 74.248 / 75.248) < 1e-9);
+  const critMult = evaluated.input.modifiers.filter(mod => mod.bucket === 'crit-mult').map(mod => mod.value).sort((a, b) => a - b);
+  assert.deepEqual(critMult, [44, 88, 310]);
+  assert.equal(evaluated.input.modifiers.some(mod => mod.bucket === 'multiplicative' && (mod.value === 310 || mod.value === 88 || mod.value === 44 || mod.value === 35)), false);
+  assert.equal(evaluated.input.modifiers.some(mod => mod.bucket === 'vuln-mult' && mod.value === 35 && mod.when === 'vulnerable'), true);
+  assert.ok(crit.value < 75.248);
+  assert.equal(crit.expr.includes('× 1.5 ×'), true);
+  assert.equal(evaluated.critAlternate.reading, 'sheet-includes-crit-multipliers');
+  assert.ok(evaluated.critAlternate.total < evaluated.result.total);
+  const vuln = evaluated.result.terms.find(term => term.label === 'Vulnerable');
+  assert.ok(Math.abs(vuln.value - 1.2 * 1.35) < 1e-9);
 });
 
 test('channeling applies the 138% imprint on Whirlwind and leaves the codex 69% off', () => {
@@ -102,7 +105,7 @@ test('Decimator joins the Vulnerable and Overpower states, and Might 8% is on fo
   assert.equal(evaluated.input.modifiers.some(mod => mod.name === 'Vulnerable Damage' && mod.when === 'vulnerable' && mod.value === 208.8), true);
   assert.equal(evaluated.input.modifiers.filter(mod => mod.name === 'vs Healthy or Injured').length, 1);
   const vulnTerm = evaluated.result.terms.find(term => term.label === 'Vulnerable');
-  assert.equal(vulnTerm.value, 1);
+  assert.ok(Math.abs(vulnTerm.value - 1.2 * 1.35) < 1e-9);
   assert.equal(evaluated.input.notes.some(note => note.includes('Wrath') && note.includes('7424.8')), true);
   assert.equal(evaluated.input.notes.some(note => note.includes('Flawless Technique') && note.includes('condition unknown')), true);
   assert.equal(evaluated.input.notes.some(note => note.includes('alternate reading')), true);

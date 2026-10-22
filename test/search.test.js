@@ -70,7 +70,7 @@ test('partial vulnerable uptime blends the engine on and off states', () => {
     weaponDmg: 100, mainStat: 0, critChance: 0, critDmg: 0, vulnPct: 100, uptime: { vulnerable: 0.5 }
   });
   const evaluated = evaluateBuild(catalog, build);
-  near(evaluated.result.total, 150);
+  near(evaluated.result.total, 110);
 });
 
 test('real catalog does not rank an unverified build unless asked', () => {
@@ -91,11 +91,10 @@ test('real catalog does not rank an unverified build unless asked', () => {
   assert.deepEqual(gearIds, [
     'gohrs-devastating-grips',
     'leorics-crown',
-    'melted-heart-of-selig',
     'ramaladni',
     'stone-of-jordan'
   ]);
-  const multipliers = [117, 35, 23, 4.1, 0.5];
+  const multipliers = [117, 23, 4.1, 0.5];
   const expected = 100 * 24.3 * multipliers.reduce((product, value) => product * (1 + value / 100), 1);
   near(shown.ranked[0].power, expected);
   assert.equal(shown.ranked.some(result => result.skills.includes('death-blow') || result.skills.includes('flay')), false);

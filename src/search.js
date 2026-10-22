@@ -238,11 +238,11 @@ export function explain(result) {
   lines.push(`Unverified share ${(result.unverifiedShare * 100).toFixed(1)}%`);
   if (result.unverifiedFields?.length) lines.push(`Unverified fields: ${result.unverifiedFields.map(field => field.path).join(', ')}`);
   if (result.critAlternate) {
-    lines.push(`Crit alternate (sheet % as the full multiplier) = ${result.critAlternate.factor.toFixed(4)}, power ${result.critAlternate.total.toFixed(4)}. Working factor ${result.critAlternate.bonusFactor.toFixed(4)}. Unverified.`);
+    lines.push(`Crit alternate (sheet already includes the [x] crit multipliers) power ${result.critAlternate.total.toFixed(4)}. Low confidence.`);
   }
   if (result.conditionalCritAlternate) {
     const alt = result.conditionalCritAlternate;
-    lines.push(`Conditional crit-damage alternate ×${alt.multiplier} = factor ${alt.critFactor.toFixed(4)}, power ${alt.total.toFixed(4)}. Estimate. The headline score leaves this buff out.`);
+    lines.push(`Flawless Technique +45%[x] added to the crit-multiplier sum (×${alt.multiplier}). Power ${alt.total.toFixed(4)}. Estimate. The headline score leaves it out.`);
   }
   return lines.join('\n');
 }

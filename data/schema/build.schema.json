@@ -192,7 +192,7 @@
       "required": ["verified", "reading", "sheetCritChance", "sheetCritDmg", "note"],
       "properties": {
         "verified": { "type": "boolean" },
-        "reading": { "enum": ["bonus", "full"] },
+        "reading": { "enum": ["bonus", "full", "s2"] },
         "sheetCritChance": { "type": "number" },
         "sheetCritDmg": { "type": "number" },
         "bonusFactor": { "type": "number" },

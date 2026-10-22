@@ -236,17 +236,36 @@ function conditionState(effect, build, catalog) {
 
 const NON_DAMAGE_KINDS = new Set(['defense', 'resource', 'mobility', 'utility', 'base-weapon']);
 
+const FORMULA_BUCKETS = new Set(['crit-mult', 'vuln-mult']);
+
+function formulaEffect(effect) {
+  const stat = effect?.stat || '';
+  if (/vulnerable damage multiplier/i.test(stat) && (effect.bucket === 'multiplicative' || effect.bucket === 'vuln-mult')) {
+    return { ...effect, bucket: 'vuln-mult' };
+  }
+  if (/critical strike damage multiplier/i.test(stat)) {
+    return { ...effect, bucket: 'crit-mult', conditions: Array.isArray(effect.conditions) ? effect.conditions : [] };
+  }
+  return effect;
+}
+
 export function damageEffects(entity, build, catalog) {
   const active = [];
   for (const effect of entity.effects || []) {
     if (effect.scored === false) continue;
     if (NON_DAMAGE_KINDS.has(effect.kind)) continue;
-    const value = pointValue(effect.value);
-    const bucket = knownBucket(effect.bucket);
+    const scoring = formulaEffect(effect);
+    const value = pointValue(scoring.value);
+    const bucket = knownBucket(scoring.bucket) || (FORMULA_BUCKETS.has(scoring.bucket) ? scoring.bucket : null);
     if (value == null || !bucket) continue;
-    const judged = build ? conditionState(effect, build, catalog) : { state: effect.conditions && effect.conditions.length === 0 ? 'active' : 'unknown' };
+    const judged = build ? conditionState(scoring, build, catalog) : { state: scoring.conditions && scoring.conditions.length === 0 ? 'active' : 'unknown' };
     if (judged.state === 'inactive') continue;
-    active.push({ effect, value, bucket, state: judged.state, when: judged.when || null });
+    let when = judged.when || null;
+    if (bucket === 'vuln-mult' && !when && build) {
+      const up = build.uptime?.vulnerable;
+      if (typeof up === 'number' && up > 0 && up < 1) when = 'vulnerable';
+    }
+    active.push({ effect: scoring, value, bucket, state: judged.state, when });
   }
   return active;
 }
@@ -308,11 +327,11 @@ function appendDamageModifiers(entity, build, catalog, modifiers, notes, label, 
       continue;
     }
     if (piece.bucket === 'crit' && typeof build.critDmg === 'number') {
-      notes.push(`${label.name}: Critical Strike Damage ${piece.value} stays out of the crit term. The sheet total ${build.critDmg}% is the crit input.`);
+      notes.push(`${label.name}: Critical Strike Damage ${piece.value} stays out of the [x] Critical Strike Damage Multiplier sum. The sheet total ${build.critDmg}% is the additive crit input.`);
       continue;
     }
     const modifier = { name: label.name, bucket: piece.bucket, value: piece.value, active: true, kind: label.kind, id: entity.id };
-    if (piece.state === 'partial' && piece.when) modifier.when = piece.when;
+    if (piece.when) modifier.when = piece.when;
     modifiers.push(modifier);
   }
 }
@@ -369,7 +388,7 @@ function applyOffensiveSheet(build, skills, modifiers, notes) {
     notes.push('Imbiber: 5%[x] per missing potion uses 0 missing potions of a capacity of 4. The factor is 1.0. Estimate.');
   }
   notes.push('Double-count: sheet vs Healthy 26% and vs Injured 26% match Might 26%[x]. While Fortified 35% does not match Warbringer 45%[x] or Crushing 64%[x], so a sheet row is a separate additive source from an [x] line. Headline keeps the additive 26 and Might 26%[x].');
-  notes.push('Double-count: Vulnerable Damage 208.8% is in the additive bucket on the Vulnerable state. The vulnerable term does not apply that percent again. Melted Heart x35% Vulnerable Damage Multiplier is a different [x] and stays multiplicative.');
+  notes.push('Double-count: Vulnerable Damage 208.8% stays in the additive bucket on the Vulnerable state. Headline: that percent does not include the base 20%. The vulnerable factor is 1.2 × (1 + sum of [x] Vulnerable Damage Multiplier). Melted Heart x35% is in that sum and is not also in the general [x] product.');
   notes.push('Double-count: while Fortified 35% is additive. Warbringer 45%[x] and Crushing 64%[x] stay multiplicative.');
 }
 
@@ -393,6 +412,13 @@ export function engineInputFromBuild(catalog, build, opts = {}) {
       const entity = (list || []).find(item => item.id === id);
       if (!entity) continue;
       appendDamageModifiers(entity, build, catalog, modifiers, notes, { name: `${entity.name} (${slot.slotId})`, kind }, alternateCrit);
+    }
+    for (const placed of slot.affixes || []) {
+      if (!placed?.affixId) continue;
+      const affix = (catalog.affixes || []).find(item => item.id === placed.affixId);
+      if (!affix) continue;
+      const effects = (affix.effects || []).map(effect => (typeof placed.value === 'number' ? { ...effect, value: placed.value } : effect));
+      appendDamageModifiers({ ...affix, effects }, build, catalog, modifiers, notes, { name: `${affix.name} (${slot.slotId})`, kind: 'affix' }, alternateCrit);
     }
   }
   for (const board of build.boards || []) {
@@ -466,9 +492,16 @@ export function engineInputFromBuild(catalog, build, opts = {}) {
     }
   }
   if (typeof build.critChance === 'number' && typeof build.critDmg === 'number' && build.critDmg > 0) {
-    const bonusFactor = 1 + (build.critChance / 100) * (build.critDmg / 100);
-    const fullFactor = (build.critChance / 100) * (build.critDmg / 100);
-    notes.push(`Crit audit: sheet Critical Strike Chance ${build.critChance}% and Critical Strike Damage ${build.critDmg}% are the only crit inputs. Working factor ${bonusFactor.toFixed(4)} = 1 + chance × sheet. Alternate factor ${fullFactor.toFixed(4)} treats the sheet percent as the full multiplier. Gear crit lines are not added again. The reading is unverified.`);
+    const critMults = modifiers.filter(mod => mod.bucket === 'crit-mult');
+    const summed = 1 + critMults.reduce((sum, mod) => sum + mod.value / 100, 0);
+    notes.push(`Crit formula [A][B][C]: (A + ${build.critDmg / 100}) / A × 1.5 × (1 + sum of Critical Strike Damage Multiplier [x]). A is the state's additive factor. At ${build.critChance}% crit chance the crit factor is used directly. Headline: sheet ${build.critDmg}% is additive Critical Strike Damage. It does not include the base 50% or the [x] multipliers ${critMults.map(mod => mod.value).join(' + ') || '(none)'} (factor ${summed.toFixed(4)}). Confidence: high on the mechanic, low on the sheet display. Sources: [A] https://d4guides.gg/en/guides/mechanics/damage-calculation-in-diablo-4-how-your-damage-works ; [B] https://mobalytics.gg/diablo-4/guides/damage-buckets-deep-dive ; [C] https://www.wowhead.com/diablo-4/news/breaking-down-the-critical-strike-and-vulnerable-damage-change-diablo-4-335487.`);
+  }
+  if (modifiers.some(mod => mod.bucket === 'vuln-mult') || build.vulnerableDamageInAdditive === true) {
+    const sheetVuln = build.offensiveSheet?.vulnerable;
+    const sheetText = build.vulnerableDamageInAdditive === true && typeof sheetVuln === 'number'
+      ? ` Sheet Vulnerable Damage ${sheetVuln}% stays additive on that state. Headline: it does not include the base 20% (low confidence on the sheet display).`
+      : '';
+    notes.push(`Vulnerable formula [A][B][C]: ×1.2 vs Vulnerable targets (high confidence), times (1 + sum of [x] Vulnerable Damage Multiplier) (medium confidence).${sheetText}`);
   }
   const mainStatPer10 = catalog.mainstat?.verified === true ? catalog.mainstat.percentPer10 : null;
   return {
@@ -554,29 +587,47 @@ function blendScore(input, uptime) {
   };
 }
 
+function applyFormulaOpts(input, opts = {}) {
+  let modifiers = (input.modifiers || []).map(mod => ({ ...mod }));
+  if (opts.omitCritMult === true) modifiers = modifiers.filter(mod => mod.bucket !== 'crit-mult');
+  if (Array.isArray(opts.onlyCritMultValues)) {
+    modifiers = modifiers.filter(mod => mod.bucket !== 'crit-mult' || opts.onlyCritMultValues.includes(mod.value));
+  }
+  if (opts.vulnerableBaseInSheet === true) {
+    modifiers = modifiers.map(mod => (mod.name === 'Vulnerable Damage' ? { ...mod, value: mod.value - 20 } : mod));
+  }
+  if (typeof opts.addCritMult === 'number') {
+    modifiers = [...modifiers, { name: opts.addCritMultName || 'extra crit multiplier', bucket: 'crit-mult', value: opts.addCritMult, active: true }];
+  }
+  return {
+    ...input,
+    modifiers,
+    ...(opts.vulnMultMode ? { vulnMultMode: opts.vulnMultMode } : {}),
+    ...(opts.critMultMode ? { critMultMode: opts.critMultMode } : {}),
+    ...(opts.critSheetIncludesBase === true ? { critSheetIncludesBase: true } : {})
+  };
+}
+
 export function evaluateBuild(catalog, build, opts = {}) {
-  const input = engineInputFromBuild(catalog, build, opts);
+  const input = applyFormulaOpts(engineInputFromBuild(catalog, build, opts), opts);
   const uptime = build.uptime || blankUptime();
   const result = blendScore(input, uptime);
   let critAlternate = null;
   let conditionalCritAlternate = null;
-  if (typeof build.critChance === 'number' && build.critChance > 0 && typeof build.critDmg === 'number' && build.critDmg > 0) {
-    const alt = blendScore({ ...input, critMode: 'full' }, uptime);
+  if (typeof build.critChance === 'number' && build.critChance > 0 && typeof build.critDmg === 'number' && build.critDmg > 0 && opts.omitCritMult !== true) {
+    const stripped = applyFormulaOpts(input, { omitCritMult: true });
+    const alt = blendScore(stripped, uptime);
     critAlternate = {
       total: alt.total,
-      factor: (build.critChance / 100) * (build.critDmg / 100),
-      bonusFactor: 1 + (build.critChance / 100) * (build.critDmg / 100),
+      reading: 'sheet-includes-crit-multipliers',
       verified: false
     };
-    const critMult = (input.alternateCrit || []).reduce((product, item) => product * (1 + item.value / 100), 1);
-    if (critMult !== 1) {
-      const conditional = blendScore({ ...input, critDamageMultiplier: critMult }, uptime);
-      const sheet = build.critDmg / 100;
-      const chance = build.critChance / 100;
+    const flawless = (input.alternateCrit || []).reduce((sum, item) => sum + item.value, 0);
+    if (flawless) {
+      const conditional = blendScore(applyFormulaOpts(input, { addCritMult: flawless, addCritMultName: 'Flawless Technique' }), uptime);
       conditionalCritAlternate = {
         total: conditional.total,
-        multiplier: critMult,
-        critFactor: 1 + chance * sheet * critMult,
+        multiplier: 1 + flawless / 100,
         estimate: true,
         verified: false
       };
