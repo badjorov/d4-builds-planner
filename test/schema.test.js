@@ -305,4 +305,15 @@ test('video 1 keeps confirmed values and flags the conflicting readings', () => 
   assert.equal(saved.suspectReadings.some(reading => reading.field === 'glyph.level'), false);
   assert.equal(saved.glyphs.find(glyph => glyph.glyphId === 'might').level, 135);
   assert.equal(saved.glyphs.filter(glyph => glyph.glyphId !== 'might').every(glyph => glyph.level === null && glyph.levelApproximate[0] === 131 && glyph.levelApproximate[1] === 135), true);
+  assert.equal(saved.defense.armorMitigationPct, 78.2);
+  assert.equal(saved.defense.resistMitigationPct, 85.9);
+  assert.equal(saved.defense.mitigationCapPct, 90);
+  assert.equal(saved.defense.coldResistance.gear + saved.defense.coldResistance.intelligence + saved.defense.coldResistance.other, 21218);
+  const without = saved.comparisons.find(entry => entry.id === 'without-stone-of-jordan');
+  assert.equal(without.armor, 33347);
+  assert.equal(without.resistances.coldMitigationPct, 85.8);
+  assert.equal(without.resistances.physical, 11280);
+  assert.equal(Object.hasOwn(without.resistances, 'physicalMitigationPct'), false);
+  assert.equal(saved.defense.armor, 33715);
+  assert.equal(saved.defense.resists, 21218);
 });

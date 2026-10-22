@@ -117,8 +117,10 @@ test('needs-input splits the user build into engine-blocking, required, and nice
   assert.equal(split.niceToHave.every(item => item.provenance == null), true);
   const blocking = countProvenance(split.engineBlocking);
   assert.equal(blocking['user-only'] + blocking.sourceable, split.engineBlocking.length);
-  assert.ok(topFieldNames(split.engineBlocking).length > 0);
-  assert.ok(topFieldNames(split.engineBlocking).length <= 20);
+  assert.equal(split.engineBlocking.length, 0);
+  assert.equal(topFieldNames(split.engineBlocking).length, 0);
+  assert.equal(split.engineBlocking.some(item => item.path.endsWith('/armorMitigationPct')), false);
+  assert.equal(split.engineBlocking.some(item => item.path.endsWith('/resistMitigationPct')), false);
 });
 
 test('channeling and fortified conditions stay unknown, and a skill tag still matches', () => {

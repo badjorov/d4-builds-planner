@@ -83,6 +83,10 @@
         "note": { "type": "string" }
       }
     },
+    "comparisons": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/sheetComparison" }
+    },
     "suspectReadings": {
       "type": "array",
       "items": { "$ref": "#/$defs/suspectReading" }
@@ -212,6 +216,45 @@
         }
       }
     },
+    "coldResistance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["gear", "intelligence", "other"],
+      "properties": {
+        "gear": { "type": "number" },
+        "intelligence": { "type": "number" },
+        "other": { "type": "number" },
+        "note": { "type": "string" }
+      }
+    },
+    "sheetComparison": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "source", "verified"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "name": { "type": "string" },
+        "armor": { "type": "number" },
+        "toughness": { "type": "number" },
+        "strength": { "type": "number" },
+        "resistances": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "physical": { "type": "number" },
+            "fire": { "type": "number" },
+            "lightning": { "type": "number" },
+            "cold": { "type": "number" },
+            "coldMitigationPct": { "type": "number" },
+            "poison": { "type": "number" },
+            "shadow": { "type": "number" }
+          }
+        },
+        "source": { "type": "string", "minLength": 1 },
+        "verified": { "type": "boolean" },
+        "note": { "type": "string" }
+      }
+    },
     "defense": {
       "type": "object",
       "additionalProperties": false,
@@ -221,7 +264,10 @@
         "armor": { "type": ["number", "null"] },
         "resists": { "type": ["number", "null"] },
         "armorMitigationPct": { "type": ["number", "null"] },
+        "armorMitigationScope": { "type": "string" },
         "resistMitigationPct": { "type": ["number", "null"] },
+        "mitigationCapPct": { "type": ["number", "null"] },
+        "coldResistance": { "$ref": "#/$defs/coldResistance" },
         "dr": {
           "oneOf": [
             { "type": "null" },
