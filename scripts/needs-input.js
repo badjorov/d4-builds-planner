@@ -1,5 +1,5 @@
 import { readFileSync } from 'node:fs';
-import { needsInput, openNeeds, pendingAllocation, splitForBuild, summarizeNeeds } from '../src/needs-input.js';
+import { countProvenance, needsInput, openNeeds, pendingAllocation, splitForBuild, summarizeNeeds, topFieldNames } from '../src/needs-input.js';
 
 const files = [
   ['../data/barbarian.json', ''],
@@ -28,7 +28,21 @@ function printGroup(label, group) {
   for (const key of Object.keys(by).sort()) console.log(`${label} ${key} ${JSON.stringify(by[key])}`);
 }
 
+function printProvenance(label, group) {
+  const counts = countProvenance(group);
+  console.log(`${label} provenance user-only ${counts['user-only']} sourceable ${counts.sourceable}`);
+}
+
+printGroup('engine-blocking', split.engineBlocking);
+printProvenance('engine-blocking', split.engineBlocking);
+console.log('engine-blocking top-fields');
+for (const [name, count] of topFieldNames(split.engineBlocking)) console.log(`engine-blocking field ${name} ${count}`);
+console.log('engine-blocking user-only paths');
+for (const item of split.engineBlocking.filter(entry => entry.provenance === 'user-only')) {
+  console.log(`${item.path} — ${item.reason}`);
+}
 printGroup('required', split.required);
+printProvenance('required', split.required);
 printGroup('nice-to-have', split.niceToHave);
 console.log(`pending-allocation ${pendingAllocation(items).length}`);
 console.log(`open ${openNeeds(items).length}`);

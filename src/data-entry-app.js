@@ -29,13 +29,16 @@ function renderChecklist() {
   const items = [...needsInput(catalog), ...extraNeeds].sort((a, b) => a.path.localeCompare(b.path) || a.reason.localeCompare(b.reason));
   const split = splitForBuild(items, userBuild, catalog);
   const pending = pendingAllocation(items).length;
-  $('checklistCount').textContent = `(${split.required.length} required, ${split.niceToHave.length} nice-to-have, ${pending} pending allocation)`;
-  const block = (label, group) => {
+  $('checklistCount').textContent = `(${split.engineBlocking.length} engine-blocking, ${split.required.length} required, ${split.niceToHave.length} nice-to-have, ${pending} pending allocation)`;
+  const block = (label, group, withProvenance) => {
     const lines = [`${label} (${group.length})`];
-    for (const item of group) lines.push(`${item.path} — ${item.reason} — ${item.message}`);
+    for (const item of group) {
+      const provenance = withProvenance ? ` — ${item.provenance}` : '';
+      lines.push(`${item.path} — ${item.reason}${provenance} — ${item.message}`);
+    }
     return lines.join('\n');
   };
-  $('checklist').textContent = `${block('Required', split.required)}\n\n${block('Nice to have', split.niceToHave)}`;
+  $('checklist').textContent = `${block('Engine-blocking', split.engineBlocking, true)}\n\n${block('Required', split.required, true)}\n\n${block('Nice to have', split.niceToHave, false)}`;
 }
 
 function renderList() {

@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { formatNeedsInput, needsInput, openNeeds, pendingAllocation, splitForBuild } from '../src/needs-input.js';
+import { countProvenance, formatNeedsInput, needsInput, openNeeds, pendingAllocation, splitForBuild, topFieldNames } from '../src/needs-input.js';
 
 const catalog = JSON.parse(readFileSync(new URL('../data/barbarian.json', import.meta.url), 'utf8'));
 const saved = JSON.parse(readFileSync(new URL('../data/builds.json', import.meta.url), 'utf8'));
@@ -69,21 +69,39 @@ test('inactive skills and upgrades stay out of needs-input, and the remaining sk
   }
 });
 
-test('needs-input splits the user build into required and nice-to-have', () => {
+test('needs-input splits the user build into engine-blocking, required, and nice-to-have', () => {
   const build = saved.builds.find(entry => entry.id === 'users-current-build');
   const items = [
     ...needsInput(catalog),
     ...needsInput(saved, '/builds.json')
   ];
   const split = splitForBuild(items, build, catalog);
-  assert.equal(split.required.some(item => item.path.startsWith('/skills/whirlwind/')), true);
-  assert.equal(split.required.some(item => item.path.startsWith('/skills/flay/')), false);
-  assert.equal(split.required.some(item => item.path.startsWith('/aspects/crushing-aspect/')), true);
-  assert.equal(split.required.some(item => item.path.startsWith('/aspects/accelerating/')), false);
+  assert.equal(split.engineBlocking.length + split.required.length + split.niceToHave.length, items.length);
+  for (const group of [split.engineBlocking, split.required, split.niceToHave]) {
+    assert.equal(group.some(item => item.path.startsWith('/skills/flay/')), false);
+  }
   assert.equal(split.niceToHave.some(item => item.path.startsWith('/aspects/accelerating/')), true);
-  assert.equal(split.required.some(item => item.path.startsWith('/uniques/ramaladni/')), true);
-  assert.equal(split.required.some(item => item.path.startsWith('/glyphs/might/')), true);
+  assert.equal(split.engineBlocking.some(item => item.path.startsWith('/aspects/accelerating/')), false);
+  assert.equal(split.niceToHave.some(item => item.path.startsWith('/glyphs/might/')), true);
+  assert.equal(split.engineBlocking.some(item => item.path.startsWith('/glyphs/')), false);
+  assert.equal(split.required.some(item => item.path.startsWith('/glyphs/')), false);
   assert.equal(split.niceToHave.some(item => item.path.startsWith('/glyphs/disembowel/')), true);
-  assert.equal(split.required.some(item => item.path === '/builds.json/builds/users-current-build/overpowerPct'), true);
-  assert.equal(split.required.length + split.niceToHave.length, items.length);
+  assert.equal(split.niceToHave.some(item => item.path === '/aspects/crushing-aspect/slots'), true);
+  assert.equal(split.niceToHave.some(item => item.path.includes('/aspects/crushing-aspect/effects/') && item.path.endsWith('/stacking')), true);
+  const overpower = split.required.find(item => item.path === '/builds.json/builds/users-current-build/overpowerPct');
+  assert.equal(overpower.provenance, 'user-only');
+  const dot = split.engineBlocking.find(item => item.path === '/skills/whirlwind/dot');
+  assert.equal(dot.reason, 'null');
+  assert.equal(dot.provenance, 'user-only');
+  const crushingConditions = split.engineBlocking.filter(item => item.path.startsWith('/aspects/crushing-aspect/effects/') && item.path.endsWith('/conditions'));
+  assert.equal(crushingConditions.some(item => item.provenance === 'sourceable'), true);
+  const ramaladniBucket = split.engineBlocking.find(item => item.path === '/uniques/ramaladni/effects/1/bucket');
+  assert.equal(ramaladniBucket.provenance, 'user-only');
+  assert.equal(split.engineBlocking.every(item => item.provenance === 'user-only' || item.provenance === 'sourceable'), true);
+  assert.equal(split.required.every(item => item.provenance === 'user-only' || item.provenance === 'sourceable'), true);
+  assert.equal(split.niceToHave.every(item => item.provenance == null), true);
+  const blocking = countProvenance(split.engineBlocking);
+  assert.equal(blocking['user-only'] + blocking.sourceable, split.engineBlocking.length);
+  assert.ok(topFieldNames(split.engineBlocking).length > 0);
+  assert.ok(topFieldNames(split.engineBlocking).length <= 20);
 });

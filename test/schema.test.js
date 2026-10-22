@@ -236,9 +236,15 @@ test('video 1 keeps confirmed values and flags the conflicting readings', () => 
   assert.equal(spirit.effects.find(item => item.stat === 'Rune Tal: Lord of Hatred').value, null);
   const insight = catalog.uniques.find(item => item.id === 'insight');
   assert.equal(insight.effects.find(item => item.stat.startsWith('Rune Ral')).note.includes('cut off'), true);
-  assert.equal(catalog.glyphs.filter(glyph => ['might', 'twister', 'imbiber', 'marshal', 'wrath'].includes(glyph.id)).every(glyph => glyph.level === 70 && glyph.suspect === true), true);
+  const equippedGlyphs = catalog.glyphs.filter(glyph => ['might', 'twister', 'imbiber', 'marshal', 'wrath'].includes(glyph.id));
+  assert.equal(equippedGlyphs.length, 5);
+  assert.equal(equippedGlyphs.every(glyph => glyph.level === 115 && glyph.verified === false && glyph.suspect === true), true);
+  assert.equal(equippedGlyphs.every(glyph => glyph.levelReadings?.map(reading => `${reading.value}:${reading.suspect}`).join(',') === '115:true,70:true,155:true'), true);
   assert.equal(catalog.paragonBoards.length, 5);
   assert.equal(catalog.paragonNodes.find(node => node.id === 'flawless-nimble').effects[0].value, null);
   assert.equal(saved.suspectReadings.every(reading => reading.suspect === true), true);
-  assert.equal(saved.glyphs.every(glyph => glyph.level === 70), true);
+  assert.equal(saved.glyphs.every(glyph => glyph.level === 115), true);
+  const glyphReading = saved.suspectReadings.find(reading => reading.field === 'glyph.level');
+  assert.equal(glyphReading.confirmedValue, null);
+  assert.equal(glyphReading.videoValue, '70, 115, and 155');
 });

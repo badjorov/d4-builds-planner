@@ -379,6 +379,20 @@
         "id": { "type": "string", "minLength": 1 },
         "name": { "type": "string" },
         "level": { "type": ["number", "null"] },
+        "levelReadings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["value", "source", "suspect"],
+            "properties": {
+              "value": { "type": "number" },
+              "source": { "type": "string", "minLength": 1 },
+              "suspect": { "type": "boolean" },
+              "note": { "type": "string" }
+            }
+          }
+        },
         "rarity": { "type": ["string", "null"] },
         "radius": { "type": ["number", "null"] },
         "base": { "type": ["string", "null"] },

@@ -97,69 +97,139 @@ export function summarizeNeeds(items) {
   return by;
 }
 
-function normName(name) {
-  return String(name || '').toLowerCase().replace(/[^a-z0-9]+/g, '');
+const KNOWN_BUCKETS = new Set(['additive', 'multiplicative', 'crit', 'vuln', 'overpower']);
+
+function entityById(list, id) {
+  return (list || []).find(entry => entry.id === id) || null;
 }
 
-function plainName(name) {
-  return normName(String(name || '').replace(/\s*\(.*$/, ''));
+function effectAt(entity, index) {
+  const effect = entity?.effects?.[index];
+  if (!effect) return null;
+  const value = effect.value;
+  return {
+    effect,
+    number: typeof value === 'number' && Number.isFinite(value),
+    range: Array.isArray(value),
+    knownBucket: KNOWN_BUCKETS.has(effect.bucket),
+    conditionsRead: typeof value === 'number' && Number.isFinite(value) && KNOWN_BUCKETS.has(effect.bucket)
+  };
 }
 
-const REQUIRED_GEAR_KEYS = new Set(['aspectId', 'uniqueId', 'attacksPerSecond', 'itemCritChance', 'itemName']);
-const REQUIRED_STAT_KEYS = new Set([
-  'weaponDmg', 'mainStat', 'critChance', 'critDmg', 'vulnPct', 'overpowerPct',
-  'maxFury', 'resistanceCapPct', 'verified', 'defense', 'uptime', 'glyphs', 'boards', 'sheet'
-]);
+function storedText(entity, effect) {
+  return [entity?.description, entity?.tooltip, entity?.transcribed, effect?.stat, effect?.note].filter(Boolean).join('\n');
+}
+
+function fromBlizzard(entity, effect) {
+  const source = effect?.source || entity?.source;
+  return String(source || '').includes('news.blizzard.com');
+}
+
+function bucketSourceable(entity, effect) {
+  if (fromBlizzard(entity, effect)) return true;
+  return /\[\s*[x+]\s*\]/i.test(`${effect?.stat || ''}\n${effect?.note || ''}`);
+}
+
+function conditionsSourceable(entity, effect) {
+  if (fromBlizzard(entity, effect)) return true;
+  return /\b(while|when|after|against|whenever|during)\b/i.test(storedText(entity, effect));
+}
+
+function scoringContext(build, catalog) {
+  const skillIds = new Set(build?.skills || []);
+  const aspects = new Map();
+  const uniques = new Map();
+  for (const slot of build?.gear || []) {
+    if (slot.aspectId) {
+      const entity = entityById(catalog.aspects, slot.aspectId);
+      if (entity) aspects.set(entity.id, entity);
+    }
+    if (slot.uniqueId) {
+      const entity = entityById(catalog.uniques, slot.uniqueId);
+      if (entity) uniques.set(entity.id, entity);
+    }
+  }
+  const skills = new Map();
+  for (const id of skillIds) {
+    const skill = entityById(catalog.skills, id);
+    if (skill) skills.set(id, skill);
+  }
+  return {
+    buildId: build?.id || '',
+    skillCount: skillIds.size,
+    skills,
+    aspects,
+    uniques
+  };
+}
+
+function classifyScoringField(item, ctx) {
+  const path = item.path;
+  const prefix = ctx.buildId ? `/builds.json/builds/${ctx.buildId}/` : '';
+  if (prefix && path.startsWith(prefix)) {
+    const rest = path.slice(prefix.length);
+    const field = rest.split('/').at(-1);
+    const blockingStats = new Set(['vulnerable', 'overpower', 'armorMitigationPct', 'resistMitigationPct', 'dr']);
+    const requiredStats = new Set(['weaponDmg', 'mainStat', 'critChance', 'critDmg', 'vulnPct', 'overpowerPct', 'life']);
+    if (rest.startsWith('uptime/') && blockingStats.has(field)) return { tier: 'engine-blocking', provenance: 'user-only' };
+    if (rest.startsWith('defense/') && blockingStats.has(field)) return { tier: 'engine-blocking', provenance: 'user-only' };
+    if (requiredStats.has(field) && (item.reason === 'null' || item.reason === 'range')) return { tier: 'required', provenance: 'user-only' };
+    return { tier: 'nice-to-have' };
+  }
+
+  let match = path.match(/^\/skills\/([^/]+)\/([^/]+)$/);
+  if (match && ctx.skills.has(match[1])) {
+    if (match[2] === 'coeffPct' && item.reason === 'null') return { tier: 'required', provenance: 'user-only' };
+    if (match[2] === 'dot' && item.reason === 'null') return { tier: 'engine-blocking', provenance: 'user-only' };
+    return { tier: 'nice-to-have' };
+  }
+
+  match = path.match(/^\/(aspects|uniques)\/([^/]+)\/effects\/(\d+)\/(value|bucket|conditions)$/);
+  if (!match) return { tier: 'nice-to-have' };
+  const collection = match[1] === 'aspects' ? ctx.aspects : ctx.uniques;
+  const entity = collection.get(match[2]);
+  if (!entity) return { tier: 'nice-to-have' };
+  const fact = effectAt(entity, Number(match[3]));
+  if (!fact) return { tier: 'nice-to-have' };
+  const key = match[4];
+  if (key === 'conditions') {
+    if (!fact.conditionsRead || item.reason !== 'null') return { tier: 'nice-to-have' };
+    return { tier: 'engine-blocking', provenance: conditionsSourceable(entity, fact.effect) ? 'sourceable' : 'user-only' };
+  }
+  if (key === 'bucket' && item.reason === 'null') {
+    return { tier: 'engine-blocking', provenance: bucketSourceable(entity, fact.effect) ? 'sourceable' : 'user-only' };
+  }
+  if (key === 'value' && (item.reason === 'null' || item.reason === 'range')) {
+    return { tier: 'engine-blocking', provenance: 'user-only' };
+  }
+  return { tier: 'nice-to-have' };
+}
 
 export function splitForBuild(items, build, catalog = {}) {
-  const skillIds = new Set(build?.skills || []);
-  const aspectIds = new Set();
-  const uniqueIds = new Set();
-  for (const slot of build?.gear || []) {
-    if (slot.aspectId) aspectIds.add(slot.aspectId);
-    if (slot.uniqueId) uniqueIds.add(slot.uniqueId);
-    const name = normName(slot.itemName);
-    if (!name) continue;
-    for (const aspect of catalog.aspects || []) if (normName(aspect.name) === name) aspectIds.add(aspect.id);
-    for (const unique of catalog.uniques || []) if (normName(unique.name) === name) uniqueIds.add(unique.id);
-  }
-  const glyphIds = new Set((build?.glyphs || []).map(glyph => glyph.glyphId).filter(Boolean));
-  const boardNames = new Set((build?.boards || []).map(board => normName(board.name)).filter(Boolean));
-  const boardIds = new Set((build?.boards || []).map(board => board.boardId).filter(Boolean));
-  for (const board of catalog.paragonBoards || []) {
-    if (boardIds.has(board.id) || boardNames.has(normName(board.name)) || boardNames.has(plainName(board.name))) boardIds.add(board.id);
-  }
-  const nodeIds = new Set();
-  for (const node of catalog.paragonNodes || []) {
-    if (boardIds.has(node.boardId) || boardNames.has(plainName(node.name)) || boardNames.has(normName(node.name))) nodeIds.add(node.id);
-  }
-
-  function isRequired(path) {
-    let match = path.match(/^\/skills\/([^/]+)/);
-    if (match) return skillIds.has(match[1]);
-    match = path.match(/^\/aspects\/([^/]+)/);
-    if (match) return aspectIds.has(match[1]);
-    match = path.match(/^\/uniques\/([^/]+)/);
-    if (match) return uniqueIds.has(match[1]);
-    match = path.match(/^\/glyphs\/([^/]+)/);
-    if (match) return glyphIds.has(match[1]);
-    if (path === '/paragonBoards') return (build?.boards || []).length > 0;
-    match = path.match(/^\/paragonBoards\/([^/]+)/);
-    if (match) return boardIds.has(match[1]);
-    match = path.match(/^\/paragonNodes\/([^/]+)/);
-    if (match) return nodeIds.has(match[1]);
-    if (path === '/mainstat' || path.startsWith('/mainstat/')) return true;
-    const prefix = build?.id ? `/builds.json/builds/${build.id}/` : '';
-    if (prefix && (path === prefix.slice(0, -1) || path.startsWith(prefix))) {
-      const head = path.slice(prefix.length).split('/')[0];
-      if (head === 'gear') return REQUIRED_GEAR_KEYS.has(path.split('/').at(-1));
-      return REQUIRED_STAT_KEYS.has(head);
-    }
-    return false;
-  }
-
+  const ctx = scoringContext(build, catalog);
+  const engineBlocking = [];
   const required = [];
   const niceToHave = [];
-  for (const item of items) (isRequired(item.path) ? required : niceToHave).push(item);
-  return { required, niceToHave };
+  for (const item of items) {
+    const role = classifyScoringField(item, ctx);
+    if (role.tier === 'engine-blocking') engineBlocking.push({ ...item, provenance: role.provenance });
+    else if (role.tier === 'required') required.push({ ...item, provenance: role.provenance });
+    else niceToHave.push(item);
+  }
+  return { engineBlocking, required, niceToHave };
+}
+
+export function countProvenance(items) {
+  const counts = { 'user-only': 0, sourceable: 0 };
+  for (const item of items) if (counts[item.provenance] != null) counts[item.provenance] += 1;
+  return counts;
+}
+
+export function topFieldNames(items, limit = 20) {
+  const counts = new Map();
+  for (const item of items) {
+    const name = item.path.split('/').filter(Boolean).at(-1) || '(root)';
+    counts.set(name, (counts.get(name) || 0) + 1);
+  }
+  return [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).slice(0, limit);
 }

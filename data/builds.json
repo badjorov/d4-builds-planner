@@ -556,23 +556,23 @@
       "glyphs": [
         {
           "glyphId": "might",
-          "level": 70
+          "level": 115
         },
         {
           "glyphId": "twister",
-          "level": 70
+          "level": 115
         },
         {
           "glyphId": "imbiber",
-          "level": 70
+          "level": 115
         },
         {
           "glyphId": "marshal",
-          "level": 70
+          "level": 115
         },
         {
           "glyphId": "wrath",
-          "level": 70
+          "level": 115
         }
       ],
       "talismans": [
@@ -616,7 +616,7 @@
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
       "manualInputsVerified": false,
-      "note": "Based on the Whirlwind Barb (S15) Immortal Speed 130 name list. User-confirmed differences: Leoric's Crown is the helm and Tuskhelm of Joritz the Mighty is a charm; Stone of Jordan replaces Ring of Starless Skies; the bludgeoning slot is a runeword polearm; Endurant Faith and Seal of the Epiphany replace Blood-Mad Idol and The Furnace; the arsenal is 2 two-handed weapons and 2 one-handed weapons. The character sheet was confirmed from the user's screenshot: level 70, Strength 4101, Intelligence 981, Willpower 1333, Dexterity 1320, Armor 32183, Toughness 29309 for all damage types, Weapon Damage 4566, Max Life 473. Video readings that the screenshot did not confirm stay unverified: crit chance 100%, crit damage 7414.8%, Vulnerable damage 206.8%, max Fury 826, resistances capped at 80%. The 80% figure is the cap that was read, not an EHP resist mitigation percent. Armor mitigation was not shown. Life numbers implied by skill tooltips are ignored. Confirmed skill allocation, 2026-10-22: Whirlwind, War Cry, Challenging Shout, Rallying Cry, Wrath of the Berserker, and Iron Skin. Flay is not active. The upgrade list on this build is the confirmed allocation. Upgrade numbers stay on the catalog rows and stay unverified. Video 1 (user video 1 (watchVideo 2026-10-22)) added the equipped item rolls, paragon boards, glyph level 70, charms, Prime Evil powers, and polearm expertise. Confirmed values kept: Insight is the 2H polearm at 0.9 APS with 94.5% crit, Spirit is 1H, Armor 32183, Life 473, and the rank model with Whirlwind at 41. The video's conflicting readings are suspect. Flay stays inactive.",
+      "note": "Based on the Whirlwind Barb (S15) Immortal Speed 130 name list. User-confirmed differences: Leoric's Crown is the helm and Tuskhelm of Joritz the Mighty is a charm; Stone of Jordan replaces Ring of Starless Skies; the bludgeoning slot is a runeword polearm; Endurant Faith and Seal of the Epiphany replace Blood-Mad Idol and The Furnace; the arsenal is 2 two-handed weapons and 2 one-handed weapons. The character sheet was confirmed from the user's screenshot: level 70, Strength 4101, Intelligence 981, Willpower 1333, Dexterity 1320, Armor 32183, Toughness 29309 for all damage types, Weapon Damage 4566, Max Life 473. Video readings that the screenshot did not confirm stay unverified: crit chance 100%, crit damage 7414.8%, Vulnerable damage 206.8%, max Fury 826, resistances capped at 80%. The 80% figure is the cap that was read, not an EHP resist mitigation percent. Armor mitigation was not shown. Life numbers implied by skill tooltips are ignored. Confirmed skill allocation, 2026-10-22: Whirlwind, War Cry, Challenging Shout, Rallying Cry, Wrath of the Berserker, and Iron Skin. Flay is not active. The upgrade list on this build is the confirmed allocation. Upgrade numbers stay on the catalog rows and stay unverified. Video 1 (user video 1 (watchVideo 2026-10-22)) added the equipped item rolls, paragon boards, glyph levels 115, 70, and 155 (working level 115, unverified), charms, Prime Evil powers, and polearm expertise. Confirmed values kept: Insight is the 2H polearm at 0.9 APS with 94.5% crit, Spirit is 1H, Armor 32183, Life 473, and the rank model with Whirlwind at 41. The video's conflicting readings are suspect. Flay stays inactive.",
       "sheet": {
         "level": 70,
         "strength": 4101,
@@ -979,11 +979,11 @@
         },
         {
           "field": "glyph.level",
-          "videoValue": 70,
+          "videoValue": "70, 115, and 155",
           "confirmedValue": null,
           "suspect": true,
           "source": "user video 1 (watchVideo 2026-10-22)",
-          "note": "This video reads 70. An earlier read said 155. The previous stored level was 115, inferred from a section header. The five equipped glyphs are level 70 and suspect."
+          "note": "Three readings conflict: 115 from the batch-2 glyph video, 70 from video 1, and 155 from an earlier read. None is verified. The working level on Might, Twister, Imbiber, Marshal, and Wrath is 115 and stays unverified."
         },
         {
           "field": "earthstrikers-aspect.itemPower",

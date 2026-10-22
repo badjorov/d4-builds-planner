@@ -10146,14 +10146,34 @@
       ],
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
-      "level": 70,
+      "level": 115,
+      "levelReadings": [
+        {
+          "value": 115,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "suspect": true,
+          "note": "Batch-2 glyph video. Working value. Unverified."
+        },
+        {
+          "value": 70,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "suspect": true,
+          "note": "Video 1 read of the equipped legendary glyphs."
+        },
+        {
+          "value": 155,
+          "source": "earlier glyph read, conflict noted in video 1",
+          "suspect": true,
+          "note": "Earlier read. No separate source text is stored in the repo."
+        }
+      ],
       "rarity": "Legendary",
       "radius": 5,
       "base": "+160.0% to Magic nodes",
       "additional": "8.0%[x] dmg with 2H (40 Str)",
       "legendary": "20.0%[x] vs Healthy",
       "transcribed": "Might L115: +160.0% to Magic nodes. Add: 8.0%[x] dmg with 2H (40 Str). Leg: 20.0%[x] vs Healthy.",
-      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3) This video reads glyph level 70. An earlier read said 155. The previous transcription stored 115, inferred from a section header. The level is suspect. Earlier base, additional, and legendary strings are kept. Previous stored level: 115.",
+      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3). Three level readings conflict and all stay suspect: 115 from the batch-2 glyph video, 70 from video 1, and 155 from an earlier read. None is verified. The working level is 115. Earlier base, additional, and legendary strings are kept.",
       "suspect": true
     },
     {
@@ -10193,14 +10213,34 @@
       ],
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
-      "level": 70,
+      "level": 115,
+      "levelReadings": [
+        {
+          "value": 115,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "suspect": true,
+          "note": "Batch-2 glyph video. Working value. Unverified."
+        },
+        {
+          "value": 70,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "suspect": true,
+          "note": "Video 1 read of the equipped legendary glyphs."
+        },
+        {
+          "value": 155,
+          "source": "earlier glyph read, conflict noted in video 1",
+          "suspect": true,
+          "note": "Earlier read. No separate source text is stored in the repo."
+        }
+      ],
       "rarity": "Legendary",
       "radius": 5,
       "base": "per 5 Str, Dust Devils +90.3%[+]",
       "additional": "8.0%[x] dmg 4s after creating Dust Devil (40 Str)",
       "legendary": "Dust Devil dmg +20.0%[x]",
       "transcribed": "Twister L115: per 5 Str, Dust Devils +90.3%[+]. Add: 8.0%[x] dmg 4s after creating Dust Devil (40 Str). Leg: Dust Devil dmg +20.0%[x].",
-      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3) This video reads glyph level 70. An earlier read said 155. The previous transcription stored 115, inferred from a section header. The level is suspect. Earlier base, additional, and legendary strings are kept. Previous stored level: 115.",
+      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3). Three level readings conflict and all stay suspect: 115 from the batch-2 glyph video, 70 from video 1, and 155 from an earlier read. None is verified. The working level is 115. Earlier base, additional, and legendary strings are kept.",
       "suspect": true
     },
     {
@@ -10250,14 +10290,34 @@
       ],
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
-      "level": 70,
+      "level": 115,
+      "levelReadings": [
+        {
+          "value": 115,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "suspect": true,
+          "note": "Batch-2 glyph video. Working value. Unverified."
+        },
+        {
+          "value": 70,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "suspect": true,
+          "note": "Video 1 read of the equipped legendary glyphs."
+        },
+        {
+          "value": 155,
+          "source": "earlier glyph read, conflict noted in video 1",
+          "suspect": true,
+          "note": "Earlier read. No separate source text is stored in the repo."
+        }
+      ],
       "rarity": "Legendary",
       "radius": 5,
       "base": "per 5 Will, +30.1%[+] dmg and +5.2%[+] potion healing per missing potion, up to 25%[+] each",
       "additional": null,
       "legendary": "dmg while Healthy +16.0%[x]",
       "transcribed": "Imbiber L115: per 5 Will, +30.1%[+] dmg and +5.2%[+] potion healing per missing potion, up to 25%[+] each. Leg: dmg while Healthy +16.0%[x].",
-      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3) This video reads glyph level 70. An earlier read said 155. The previous transcription stored 115, inferred from a section header. The level is suspect. Earlier base, additional, and legendary strings are kept. Previous stored level: 115.",
+      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3). Three level readings conflict and all stay suspect: 115 from the batch-2 glyph video, 70 from video 1, and 155 from an earlier read. None is verified. The working level is 115. Earlier base, additional, and legendary strings are kept.",
       "suspect": true
     },
     {
@@ -10326,14 +10386,34 @@
       ],
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
-      "level": 70,
+      "level": 115,
+      "levelReadings": [
+        {
+          "value": 115,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "suspect": true,
+          "note": "Batch-2 glyph video. Working value. Unverified."
+        },
+        {
+          "value": 70,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "suspect": true,
+          "note": "Video 1 read of the equipped legendary glyphs."
+        },
+        {
+          "value": 155,
+          "source": "earlier glyph read, conflict noted in video 1",
+          "suspect": true,
+          "note": "Earlier read. No separate source text is stored in the repo."
+        }
+      ],
       "rarity": "Legendary",
       "radius": 5,
       "base": "per 5 Dex, +14.2% Crit Dmg",
       "additional": "crits generate 3 Fury (25 Dex)",
       "legendary": "Crit Dmg +17.0%[x]",
       "transcribed": "Wrath L115: per 5 Dex, +14.2% Crit Dmg. Add: crits generate 3 Fury (25 Dex). Leg: Crit Dmg +17.0%[x].",
-      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3) This video reads glyph level 70. An earlier read said 155. The previous transcription stored 115, inferred from a section header. The level is suspect. Earlier base, additional, and legendary strings are kept. Previous stored level: 115.",
+      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3). Three level readings conflict and all stay suspect: 115 from the batch-2 glyph video, 70 from video 1, and 155 from an earlier read. None is verified. The working level is 115. Earlier base, additional, and legendary strings are kept.",
       "suspect": true
     },
     {
@@ -10400,14 +10480,34 @@
       ],
       "source": "user video 2026-10-21 batch2 (transcribed)",
       "verified": false,
-      "level": 70,
+      "level": 115,
+      "levelReadings": [
+        {
+          "value": 115,
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "suspect": true,
+          "note": "Batch-2 glyph video. Working value. Unverified."
+        },
+        {
+          "value": 70,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "suspect": true,
+          "note": "Video 1 read of the equipped legendary glyphs."
+        },
+        {
+          "value": 155,
+          "source": "earlier glyph read, conflict noted in video 1",
+          "suspect": true,
+          "note": "Earlier read. No separate source text is stored in the repo."
+        }
+      ],
       "rarity": "Legendary",
       "radius": 5,
       "base": "+133.3% Magic nodes",
       "additional": "casting Shout reduces other Shout CDs by 2.0s; while Shout active next Core Skill Fury cost -10% (40 Str)",
       "legendary": "+15.6%[x]",
       "transcribed": "Marshal L115: +133.3% Magic nodes. Add: casting Shout reduces other Shout CDs by 2.0s; while Shout active next Core Skill Fury cost -10% (40 Str). Leg: +15.6%[x].",
-      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3) This video reads glyph level 70. An earlier read said 155. The previous transcription stored 115, inferred from a section header. The level is suspect. Earlier base, additional, and legendary strings are kept. Previous stored level: 115.",
+      "note": "rarity/radius inferred from section header (L115=Legendary r5, L1=Rare r3). Three level readings conflict and all stay suspect: 115 from the batch-2 glyph video, 70 from video 1, and 155 from an earlier read. None is verified. The working level is 115. Earlier base, additional, and legendary strings are kept.",
       "suspect": true
     },
     {
