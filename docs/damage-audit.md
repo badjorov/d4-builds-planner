@@ -114,7 +114,7 @@ Warbringer's legendary 45%[x] while Fortified is in the table at ×1.45. The 2% 
 Stacking lines that are equipped:
 
 - Leoric's Crown stores Armor, a +65%[x] gem effect, 41% Damage Reduction, and −30% Movement Speed. The Splinter of the Black Soulstone is socketed in the helm. The gem effect raises the splinter base 2.5%[x] to the tooltip 4.1%[x] per soul (2.5 × 1.65 = 4.125, shown as 4.1). The helm copy of that line is stored with `scored: false`. The gem line stays utility. The video gem read of +150% is ignored.
-- Splinter of the Black Soulstone is the one scored soul effect, 4.1%[x] per soul. The base 2.5% is not scored again. Empty `souls` uses 15, an estimate, so the sum model is `1 + 0.041 × 15 = ×1.615` and the defence note is +15% damage taken. The compound model is `1.041^souls` (×1.8271 at 15, ×2.9592 at 27). At 4 souls the sum factor is ×1.164 and at 27 it is ×2.107. The video range was about 4 to 27 or more. A screenshot showed 17. The 200-stack cap is stored and is not applied.
+- Splinter of the Black Soulstone is the one scored soul effect, 4.1%[x] per soul. The base 2.5% is not scored again. Empty `souls` uses 15, an estimate, so the sum model is `1 + 0.041 × 15 = ×1.615` and the defence note is +15% damage taken. The compound model is `1.041^souls` (×1.8271 at 15, ×2.9592 at 27). At 4 souls the sum factor is ×1.164 and at 27 it is ×2.107. The video range was about 4 to 27 or more. Screenshots showed 17 and 30. The stored cap is 200. A count above 200 scores at 200. The calibration section below reports 15, 30, and 200.
 - Aspect of Channeling 138%[x] is in the calc. Whirlwind's own channel bonus is 1%[x] per hit, cap 25 (`data/barbarian.json:366`). The uptime note says those stacks are reached fast and are not added on top of the 138%. If both apply, the cap is another ×1.25.
 - Earthstriker's 26%[+] per stack is the retired 4 × 26 = 104 path. That percent is stored and is not applied. Sheet Overpower Damage is the additive total on an Overpower hit. The 19.5%[x] while you have Overpower stays a separate multiplier.
 - Twister is one 4s buff, covered above. Imbiber's per-potion line is ×1.000 at 0 missing potions.
@@ -258,30 +258,87 @@ The same headline hits at souls 4, 15, and 27. Sum is `1 + 0.041 × souls`. Comp
 
 A Healthy Vulnerable target also adds vs Healthy 181.8%, Weapons Master 75%[x], and Might 26%[x]. Headline at 15 souls, sum model, total reading: no-buff normal 85.96B, all-buff high normal 145.90B, all-buff high Overpower 262.83B (423.65B on `perStack`). At 27 souls the all-buff high normal hit is 190.35B on the sum model and 267.33B on the compound model.
 
-Observed hits: no buffs typically 20–80B, max about 140–144B. All buffs typically 150–400B, peaks 461B and 507B, and 841B on an Overpower crit.
-
-| Case | Predicted | Observed | Where it sits |
-| --- | ---: | --- | --- |
-| No buff, mid-life, 15 souls, headline normal | 16.43B | 20–80B, max 140–144B | under the typical floor |
-| No buff, Healthy and Vulnerable, 15 souls, headline normal | 85.96B | 20–80B, max 140–144B | just above the typical band, under the max |
-| All buff high, mid-life, 15 souls, headline normal | 65.69B | 150–400B | under the typical floor |
-| All buff high, Healthy and Vulnerable, 15 souls, headline normal | 145.90B | 150–400B, peaks 461B and 507B | just under the typical floor |
-| All buff high, Healthy, 27 souls, sum, headline normal | 190.35B | 150–400B | inside the typical band, under the peaks |
-| All buff high, Healthy, 27 souls, compound, headline normal | 267.33B | 150–400B | inside the typical band, under the peaks |
-| All buff high, mid-life, 15 souls, headline Overpower, total | 118.51B | 841B | about 7× under |
-| All buff high, Healthy, 15 souls, headline Overpower, total | 262.83B | 841B | about 3× under |
-| All buff high, Healthy, 15 souls, headline Overpower, perStack | 423.65B | 841B | about 2× under |
-| All buff high, Healthy, 27 souls, compound, perStack Overpower | 776.25B | 841B | the highest hit in this grid, still under 841B |
-
-An Overpower crit does not reach about 841B. The default reading, 15 souls and the total sheet percent, is 118.51B mid-life and 262.83B on a Healthy Vulnerable target. The highest combination in the requested grid is 776.25B: 27 souls, the compound soul model, `perStack` (four times the sheet percent), and a Healthy Vulnerable target. That is still short of 841B.
+The 841B video read is withdrawn. A second pass reads it as two overlapping numbers with a Dust Devil, and Nikolay found no hit of 800B or more. The live calibration target is a 718B peak at 30 souls. The table below is the previous grid, kept so the 15-soul sheet comparison stays visible. The calibration section is the comparison that replaces it.
 
 Headline, which keeps the gear crit sum ×5.42, stays the working reading. Research Scout floats the conflict that the sheet Crit Damage may already include the gear [x] lines. Under `sheet-includes-gear-x` a Healthy Vulnerable no-buff hit is 15.86B, under the 20B floor, and the all-buff high Healthy hit is 26.92B, under the 150B floor. That reading is too low for the observed hits, so the gear [x] sum stays in the headline factor.
 
 The town-to-combat jumps were checked as possible double counts. Critical Strike Damage 7,424.8% to 10,819.5% is ×1.457. `7424.8 × 1.45 = 10,765.96`, and the remainder is about 53.5 points, which looks like Flawless Technique's ~45%[x] already inside the sheet. Headline leaves that separate ×1.45 off. Vulnerable Damage 208.8% to 2,836.8% is extra additive, and the ×1.62 vulnerable factor still applies. All Damage 606.7% to 1,755.2%, then the ramp to 9,897.7%, is a much smaller step than the [x] product. `sheet-includes-gear-x` mid-life hits are 3.03B to 21.87B, so the gear crit sum and the other [x] lines are still required.
 
-What still does not line up:
+## Calibration, screenshots 2026-10-23
 
-- Headline normal hits at 15 souls are 145.90B on a Healthy Vulnerable all-buff target, just under the 150B floor, and under the peaks of 461B and 507B. At 27 souls the sum model reaches 190.35B and the compound model reaches 267.33B, inside 150–400B and still under the peaks.
-- Overpower stays under 841B at souls 4, 15, and 27, on both soul models, and on both sheet meanings.
-- Dust Devils stay unscored. Two at 510% on the same hit as the 386% Whirlwind would scale a hit by 3.642. On the 145.90B Healthy all-buff hit that would be about 531B, above the 461B peak. The hit rate and damage type are unknown, so that ratio is not applied.
-- The unmatched "Deathhead of Channeling" tooltip (+21 Damage Multiplier, 150%[x] all damage, +114% damage) is not applied. Grand Skull sockets stay unscored. Polearm Expertise 10/10 stays unscored. Attack speed 120% does not change per-hit damage.
+Nikolay's screenshots outrank the video hit reads. The biggest confirmed single hit is 718B, on a Boss Training Dummy. Other visible hits there are mostly 300–510B. A separate screenshot shows the soul buff at 30 stacks, with hits of 75–115B on non-boss targets. The calibration pairs that 718B peak with 30 souls.
+
+Subo and Varyana were active in the 718B fight, hitting the dummy and using shouts and buffs. Nikolay thinks their contribution is not significant. The model stays solo. Party buffs are a minor possible source in the unexplained list. They are not fitted and they are not modeled.
+
+`souls` stays an input. The stored cap is 200. Empty `souls` still uses 15, an estimate. A count above 200 scores at 200. The rows below are 15, 30, and 200, sum and compound, at 4.1%[x] per soul.
+
+### Buff timeline
+
+The timeline reads duration and cooldown from the stored skill tooltips. Sheet Cooldown Reduction 39.4% is a video reading on the character sheet. Each tooltip cooldown is multiplied by `1 - 0.394`. The helm 25% and the ring 5% are parts of that sheet total and are not added again. Marshal's stored cut, 2.0s off the active cooldown of other non-Shout skills after a Shout, is applied inside the timeline. Both the percent formula and the flat cut are estimates.
+
+A skill with a missing duration or a missing cooldown is left off the timeline and flagged.
+
+| Skill | Duration | Cooldown | Effective cooldown | On the timeline |
+| --- | ---: | ---: | ---: | --- |
+| War Cry | 4s | 15.09s | 9.14454s | yes, 38.5%[x] |
+| Challenging Shout | 8s | 15.09s | 9.14454s | yes, 20%[x] vs Burning tied to the burn length, an estimate |
+| Rallying Cry | 4s | not stored | — | no. The earlier 25s video cooldown stays unconfirmed |
+| Wrath of the Berserker | 15.8s | 54.32s | 32.91792s before the flat cut | yes, 30%[x] |
+| Iron Skin | not stored | 8.45s | — | no |
+
+The 20%[x] on the first 5 taunted has no duration stored, so it stays off. The horizon is 60s. Every modeled buff is cast together at 0s, then again on cooldown. No phase between the skills is stored. Every uptime is an estimate. Overpower uses the stored full-stack assumption for the whole Wrath window, plus the stored 4s linger. Unstoppable on this timeline is Wrath's duration plus Tibault's stored 5s after. Iron Skin's window is not added.
+
+| Buff | Casts in 60s | Uptime |
+| --- | ---: | ---: |
+| War Cry | 7 | 0.466667 |
+| Challenging Shout | 7 | 0.885546 |
+| Wrath of the Berserker | 3 | 0.764622 |
+| Overpower, full stacks plus the 4s linger | — | 0.897955 |
+| All three buffs together | — | 0.358515 (21.51s) |
+
+### Peak, average, and the 718B hit
+
+The scored hit is one Whirlwind crit, headline reading, on a Healthy Vulnerable boss. The dummy is scored as an elite. That elite flag is an estimate. The peak forces War Cry, Challenging Shout, and Wrath on together, with Overpower on, and uses the high end of the All Damage ramp, 9,897.7%. The sustained average weights each slice of the 60s timeline. A slice with any modeled buff up uses the low end of that ramp, 1,996%. A slice with none up uses the no-buff sheet. The ramp between those ends is not interpolated. Vulnerable follows War Cry's 4s. Berserking follows War Cry or Wrath. The dummy is held Healthy for the whole average, so the average is the sustained rate while it is Healthy.
+
+Overpower stays additive. The separate multiplier stays 1. `total` adds sheet 6,432.2%. `perStack` adds 6,432.2% × 4.
+
+| Souls | Model | Peak, total | Peak, perStack | Average, total | Average, perStack |
+| --- | --- | ---: | ---: | ---: | ---: |
+| 15 | sum | 567.86B | 915.33B | 247.29B | 450.59B |
+| 15 | compound | 642.44B | 1,035.54B | 279.77B | 509.77B |
+| 30 | sum | 784.11B | 1,263.89B | 341.46B | 622.18B |
+| 30 | compound | 1,173.79B | 1,892.02B | 511.16B | 931.40B |
+| 200 | sum | 3,234.88B | 5,214.26B | 1,408.73B | 2,566.85B |
+| 200 | compound | 1,086,966.49B | 1,752,067.47B | 473,352.43B | 862,499.37B |
+
+At 30 souls, sum model, headline, Healthy Vulnerable boss:
+
+- The peak with everything overlapping is 784.11B on `total` and 1,263.89B on `perStack`.
+- The sustained average is 341.46B on `total` and 622.18B on `perStack`.
+- The predicted peak against 718B is 784.11B on `total`, about 1.09× the calibration hit, and 1,263.89B on `perStack`, about 1.76× that hit.
+- Leaving off the estimated 20%[x] vs Burning line, the same peak is 653.42B, about 0.91× the 718B hit.
+
+The 341.46B average sits inside the 300–510B hits on the dummy. The `total` peak is the closer reading of the 718B hit. It sits about 66B above that hit. The `perStack` peak sits well above it.
+
+Non-boss hits at 30 souls, sum model, with no cross-skill buff lines: no-buff mid-life 25.46B, no-buff Healthy 56.90B, all-buff high Healthy 200.70B. The screenshot band is 75–115B.
+
+### What is still unexplained
+
+- Party buffs from Subo and Varyana. They were active in the 718B fight, hitting the dummy and using shouts and buffs. Nikolay thinks the contribution is not significant. The model stays solo. This is a minor possible source. It is not fitted and it is not modeled.
+- The `total` peak is 784.11B against the 718B calibration hit. The estimated Burning line is the swing: with it the peak is 784.11B, and without it the peak is 653.42B.
+- `perStack` at 30 souls is 1,263.89B on the peak and 622.18B on the average. The peak sits well above 718B. The average sits above the 300–510B cluster.
+- 200 souls, on both the sum and the compound model, sits far above the 718B hit. The cap is reported because long fights can reach it.
+- Non-boss hits at 30 souls are 25.46B and 56.90B with no buffs, under the 75–115B screenshot band, and 200.70B on the all-buff Healthy hit, above that band.
+- Dust Devil hits stay unscored. Damage type and hit rate are not stored. The withdrawn 841B read was two overlapping numbers with a Dust Devil.
+- Rallying Cry's cooldown is not stored, so its buff and its Marshal cut are not on the timeline.
+- Iron Skin's duration is not stored, so its Unstoppable window is not on the timeline.
+- Challenging Shout's 20%[x] on the first 5 taunted has no duration stored.
+- The Berserking keyword 75%[x], and the doubled reading while Wrath is up, are not copied onto a damage effect.
+- Sheet Cooldown Reduction 39.4% is a video reading. The `tooltip × (1 - sheet)` formula is an estimate.
+- The timeline phase, all buffs cast together at 0s, is an estimate.
+- Overpower partial stacks are not scaled. The sheet total is applied only while the stored full-stack window is on.
+- Stone of Jordan's 10s Vulnerable touch has no touch interval. Vulnerable follows War Cry's 4s.
+- The Boss Training Dummy is scored as an elite. That is an estimate. The average holds the dummy Healthy for the whole window.
+- War Cry 38.5%[x], Wrath 30%[x], and the Burning line are applied on top of a combat sheet that was read while buffs were up. Whether the sheet already folded those lines in is unverified.
+- The All Damage ramp from 1,996% to 9,897.7% is not interpolated.
+- Grand Skull sockets, the unmatched Deathhead tooltip, Polearm Expertise 10/10, and attack speed 120% stay unscored.

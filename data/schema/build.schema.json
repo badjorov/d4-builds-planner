@@ -256,6 +256,31 @@
             "overpowerCrit": { "type": "string" }
           }
         },
+        "calibration": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["source", "verified", "peakBillions", "souls"],
+          "properties": {
+            "source": { "type": "string", "minLength": 1 },
+            "verified": { "type": "boolean" },
+            "note": { "type": "string" },
+            "peakBillions": { "type": "number" },
+            "souls": { "type": "number" },
+            "nonBossHits": { "type": "string" },
+            "dummyHits": { "type": "string" },
+            "party": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["names", "active", "modeled"],
+              "properties": {
+                "names": { "type": "array", "items": { "type": "string" } },
+                "active": { "type": "boolean" },
+                "modeled": { "type": "boolean" },
+                "note": { "type": "string" }
+              }
+            }
+          }
+        },
         "weaponTooltip": {
           "type": "object",
           "additionalProperties": false,

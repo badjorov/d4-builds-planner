@@ -535,8 +535,15 @@ function applySplinter(catalog, build, modifiers, notes, opts = {}) {
     return { souls: null, soulsEstimate: false, soulFactor: null, soulModel: null };
   }
   const measured = typeof build.souls === 'number' && Number.isFinite(build.souls);
-  const souls = measured ? build.souls : DEFAULT_SOULS;
+  const capMatch = String(damage.stacking || '').match(/up to (\d+) stacks/i);
+  const soulCap = capMatch ? Number(capMatch[1]) : null;
+  let souls = measured ? build.souls : DEFAULT_SOULS;
   const soulsEstimate = !measured;
+  let soulsCapped = false;
+  if (soulCap != null && souls > soulCap) {
+    soulsCapped = true;
+    souls = soulCap;
+  }
   const compound = opts.soulModel === 'compound';
   const perSoul = 1 + rate / 100;
   const factor = compound ? perSoul ** souls : 1 + (rate / 100) * souls;
@@ -554,15 +561,18 @@ function applySplinter(catalog, build, modifiers, notes, opts = {}) {
   });
   const applied = compound ? `${perSoul}^${souls}` : `1 + ${rate}/100 × ${souls}`;
   const other = compound ? `1 + ${rate}/100 × ${souls}` : `${perSoul}^${souls}`;
+  const capText = soulsCapped
+    ? ` The input ${build.souls} is above the stored cap of ${soulCap}, so the score uses ${soulCap}.`
+    : (soulCap != null ? ` The stored cap is ${soulCap}.` : '');
   const countText = soulsEstimate
-    ? `Souls default to ${souls}. That default is an estimate. The video range was about 4 to 27 or more, and a screenshot showed 17.`
-    : `Souls ${souls}.`;
+    ? `Souls default to ${souls}. That default is an estimate. The video range was about 4 to 27 or more. Screenshots showed 17 and 30. Long fights can be scored up to the cap.${capText}`
+    : `Souls ${souls}.${capText}`;
   const host = ref.slotId || ref.slot || 'an unset slot';
   notes.push(`${entity.name}: one effect, ${rate}%[x] per soul, socketed in ${host}. ${damage.note || ''} ${applied} = ${factor}. ${countText} The compounded alternative at this count is ${other} = ${alternate}.`);
   if (typeof taken?.value === 'number') {
     notes.push(`${entity.name}: +${taken.value}% damage taken per soul × ${souls} = +${taken.value * souls}% damage taken.${soulsEstimate ? ' Estimate.' : ''} This stays a defence note. It is not added to the DR list.`);
   }
-  return { souls, soulsEstimate, soulFactor: factor, soulModel: compound ? 'compound' : 'sum' };
+  return { souls, soulsEstimate, soulsCapped, soulCap, soulFactor: factor, soulModel: compound ? 'compound' : 'sum' };
 }
 
 export function engineInputFromBuild(catalog, build, opts = {}) {
@@ -744,6 +754,8 @@ export function engineInputFromBuild(catalog, build, opts = {}) {
     currentFury: typeof build.currentFury === 'number' ? build.currentFury : null,
     souls: splinter.souls,
     soulsEstimate: splinter.soulsEstimate,
+    soulsCapped: splinter.soulsCapped === true,
+    soulCap: splinter.soulCap ?? null,
     soulFactor: splinter.soulFactor,
     soulModel: splinter.soulModel
   };
@@ -949,6 +961,8 @@ export function evaluateBuild(catalog, build, opts = {}) {
     currentFuryEstimate: input.currentFuryEstimate,
     souls: input.souls,
     soulsEstimate: input.soulsEstimate,
+    soulsCapped: input.soulsCapped === true,
+    soulCap: input.soulCap,
     soulFactor: input.soulFactor,
     soulModel: input.soulModel,
     soulAlternate,

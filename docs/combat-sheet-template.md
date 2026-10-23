@@ -81,4 +81,4 @@ These numbers are on the build or in the defence-sheet note. The damage score do
 | Movement speed % | defence-sheet note | 200 | | |
 | Weapon speed | defence-sheet note | 1.10 | | |
 
-Observed hits from the same video, stored on `combatObservations.observedHits`: no buffs typically 20–80B with a max about 140–144B; all buffs typically 150–400B, peaks 461B and 507B, and 841B on an Overpower crit. The comparison with the model is in `docs/damage-audit.md`.
+Observed hits from the same video, stored on `combatObservations.observedHits`: no buffs typically 20–80B with a max about 140–144B; all buffs typically 150–400B, peaks 461B and 507B. The 841B Overpower read is withdrawn. Nikolay's later screenshots set the calibration target at 718B on a Boss Training Dummy, at 30 souls. The comparison is in `docs/damage-audit.md`.

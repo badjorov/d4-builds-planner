@@ -941,7 +941,7 @@
           "screenshot": 17,
           "defaultSouls": 15,
           "estimate": true,
-          "note": "The video range was about 4 to 27 or more. A screenshot showed 17. The working default is 15, an estimate."
+          "note": "The video range was about 4 to 27 or more. Screenshots showed 17 and, later, 30. The working default is 15, an estimate. The stored cap is 200. A count above 200 scores at 200."
         },
         "polearmExpertise": "10/10. The catalog already stores Polearm Expertise at that rank.",
         "allDamageRamp": {
@@ -955,7 +955,22 @@
           "nobuffMax": "140-144B",
           "allbuffTypical": "150-400B",
           "allbuffPeaks": "461B and 507B",
-          "overpowerCrit": "841B"
+          "overpowerCrit": "Withdrawn. A second video pass reads the old 841B figure as two overlapping numbers with a Dust Devil. No confirmed hit of 800B or more."
+        },
+        "calibration": {
+          "source": "user confirmation 2026-10-23",
+          "verified": true,
+          "note": "Nikolay's screenshots outrank the video hit reads. Screenshot 1 shows the soul buff at 30 stacks, with hits of 75-115B on non-boss targets. Screenshot 2 is a Boss Training Dummy. The biggest confirmed single hit is 718B. Other visible hits there are mostly 300-510B. The model stays solo.",
+          "peakBillions": 718,
+          "souls": 30,
+          "nonBossHits": "75-115B",
+          "dummyHits": "300-510B",
+          "party": {
+            "names": ["Subo", "Varyana"],
+            "active": true,
+            "modeled": false,
+            "note": "Subo and Varyana were active in the 718B fight, hitting the dummy and using shouts and buffs. Nikolay thinks their contribution is not significant. The model stays solo. Party buffs are a minor possible source in the unexplained gap. They are not fitted and they are not modeled."
+          }
         },
         "weaponTooltip": {
           "name": "Deathhead of Channeling",
