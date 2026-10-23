@@ -65,6 +65,7 @@
     "vulnerableDamageInAdditive": { "type": "boolean" },
     "vulnPct": { "$ref": "#/$defs/sheetReading" },
     "overpowerPct": { "type": ["number", "null"] },
+    "overpowerSheetMeaning": { "enum": ["total", "perStack"] },
     "overpowerStacks": { "$ref": "#/$defs/overpowerStacks" },
     "label": { "type": "string" },
     "source": { "type": "string", "minLength": 1 },

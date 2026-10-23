@@ -48,8 +48,8 @@ Equipped Whirlwind only. "Effective" is the blended headline power divided by th
 | vs Healthy or Injured | additive | 26% once | Healthy or Injured 0.70, estimate | ×1.0024 | `data/builds.json:717`, `src/catalog.js:390` |
 | while you are Healthy | additive | 223.2% | player Healthy 1, estimate | ×1.0256 | `data/builds.json:719`, `src/catalog.js:394` |
 | while Fortified | additive | 35% | Fortified 1, confirmed | ×1.0039 | `data/builds.json:720`, `src/catalog.js:396` |
-| Leoric's Crown | none | Armor, +65%[x] gem effect, 41% Damage Reduction, −30% Movement Speed | 1 | ×1 | `data/barbarian.json` helm. Gem is utility, Damage Reduction is defense, Movement Speed is mobility. No damage multiplier. |
-| Splinter of the Black Soulstone | [x] | 2.5% per soul × default 15 souls | 1, souls 15 is an estimate | ×1.3750 | `data/barbarian.json` seasonal mechanic, https://helltides.com/tools/splinters |
+| Leoric's Crown | gem effect | +65%[x] gem effect on the socketed splinter. Armor, 41% Damage Reduction, −30% Movement Speed. Tooltip 4.1%[x] per soul is stored and scored on the splinter. | 1 | ×1 from the helm alone | `data/barbarian.json` helm. Gem is utility. The video gem read of +150% is ignored. |
+| Splinter of the Black Soulstone | [x] | 4.1% per soul × default 15 souls. One effect: base 2.5% × 1.65. | 1, souls 15 is an estimate | ×1.6150 | `data/barbarian.json` seasonal mechanic. Screenshot answers-2026-10-22.md. Base rate https://helltides.com/tools/splinters |
 | Gohr's Devastating Grips | [x] | 117% Whirlwind | 1 | ×2.1700 | `data/barbarian.json:6562` |
 | Tibault's Will | [x] | 26% while Unstoppable and for 5s after | Unstoppable 0.967138, estimate | ×1.2515 | `data/barbarian.json:6600` |
 | Earthstriker's Aspect | [x] | 19.5% while you have Overpower | treated as always on, because Overpower uptime is above 0 | ×1.1950 | `data/barbarian.json:5441`, `src/catalog.js:210` |
@@ -113,13 +113,13 @@ Warbringer's legendary 45%[x] while Fortified is in the table at ×1.45. The 2% 
 
 Stacking lines that are equipped:
 
-- Leoric's Crown's stored tooltip is Armor, a +65%[x] gem effect, 41% Damage Reduction, and −30% Movement Speed. The gem line is utility, Damage Reduction is defense, and Movement Speed is mobility, so the helm adds no damage multiplier. A 4.1%[x] per soul line was stored on the helm and is removed. That line was the Splinter of the Black Soulstone.
-- Splinter of the Black Soulstone is socketed in jewelry. Each soul is 2.5%[x] damage and +1% damage taken, up to 200 stacks, and the stacks do not refresh. The default model is `1 + 0.025 × souls`. Empty `souls` uses 15, an estimate, so the factor is ×1.375 and the defence note is +15% damage taken. The compounded alternative is `1.025^souls` (×1.4483 at 15, ×1.9478 at 27). The video range was about 4 to 27 or more. A screenshot showed 17. The 200-stack cap is not applied.
+- Leoric's Crown stores Armor, a +65%[x] gem effect, 41% Damage Reduction, and −30% Movement Speed. The Splinter of the Black Soulstone is socketed in the helm. The gem effect raises the splinter base 2.5%[x] to the tooltip 4.1%[x] per soul (2.5 × 1.65 = 4.125, shown as 4.1). The helm copy of that line is stored with `scored: false`. The gem line stays utility. The video gem read of +150% is ignored.
+- Splinter of the Black Soulstone is the one scored soul effect, 4.1%[x] per soul. The base 2.5% is not scored again. Empty `souls` uses 15, an estimate, so the sum model is `1 + 0.041 × 15 = ×1.615` and the defence note is +15% damage taken. The compound model is `1.041^souls` (×1.8271 at 15, ×2.9592 at 27). At 4 souls the sum factor is ×1.164 and at 27 it is ×2.107. The video range was about 4 to 27 or more. A screenshot showed 17. The 200-stack cap is stored and is not applied.
 - Aspect of Channeling 138%[x] is in the calc. Whirlwind's own channel bonus is 1%[x] per hit, cap 25 (`data/barbarian.json:366`). The uptime note says those stacks are reached fast and are not added on top of the 138%. If both apply, the cap is another ×1.25.
-- Earthstriker's Overpower stacks are the 104% above, not a second stacking `[x]`.
+- Earthstriker's 26%[+] per stack is the retired 4 × 26 = 104 path. That percent is stored and is not applied. Sheet Overpower Damage is the additive total on an Overpower hit. The 19.5%[x] while you have Overpower stays a separate multiplier.
 - Twister is one 4s buff, covered above. Imbiber's per-potion line is ×1.000 at 0 missing potions.
 
-Seasonal data: Hell's Legacy has an empty effect list ("No mechanic numbers are stored"). Ghosts of Odium stores physical damage 56,847 with a null bucket, unverified (`data/barbarian.json:11225`). Undying Rage has a null value. The build's talismans are name strings, and the scorer does not read `build.talismans`. No seasonal multiplier is stored.
+Seasonal data: Hell's Legacy has an empty effect list ("No mechanic numbers are stored"). Ghosts of Odium stores physical damage 56,847 with a null bucket, unverified (`data/barbarian.json:11225`). Undying Rage has a null value. The build's talismans are name strings, and the scorer does not read `build.talismans`. The scored seasonal multiplier is the Splinter of the Black Soulstone, one 4.1%[x] per soul effect, socketed in Leoric's Crown.
 
 Cross-skill buffs the whirlwind-only score leaves out, with a stored duration and cooldown:
 
@@ -220,72 +220,68 @@ No single stored line with a known count, other than the Ramaladni fix, closes a
 | Defined together, all of those buffs forced on | 222,189,247,616.94 | 40,994,326,128.59 | 77,069,333,121.74 | 40,994,326,128.59 |
 | That all-on row, gear crit as a product | 455,017,342,750.77 | 40,994,326,128.59 | 77,069,333,121.74 | 40,994,326,128.59 |
 
-The flagged range on the fixed baseline above is 7,822,576,823.14 to 42,398,366,381.44. Headline is the top of that range. Those rows include the retired 4.1%[x] helm line and leave the splinter out. The engine now scores the splinter at 15 souls (×1.375) and leaves that 4.1%[x] off, so the blended headline is 56,001,684,701.70.
+The flagged range on the fixed baseline above is 7,822,576,823.14 to 42,398,366,381.44. Headline was the top of that range. Those rows are the previous baseline: a one-time 4.1%[x] on the helm, no per-soul splinter, and Overpower still multiplied by the retired 104% path. The engine now scores one splinter effect at 4.1%[x] per soul (×1.615 at the default 15 souls) and puts sheet Overpower Damage in the additive pool. The blended town headline is 46,191,544,367.22.
 
 ## Combat sheet, video-model reading 2026-10-23
 
-The score tables above are the pre-splinter town baseline. This section is the per-hit comparison, and it includes the splinter. `combat-nobuff` and `combat-allbuff` are a video-model reading from 2026-10-23. That reading is unconfirmed. The saved `sheetContext` stays `town`. With the splinter at the default 15 souls, the blended town headline is 56,001,684,701.70.
+The score tables above are the previous town baseline. This section is the per-hit comparison after two corrections. The Splinter of the Black Soulstone is socketed in Leoric's Crown. Leoric's screenshot gem effect is +65%[x] (the video read of +150% is ignored). That boost raises the splinter base 2.5%[x] to one scored effect of 4.1%[x] per soul (2.5 × 1.65 = 4.125, shown as 4.1). The base 2.5% is not scored again. Empty `souls` uses 15 and that default is an estimate. The sum model is `1 + 0.041 × souls` (×1.164 at 4, ×1.615 at 15, ×2.107 at 27). The compound model is `1.041^souls` (×1.1744 at 4, ×1.8271 at 15, ×2.9592 at 27). Each soul still adds 1% damage taken on the defence notes.
 
-The video shows fighting with Fortified and Flawless Technique stacks, then the same fight with War Cry, Rallying Cry, Challenging Shout, Berserking, Wrath of the Berserker, Dust Devil, and one fast-stacking buff. Attack speed 120%, crit chance 100%, crit damage 10,819.5%, Vulnerable Damage 2,836.8%, and Physical 250.5% are the same in both contexts. All Damage is 1,755.2% with no buffs, then ramps from 1,996% to 9,897.7% over about 14 seconds with the buffs up. The lower all-buff rows were not visible, so they use the no-buff values and the result lists that fallback. vs Healthy 181.8% and vs Injured 133.4% are separate rows. while Berserking 247.9% and Overpower Damage 6,432.2% are new rows. Current Fury is 826 because the Fury globe stays full, so the combat contexts are observed and the estimate flag is off there. The town context still estimates.
+Overpower follows the attached research note `d4-overpower-formula.md` (Research Scout). Since patch 3.0 (Season 13), Overpower adds to the additive pool and stacks with crit. Life and Fortify do not scale it. The base is 15%[+] per stack plus Overpower Damage Per Stack. Stacks cap at 4 in this model. Some sources say 8, and extra-stack sources such as Tidal Aspect exist. Each stack lasts 4s. Sheet Overpower Damage 6,432.2% is that additive line on an Overpower hit. It is not a separate ×65.322. `overpowerSheetMeaning` is `total` by default, or `perStack` with 4 stacks (6,432.2% × 4 = 25,728.8%). Both are reported. The stored 104% (4 × 26) is retired and is not applied. Scout suggests the stat hover's bottom line, "from items and Paragon", is the raw value, while the top line may fold in multipliers. That reading is unverified.
 
-Each row below is one Whirlwind crit at the default 15 souls, sum model (`1 + 0.025 × 15 = ×1.375`). Channeling, Fortified, Fury above 50, Unstoppable, player Healthy, elites, and consecutive-weapon are on. Missing potions are 0. The mid-life band leaves the Healthy-or-Injured window off, and leaves enemy Healthy and enemy Injured off, so vs Healthy, vs Injured, Weapons Master, and Might's 26%[x] stay off. No-buff leaves Vulnerable, Berserking, and Dust Devil off. All-buff turns those three on. A normal crit leaves Overpower off, so Earthstriker and Decimator's Overpower line stay off. An Overpower crit turns them on and uses Overpower Damage as `1 + 6432.2/100 = 65.322`. Powers are billions, two decimals. The exact totals are locked in `test/combat-sheet.test.js`. `sheet-includes-gear-x-active-weapon` matches `sheet-includes-gear-x` because Deathshead's x88% is a gear line.
+`combat-nobuff` and `combat-allbuff` are a video-model reading from 2026-10-23. That reading is unconfirmed. The saved `sheetContext` stays `town`. The blended town headline is 46,191,544,367.22.
+
+The video shows fighting with Fortified and Flawless Technique stacks, then the same fight with War Cry, Rallying Cry, Challenging Shout, Berserking, Wrath of the Berserker, Dust Devil, and the soul stacks. Attack speed 120%, crit chance 100%, crit damage 10,819.5%, Vulnerable Damage 2,836.8%, and Physical 250.5% are the same in both contexts. All Damage is 1,755.2% with no buffs, then ramps from 1,996% to 9,897.7% over about 14 seconds. The lower all-buff rows use the no-buff values, and the result lists that fallback. Current Fury is 826 in both combat contexts.
+
+Each row below is one Whirlwind crit at 15 souls, sum model (×1.615), with `overpowerSheetMeaning` `total`. Channeling, Fortified, Fury above 50, Unstoppable, player Healthy, elites, and consecutive-weapon are on. Missing potions are 0. The mid-life band leaves vs Healthy, vs Injured, Weapons Master, and Might's 26%[x] off. No-buff leaves Vulnerable, Berserking, and Dust Devil off. All-buff turns those three on. A normal crit leaves Overpower off. An Overpower crit adds 6,432.2% to the additive pool and turns Earthstriker and Decimator's Overpower line on. The separate Overpower multiplier stays 1. Powers are billions. Exact totals are locked in `test/combat-sheet.test.js`. `sheet-includes-gear-x-active-weapon` matches `sheet-includes-gear-x`.
 
 | Hit | headline | sheet-includes-gear-x | active-weapon | sheet-includes-gear-x-active-weapon |
 | --- | ---: | ---: | ---: | ---: |
-| No buff, normal crit | 13.99B | 2.58B | 4.85B | 2.58B |
-| No buff, Overpower crit | 1,310.47B | 241.78B | 454.55B | 241.78B |
-| All buff, All Damage 1,996%, normal crit | 38.19B | 7.05B | 13.25B | 7.05B |
-| All buff, All Damage 1,996%, Overpower crit | 3,577.77B | 660.11B | 1,241.00B | 660.11B |
-| All buff, All Damage 9,897.7%, normal crit | 55.93B | 10.32B | 19.40B | 10.32B |
-| All buff, All Damage 9,897.7%, Overpower crit | 5,238.74B | 966.56B | 1,817.13B | 966.56B |
+| No buff, normal crit | 16.43B | 3.03B | 5.70B | 3.03B |
+| No buff, Overpower crit | 34.63B | 6.39B | 12.01B | 6.39B |
+| All buff, All Damage 1,996%, normal crit | 44.86B | 8.28B | 15.56B | 8.28B |
+| All buff, All Damage 1,996%, Overpower crit | 88.64B | 16.35B | 30.75B | 16.35B |
+| All buff, All Damage 9,897.7%, normal crit | 65.69B | 12.12B | 22.78B | 12.12B |
+| All buff, All Damage 9,897.7%, Overpower crit | 118.51B | 21.87B | 41.11B | 21.87B |
 
-The same hits at souls 4, 15, and 27, headline only. Sum is `1 + 0.025 × souls` (×1.10, ×1.375, ×1.675). Compound is `1.025^souls` (×1.1038, ×1.4483, ×1.9478). ×1.9478 at 27 rounds to the ×1.95 reading.
+The same headline hits at souls 4, 15, and 27. Sum is `1 + 0.041 × souls`. Compound is `1.041^souls`. Overpower uses the total reading.
 
 | Hit | 4 sum | 4 compound | 15 sum | 15 compound | 27 sum | 27 compound |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| No buff, normal crit | 11.19B | 11.23B | 13.99B | 14.74B | 17.04B | 19.82B |
-| No buff, Overpower crit | 1,048.38B | 1,052.01B | 1,310.47B | 1,380.33B | 1,596.39B | 1,856.39B |
-| All buff, All Damage 1,996%, normal crit | 30.56B | 30.66B | 38.19B | 40.23B | 46.53B | 54.11B |
-| All buff, All Damage 1,996%, Overpower crit | 2,862.22B | 2,872.14B | 3,577.77B | 3,768.49B | 4,358.37B | 5,068.20B |
-| All buff, All Damage 9,897.7%, normal crit | 44.74B | 44.90B | 55.93B | 58.91B | 68.13B | 79.22B |
-| All buff, All Damage 9,897.7%, Overpower crit | 4,190.99B | 4,205.52B | 5,238.74B | 5,518.00B | 6,381.73B | 7,421.10B |
+| No buff, normal crit | 11.84B | 11.95B | 16.43B | 18.59B | 21.44B | 30.11B |
+| No buff, Overpower crit | 24.96B | 25.18B | 34.63B | 39.18B | 45.18B | 63.45B |
+| All buff, All Damage 1,996%, normal crit | 32.33B | 32.62B | 44.86B | 50.75B | 58.53B | 82.20B |
+| All buff, All Damage 1,996%, Overpower crit | 63.89B | 64.46B | 88.64B | 100.28B | 115.65B | 162.42B |
+| All buff, All Damage 9,897.7%, normal crit | 47.34B | 47.77B | 65.69B | 74.31B | 85.70B | 120.36B |
+| All buff, All Damage 9,897.7%, Overpower crit | 85.41B | 86.17B | 118.51B | 134.07B | 154.61B | 217.14B |
 
-A second state puts the enemy in the Healthy band and turns Vulnerable on, including for the no-buff hit. That adds vs Healthy 181.8%, Weapons Master 75%[x], and Might 26%[x]. Headline at 15 souls, sum model: no-buff normal 73.19B, all-buff low normal 85.12B, all-buff high normal 124.22B, all-buff high Overpower 11,635.68B. At 27 souls on the sum model the all-buff high normal hit is 151.32B. On the compound model at 27 souls it is 175.96B.
+`perStack` multiplies the sheet percent by 4 before adding it. Normal hits stay the same. Headline Overpower hits at 15 souls, sum model: no buff 67.83B, all-buff low 161.58B, all-buff high 191.44B. At 27 souls on the compound model the all-buff high Overpower hit is 350.78B mid-life and 776.25B on a Healthy Vulnerable target.
 
-Observed hits from the same video: no buffs typically 20–80B, max about 140–144B. All buffs typically 150–400B, peaks 461B and 507B, and 841B on an Overpower crit.
+A Healthy Vulnerable target also adds vs Healthy 181.8%, Weapons Master 75%[x], and Might 26%[x]. Headline at 15 souls, sum model, total reading: no-buff normal 85.96B, all-buff high normal 145.90B, all-buff high Overpower 262.83B (423.65B on `perStack`). At 27 souls the all-buff high normal hit is 190.35B on the sum model and 267.33B on the compound model.
+
+Observed hits: no buffs typically 20–80B, max about 140–144B. All buffs typically 150–400B, peaks 461B and 507B, and 841B on an Overpower crit.
 
 | Case | Predicted | Observed | Where it sits |
 | --- | ---: | --- | --- |
-| No buff, mid-life, 15 souls, headline normal | 13.99B | 20–80B, max 140–144B | under the typical floor |
-| No buff, Healthy and Vulnerable, 15 souls, headline normal | 73.19B | 20–80B, max 140–144B | inside the typical band, under the max |
-| All buff high, mid-life, 15 souls, headline normal | 55.93B | 150–400B | under the typical floor |
-| All buff high, Healthy and Vulnerable, 15 souls, headline normal | 124.22B | 150–400B, peaks 461B and 507B | under the typical floor, about 4× under the peaks |
-| All buff high, Healthy, 27 souls, sum model, headline normal | 151.32B | 150–400B | on the typical floor |
-| All buff high, Healthy, 27 souls, compound model, headline normal | 175.96B | 150–400B | inside the typical band, under the peaks |
-| All buff high, mid-life, 15 souls, headline Overpower | 5,238.74B | 841B | about 6× over |
-| All buff high, Healthy, 15 souls, headline Overpower | 11,635.68B | 841B | about 14× over |
-| All buff high, mid-life, 15 souls, sheet-includes-gear-x Overpower | 966.56B | 841B | near 841B, while that reading's normal hit is 10.32B |
-| All buff high, Healthy, Overpower at the town 104%, 15 souls | 363.37B | 150–400B, peaks 461B and 507B, Overpower 841B | inside the typical band, under the peaks and under 841B |
+| No buff, mid-life, 15 souls, headline normal | 16.43B | 20–80B, max 140–144B | under the typical floor |
+| No buff, Healthy and Vulnerable, 15 souls, headline normal | 85.96B | 20–80B, max 140–144B | just above the typical band, under the max |
+| All buff high, mid-life, 15 souls, headline normal | 65.69B | 150–400B | under the typical floor |
+| All buff high, Healthy and Vulnerable, 15 souls, headline normal | 145.90B | 150–400B, peaks 461B and 507B | just under the typical floor |
+| All buff high, Healthy, 27 souls, sum, headline normal | 190.35B | 150–400B | inside the typical band, under the peaks |
+| All buff high, Healthy, 27 souls, compound, headline normal | 267.33B | 150–400B | inside the typical band, under the peaks |
+| All buff high, mid-life, 15 souls, headline Overpower, total | 118.51B | 841B | about 7× under |
+| All buff high, Healthy, 15 souls, headline Overpower, total | 262.83B | 841B | about 3× under |
+| All buff high, Healthy, 15 souls, headline Overpower, perStack | 423.65B | 841B | about 2× under |
+| All buff high, Healthy, 27 souls, compound, perStack Overpower | 776.25B | 841B | the highest hit in this grid, still under 841B |
 
-Headline, which keeps the gear crit sum ×5.42, is the reading that lands nearest the observed normal hits. `sheet-includes-gear-x` on a Healthy Vulnerable no-buff hit is 13.50B, under the 20B floor, and on the all-buff high Healthy hit is 22.92B, under the 150B floor. `active-weapon` sits between those and the headline, and is still short of the observed bands. Moving from 4 souls to 27 souls, or from the sum model to the compound model, lifts every hit by the same ratio. It does not close the Overpower gap, and the sum model reaches the 150B all-buff floor only on a Healthy Vulnerable target at 27 souls.
+An Overpower crit does not reach about 841B. The default reading, 15 souls and the total sheet percent, is 118.51B mid-life and 262.83B on a Healthy Vulnerable target. The highest combination in the requested grid is 776.25B: 27 souls, the compound soul model, `perStack` (four times the sheet percent), and a Healthy Vulnerable target. That is still short of 841B.
 
-The town-to-combat jumps were checked as possible double counts.
+Headline, which keeps the gear crit sum ×5.42, stays the working reading. Research Scout floats the conflict that the sheet Crit Damage may already include the gear [x] lines. Under `sheet-includes-gear-x` a Healthy Vulnerable no-buff hit is 15.86B, under the 20B floor, and the all-buff high Healthy hit is 26.92B, under the 150B floor. That reading is too low for the observed hits, so the gear [x] sum stays in the headline factor.
 
-Critical Strike Damage 7,424.8% to 10,819.5% is ×1.457. `7424.8 × 1.45 = 10,765.96`, and the remainder is about 53.5 points. That jump looks like Flawless Technique's ~45%[x] landing inside the sheet. Headline already leaves that separate ×1.45 off the factor. Adding it again on top of 10,819.5% would count it twice. The jump is much smaller than the gear crit sum ×5.42, so Insight, Deathshead, and Ramaladni stay outside the sheet crit row.
+The town-to-combat jumps were checked as possible double counts. Critical Strike Damage 7,424.8% to 10,819.5% is ×1.457. `7424.8 × 1.45 = 10,765.96`, and the remainder is about 53.5 points, which looks like Flawless Technique's ~45%[x] already inside the sheet. Headline leaves that separate ×1.45 off. Vulnerable Damage 208.8% to 2,836.8% is extra additive, and the ×1.62 vulnerable factor still applies. All Damage 606.7% to 1,755.2%, then the ramp to 9,897.7%, is a much smaller step than the [x] product. `sheet-includes-gear-x` mid-life hits are 3.03B to 21.87B, so the gear crit sum and the other [x] lines are still required.
 
-Vulnerable Damage 208.8% to 2,836.8% is ×13.59. Melted Heart's Vulnerable line is ×1.35, and the on-state vulnerable factor is ×1.62. The combat row stays additive, and ×1.62 still applies on a Vulnerable target. Taking ×1.62 off makes the normal hits smaller and moves them away from the video. The jump is extra additive.
+What still does not line up:
 
-All Damage 606.7% to 1,755.2% is ×2.89, and the ramp then reaches 9,897.7%. The multiplicative product on the no-buff mid-life hit is ×187.89, and on the all-buff high Overpower hit it is ×365.36, before the splinter. Dropping the multiplicative bucket on that Overpower hit, with gear crit, the vulnerable factor, and the default 15 souls kept, leaves 14.34B. Also dropping the Vulnerable [x] sum leaves 10.62B. Using `sheet-includes-gear-x` on top of that leaves 1.96B. Those are far under the video, so the [x] product is still required on top of the sheet row.
-
-Overpower Damage 6,432.2% is applied as ×65.322 on an Overpower hit, as the video row reads. The observed Overpower crit, 841B, is about 1.7× to 5.6× the all-buff peaks, which is a much smaller step than ×65. Replacing that row with the town 104% (×2.04) on the all-buff high Healthy Overpower hit, at 15 souls, gives 363.37B. That sits inside 150–400B and under both the peaks and 841B. The stored combat percent stays the factor the combat context uses. The town context still uses 104%.
-
-What still does not line up, and what was left unchanged:
-
-- Headline normal hits at 15 souls are short of the all-buff band on a Healthy Vulnerable target (124.22B against 150–400B, and against peaks of 461B and 507B). At 27 souls the sum model reaches 151.32B and the compound model reaches 175.96B, inside 150–400B and still under the peaks.
-- The Overpower sheet percent overshoots 841B on every reading that keeps a normal hit inside or near the no-buff band. Soul count 4, 15, or 27 changes that hit by the same ratio as the normal hit, so it stays several times above 841B.
-- Dust Devils stay unscored. The tooltip says two at 510% each, and the damage type is unset. If both landed on the same hit as the 386% Whirlwind, the coefficient ratio would be `(386 + 1020) / 386 = 3.642`, and 124.22B would become about 452B, near the 461B peak. The hit rate is unknown, so that ratio is not applied.
-- Leoric's Crown adds no damage multiplier. Its stored lines are Armor, a +65%[x] gem effect (utility), 41% Damage Reduction (defense), and −30% Movement Speed (mobility). The soul stacks are the splinter. The video count is about 4 to 27 or more, and a screenshot showed 17. The working default is 15, an estimate. The 200-stack cap is stored and is not applied.
-- The "Deathhead of Channeling" tooltip lines (+21 Damage Multiplier, 150%[x] all damage, +114% damage) do not match Deathshead of Channeling. They are not applied.
-- Attack speed 120% is stored and does not change per-hit damage.
-- Polearm Expertise is already rank 10/10. The video reads the same rank. Its Lucky Hit and while-Healthy lines stay unscored.
-- The Grand Skull sockets on the weapons stay unscored.
+- Headline normal hits at 15 souls are 145.90B on a Healthy Vulnerable all-buff target, just under the 150B floor, and under the peaks of 461B and 507B. At 27 souls the sum model reaches 190.35B and the compound model reaches 267.33B, inside 150–400B and still under the peaks.
+- Overpower stays under 841B at souls 4, 15, and 27, on both soul models, and on both sheet meanings.
+- Dust Devils stay unscored. Two at 510% on the same hit as the 386% Whirlwind would scale a hit by 3.642. On the 145.90B Healthy all-buff hit that would be about 531B, above the 461B peak. The hit rate and damage type are unknown, so that ratio is not applied.
+- The unmatched "Deathhead of Channeling" tooltip (+21 Damage Multiplier, 150%[x] all damage, +114% damage) is not applied. Grand Skull sockets stay unscored. Polearm Expertise 10/10 stays unscored. Attack speed 120% does not change per-hit damage.

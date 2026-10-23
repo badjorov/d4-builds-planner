@@ -8,7 +8,7 @@ The saved build stays on `sheetContext: town`. The town headline uses the town n
 
 All Damage is one row. It is stored on both `additivePct` and `offensiveSheet.allDamage`. Vulnerable Damage is one row, stored on both `vulnPct` and `offensiveSheet.vulnerable`. The items-and-Paragon split is the tooltip inside All Damage. The engine does not add it on top of All Damage.
 
-Attack speed is stored and is not a per-hit damage multiplier. Polearm Expertise is already 10/10 in the catalog. The combat video reads the same rank. The skull-stack icon is the Splinter of the Black Soulstone, socketed in jewelry, not Leoric's Crown. Empty `souls` uses 15 and that default is an estimate. The video range was about 4 to 27 or more, and a screenshot showed 17. Leoric's Crown keeps Armor, a +65%[x] gem effect, 41% Damage Reduction, and −30% Movement Speed, and it adds no damage multiplier. A weapon tooltip read as "Deathhead of Channeling" (1H mace, uncertain) listed +21 Damage Multiplier, 150%[x] all damage, and +114% damage. The equipped item is Deathshead of Channeling, a 2H mace, with Aspect of Channeling at 138%[x] [100-140], x25% All Damage Multiplier, and x88% Critical Strike Damage Multiplier. None of those three tooltip lines match, so `combatObservations.weaponTooltip.applied` is false.
+Attack speed is stored and is not a per-hit damage multiplier. Polearm Expertise is already 10/10 in the catalog. The combat video reads the same rank. The skull-stack icon is the Splinter of the Black Soulstone, socketed in Leoric's Crown. Leoric's +65%[x] gem effect raises the splinter base 2.5%[x] to one scored effect of 4.1%[x] per soul. Empty `souls` uses 15 and that default is an estimate. The video range was about 4 to 27 or more, and a screenshot showed 17. The video gem read of +150% is ignored. A weapon tooltip read as "Deathhead of Channeling" (1H mace, uncertain) listed +21 Damage Multiplier, 150%[x] all damage, and +114% damage. The equipped item is Deathshead of Channeling, a 2H mace, with Aspect of Channeling at 138%[x] [100-140], x25% All Damage Multiplier, and x88% Critical Strike Damage Multiplier. None of those three tooltip lines match, so `combatObservations.weaponTooltip.applied` is false.
 
 ## Scored by the damage engine
 
@@ -39,7 +39,7 @@ Attack speed is stored and is not a per-hit damage multiplier. Polearm Expertise
 
 Whirlwind scores the Physical row. The other element rows are stored and score when the selected skill's element is that row. Thorns stays `offensiveSheet.thorns` town 0.
 
-vs Healthy and vs Injured are separate rows in combat. The town pair is still 26 and 26, so the town score keeps one shared Healthy-or-Injured window. while Berserking applies while `uptime.berserk` is above 0. Overpower Damage 6,432.2% is the factor on an Overpower hit in a combat context (`1 + 6432.2/100`). The town stack total stays 104% on the town context.
+vs Healthy and vs Injured are separate rows in combat. The town pair is still 26 and 26, so the town score keeps one shared Healthy-or-Injured window. while Berserking applies while `uptime.berserk` is above 0. Overpower Damage 6,432.2% joins the additive pool on an Overpower hit. `overpowerSheetMeaning` `total` adds that percent once. `perStack` adds it four times. The stored 104% is not applied, and the separate Overpower multiplier stays 1.
 
 The lower combat-allbuff rows were not visible in the video. They are stored empty and fall back to combat-nobuff, and the result lists that fallback.
 

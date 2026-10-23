@@ -6487,13 +6487,38 @@
           "unit": "%",
           "note": "Lose 30% Movement Speed. Screenshot confirms -30% Movement Speed. No bucket tag.",
           "kind": "mobility"
+        },
+        {
+          "stat": "damage per soul",
+          "bucket": "multiplicative",
+          "value": 4.1,
+          "conditions": [],
+          "stacking": "up to 200 stacks, does not refresh",
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "kind": "damage",
+          "scored": false,
+          "note": "Leoric's tooltip shows 4.1%[x] per soul. This is the Splinter of the Black Soulstone socketed in this helm. Splinter base 2.5%[x] × gem effect +65%[x] (1.65) = 4.125, shown as 4.1. The line is stored here and scored once on the splinter. The base 2.5% is not a second effect. The video gem read of +150% is ignored."
+        },
+        {
+          "stat": "damage taken per soul",
+          "bucket": null,
+          "value": 1,
+          "conditions": [],
+          "stacking": "up to 200 stacks, does not refresh",
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "unit": "%",
+          "kind": "defense",
+          "note": "Leoric's tooltip: +1% damage taken per soul. Recorded on the defence notes through the splinter. Not added to the DR list."
         }
       ],
       "source": "user video 1 (watchVideo 2026-10-22)",
       "verified": false,
       "id": "leorics-crown",
       "name": "Leoric's Crown",
-      "note": "Ancestral Mythic Unique, 900 Item Power, 25/25, Transfigured. The 25/25 figure is stored as read and is not interpreted. The stored tooltip contributes Armor, a +65%[x] gem effect, 41% Damage Reduction, and -30% Movement Speed. The gem line is utility, Damage Reduction is defense, and Movement Speed is mobility, so this helm adds no damage multiplier. A 4.1%[x] per soul line and a +1% damage taken per soul line were stored here with the text that life absorbs a soul for 10s and that it counts as jewelry. Those lines are the Splinter of the Black Soulstone and are removed from this helm."
+      "note": "Ancestral Mythic Unique, 900 Item Power, 25/25, Transfigured. The 25/25 figure is stored as read and is not interpreted. The Splinter of the Black Soulstone is socketed in this helm. The tooltip shows 4.1%[x] per soul, up to 200 stacks, and +1% damage taken per soul. That 4.1 is the splinter base 2.5%[x] times the gem effect +65%[x] (1.65), shown as 4.1. The gem line stays utility. Armor, Damage Reduction, and Movement Speed stay defense or mobility. The per-soul damage line is scored once on the splinter, so this helm copy has scored false. The video gem read of +150% is ignored."
     },
     {
       "slots": [
@@ -11217,14 +11242,14 @@
         {
           "stat": "damage per soul",
           "bucket": "multiplicative",
-          "value": 2.5,
+          "value": 4.1,
           "conditions": [],
           "stacking": "up to 200 stacks, does not refresh",
-          "source": "https://helltides.com/tools/splinters",
-          "verified": false,
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
           "unit": "%",
           "kind": "damage",
-          "note": "Manual entry. Season 15 Soul Splinter, socketed in jewelry. Your kills absorb a soul for 10 seconds. Each soul increases your damage by 2.5%[x]. The value is the per-soul rate. The default model is 1 + 0.025 × souls. The compounded alternative is 1.025^souls."
+          "note": "One effect. Socketed in Leoric's Crown. Source chain: splinter base 2.5%[x] (https://helltides.com/tools/splinters) × Leoric gem effect +65%[x] (1.65) = 4.125, shown on the tooltip as 4.1%[x] per soul. The base 2.5% is not scored. The video gem read of +150% is ignored. Default model 1 + 0.041 × souls. Compound model 1.041^souls. Screenshot answers-2026-10-22.md."
         },
         {
           "stat": "damage taken per soul",
@@ -11241,7 +11266,7 @@
       ],
       "source": "https://helltides.com/tools/splinters",
       "verified": false,
-      "note": "Season 15 Soul Splinter. Socketed in jewelry. The jewelry piece is not stored. The soul count is the build's souls input."
+      "note": "Season 15 Soul Splinter, socketed in Leoric's Crown. The scored rate is the tooltip 4.1%[x] per soul. Source chain: base 2.5%[x] × Leoric gem effect 1.65. The soul count is the build's souls input."
     },
     {
       "id": "hells-legacy",

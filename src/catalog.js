@@ -390,7 +390,7 @@ function appendDamageModifiers(entity, build, catalog, modifiers, notes, label, 
     }
     if (piece.bucket === 'additive' && typeof build.additivePct === 'number') continue;
     if (piece.bucket === 'overpower' && typeof build.overpowerPct === 'number') {
-      notes.push(`${label.name}: Overpower per-stack line is included in overpowerPct and is not added again.`);
+      notes.push(`${label.name}: Overpower per-stack line stays out. The stored ${build.overpowerPct}% was 4 × that line and is retired. Sheet Overpower Damage, when present, is the additive total. The two are not both applied.`);
       continue;
     }
     if (piece.bucket === 'crit' && typeof build.critDmg === 'number') {
@@ -433,9 +433,37 @@ function sheetWhen(uptime, key) {
   return {};
 }
 
-function applyOffensiveSheet(build, skills, modifiers, notes) {
+const OVERPOWER_STACK_CAP = 4;
+
+function applyOverpowerAdditive(build, modifiers, notes, opts = {}) {
+  const meaning = opts.overpowerSheetMeaning === 'perStack' ? 'perStack' : 'total';
+  const sheet = build.offensiveSheet?.overpowerDamage;
+  const retired = typeof build.overpowerPct === 'number' ? build.overpowerPct : null;
+  const retiredText = retired == null ? 'No retired stack total is stored.' : `The stored ${retired}% (4 × 26) is retired and is not applied.`;
+  if (typeof sheet !== 'number') {
+    notes.push(`Overpower adds to the additive pool since patch 3.0 (Season 13). Life and Fortify do not scale it. ${retiredText} The separate Overpower multiplier is 1. Source: d4-overpower-formula.md (Research Scout).`);
+    return { overpowerSheetMeaning: meaning, overpowerAdditive: null };
+  }
+  const gate = sheetWhen(build.uptime, 'overpower');
+  if (gate.skip) {
+    notes.push(`Overpower Damage ${sheet}% stays out because Overpower uptime is 0. The separate multiplier is 1. ${retiredText}`);
+    return { overpowerSheetMeaning: meaning, overpowerAdditive: 0 };
+  }
+  const value = meaning === 'perStack' ? sheet * OVERPOWER_STACK_CAP : sheet;
+  pushSheetLine(modifiers, 'Overpower Damage', value, gate.when);
+  const reading = meaning === 'perStack'
+    ? `${sheet}% × ${OVERPOWER_STACK_CAP} stacks = ${value}%`
+    : `${sheet}% as the total`;
+  const other = meaning === 'perStack'
+    ? `The total reading is ${sheet}%.`
+    : `The per-stack reading at ${OVERPOWER_STACK_CAP} stacks is ${sheet * OVERPOWER_STACK_CAP}%.`;
+  notes.push(`Overpower Damage is additive on an Overpower hit: ${reading}. overpowerSheetMeaning is ${meaning}. ${other} The separate Overpower multiplier is 1. ${retiredText} Since patch 3.0 Overpower adds to the additive pool and stacks with crit. Life and Fortify do not scale it. Whether the sheet percent is the total or the per-stack figure is unverified. Source: d4-overpower-formula.md (Research Scout).`);
+  return { overpowerSheetMeaning: meaning, overpowerAdditive: value };
+}
+
+function applyOffensiveSheet(build, skills, modifiers, notes, opts = {}) {
   const sheet = build.offensiveSheet;
-  if (!sheet) return;
+  if (!sheet) return applyOverpowerAdditive(build, modifiers, notes, opts);
   const uptime = build.uptime || {};
   const element = skills.length === 1 ? skillDamageElement(skills[0]) : null;
   if (element && typeof sheet[element] === 'number') {
@@ -474,6 +502,7 @@ function applyOffensiveSheet(build, skills, modifiers, notes) {
   if (uptime.missingPotions === 0 && (build.glyphs || []).some(glyph => glyph.glyphId === 'imbiber')) {
     notes.push('Imbiber: 5%[x] per missing potion uses 0 missing potions of a capacity of 4. The factor is 1.0. Estimate.');
   }
+  const overpower = applyOverpowerAdditive(build, modifiers, notes, opts);
   if (sameEnemyWindow) {
     notes.push('Double-count: sheet vs Healthy 26% and vs Injured 26% match Might 26%[x]. While Fortified 35% does not match Warbringer 45%[x] or Crushing 64%[x], so a sheet row is a separate additive source from an [x] line. Headline keeps the additive 26 and Might 26%[x].');
   } else if (typeof sheet.vsHealthy === 'number' && typeof sheet.vsInjured === 'number') {
@@ -485,6 +514,7 @@ function applyOffensiveSheet(build, skills, modifiers, notes) {
   if (typeof sheet.whileFortified === 'number') {
     notes.push(`Double-count: while Fortified ${sheet.whileFortified}% is additive. Warbringer 45%[x] and Crushing 64%[x] stay multiplicative.`);
   }
+  return overpower;
 }
 
 const DEFAULT_SOULS = 15;
@@ -519,14 +549,16 @@ function applySplinter(catalog, build, modifiers, notes, opts = {}) {
     kind: 'season',
     id: entity.id,
     souls,
-    soulModel: compound ? 'compound' : 'sum'
+    soulModel: compound ? 'compound' : 'sum',
+    perSoul: rate
   });
   const applied = compound ? `${perSoul}^${souls}` : `1 + ${rate}/100 × ${souls}`;
   const other = compound ? `1 + ${rate}/100 × ${souls}` : `${perSoul}^${souls}`;
   const countText = soulsEstimate
     ? `Souls default to ${souls}. That default is an estimate. The video range was about 4 to 27 or more, and a screenshot showed 17.`
     : `Souls ${souls}.`;
-  notes.push(`${entity.name}: ${rate}%[x] per soul, socketed in jewelry. ${applied} = ${factor}. ${countText} The compounded alternative at this count is ${other} = ${alternate}. Source: ${entity.source}.`);
+  const host = ref.slotId || ref.slot || 'an unset slot';
+  notes.push(`${entity.name}: one effect, ${rate}%[x] per soul, socketed in ${host}. ${damage.note || ''} ${applied} = ${factor}. ${countText} The compounded alternative at this count is ${other} = ${alternate}.`);
   if (typeof taken?.value === 'number') {
     notes.push(`${entity.name}: +${taken.value}% damage taken per soul × ${souls} = +${taken.value * souls}% damage taken.${soulsEstimate ? ' Estimate.' : ''} This stays a defence note. It is not added to the DR list.`);
   }
@@ -613,7 +645,7 @@ export function engineInputFromBuild(catalog, build, opts = {}) {
       }
     }
   }
-  applyOffensiveSheet(build, skills, modifiers, notes);
+  const overpowerSheet = applyOffensiveSheet(build, skills, modifiers, notes, opts);
   for (const extra of opts.extraModifiers || []) {
     if (typeof extra?.value === 'number') modifiers.push({ active: true, ...extra });
   }
@@ -641,15 +673,6 @@ export function engineInputFromBuild(catalog, build, opts = {}) {
   }
   for (const aura of auras) {
     if (aura.estimate) notes.push(`${aura.name} is applied for uptime ${aura.uptime}. That fraction is an estimate.`);
-  }
-  let overpowerBonus = build.overpowerPct;
-  const sheetOverpower = build.offensiveSheet?.overpowerDamage;
-  if (typeof sheetOverpower === 'number') {
-    notes.push(`Overpower Damage ${sheetOverpower}% is the combat sheet row. An Overpower hit uses 1 + ${sheetOverpower}/100. The town stack total stays ${build.overpowerPct}%. That stack total is not added on top of this row. Source: video-model reading 2026-10-23, unconfirmed.`);
-    overpowerBonus = sheetOverpower;
-  } else if (build.overpowerStacks && typeof build.overpowerPct === 'number') {
-    const stacks = build.overpowerStacks;
-    notes.push(`Overpower is ${stacks.activeStacks} stacks × ${stacks.perStack}% = ${build.overpowerPct}%, including a ${stacks.lingerSeconds}s linger. The uptime is an estimate.`);
   }
   const estimate = uptime.estimate || {};
   for (const [key, label] of [['channeling', 'Channeling'], ['furyAbove50', 'Fury above 50'], ['unstoppable', 'Unstoppable'], ['fortified', 'Fortified'], ['healthyInjured', 'Healthy or Injured'], ['dustDevil', 'Dust Devil'], ['consecutiveWeapon', 'Consecutive weapon'], ['elites', 'Elites'], ['playerHealthy', 'Player Healthy'], ['missingPotions', 'Missing potions']]) {
@@ -705,7 +728,9 @@ export function engineInputFromBuild(catalog, build, opts = {}) {
     vulnerable,
     vulnPct: build.vulnPct,
     overpower,
-    overpowerPct: overpowerBonus,
+    overpowerPct: null,
+    overpowerSheetMeaning: overpowerSheet?.overpowerSheetMeaning || 'total',
+    overpowerAdditive: overpowerSheet?.overpowerAdditive ?? null,
     isDot,
     modifiers,
     notes,
@@ -873,6 +898,23 @@ export function evaluateBuild(catalog, build, opts = {}) {
     const alt = blendScore(altInput, uptime);
     soulAlternate = { total: alt.total, model: 'compound', factor: altInput.soulFactor, souls: altInput.souls, verified: false };
   }
+  let overpowerAlternate = null;
+  if (opts.overpowerSheetMeaning !== 'perStack' && typeof input.overpowerAdditive === 'number' && input.overpowerAdditive > 0) {
+    const altInput = applyFormulaOpts(engineInputFromBuild(catalog, build, { ...opts, overpowerSheetMeaning: 'perStack' }), {
+      ...opts,
+      critReading,
+      activeWeaponSlot,
+      overpowerSheetMeaning: 'perStack'
+    });
+    const alt = blendScore(altInput, uptime);
+    overpowerAlternate = {
+      total: alt.total,
+      meaning: 'perStack',
+      stacks: 4,
+      additive: altInput.overpowerAdditive,
+      verified: false
+    };
+  }
   let critAlternate = null;
   let conditionalCritAlternate = null;
   if (typeof input.critChance === 'number' && input.critChance > 0 && typeof input.critDmg === 'number' && input.critDmg > 0 && opts.omitGearCritMult !== true && opts.omitCritMult !== true) {
@@ -909,7 +951,10 @@ export function evaluateBuild(catalog, build, opts = {}) {
     soulsEstimate: input.soulsEstimate,
     soulFactor: input.soulFactor,
     soulModel: input.soulModel,
-    soulAlternate
+    soulAlternate,
+    overpowerSheetMeaning: input.overpowerSheetMeaning,
+    overpowerAdditive: input.overpowerAdditive,
+    overpowerAlternate
   };
 }
 

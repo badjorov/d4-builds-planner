@@ -64,13 +64,17 @@ test('the saved build stays on the town sheet and tags the combat reading as unc
   assert.equal(saved.combatObservations.weaponTooltip.applied, false);
   assert.equal(saved.combatObservations.weaponTooltip.name, 'Deathhead of Channeling');
   const town = evaluateBuild(catalog, { ...saved, skills: ['whirlwind'] });
-  near(town.result.total, 56001684701.70);
+  near(town.result.total, 46191544367.22);
   assert.equal(town.souls, 15);
   assert.equal(town.soulsEstimate, true);
-  assert.ok(Math.abs(town.soulFactor - 1.375) < 1e-9);
+  assert.ok(Math.abs(town.soulFactor - (1 + 0.041 * 15)) < 1e-9);
   assert.equal(town.input.modifiers.some(mod => mod.id === 'leorics-crown'), false);
-  const splinter = town.input.modifiers.find(mod => mod.id === 'splinter-of-the-black-soulstone');
-  assert.ok(Math.abs(splinter.value - 37.5) < 1e-9);
+  const soulMods = town.input.modifiers.filter(mod => mod.perSoul != null || mod.id === 'splinter-of-the-black-soulstone');
+  assert.equal(soulMods.length, 1);
+  assert.equal(soulMods[0].id, 'splinter-of-the-black-soulstone');
+  assert.equal(soulMods[0].perSoul, 4.1);
+  assert.ok(Math.abs(soulMods[0].value - 61.5) < 1e-9);
+  assert.equal(saved.splinter.slotId, 'helm');
   assert.match(town.input.notes.join('\n'), /\+15% damage taken/);
   assert.equal(saved.defense.dr.length, 1);
   assert.equal(saved.defense.dr[0], 50);
@@ -124,18 +128,22 @@ test('vs Healthy and vs Injured are separate rows, and Overpower Damage applies 
   assert.equal(healthy.input.modifiers.some(mod => mod.name === 'vs Healthy' && mod.value === 181.8), true);
   assert.equal(healthy.input.modifiers.some(mod => mod.name === 'vs Injured'), false);
   assert.equal(healthy.input.modifiers.some(mod => mod.value === 75), true);
-  near(healthy.result.total, 73186609357.97);
+  near(healthy.result.total, 85960999355.00);
 
   const injured = score('combat-nobuff', 'low', 'normal', { enemyInjured: 1 });
   assert.equal(injured.input.modifiers.some(mod => mod.name === 'vs Injured' && mod.value === 133.4), true);
   assert.equal(injured.input.modifiers.some(mod => mod.name === 'vs Healthy'), false);
 
   const overpower = score('combat-nobuff', 'low', 'overpower');
-  near(overpower.result.buckets.overpower, 1 + 6432.2 / 100);
-  assert.equal(overpower.input.overpowerPct, 6432.2);
+  assert.equal(overpower.result.buckets.overpower, 1);
+  assert.equal(overpower.input.overpowerPct, null);
+  const overpowerLine = overpower.input.modifiers.find(mod => mod.name === 'Overpower Damage');
+  assert.equal(overpowerLine.bucket, 'additive');
+  assert.equal(overpowerLine.value, 6432.2);
   assert.equal(overpower.input.modifiers.some(mod => mod.name.startsWith('Earthstriker') && mod.value === 19.5), true);
   const town = evaluateBuild(catalog, { ...saved, skills: ['whirlwind'] });
-  assert.equal(town.input.overpowerPct, 104);
+  assert.equal(town.input.overpowerPct, null);
+  assert.equal(town.input.modifiers.some(mod => mod.name === 'Overpower Damage'), false);
   assert.equal(town.input.modifiers.some(mod => mod.name === 'vs Healthy or Injured' && mod.value === 26), true);
 });
 
@@ -143,18 +151,18 @@ test('per-hit predictions under each crit reading', () => {
   const expected = {
     'combat-nobuff': {
       low: {
-        normal: [13990035140.21, 2581187295.24, 4852632115.05, 2581187295.24],
-        overpower: [1310471046164.52, 241784325860.61, 454554532617.95, 241784325860.61]
+        normal: [16431932182.86, 3031721804.96, 5699636993.32, 3031721804.96],
+        overpower: [34630527806.34, 6389396274.23, 12012064995.56, 6389396274.23]
       }
     },
     'combat-allbuff': {
       low: {
-        normal: [38194760115.31, 7047003711.31, 13248366977.27, 7047003711.31],
-        overpower: [3577769944441.61, 660105155801.04, 1240997692905.95, 660105155801.04]
+        normal: [44861481880.89, 8277026177.29, 15560809213.30, 8277026177.29],
+        overpower: [88642766331.12, 16354753935.63, 30746937398.99, 16354753935.63]
       },
       high: {
-        normal: [55926526867.35, 10318547392.50, 19398869097.90, 10318547392.50],
-        overpower: [5238735531233.67, 966556371076.32, 1817125977623.49, 966556371076.32]
+        normal: [65688247920.56, 12119602937.37, 22784853522.26, 12119602937.37],
+        overpower: [118508348832.01, 21865009009.60, 41106216938.04, 21865009009.60]
       }
     }
   };
@@ -172,12 +180,60 @@ test('per-hit predictions under each crit reading', () => {
     enemyHealthy: 1,
     healthyInjured: 1
   });
-  near(healthyHigh.result.total, 124217559633.74);
+  near(healthyHigh.result.total, 145899170042.53);
   const four = score('combat-nobuff', 'low', 'normal', {}, 'headline');
   const atFour = evaluateBuild(catalog, { ...hit('combat-nobuff', 'normal'), souls: 4 }, { sheetContext: 'combat-nobuff' });
   const at27 = evaluateBuild(catalog, { ...hit('combat-nobuff', 'normal'), souls: 27 }, { sheetContext: 'combat-nobuff', soulModel: 'compound' });
-  near(atFour.result.total, four.result.total * 1.1 / 1.375);
-  near(at27.soulFactor, 1.025 ** 27);
+  near(atFour.result.total, four.result.total * 1.164 / 1.615);
+  near(at27.soulFactor, 1.041 ** 27);
   assert.equal(atFour.soulsEstimate, false);
   assert.match(atFour.input.notes.join('\n'), /\+4% damage taken/);
+});
+
+test('the splinter is a single 4.1% per soul effect', () => {
+  const entity = catalog.seasonalMechanics.find(item => item.id === 'splinter-of-the-black-soulstone');
+  const scored = entity.effects.filter(effect => effect.kind === 'damage' && effect.scored !== false && /per soul/i.test(effect.stat || ''));
+  assert.equal(scored.length, 1);
+  assert.equal(scored[0].value, 4.1);
+  const helm = catalog.uniques.find(item => item.id === 'leorics-crown');
+  assert.equal(helm.effects.filter(effect => /per soul/i.test(effect.stat || '') && effect.scored !== false && effect.kind === 'damage').length, 0);
+  const town = evaluateBuild(catalog, { ...saved, skills: ['whirlwind'] });
+  const applied = town.input.modifiers.filter(mod => mod.id === 'splinter-of-the-black-soulstone' || (mod.id === 'leorics-crown' && mod.bucket === 'multiplicative'));
+  assert.equal(applied.length, 1);
+  assert.equal(applied[0].perSoul, 4.1);
+  assert.match(town.input.notes.join('\n'), /2\.5%\[x\].*× Leoric gem effect \+65%\[x\] \(1\.65\)/);
+  assert.match(town.input.notes.join('\n'), /not scored/);
+  const at15 = 1 + 0.041 * 15;
+  assert.ok(Math.abs(town.soulFactor - at15) < 1e-9);
+  const compound = evaluateBuild(catalog, { ...saved, skills: ['whirlwind'], souls: 27 }, { soulModel: 'compound' });
+  assert.ok(Math.abs(compound.soulFactor - (1.041 ** 27)) < 1e-9);
+  assert.equal(compound.input.modifiers.filter(mod => mod.perSoul != null).length, 1);
+});
+
+test('Overpower Damage is additive and the separate multiplier stays 1', () => {
+  const normal = score('combat-nobuff', 'low', 'normal');
+  const overpower = score('combat-nobuff', 'low', 'overpower');
+  assert.equal(overpower.result.buckets.overpower, 1);
+  assert.equal(normal.result.buckets.overpower, 1);
+  assert.equal(overpower.input.overpowerPct, null);
+  const line = overpower.input.modifiers.find(mod => mod.name === 'Overpower Damage');
+  assert.equal(line.bucket, 'additive');
+  assert.equal(line.sheetConditional, true);
+  assert.equal(line.value, 6432.2);
+  assert.ok(Math.abs((overpower.result.buckets.additive - normal.result.buckets.additive) - 6432.2 / 100) < 1e-9);
+  assert.equal(normal.input.modifiers.some(mod => mod.name === 'Overpower Damage'), false);
+  assert.equal(overpower.overpowerSheetMeaning, 'total');
+  assert.equal(overpower.overpowerAlternate.meaning, 'perStack');
+  assert.equal(overpower.overpowerAlternate.stacks, 4);
+  assert.equal(overpower.overpowerAlternate.additive, 6432.2 * 4);
+  const perStack = evaluateBuild(catalog, hit('combat-nobuff', 'overpower'), {
+    sheetContext: 'combat-nobuff',
+    overpowerSheetMeaning: 'perStack'
+  });
+  assert.equal(perStack.input.modifiers.find(mod => mod.name === 'Overpower Damage').value, 6432.2 * 4);
+  assert.equal(perStack.result.buckets.overpower, 1);
+  const town = evaluateBuild(catalog, { ...saved, skills: ['whirlwind'] });
+  assert.equal(town.input.overpowerPct, null);
+  assert.equal(town.result.buckets.overpower, 1);
+  assert.match(town.input.notes.join('\n'), /104% \(4 × 26\) is retired/);
 });

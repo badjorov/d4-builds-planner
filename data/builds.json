@@ -923,18 +923,18 @@
       "splinter": {
         "id": "splinter-of-the-black-soulstone",
         "equipped": true,
-        "slot": "jewelry",
-        "slotId": null,
-        "source": "https://helltides.com/tools/splinters",
-        "verified": false,
-        "note": "Season 15 Soul Splinter, socketed in jewelry. Which jewelry piece holds it is not stored. Manual entry."
+        "slot": "helm",
+        "slotId": "helm",
+        "source": "user screenshot 2026-10-22",
+        "verified": true,
+        "note": "Socketed in Leoric's Crown. Source chain: splinter base 2.5%[x] (https://helltides.com/tools/splinters) × Leoric gem effect +65%[x] (1.65) = 4.125, shown as 4.1%[x] per soul. The base 2.5% is not scored. The video gem read of +150% is ignored. answers-2026-10-22.md."
       },
       "combatObservations": {
         "source": "video-model reading 2026-10-23, unconfirmed",
         "verified": false,
         "note": "Fighting sheet from the combat video. Not confirmed by screenshots. sheetContext stays town, so the headline score stays the town score.",
         "currentFury": "The Fury globe stays full. combat-nobuff and combat-allbuff currentFury are Max Fury 826, observed.",
-        "leoricSouls": "The skull-stack icon is the Splinter of the Black Soulstone, socketed in jewelry. It is not Leoric's Crown.",
+        "leoricSouls": "The skull-stack icon is the Splinter of the Black Soulstone, socketed in Leoric's Crown. Leoric's +65%[x] gem effect raises the splinter base 2.5%[x] to the tooltip 4.1%[x] per soul. The video gem read of +150% is ignored.",
         "souls": {
           "videoLow": 4,
           "videoHigh": 27,
@@ -1347,7 +1347,7 @@
         "stackSeconds": 4,
         "estimate": true,
         "source": "user screenshot 2026-10-22",
-        "note": "26%[+] per stack, up to 4 stacks, each stack lasts 4s. Wrath grants 1 stack per second. Full 4 stacks during Wrath, plus a 4s linger after Wrath ends. 4 × 26 = 104, stored as overpowerPct. Weapon-swap stacks from Earthstriker are not added."
+        "note": "26%[+] per stack, up to 4 stacks, each stack lasts 4s. Wrath grants 1 stack per second. Full 4 stacks during Wrath, plus a 4s linger after Wrath ends. 4 × 26 = 104 is stored as overpowerPct and is not applied. Sheet Overpower Damage is the additive total on an Overpower hit. Weapon-swap stacks from Earthstriker are not added."
       },
       "comparisons": [
         {

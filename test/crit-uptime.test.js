@@ -40,7 +40,7 @@ test('Ramaladni multiplies 0.5%[x] by the stored Max Fury', () => {
   const evaluated = evaluateBuild(catalog, whirlwindBuild());
   const applied = evaluated.input.modifiers.find(mod => mod.id === 'ramaladni' && mod.bucket === 'multiplicative');
   assert.equal(applied.value, 0.5 * 826);
-  assert.ok(Math.abs(evaluated.result.total - 56001684701.70) < 0.01);
+  assert.ok(Math.abs(evaluated.result.total - 46191544367.22) < 0.01);
   const bare = evaluateBuild(catalog, { ...whirlwindBuild(), maxFury: null, currentFury: { town: null, combat: null } });
   const once = bare.input.modifiers.find(mod => mod.id === 'ramaladni' && mod.bucket === 'multiplicative');
   assert.equal(once.value, 0.5);

@@ -17,6 +17,10 @@
 // Headline crit: (A + sheet crit damage) / A × (1 + sum of gear [x] crit) × each aspect/unique/skill [x] crit.
 // The extra ×1.5 is dropped because the sheet figure already includes the base 50% (medium [E]).
 // Whether the sheet also includes gear [x] crit, and whether a weapon [x] crit line applies only while that weapon swings: low [A][F].
+// Overpower, patch 3.0 / Season 13, attached research note d4-overpower-formula.md (Research Scout):
+// Overpower adds to the additive [+] pool and stacks with crit. Life and Fortify do not scale it.
+// The build scorer puts sheet Overpower Damage in that additive pool and passes overpowerPct null, so this multiplier stays 1.
+// A direct compute() call can still pass overpowerPct. That path is the pre-3.0 multiplier and the build scorer does not use it.
 export const BUCKETS=['additive','multiplicative','mainstat','crit','vuln','overpower'];
 export const SEPARATE_CRIT_KINDS=new Set(['aspect','unique','skill']);
 const VULN_BASE=1.2;
