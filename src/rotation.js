@@ -122,13 +122,17 @@ function clipIntervals(casts, length, horizon) {
 export function simulateBuffRotation(buffs, opts = {}) {
   const horizon = typeof opts.horizon === 'number' && opts.horizon > 0 ? opts.horizon : ROTATION_HORIZON_S;
   const cdrPct = typeof opts.cdrPct === 'number' ? opts.cdrPct : null;
+  const extraCdrPct = typeof opts.extraCdrPct === 'number' ? opts.extraCdrPct : 0;
   const cut = typeof opts.shoutCutSeconds === 'number' ? opts.shoutCutSeconds : 0;
   const linger = typeof opts.overpowerLinger === 'number' ? opts.overpowerLinger : null;
   const afterglow = typeof opts.unstoppableAfter === 'number' ? opts.unstoppableAfter : null;
-  const cdrFactor = cdrPct == null ? 1 : 1 - cdrPct / 100;
+  const sheetFactor = cdrPct == null ? 1 : 1 - cdrPct / 100;
+  const extraFactor = extraCdrPct ? 1 - extraCdrPct / 100 : 1;
+  const cdrFactor = sheetFactor * extraFactor;
   const notes = [];
   if (cdrPct == null) notes.push('No sheet Cooldown Reduction is stored. Tooltip cooldowns are used.');
-  else notes.push(`Sheet Cooldown Reduction ${cdrPct}% scales each tooltip cooldown by ${cdrFactor}. Gear cooldown-reduction lines are not added on top of the sheet total. The formula is an estimate.`);
+  else notes.push(`Sheet Cooldown Reduction ${cdrPct}% scales each tooltip cooldown by ${sheetFactor}. Gear cooldown-reduction lines that are already inside that sheet total are not added again. The formula is an estimate.`);
+  if (extraCdrPct) notes.push(`Extra Cooldown Reduction ${extraCdrPct}% multiplies the remaining cooldown after the sheet factor. That extra line is an estimate.`);
   if (cut > 0) notes.push(`Each Shout cast reduces other non-Shout cooldowns by ${cut}s. That flat cut is an estimate.`);
   notes.push('Every modeled buff is cast together at 0s, then again on cooldown. No phase between the skills is stored. Every uptime is an estimate.');
 
@@ -245,6 +249,7 @@ export function simulateBuffRotation(buffs, opts = {}) {
     horizon,
     estimate: true,
     cdrPct,
+    extraCdrPct,
     shoutCutSeconds: cut,
     notes,
     buffs: runnable.map(buff => ({
@@ -297,14 +302,16 @@ function sliceBuild(build, souls, slice) {
 }
 
 function scoreSlice(catalog, build, slice, opts) {
-  return evaluateBuild(catalog, sliceBuild(build, opts.souls, slice), {
+  const options = {
     sheetContext: slice.sheetContext,
     allbuffEndpoint: slice.endpoint,
     critReading: opts.critReading || resolveCritReading(build, {}),
     soulModel: opts.soulModel || resolveSoulModel(build, {}),
     overpowerSheetMeaning: opts.overpowerSheetMeaning || resolveOverpowerMeaning(build, {}),
     extraModifiers: slice.extras || []
-  });
+  };
+  if (typeof opts.soulRatePct === 'number') options.soulRatePct = opts.soulRatePct;
+  return evaluateBuild(catalog, sliceBuild(build, opts.souls, slice), options);
 }
 
 function extrasFor(buffs, activeIds, includeAssumed = true) {
@@ -326,8 +333,12 @@ function extrasFor(buffs, activeIds, includeAssumed = true) {
   return extras;
 }
 
-function soulFactor(souls, model) {
-  return model === 'compound' ? 1.041 ** souls : 1 + 0.041 * souls;
+function soulFactor(souls, model, ratePct) {
+  if (typeof ratePct !== 'number') {
+    return model === 'compound' ? 1.041 ** souls : 1 + 0.041 * souls;
+  }
+  const per = 1 + ratePct / 100;
+  return model === 'compound' ? per ** souls : 1 + (ratePct / 100) * souls;
 }
 
 function billions(total) {
@@ -343,6 +354,7 @@ export function rotationReport(catalog, build, opts = {}) {
   const rotation = simulateBuffRotation(buffs, {
     horizon: opts.horizon,
     cdrPct: cdr.pct,
+    extraCdrPct: typeof opts.extraCdrPct === 'number' ? opts.extraCdrPct : 0,
     shoutCutSeconds: shoutCut.applied ? shoutCut.seconds : 0,
     overpowerLinger: linger,
     unstoppableAfter: afterglow.seconds
@@ -350,6 +362,16 @@ export function rotationReport(catalog, build, opts = {}) {
   const simulated = buffs.filter(buff => buff.simulated);
   const allIds = simulated.map(buff => buff.id);
   const cache = new Map();
+  const decorate = (slice, peak) => {
+    const next = {
+      ...slice,
+      berserk: opts.forceBerserk ? 1 : slice.berserk,
+      extras: [...(slice.extras || [])]
+    };
+    const more = typeof opts.extraModifiersFor === 'function' ? opts.extraModifiersFor(next, { peak }) : [];
+    if (more?.length) next.extras = next.extras.concat(more);
+    return next;
+  };
   const evalSlice = (slice, meaning) => {
     const key = JSON.stringify({
       meaning,
@@ -361,19 +383,21 @@ export function rotationReport(catalog, build, opts = {}) {
       elites: slice.elites,
       sheetContext: slice.sheetContext,
       endpoint: slice.endpoint,
-      extras: (slice.extras || []).map(extra => [extra.id, extra.value])
+      soulRatePct: opts.soulRatePct ?? null,
+      extras: (slice.extras || []).map(extra => [extra.id, extra.bucket, extra.value])
     });
     if (!cache.has(key)) {
       cache.set(key, scoreSlice(catalog, build, slice, {
         souls: 30,
         soulModel: 'sum',
-        overpowerSheetMeaning: meaning
+        overpowerSheetMeaning: meaning,
+        soulRatePct: opts.soulRatePct
       }).result.total);
     }
     return cache.get(key);
   };
 
-  const peakSlice = {
+  const peakSlice = decorate({
     vulnerable: 1,
     overpower: 1,
     berserk: 1,
@@ -383,7 +407,7 @@ export function rotationReport(catalog, build, opts = {}) {
     sheetContext: 'combat-allbuff',
     endpoint: 'high',
     extras: extrasFor(simulated, allIds)
-  };
+  }, true);
   const peakTotal30 = evalSlice(peakSlice, 'total');
   const peakPerStack30 = evalSlice(peakSlice, 'perStack');
   const peakScore = scoreSlice(catalog, build, peakSlice, { souls: 30, soulModel: 'sum', overpowerSheetMeaning: 'total' });
@@ -408,12 +432,12 @@ export function rotationReport(catalog, build, opts = {}) {
       endpoint: 'low',
       extras: extrasFor(simulated, segment.active)
     };
-    averageTotal30 += weight * evalSlice(slice, 'total');
-    averagePerStack30 += weight * evalSlice(slice, 'perStack');
+    averageTotal30 += weight * evalSlice(decorate(slice, false), 'total');
+    averagePerStack30 += weight * evalSlice(decorate(slice, false), 'perStack');
   }
 
-  const base = soulFactor(30, 'sum');
-  const scale = (souls, model) => soulFactor(souls, model) / base;
+  const base = soulFactor(30, 'sum', opts.soulRatePct);
+  const scale = (souls, model) => soulFactor(souls, model, opts.soulRatePct) / base;
   const targetBillions = build?.combatObservations?.calibration?.peakBillions ?? null;
   const target = typeof targetBillions === 'number' ? targetBillions * 1e9 : null;
   const soulsTable = [];

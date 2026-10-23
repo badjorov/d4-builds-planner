@@ -3,6 +3,7 @@ import { rotationReport } from './rotation.js';
 
 export const GUIDE_ID = 'ww-d4builds-immortal-speed-130';
 export const GUIDE_SOURCE = 'https://d4builds.gg/builds/whirlwind-barbarian-endgame/?var=4';
+export const GUIDE_UNIQUE_SOURCE = 'd4-guide-uniques.md';
 
 const DIRECT_SLOTS = [
   ['helm', 'helm', 'Helm'],
@@ -16,6 +17,13 @@ const DIRECT_SLOTS = [
   ['weapon-3', 'dualWield1', 'Dual wield 1'],
   ['weapon-4', 'dualWield2', 'Dual wield 2']
 ];
+
+const UNIQUE_IDS = {
+  starless: 'ring-of-starless-skies',
+  tuskhelm: 'tuskhelm-of-joritz-the-mighty-unique',
+  bloodMad: 'blood-mad-idol',
+  furnace: 'the-furnace'
+};
 
 function norm(value) {
   return String(value || '').toLowerCase().replace(/\([^)]*\)/g, ' ').replace(/[^a-z0-9]+/g, ' ').trim();
@@ -77,6 +85,37 @@ function withGuideItem(build, slotId, guideName, resolved) {
   return next;
 }
 
+function uniqueById(catalog, id) {
+  return (catalog.uniques || []).find(item => item.id === id) || null;
+}
+
+function splinterEntity(catalog) {
+  return (catalog.seasonalMechanics || []).find(item => item.id === 'splinter-of-the-black-soulstone') || null;
+}
+
+function boostedSoulRate(catalog) {
+  const effect = (splinterEntity(catalog)?.effects || []).find(item => item.kind === 'damage' && item.scored !== false && /per soul/i.test(item.stat || '') && !/unboosted/i.test(item.stat || ''));
+  return typeof effect?.value === 'number' ? effect.value : null;
+}
+
+function unboostedSoulRate(catalog) {
+  const effect = (splinterEntity(catalog)?.effects || []).find(item => item.kind === 'damage' && item.scored === false && /unboosted/i.test(item.stat || ''));
+  return typeof effect?.value === 'number' ? effect.value : null;
+}
+
+function damageRoll(unique) {
+  const effect = (unique?.effects || []).find(item => item.kind === 'damage' && Array.isArray(item.range));
+  if (!effect || typeof effect.range[0] !== 'number' || typeof effect.range[1] !== 'number') {
+    throw new Error(`${unique?.id || 'unique'} has no stored damage range`);
+  }
+  return { min: effect.range[0], max: effect.range[1], stat: effect.stat };
+}
+
+function effectValue(unique, pattern) {
+  const effect = (unique?.effects || []).find(item => pattern.test(item.stat || '') && typeof item.value === 'number');
+  return effect?.value ?? null;
+}
+
 function calibratedRows(catalog, build) {
   const report = rotationReport(catalog, build);
   return [15, 30].map(souls => {
@@ -85,9 +124,7 @@ function calibratedRows(catalog, build) {
       souls,
       model: 'sum',
       peakTotal: row.peakTotal,
-      averageTotal: row.averageTotal,
-      peakTotalBillions: row.peakTotalBillions,
-      averageTotalBillions: row.averageTotalBillions
+      averageTotal: row.averageTotal
     };
   });
 }
@@ -96,22 +133,108 @@ function ratio(next, base) {
   return base ? next / base : null;
 }
 
-function slotNote(slotId, guideName, resolved, identity, catalog) {
+function damageMod(name, id, value, bucket) {
+  const mod = { name, id, bucket, value, active: true, kind: 'unique', estimate: true };
+  if (bucket === 'additive') mod.sheetConditional = true;
+  return mod;
+}
+
+function linesFor(spec, flags, slice, info) {
+  const end = spec.end;
+  const lines = [];
+  if (flags.starless) {
+    lines.push(damageMod('Ring of Starless Skies', UNIQUE_IDS.starless, spec.rolls.starless[end], 'multiplicative'));
+  }
+  if (flags.tuskhelm && slice.berserk === 1) {
+    lines.push(damageMod(
+      'Tuskhelm of Joritz the Mighty',
+      UNIQUE_IDS.tuskhelm,
+      spec.rolls.tuskhelm[end],
+      spec.additive ? 'additive' : 'multiplicative'
+    ));
+  }
+  if (flags.bloodMad) {
+    lines.push(damageMod(
+      'Blood-Mad Idol',
+      UNIQUE_IDS.bloodMad,
+      spec.rolls.bloodMad[end],
+      spec.additive ? 'additive' : 'multiplicative'
+    ));
+  }
+  if (flags.furnace) {
+    const weight = info.peak ? 1 : spec.eliteShare;
+    lines.push(damageMod('The Furnace', UNIQUE_IDS.furnace, spec.rolls.furnace[end] * weight, 'multiplicative'));
+  }
+  return lines;
+}
+
+function scoreProfile(catalog, build, spec, flags) {
+  const report = rotationReport(catalog, build, {
+    soulRatePct: flags.soulRatePct,
+    extraCdrPct: flags.extraCdrPct || 0,
+    forceBerserk: flags.forceBerserk === true,
+    extraModifiersFor: (slice, info) => linesFor(spec, flags, slice, info)
+  });
+  return [15, 30].map(souls => {
+    const row = report.soulsTable.find(item => item.souls === souls && item.model === 'sum');
+    return { souls, model: 'sum', peakTotal: row.peakTotal, averageTotal: row.averageTotal };
+  });
+}
+
+function variantsOf(rolls, eliteShare) {
+  return [
+    { id: 'min', end: 'min', additive: false, rolls, eliteShare },
+    { id: 'max', end: 'max', additive: false, rolls, eliteShare },
+    { id: 'additive-min', end: 'min', additive: true, rolls, eliteShare },
+    { id: 'additive-max', end: 'max', additive: true, rolls, eliteShare }
+  ];
+}
+
+function scoreSet(catalog, build, variants, flags) {
+  const out = {};
+  for (const spec of variants) {
+    const berserkLine = flags.tuskhelm || flags.bloodMad;
+    if (!berserkLine && spec.additive) {
+      out[spec.id] = spec.end === 'max' ? out.max : out.min;
+      continue;
+    }
+    out[spec.id] = scoreProfile(catalog, build, spec, flags);
+  }
+  return out;
+}
+
+function at(rows, souls, field) {
+  return rows.find(row => row.souls === souls)[field];
+}
+
+function pack(scored, base) {
+  const one = rows => ({
+    peak: ratio(at(rows, 30, 'peakTotal'), at(base, 30, 'peakTotal')),
+    average: ratio(at(rows, 30, 'averageTotal'), at(base, 30, 'averageTotal'))
+  });
+  return {
+    min: one(scored.min),
+    max: one(scored.max),
+    additiveMin: one(scored['additive-min']),
+    additiveMax: one(scored['additive-max'])
+  };
+}
+
+const ONES = { peak: 1, average: 1 };
+const ONE_SET = { min: ONES, max: ONES, additiveMin: ONES, additiveMax: ONES };
+
+function slotNote(slotId, guideName, identity) {
   if (slotId === 'helm') {
-    return 'Tuskhelm is stored as a charm. Its damage line has no bucket, so the helm name adds no multiplier. Leoric\'s helm copy of the per-soul line is scored on the splinter, not on the helm.';
+    return 'Tuskhelm replaces Leoric\'s Crown. The helm is not jewelry, so this row uses the unboosted 2.5%[x] per soul. The 10% Cooldown Reduction multiplies the remaining cooldown after the sheet 39.4%. The [40-50]%[x] line is on for the all-buff peak and follows War Cry or Wrath on the average. That Berserk match is an estimate. The additive columns move the same percents into the additive pool.';
   }
   if (slotId === 'weapon-3' && /\bmace\b/i.test(guideName)) {
     return 'The guide names Spirit as a 1H mace. Nikolay\'s stored Spirit is a 1H sword. No separate mace damage number is stored, so the score uses the same unique.';
   }
   if (slotId === 'weapon-2' && identity.kind === 'aspect') {
-    return 'The guide names Aspect of Channeling on a 2H mace. Nikolay\'s item is Deathshead of Channeling, a 2H mace, with that aspect.';
+    return 'The guide names Aspect of Channeling on a 2H mace. Nikolay\'s item is Deathshead of Channeling, a 2H mace, with that aspect. The Furnace is also a 2H mace, and the recorded guide lists it as a charm, so this weapon stays Aspect of Channeling.';
   }
-  if (!resolved.catalog) {
-    const removed = identity?.id === 'stone-of-jordan'
-      ? (catalog.uniques || []).find(item => item.id === 'stone-of-jordan')?.effects?.find(effect => effect.kind === 'damage' && effect.bucket === 'multiplicative')
-      : null;
-    const removedText = removed ? ` The scored line removed with ${identity.name} is ${removed.value}%[x] ${removed.stat}.` : '';
-    return `${guideName} is a recorded name. The catalog has no effect for it, so no multiplier is invented.${removedText}`;
+  if (/starless/i.test(guideName)) {
+    return 'Ring of Starless Skies spends Primary Resource for 10%[x] damage for 3s, up to 50%[x]. Whirlwind channels constantly, so the min column is one stack and the max column is the cap. Stack uptime is an estimate. The resource-cost amount is null. The line removed with Stone of Jordan is 23%[x] damage of the highest element.';
   }
   return null;
 }
@@ -151,15 +274,7 @@ function directSlots(catalog, nikolay, guide) {
     const guideName = guide.gear[guideKey];
     const resolved = resolveGuideItem(catalog, guideName);
     const identity = slotIdentity(catalog, slot);
-    return {
-      slot,
-      label,
-      guideKey,
-      guideName,
-      resolved,
-      identity,
-      same: sameEntity(identity, resolved)
-    };
+    return { slot, label, guideKey, guideName, resolved, identity, same: sameEntity(identity, resolved) };
   });
 }
 
@@ -189,6 +304,21 @@ export function compareGuide(catalog, buildsFile, metaFile) {
     overpowerSheetMeaning: resolveOverpowerMeaning(nikolay, {}),
     critReading: resolveCritReading(nikolay, {})
   };
+  const rolls = {
+    starless: damageRoll(uniqueById(catalog, UNIQUE_IDS.starless)),
+    tuskhelm: damageRoll(uniqueById(catalog, UNIQUE_IDS.tuskhelm)),
+    bloodMad: damageRoll(uniqueById(catalog, UNIQUE_IDS.bloodMad)),
+    furnace: damageRoll(uniqueById(catalog, UNIQUE_IDS.furnace))
+  };
+  const tuskhelm = uniqueById(catalog, UNIQUE_IDS.tuskhelm);
+  const furnace = uniqueById(catalog, UNIQUE_IDS.furnace);
+  const soulBoosted = boostedSoulRate(catalog);
+  const soulBase = unboostedSoulRate(catalog);
+  const extraCdrPct = effectValue(tuskhelm, /cooldown reduction/i);
+  const eliteShare = typeof nikolay.uptime?.elites === 'number' ? nikolay.uptime.elites : null;
+  const variants = variantsOf(rolls, eliteShare);
+  const nikolayRows = calibratedRows(catalog, nikolay);
+
   const direct = directSlots(catalog, nikolay, guide);
   const rings = pairRings(catalog, nikolay, guide);
   const ringRows = rings.map(pair => ({
@@ -202,23 +332,46 @@ export function compareGuide(catalog, buildsFile, metaFile) {
     guideSlotLabel: pair.guide.slotLabel
   }));
   const rows = [...direct, ...ringRows];
-  const swaps = rows.filter(row => !row.same);
-  const swapScores = new Map();
-  for (const swap of swaps) {
-    const swapped = withGuideItem(nikolay, swap.slot.slotId, swap.guideName, swap.resolved);
-    swapScores.set(swap.slot.slotId, calibratedRows(catalog, swapped));
-  }
   let guideBuild = structuredClone(nikolay);
-  for (const swap of swaps) guideBuild = withGuideItem(guideBuild, swap.slot.slotId, swap.guideName, swap.resolved);
+  for (const swap of rows.filter(row => !row.same)) {
+    guideBuild = withGuideItem(guideBuild, swap.slot.slotId, swap.guideName, swap.resolved);
+  }
   guideBuild.id = guide.id;
   guideBuild.name = guide.name;
   guideBuild.talismans = [...(guide.seasonal?.charms || [])];
-  const nikolayRows = calibratedRows(catalog, nikolay);
-  const guideRows = calibratedRows(catalog, guideBuild);
+
+  const fullFlags = {
+    starless: true,
+    tuskhelm: true,
+    bloodMad: true,
+    furnace: true,
+    soulRatePct: soulBase,
+    extraCdrPct,
+    forceBerserk: true
+  };
+  const guideVariants = scoreSet(catalog, guideBuild, variants, fullFlags);
+  const full = pack(guideVariants, nikolayRows);
+
+  const swapScores = new Map();
+  for (const swap of rows.filter(row => !row.same)) {
+    const swapped = withGuideItem(nikolay, swap.slot.slotId, swap.guideName, swap.resolved);
+    const helm = swap.slot.slotId === 'helm';
+    const starless = /starless/i.test(swap.guideName);
+    swapScores.set(swap.slot.slotId, scoreSet(catalog, swapped, variants, {
+      tuskhelm: helm,
+      starless,
+      soulRatePct: helm ? soulBase : undefined,
+      extraCdrPct: helm ? extraCdrPct : 0,
+      forceBerserk: false
+    }));
+  }
+  const charmScores = {
+    bloodMad: scoreSet(catalog, nikolay, variants, { bloodMad: true, forceBerserk: true }),
+    furnace: scoreSet(catalog, nikolay, variants, { furnace: true })
+  };
+
   const slots = rows.map(row => {
     const scored = row.same ? null : swapScores.get(row.slot.slotId);
-    const peak = row.same ? 1 : ratio(scored[1].peakTotal, nikolayRows[1].peakTotal);
-    const average = row.same ? 1 : ratio(scored[1].averageTotal, nikolayRows[1].averageTotal);
     return {
       slotId: row.slot.slotId,
       label: row.label,
@@ -229,19 +382,50 @@ export function compareGuide(catalog, buildsFile, metaFile) {
       catalogKind: row.resolved.kind,
       catalogId: row.resolved.id,
       invented: false,
+      additiveApplies: row.slot.slotId === 'helm',
       assumption: row.same
         ? 'The guide states no roll for this item. The item matches, so Nikolay\'s stored rolls are used. Assumption.'
-        : 'The guide states no rolls for this item. Nikolay\'s affixes on the replaced item are not copied. No roll is invented. Assumption.',
-      note: slotNote(row.slot.slotId, row.guideName, row.resolved, row.identity, catalog),
-      swapMultiplierPeak: peak,
-      swapMultiplierAverage: average
+        : 'The guide states no affix rolls for this item. Nikolay\'s affixes on the replaced item are not copied. No roll is invented. Assumption.',
+      note: slotNote(row.slot.slotId, row.guideName, row.identity),
+      multipliers: row.same ? ONE_SET : pack(scored, nikolayRows)
     };
   });
   const order = ['helm', 'chest', 'gloves', 'pants', 'boots', 'amulet', 'ring-1', 'ring-2', 'weapon-1', 'weapon-2', 'weapon-3', 'weapon-4'];
   slots.sort((a, b) => order.indexOf(a.slotId) - order.indexOf(b.slotId));
-  const at = (list, souls) => list.find(row => row.souls === souls);
-  const fullPeak = ratio(at(guideRows, 30).peakTotal, at(nikolayRows, 30).peakTotal);
-  const fullAverage = ratio(at(guideRows, 30).averageTotal, at(nikolayRows, 30).averageTotal);
+
+  const charms = [
+    {
+      slotId: 'charm-blood-mad',
+      label: 'Charm',
+      nikolayName: '—',
+      guideName: 'Blood-Mad Idol',
+      guideSlotLabel: 'charm',
+      same: false,
+      catalogKind: 'unique',
+      catalogId: UNIQUE_IDS.bloodMad,
+      invented: false,
+      additiveApplies: true,
+      note: 'Always Berserking, so the guide row and this isolated charm keep Berserk on for the whole timeline. The additional damage uses min 75 and max 150. Low confidence. The 200%[x] self-burn is damage taken over 8s and is not scored. Burning on the player does not turn on the vs Burning target line. The additive columns move 75 and 150 into the additive pool.',
+      multipliers: pack(charmScores.bloodMad, nikolayRows)
+    },
+    {
+      slotId: 'charm-furnace',
+      label: 'Charm',
+      nikolayName: '—',
+      guideName: 'The Furnace',
+      guideSlotLabel: 'charm',
+      same: false,
+      catalogKind: 'unique',
+      catalogId: UNIQUE_IDS.furnace,
+      invented: false,
+      additiveApplies: false,
+      catalogSlots: furnace?.slots || [],
+      replacesWeapon: false,
+      note: `The Furnace is a 2H mace. The catalog slot is ${(furnace?.slots || []).join(', ') || 'unset'}. The recorded guide lists it as a charm and keeps Aspect of Channeling on 2H Bludgeoning, so it does not replace a weapon. Min 75 and max 200, low confidence. The peak uses elite 1. The average weights the percent by the stored elite share ${eliteShare}.`,
+      multipliers: pack(charmScores.furnace, nikolayRows)
+    }
+  ];
+
   const missingGear = slots.filter(slot => !slot.same).map(slot => ({
     name: slot.guideName,
     where: slot.guideSlotLabel && slot.guideSlotLabel !== slot.label ? `${slot.guideSlotLabel} on the guide` : slot.label
@@ -250,14 +434,12 @@ export function compareGuide(catalog, buildsFile, metaFile) {
   const hisGear = slots.filter(slot => !slot.same).map(slot => ({
     name: slot.nikolayName,
     where: slot.label,
-    beats: slot.swapMultiplierPeak < 1 - 1e-9,
-    multiplier: slot.swapMultiplierPeak
+    multipliers: slot.multipliers
   }));
   const hisCharms = listDiff(nikolay.talismans || [], guide.seasonal?.charms || []).map(name => ({
     name,
     where: 'charm',
-    beats: false,
-    multiplier: null
+    multipliers: null
   }));
   const paragon = paragonSame(nikolay, guide);
   const skillsSame = (guide.skills || []).every(id => (nikolay.skills || []).includes(id)) && guide.skills.length === nikolay.skills.length;
@@ -267,13 +449,21 @@ export function compareGuide(catalog, buildsFile, metaFile) {
     `Glyph levels stay Nikolay's stored levels: ${paragon.levels.map(item => `${item.glyphId} ${item.level}`).join(', ')}. The guide states no glyph level. Assumption.`,
     'Paragon nodes inside each board stay Nikolay\'s stored nodes. The recorded guide lists the board and the glyph only. Assumption.',
     'Both rows use Nikolay\'s combat-allbuff sheet, weapon damage, strength, and the 60s buff timeline. The guide states none of those numbers. Assumption.',
-    'Both rows use the calibrated 4.1%[x] per soul on the sum model. That rate is Nikolay\'s Leoric gem chain. The guide helm is Tuskhelm and states no soul rate. Keeping 4.1 on the guide row is an assumption so both rows share the calibrated model.',
-    'Changed slots do not receive the replaced item\'s affixes. No roll is invented for Ring of Starless Skies, Blood-Mad Idol, or The Furnace.',
-    'Tuskhelm\'s stored charm lines have no damage bucket. Placing that name on the helm adds no multiplier.',
-    'The guide names Spirit as a 1H mace. Nikolay\'s stored Spirit is a 1H sword. No separate mace damage number is stored.'
+    `Nikolay's row keeps the screenshot soul rate ${soulBoosted}%[x], sum model. The guide helm is Tuskhelm, which does not count as jewelry, so the guide row uses the unboosted ${soulBase}%[x] per soul. That guide rate is an estimate.`,
+    `Tuskhelm's ${extraCdrPct}% Cooldown Reduction multiplies the remaining cooldown after sheet 39.4% on any row that equips that helm. It is not inside Nikolay's sheet. Estimate.`,
+    'Changed slots do not receive the replaced item\'s affixes. No roll is invented. Starless, Tuskhelm, Blood-Mad Idol, and The Furnace use the ranges stored from d4-guide-uniques.md.',
+    'Starless stack uptime is an estimate. The tooltip is high confidence: 10%[x] for 3s, up to 50%[x]. The resource-cost amount stays null.',
+    'Tuskhelm\'s Berserk line is on for the all-buff peak. The average follows War Cry or Wrath unless Blood-Mad Idol forces Berserk on for the whole timeline. That uptime is an estimate. 6 Fury per second is not converted into damage.',
+    'Blood-Mad Idol\'s additional damage uses min 75 and max 150 because the sources conflict. Low confidence. The 8s self-burn has no refresh interval, so the line is on for the whole window. That is an estimate. The 200%[x] is damage taken and does not turn on the vs Burning target line.',
+    `The Furnace average uses elite share ${eliteShare}, an estimate. The boss-dummy peak uses elite 1. The recorded guide places The Furnace on the charm list, not in the 2H Bludgeoning slot.`,
+    'Patch 3.1 notes say some while-Berserking [x] bonuses were additive, and the items were not named. The additive columns score Tuskhelm and Blood-Mad Idol in the additive pool. Starless and The Furnace stay [x].',
+    'Leoric\'s Crown database ranges of 35-50 or 75-100 are recorded on the gem note. The screenshot +65%[x] stays the stored boost.',
+    'The guide names Spirit as a 1H mace. Nikolay\'s stored Spirit is a 1H sword. No separate mace damage number is stored.',
+    'The four unique entries cite d4-guide-uniques.md. The note\'s source URLs were not in the workspace, so no URL is invented. Season 15, patch 3.2.3. Verified stays false.'
   ];
   return {
     source: guide.source || GUIDE_SOURCE,
+    uniqueSource: GUIDE_UNIQUE_SOURCE,
     guideId: guide.id,
     guideName: guide.name,
     recordedOn: guide.recordedOn,
@@ -282,12 +472,20 @@ export function compareGuide(catalog, buildsFile, metaFile) {
     defaults,
     context: 'combat-allbuff',
     timeline: 'the stored 60s buff timeline',
+    soulRates: { nikolay: soulBoosted, guide: soulBase },
+    extraCdrPct,
+    eliteShare,
+    rolls,
     nikolay: { id: nikolay.id, name: nikolay.name, rows: nikolayRows },
-    guideScores: { id: guide.id, name: guide.name, rows: guideRows },
-    fullMultiplier: { peak: fullPeak, average: fullAverage },
+    guideScores: {
+      id: guide.id,
+      name: guide.name,
+      variants: guideVariants
+    },
+    full,
     slots,
+    charms,
     missing: [...missingGear, ...missingCharms],
-    beats: [...hisGear, ...hisCharms].filter(item => item.beats),
     hisChoices: [...hisGear, ...hisCharms],
     skillsSame,
     runesSame,
@@ -308,54 +506,83 @@ function factorText(value) {
   return `×${value.toFixed(4)}`;
 }
 
+function readingRows(report, key) {
+  const rows = key === 'nikolay' ? report.nikolay.rows : report.guideScores.variants[key];
+  return [15, 30].map(souls => rows.find(row => row.souls === souls));
+}
+
 export function renderGuideComparison(report) {
-  const n15 = report.nikolay.rows.find(row => row.souls === 15);
-  const n30 = report.nikolay.rows.find(row => row.souls === 30);
-  const g15 = report.guideScores.rows.find(row => row.souls === 15);
-  const g30 = report.guideScores.rows.find(row => row.souls === 30);
+  const labels = [
+    ['nikolay', 'Nikolay'],
+    ['min', 'Guide min'],
+    ['max', 'Guide max'],
+    ['additive-min', 'Guide additive min'],
+    ['additive-max', 'Guide additive max']
+  ];
   const lines = [
     '# Whirlwind guide variant 4 vs Nikolay\'s build',
     '',
     `The guide is the recorded row \`${report.guideId}\` in \`data/meta-builds.json\`. Source: ${report.source}. Author ${report.author}, updated ${report.updated}, recorded ${report.recordedOn}. That row is names and the link. This comparison uses those recorded names.`,
     '',
-    'The score is the calibrated model. Souls use the sum `1 + 0.041 × souls`. `overpowerSheetMeaning` is `total`. `critAudit.reading` is `headline`. Those defaults are calibrated against the 718B boss-dummy hit at 30 souls (peak 784B with the Burning line, 653B without it; average 341B). Both builds use the combat-allbuff sheet and the same 60s buff timeline. The peak is the full overlap on the high end of the All Damage ramp. The sustained average weights that timeline. The guide states no sheet, so both rows use Nikolay\'s sheet.',
+    `The four guide uniques are manual entries from \`${report.uniqueSource}\` (Research Scout), Season 15, patch 3.2.3. The note's source URLs were not in the workspace, so no URL is invented. Each value is an estimate and stays unverified.`,
+    '',
+    `The score uses the locked defaults. Souls use the sum \`1 + rate × souls\`. Nikolay's rate is ${report.soulRates.nikolay}%[x]. The guide rate is ${report.soulRates.guide}%[x], because Tuskhelm does not count as jewelry and the splinter is not gem-boosted. \`overpowerSheetMeaning\` is \`total\`. \`critAudit.reading\` is \`headline\`. Those defaults are calibrated against the 718B boss-dummy hit at 30 souls (peak 784B with the Burning line, 653B without it; average 341B). Both builds use the combat-allbuff sheet and the same 60s buff timeline. The peak is the full overlap on the high end of the All Damage ramp. The sustained average weights that timeline. The guide states no sheet, so both rows use Nikolay's sheet.`,
+    '',
+    'Min uses Starless 10%[x], Tuskhelm 40, Blood-Mad Idol 75, and The Furnace 75. Max uses Starless 50%[x], Tuskhelm 50, Blood-Mad Idol 150, and The Furnace 200. The additive readings move the Tuskhelm and Blood-Mad Idol percents into the additive pool. Starless and The Furnace stay [x].',
     '',
     '## Scores',
     '',
-    '| Build | Souls | Peak | Sustained average |',
-    '| --- | ---: | ---: | ---: |',
-    `| Nikolay | 15 | ${billionsText(n15.peakTotal)} | ${billionsText(n15.averageTotal)} |`,
-    `| Nikolay | 30 | ${billionsText(n30.peakTotal)} | ${billionsText(n30.averageTotal)} |`,
-    `| Guide variant 4 | 15 | ${billionsText(g15.peakTotal)} | ${billionsText(g15.averageTotal)} |`,
-    `| Guide variant 4 | 30 | ${billionsText(g30.peakTotal)} | ${billionsText(g30.averageTotal)} |`,
+    '| Reading | Souls | Peak | Sustained average |',
+    '| --- | ---: | ---: | ---: |'
+  ];
+  for (const [key, label] of labels) {
+    for (const row of readingRows(report, key)) {
+      lines.push(`| ${label} | ${row.souls} | ${billionsText(row.peakTotal)} | ${billionsText(row.averageTotal)} |`);
+    }
+  }
+  lines.push(
     '',
-    `Replacing Nikolay's differing items with the guide's items multiplies the 30-soul peak by ${factorText(report.fullMultiplier.peak)} and the sustained average by ${factorText(report.fullMultiplier.average)}.`,
+    `On the full guide loadout, the 30-soul peak runs from ${factorText(report.full.min.peak)} at the min reading to ${factorText(report.full.max.peak)} at the max reading. The additive readings are ${factorText(report.full.additiveMin.peak)} and ${factorText(report.full.additiveMax.peak)}. The sustained average runs from ${factorText(report.full.min.average)} to ${factorText(report.full.max.average)}, and the additive average readings are ${factorText(report.full.additiveMin.average)} and ${factorText(report.full.additiveMax.average)}.`,
+    '',
+    'At the peak every compared line is on, so the [x] peak is the product of the isolated peak factors. The average is not that product. Blood-Mad Idol keeps Berserk on outside the War Cry and Wrath windows, which also keeps the Tuskhelm line on, and The Furnace average uses the stored elite share. The additive readings join the combat-allbuff pool, so 40 to 150 additive is a small change beside All Damage and Overpower Damage.',
     '',
     '## Per-slot diff',
     '',
-    'The multiplier is the 30-soul score after that one slot takes the guide item, divided by Nikolay\'s score. A factor below 1 means his item scores higher. The same factor applies at 15 souls, because the changed line is a multiplier and the soul factor scales both rows together. Peak and average use the same factor when the line is on for the whole timeline.',
+    'The multiplier is the 30-soul score after that one change, divided by Nikolay\'s score. A factor below 1 means his item scores higher on that reading. Helm includes the unboosted soul rate and the 10% Cooldown Reduction. The charm rows are isolated. The other gear slots stay ×1.0000.',
     '',
-    '| Slot | Nikolay | Guide | Multiplier |',
-    '| --- | --- | --- | ---: |'
-  ];
-  for (const slot of report.slots) {
+    '| Slot | Nikolay | Guide | Peak min | Peak max | Peak additive min | Peak additive max | Average min | Average max | Average additive min | Average additive max |',
+    '| --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |'
+  );
+  const shown = [...report.slots, ...report.charms];
+  for (const slot of shown) {
     const guideLabel = slot.guideSlotLabel && slot.guideSlotLabel !== slot.label ? `${slot.guideName} (${slot.guideSlotLabel})` : slot.guideName;
-    lines.push(`| ${slot.label} | ${slot.nikolayName} | ${guideLabel} | ${factorText(slot.swapMultiplierPeak)} |`);
+    const set = slot.multipliers;
+    lines.push(`| ${slot.label} | ${slot.nikolayName} | ${guideLabel} | ${factorText(set.min.peak)} | ${factorText(set.max.peak)} | ${factorText(set.additiveMin.peak)} | ${factorText(set.additiveMax.peak)} | ${factorText(set.min.average)} | ${factorText(set.max.average)} | ${factorText(set.additiveMin.average)} | ${factorText(set.additiveMax.average)} |`);
   }
   lines.push('', 'Crushing Aspect is on both builds. The guide lists it on ring 1 and Ring of Starless Skies on ring 2. Nikolay lists Stone of Jordan on ring 1 and Crushing Aspect on ring 2. The scored swap keeps Crushing Aspect and replaces Stone of Jordan.');
-  lines.push('', 'Notes on the slots that need one:');
+  lines.push('', 'Notes on the rows that need one:');
   lines.push('');
-  for (const slot of report.slots.filter(slot => slot.note)) {
-    lines.push(`- ${slot.label}: ${slot.note}`);
+  for (const slot of shown.filter(slot => slot.note)) {
+    lines.push(`- ${slot.label === 'Charm' ? slot.guideName : slot.label}: ${slot.note}`);
   }
   lines.push('', '## Guide items he is missing', '');
   for (const item of report.missing) lines.push(`- ${item.name} (${item.where})`);
-  lines.push('', '## His items that beat the guide', '');
-  if (!report.beats.length) lines.push('No scored item of his beats the guide item in that slot.');
-  for (const item of report.beats) {
-    lines.push(`- ${item.name} (${item.where}) scores higher. Swapping it for the guide item multiplies the score by ${factorText(item.multiplier)}.`);
+  lines.push('', '## Which side scores higher', '');
+  lines.push('Isolated 30-soul factors below 1 mean his side scores higher on that reading.');
+  lines.push('');
+  for (const slot of report.slots.filter(slot => !slot.same)) {
+    const additive = slot.additiveApplies
+      ? ` The additive peak is ${factorText(slot.multipliers.additiveMin.peak)} and ${factorText(slot.multipliers.additiveMax.peak)}.`
+      : '';
+    lines.push(`- ${slot.nikolayName} against ${slot.guideName}: peak ${factorText(slot.multipliers.min.peak)} to ${factorText(slot.multipliers.max.peak)}, average ${factorText(slot.multipliers.min.average)} to ${factorText(slot.multipliers.max.average)}.${additive}`);
   }
-  const ties = report.hisChoices.filter(item => !item.beats);
+  for (const charm of report.charms) {
+    const additive = charm.additiveApplies
+      ? ` The additive peak is ${factorText(charm.multipliers.additiveMin.peak)} to ${factorText(charm.multipliers.additiveMax.peak)}.`
+      : '';
+    lines.push(`- ${charm.guideName} is not on his build. Adding it multiplies the peak by ${factorText(charm.multipliers.min.peak)} to ${factorText(charm.multipliers.max.peak)} and the average by ${factorText(charm.multipliers.min.average)} to ${factorText(charm.multipliers.max.average)}.${additive}`);
+  }
+  const ties = report.hisChoices.filter(item => !item.multipliers);
   if (ties.length) {
     lines.push('');
     lines.push('His other choices are not on the guide. They do not change this score:');

@@ -355,4 +355,4 @@ Non-boss hits at 30 souls, sum model, with no cross-skill buff lines: no-buff mi
 - The All Damage ramp from 1,996% to 9,897.7% is not interpolated.
 - Grand Skull sockets, the unmatched Deathhead tooltip, Polearm Expertise 10/10, and attack speed 120% stay unscored.
 
-The first step-3 comparison, the d4builds.gg Whirlwind Barbarian endgame guide variant 4 against this build, is in `docs/compare-guide-v4.md`.
+The first step-3 comparison, the d4builds.gg Whirlwind Barbarian endgame guide variant 4 against this build, is in `docs/compare-guide-v4.md`. That comparison scores the four guide uniques from `d4-guide-uniques.md` as estimates. The guide row uses the unboosted 2.5%[x] per soul. Nikolay's row keeps 4.1%[x].

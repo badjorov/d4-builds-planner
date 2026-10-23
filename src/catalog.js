@@ -527,9 +527,10 @@ function applySplinter(catalog, build, modifiers, notes, opts = {}) {
     notes.push(`Splinter ${ref.id} is not in the catalog.`);
     return { souls: null, soulsEstimate: false, soulFactor: null, soulModel: null };
   }
-  const damage = (entity.effects || []).find(effect => effect.kind === 'damage' && /per soul/i.test(effect.stat || ''));
+  const damage = (entity.effects || []).find(effect => effect.kind === 'damage' && effect.scored !== false && /per soul/i.test(effect.stat || ''));
   const taken = (entity.effects || []).find(effect => effect.kind === 'defense' && /damage taken per soul/i.test(effect.stat || ''));
-  const rate = typeof damage?.value === 'number' ? damage.value : null;
+  const storedRate = typeof damage?.value === 'number' ? damage.value : null;
+  const rate = typeof opts.soulRatePct === 'number' ? opts.soulRatePct : storedRate;
   if (rate == null) {
     notes.push(`${entity.name}: the per-soul damage rate is missing, so the splinter is not scored.`);
     return { souls: null, soulsEstimate: false, soulFactor: null, soulModel: null };
@@ -568,7 +569,10 @@ function applySplinter(catalog, build, modifiers, notes, opts = {}) {
     ? `Souls default to ${souls}. That default is an estimate. The video range was about 4 to 27 or more. Screenshots showed 17 and 30. Long fights can be scored up to the cap.${capText}`
     : `Souls ${souls}.${capText}`;
   const host = ref.slotId || ref.slot || 'an unset slot';
-  notes.push(`${entity.name}: one effect, ${rate}%[x] per soul, socketed in ${host}. ${damage.note || ''} ${applied} = ${factor}. ${countText} The compounded alternative at this count is ${other} = ${alternate}.`);
+  const rateNote = typeof opts.soulRatePct === 'number' && storedRate != null && opts.soulRatePct !== storedRate
+    ? ` This row uses ${opts.soulRatePct}%[x] per soul instead of the stored ${storedRate}%[x]. That rate is an estimate.`
+    : '';
+  notes.push(`${entity.name}: one effect, ${rate}%[x] per soul, socketed in ${host}. ${damage.note || ''} ${applied} = ${factor}. ${countText} The compounded alternative at this count is ${other} = ${alternate}.${rateNote}`);
   if (typeof taken?.value === 'number') {
     notes.push(`${entity.name}: +${taken.value}% damage taken per soul × ${souls} = +${taken.value * souls}% damage taken.${soulsEstimate ? ' Estimate.' : ''} This stays a defence note. It is not added to the DR list.`);
   }

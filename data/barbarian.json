@@ -45,6 +45,11 @@
         "url": "user screenshot 2026-10-22",
         "title": "User item, gem, glyph, and stat screenshots",
         "license": "User screenshots transcribed 2026-10-22. The transcribed lines are verified. A line with no [+] or [x] tag has a null bucket. An x prefix is the [x] tag."
+      },
+      {
+        "url": "d4-guide-uniques.md",
+        "title": "Research Scout notes on Ring of Starless Skies, Tuskhelm of Joritz the Mighty, Blood-Mad Idol, and The Furnace",
+        "license": "User-supplied research note, Season 15 patch 3.2.3. Manual entry. Not scraped. The note's source URLs were not in the workspace, so those URLs are not invented. Every value from this source stays verified false and is an estimate."
       }
     ]
   },
@@ -6462,7 +6467,7 @@
           "verified": true,
           "unit": "%",
           "kind": "utility",
-          "note": "Screenshot: gem effect +65%[x]. The earlier stored value was 150 [50-150]."
+          "note": "Screenshot: gem effect +65%[x]. The earlier stored value was 150 [50-150]. d4-guide-uniques.md records database ranges of 35-50 or 75-100. The screenshot +65% outranks those ranges and stays the stored value."
         },
         {
           "stat": "Damage Reduction",
@@ -6914,6 +6919,155 @@
       "id": "melted-heart-of-selig",
       "name": "Melted Heart of Selig",
       "note": "Mythic, 900 Item Power. The header and one affix both read +28.5% Resistance to All Elements. The ranged affix is the stored roll."
+    },
+    {
+      "id": "ring-of-starless-skies",
+      "name": "Ring of Starless Skies",
+      "slots": ["ring-1", "ring-2"],
+      "effects": [
+        {
+          "stat": "damage for 3s on spending Primary Resource",
+          "bucket": "multiplicative",
+          "value": null,
+          "range": [10, 50],
+          "conditions": ["spending Primary Resource"],
+          "stacking": "10%[x] for 3s, stacking up to 50%[x]",
+          "source": "d4-guide-uniques.md",
+          "verified": false,
+          "unit": "%",
+          "kind": "damage",
+          "note": "Season 15, patch 3.2.3. Manual entry from d4-guide-uniques.md (Research Scout). High confidence on the tooltip. Spending Primary Resource grants 10%[x] damage for 3s, stacking up to 50%[x]. The comparison uses 50%[x] as the max-stack reading and 10%[x] as the one-stack reading. Whirlwind channels constantly, so the stack uptime is modeled at those two ends. That uptime is an estimate. The point value stays null so the catalog does not pick one end."
+        },
+        {
+          "stat": "Primary Resource cost reduction",
+          "bucket": null,
+          "value": null,
+          "conditions": null,
+          "stacking": null,
+          "source": "d4-guide-uniques.md",
+          "verified": false,
+          "kind": "resource",
+          "note": "The resource-cost reduction amount is unstated. Left null. No number is invented."
+        }
+      ],
+      "source": "d4-guide-uniques.md",
+      "verified": false,
+      "note": "Season 15, patch 3.2.3. Manual entry from Research Scout's d4-guide-uniques.md. The note's source URLs were not in the workspace, so no URL is invented. Estimate. Verified stays false."
+    },
+    {
+      "id": "tuskhelm-of-joritz-the-mighty-unique",
+      "name": "Tuskhelm of Joritz the Mighty",
+      "slots": ["helm"],
+      "effects": [
+        {
+          "stat": "damage on gaining Berserking while Berserk",
+          "bucket": "multiplicative",
+          "value": null,
+          "range": [40, 50],
+          "conditions": ["while Berserking"],
+          "stacking": null,
+          "source": "d4-guide-uniques.md",
+          "verified": false,
+          "unit": "%",
+          "kind": "damage",
+          "note": "Season 15, patch 3.2.3. Manual entry. Gaining Berserking while Berserk grants [40-50]%[x] damage. The comparison uses 40 and 50. Berserk uptime on the saved build is unset. The all-buff peak treats the line as on. The sustained average follows the timeline Berserk windows from War Cry and Wrath of the Berserker. That match is an estimate. Patch 3.1 notes say some while-Berserking [x] bonuses were additive, and the items were not named, so the comparison also scores 40 and 50 as additive."
+        },
+        {
+          "stat": "Fury per second",
+          "bucket": null,
+          "value": 6,
+          "conditions": null,
+          "stacking": null,
+          "source": "d4-guide-uniques.md",
+          "verified": false,
+          "kind": "resource",
+          "note": "6 Fury per second. Resource line. It is not converted into a damage multiplier."
+        },
+        {
+          "stat": "Cooldown Reduction",
+          "bucket": null,
+          "value": 10,
+          "conditions": null,
+          "stacking": null,
+          "source": "d4-guide-uniques.md",
+          "verified": false,
+          "unit": "%",
+          "kind": "utility",
+          "note": "10% Cooldown Reduction. The guide row multiplies this into the remaining cooldown after the sheet 39.4%. It is not inside Nikolay's sheet. Estimate."
+        }
+      ],
+      "source": "d4-guide-uniques.md",
+      "verified": false,
+      "note": "Season 15, patch 3.2.3. Manual entry from Research Scout's d4-guide-uniques.md. Helm unique. It does not count as jewelry, so the Black Soulstone splinter is not gem-boosted in this helm. The guide row uses the unboosted 2.5%[x] per soul. The charm transcription under talismans is a separate video read and is not replaced. Estimate. The note's source URLs were not in the workspace."
+    },
+    {
+      "id": "blood-mad-idol",
+      "name": "Blood-Mad Idol",
+      "slots": null,
+      "effects": [
+        {
+          "stat": "Berserking",
+          "bucket": null,
+          "value": null,
+          "conditions": [],
+          "stacking": null,
+          "source": "d4-guide-uniques.md",
+          "verified": false,
+          "kind": "utility",
+          "note": "Always Berserking. The guide row forces Berserk on for the peak and for every slice of the timeline. Estimate."
+        },
+        {
+          "stat": "damage taken as Burning",
+          "bucket": null,
+          "value": 200,
+          "conditions": [],
+          "stacking": "over 8s",
+          "source": "d4-guide-uniques.md",
+          "verified": false,
+          "unit": "%",
+          "kind": "defense",
+          "note": "You take 200%[x] increased damage as Burning over 8s. This is damage taken. It is not scored as damage dealt. Burning on the player does not turn on the vs Burning target line. No refresh interval is stored for the 8s."
+        },
+        {
+          "stat": "damage while Berserking and Burning",
+          "bucket": "multiplicative",
+          "value": null,
+          "range": [75, 150],
+          "conditions": ["while Berserking", "while Burning"],
+          "stacking": null,
+          "source": "d4-guide-uniques.md",
+          "verified": false,
+          "unit": "%",
+          "kind": "damage",
+          "note": "While Burning, Berserking grants an additional X%[x] damage. Sources conflict on X: 80-100, 120-150, or 75-125. Low confidence. The comparison uses the envelope min 75 and max 150. The 8s self-burn has no refresh interval, so treating the line as on for the whole window is an estimate. Patch 3.1 notes say some while-Berserking [x] bonuses were additive, items not named, so 75 and 150 are also scored as additive."
+        }
+      ],
+      "source": "d4-guide-uniques.md",
+      "verified": false,
+      "note": "Season 15, patch 3.2.3. Manual entry from Research Scout's d4-guide-uniques.md. Charm. The recorded guide lists it under seasonal charms. Estimate. The note's source URLs were not in the workspace."
+    },
+    {
+      "id": "the-furnace",
+      "name": "The Furnace",
+      "slots": ["weapon-2"],
+      "effects": [
+        {
+          "stat": "damage to Elites",
+          "bucket": "multiplicative",
+          "value": null,
+          "range": [75, 200],
+          "conditions": ["vs Elites"],
+          "stacking": null,
+          "source": "d4-guide-uniques.md",
+          "verified": false,
+          "unit": "%",
+          "kind": "damage",
+          "note": "2H mace. X%[x] damage to Elites. Sources conflict at 75-100 or 150-200. Low confidence. The comparison uses min 75 and max 200. The sustained average weights that percent by the stored elite share. The boss-dummy peak uses elite 1. Estimate. The point value stays null."
+        }
+      ],
+      "source": "d4-guide-uniques.md",
+      "verified": false,
+      "note": "Season 15, patch 3.2.3. Manual entry from Research Scout's d4-guide-uniques.md. The catalog slot is weapon-2, a 2H mace. The recorded guide variant 4 lists The Furnace as a charm and keeps Aspect of Channeling on 2H Bludgeoning, so the comparison does not replace that weapon. Estimate. The note's source URLs were not in the workspace."
     }
   ],
   "affixes": [
@@ -11106,7 +11260,7 @@
       ],
       "source": "user video 1 (watchVideo 2026-10-22)",
       "verified": false,
-      "note": "Unique charm. The chance and the Berserking condition stay in the effect note."
+      "note": "Unique charm. The chance and the Berserking condition stay in the effect note. This is the video transcription. The helm unique used by the guide comparison is a separate catalog entry and does not replace these charm lines."
     },
     {
       "id": "hellfire-torch",
@@ -11249,7 +11403,20 @@
           "verified": true,
           "unit": "%",
           "kind": "damage",
-          "note": "One effect. Socketed in Leoric's Crown. Source chain: splinter base 2.5%[x] (https://helltides.com/tools/splinters) × Leoric gem effect +65%[x] (1.65) = 4.125, shown on the tooltip as 4.1%[x] per soul. The base 2.5% is not scored. The video gem read of +150% is ignored. Default model 1 + 0.041 × souls. Compound model 1.041^souls. Screenshot answers-2026-10-22.md."
+          "note": "One effect. Socketed in Leoric's Crown. Source chain: splinter base 2.5%[x] (https://helltides.com/tools/splinters) × Leoric gem effect +65%[x] (1.65) = 4.125, shown on the tooltip as 4.1%[x] per soul. The base 2.5% is not scored on this row. The video gem read of +150% is ignored. Default model 1 + 0.041 × souls. Compound model 1.041^souls. Screenshot answers-2026-10-22.md."
+        },
+        {
+          "stat": "damage per soul, unboosted",
+          "bucket": "multiplicative",
+          "value": 2.5,
+          "conditions": [],
+          "stacking": "up to 200 stacks, does not refresh",
+          "source": "https://helltides.com/tools/splinters",
+          "verified": false,
+          "unit": "%",
+          "kind": "damage",
+          "scored": false,
+          "note": "Unboosted base 2.5%[x] per soul. Leoric's Crown raises it to the tooltip 4.1%[x]. d4-guide-uniques.md (Research Scout): Tuskhelm does not count as jewelry, so the guide row scores this base instead of 4.1. Nikolay's row keeps 4.1. Applying 2.5 on the guide row is an estimate."
         },
         {
           "stat": "damage taken per soul",
