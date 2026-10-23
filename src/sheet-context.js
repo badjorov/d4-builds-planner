@@ -1,7 +1,7 @@
-// Town and combat are two readings of the same sheet stat.
+// Town, combat, combat-nobuff, and combat-allbuff are readings of the same sheet stat.
 // sheetContext selects one. A missing combat number uses the town number
-// and is recorded as a fallback. A bare number is a town reading, so
-// fixtures and the optimizer form keep working.
+// and is recorded as a fallback. combat-allbuff falls back to combat-nobuff
+// before town. A bare number is a town reading, so fixtures and the optimizer form keep working.
 
 const SCALAR_FIELDS = [
   ['weaponDmg', 'Weapon Damage'],
@@ -14,7 +14,8 @@ const SCALAR_FIELDS = [
   ['furyRegeneration', 'Fury regeneration'],
   ['furyGenerationPct', 'Fury generation'],
   ['furyCostReductionPct', 'Fury cost reduction'],
-  ['furyOnKill', 'Fury on kill']
+  ['furyOnKill', 'Fury on kill'],
+  ['attackSpeed', 'Attack Speed']
 ];
 
 const OFFENSIVE_FIELDS = [
@@ -33,6 +34,8 @@ const OFFENSIVE_FIELDS = [
   ['vsInjured', 'vs Injured'],
   ['whileHealthy', 'while you are Healthy'],
   ['whileFortified', 'while Fortified'],
+  ['whileBerserking', 'while Berserking'],
+  ['overpowerDamage', 'Overpower Damage'],
   ['thorns', 'Thorns']
 ];
 
@@ -50,82 +53,125 @@ const COLD_FIELDS = [
   ['other', 'Cold resistance, other']
 ];
 
+export const SHEET_CONTEXTS = ['town', 'combat', 'combat-nobuff', 'combat-allbuff'];
+
+const READING_KEYS = ['town', 'combat', 'combat-nobuff', 'combat-allbuff', 'combat-allbuff-high'];
+
 export function sheetContextOf(build, opts = {}) {
   const raw = opts.sheetContext ?? build?.sheetContext;
-  return raw === 'combat' ? 'combat' : 'town';
+  return SHEET_CONTEXTS.includes(raw) ? raw : 'town';
 }
 
 export function isSheetReading(value) {
   return value != null && typeof value === 'object' && !Array.isArray(value)
-    && (Object.hasOwn(value, 'town') || Object.hasOwn(value, 'combat'));
+    && READING_KEYS.some(key => Object.hasOwn(value, key));
 }
 
 function finite(value) {
   return typeof value === 'number' && Number.isFinite(value) ? value : null;
 }
 
-export function resolveReading(value, context) {
+function found(value, source) {
+  return { value, source, fallback: false, from: source };
+}
+
+function townFallback(town) {
+  return { value: town, source: 'town', fallback: true, from: 'town' };
+}
+
+export function resolveReading(value, context, opts = {}) {
+  const high = opts.allbuffEndpoint === 'high';
   if (!isSheetReading(value)) {
     const number = finite(value);
     if (number == null) return { value: null, source: 'missing', fallback: false };
-    if (context === 'combat') return { value: number, source: 'town', fallback: true };
-    return { value: number, source: 'town', fallback: false };
+    if (context === 'town') return { value: number, source: 'town', fallback: false };
+    return townFallback(number);
   }
   const town = finite(value.town);
-  const combat = finite(value.combat);
   if (context === 'combat') {
-    if (combat != null) return { value: combat, source: 'combat', fallback: false };
-    if (town != null) return { value: town, source: 'town', fallback: true };
+    const combat = finite(value.combat);
+    if (combat != null) return found(combat, 'combat');
+    if (town != null) return townFallback(town);
+    return { value: null, source: 'missing', fallback: false };
+  }
+  if (context === 'combat-nobuff') {
+    const nobuff = finite(value['combat-nobuff']);
+    if (nobuff != null) return found(nobuff, 'combat-nobuff');
+    if (town != null) return townFallback(town);
+    return { value: null, source: 'missing', fallback: false };
+  }
+  if (context === 'combat-allbuff') {
+    if (high) {
+      const ramp = finite(value['combat-allbuff-high']);
+      if (ramp != null) return found(ramp, 'combat-allbuff-high');
+    }
+    const allbuff = finite(value['combat-allbuff']);
+    if (allbuff != null) return found(allbuff, 'combat-allbuff');
+    const nobuff = finite(value['combat-nobuff']);
+    if (nobuff != null) return { value: nobuff, source: 'combat-nobuff', fallback: true, from: 'combat-nobuff' };
+    if (town != null) return townFallback(town);
     return { value: null, source: 'missing', fallback: false };
   }
   if (town == null) return { value: null, source: 'missing', fallback: false };
   return { value: town, source: 'town', fallback: false };
 }
 
-function take(build, field, label, context, fallbacks) {
-  const reading = resolveReading(build?.[field], context);
-  if (reading.fallback && reading.value != null) fallbacks.push({ field, label, town: reading.value });
+function pushFallback(fallbacks, field, label, raw, reading) {
+  const storedTown = isSheetReading(raw) ? finite(raw.town) : null;
+  fallbacks.push({
+    field,
+    label,
+    town: reading.from === 'town' ? reading.value : storedTown,
+    from: reading.from || 'town',
+    value: reading.value
+  });
+}
+
+function take(build, field, label, context, opts, fallbacks) {
+  const raw = build?.[field];
+  const reading = resolveReading(raw, context, opts);
+  if (reading.fallback && reading.value != null) pushFallback(fallbacks, field, label, raw, reading);
   return reading.value;
 }
 
-function takeGroup(source, fields, prefix, context, fallbacks) {
+function takeGroup(source, fields, prefix, context, opts, fallbacks) {
   const next = { ...source };
   for (const [field, label] of fields) {
     if (!Object.hasOwn(source, field)) continue;
-    const reading = resolveReading(source[field], context);
+    const reading = resolveReading(source[field], context, opts);
     if (reading.fallback && reading.value != null) {
-      fallbacks.push({ field: prefix ? `${prefix}.${field}` : field, label, town: reading.value });
+      pushFallback(fallbacks, prefix ? `${prefix}.${field}` : field, label, source[field], reading);
     }
     next[field] = reading.value;
   }
   return next;
 }
 
-export function applySheetContext(build, context = sheetContextOf(build)) {
+export function applySheetContext(build, context = sheetContextOf(build), opts = {}) {
   const source = build || {};
   const fallbacks = [];
   const next = { ...source };
   for (const [field, label] of SCALAR_FIELDS) {
     if (!Object.hasOwn(source, field)) continue;
-    next[field] = take(source, field, label, context, fallbacks);
+    next[field] = take(source, field, label, context, opts, fallbacks);
   }
   if (source.offensiveSheet) {
-    next.offensiveSheet = takeGroup(source.offensiveSheet, OFFENSIVE_FIELDS, 'offensiveSheet', context, fallbacks);
+    next.offensiveSheet = takeGroup(source.offensiveSheet, OFFENSIVE_FIELDS, 'offensiveSheet', context, opts, fallbacks);
   }
   if (source.defense) {
-    next.defense = takeGroup(source.defense, DEFENSE_FIELDS, 'defense', context, fallbacks);
+    next.defense = takeGroup(source.defense, DEFENSE_FIELDS, 'defense', context, opts, fallbacks);
     if (source.defense.coldResistance) {
-      next.defense.coldResistance = takeGroup(source.defense.coldResistance, COLD_FIELDS, 'defense.coldResistance', context, fallbacks);
+      next.defense.coldResistance = takeGroup(source.defense.coldResistance, COLD_FIELDS, 'defense.coldResistance', context, opts, fallbacks);
     }
   }
-  const current = resolveReading(source.currentFury, context);
+  const current = resolveReading(source.currentFury, context, opts);
   const maxFury = finite(next.maxFury);
   let currentFuryEstimate = false;
   if (current.value != null && !current.fallback) {
     next.currentFury = current.value;
   } else if (current.value != null && current.fallback) {
     next.currentFury = current.value;
-    fallbacks.push({ field: 'currentFury', label: 'Current Fury', town: current.value });
+    pushFallback(fallbacks, 'currentFury', 'Current Fury', source.currentFury, current);
   } else if (maxFury != null) {
     next.currentFury = maxFury;
     currentFuryEstimate = true;

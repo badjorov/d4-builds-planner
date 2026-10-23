@@ -71,7 +71,8 @@
     "verified": { "type": "boolean" },
     "note": { "type": ["string", "null"] },
     "maxFury": { "$ref": "#/$defs/sheetReading" },
-    "sheetContext": { "enum": ["town", "combat"] },
+    "sheetContext": { "enum": ["town", "combat", "combat-nobuff", "combat-allbuff"] },
+    "attackSpeed": { "$ref": "#/$defs/sheetReading" },
     "currentFury": { "$ref": "#/$defs/sheetReading" },
     "furyRegeneration": { "$ref": "#/$defs/sheetReading" },
     "furyGenerationPct": { "$ref": "#/$defs/sheetReading" },
@@ -101,7 +102,8 @@
     "suspectReadings": {
       "type": "array",
       "items": { "$ref": "#/$defs/suspectReading" }
-    }
+    },
+    "combatObservations": { "$ref": "#/$defs/combatObservations" }
   },
   "$defs": {
     "slotAssignment": {
@@ -192,6 +194,53 @@
         "castsPerSecond": { "type": ["number", "null"] }
       }
     },
+    "combatObservations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source", "verified"],
+      "properties": {
+        "source": { "type": "string", "minLength": 1 },
+        "verified": { "type": "boolean" },
+        "note": { "type": "string" },
+        "currentFury": { "type": "string" },
+        "leoricSouls": { "type": "string" },
+        "polearmExpertise": { "type": "string" },
+        "allDamageRamp": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["low", "high", "seconds"],
+          "properties": {
+            "low": { "type": "number" },
+            "high": { "type": "number" },
+            "seconds": { "type": "number" },
+            "note": { "type": "string" }
+          }
+        },
+        "observedHits": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "nobuffTypical": { "type": "string" },
+            "nobuffMax": { "type": "string" },
+            "allbuffTypical": { "type": "string" },
+            "allbuffPeaks": { "type": "string" },
+            "overpowerCrit": { "type": "string" }
+          }
+        },
+        "weaponTooltip": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["name", "applied"],
+          "properties": {
+            "name": { "type": "string" },
+            "hands": { "type": "string" },
+            "lines": { "type": "array", "items": { "type": "string" } },
+            "applied": { "type": "boolean" },
+            "note": { "type": "string" }
+          }
+        }
+      }
+    },
     "sheetReading": {
       "description": "A bare number is the town reading. An object stores town and an optional combat reading. sheetContext selects which one the engine uses.",
       "oneOf": [
@@ -202,7 +251,21 @@
           "required": ["town"],
           "properties": {
             "town": { "type": ["number", "null"] },
-            "combat": { "type": ["number", "null"] }
+            "combat": { "type": ["number", "null"] },
+            "combat-nobuff": { "type": ["number", "null"] },
+            "combat-allbuff": { "type": ["number", "null"] },
+            "combat-allbuff-high": { "type": ["number", "null"] },
+            "sources": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "town": { "type": "string", "minLength": 1 },
+                "combat": { "type": "string", "minLength": 1 },
+                "combat-nobuff": { "type": "string", "minLength": 1 },
+                "combat-allbuff": { "type": "string", "minLength": 1 },
+                "combat-allbuff-high": { "type": "string", "minLength": 1 }
+              }
+            }
           }
         }
       ]
@@ -244,6 +307,8 @@
         "vsInjured": { "$ref": "#/$defs/sheetReading" },
         "whileHealthy": { "$ref": "#/$defs/sheetReading" },
         "whileFortified": { "$ref": "#/$defs/sheetReading" },
+        "whileBerserking": { "$ref": "#/$defs/sheetReading" },
+        "overpowerDamage": { "$ref": "#/$defs/sheetReading" },
         "thorns": { "$ref": "#/$defs/sheetReading" },
         "note": { "type": "string" }
       }

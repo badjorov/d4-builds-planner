@@ -724,15 +724,45 @@
       },
       "critChance": {
         "town": 100,
-        "combat": null
+        "combat": null,
+        "combat-nobuff": 100,
+        "combat-allbuff": 100,
+        "sources": {
+          "combat-nobuff": "video-model reading 2026-10-23, unconfirmed",
+          "combat-allbuff": "video-model reading 2026-10-23, unconfirmed"
+        }
       },
       "critDmg": {
         "town": 7424.8,
-        "combat": null
+        "combat": null,
+        "combat-nobuff": 10819.5,
+        "combat-allbuff": 10819.5,
+        "sources": {
+          "combat-nobuff": "video-model reading 2026-10-23, unconfirmed",
+          "combat-allbuff": "video-model reading 2026-10-23, unconfirmed"
+        }
+      },
+      "attackSpeed": {
+        "town": null,
+        "combat": null,
+        "combat-nobuff": 120,
+        "combat-allbuff": 120,
+        "sources": {
+          "combat-nobuff": "video-model reading 2026-10-23, unconfirmed",
+          "combat-allbuff": "video-model reading 2026-10-23, unconfirmed"
+        }
       },
       "additivePct": {
         "town": 606.7,
-        "combat": null
+        "combat": null,
+        "combat-nobuff": 1755.2,
+        "combat-allbuff": 1996,
+        "combat-allbuff-high": 9897.7,
+        "sources": {
+          "combat-nobuff": "video-model reading 2026-10-23, unconfirmed",
+          "combat-allbuff": "video-model reading 2026-10-23, unconfirmed",
+          "combat-allbuff-high": "video-model reading 2026-10-23, unconfirmed"
+        }
       },
       "additiveAudit": {
         "verified": true,
@@ -744,7 +774,15 @@
         "verified": true,
         "allDamage": {
           "town": 606.7,
-          "combat": null
+          "combat": null,
+          "combat-nobuff": 1755.2,
+          "combat-allbuff": 1996,
+          "combat-allbuff-high": 9897.7,
+          "sources": {
+            "combat-nobuff": "video-model reading 2026-10-23, unconfirmed",
+            "combat-allbuff": "video-model reading 2026-10-23, unconfirmed",
+            "combat-allbuff-high": "video-model reading 2026-10-23, unconfirmed"
+          }
         },
         "allDamageItemsAndParagon": {
           "town": 316.5,
@@ -752,11 +790,23 @@
         },
         "vulnerable": {
           "town": 208.8,
-          "combat": null
+          "combat": null,
+          "combat-nobuff": 2836.8,
+          "combat-allbuff": 2836.8,
+          "sources": {
+            "combat-nobuff": "video-model reading 2026-10-23, unconfirmed",
+            "combat-allbuff": "video-model reading 2026-10-23, unconfirmed"
+          }
         },
         "physical": {
           "town": 250.5,
-          "combat": null
+          "combat": null,
+          "combat-nobuff": 250.5,
+          "combat-allbuff": 250.5,
+          "sources": {
+            "combat-nobuff": "video-model reading 2026-10-23, unconfirmed",
+            "combat-allbuff": "video-model reading 2026-10-23, unconfirmed"
+          }
         },
         "fire": {
           "town": 120.5,
@@ -784,23 +834,66 @@
         },
         "vsElites": {
           "town": 133.5,
-          "combat": null
+          "combat": null,
+          "combat-nobuff": 94.1,
+          "combat-allbuff": null,
+          "sources": {
+            "combat-nobuff": "video-model reading 2026-10-23, unconfirmed"
+          }
         },
         "vsHealthy": {
           "town": 26,
-          "combat": null
+          "combat": null,
+          "combat-nobuff": 181.8,
+          "combat-allbuff": null,
+          "sources": {
+            "combat-nobuff": "video-model reading 2026-10-23, unconfirmed"
+          }
         },
         "vsInjured": {
           "town": 26,
-          "combat": null
+          "combat": null,
+          "combat-nobuff": 133.4,
+          "combat-allbuff": null,
+          "sources": {
+            "combat-nobuff": "video-model reading 2026-10-23, unconfirmed"
+          }
         },
         "whileHealthy": {
           "town": 223.2,
-          "combat": null
+          "combat": null,
+          "combat-nobuff": 308.2,
+          "combat-allbuff": null,
+          "sources": {
+            "combat-nobuff": "video-model reading 2026-10-23, unconfirmed"
+          }
         },
         "whileFortified": {
           "town": 35,
-          "combat": null
+          "combat": null,
+          "combat-nobuff": 367.5,
+          "combat-allbuff": null,
+          "sources": {
+            "combat-nobuff": "video-model reading 2026-10-23, unconfirmed"
+          }
+        },
+        "whileBerserking": {
+          "town": null,
+          "combat": null,
+          "combat-nobuff": 247.9,
+          "combat-allbuff": null,
+          "sources": {
+            "combat-nobuff": "video-model reading 2026-10-23, unconfirmed"
+          }
+        },
+        "overpowerDamage": {
+          "town": null,
+          "combat": null,
+          "combat-nobuff": 6432.2,
+          "combat-allbuff": null,
+          "sources": {
+            "combat-nobuff": "video-model reading 2026-10-23, unconfirmed"
+          }
         },
         "thorns": {
           "town": 0,
@@ -811,7 +904,13 @@
       "vulnerableDamageInAdditive": true,
       "vulnPct": {
         "town": 208.8,
-        "combat": null
+        "combat": null,
+        "combat-nobuff": 2836.8,
+        "combat-allbuff": 2836.8,
+        "sources": {
+          "combat-nobuff": "video-model reading 2026-10-23, unconfirmed",
+          "combat-allbuff": "video-model reading 2026-10-23, unconfirmed"
+        }
       },
       "overpowerPct": 104,
       "maxFury": {
@@ -819,9 +918,47 @@
         "combat": null
       },
       "sheetContext": "town",
+      "combatObservations": {
+        "source": "video-model reading 2026-10-23, unconfirmed",
+        "verified": false,
+        "note": "Fighting sheet from the combat video. Not confirmed by screenshots. sheetContext stays town, so the headline score stays the town score.",
+        "currentFury": "The Fury globe stays full. combat-nobuff and combat-allbuff currentFury are Max Fury 826, observed.",
+        "leoricSouls": "The Leoric skull icon shows no stack count. The per-soul rate stays applied once.",
+        "polearmExpertise": "10/10. The catalog already stores Polearm Expertise at that rank.",
+        "allDamageRamp": {
+          "low": 1996,
+          "high": 9897.7,
+          "seconds": 14,
+          "note": "All Damage ramps from 1,996% to 9,897.7% over about 14s while the listed buffs are up. Likely the Wrath ramp. The two ends are combat-allbuff and combat-allbuff-high."
+        },
+        "observedHits": {
+          "nobuffTypical": "20-80B",
+          "nobuffMax": "140-144B",
+          "allbuffTypical": "150-400B",
+          "allbuffPeaks": "461B and 507B",
+          "overpowerCrit": "841B"
+        },
+        "weaponTooltip": {
+          "name": "Deathhead of Channeling",
+          "hands": "1H mace, uncertain",
+          "lines": [
+            "+21 Damage Multiplier",
+            "150%[x] all damage",
+            "+114% damage"
+          ],
+          "applied": false,
+          "note": "The equipped item is Deathshead of Channeling, a 2H mace in the Bludgeoning slot, with Aspect of Channeling at 138%[x] [100-140], x25% All Damage Multiplier, and x88% Critical Strike Damage Multiplier. None of +21, 150%[x], or +114% is on that item. The lines stay off the score."
+        }
+      },
       "currentFury": {
         "town": null,
-        "combat": null
+        "combat": null,
+        "combat-nobuff": 826,
+        "combat-allbuff": 826,
+        "sources": {
+          "combat-nobuff": "video-model reading 2026-10-23, unconfirmed",
+          "combat-allbuff": "video-model reading 2026-10-23, unconfirmed"
+        }
       },
       "furyRegeneration": {
         "town": 85,

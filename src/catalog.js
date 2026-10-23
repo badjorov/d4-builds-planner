@@ -450,25 +450,45 @@ function applyOffensiveSheet(build, skills, modifiers, notes) {
   }
   const elites = sheetWhen(uptime, 'elites');
   if (!elites.skip) pushSheetLine(modifiers, 'vs Elites', sheet.vsElites, elites.when);
+  const sameEnemyWindow = typeof sheet.vsHealthy === 'number' && sheet.vsHealthy === sheet.vsInjured;
   const healthyInjured = sheetWhen(uptime, 'healthyInjured');
-  if (!healthyInjured.skip && sheet.vsHealthy === sheet.vsInjured) {
+  if (!healthyInjured.skip && sameEnemyWindow) {
     pushSheetLine(modifiers, 'vs Healthy or Injured', sheet.vsHealthy, healthyInjured.when);
     notes.push('Offensive sheet: vs Healthy and vs Injured are each 26%. An enemy is in only one of those states, so the shared window adds 26 once.');
+  }
+  if (!sameEnemyWindow) {
+    const enemyHealthy = sheetWhen(uptime, 'enemyHealthy');
+    const enemyInjured = sheetWhen(uptime, 'enemyInjured');
+    if (!enemyHealthy.skip) pushSheetLine(modifiers, 'vs Healthy', sheet.vsHealthy, enemyHealthy.when);
+    if (!enemyInjured.skip) pushSheetLine(modifiers, 'vs Injured', sheet.vsInjured, enemyInjured.when);
+    if (typeof sheet.vsHealthy === 'number' && typeof sheet.vsInjured === 'number' && enemyHealthy.skip && enemyInjured.skip) {
+      notes.push(`Offensive sheet: vs Healthy ${sheet.vsHealthy}% and vs Injured ${sheet.vsInjured}% are separate rows. No enemy-healthy or enemy-injured uptime is set on this evaluation, so both rows stay out.`);
+    }
   }
   const playerHealthy = sheetWhen(uptime, 'playerHealthy');
   if (!playerHealthy.skip) pushSheetLine(modifiers, 'while you are Healthy', sheet.whileHealthy, playerHealthy.when);
   const fortified = sheetWhen(uptime, 'fortified');
   if (!fortified.skip) pushSheetLine(modifiers, 'while Fortified', sheet.whileFortified, fortified.when);
+  const berserk = sheetWhen(uptime, 'berserk');
+  if (!berserk.skip) pushSheetLine(modifiers, 'while Berserking', sheet.whileBerserking, berserk.when);
   if (uptime.missingPotions === 0 && (build.glyphs || []).some(glyph => glyph.glyphId === 'imbiber')) {
     notes.push('Imbiber: 5%[x] per missing potion uses 0 missing potions of a capacity of 4. The factor is 1.0. Estimate.');
   }
-  notes.push('Double-count: sheet vs Healthy 26% and vs Injured 26% match Might 26%[x]. While Fortified 35% does not match Warbringer 45%[x] or Crushing 64%[x], so a sheet row is a separate additive source from an [x] line. Headline keeps the additive 26 and Might 26%[x].');
-  notes.push('Double-count: Vulnerable Damage 208.8% stays in the additive bucket on the Vulnerable state. Headline: that percent does not include the base 20%. The vulnerable factor is 1.2 × (1 + sum of [x] Vulnerable Damage Multiplier). Melted Heart x35% is in that sum and is not also in the general [x] product.');
-  notes.push('Double-count: while Fortified 35% is additive. Warbringer 45%[x] and Crushing 64%[x] stay multiplicative.');
+  if (sameEnemyWindow) {
+    notes.push('Double-count: sheet vs Healthy 26% and vs Injured 26% match Might 26%[x]. While Fortified 35% does not match Warbringer 45%[x] or Crushing 64%[x], so a sheet row is a separate additive source from an [x] line. Headline keeps the additive 26 and Might 26%[x].');
+  } else if (typeof sheet.vsHealthy === 'number' && typeof sheet.vsInjured === 'number') {
+    notes.push(`Double-count: vs Healthy ${sheet.vsHealthy}% and vs Injured ${sheet.vsInjured}% are separate additive rows. Might 26%[x] stays on the Healthy-or-Injured window.`);
+  }
+  if (typeof sheet.vulnerable === 'number') {
+    notes.push(`Double-count: Vulnerable Damage ${sheet.vulnerable}% stays in the additive bucket on the Vulnerable state. Headline: that percent does not include the base 20%. The vulnerable factor is 1.2 × (1 + sum of [x] Vulnerable Damage Multiplier). Melted Heart x35% is in that sum and is not also in the general [x] product.`);
+  }
+  if (typeof sheet.whileFortified === 'number') {
+    notes.push(`Double-count: while Fortified ${sheet.whileFortified}% is additive. Warbringer 45%[x] and Crushing 64%[x] stay multiplicative.`);
+  }
 }
 
 export function engineInputFromBuild(catalog, build, opts = {}) {
-  const applied = applySheetContext(build, sheetContextOf(build, opts));
+  const applied = applySheetContext(build, sheetContextOf(build, opts), opts);
   build = applied.build;
   const skills = (build.skills || []).map(id => skillById(catalog, id)).filter(Boolean);
   const resolved = resolveSkillDamage(skills);
@@ -552,7 +572,10 @@ export function engineInputFromBuild(catalog, build, opts = {}) {
     if (typeof extra?.value === 'number') modifiers.push({ active: true, ...extra });
   }
   if (typeof build.additivePct === 'number') {
-    const verified = build.additiveAudit?.verified === true ? 'Screenshot-verified' : 'Video-read, unverified';
+    const combatReading = applied.context === 'combat' || applied.context === 'combat-nobuff' || applied.context === 'combat-allbuff';
+    const verified = combatReading
+      ? 'The combat figure is a video-model reading 2026-10-23, unconfirmed. The town screenshot verifies All Damage 606.7%'
+      : (build.additiveAudit?.verified === true ? 'Screenshot-verified' : 'Video-read, unverified');
     notes.push(`Additive audit: sheet All Damage ${build.additivePct}% is the unconditional additive base. ${verified}. The conditional sheet rows join that same sum. Catalog +% Damage lines stay out of the sum.`);
   }
   const auras = [...sideParts];
@@ -573,7 +596,12 @@ export function engineInputFromBuild(catalog, build, opts = {}) {
   for (const aura of auras) {
     if (aura.estimate) notes.push(`${aura.name} is applied for uptime ${aura.uptime}. That fraction is an estimate.`);
   }
-  if (build.overpowerStacks && typeof build.overpowerPct === 'number') {
+  let overpowerBonus = build.overpowerPct;
+  const sheetOverpower = build.offensiveSheet?.overpowerDamage;
+  if (typeof sheetOverpower === 'number') {
+    notes.push(`Overpower Damage ${sheetOverpower}% is the combat sheet row. An Overpower hit uses 1 + ${sheetOverpower}/100. The town stack total stays ${build.overpowerPct}%. That stack total is not added on top of this row. Source: video-model reading 2026-10-23, unconfirmed.`);
+    overpowerBonus = sheetOverpower;
+  } else if (build.overpowerStacks && typeof build.overpowerPct === 'number') {
     const stacks = build.overpowerStacks;
     notes.push(`Overpower is ${stacks.activeStacks} stacks × ${stacks.perStack}% = ${build.overpowerPct}%, including a ${stacks.lingerSeconds}s linger. The uptime is an estimate.`);
   }
@@ -597,9 +625,25 @@ export function engineInputFromBuild(catalog, build, opts = {}) {
     notes.push(`Vulnerable formula [A][B][C]: ×1.2 vs Vulnerable targets (high confidence), times (1 + sum of [x] Vulnerable Damage Multiplier) (medium confidence).${sheetText}`);
   }
   const mainStatPer10 = catalog.mainstat?.verified === true ? catalog.mainstat.percentPer10 : null;
-  if (applied.context === 'combat' && applied.fallbacks.length) {
-    const labels = applied.fallbacks.map(item => `${item.label} (${item.town})`).join(', ');
-    notes.push(`Sheet context is combat. No combat value is stored for: ${labels}. The town value is used.`);
+  if (applied.fallbacks.length && (applied.context === 'combat' || applied.context === 'combat-nobuff' || applied.context === 'combat-allbuff')) {
+    if (applied.context === 'combat') {
+      const labels = applied.fallbacks.map(item => `${item.label} (${item.town})`).join(', ');
+      notes.push(`Sheet context is combat. No combat value is stored for: ${labels}. The town value is used.`);
+    } else {
+      const labels = applied.fallbacks.map(item => {
+        const from = item.from === 'combat-nobuff' ? 'combat-nobuff' : 'town';
+        const shown = item.from === 'combat-nobuff' ? item.value : item.town;
+        return `${item.label} (${shown} from ${from})`;
+      }).join(', ');
+      const usesNobuff = applied.fallbacks.some(item => item.from === 'combat-nobuff');
+      const usesTown = applied.fallbacks.some(item => item.from !== 'combat-nobuff');
+      const tail = [usesNobuff ? 'The combat-nobuff value is used for the rows that were not visible.' : '', usesTown ? 'The town value is used where no combat reading is stored.' : ''].filter(Boolean).join(' ');
+      notes.push(`Sheet context is ${applied.context}. No ${applied.context} value is stored for: ${labels}. ${tail}`);
+    }
+  }
+  if (applied.context === 'combat-nobuff' || applied.context === 'combat-allbuff') {
+    notes.push('Combat sheet numbers are a video-model reading 2026-10-23, unconfirmed.');
+    if (opts.allbuffEndpoint === 'high') notes.push('All Damage uses the high end of the combat-allbuff ramp.');
   }
   if (applied.currentFuryEstimate && typeof build.currentFury === 'number') {
     notes.push(`Current Fury defaults to Max Fury ${build.currentFury}. That default is an estimate.`);
@@ -614,7 +658,7 @@ export function engineInputFromBuild(catalog, build, opts = {}) {
     vulnerable,
     vulnPct: build.vulnPct,
     overpower,
-    overpowerPct: build.overpowerPct,
+    overpowerPct: overpowerBonus,
     isDot,
     modifiers,
     notes,

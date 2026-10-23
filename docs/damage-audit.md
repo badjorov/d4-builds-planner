@@ -31,7 +31,7 @@ The previous calc used 0.5 a single time, factor 1.005. The rate times Max Fury 
 
 `currentFury` is empty on the saved build. It defaults to the resolved Max Fury, 826, and that default is flagged as an estimate. The same tooltip drains 7% Fury per second in combat (`data/barbarian.json:6337`), so 5.13× is the full-Max-Fury reading. A measured current Fury below 826 would shrink this factor. The ratio against the old 1.005 line is 5.13 / 1.005 = 5.1045, and the blended headline moves from 8,306,112,712.15 to 42,398,366,381.44 by that exact ratio.
 
-`sheetContext` is `town` or `combat`. The saved build is `town`. Every `combat` field is empty until in-combat screenshots are entered. In `combat` context a missing combat value uses the town value, and the result lists that fallback. The town context is the headline in the table below. The fields to fill are in `docs/combat-sheet-template.md`. Fury regeneration 85, generation 52.5%, cost reduction -30%, and Fury on kill 11 are stored as town readings for that template. They stay records.
+`sheetContext` is `town`, `combat`, `combat-nobuff`, or `combat-allbuff`. The saved build is `town`. The headline in the table below is the town context. `combat-nobuff` and `combat-allbuff` hold a video-model reading from 2026-10-23. That reading is unconfirmed. A missing value falls back to town, and `combat-allbuff` falls back to `combat-nobuff` first. The result lists each fallback. Fury regeneration 85, generation 52.5%, cost reduction -30%, and Fury on kill 11 are stored as town readings. They stay records.
 
 ## Factor table
 
@@ -222,3 +222,58 @@ No single stored line with a known count, other than the Ramaladni fix, closes a
 | Leoric 200, every modeled uptime at 1 | 872,483,047,835.56 | 160,974,732,072.98 | 302,632,496,297.20 | 160,974,732,072.98 |
 
 The flagged range on the fixed baseline is 7,822,576,823.14 to 42,398,366,381.44. Headline is the top of that range.
+
+## Combat sheet, video-model reading 2026-10-23
+
+The numbers above stay the town sheet. This section is a separate per-hit comparison. `combat-nobuff` and `combat-allbuff` are a video-model reading from 2026-10-23. That reading is unconfirmed. The saved `sheetContext` stays `town`, so the blended headline stays 42,398,366,381.44.
+
+The video shows fighting with Fortified and Flawless Technique stacks, then the same fight with War Cry, Rallying Cry, Challenging Shout, Berserking, Wrath of the Berserker, Dust Devil, and one fast-stacking buff. Attack speed 120%, crit chance 100%, crit damage 10,819.5%, Vulnerable Damage 2,836.8%, and Physical 250.5% are the same in both contexts. All Damage is 1,755.2% with no buffs, then ramps from 1,996% to 9,897.7% over about 14 seconds with the buffs up. The lower all-buff rows were not visible, so they use the no-buff values and the result lists that fallback. vs Healthy 181.8% and vs Injured 133.4% are separate rows. while Berserking 247.9% and Overpower Damage 6,432.2% are new rows. Current Fury is 826 because the Fury globe stays full, so the combat contexts are observed and the estimate flag is off there. The town context still estimates.
+
+Each row below is one Whirlwind crit. Channeling, Fortified, Fury above 50, Unstoppable, player Healthy, elites, and consecutive-weapon are on. Missing potions are 0. The mid-life band leaves the Healthy-or-Injured window off, and leaves enemy Healthy and enemy Injured off, so vs Healthy, vs Injured, Weapons Master, and Might's 26%[x] stay off. No-buff leaves Vulnerable, Berserking, and Dust Devil off. All-buff turns those three on. A normal crit leaves Overpower off, so Earthstriker and Decimator's Overpower line stay off. An Overpower crit turns them on and uses Overpower Damage as `1 + 6432.2/100 = 65.322`. Powers are billions, two decimals. The exact totals are locked in `test/combat-sheet.test.js`. `sheet-includes-gear-x-active-weapon` matches `sheet-includes-gear-x` because Deathshead's x88% is a gear line.
+
+| Hit | headline | sheet-includes-gear-x | active-weapon | sheet-includes-gear-x-active-weapon |
+| --- | ---: | ---: | ---: | ---: |
+| No buff, normal crit | 10.59B | 1.95B | 3.67B | 1.95B |
+| No buff, Overpower crit | 992.15B | 183.05B | 344.14B | 183.05B |
+| All buff, All Damage 1,996%, normal crit | 28.92B | 5.34B | 10.03B | 5.34B |
+| All buff, All Damage 1,996%, Overpower crit | 2,708.70B | 499.76B | 939.55B | 499.76B |
+| All buff, All Damage 9,897.7%, normal crit | 42.34B | 7.81B | 14.69B | 7.81B |
+| All buff, All Damage 9,897.7%, Overpower crit | 3,966.20B | 731.77B | 1,375.73B | 731.77B |
+
+A second state puts the enemy in the Healthy band and turns Vulnerable on, including for the no-buff hit. That adds vs Healthy 181.8%, Weapons Master 75%[x], and Might 26%[x]. Headline on that state: no-buff normal 55.41B, all-buff low normal 64.44B, all-buff high normal 94.04B, all-buff high Overpower 8,809.26B.
+
+Observed hits from the same video: no buffs typically 20–80B, max about 140–144B. All buffs typically 150–400B, peaks 461B and 507B, and 841B on an Overpower crit.
+
+| Case | Predicted | Observed | Where it sits |
+| --- | ---: | --- | --- |
+| No buff, mid-life, headline normal | 10.59B | 20–80B, max 140–144B | under the typical floor |
+| No buff, Healthy and Vulnerable, headline normal | 55.41B | 20–80B, max 140–144B | inside the typical band, about 2.6× under the max |
+| All buff high, mid-life, headline normal | 42.34B | 150–400B | under the typical floor |
+| All buff high, Healthy and Vulnerable, headline normal | 94.04B | 150–400B, peaks 461B and 507B | about 1.6× under the typical floor, about 5× under the peaks |
+| All buff high, mid-life, headline Overpower | 3,966.20B | 841B | about 4.7× over |
+| All buff high, Healthy, headline Overpower | 8,809.26B | 841B | about 10× over |
+| All buff high, mid-life, sheet-includes-gear-x Overpower | 731.77B | 841B | near 841B, while that reading's normal hit is 7.81B |
+| All buff high, Healthy, Overpower at the town 104% | 275.11B | 150–400B, peaks 461B and 507B, Overpower 841B | inside the typical band, under the peaks and under 841B |
+
+Headline, which keeps the gear crit sum ×5.42, is the reading that lands nearest the observed normal hits. `sheet-includes-gear-x` on a Healthy Vulnerable no-buff hit is 10.22B, under the 20B floor, and on the all-buff high Healthy hit is 17.35B, under the 150B floor. `active-weapon` sits between those and the headline, and is still short of the observed bands.
+
+The town-to-combat jumps were checked as possible double counts.
+
+Critical Strike Damage 7,424.8% to 10,819.5% is ×1.457. `7424.8 × 1.45 = 10,765.96`, and the remainder is about 53.5 points. That jump looks like Flawless Technique's ~45%[x] landing inside the sheet. Headline already leaves that separate ×1.45 off the factor. Adding it again on top of 10,819.5% would count it twice. The jump is much smaller than the gear crit sum ×5.42, so Insight, Deathshead, and Ramaladni stay outside the sheet crit row.
+
+Vulnerable Damage 208.8% to 2,836.8% is ×13.59. Melted Heart's Vulnerable line is ×1.35, and the on-state vulnerable factor is ×1.62. The combat row stays additive, and ×1.62 still applies on a Vulnerable target. Taking ×1.62 off makes the normal hits smaller and moves them away from the video. The jump is extra additive.
+
+All Damage 606.7% to 1,755.2% is ×2.89, and the ramp then reaches 9,897.7%. The multiplicative product on the no-buff mid-life hit is ×187.89, and on the all-buff high Overpower hit it is ×365.36. Dropping the multiplicative bucket on that Overpower hit, with gear crit and the vulnerable factor kept, leaves 10.86B. Also dropping the Vulnerable [x] sum leaves 8.04B. Using `sheet-includes-gear-x` on top of that leaves 1.48B. Those are far under the video, so the [x] product is still required on top of the sheet row.
+
+Overpower Damage 6,432.2% is applied as ×65.322 on an Overpower hit, as the video row reads. The observed Overpower crit, 841B, is about 1.7× to 5.6× the all-buff peaks, which is a much smaller step than ×65. Replacing that row with the town 104% (×2.04) on the all-buff high Healthy Overpower hit gives 275.11B. That sits inside 150–400B and under both the peaks and 841B. The stored combat percent stays the factor the combat context uses. The town context still uses 104%.
+
+What still does not line up, and what was left unchanged:
+
+- Headline normal hits are short of the all-buff band even on a Healthy Vulnerable target (94.04B against 150–400B, and against peaks of 461B and 507B).
+- The Overpower sheet percent overshoots 841B on every reading that keeps a normal hit inside or near the no-buff band.
+- Dust Devils stay unscored. The tooltip says two at 510% each, and the damage type is unset. If both landed on the same hit as the 386% Whirlwind, the coefficient ratio would be `(386 + 1020) / 386 = 3.642`, and 94.04B would become about 342B, inside 150–400B. The hit rate is unknown, so that ratio is not applied.
+- The Leoric skull icon shows no stack count. The rate stays ×1.041, applied once. A 200-soul reading would be about ×8.84 relative to that, and 94B × 8.84 is about 831B, near the 841B Overpower crit. The icon did not show a count, so that cap is not applied.
+- The "Deathhead of Channeling" tooltip lines (+21 Damage Multiplier, 150%[x] all damage, +114% damage) do not match Deathshead of Channeling. They are not applied.
+- Attack speed 120% is stored and does not change per-hit damage.
+- Polearm Expertise is already rank 10/10. The video reads the same rank. Its Lucky Hit and while-Healthy lines stay unscored.
+- The Grand Skull sockets on the weapons stay unscored.
