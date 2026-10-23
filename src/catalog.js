@@ -316,6 +316,60 @@ function scaledGlyph(glyph, level) {
   return { glyph: { ...glyph, effects }, unscaled };
 }
 
+function damageTypeOf(value) {
+  if (value === 'direct' || value === 'dot') return value;
+  if (value === true) return 'dot';
+  if (value === false) return 'direct';
+  return null;
+}
+
+function skillDamageParts(skill) {
+  if (Array.isArray(skill.components) && skill.components.length) {
+    return skill.components.map(part => ({
+      name: part.name || skill.name,
+      coeffPct: part.coeffPct,
+      damageType: damageTypeOf(part.damageType),
+      uptime: part.uptime
+    }));
+  }
+  if (typeof skill.coeffPct !== 'number') return [];
+  return [{ name: skill.name, coeffPct: skill.coeffPct, damageType: damageTypeOf(skill.dot) }];
+}
+
+function resolveSkillDamage(skills) {
+  if (skills.length !== 1) return { coeffPct: null, isDot: false, sideParts: [], notes: [] };
+  const skill = skills[0];
+  const parts = skillDamageParts(skill).filter(part => typeof part.coeffPct === 'number');
+  const direct = parts.filter(part => part.damageType === 'direct');
+  const dots = parts.filter(part => part.damageType === 'dot');
+  const unknown = parts.filter(part => part.damageType == null);
+  const notes = [];
+  const sideParts = [];
+  const pushSide = (part, damageType) => {
+    sideParts.push({
+      name: part.name,
+      coeffPct: part.coeffPct,
+      isDot: damageType !== 'direct',
+      uptime: typeof part.uptime === 'number' ? part.uptime : 1,
+      estimate: false
+    });
+    if (damageType == null) notes.push(`${part.name}: damage type is unset. Crit is left off until it is tagged direct or damage over time.`);
+  };
+  if (direct.length === 1 && !dots.length && !unknown.length) {
+    return { coeffPct: direct[0].coeffPct, isDot: false, sideParts, notes };
+  }
+  if (!direct.length && dots.length === 1 && !unknown.length) {
+    return { coeffPct: dots[0].coeffPct, isDot: true, sideParts, notes };
+  }
+  if (!direct.length && !dots.length && unknown.length === 1) {
+    notes.push(`${skill.name}: damage type is unset. Crit is left off until it is tagged direct or damage over time.`);
+    return { coeffPct: unknown[0].coeffPct, isDot: true, sideParts, notes };
+  }
+  for (const part of dots) pushSide(part, 'dot');
+  for (const part of unknown) pushSide(part, null);
+  return { coeffPct: direct.reduce((sum, part) => sum + part.coeffPct, 0), isDot: false, sideParts, notes };
+}
+
 function appendDamageModifiers(entity, build, catalog, modifiers, notes, label, alternateCrit) {
   for (const piece of damageEffects(entity, build, catalog)) {
     if (piece.effect.alternateReading === true) {
@@ -417,9 +471,10 @@ export function engineInputFromBuild(catalog, build, opts = {}) {
   const applied = applySheetContext(build, sheetContextOf(build, opts));
   build = applied.build;
   const skills = (build.skills || []).map(id => skillById(catalog, id)).filter(Boolean);
-  const coeffPct = skills.length === 1 ? skills[0].coeffPct : null;
-  const dotKnown = skills.length > 0 && skills.every(skill => skill.dot === true || skill.dot === false);
-  const isDot = dotKnown ? skills.every(skill => skill.dot === true) : false;
+  const resolved = resolveSkillDamage(skills);
+  let coeffPct = resolved.coeffPct;
+  let isDot = resolved.isDot;
+  const sideParts = resolved.sideParts;
   const uptime = build.uptime || blankUptime();
   const vulnerable = typeof uptime.vulnerable === 'number' && uptime.vulnerable > 0;
   const overpower = typeof uptime.overpower === 'number' && uptime.overpower > 0;
@@ -427,7 +482,14 @@ export function engineInputFromBuild(catalog, build, opts = {}) {
   const notes = [];
   const alternateCrit = [];
   if (skills.length > 1) notes.push('Multiple skills are not summed into one coefficient. Power uses no coeff until a single core skill is selected.');
-  if (!dotKnown) notes.push('DoT flag is unknown for a selected skill. Crit was not removed.');
+  notes.push(...resolved.notes);
+  for (const skill of skills) {
+    for (const effect of skill.effects || []) {
+      if (effect.kind !== 'damage' || effect.bucket != null || typeof effect.value !== 'number') continue;
+      if (effect.damageType === 'direct' || effect.damageType === 'dot') continue;
+      notes.push(`${skill.name}: ${effect.stat || 'damage'} has no damage type. It stays out of the crit calc until it is tagged direct or damage over time.`);
+    }
+  }
   for (const slot of build.gear || []) {
     for (const ref of [['aspect', slot.aspectId, catalog.aspects], ['unique', slot.uniqueId, catalog.uniques]]) {
       const [kind, id, list] = ref;
@@ -493,15 +555,19 @@ export function engineInputFromBuild(catalog, build, opts = {}) {
     const verified = build.additiveAudit?.verified === true ? 'Screenshot-verified' : 'Video-read, unverified';
     notes.push(`Additive audit: sheet All Damage ${build.additivePct}% is the unconditional additive base. ${verified}. The conditional sheet rows join that same sum. Catalog +% Damage lines stay out of the sum.`);
   }
-  const auras = [];
+  const auras = [...sideParts];
   for (const skill of skills) {
     const aura = skill.aura;
     if (!aura || typeof aura.uptime !== 'number') continue;
     if (typeof aura.coeffPct === 'number' && aura.coeffPct !== 0) {
-      auras.push({ name: `${skill.name} aura`, coeffPct: aura.coeffPct, isDot: aura.dot === true, uptime: aura.uptime, estimate: aura.estimate === true });
+      const damageType = damageTypeOf(aura.dot);
+      if (damageType == null) notes.push(`${skill.name} aura: damage type is unset. Crit is left off until it is tagged direct or damage over time.`);
+      auras.push({ name: `${skill.name} aura`, coeffPct: aura.coeffPct, isDot: damageType !== 'direct', uptime: aura.uptime, estimate: aura.estimate === true });
     }
     if (typeof aura.burnCoeffPct === 'number' && aura.burnCoeffPct !== 0) {
-      auras.push({ name: `${skill.name} burn`, coeffPct: aura.burnCoeffPct, isDot: aura.burnDot !== false, uptime: aura.uptime, estimate: aura.estimate === true });
+      const damageType = damageTypeOf(aura.burnDot);
+      if (damageType == null) notes.push(`${skill.name} burn: damage type is unset. Crit is left off until it is tagged direct or damage over time.`);
+      auras.push({ name: `${skill.name} burn`, coeffPct: aura.burnCoeffPct, isDot: damageType !== 'direct', uptime: aura.uptime, estimate: aura.estimate === true });
     }
   }
   for (const aura of auras) {
@@ -517,7 +583,7 @@ export function engineInputFromBuild(catalog, build, opts = {}) {
       notes.push(`${label} uptime ${uptime[key]} is an estimate.`);
     }
   }
-  if (typeof build.critChance === 'number' && typeof build.critDmg === 'number' && build.critDmg > 0) {
+  if (!isDot && typeof build.critChance === 'number' && typeof build.critDmg === 'number' && build.critDmg > 0) {
     const gearCrit = modifiers.filter(mod => mod.bucket === 'crit-mult' && !SEPARATE_CRIT_KINDS.has(mod.kind));
     const separateCrit = modifiers.filter(mod => mod.bucket === 'crit-mult' && SEPARATE_CRIT_KINDS.has(mod.kind));
     const gearX = 1 + gearCrit.reduce((sum, mod) => sum + mod.value / 100, 0);
@@ -567,13 +633,18 @@ function modifiersFor(input, patch) {
   return (input.modifiers || []).filter(mod => !mod.when || patch[mod.when] !== false);
 }
 
+function modsForDamage(modifiers, isDot) {
+  if (!isDot) return modifiers;
+  return modifiers.filter(mod => mod.bucket !== 'crit-mult' && mod.bucket !== 'crit');
+}
+
 function scoreWithAuras(input, patch) {
   const modifiers = modifiersFor(input, patch);
-  const direct = compute({ ...input, ...patch, modifiers });
+  const direct = compute({ ...input, ...patch, modifiers: modsForDamage(modifiers, input.isDot) });
   let total = direct.total;
   const extra = [];
   for (const aura of input.auras || []) {
-    const part = compute({ ...input, ...patch, modifiers, coeffPct: aura.coeffPct, isDot: aura.isDot });
+    const part = compute({ ...input, ...patch, modifiers: modsForDamage(modifiers, aura.isDot), coeffPct: aura.coeffPct, isDot: aura.isDot });
     const scaled = part.total * aura.uptime;
     total += scaled;
     extra.push({ label: aura.name, value: scaled, expr: `${part.total} × ${aura.uptime}` });

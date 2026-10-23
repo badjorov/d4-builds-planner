@@ -57,7 +57,7 @@ test('transcribed coefficients stay unverified and the sourced scalar stays put'
 test('inactive skills and upgrades stay out of needs-input, and the remaining skill fields are active', () => {
   const items = needsInput(catalog).filter(item => item.path.startsWith('/skills/'));
   const active = new Set(catalog.skills.filter(skill => skill.allocated === true).map(skill => skill.id));
-  assert.equal(items.length, 98);
+  assert.equal(items.length, 99);
   for (const item of items) {
     const id = item.path.split('/')[2];
     assert.equal(active.has(id), true, item.path);

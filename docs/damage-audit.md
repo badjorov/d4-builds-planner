@@ -102,7 +102,7 @@ Berserking is absent from the calc. `uptime.berserk` is null, and the stored upt
 
 Twister's scored line is one buff, +13%[x] for 4s after creating a Dust Devil, at Dust Devil uptime 1. It is not per stack, and nothing in the repo says stacks of that buff multiply.
 
-Whirlwind's tooltip and the allocated Tornado upgrade say 2 Dust Devils at 510% each (`data/barbarian.json:311`). Those hits sit outside the 386% coefficient. No Dust Devil hit rate is stored, so they are not added. Twister's legendary Dust Devil damage +39.9%[x] and the +39.8% per 5 Strength line are `scored: false` for the same reason. The "110/+40 Strength" count is tooltip text, not board data. Weapon attacks per second (0.90 on Deathshead) are stored and are not a Dust Devil hit rate.
+Whirlwind's tooltip and the allocated Tornado upgrade say 2 Dust Devils at 510% each (`data/barbarian.json:311`). Those hits sit outside the 386% coefficient. The tooltip does not say whether a Dust Devil is a direct hit or damage over time, so the damage type stays unset. No Dust Devil hit rate is stored, so they are not added. Twister's legendary Dust Devil damage +39.9%[x] and the +39.8% per 5 Strength line are `scored: false` for the same reason. The "110/+40 Strength" count is tooltip text, not board data. Weapon attacks per second (0.90 on Deathshead) are stored and are not a Dust Devil hit rate.
 
 If the two 510% devils hit once for each 386% Whirlwind hit, on the same weapon-damage base, the hit total would be `(386 + 2 × 510) / 386 = 3.642×`. That hit rate is not stored, so this has no score. The 39.9%[x] would apply to the devil portion only.
 
@@ -141,6 +141,8 @@ The product of the same three lines is `4.10 × 1.88 × 1.44 = 11.09952`, which 
 Flawless Technique's +45%[x] Critical Strike Damage is an alternate reading (`data/barbarian.json:9478`). Consecutive-weapon uptime is 1, an estimate, and the line multiplies on its own (×1.45). The headline leaves it out. The patch-note 45%[x] is generic damage with null conditions and stays out as well.
 
 Wrath glyph +17.8%[x] Critical Strike Damage is kept inside sheet 7,424.8% (`data/barbarian.json:10585`).
+
+Damage over time does not crit. The crit factor on a damage-over-time part is 1, and crit-damage [x] lines are left off that part. Challenging Shout's 2,430% burn and Wrath of the Berserker's 56% burn were already on that factor, and they stay there. Whirlwind's scored 386% hit is direct, so the blended headline stays 42,398,366,381.44. The 510% Dust Devils have no stored damage type. They stay outside the coefficient and are flagged.
 
 ### 8. Sheet lines dropped or double-counted
 

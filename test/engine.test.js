@@ -31,5 +31,18 @@ test('gear crit lines sum and aspect crit multiplies separately',()=>{
 test('null values skipped and reported',()=>{const r=compute({weaponDmg:100,coeffPct:100,modifiers:[{name:'x',bucket:'multiplicative',value:null}]});near(r.total,100);assert.deepEqual(r.skipped,['x']);});
 test('mainstat 0.8 per 10',()=>near(compute({weaponDmg:100,coeffPct:100,mainStat:1000,mainStatPer10:0.8}).total,180));
 test('dot no crit',()=>near(compute({weaponDmg:100,coeffPct:100,critChance:100,critDmg:100,isDot:true}).total,100));
+test('a damage over time component is unchanged when crit chance, crit damage, or a crit-damage multiplier changes',()=>{
+  const dot={weaponDmg:100,coeffPct:184,isDot:true,modifiers:[
+    {name:'gear',bucket:'crit-mult',value:310,kind:'affix'},
+    {name:'aspect',bucket:'crit-mult',value:45,kind:'aspect'},
+    {name:'sheet crit',bucket:'crit',value:50}
+  ]};
+  const quiet=compute({...dot,critChance:0,critDmg:0});
+  const loud=compute({...dot,critChance:100,critDmg:7424.8});
+  near(quiet.total,184);
+  near(loud.total,184);
+  near(loud.buckets.crit,1);
+  assert.equal(loud.terms.find(term=>term.label==='Crit (expected)').expr.includes('damage over time'),true);
+});
 test('inactive modifier ignored',()=>near(compute({weaponDmg:1,coeffPct:100,modifiers:[{name:'x',bucket:'multiplicative',value:50,active:false}]}).total,1));
 test('additive dilution: marginal additive < multiplicative',()=>{const m=marginal(ex);assert.ok(m.additive<m.multiplicative);});

@@ -31,8 +31,11 @@ export function critMultiplier(mods){
   const separateX=separate.reduce((p,m)=>p*(1+m.value/100),1);
   return {gear,separate,gearX,separateX,factor:gearX*separateX};
 }
+function activeMods(inp){
+  return (inp.modifiers||[]).filter(m=>m.active!==false&&typeof m.value==='number'&&!(inp.isDot&&(m.bucket==='crit-mult'||m.bucket==='crit')));
+}
 export function compute(inp){
-  const mods=(inp.modifiers||[]).filter(m=>m.active!==false&&typeof m.value==='number');
+  const mods=activeMods(inp);
   const terms=[],skipped=(inp.modifiers||[]).filter(m=>typeof m.value!=='number').map(m=>m.name);
   const base=(inp.weaponDmg??0)*((inp.coeffPct??0)/100);
   terms.push({label:'Base = weapon × coeff',value:base,expr:`${inp.weaponDmg} × ${(inp.coeffPct??0)/100}`});
@@ -58,7 +61,7 @@ export function compute(inp){
   const crit=inp.isDot||chance<=0?1:(chance>=1?critFull:(1-chance)+chance*critFull);
   const gearText=critParts.gear.length?`${Number(critParts.gearX.toFixed(4))} gear [x] (${critParts.gear.map(m=>`${m.value}%`).join(' + ')})`:'1 gear [x]';
   const separateText=critParts.separate.length?` × ${Number(critParts.separateX.toFixed(4))} separate [x] (${critParts.separate.map(m=>`${m.value}% ${m.name}`).join(', ')})`:'';
-  const critExpr=inp.isDot?'DoT: no crit':chance<=0?'no crit chance':`(${Number(A.toFixed(4))} + ${Number(csd.toFixed(4))}) / ${Number(A.toFixed(4))} × ${gearText}${separateText}`;
+  const critExpr=inp.isDot?'damage over time: crit and crit-damage [x] lines are left off':chance<=0?'no crit chance':`(${Number(A.toFixed(4))} + ${Number(csd.toFixed(4))}) / ${Number(A.toFixed(4))} × ${gearText}${separateText}`;
   terms.push({label:'Crit (expected)',value:crit,expr:critExpr});
   const vulnMods=mods.filter(m=>m.bucket==='vuln-mult');
   const vulnX=percentFactor(vulnMods,inp.vulnMultMode);

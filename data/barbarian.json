@@ -303,21 +303,23 @@
           "value": 386,
           "conditions": null,
           "stacking": null,
+          "damageType": "direct",
           "source": "user screenshot 2026-10-22",
           "verified": true,
-          "note": "Tooltip coefficient transcribed from user video. Unverified. Screenshot coefficient 386%. The earlier value was 18. Tooltip damage 3,717,620 is not a second coefficient."
+          "note": "Tooltip coefficient transcribed from user video. Unverified. Screenshot coefficient 386%. The earlier value was 18. Tooltip damage 3,717,620 is not a second coefficient. The hit is Physical and the skill dot flag is false, so this component is direct."
         },
         {
           "stat": "Dust Devils",
           "kind": "damage",
           "bucket": null,
           "value": 510,
+          "damageType": null,
           "conditions": [],
           "stacking": null,
           "source": "user screenshot 2026-10-22",
           "verified": true,
           "unit": "%",
-          "note": "Screenshot: 2 Dust Devils at 510% each. No [+] or [x] tag, so the bucket is null."
+          "note": "Screenshot: 2 Dust Devils at 510% each. No [+] or [x] tag, so the bucket is null. Damage type is unset. The tooltip does not say whether these Dust Devils are a direct hit or damage over time."
         }
       ],
       "source": "manual-entry",
@@ -392,6 +394,24 @@
       "coeffPct": 86,
       "rank": 11,
       "dot": true,
+      "components": [
+        {
+          "name": "hit",
+          "coeffPct": 86,
+          "damageType": "direct",
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false,
+          "note": "Tooltip shows 86% beside a separate bleed. The 86% is the direct hit."
+        },
+        {
+          "name": "bleed",
+          "coeffPct": 184,
+          "damageType": "dot",
+          "source": "user video 2026-10-21 batch2 (transcribed)",
+          "verified": false,
+          "note": "Tooltip 184% bleed over 5s. Damage over time, so crit stays off this part."
+        }
+      ],
       "furyGeneratePerCast": null,
       "furySpendPerCast": null,
       "variantOf": null,
@@ -1362,6 +1382,7 @@
           "verified": true,
           "source": "user screenshot 2026-10-22",
           "kind": "damage",
+          "damageType": "dot",
           "note": "Screenshot: burn 2,430% over 8s, Fire, DoT. The earlier tooltip was 4,030% over 4s."
         },
         {
@@ -1897,18 +1918,20 @@
           "kind": "damage",
           "bucket": null,
           "value": 560,
+          "damageType": "direct",
           "conditions": [],
           "stacking": null,
           "source": "user screenshot 2026-10-22",
           "verified": true,
           "unit": "%",
-          "note": "Screenshot: fire aura 560%. No [+] or [x] tag."
+          "note": "Screenshot: fire aura 560%. No [+] or [x] tag. The aura hit is separate from the burn, so this component is direct."
         },
         {
           "stat": "burn",
           "kind": "damage",
           "bucket": null,
           "value": 56,
+          "damageType": "dot",
           "conditions": [],
           "stacking": null,
           "source": "user screenshot 2026-10-22",
@@ -3291,10 +3314,12 @@
           "stat": "60% [40-60]",
           "bucket": null,
           "value": 60,
+          "damageType": "dot",
           "conditions": null,
           "stacking": null,
           "source": "video-frames",
           "verified": false,
+          "note": "Bonus Bleeding damage over 5 seconds, so this component is damage over time. The bucket stays null, so the line is not scored.",
           "upgrade": {
             "level": 21,
             "maxLevel": 21,

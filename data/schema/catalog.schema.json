@@ -107,7 +107,8 @@
         "slotType": { "type": ["string", "null"] },
         "scored": { "type": "boolean" },
         "alignWithState": { "type": "boolean" },
-        "alternateReading": { "type": "boolean" }
+        "alternateReading": { "type": "boolean" },
+        "damageType": { "enum": ["direct", "dot", null] }
       }
     },
     "meta": {
@@ -238,6 +239,7 @@
           }
         },
         "dot": { "type": ["boolean", "null"] },
+        "components": { "type": "array", "items": { "$ref": "#/$defs/damageComponent" } },
         "cooldown": { "type": ["number", "null"] },
         "duration": { "type": ["number", "null"] },
         "aura": { "$ref": "#/$defs/aura" },
@@ -249,6 +251,20 @@
         "source": { "$ref": "#/$defs/source" },
         "verified": { "type": "boolean" },
         "note": { "type": ["string", "null"] }
+      }
+    },
+    "damageComponent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "coeffPct", "damageType"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "coeffPct": { "type": ["number", "null"] },
+        "damageType": { "enum": ["direct", "dot", null] },
+        "uptime": { "type": ["number", "null"] },
+        "source": { "type": "string", "minLength": 1 },
+        "verified": { "type": "boolean" },
+        "note": { "type": "string" }
       }
     },
     "aura": {
