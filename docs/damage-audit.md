@@ -270,7 +270,19 @@ Nikolay's screenshots outrank the video hit reads. The biggest confirmed single 
 
 Subo and Varyana were active in the 718B fight, hitting the dummy and using shouts and buffs. Nikolay thinks their contribution is not significant. The model stays solo. Party buffs are a minor possible source in the unexplained list. They are not fitted and they are not modeled.
 
-`souls` stays an input. The stored cap is 200. Empty `souls` still uses 15, an estimate. A count above 200 scores at 200. The rows below are 15, 30, and 200, sum and compound, at 4.1%[x] per soul.
+### Calibrated defaults
+
+Three switches are locked as the working defaults. The alternatives stay switchable.
+
+| Switch | Default | Alternate |
+| --- | --- | --- |
+| `soulModel` | `sum`, `1 + 0.041 × souls` | `compound`, `1.041^souls` |
+| `overpowerSheetMeaning` | `total` | `perStack`, sheet Overpower Damage × 4 |
+| `critAudit.reading` | `headline` | `sheet-includes-gear-x`, `active-weapon`, `sheet-includes-gear-x-active-weapon` |
+
+These defaults are calibrated against the 718B boss-dummy hit at 30 souls (peak 784B with the Burning line, 653B without it; average 341B). `total` is the closer Overpower reading of that hit. `headline` is the crit reading that reaches this band. Pass `soulModel`, `overpowerSheetMeaning`, or `critReading` to score an alternate. The saved build stores `soulModel` `sum`, `overpowerSheetMeaning` `total`, and `critAudit.reading` `headline`.
+
+`souls` stays an input. The stored cap is 200. Empty `souls` still uses 15, an estimate. A count above 200 scores at 200. The rows below are 15, 30, and 200, sum and compound, at 4.1%[x] per soul. Sum is the locked default. Compound stays the alternate.
 
 ### Buff timeline
 
@@ -342,3 +354,5 @@ Non-boss hits at 30 souls, sum model, with no cross-skill buff lines: no-buff mi
 - War Cry 38.5%[x], Wrath 30%[x], and the Burning line are applied on top of a combat sheet that was read while buffs were up. Whether the sheet already folded those lines in is unverified.
 - The All Damage ramp from 1,996% to 9,897.7% is not interpolated.
 - Grand Skull sockets, the unmatched Deathhead tooltip, Polearm Expertise 10/10, and attack speed 120% stay unscored.
+
+The first step-3 comparison, the d4builds.gg Whirlwind Barbarian endgame guide variant 4 against this build, is in `docs/compare-guide-v4.md`.

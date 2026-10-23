@@ -1,4 +1,4 @@
-import { evaluateBuild } from './catalog.js';
+import { evaluateBuild, resolveCritReading, resolveOverpowerMeaning, resolveSoulModel } from './catalog.js';
 
 const EPS = 1e-6;
 export const ROTATION_HORIZON_S = 60;
@@ -300,9 +300,9 @@ function scoreSlice(catalog, build, slice, opts) {
   return evaluateBuild(catalog, sliceBuild(build, opts.souls, slice), {
     sheetContext: slice.sheetContext,
     allbuffEndpoint: slice.endpoint,
-    critReading: 'headline',
-    soulModel: opts.soulModel || 'sum',
-    overpowerSheetMeaning: opts.overpowerSheetMeaning || 'total',
+    critReading: opts.critReading || resolveCritReading(build, {}),
+    soulModel: opts.soulModel || resolveSoulModel(build, {}),
+    overpowerSheetMeaning: opts.overpowerSheetMeaning || resolveOverpowerMeaning(build, {}),
     extraModifiers: slice.extras || []
   });
 }

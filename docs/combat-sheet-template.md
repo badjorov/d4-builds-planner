@@ -39,7 +39,7 @@ Attack speed is stored and is not a per-hit damage multiplier. Polearm Expertise
 
 Whirlwind scores the Physical row. The other element rows are stored and score when the selected skill's element is that row. Thorns stays `offensiveSheet.thorns` town 0.
 
-vs Healthy and vs Injured are separate rows in combat. The town pair is still 26 and 26, so the town score keeps one shared Healthy-or-Injured window. while Berserking applies while `uptime.berserk` is above 0. Overpower Damage 6,432.2% joins the additive pool on an Overpower hit. `overpowerSheetMeaning` `total` adds that percent once. `perStack` adds it four times. The stored 104% is not applied, and the separate Overpower multiplier stays 1.
+vs Healthy and vs Injured are separate rows in combat. The town pair is still 26 and 26, so the town score keeps one shared Healthy-or-Injured window. while Berserking applies while `uptime.berserk` is above 0. Overpower Damage 6,432.2% joins the additive pool on an Overpower hit. `overpowerSheetMeaning` `total` is the locked default and adds that percent once. `perStack` stays switchable and adds it four times. The stored 104% is not applied, and the separate Overpower multiplier stays 1.
 
 The lower combat-allbuff rows were not visible in the video. They are stored empty and fall back to combat-nobuff, and the result lists that fallback.
 

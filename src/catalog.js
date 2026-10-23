@@ -436,7 +436,7 @@ function sheetWhen(uptime, key) {
 const OVERPOWER_STACK_CAP = 4;
 
 function applyOverpowerAdditive(build, modifiers, notes, opts = {}) {
-  const meaning = opts.overpowerSheetMeaning === 'perStack' ? 'perStack' : 'total';
+  const meaning = resolveOverpowerMeaning(build, opts);
   const sheet = build.offensiveSheet?.overpowerDamage;
   const retired = typeof build.overpowerPct === 'number' ? build.overpowerPct : null;
   const retiredText = retired == null ? 'No retired stack total is stored.' : `The stored ${retired}% (4 × 26) is retired and is not applied.`;
@@ -457,7 +457,7 @@ function applyOverpowerAdditive(build, modifiers, notes, opts = {}) {
   const other = meaning === 'perStack'
     ? `The total reading is ${sheet}%.`
     : `The per-stack reading at ${OVERPOWER_STACK_CAP} stacks is ${sheet * OVERPOWER_STACK_CAP}%.`;
-  notes.push(`Overpower Damage is additive on an Overpower hit: ${reading}. overpowerSheetMeaning is ${meaning}. ${other} The separate Overpower multiplier is 1. ${retiredText} Since patch 3.0 Overpower adds to the additive pool and stacks with crit. Life and Fortify do not scale it. Whether the sheet percent is the total or the per-stack figure is unverified. Source: d4-overpower-formula.md (Research Scout).`);
+  notes.push(`Overpower Damage is additive on an Overpower hit: ${reading}. overpowerSheetMeaning is ${meaning}. ${other} The separate Overpower multiplier is 1. ${retiredText} Since patch 3.0 Overpower adds to the additive pool and stacks with crit. Life and Fortify do not scale it. The calibrated default is total. perStack stays switchable. Source: d4-overpower-formula.md (Research Scout).`);
   return { overpowerSheetMeaning: meaning, overpowerAdditive: value };
 }
 
@@ -544,7 +544,7 @@ function applySplinter(catalog, build, modifiers, notes, opts = {}) {
     soulsCapped = true;
     souls = soulCap;
   }
-  const compound = opts.soulModel === 'compound';
+  const compound = resolveSoulModel(build, opts) === 'compound';
   const perSoul = 1 + rate / 100;
   const factor = compound ? perSoul ** souls : 1 + (rate / 100) * souls;
   const alternate = compound ? 1 + (rate / 100) * souls : perSoul ** souls;
@@ -840,6 +840,16 @@ export function resolveCritReading(build, opts = {}) {
   return CRIT_READINGS.includes(requested) ? requested : 'headline';
 }
 
+export function resolveSoulModel(build, opts = {}) {
+  const requested = opts.soulModel ?? build?.soulModel;
+  return requested === 'compound' ? 'compound' : 'sum';
+}
+
+export function resolveOverpowerMeaning(build, opts = {}) {
+  const requested = opts.overpowerSheetMeaning ?? build?.overpowerSheetMeaning;
+  return requested === 'perStack' ? 'perStack' : 'total';
+}
+
 function activeWeaponSlotFor(catalog, build) {
   const skills = (build.skills || []).map(id => skillById(catalog, id)).filter(Boolean);
   if (skills.length !== 1) return null;
@@ -892,6 +902,8 @@ function applyFormulaOpts(input, opts = {}) {
 
 export function evaluateBuild(catalog, build, opts = {}) {
   const critReading = resolveCritReading(build, opts);
+  const soulModel = resolveSoulModel(build, opts);
+  const overpowerMeaning = resolveOverpowerMeaning(build, opts);
   const activeWeaponSlot = opts.activeWeaponSlot || activeWeaponSlotFor(catalog, build);
   const input = applyFormulaOpts(engineInputFromBuild(catalog, build, opts), { ...opts, critReading, activeWeaponSlot });
   if (critReading === 'active-weapon' && !activeWeaponSlot) {
@@ -900,7 +912,7 @@ export function evaluateBuild(catalog, build, opts = {}) {
   const uptime = build.uptime || blankUptime();
   const result = blendScore(input, uptime);
   let soulAlternate = null;
-  if (typeof input.soulFactor === 'number' && opts.soulModel !== 'compound') {
+  if (typeof input.soulFactor === 'number' && soulModel !== 'compound') {
     const altInput = applyFormulaOpts(engineInputFromBuild(catalog, build, { ...opts, soulModel: 'compound' }), {
       ...opts,
       critReading,
@@ -911,7 +923,7 @@ export function evaluateBuild(catalog, build, opts = {}) {
     soulAlternate = { total: alt.total, model: 'compound', factor: altInput.soulFactor, souls: altInput.souls, verified: false };
   }
   let overpowerAlternate = null;
-  if (opts.overpowerSheetMeaning !== 'perStack' && typeof input.overpowerAdditive === 'number' && input.overpowerAdditive > 0) {
+  if (overpowerMeaning !== 'perStack' && typeof input.overpowerAdditive === 'number' && input.overpowerAdditive > 0) {
     const altInput = applyFormulaOpts(engineInputFromBuild(catalog, build, { ...opts, overpowerSheetMeaning: 'perStack' }), {
       ...opts,
       critReading,

@@ -74,6 +74,7 @@
     "maxFury": { "$ref": "#/$defs/sheetReading" },
     "sheetContext": { "enum": ["town", "combat", "combat-nobuff", "combat-allbuff"] },
     "souls": { "type": ["number", "null"] },
+    "soulModel": { "enum": ["sum", "compound"] },
     "splinter": { "$ref": "#/$defs/splinter" },
     "attackSpeed": { "$ref": "#/$defs/sheetReading" },
     "currentFury": { "$ref": "#/$defs/sheetReading" },
