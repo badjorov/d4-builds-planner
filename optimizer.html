@@ -9,7 +9,7 @@
 <body>
 <nav><a href="index.html">Calculator</a> <a href="optimizer.html">Optimizer</a> <a href="data-entry.html">Data entry</a></nav>
 <h1>Build optimizer</h1>
-<p>Class-agnostic search. This catalog is Barbarian first. Paragon boards, glyphs, and talismans are stored but not searched. Unknown game numbers stay null and do not become damage.</p>
+<p>Class-agnostic search. This catalog is Barbarian first. Equipped paragon nodes and glyphs from the saved build are scored with the gear. Which boards, glyphs, and talismans to equip is not searched. Unknown game numbers stay null and do not become damage.</p>
 <p id="status">Loading catalog…</p>
 <fieldset>
   <legend>Search</legend>
@@ -29,9 +29,13 @@
   <label>Vulnerable % <input id="vulnPct" type="number"></label>
   <label>Overpower % <input id="overpowerPct" type="number"></label>
   <br>
-  <label>Berserk uptime (0–1) <input id="upBerserk" type="number" step="0.05"></label>
-  <label>Vulnerable uptime (0–1) <input id="upVulnerable" type="number" step="0.05"></label>
-  <label>Overpower uptime (0–1) <input id="upOverpower" type="number" step="0.05"></label>
+  <label>Berserk uptime (0–1) <input id="upBerserk" type="number" step="0.000001"></label>
+  <label>Vulnerable uptime (0–1) <input id="upVulnerable" type="number" step="0.000001"></label>
+  <label>Overpower uptime (0–1) <input id="upOverpower" type="number" step="0.000001"></label>
+  <label>Channeling uptime (0–1) <input id="upChanneling" type="number" step="0.000001"></label>
+  <label>Fury above 50 uptime (0–1) <input id="upFury" type="number" step="0.000001"></label>
+  <label>Unstoppable uptime (0–1) <input id="upUnstoppable" type="number" step="0.000001"></label>
+  <label>Fortified uptime (0–1) <input id="upFortified" type="number" step="0.000001"></label>
   <label>Casts per second <input id="castsPerSecond" type="number" step="0.1"></label>
 </fieldset>
 <fieldset>

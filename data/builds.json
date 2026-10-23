@@ -1,0 +1,1402 @@
+{
+  "note": "Saved builds are not meta baselines. The row below is the user's current build. The character sheet block is verified from the user's screenshot. The rest of the build stays unverified.",
+  "builds": [
+    {
+      "id": "users-current-build",
+      "name": "user's current build",
+      "label": "user's current build",
+      "class": "Barbarian",
+      "skills": [
+        "whirlwind",
+        "war-cry",
+        "challenging-shout",
+        "rallying-cry",
+        "wrath-of-the-berserker",
+        "iron-skin"
+      ],
+      "variants": [],
+      "gear": [
+        {
+          "slotId": "helm",
+          "affixes": [
+            {
+              "affixId": "v1-helm-strength",
+              "value": 111
+            },
+            {
+              "affixId": "v1-helm-willpower",
+              "value": 111
+            },
+            {
+              "affixId": "v1-helm-attack-speed",
+              "value": 17.5
+            },
+            {
+              "affixId": "v1-helm-cooldown-reduction",
+              "value": 25
+            },
+            {
+              "affixId": "v1-helm-armor",
+              "value": 1111
+            },
+            {
+              "affixId": "v1-helm-poison-res",
+              "value": 10
+            },
+            {
+              "affixId": "v1-helm-all-stats",
+              "value": 82
+            }
+          ],
+          "aspectId": null,
+          "uniqueId": "leorics-crown",
+          "itemName": "Leoric's Crown",
+          "hands": null,
+          "weaponType": null,
+          "attacksPerSecond": null,
+          "itemCritChance": null,
+          "itemNote": "Ancestral Mythic Unique. User confirmed the helm is Leoric's Crown. Tuskhelm of Joritz the Mighty is a charm, not the helm."
+        },
+        {
+          "slotId": "chest",
+          "affixes": [
+            {
+              "affixId": "v1-chest-max-resource",
+              "value": 18
+            },
+            {
+              "affixId": "v1-chest-armor-roll",
+              "value": 1322
+            },
+            {
+              "affixId": "v1-chest-max-life",
+              "value": 19
+            },
+            {
+              "affixId": "v1-chest-dr",
+              "value": 13
+            },
+            {
+              "affixId": "v1-chest-armor-flat",
+              "value": 3000
+            }
+          ],
+          "aspectId": null,
+          "uniqueId": "enigma",
+          "itemName": "Enigma",
+          "hands": null,
+          "weaponType": null,
+          "attacksPerSecond": null,
+          "itemCritChance": null,
+          "itemNote": "Ancestral Unique Runeword."
+        },
+        {
+          "slotId": "gloves",
+          "affixes": [
+            {
+              "affixId": "v1-gloves-attack-speed",
+              "value": 34
+            },
+            {
+              "affixId": "v1-gloves-crit-chance",
+              "value": 16
+            },
+            {
+              "affixId": "v1-gloves-fire-mult",
+              "value": 45
+            },
+            {
+              "affixId": "v1-gloves-core-skills",
+              "value": 13
+            },
+            {
+              "affixId": "v1-gloves-crit-damage",
+              "value": 50
+            }
+          ],
+          "aspectId": null,
+          "uniqueId": "gohrs-devastating-grips",
+          "itemName": "Gohr's Devastating Grips",
+          "hands": null,
+          "weaponType": null,
+          "attacksPerSecond": null,
+          "itemCritChance": null,
+          "itemNote": "Mythic."
+        },
+        {
+          "slotId": "pants",
+          "affixes": [
+            {
+              "affixId": "v1-pants-max-resource",
+              "value": 30
+            },
+            {
+              "affixId": "v1-pants-life-regen",
+              "value": 276
+            },
+            {
+              "affixId": "v1-pants-dr",
+              "value": 11.5
+            },
+            {
+              "affixId": "v1-pants-impairment",
+              "value": 15.5
+            },
+            {
+              "affixId": "v1-pants-phys-res",
+              "value": 23.5
+            }
+          ],
+          "aspectId": null,
+          "uniqueId": "tibaults-will",
+          "itemName": "Tibault's Will",
+          "hands": null,
+          "weaponType": null,
+          "attacksPerSecond": null,
+          "itemCritChance": null,
+          "itemNote": "Mythic."
+        },
+        {
+          "slotId": "boots",
+          "affixes": [
+            {
+              "affixId": "v1-boots-all-stats",
+              "value": 151
+            },
+            {
+              "affixId": "v1-boots-fury-regen",
+              "value": 5
+            },
+            {
+              "affixId": "v1-boots-move-speed",
+              "value": 28
+            },
+            {
+              "affixId": "v1-boots-all-res",
+              "value": 426
+            },
+            {
+              "affixId": "v1-boots-temper-move-speed",
+              "value": 43
+            }
+          ],
+          "aspectId": "earthstrikers-aspect",
+          "uniqueId": null,
+          "itemName": "Earthstriker's Boneweave Treads",
+          "hands": null,
+          "weaponType": null,
+          "attacksPerSecond": null,
+          "itemCritChance": null,
+          "itemNote": "Ancestral Legendary Boots, 900 Item Power, Quality 25 (+25), 1,001 Armor. The tooltip does not say Transfigured. Tempered Movement Speed 43% [15-25] and +28% Movement Speed [20-24] stay verified."
+        },
+        {
+          "slotId": "amulet",
+          "affixes": [
+            {
+              "affixId": "v1-selig-vuln-mult",
+              "value": 10
+            },
+            {
+              "affixId": "v1-selig-strength",
+              "value": 115
+            },
+            {
+              "affixId": "v1-selig-all-res",
+              "value": 28.5
+            },
+            {
+              "affixId": "v1-selig-dual-wield",
+              "value": 3
+            },
+            {
+              "affixId": "v1-selig-move-speed",
+              "value": 45
+            }
+          ],
+          "aspectId": null,
+          "uniqueId": "melted-heart-of-selig",
+          "itemName": "Melted Heart of Selig",
+          "hands": null,
+          "weaponType": null,
+          "attacksPerSecond": null,
+          "itemCritChance": null,
+          "itemNote": "Mythic."
+        },
+        {
+          "slotId": "ring-1",
+          "affixes": [
+            {
+              "affixId": "v1-soj-strength",
+              "value": 115
+            },
+            {
+              "affixId": "v1-soj-crit-chance",
+              "value": 5.5
+            },
+            {
+              "affixId": "v1-soj-crit-damage",
+              "value": 65
+            },
+            {
+              "affixId": "v1-soj-max-life",
+              "value": 33
+            },
+            {
+              "affixId": "v1-soj-all-skills",
+              "value": 3
+            }
+          ],
+          "aspectId": null,
+          "uniqueId": "stone-of-jordan",
+          "itemName": "Stone of Jordan",
+          "hands": null,
+          "weaponType": null,
+          "attacksPerSecond": null,
+          "itemCritChance": null,
+          "itemNote": "Video 1 reads this as Ring 1. An earlier name list had Stone of Jordan replacing Ring of Starless Skies on ring 2. The video's ring note puts Crushing on ring 2, so Stone of Jordan is on ring 1 here."
+        },
+        {
+          "slotId": "ring-2",
+          "affixes": [
+            {
+              "affixId": "v1-crush-all-res",
+              "value": 115
+            },
+            {
+              "affixId": "v1-crush-strength",
+              "value": 115
+            },
+            {
+              "affixId": "v1-crush-vuln-mult",
+              "value": 10
+            },
+            {
+              "affixId": "v1-crush-vuln",
+              "value": 16
+            },
+            {
+              "affixId": "v1-crush-max-resource",
+              "value": 12
+            },
+            {
+              "affixId": "v1-crush-cdr",
+              "value": 5
+            }
+          ],
+          "aspectId": "crushing-aspect",
+          "uniqueId": null,
+          "itemName": "Crushing Aspect",
+          "hands": null,
+          "weaponType": null,
+          "attacksPerSecond": null,
+          "itemCritChance": null,
+          "itemNote": "Video name Crushing Spiritmachy, identified as the Crushing Aspect ring. Video Ring 2."
+        },
+        {
+          "slotId": "weapon-1",
+          "affixes": [
+            {
+              "affixId": "v1-insight-weapon-damage",
+              "value": 522
+            },
+            {
+              "affixId": "v1-insight-strength",
+              "value": 555
+            },
+            {
+              "affixId": "v1-insight-fury-regen",
+              "value": 47
+            },
+            {
+              "affixId": "v1-insight-attack-speed",
+              "value": 54.2
+            },
+            {
+              "affixId": "v1-insight-crit-chance",
+              "value": 94.3
+            },
+            {
+              "affixId": "v1-insight-crit-damage",
+              "value": 180
+            },
+            {
+              "affixId": "v1-insight-damage",
+              "value": 310
+            },
+            {
+              "affixId": "v1-insight-item-quality",
+              "value": 30
+            }
+          ],
+          "aspectId": null,
+          "uniqueId": "insight",
+          "itemName": "Insight",
+          "hands": "2H",
+          "weaponType": "polearm",
+          "attacksPerSecond": 0.9,
+          "itemCritChance": 94.3,
+          "itemNote": "Ancestral Unique Polearm, 2H Slashing, 900 Item Power, Quality 55 (+25), Transfigured. Runes RalTirTalSol. 4,615 DPS, [4,360-5,896] per hit, 0.90 attacks per second. Two Grand Skull sockets at x28% Physical Damage Multiplier. The gem's own tooltip is x24%.",
+          "arsenalSlot": "2H Slashing",
+          "critDamageMultiplier": 310,
+          "critDamageMultiplierBucket": "multiplicative",
+          "verifiedFacts": [
+            "weaponType",
+            "arsenalSlot",
+            "attacksPerSecond",
+            "itemCritChance",
+            "critDamageMultiplier"
+          ],
+          "sockets": [
+            {
+              "gemId": "grand-skull",
+              "slotType": "weapon",
+              "value": 28,
+              "bucket": "multiplicative"
+            },
+            {
+              "gemId": "grand-skull",
+              "slotType": "weapon",
+              "value": 28,
+              "bucket": "multiplicative"
+            }
+          ],
+          "transfigured": true
+        },
+        {
+          "slotId": "weapon-2",
+          "affixes": [
+            {
+              "affixId": "v1-channel-weapon-damage",
+              "value": 467
+            },
+            {
+              "affixId": "v1-channel-strength",
+              "value": 448
+            },
+            {
+              "affixId": "v1-channel-all-damage",
+              "value": 25
+            },
+            {
+              "affixId": "v1-channel-crit-damage",
+              "value": 88
+            },
+            {
+              "affixId": "v1-channel-vuln",
+              "value": 388
+            },
+            {
+              "affixId": "v1-channel-crit-chance",
+              "value": 7.5
+            }
+          ],
+          "aspectId": "aspect-of-channeling",
+          "uniqueId": null,
+          "itemName": "Deathshead of Channeling",
+          "hands": "2H",
+          "weaponType": "mace",
+          "attacksPerSecond": 0.9,
+          "itemCritChance": null,
+          "itemNote": "Ancestral Legendary 2H Mace, Bludgeoning, 900 Item Power, Quality 25 (+25), Transfigured. Aspect of Channeling imprint 138%[x] [100-140]. 4,565 DPS, [4,305-5,841] per hit, 0.90 attacks per second. Two Grand Skull sockets at x28% Physical Damage Multiplier.",
+          "arsenalSlot": "2H Bludgeoning",
+          "verifiedFacts": [
+            "weaponType",
+            "arsenalSlot",
+            "attacksPerSecond"
+          ],
+          "sockets": [
+            {
+              "gemId": "grand-skull",
+              "slotType": "weapon",
+              "value": 28,
+              "bucket": "multiplicative"
+            },
+            {
+              "gemId": "grand-skull",
+              "slotType": "weapon",
+              "value": 28,
+              "bucket": "multiplicative"
+            }
+          ],
+          "transfigured": true
+        },
+        {
+          "slotId": "weapon-3",
+          "affixes": [
+            {
+              "affixId": "v1-spirit-weapon-damage",
+              "value": 175
+            },
+            {
+              "affixId": "v1-spirit-strength",
+              "value": 101
+            },
+            {
+              "affixId": "v1-spirit-all-damage",
+              "value": 66
+            },
+            {
+              "affixId": "v1-spirit-attack-speed",
+              "value": 45.8
+            },
+            {
+              "affixId": "v1-spirit-impairment",
+              "value": 65.5
+            },
+            {
+              "affixId": "v1-spirit-all-skills",
+              "value": 6
+            },
+            {
+              "affixId": "v1-spirit-item-quality",
+              "value": 6
+            },
+            {
+              "affixId": "v1-spirit-crit-damage",
+              "value": 78
+            }
+          ],
+          "aspectId": null,
+          "uniqueId": "spirit",
+          "itemName": "Spirit",
+          "hands": "1H",
+          "weaponType": "sword",
+          "attacksPerSecond": 1.1,
+          "itemCritChance": null,
+          "itemNote": "Ancestral Unique Sword, 1H Slashing, 900 Item Power, Quality 31 (+25), Transfigured. Runes TalThulOrtAmn. 2,264 DPS, [1,745-2,373] per hit, 1.10 attacks per second. One Grand Skull socket at x24% Physical Damage Multiplier.",
+          "arsenalSlot": "1H",
+          "verifiedFacts": [
+            "weaponType",
+            "arsenalSlot",
+            "attacksPerSecond"
+          ],
+          "transfigured": true,
+          "sockets": [
+            {
+              "gemId": "grand-skull",
+              "slotType": "weapon",
+              "value": 24,
+              "bucket": "multiplicative"
+            }
+          ]
+        },
+        {
+          "slotId": "weapon-4",
+          "affixes": [
+            {
+              "affixId": "v1-ramaladni-weapon-damage",
+              "value": 235
+            },
+            {
+              "affixId": "v1-ramaladni-strength",
+              "value": 200
+            },
+            {
+              "affixId": "v1-ramaladni-dexterity",
+              "value": 30
+            },
+            {
+              "affixId": "v1-ramaladni-crit-damage",
+              "value": 75
+            },
+            {
+              "affixId": "v1-ramaladni-max-life",
+              "value": 5
+            },
+            {
+              "affixId": "v1-ramaladni-crit-mult",
+              "value": 44
+            }
+          ],
+          "aspectId": null,
+          "uniqueId": "ramaladni",
+          "itemName": "Ramaladni's Magnum Opus",
+          "hands": "1H",
+          "weaponType": "sword",
+          "attacksPerSecond": 1.1,
+          "itemCritChance": null,
+          "itemNote": "Ancestral Unique Sword, 1H Slashing, 900 Item Power, Quality 25 (+25), Transfigured. 2,330 DPS, [1,805-2,433] per hit, 1.10 attacks per second. One Grand Skull socket at x24% Physical Damage Multiplier.",
+          "arsenalSlot": "1H",
+          "verifiedFacts": [
+            "weaponType",
+            "arsenalSlot",
+            "attacksPerSecond"
+          ],
+          "sockets": [
+            {
+              "gemId": "grand-skull",
+              "slotType": "weapon",
+              "value": 24,
+              "bucket": "multiplicative"
+            }
+          ],
+          "transfigured": true
+        },
+        {
+          "slotId": "slot-13",
+          "affixes": [],
+          "aspectId": null,
+          "uniqueId": null,
+          "itemName": null,
+          "hands": null,
+          "weaponType": null,
+          "attacksPerSecond": null,
+          "itemCritChance": null,
+          "itemNote": "Planner placeholder. The supplied lists name 12 gear slots and do not name a 13th item."
+        }
+      ],
+      "boards": [
+        {
+          "boardId": "starting-board",
+          "name": "Starting Board",
+          "nodeIds": [
+            "starting-brawn",
+            "starting-raw-power",
+            "starting-iron-strength",
+            "starting-normal-strength",
+            "starting-normal-dexterity",
+            "starting-magic-damage",
+            "starting-magic-max-life",
+            "starting-magic-willpower"
+          ]
+        },
+        {
+          "boardId": "warbringer",
+          "name": "Warbringer",
+          "nodeIds": [
+            "warbringer-legendary",
+            "warbringer-raw-power",
+            "warbringer-brute-force",
+            "warbringer-hungering-fury",
+            "warbringer-conditioned"
+          ]
+        },
+        {
+          "boardId": "decimator",
+          "name": "Decimator",
+          "nodeIds": [
+            "decimator-legendary",
+            "decimator-pillage",
+            "decimator-destroyer",
+            "decimator-demolish",
+            "decimator-arrogance"
+          ]
+        },
+        {
+          "boardId": "weapons-master",
+          "name": "Weapons Master",
+          "nodeIds": [
+            "weapons-master-legendary",
+            "weapons-master-iron-strength",
+            "weapons-master-raw-power",
+            "weapons-master-nimble",
+            "weapons-master-hunter-killer",
+            "weapons-master-deflection"
+          ]
+        },
+        {
+          "boardId": "flawless-technique-board",
+          "name": "Flawless Technique",
+          "nodeIds": [
+            "flawless-technique",
+            "flawless-wild-force",
+            "flawless-heavy-blows",
+            "flawless-nimble"
+          ]
+        }
+      ],
+      "glyphs": [
+        {
+          "glyphId": "might",
+          "level": 135,
+          "levelVerified": true
+        },
+        {
+          "glyphId": "twister",
+          "level": 135,
+          "levelVerified": true
+        },
+        {
+          "glyphId": "imbiber",
+          "level": 133,
+          "levelVerified": true
+        },
+        {
+          "glyphId": "marshal",
+          "level": 131,
+          "levelVerified": true
+        },
+        {
+          "glyphId": "wrath",
+          "level": 131,
+          "levelVerified": true
+        }
+      ],
+      "talismans": [
+        "Fer of the Crucible",
+        "Beru of the Crucible",
+        "Linta of the Crucible",
+        "Endurant Faith",
+        "Seal of the Epiphany",
+        "Hellfire Torch",
+        "Tuskhelm of Joritz the Mighty"
+      ],
+      "rotation": [],
+      "uptime": {
+        "berserk": null,
+        "vulnerable": 0.662691,
+        "overpower": 0.364507,
+        "estimate": {
+          "vulnerable": true,
+          "overpower": true,
+          "note": "Estimated from the screenshot, not measured. The Vulnerable and Wrath-active figures were accepted. Vulnerable: War Cry makes enemies Vulnerable for 4s on a 15.09s cooldown (4/15.09 = 0.265076). Stone of Jordan makes a touched enemy Vulnerable for 10s and the screenshot gives no touch interval. The estimate uses War Cry's cooldown as the only printed cycle and one touch per cycle. The 4s War Cry window sits inside the 10s touch window, so the union is 10/15.09 = 0.662691. A faster touch rate is not in the screenshot and would raise this toward 1. Overpower: Wrath grants 1 stack per second for 15.8s on a 54.32s cooldown (15.8/54.32 = 0.290869). Each stack is 26%[+] and lasts 4s, up to 4 stacks. Full 4 stacks during Wrath is the working assumption. Stacks linger 4s after Wrath ends, still counted at 4 stacks. Overpower is on for (15.8+4)/54.32 = 0.364507. Earthstriker weapon-swap stacks are not added. Berserk uptime is not estimated. Channeling uptime is 1 while the scored skill is channeled. Whirlwind's channel bonus is 1%[x] per hit up to 25, and those stacks are reached fast, so the uptime is 1. The scored line is Aspect of Channeling 138%[x]. The codex 69%[x] effect stays on the aspect and is not applied with the imprint. The skill's 1%[x] per hit is not added on top of the 138%. Fury above 50 is 1, confirmed by the user, and is no longer an estimate. Max Fury 826, Fury regeneration 85, and +52.5% Fury generation are town values and may be higher in combat. Melted Heart's 30%[x] uses that uptime. The x35% Vulnerable multiplier stays a separate always-on line. Unstoppable for Tibault's 26%[x] includes the 5s after Unstoppable ends. Iron Skin's 3s duration is the estimate input; the screenshot shows Unstoppable and cooldown 8.45s and does not show the seconds. The Iron Skin window is (3+5)/8.45 = 0.946746. Wrath is Unstoppable for 15.8s on a 54.32s cooldown, so its window is (15.8+5)/54.32 = 0.382916. No phase between the two cycles is stored, so the union is 1 - (1 - 8/8.45) × (1 - 20.8/54.32) = 0.967138. Fortified uptime is 1. The user confirmed the character is almost always Fortified, so this value is no longer an estimate. The earlier stacking check stays as history: Rallying Cry grants Fortify equal to 15% of Maximum Life per cast. Life 473, so one cast is 70.95 Fortify. The Fortified rule used for that check is an assumption: Fortify is at least current Life. One cast is below 473. No decay rate is stored, so the grants stack and persist. 7 × 70.95 = 496.65, which clears 473. The screenshot does not restate Rallying Cry's cooldown. The video transcription of 25s is the ramp clock only: the 7th cast is 150s after the first. The +20% effectiveness line is not applied to the Fortify grant. Channeling and Unstoppable remain estimates. Vulnerable and Overpower remain estimates. Berserk stays unset. Healthy or Injured uptime is 0.7 and is an estimate. Healthy means the enemy is above 80% life, which is 20% of the life bar. Injured means the enemy is below 35% life, which is 35% of the life bar. The band from 35% to 80% gets neither Weapons Master nor Might. A boss taking damage uniformly over its life spends 0.20 + 0.35 = 0.55 of the fight in one of those two windows. Trash dies fast, so most of its time is still Healthy and a short slice is Injured. The working trash share is 0.85. An equal mix of that trash reading and the boss life-bar fraction is 0.5 × 0.85 + 0.5 × 0.55 = 0.70. Weapons Master 75%[x] and Might 26%[x] use this one uptime together. The screenshot sheet's vs Healthy 26% and vs Injured 26% join the additive sum once on this same window. An enemy is in only one of those states. Dust Devil uptime is 1 while the scored skill is Whirlwind. The catalog tooltip and the allocated Tornado upgrade say Whirlwind creates 2 Dust Devils at 510% each. The channel creates them continuously, so Twister's 4s buff stays up. That uptime is an estimate. Twister's 13%[x] uses it. Twister's 39.9%[x] Dust Devil damage and the 39.8%[+] per 5 Strength rate are not applied to the 386% hit. Consecutive same-weapon uptime is 1 for a channeled Whirlwind and is an estimate. It is used only for the alternate Flawless Technique reading of +45%[x] Critical Strike Damage for 4s. The headline score does not apply that 45%[x]. Marshal's screenshot reduces the active cooldown of other non-Shout skills by 2.0s. It does not reduce War Cry, so Vulnerable stays 10/15.09 = 0.662691. The level-70 video line that reduced other Shout cooldowns is not applied. Wrath 54.32s and Iron Skin 8.45s stay the tooltip cooldowns because a shout-cast rate is not stored. Elites uptime is 0.75 and is an estimate. Trash dies fast, so most damage time is on elites and the boss. Player Healthy uptime is 1 and is an estimate: the player is Healthy almost all of the time. Missing potions is 0 of a capacity of 4, an estimate for this near-immortal setup, so Imbiber's 5%[x] per missing potion has factor 1.",
+          "channeling": true,
+          "furyAbove50": false,
+          "unstoppable": true,
+          "fortified": false,
+          "healthyInjured": true,
+          "dustDevil": true,
+          "consecutiveWeapon": true,
+          "elites": true,
+          "playerHealthy": true,
+          "missingPotions": true
+        },
+        "channeling": 1,
+        "furyAbove50": 1,
+        "unstoppable": 0.967138,
+        "fortified": 1,
+        "healthyInjured": 0.7,
+        "dustDevil": 1,
+        "consecutiveWeapon": 1,
+        "elites": 0.75,
+        "playerHealthy": 1,
+        "missingPotions": 0
+      },
+      "defense": {
+        "life": {
+          "town": 473,
+          "combat": null
+        },
+        "armor": {
+          "town": 33715,
+          "combat": null
+        },
+        "resists": {
+          "town": 21218,
+          "combat": null
+        },
+        "armorMitigationPct": {
+          "town": 78.2,
+          "combat": null
+        },
+        "resistMitigationPct": {
+          "town": 85.9,
+          "combat": null
+        },
+        "dr": [
+          50
+        ],
+        "armorMitigationScope": "direct and DoT",
+        "mitigationCapPct": 90,
+        "note": "Splinter of the Black Soulstone adds +1% damage taken per soul. The soul count is the souls input. Empty souls use 15 and that default is an estimate. This percent is not in the DR list.",
+        "coldResistance": {
+          "gear": {
+            "town": 18947,
+            "combat": null
+          },
+          "intelligence": {
+            "town": 629,
+            "combat": null
+          },
+          "other": {
+            "town": 1642,
+            "combat": null
+          },
+          "note": "Cold breakdown with Stone of Jordan equipped. Every resistance is 21,218 and reduces 85.9%. These three parts are the cold line only."
+        }
+      },
+      "weaponDmg": {
+        "town": 4596,
+        "combat": null
+      },
+      "mainStat": {
+        "town": 4101,
+        "combat": null
+      },
+      "critChance": {
+        "town": 100,
+        "combat": null,
+        "combat-nobuff": 100,
+        "combat-allbuff": 100,
+        "sources": {
+          "combat-nobuff": "video-model reading 2026-10-23, unconfirmed",
+          "combat-allbuff": "video-model reading 2026-10-23, unconfirmed"
+        }
+      },
+      "critDmg": {
+        "town": 7424.8,
+        "combat": null,
+        "combat-nobuff": 10819.5,
+        "combat-allbuff": 10819.5,
+        "sources": {
+          "combat-nobuff": "video-model reading 2026-10-23, unconfirmed",
+          "combat-allbuff": "video-model reading 2026-10-23, unconfirmed"
+        }
+      },
+      "attackSpeed": {
+        "town": null,
+        "combat": null,
+        "combat-nobuff": 120,
+        "combat-allbuff": 120,
+        "sources": {
+          "combat-nobuff": "video-model reading 2026-10-23, unconfirmed",
+          "combat-allbuff": "video-model reading 2026-10-23, unconfirmed"
+        }
+      },
+      "additivePct": {
+        "town": 606.7,
+        "combat": null,
+        "combat-nobuff": 1755.2,
+        "combat-allbuff": 1996,
+        "combat-allbuff-high": 9897.7,
+        "sources": {
+          "combat-nobuff": "video-model reading 2026-10-23, unconfirmed",
+          "combat-allbuff": "video-model reading 2026-10-23, unconfirmed",
+          "combat-allbuff-high": "video-model reading 2026-10-23, unconfirmed"
+        }
+      },
+      "additiveAudit": {
+        "verified": true,
+        "source": "user screenshot 2026-10-22",
+        "note": "Offensive sheet screenshot: All Damage 606.7%. The tooltip says +316.5% of that total is from items and Paragon. 606.7% is the unconditional additive base. The conditional rows join the same sum. Catalog +% Damage lines stay out. Affix x66% and x25% All Damage Multiplier stay multiplicative."
+      },
+      "offensiveSheet": {
+        "source": "user screenshot 2026-10-22",
+        "verified": true,
+        "allDamage": {
+          "town": 606.7,
+          "combat": null,
+          "combat-nobuff": 1755.2,
+          "combat-allbuff": 1996,
+          "combat-allbuff-high": 9897.7,
+          "sources": {
+            "combat-nobuff": "video-model reading 2026-10-23, unconfirmed",
+            "combat-allbuff": "video-model reading 2026-10-23, unconfirmed",
+            "combat-allbuff-high": "video-model reading 2026-10-23, unconfirmed"
+          }
+        },
+        "allDamageItemsAndParagon": {
+          "town": 316.5,
+          "combat": null
+        },
+        "vulnerable": {
+          "town": 208.8,
+          "combat": null,
+          "combat-nobuff": 2836.8,
+          "combat-allbuff": 2836.8,
+          "sources": {
+            "combat-nobuff": "video-model reading 2026-10-23, unconfirmed",
+            "combat-allbuff": "video-model reading 2026-10-23, unconfirmed"
+          }
+        },
+        "physical": {
+          "town": 250.5,
+          "combat": null,
+          "combat-nobuff": 250.5,
+          "combat-allbuff": 250.5,
+          "sources": {
+            "combat-nobuff": "video-model reading 2026-10-23, unconfirmed",
+            "combat-allbuff": "video-model reading 2026-10-23, unconfirmed"
+          }
+        },
+        "fire": {
+          "town": 120.5,
+          "combat": null
+        },
+        "lightning": {
+          "town": 90.5,
+          "combat": null
+        },
+        "cold": {
+          "town": 134.3,
+          "combat": null
+        },
+        "holy": {
+          "town": 90.5,
+          "combat": null
+        },
+        "poison": {
+          "town": 90.5,
+          "combat": null
+        },
+        "shadow": {
+          "town": 90.5,
+          "combat": null
+        },
+        "vsElites": {
+          "town": 133.5,
+          "combat": null,
+          "combat-nobuff": 94.1,
+          "combat-allbuff": null,
+          "sources": {
+            "combat-nobuff": "video-model reading 2026-10-23, unconfirmed"
+          }
+        },
+        "vsHealthy": {
+          "town": 26,
+          "combat": null,
+          "combat-nobuff": 181.8,
+          "combat-allbuff": null,
+          "sources": {
+            "combat-nobuff": "video-model reading 2026-10-23, unconfirmed"
+          }
+        },
+        "vsInjured": {
+          "town": 26,
+          "combat": null,
+          "combat-nobuff": 133.4,
+          "combat-allbuff": null,
+          "sources": {
+            "combat-nobuff": "video-model reading 2026-10-23, unconfirmed"
+          }
+        },
+        "whileHealthy": {
+          "town": 223.2,
+          "combat": null,
+          "combat-nobuff": 308.2,
+          "combat-allbuff": null,
+          "sources": {
+            "combat-nobuff": "video-model reading 2026-10-23, unconfirmed"
+          }
+        },
+        "whileFortified": {
+          "town": 35,
+          "combat": null,
+          "combat-nobuff": 367.5,
+          "combat-allbuff": null,
+          "sources": {
+            "combat-nobuff": "video-model reading 2026-10-23, unconfirmed"
+          }
+        },
+        "whileBerserking": {
+          "town": null,
+          "combat": null,
+          "combat-nobuff": 247.9,
+          "combat-allbuff": null,
+          "sources": {
+            "combat-nobuff": "video-model reading 2026-10-23, unconfirmed"
+          }
+        },
+        "overpowerDamage": {
+          "town": null,
+          "combat": null,
+          "combat-nobuff": 6432.2,
+          "combat-allbuff": null,
+          "sources": {
+            "combat-nobuff": "video-model reading 2026-10-23, unconfirmed"
+          }
+        },
+        "thorns": {
+          "town": 0,
+          "combat": null
+        },
+        "note": "Screenshot offensive sheet. All Damage 606.7% includes the tooltip split +316.5% from items and Paragon. Vulnerable Damage 208.8% replaces the video 206.8 and 226.8. vs Elites 133.5% replaces the video 135.5%. while Fortified 35.0% replaces the video 55%. Fire 120.5% replaces the video 135.0%. vs Healthy 26.0% and vs Injured 26.0% are separate rows. while Healthy 223.2% is the player. Thorns 0."
+      },
+      "vulnerableDamageInAdditive": true,
+      "vulnPct": {
+        "town": 208.8,
+        "combat": null,
+        "combat-nobuff": 2836.8,
+        "combat-allbuff": 2836.8,
+        "sources": {
+          "combat-nobuff": "video-model reading 2026-10-23, unconfirmed",
+          "combat-allbuff": "video-model reading 2026-10-23, unconfirmed"
+        }
+      },
+      "overpowerPct": 104,
+      "overpowerSheetMeaning": "total",
+      "maxFury": {
+        "town": 826,
+        "combat": null
+      },
+      "sheetContext": "town",
+      "souls": null,
+      "soulModel": "sum",
+      "splinter": {
+        "id": "splinter-of-the-black-soulstone",
+        "equipped": true,
+        "slot": "helm",
+        "slotId": "helm",
+        "source": "user screenshot 2026-10-22",
+        "verified": true,
+        "note": "Socketed in Leoric's Crown. Source chain: splinter base 2.5%[x] (https://helltides.com/tools/splinters) × Leoric gem effect +65%[x] (1.65) = 4.125, shown as 4.1%[x] per soul. The base 2.5% is not scored. The video gem read of +150% is ignored. answers-2026-10-22.md."
+      },
+      "combatObservations": {
+        "source": "video-model reading 2026-10-23, unconfirmed",
+        "verified": false,
+        "note": "Fighting sheet from the combat video. Not confirmed by screenshots. sheetContext stays town, so the headline score stays the town score.",
+        "currentFury": "The Fury globe stays full. combat-nobuff and combat-allbuff currentFury are Max Fury 826, observed.",
+        "leoricSouls": "The skull-stack icon is the Splinter of the Black Soulstone, socketed in Leoric's Crown. Leoric's +65%[x] gem effect raises the splinter base 2.5%[x] to the tooltip 4.1%[x] per soul. The video gem read of +150% is ignored.",
+        "souls": {
+          "videoLow": 4,
+          "videoHigh": 27,
+          "screenshot": 17,
+          "defaultSouls": 15,
+          "estimate": true,
+          "note": "The video range was about 4 to 27 or more. Screenshots showed 17 and, later, 30. The working default is 15, an estimate. The stored cap is 200. A count above 200 scores at 200."
+        },
+        "polearmExpertise": "10/10. The catalog already stores Polearm Expertise at that rank.",
+        "allDamageRamp": {
+          "low": 1996,
+          "high": 9897.7,
+          "seconds": 14,
+          "note": "All Damage ramps from 1,996% to 9,897.7% over about 14s while the listed buffs are up. Likely the Wrath ramp. The two ends are combat-allbuff and combat-allbuff-high."
+        },
+        "observedHits": {
+          "nobuffTypical": "20-80B",
+          "nobuffMax": "140-144B",
+          "allbuffTypical": "150-400B",
+          "allbuffPeaks": "461B and 507B",
+          "overpowerCrit": "Withdrawn. A second video pass reads the old 841B figure as two overlapping numbers with a Dust Devil. No confirmed hit of 800B or more."
+        },
+        "calibration": {
+          "source": "user confirmation 2026-10-23",
+          "verified": true,
+          "note": "Nikolay's screenshots outrank the video hit reads. Screenshot 1 shows the soul buff at 30 stacks, with hits of 75-115B on non-boss targets. Screenshot 2 is a Boss Training Dummy. The biggest confirmed single hit is 718B. Other visible hits there are mostly 300-510B. The model stays solo.",
+          "peakBillions": 718,
+          "souls": 30,
+          "nonBossHits": "75-115B",
+          "dummyHits": "300-510B",
+          "party": {
+            "names": ["Subo", "Varyana"],
+            "active": true,
+            "modeled": false,
+            "note": "Subo and Varyana were active in the 718B fight, hitting the dummy and using shouts and buffs. Nikolay thinks their contribution is not significant. The model stays solo. Party buffs are a minor possible source in the unexplained gap. They are not fitted and they are not modeled."
+          }
+        },
+        "weaponTooltip": {
+          "name": "Deathhead of Channeling",
+          "hands": "1H mace, uncertain",
+          "lines": [
+            "+21 Damage Multiplier",
+            "150%[x] all damage",
+            "+114% damage"
+          ],
+          "applied": false,
+          "note": "The equipped item is Deathshead of Channeling, a 2H mace in the Bludgeoning slot, with Aspect of Channeling at 138%[x] [100-140], x25% All Damage Multiplier, and x88% Critical Strike Damage Multiplier. None of +21, 150%[x], or +114% is on that item. The lines stay off the score."
+        }
+      },
+      "currentFury": {
+        "town": null,
+        "combat": null,
+        "combat-nobuff": 826,
+        "combat-allbuff": 826,
+        "sources": {
+          "combat-nobuff": "video-model reading 2026-10-23, unconfirmed",
+          "combat-allbuff": "video-model reading 2026-10-23, unconfirmed"
+        }
+      },
+      "furyRegeneration": {
+        "town": 85,
+        "combat": null
+      },
+      "furyGenerationPct": {
+        "town": 52.5,
+        "combat": null
+      },
+      "furyCostReductionPct": {
+        "town": -30,
+        "combat": null
+      },
+      "furyOnKill": {
+        "town": 11,
+        "combat": null
+      },
+      "resistanceCapPct": 80,
+      "expertise": "polearm",
+      "runes": [
+        "Igni",
+        "Ohm",
+        "Bac",
+        "Mot"
+      ],
+      "source": "user video 2026-10-21 batch2 (transcribed)",
+      "verified": false,
+      "manualInputsVerified": false,
+      "note": "Based on the Whirlwind Barb (S15) Immortal Speed 130 name list. User-confirmed differences: Leoric's Crown is the helm and Tuskhelm of Joritz the Mighty is a charm; Stone of Jordan replaces Ring of Starless Skies; 2H Bludgeoning is the Deathshead mace with Aspect of Channeling; Endurant Faith and Seal of the Epiphany replace Blood-Mad Idol and The Furnace; the arsenal is 2 two-handed weapons and 2 one-handed weapons. The character sheet was confirmed from the user's screenshot: level 70, Strength 4101, Intelligence 981, Willpower 1333, Dexterity 1320, Armor 32183, Toughness 24910 for all damage types, Weapon Damage 4596, Max Life 473. The defence sheet confirms Critical Strike Chance 100%, Critical Strike Damage 7,424.8%, and Max Fury 826. Vulnerable damage 206.8% and the 80% resistance cap stay as the earlier video readings. The 80% figure is the cap that was read, not an EHP resist mitigation percent. Screenshot with Stone of Jordan equipped: Armor 33,715 reduces 78.2% of direct and damage-over-time damage, and every resistance of 21,218 reduces 85.9%. The mitigation cap is 90% against enemies at his level. Cold is 18,947 from gear, 629 from Intelligence, and 1,642 other. A separate snapshot without Stone of Jordan is stored on comparisons and is not this build. Life numbers implied by skill tooltips are ignored. Confirmed skill allocation, 2026-10-22: Whirlwind, War Cry, Challenging Shout, Rallying Cry, Wrath of the Berserker, and Iron Skin. Flay is not active. The upgrade list on this build is the confirmed allocation. Upgrade numbers stay on the catalog rows and stay unverified. Video 1 (user video 1 (watchVideo 2026-10-22)) added the equipped item rolls, paragon boards, glyph levels from the user rule: Might 135 verified, the other equipped glyphs approximately 131-135 unverified, and every unequipped glyph at 0, charms, Prime Evil powers, and polearm expertise. User rule 2026-10-22: 2H Bludgeoning is Deathshead with Aspect of Channeling at 0.90 attacks per second; 2H Slashing is Insight, a polearm, at 0.90 attacks per second with +94.3% crit chance and x310% crit damage; the two 1H swords are Spirit and Ramaladni's Magnum Opus, both at 1.10 attacks per second. Weapon type, slot, and attacks per second are verified. Armor 32183, Life 473, and the rank model with Whirlwind at 41 stay. The video's conflicting readings are suspect. Flay stays inactive. Screenshot 2026-10-22 replaces weapon damage 4566 with 4596 and toughness 29309 with 24910. Screenshot 2026-10-22 defence sheet replaces Armor 32,183 with 33,715, Toughness 24,910 with 25,600, and Critical Strike Damage 7,414.8% with 7,424.8%. All resistances are 21,218. All Damage Reduction is 50%. Vulnerable and Overpower uptime are estimates flagged on the uptime object. Overpower uptime now includes the 4s stack linger: (15.8+4)/54.32 = 0.364507. overpowerPct is 4 stacks × 26% = 104. Both uptimes stay estimates. Crit audit: the sheet Critical Strike Chance 100% and Critical Strike Damage 7,424.8% are the only crit inputs, and the reading is unverified. Fury above 50 is 1 and Fortified is 1, both user-confirmed. Channeling and Unstoppable remain estimates on the uptime object. Max Fury 826, Fury regeneration 85, and +52.5% Fury generation are town values and may be higher in combat. Warbringer's 45%[x] applies while Fortified. Decimator's 20%[x] vs Vulnerable and 20%[x] while having Overpower use those uptime states. Might's 8%[x] with a Two-Handed weapon is always on for this 2H arsenal. Screenshot glyphs: Twister L135, Imbiber L133, Marshal L131, Wrath L131, all verified. Those replace the level-70 video values. Marshal's legendary +13.5%[x] damage is unconditional. Twister's +13%[x] for 4s after a Dust Devil is scored on Whirlwind. Twister's Dust Devil damage lines are not applied to the 386% coefficient. Imbiber's +10.3% while Healthy has no [+] or [x] tag and stays unscored. Imbiber's legendary +16%[x] while you are Healthy is on at player Healthy uptime 1. Imbiber's 5%[x] per missing potion uses 0 missing potions, so that factor is 1.0 and is an estimate. Wrath's crit-damage lines stay out of sheet 7,424.8%. The video's 19%[x] on Might is discarded. Healthy or Injured uptime is 0.7, an estimate shared by Weapons Master 75%[x] and Might 26%[x]. The offensive sheet is screenshot-verified. All Damage 606.7% is the unconditional additive base. Vulnerable 208.8%, Physical 250.5%, vs Elites 133.5%, vs Healthy or Injured 26, while Healthy 223.2%, and while Fortified 35% join that sum with their uptimes. The tooltip +316.5% from items and Paragon is the split inside All Damage, not a second total.",
+      "sheet": {
+        "level": 70,
+        "strength": 4101,
+        "intelligence": 981,
+        "willpower": 1333,
+        "dexterity": 1320,
+        "armor": 33715,
+        "toughness": 25600,
+        "toughnessScope": "all damage types",
+        "weaponDamage": 4596,
+        "maxLife": 473,
+        "source": "user screenshot 2026-10-22",
+        "verified": true,
+        "note": "Latest screenshot: Strength 4,101, Intelligence 981, Willpower 1,333, Dexterity 1,320, Weapon Damage 4,596, Toughness 24,910. Weapon Damage replaces 4,566. Toughness replaces 29,309. The earlier confirmed sheet still has Armor 32,183 and Max Life 473. The latest screenshot does not restate the toughness scope. Attributes match the earlier confirmation. Defence sheet from the same screenshot source: Toughness 25,600 replaces 24,910. Armor 33,715 replaces 32,183. All resistances 21,218 replace the video reading 19,446. All Damage Reduction 50.0% is stored as the DR list. Block reduction 15% and Dodge 7.9% are not DR layers and are not folded into that list. Max Life stays 473. Healing received 67.7% replaces the video 67.1%. Life regeneration 276. Max Fury 826, Fury cost reduction -30%, Fury regeneration 85, Fury generation 52.5%, Fury on kill 11. Movement Speed 200%, attack speed bonus 100%, Critical Strike Chance 100%, Critical Strike Damage 7,424.8% replaces 7,414.8%. Weapon speed 1.10. Base weapon damage: Bludgeoning 5,073 replaces the video 5,010, Dual-Wield 4,178, Slashing 5,128. These bases do not replace sheet Weapon Damage 4,596, which this defence sheet does not restate. Armor and resistance figures are ratings. A later screenshot shows the mitigation percents: Armor 33,715 reduces 78.2% of direct and damage-over-time damage, and every resistance of 21,218 reduces 85.9%. The mitigation cap is 90% against enemies at his level. Cold breaks down as 18,947 from gear, 629 from Intelligence, and 1,642 other. The without-Stone-of-Jordan sheet is a comparison snapshot, not this build.",
+        "videoReadings": [
+          {
+            "stat": "armor mitigation shown with the video armor",
+            "value": 75.7,
+            "unit": "%",
+            "suspect": true,
+            "source": "user video 1 (watchVideo 2026-10-22)",
+            "note": "Read next to Armor 32,185. The confirmed armor is 32,183, so this percent was not copied onto armor mitigation."
+          },
+          {
+            "stat": "resistances",
+            "value": 19446,
+            "unit": null,
+            "suspect": false,
+            "source": "user video 1 (watchVideo 2026-10-22)",
+            "note": "85% capped, all types. The cap conflicts with the stored 80% cap reading."
+          },
+          {
+            "stat": "Healing Received",
+            "value": 67.1,
+            "unit": "%",
+            "suspect": false,
+            "source": "user video 1 (watchVideo 2026-10-22)"
+          },
+          {
+            "stat": "Life Regeneration",
+            "value": 276,
+            "unit": null,
+            "suspect": false,
+            "source": "user video 1 (watchVideo 2026-10-22)"
+          },
+          {
+            "stat": "Damage Reduction",
+            "value": 50,
+            "unit": "%",
+            "suspect": false,
+            "source": "user video 1 (watchVideo 2026-10-22)"
+          },
+          {
+            "stat": "Bludgeoning base weapon damage",
+            "value": 5010,
+            "unit": null,
+            "suspect": false,
+            "source": "user video 1 (watchVideo 2026-10-22)",
+            "note": "Does not replace the confirmed weapon damage of 4566."
+          },
+          {
+            "stat": "Dual-Wield base weapon damage",
+            "value": 4178,
+            "unit": null,
+            "suspect": false,
+            "source": "user video 1 (watchVideo 2026-10-22)",
+            "note": "Does not replace the confirmed weapon damage of 4566."
+          },
+          {
+            "stat": "Slashing base weapon damage",
+            "value": 5129,
+            "unit": null,
+            "suspect": false,
+            "source": "user video 1 (watchVideo 2026-10-22)",
+            "note": "Does not replace the confirmed weapon damage of 4566."
+          },
+          {
+            "stat": "Weapon Speed",
+            "value": 1.1,
+            "unit": null,
+            "suspect": false,
+            "source": "user video 1 (watchVideo 2026-10-22)"
+          },
+          {
+            "stat": "Attack Speed",
+            "value": 100,
+            "unit": "%",
+            "suspect": false,
+            "source": "user video 1 (watchVideo 2026-10-22)"
+          },
+          {
+            "stat": "All Damage",
+            "value": 606.7,
+            "unit": "%",
+            "suspect": false,
+            "source": "user video 1 (watchVideo 2026-10-22)"
+          },
+          {
+            "stat": "Physical damage",
+            "value": 250.5,
+            "unit": "%",
+            "suspect": false,
+            "source": "user video 1 (watchVideo 2026-10-22)"
+          },
+          {
+            "stat": "Fire damage",
+            "value": 135,
+            "unit": "%",
+            "suspect": true,
+            "source": "user video 1 (watchVideo 2026-10-22)",
+            "note": "The offensive sheet screenshot is 120.5%."
+          },
+          {
+            "stat": "Cold damage",
+            "value": 134.3,
+            "unit": "%",
+            "suspect": false,
+            "source": "user video 1 (watchVideo 2026-10-22)"
+          },
+          {
+            "stat": "other element damage",
+            "value": 90.5,
+            "unit": "%",
+            "suspect": false,
+            "source": "user video 1 (watchVideo 2026-10-22)"
+          },
+          {
+            "stat": "vs Elites",
+            "value": 135.5,
+            "unit": "%",
+            "suspect": true,
+            "source": "user video 1 (watchVideo 2026-10-22)",
+            "note": "The offensive sheet screenshot is 133.5%."
+          },
+          {
+            "stat": "vs Healthy/Injured",
+            "value": 26,
+            "unit": "%",
+            "suspect": false,
+            "source": "user video 1 (watchVideo 2026-10-22)"
+          },
+          {
+            "stat": "while Healthy",
+            "value": 223.2,
+            "unit": "%",
+            "suspect": false,
+            "source": "user video 1 (watchVideo 2026-10-22)"
+          },
+          {
+            "stat": "while Fortified",
+            "value": 55,
+            "unit": "%",
+            "suspect": true,
+            "source": "user video 1 (watchVideo 2026-10-22)",
+            "note": "The offensive sheet screenshot is 35.0%."
+          },
+          {
+            "stat": "Fury Cost Reduction",
+            "value": 30,
+            "unit": "%",
+            "suspect": false,
+            "source": "user video 1 (watchVideo 2026-10-22)"
+          },
+          {
+            "stat": "Fury Regeneration",
+            "value": 85,
+            "unit": null,
+            "suspect": false,
+            "source": "user video 1 (watchVideo 2026-10-22)"
+          },
+          {
+            "stat": "Bonus Fury Generation",
+            "value": 52.5,
+            "unit": "%",
+            "suspect": false,
+            "source": "user video 1 (watchVideo 2026-10-22)"
+          },
+          {
+            "stat": "Fury on Kill",
+            "value": 11,
+            "unit": null,
+            "suspect": false,
+            "source": "user video 1 (watchVideo 2026-10-22)"
+          },
+          {
+            "stat": "Movement Speed",
+            "value": 200,
+            "unit": "%",
+            "suspect": false,
+            "source": "user video 1 (watchVideo 2026-10-22)"
+          },
+          {
+            "stat": "Cooldown Reduction",
+            "value": 39.4,
+            "unit": "%",
+            "suspect": false,
+            "source": "user video 1 (watchVideo 2026-10-22)"
+          }
+        ]
+      },
+      "upgrades": [
+        {
+          "skillId": "whirlwind",
+          "name": "Cost Damage Bonus"
+        },
+        {
+          "skillId": "whirlwind",
+          "name": "Tornado"
+        },
+        {
+          "skillId": "whirlwind",
+          "name": "Channel Damage Bonus"
+        },
+        {
+          "skillId": "war-cry",
+          "name": "Vulnerable"
+        },
+        {
+          "skillId": "war-cry",
+          "name": "Mighty Roar"
+        },
+        {
+          "skillId": "war-cry",
+          "name": "Ferocity"
+        },
+        {
+          "skillId": "challenging-shout",
+          "name": "Weaken"
+        },
+        {
+          "skillId": "challenging-shout",
+          "name": "Raging"
+        },
+        {
+          "skillId": "challenging-shout",
+          "name": "Damage Bonus"
+        },
+        {
+          "skillId": "rallying-cry",
+          "name": "Fortify"
+        },
+        {
+          "skillId": "rallying-cry",
+          "name": "Booming"
+        },
+        {
+          "skillId": "rallying-cry",
+          "name": "Potency"
+        },
+        {
+          "skillId": "wrath-of-the-berserker",
+          "name": "Berserking"
+        },
+        {
+          "skillId": "wrath-of-the-berserker",
+          "name": "Full Throttle"
+        },
+        {
+          "skillId": "wrath-of-the-berserker",
+          "name": "Overpower"
+        },
+        {
+          "skillId": "iron-skin",
+          "name": "Movement Speed"
+        },
+        {
+          "skillId": "iron-skin",
+          "name": "Juggernaut"
+        },
+        {
+          "skillId": "iron-skin",
+          "name": "Resolve"
+        }
+      ],
+      "suspectReadings": [
+        {
+          "field": "armor",
+          "videoValue": 32185,
+          "confirmedValue": 32183,
+          "suspect": true,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "note": "The screenshot armor stays 32,183. The video also showed 75.7% beside 32,185."
+        },
+        {
+          "field": "maxLife",
+          "videoValue": 475,
+          "confirmedValue": 473,
+          "suspect": true,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "note": "The confirmed Max Life stays 473."
+        },
+        {
+          "field": "skill.rank",
+          "videoValue": "11/5",
+          "confirmedValue": "base plus bonus; Whirlwind total 41",
+          "suspect": true,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "note": "The rank display was misread. Skill ranks were not changed. Flay stays inactive."
+        },
+        {
+          "field": "vulnPct",
+          "videoValue": 226.8,
+          "confirmedValue": 208.8,
+          "suspect": true,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "note": "An earlier video read 206.8. This video reads 226.8. The offensive sheet screenshot is 208.8, and that value replaces both video readings."
+        },
+        {
+          "field": "resistanceCapPct",
+          "videoValue": 85,
+          "confirmedValue": 80,
+          "suspect": true,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "note": "This video reads resistances capped at 85%. The earlier reading of 80% stays."
+        },
+        {
+          "field": "crushing-aspect.itemPower",
+          "videoValue": "+45% [30-45] damage for 5s after dealing Vulnerable damage",
+          "confirmedValue": "codex: 64%[x] [45-65] while Fortified",
+          "suspect": true,
+          "source": "user video 1 (watchVideo 2026-10-22)",
+          "note": "The codex effect is unchanged."
+        }
+      ],
+      "paragon": {
+        "level": 278,
+        "pointsSpent": 320,
+        "source": "user screenshot 2026-10-22",
+        "verified": true,
+        "note": "Screenshot: paragon level 278, 320 points spent. Matches the user rule."
+      },
+      "overpowerStacks": {
+        "perStack": 26,
+        "maxStacks": 4,
+        "activeStacks": 4,
+        "lingerSeconds": 4,
+        "gainPerSecond": 1,
+        "stackSeconds": 4,
+        "estimate": true,
+        "source": "user screenshot 2026-10-22",
+        "note": "26%[+] per stack, up to 4 stacks, each stack lasts 4s. Wrath grants 1 stack per second. Full 4 stacks during Wrath, plus a 4s linger after Wrath ends. 4 × 26 = 104 is stored as overpowerPct and is not applied. Sheet Overpower Damage is the additive total on an Overpower hit. Weapon-swap stacks from Earthstriker are not added."
+      },
+      "comparisons": [
+        {
+          "id": "without-stone-of-jordan",
+          "name": "Without Stone of Jordan",
+          "armor": 33347,
+          "toughness": 17993,
+          "strength": 3962,
+          "resistances": {
+            "physical": 11280,
+            "fire": 7277,
+            "lightning": 3077,
+            "cold": 20981,
+            "coldMitigationPct": 85.8,
+            "poison": 14626,
+            "shadow": 3077
+          },
+          "source": "user screenshot 2026-10-22",
+          "verified": true,
+          "note": "Comparison snapshot with Stone of Jordan removed. Not the current build. Enemies are at his level and the mitigation cap is 90%. Only Cold shows a mitigation percent, 85.8%. The other elements are ratings only."
+        }
+      ],
+      "critAudit": {
+        "verified": false,
+        "reading": "headline",
+        "sheetCritChance": 100,
+        "sheetCritDmg": 7424.8,
+        "bonusFactor": 75.248,
+        "fullFactor": 74.248,
+        "source": "user screenshot 2026-10-22",
+        "note": "Follow-up 2026-10-22. Headline crit factor is (A + 74.248) / A × (1 + sum of gear [x] crit) × each aspect, unique, or skill [x] crit. The sheet 7,424.8% already includes the base 50% (medium [E]), so the extra ×1.5 is off. Gear lines sum (medium-high [A]): Insight 310 + Deathshead 88 + Ramaladni 44 = 442%, factor 5.42. reading is the one switch for the low-confidence pair: headline, sheet-includes-gear-x, active-weapon (Whirlwind swings Deathshead, weapon-2, x88%), or sheet-includes-gear-x-active-weapon. The in-game test is unequip Insight and compare the sheet. Additive gear crit stays inside the sheet: Gohr's +50%, Stone of Jordan +65%, Insight +180%, Spirit +78%, Ramaladni's +75%. Crit chance lines stay inside sheet 100%. Wrath +17.8%[x] is not named Critical Strike Damage Multiplier; the stored note keeps it inside the sheet. Flawless Technique +45%[x] is a skill line and multiplies separately in the alternate. reading headline is the calibrated default. The other readings stay switchable. Sources: [A] https://d4guides.gg/en/guides/mechanics/damage-calculation-in-diablo-4-how-your-damage-works ; [E] https://diablo4.cc/us/Glossary ; [F] https://us.forums.blizzard.com/en/d4/t/weapon-stats-and-weapons-used/47095."
+      }
+    }
+  ]
+}

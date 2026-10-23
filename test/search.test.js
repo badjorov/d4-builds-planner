@@ -27,6 +27,10 @@ test('skill cores are pruned by tags and capped by the skill bar', () => {
   assert.ok(ids.includes('alpha+beta'));
   assert.equal(ids.some(id => id.includes('gamma')), false);
   assert.equal(cores.some(core => core.length > 2), false);
+  const copy = structuredClone(catalog);
+  copy.skills.find(skill => skill.id === 'alpha').allocated = false;
+  const withoutAlpha = enumerateSkillCores(copy, { tags: ['Core'] });
+  assert.equal(withoutAlpha.some(core => core.some(skill => skill.id === 'alpha')), false);
 });
 
 test('greedy ranks by marginal bucket value and will not place null, slotless, or paragon items', () => {
@@ -66,7 +70,7 @@ test('partial vulnerable uptime blends the engine on and off states', () => {
     weaponDmg: 100, mainStat: 0, critChance: 0, critDmg: 0, vulnPct: 100, uptime: { vulnerable: 0.5 }
   });
   const evaluated = evaluateBuild(catalog, build);
-  near(evaluated.result.total, 150);
+  near(evaluated.result.total, 110);
 });
 
 test('real catalog does not rank an unverified build unless asked', () => {
@@ -82,7 +86,66 @@ test('real catalog does not rank an unverified build unless asked', () => {
     manualInputsVerified: true, powerFloor: 1, maxSkills: 1, metaBuilds: realMeta
   });
   assert.ok(shown.ranked.length > 0);
-  assert.equal(shown.ranked[0].skills[0], 'cota-madawc');
+  assert.equal(shown.ranked[0].skills[0], 'challenging-shout');
+  const gearIds = shown.ranked[0].gear.map(item => item.id).sort();
+  assert.deepEqual(gearIds, [
+    'gohrs-devastating-grips',
+    'ramaladni',
+    'stone-of-jordan'
+  ]);
+  const multipliers = [117, 23, 0.5];
+  const expected = 100 * 24.3 * multipliers.reduce((product, value) => product * (1 + value / 100), 1);
+  near(shown.ranked[0].power, expected);
+  assert.equal(shown.ranked.some(result => result.skills.includes('death-blow') || result.skills.includes('flay')), false);
+  assert.equal(real.skills.find(skill => skill.id === 'cota-madawc').coeffPct, 120);
+  assert.equal(shown.ranked[0].why.toLowerCase().includes('passive'), false);
   assert.ok(shown.ranked.every(result => result.unverifiedShare > 0));
-  assert.equal(shown.ranked.some(result => result.gear.some(item => item.kind === 'aspect' || item.kind === 'unique')), false);
+});
+
+test('a candidate with the equipped layout scores the equipped power', () => {
+  const real = JSON.parse(readFileSync(new URL('../data/barbarian.json', import.meta.url), 'utf8'));
+  const saved = JSON.parse(readFileSync(new URL('../data/builds.json', import.meta.url), 'utf8')).builds.find(build => build.id === 'users-current-build');
+  const skill = real.skills.find(entry => entry.id === 'whirlwind');
+  const weaponIds = new Set(real.constraints.gearSlots.filter(slot => slot.kind === 'weapon').map(slot => slot.id));
+  const opts = {
+    weaponDmg: saved.weaponDmg,
+    mainStat: saved.mainStat,
+    critChance: saved.critChance,
+    critDmg: saved.critDmg,
+    maxFury: saved.maxFury,
+    sheetContext: saved.sheetContext,
+    currentFury: saved.currentFury,
+    vulnPct: saved.vulnPct,
+    overpowerPct: saved.overpowerPct,
+    additivePct: saved.additivePct,
+    offensiveSheet: saved.offensiveSheet,
+    vulnerableDamageInAdditive: saved.vulnerableDamageInAdditive === true,
+    boards: saved.boards,
+    glyphs: saved.glyphs,
+    uptime: saved.uptime,
+    critAudit: saved.critAudit,
+    splinter: saved.splinter,
+    souls: saved.souls,
+    slotHands: Object.fromEntries(saved.gear.filter(slot => slot.hands).map(slot => [slot.slotId, slot.hands])),
+    arsenalSlots: saved.gear.filter(slot => weaponIds.has(slot.slotId)).map(slot => ({
+      slotId: slot.slotId,
+      affixes: slot.affixes.map(affix => ({ ...affix }))
+    })),
+    includeUnverified: true
+  };
+  const core = buildFromCore(real, [skill], opts);
+  const gear = core.gear.map(slot => {
+    const src = saved.gear.find(entry => entry.slotId === slot.slotId);
+    return { ...slot, aspectId: src.aspectId, uniqueId: src.uniqueId, hands: src.hands ?? slot.hands ?? null };
+  });
+  const equipped = evaluateBuild(real, { ...saved, skills: ['whirlwind'] });
+  const candidate = evaluateBuild(real, { ...core, gear });
+  near(candidate.result.total, equipped.result.total);
+  assert.deepEqual(candidate.input.modifiers.filter(mod => mod.bucket === 'crit-mult').map(mod => mod.value).sort((a, b) => a - b), [44, 88, 310]);
+  const searched = searchGear(real, core, opts);
+  for (const id of ['v1-insight-damage', 'v1-channel-crit-damage', 'v1-ramaladni-crit-mult']) {
+    assert.equal(searched.build.gear.some(slot => (slot.affixes || []).some(affix => affix.affixId === id)), true, id);
+  }
+  const bare = buildFromCore(real, [skill], { ...opts, arsenalSlots: [] });
+  assert.ok(evaluateBuild(real, bare).result.total < equipped.result.total);
 });

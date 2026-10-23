@@ -29,6 +29,18 @@
     "name": { "type": "string" },
     "class": { "type": "string" },
     "skills": { "type": "array", "items": { "type": "string" } },
+    "upgrades": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["skillId", "name"],
+        "properties": {
+          "skillId": { "type": "string", "minLength": 1 },
+          "name": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
     "variants": { "type": "array", "items": { "type": "string" } },
     "gear": {
       "type": "array",
@@ -42,12 +54,60 @@
     "rotation": { "type": "array", "items": { "$ref": "#/$defs/rotationStep" } },
     "uptime": { "$ref": "#/$defs/uptime" },
     "defense": { "$ref": "#/$defs/defense" },
-    "weaponDmg": { "type": ["number", "null"] },
-    "mainStat": { "type": ["number", "null"] },
-    "critChance": { "type": ["number", "null"] },
-    "critDmg": { "type": ["number", "null"] },
-    "vulnPct": { "type": ["number", "null"] },
-    "overpowerPct": { "type": ["number", "null"] }
+    "weaponDmg": { "$ref": "#/$defs/sheetReading" },
+    "mainStat": { "$ref": "#/$defs/sheetReading" },
+    "critChance": { "$ref": "#/$defs/sheetReading" },
+    "critDmg": { "$ref": "#/$defs/sheetReading" },
+    "critAudit": { "$ref": "#/$defs/critAudit" },
+    "additivePct": { "$ref": "#/$defs/sheetReading" },
+    "additiveAudit": { "$ref": "#/$defs/additiveAudit" },
+    "offensiveSheet": { "$ref": "#/$defs/offensiveSheet" },
+    "vulnerableDamageInAdditive": { "type": "boolean" },
+    "vulnPct": { "$ref": "#/$defs/sheetReading" },
+    "overpowerPct": { "type": ["number", "null"] },
+    "overpowerSheetMeaning": { "enum": ["total", "perStack"] },
+    "overpowerStacks": { "$ref": "#/$defs/overpowerStacks" },
+    "label": { "type": "string" },
+    "source": { "type": "string", "minLength": 1 },
+    "verified": { "type": "boolean" },
+    "note": { "type": ["string", "null"] },
+    "maxFury": { "$ref": "#/$defs/sheetReading" },
+    "sheetContext": { "enum": ["town", "combat", "combat-nobuff", "combat-allbuff"] },
+    "souls": { "type": ["number", "null"] },
+    "soulModel": { "enum": ["sum", "compound"] },
+    "splinter": { "$ref": "#/$defs/splinter" },
+    "attackSpeed": { "$ref": "#/$defs/sheetReading" },
+    "currentFury": { "$ref": "#/$defs/sheetReading" },
+    "furyRegeneration": { "$ref": "#/$defs/sheetReading" },
+    "furyGenerationPct": { "$ref": "#/$defs/sheetReading" },
+    "furyCostReductionPct": { "$ref": "#/$defs/sheetReading" },
+    "furyOnKill": { "$ref": "#/$defs/sheetReading" },
+    "resistanceCapPct": { "type": ["number", "null"] },
+    "expertise": { "type": ["string", "null"] },
+    "runes": { "type": "array", "items": { "type": "string" } },
+    "manualInputsVerified": { "type": "boolean" },
+    "sheet": { "$ref": "#/$defs/characterSheet" },
+    "paragon": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["level", "pointsSpent", "source", "verified"],
+      "properties": {
+        "level": { "type": ["integer", "null"] },
+        "pointsSpent": { "type": ["integer", "null"] },
+        "source": { "type": "string", "minLength": 1 },
+        "verified": { "type": "boolean" },
+        "note": { "type": "string" }
+      }
+    },
+    "comparisons": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/sheetComparison" }
+    },
+    "suspectReadings": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/suspectReading" }
+    },
+    "combatObservations": { "$ref": "#/$defs/combatObservations" }
   },
   "$defs": {
     "slotAssignment": {
@@ -69,7 +129,37 @@
           }
         },
         "aspectId": { "type": ["string", "null"] },
-        "uniqueId": { "type": ["string", "null"] }
+        "uniqueId": { "type": ["string", "null"] },
+        "itemName": { "type": ["string", "null"] },
+        "hands": { "type": ["string", "null"] },
+        "weaponType": { "type": ["string", "null"] },
+        "attacksPerSecond": { "type": ["number", "null"] },
+        "itemCritChance": { "type": ["number", "null"] },
+        "itemNote": { "type": ["string", "null"] },
+        "arsenalSlot": { "type": ["string", "null"] },
+        "critDamageMultiplier": { "type": ["number", "null"] },
+        "critDamageMultiplierBucket": {
+          "enum": ["additive", "multiplicative", "crit", "vuln", "overpower", "mainstat", "special", "none", "additive?", "vuln?", null]
+        },
+        "verifiedFacts": { "type": "array", "items": { "type": "string" } },
+        "masterworkLevel": { "type": ["integer", "null"], "minimum": 0, "maximum": 25 },
+        "transfigured": { "type": ["boolean", "null"] },
+        "sockets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["gemId", "slotType"],
+            "properties": {
+              "gemId": { "type": "string", "minLength": 1 },
+              "slotType": { "type": "string", "minLength": 1 },
+              "value": { "type": ["number", "null"] },
+              "bucket": {
+                "enum": ["additive", "multiplicative", "crit", "vuln", "overpower", "mainstat", "special", "none", "additive?", "vuln?", null]
+              }
+            }
+          }
+        }
       }
     },
     "boardStub": {
@@ -78,6 +168,7 @@
       "required": ["boardId", "nodeIds"],
       "properties": {
         "boardId": { "type": ["string", "null"] },
+        "name": { "type": ["string", "null"] },
         "nodeIds": { "type": "array", "items": { "type": "string" } }
       }
     },
@@ -87,7 +178,15 @@
       "required": ["glyphId", "level"],
       "properties": {
         "glyphId": { "type": ["string", "null"] },
-        "level": { "type": ["number", "null"] }
+        "level": { "type": ["number", "null"] },
+        "levelVerified": { "type": "boolean" },
+        "provisional": { "type": "boolean" },
+        "levelApproximate": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": { "type": "number" }
+        }
       }
     },
     "rotationStep": {
@@ -99,6 +198,202 @@
         "castsPerSecond": { "type": ["number", "null"] }
       }
     },
+    "splinter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "equipped"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "equipped": { "type": "boolean" },
+        "slot": { "type": ["string", "null"] },
+        "slotId": { "type": ["string", "null"] },
+        "source": { "type": "string", "minLength": 1 },
+        "verified": { "type": "boolean" },
+        "note": { "type": "string" }
+      }
+    },
+    "combatObservations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source", "verified"],
+      "properties": {
+        "source": { "type": "string", "minLength": 1 },
+        "verified": { "type": "boolean" },
+        "note": { "type": "string" },
+        "currentFury": { "type": "string" },
+        "leoricSouls": { "type": "string" },
+        "souls": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "videoLow": { "type": "number" },
+            "videoHigh": { "type": "number" },
+            "screenshot": { "type": "number" },
+            "defaultSouls": { "type": "number" },
+            "estimate": { "type": "boolean" },
+            "note": { "type": "string" }
+          }
+        },
+        "polearmExpertise": { "type": "string" },
+        "allDamageRamp": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["low", "high", "seconds"],
+          "properties": {
+            "low": { "type": "number" },
+            "high": { "type": "number" },
+            "seconds": { "type": "number" },
+            "note": { "type": "string" }
+          }
+        },
+        "observedHits": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "nobuffTypical": { "type": "string" },
+            "nobuffMax": { "type": "string" },
+            "allbuffTypical": { "type": "string" },
+            "allbuffPeaks": { "type": "string" },
+            "overpowerCrit": { "type": "string" }
+          }
+        },
+        "calibration": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["source", "verified", "peakBillions", "souls"],
+          "properties": {
+            "source": { "type": "string", "minLength": 1 },
+            "verified": { "type": "boolean" },
+            "note": { "type": "string" },
+            "peakBillions": { "type": "number" },
+            "souls": { "type": "number" },
+            "nonBossHits": { "type": "string" },
+            "dummyHits": { "type": "string" },
+            "party": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["names", "active", "modeled"],
+              "properties": {
+                "names": { "type": "array", "items": { "type": "string" } },
+                "active": { "type": "boolean" },
+                "modeled": { "type": "boolean" },
+                "note": { "type": "string" }
+              }
+            }
+          }
+        },
+        "weaponTooltip": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["name", "applied"],
+          "properties": {
+            "name": { "type": "string" },
+            "hands": { "type": "string" },
+            "lines": { "type": "array", "items": { "type": "string" } },
+            "applied": { "type": "boolean" },
+            "note": { "type": "string" }
+          }
+        }
+      }
+    },
+    "sheetReading": {
+      "description": "A bare number is the town reading. An object stores town and an optional combat reading. sheetContext selects which one the engine uses.",
+      "oneOf": [
+        { "type": ["number", "null"] },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["town"],
+          "properties": {
+            "town": { "type": ["number", "null"] },
+            "combat": { "type": ["number", "null"] },
+            "combat-nobuff": { "type": ["number", "null"] },
+            "combat-allbuff": { "type": ["number", "null"] },
+            "combat-allbuff-high": { "type": ["number", "null"] },
+            "sources": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "town": { "type": "string", "minLength": 1 },
+                "combat": { "type": "string", "minLength": 1 },
+                "combat-nobuff": { "type": "string", "minLength": 1 },
+                "combat-allbuff": { "type": "string", "minLength": 1 },
+                "combat-allbuff-high": { "type": "string", "minLength": 1 }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "critAudit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["verified", "reading", "sheetCritChance", "sheetCritDmg", "note"],
+      "properties": {
+        "verified": { "type": "boolean" },
+        "reading": { "enum": ["bonus", "full", "s2", "headline", "sheet-includes-gear-x", "active-weapon", "sheet-includes-gear-x-active-weapon"] },
+        "sheetCritChance": { "type": "number" },
+        "sheetCritDmg": { "type": "number" },
+        "bonusFactor": { "type": "number" },
+        "fullFactor": { "type": "number" },
+        "source": { "type": "string" },
+        "note": { "type": "string" }
+      }
+    },
+    "offensiveSheet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source", "verified", "allDamage", "vulnerable", "physical", "vsElites", "vsHealthy", "vsInjured", "whileHealthy", "whileFortified"],
+      "properties": {
+        "source": { "type": "string", "minLength": 1 },
+        "verified": { "type": "boolean" },
+        "allDamage": { "$ref": "#/$defs/sheetReading" },
+        "allDamageItemsAndParagon": { "$ref": "#/$defs/sheetReading" },
+        "vulnerable": { "$ref": "#/$defs/sheetReading" },
+        "physical": { "$ref": "#/$defs/sheetReading" },
+        "fire": { "$ref": "#/$defs/sheetReading" },
+        "lightning": { "$ref": "#/$defs/sheetReading" },
+        "cold": { "$ref": "#/$defs/sheetReading" },
+        "holy": { "$ref": "#/$defs/sheetReading" },
+        "poison": { "$ref": "#/$defs/sheetReading" },
+        "shadow": { "$ref": "#/$defs/sheetReading" },
+        "vsElites": { "$ref": "#/$defs/sheetReading" },
+        "vsHealthy": { "$ref": "#/$defs/sheetReading" },
+        "vsInjured": { "$ref": "#/$defs/sheetReading" },
+        "whileHealthy": { "$ref": "#/$defs/sheetReading" },
+        "whileFortified": { "$ref": "#/$defs/sheetReading" },
+        "whileBerserking": { "$ref": "#/$defs/sheetReading" },
+        "overpowerDamage": { "$ref": "#/$defs/sheetReading" },
+        "thorns": { "$ref": "#/$defs/sheetReading" },
+        "note": { "type": "string" }
+      }
+    },
+    "additiveAudit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["verified", "source", "note"],
+      "properties": {
+        "verified": { "type": "boolean" },
+        "source": { "type": "string", "minLength": 1 },
+        "note": { "type": "string" }
+      }
+    },
+    "overpowerStacks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["perStack", "maxStacks", "activeStacks", "lingerSeconds", "estimate"],
+      "properties": {
+        "perStack": { "type": "number" },
+        "maxStacks": { "type": "integer" },
+        "activeStacks": { "type": "integer" },
+        "lingerSeconds": { "type": "number" },
+        "gainPerSecond": { "type": "number" },
+        "stackSeconds": { "type": "number" },
+        "estimate": { "type": "boolean" },
+        "source": { "type": "string", "minLength": 1 },
+        "note": { "type": "string" }
+      }
+    },
     "uptime": {
       "type": "object",
       "additionalProperties": false,
@@ -106,7 +401,76 @@
       "properties": {
         "berserk": { "type": ["number", "null"] },
         "vulnerable": { "type": ["number", "null"] },
-        "overpower": { "type": ["number", "null"] }
+        "overpower": { "type": ["number", "null"] },
+        "channeling": { "type": ["number", "null"] },
+        "furyAbove50": { "type": ["number", "null"] },
+        "unstoppable": { "type": ["number", "null"] },
+        "fortified": { "type": ["number", "null"] },
+        "healthyInjured": { "type": ["number", "null"] },
+        "dustDevil": { "type": ["number", "null"] },
+        "consecutiveWeapon": { "type": ["number", "null"] },
+        "elites": { "type": ["number", "null"] },
+        "playerHealthy": { "type": ["number", "null"] },
+        "missingPotions": { "type": ["number", "null"] },
+        "estimate": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "berserk": { "type": "boolean" },
+            "vulnerable": { "type": "boolean" },
+            "overpower": { "type": "boolean" },
+            "channeling": { "type": "boolean" },
+            "furyAbove50": { "type": "boolean" },
+            "unstoppable": { "type": "boolean" },
+            "fortified": { "type": "boolean" },
+            "healthyInjured": { "type": "boolean" },
+            "dustDevil": { "type": "boolean" },
+            "consecutiveWeapon": { "type": "boolean" },
+            "elites": { "type": "boolean" },
+            "playerHealthy": { "type": "boolean" },
+            "missingPotions": { "type": "boolean" },
+            "note": { "type": "string" }
+          }
+        }
+      }
+    },
+    "coldResistance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["gear", "intelligence", "other"],
+      "properties": {
+        "gear": { "$ref": "#/$defs/sheetReading" },
+        "intelligence": { "$ref": "#/$defs/sheetReading" },
+        "other": { "$ref": "#/$defs/sheetReading" },
+        "note": { "type": "string" }
+      }
+    },
+    "sheetComparison": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "source", "verified"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "name": { "type": "string" },
+        "armor": { "type": "number" },
+        "toughness": { "type": "number" },
+        "strength": { "type": "number" },
+        "resistances": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "physical": { "type": "number" },
+            "fire": { "type": "number" },
+            "lightning": { "type": "number" },
+            "cold": { "type": "number" },
+            "coldMitigationPct": { "type": "number" },
+            "poison": { "type": "number" },
+            "shadow": { "type": "number" }
+          }
+        },
+        "source": { "type": "string", "minLength": 1 },
+        "verified": { "type": "boolean" },
+        "note": { "type": "string" }
       }
     },
     "defense": {
@@ -114,17 +478,71 @@
       "additionalProperties": false,
       "required": ["life", "armor", "resists", "armorMitigationPct", "resistMitigationPct", "dr"],
       "properties": {
-        "life": { "type": ["number", "null"] },
-        "armor": { "type": ["number", "null"] },
-        "resists": { "type": ["number", "null"] },
-        "armorMitigationPct": { "type": ["number", "null"] },
-        "resistMitigationPct": { "type": ["number", "null"] },
+        "life": { "$ref": "#/$defs/sheetReading" },
+        "armor": { "$ref": "#/$defs/sheetReading" },
+        "resists": { "$ref": "#/$defs/sheetReading" },
+        "armorMitigationPct": { "$ref": "#/$defs/sheetReading" },
+        "armorMitigationScope": { "type": "string" },
+        "resistMitigationPct": { "$ref": "#/$defs/sheetReading" },
+        "mitigationCapPct": { "type": ["number", "null"] },
+        "note": { "type": "string" },
+        "coldResistance": { "$ref": "#/$defs/coldResistance" },
         "dr": {
           "oneOf": [
             { "type": "null" },
             { "type": "array", "items": { "type": ["number", "null"] } }
           ]
         }
+      }
+    },
+    "characterSheet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["level", "strength", "intelligence", "willpower", "dexterity", "armor", "toughness", "toughnessScope", "weaponDamage", "maxLife", "source", "verified"],
+      "properties": {
+        "level": { "type": "integer" },
+        "strength": { "type": "number" },
+        "intelligence": { "type": "number" },
+        "willpower": { "type": "number" },
+        "dexterity": { "type": "number" },
+        "armor": { "type": "number" },
+        "toughness": { "type": "number" },
+        "toughnessScope": { "type": "string" },
+        "weaponDamage": { "type": "number" },
+        "maxLife": { "type": "number" },
+        "source": { "type": "string", "minLength": 1 },
+        "verified": { "type": "boolean" },
+        "note": { "type": "string" },
+        "videoReadings": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/videoReading" }
+        }
+      }
+    },
+    "suspectReading": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["field", "videoValue", "confirmedValue", "suspect", "source"],
+      "properties": {
+        "field": { "type": "string", "minLength": 1 },
+        "videoValue": { "type": ["number", "string", "null"] },
+        "confirmedValue": { "type": ["number", "string", "null"] },
+        "suspect": { "type": "boolean" },
+        "source": { "type": "string", "minLength": 1 },
+        "note": { "type": "string" }
+      }
+    },
+    "videoReading": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stat", "value", "suspect", "source"],
+      "properties": {
+        "stat": { "type": "string", "minLength": 1 },
+        "value": { "type": ["number", "null"] },
+        "unit": { "type": ["string", "null"] },
+        "suspect": { "type": "boolean" },
+        "source": { "type": "string", "minLength": 1 },
+        "note": { "type": "string" }
       }
     }
   }

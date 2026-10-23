@@ -1,4 +1,5 @@
 import { optimize } from './search.js';
+import { CRIT_READINGS, evaluateBuild } from './catalog.js';
 import { esc } from './html.js';
 
 const $ = (id) => document.getElementById(id);
@@ -19,6 +20,7 @@ function drList(value) {
 
 let catalog = null;
 let metaBuilds = { builds: [] };
+let savedBuild = null;
 
 function selectedTags() {
   return [...document.querySelectorAll('#tags input:checked')].map(input => input.value);
@@ -32,7 +34,16 @@ function renderTags() {
 
 function renderResults(out) {
   const rows = out.ranked;
-  $('summary').textContent = `${rows.length} ranked of ${out.considered} scored. ${out.rejectedCount} rejected by constraints. Paragon, glyphs, boards, and talismans were not searched.`;
+  const equippedBuild = savedBuild ? { ...savedBuild, skills: ['whirlwind'] } : null;
+  const equipped = equippedBuild ? evaluateBuild(catalog, equippedBuild) : null;
+  let equippedText = '';
+  if (equipped) {
+    const totals = CRIT_READINGS.map(reading => evaluateBuild(catalog, equippedBuild, { critReading: reading }).result.total);
+    const low = Math.min(...totals);
+    const high = Math.max(...totals);
+    equippedText = ` Equipped Whirlwind power ${equipped.result.total.toFixed(2)}. Crit reading ${equipped.critReading}. Flagged range ${low.toFixed(2)} to ${high.toFixed(2)}.`;
+  }
+  $('summary').textContent = `${rows.length} ranked of ${out.considered} scored. ${out.rejectedCount} rejected by constraints.${equippedText} Equipped paragon nodes, glyphs, and weapon affixes are scored. Which nodes, glyphs, boards, and talismans to equip was not searched.`;
   if (!rows.length) {
     $('results').innerHTML = '<p class="warn">No build passed the power floor and the verification filter. Leave manual inputs blank only when you mean null, or turn on unverified data. The data-entry page lists every null and unverified field.</p>';
     return;
@@ -65,14 +76,31 @@ function run() {
     mainStat: num($('mainStat').value),
     critChance: num($('critChance').value),
     critDmg: num($('critDmg').value),
+    maxFury: savedBuild?.maxFury ?? null,
+    sheetContext: savedBuild?.sheetContext ?? 'town',
+    currentFury: savedBuild?.currentFury ?? null,
     vulnPct: num($('vulnPct').value),
     overpowerPct: num($('overpowerPct').value),
     castsPerSecond: num($('castsPerSecond').value),
     uptime: {
       berserk: num($('upBerserk').value),
       vulnerable: num($('upVulnerable').value),
-      overpower: num($('upOverpower').value)
+      overpower: num($('upOverpower').value),
+      channeling: num($('upChanneling').value),
+      furyAbove50: num($('upFury').value),
+      unstoppable: num($('upUnstoppable').value),
+      fortified: num($('upFortified').value),
+      healthyInjured: savedBuild?.uptime?.healthyInjured ?? null,
+      dustDevil: savedBuild?.uptime?.dustDevil ?? null,
+      consecutiveWeapon: savedBuild?.uptime?.consecutiveWeapon ?? null,
+      elites: savedBuild?.uptime?.elites ?? null,
+      playerHealthy: savedBuild?.uptime?.playerHealthy ?? null,
+      missingPotions: savedBuild?.uptime?.missingPotions ?? null,
+      estimate: savedBuild?.uptime?.estimate
     },
+    additivePct: savedBuild?.additivePct ?? null,
+    offensiveSheet: savedBuild?.offensiveSheet,
+    vulnerableDamageInAdditive: savedBuild?.vulnerableDamageInAdditive === true,
     defense,
     minimums: {
       furyPerSecond: num($('minFury').value),
@@ -82,6 +110,14 @@ function run() {
       ehp: num($('minEhp').value)
     },
     metaBuilds,
+    boards: savedBuild?.boards || [],
+    glyphs: savedBuild?.glyphs || [],
+    critAudit: savedBuild?.critAudit,
+    slotHands: Object.fromEntries((savedBuild?.gear || []).filter(slot => slot.hands).map(slot => [slot.slotId, slot.hands])),
+    arsenalSlots: (savedBuild?.gear || []).filter(slot => (catalog.constraints?.gearSlots || []).some(def => def.id === slot.slotId && def.kind === 'weapon')).map(slot => ({
+      slotId: slot.slotId,
+      affixes: (slot.affixes || []).map(affix => ({ ...affix }))
+    })),
     limit: 20
   });
   renderResults(out);
@@ -92,6 +128,9 @@ $('run').addEventListener('click', run);
 try {
   catalog = await (await fetch(catalogUrl)).json();
   metaBuilds = await (await fetch(metaUrl)).json();
+  const buildsUrl = params.get('builds') || 'data/builds.json';
+  const buildsFile = await (await fetch(buildsUrl)).json();
+  savedBuild = (buildsFile.builds || []).find(build => build.id === 'users-current-build') || null;
   const cap = catalog.constraints?.skillBarSize;
   if (typeof cap === 'number') $('maxSkills').value = String(cap);
   renderTags();

@@ -1,0 +1,358 @@
+# Whirlwind damage audit
+
+Nikolay's in-game Whirlwind hits, with buffs up, exceed 500B. The model before this pass printed 1.53B–8.31B. That range is the blended expected power across the four `critAudit.reading` values, and it is short of 500B by about 60× at the top and about 326× at the bottom.
+
+This pass checks every factor the equipped Whirlwind calc applies, using only numbers stored in this repo. One stored tooltip was applied once instead of per point of Fury. That line is fixed below. Everything else that could close the rest of the gap is listed as a suspect, with a score, or marked unknown when the repo has no count, uptime, or formula.
+
+The headline number is the uptime blend. The heaviest single state in that blend (Vulnerable on, Overpower off, Unstoppable on, elites on, Healthy-or-Injured on) is 40,328,167,305.91. The expectation is 42,398,366,381.44. A fight with every modeled buff on at once is 98,723,353,564.87. The 500B hits are the all-buffs case, so both figures are compared with 500B.
+
+| Comparison | Headline power | 500B / power |
+| --- | ---: | ---: |
+| Previous blended headline (Ramaladni applied once) | 8,306,112,712.15 | 60.20× |
+| Previous low reading | 1,532,493,120.32 | 326.26× |
+| Blended headline after the Fury fix | 42,398,366,381.44 | 11.79× |
+| Every modeled uptime set to 1 | 98,723,353,564.87 | 5.06× |
+
+Sources for the formula, with the confidence already recorded in `src/engine.js`:
+
+- [A] d4guides.gg, Chrix1848, 2026-10-05, season 15 / 3.2.2. Medium on the guide. Medium-high that same-type gear multipliers add, and that an aspect, unique, or skill `[x]` crit line multiplies on its own. https://d4guides.gg/en/guides/mechanics/damage-calculation-in-diablo-4-how-your-damage-works
+- [B] Blizzard season 2 note, quoted by Mobalytics. High for the quoted baseline. https://mobalytics.gg/diablo-4/guides/damage-buckets-deep-dive
+- [C] Wowhead, 2023. High for the quoted baseline. https://www.wowhead.com/diablo-4/news/breaking-down-the-critical-strike-and-vulnerable-damage-change-diablo-4-335487
+- [E] diablo4.cc glossary, datamined tooltip strings, version undated. Medium that the sheet crit figure includes the inherent 50%. https://diablo4.cc/us/Glossary
+- [F] Blizzard forum, a player reply, not staff, date unknown. Low on whether every equipped weapon's `[x]` crit counts. https://us.forums.blizzard.com/en/d4/t/weapon-stats-and-weapons-used/47095
+
+No other numbers were copied from those pages.
+
+## Ramaladni's Magnum Opus
+
+The tooltip is stored at `data/barbarian.json:6375`: "Skills deal 0.50%[x] [0.35-0.50]% increased damage per point of Fury you have." The effect value is the per-point rate, 0.5, bucket multiplicative, conditions empty, verified. Max Fury on the defence sheet is 826 (`data/builds.json:727`).
+
+The previous calc used 0.5 a single time, factor 1.005. The rate times Max Fury is `1 + 0.005 × 826 = 5.13`, modifier value 413. That is the headline now. Ramaladni reads `currentFury` when that input is a number, and otherwise the resolved Max Fury. With both unset, the rate stays 0.5, so a search that has no Max Fury still uses the per-point rate once.
+
+`currentFury` is empty on the saved build. It defaults to the resolved Max Fury, 826, and that default is flagged as an estimate. The same tooltip drains 7% Fury per second in combat (`data/barbarian.json:6337`), so 5.13× is the full-Max-Fury reading. A measured current Fury below 826 would shrink this factor. The ratio against the old 1.005 line is 5.13 / 1.005 = 5.1045, and the blended headline moves from 8,306,112,712.15 to 42,398,366,381.44 by that exact ratio.
+
+`sheetContext` is `town`, `combat`, `combat-nobuff`, or `combat-allbuff`. The saved build is `town`. The headline in the table below is the town context. `combat-nobuff` and `combat-allbuff` hold a video-model reading from 2026-10-23. That reading is unconfirmed. A missing value falls back to town, and `combat-allbuff` falls back to `combat-nobuff` first. The result lists each fallback. Fury regeneration 85, generation 52.5%, cost reduction -30%, and Fury on kill 11 are stored as town readings. They stay records.
+
+## Factor table
+
+Equipped Whirlwind only. "Effective" is the blended headline power divided by the same power with that one line removed. An always-on `[x]` line's effective factor equals `1 + tooltip/100`. A conditional line is smaller, because the uptime blend turns it off some of the time and because crit is `(A + 74.248) / A`, so a bigger additive A shrinks the crit term. Gear `[x]` crit lines are summed, so each line's effective factor is its marginal inside that sum, and the three of them together are ×5.42.
+
+| Name | Additive or [x] | Tooltip value | Uptime or state weight | Effective multiplier | Source |
+| --- | --- | ---: | ---: | ---: | --- |
+| Weapon damage | base | 4,596 | 1 | starting term | `data/builds.json:693`, `src/engine.js:37` |
+| Whirlwind coefficient | base | 386% | 1 | ×3.86 on weapon damage (base 17,740.56) | `data/barbarian.json:293`, `src/engine.js:37` |
+| All Damage | additive | 606.7% | 1 | ×1.0729 | `data/builds.json:706`, `src/engine.js:42` |
+| Damage with Physical | additive | 250.5% | 1 | ×1.0289 | `data/builds.json:709`, `src/catalog.js:377` |
+| Vulnerable Damage | additive | 208.8% | Vulnerable 0.662691, estimate | ×1.0189 | `data/builds.json:708`, `src/catalog.js:384` |
+| vs Elites | additive | 133.5% | elites 0.75, estimate | ×1.0113 | `data/builds.json:716`, `src/catalog.js:387` |
+| vs Healthy or Injured | additive | 26% once | Healthy or Injured 0.70, estimate | ×1.0024 | `data/builds.json:717`, `src/catalog.js:390` |
+| while you are Healthy | additive | 223.2% | player Healthy 1, estimate | ×1.0256 | `data/builds.json:719`, `src/catalog.js:394` |
+| while Fortified | additive | 35% | Fortified 1, confirmed | ×1.0039 | `data/builds.json:720`, `src/catalog.js:396` |
+| Leoric's Crown | gem effect | +65%[x] gem effect on the socketed splinter. Armor, 41% Damage Reduction, −30% Movement Speed. Tooltip 4.1%[x] per soul is stored and scored on the splinter. | 1 | ×1 from the helm alone | `data/barbarian.json` helm. Gem is utility. The video gem read of +150% is ignored. |
+| Splinter of the Black Soulstone | [x] | 4.1% per soul × default 15 souls. One effect: base 2.5% × 1.65. | 1, souls 15 is an estimate | ×1.6150 | `data/barbarian.json` seasonal mechanic. Screenshot answers-2026-10-22.md. Base rate https://helltides.com/tools/splinters |
+| Gohr's Devastating Grips | [x] | 117% Whirlwind | 1 | ×2.1700 | `data/barbarian.json:6562` |
+| Tibault's Will | [x] | 26% while Unstoppable and for 5s after | Unstoppable 0.967138, estimate | ×1.2515 | `data/barbarian.json:6600` |
+| Earthstriker's Aspect | [x] | 19.5% while you have Overpower | treated as always on, because Overpower uptime is above 0 | ×1.1950 | `data/barbarian.json:5441`, `src/catalog.js:210` |
+| Melted Heart of Selig | [x] | 30% above 50 Fury | Fury above 50 is 1, confirmed | ×1.3000 | `data/barbarian.json:6826` |
+| Melted Heart of Selig | vuln [x] | 35% Vulnerable Damage Multiplier | Vulnerable 0.662691, estimate | ×1.2602 | `data/barbarian.json:6841`, `src/engine.js:65` |
+| Stone of Jordan | [x] | 23% to the highest element | 1 | ×1.2300 | `data/barbarian.json:6747` |
+| Crushing Aspect | [x] | 64% while Fortified | Fortified 1, confirmed | ×1.6400 | `data/barbarian.json:3894` |
+| Aspect of Channeling | [x] | 138% while channeling | Channeling 1, estimate, Whirlwind is tagged Channeled | ×2.3800 | `data/barbarian.json:3416` |
+| Ramaladni's Magnum Opus | [x] | 0.50% per Fury × Max Fury 826 = 413% | full Max Fury; current Fury is unmeasured | ×5.1300 | `data/barbarian.json:6375`, `data/builds.json:727` |
+| Warbringer | [x] | 45% while Fortified | Fortified 1, confirmed | ×1.4500 | `data/barbarian.json:9744` |
+| Decimator | [x] | 20% vs Vulnerable | Vulnerable 0.662691, estimate | ×1.1530 | `data/barbarian.json:9902` |
+| Decimator | [x] | 20% while having Overpower | Overpower 0.364507, estimate | ×1.1078 | `data/barbarian.json:9914` |
+| Weapons Master | [x] | 75% vs Healthy and Injured | Healthy or Injured 0.70, estimate | ×1.5601 | `data/barbarian.json:10063` |
+| Might | [x] | 8% with a Two-Handed weapon | 1 (arsenal has a 2H) | ×1.0800 | `data/barbarian.json:10377` |
+| Might | [x] | 26% vs Healthy and Injured | Healthy or Injured 0.70, estimate | ×1.2090 | `data/barbarian.json:10388` |
+| Twister | [x] | 13% for 4s after creating a Dust Devil | Dust Devil 1, estimate | ×1.1300 | `data/barbarian.json:10429` |
+| Imbiber | [x] | 16% while you are Healthy | player Healthy 1, estimate | ×1.1600 | `data/barbarian.json:10503` |
+| Imbiber | [x] | 5% per missing potion, 0 of 4 | missing potions 0, estimate | ×1.0000 | `data/barbarian.json:10480`, `src/catalog.js:397` |
+| Marshal | [x] | 13.5% | 1 | ×1.1350 | `data/barbarian.json:10648` |
+| Insight crit | gear crit [x], summed | 310% | 1 | ×2.3362 inside the ×5.42 sum | `data/barbarian.json:8415` |
+| Deathshead crit | gear crit [x], summed | 88% | 1 | ×1.1938 inside the ×5.42 sum | `data/barbarian.json:9106` |
+| Ramaladni crit | gear crit [x], summed | 44% | 1 | ×1.0884 inside the ×5.42 sum | `data/barbarian.json:9308` |
+| Main stat | separate | 0.8% per 10 Strength, Strength 4,101 | 1 | ×4.2808 | `data/barbarian.json:209`, `data/builds.json:694`, `src/engine.js:49` |
+| Crit chance and sheet crit | formula | 100% chance, 7,424.8% damage | chance 1 | modal-state factor ×30.8304; removing crit entirely is ×32.1989 on the blend | `data/builds.json:695`, `src/engine.js:57` |
+| Vulnerable base | formula | ×1.2 vs Vulnerable | Vulnerable 0.662691, estimate | on-state ×1.2, times Melted Heart's ×1.35, so the on-state vulnerable factor is ×1.62. Removing the whole Vulnerable state is ×1.6563 on the blend | `src/engine.js:22`, `src/engine.js:65` |
+| Overpower bonus | formula | 104% = 4 × 26% | Overpower 0.364507, estimate | on-state ×2.04; the 104 points alone are ×1.4240 on the blend. An independent blend of ×2.04 and ×1 would be ×1.3791 | `data/builds.json:726`, `data/barbarian.json:5467`, `src/engine.js:68` |
+
+The modal-state product of those terms is base × 15.837 × 671.3507 × 4.2808 × 30.8304 × 1.62 × 1 = 40,328,167,305.91. Overpower is off in that state, so its term is 1. The printed power, 42,398,366,381.44, is the expectation across Vulnerable, Overpower, Unstoppable, elites, and Healthy-or-Injured.
+
+All Damage's tooltip contribution to the additive factor is +6.067, and the all-on additive factor is 15.837. Its effective multiplier on the total is only ×1.0729 because the crit term divides by that same additive factor.
+
+## The eight checks
+
+### 1. Ramaladni
+
+Fixed, as above. ×5.13 at Max Fury 826. The old ×1.005 is gone from the headline. This accounts for the move from the 1.53B–8.31B range to 7.82B–42.40B. It leaves an 11.8× gap on the blended headline and a 5.1× gap when every modeled buff is on.
+
+### 2. Overpower
+
+The bonus in the calc is `overpowerPct` 104, which is 4 stacks × 26% from Earthstriker (`data/barbarian.json:5467`). Wrath's "1 Overpower per second" uses that same 26% line, and the per-stack effect is skipped when `overpowerPct` is a number, so it is counted once. On a hit that Overpowers, the factor is `1 + 104/100 = 2.04`. No other overpower-bucket line is added.
+
+The 0.364507 weight is `(15.8 + 4) / 54.32`: Wrath lasts 15.8s on a 54.32s cooldown, and the 4 stacks linger 4s. It is an estimate. The blend puts weight 0.364507 on the ×2.04 state and weight 0.635493 on ×1, together with the other uptimes, so the lines are correlated. Decimator's 20%[x] while having Overpower uses that same state. Earthstriker's 19.5%[x] does not: its condition is "while you have Overpower", and the scorer turns a state fully on whenever its uptime is above 0 unless the effect sets `alignWithState`. The 19.5% is therefore on every hit. Aligning it with the Overpower state changes the blended headline from 42,398,366,381.44 to 35,479,804,503.29 (×0.8368). That moves the score down, so it widens the gap.
+
+Life and Fortify are stored (Life 473, Warbringer grants 2% of Maximum Life as Fortify, shown as 9). The repo has no life-plus-Fortify Overpower formula, so that scaling is unknown and has no score.
+
+### 3. Berserking
+
+Berserking is absent from the calc. `uptime.berserk` is null, and the stored uptime note says Berserk uptime is not estimated. War Cry's tooltip says "Berserking 75%[x] damage, 15%[x] Movement Speed" (`data/barbarian.json:1495`). Those keyword lines are not copied onto a damage effect. Wrath's tooltip says "Berserking base doubled" (`data/barbarian.json:1937`). If 75%[x] is the base, the doubled reading is 150%[x]. That reading is an interpretation of the keyword text. No uptime is stored, so both are ceilings at uptime 1: ×1.75 and ×2.50. They are not part of the defined total.
+
+### 4. Twister and Dust Devils
+
+Twister's scored line is one buff, +13%[x] for 4s after creating a Dust Devil, at Dust Devil uptime 1. It is not per stack, and nothing in the repo says stacks of that buff multiply.
+
+Whirlwind's tooltip and the allocated Tornado upgrade say 2 Dust Devils at 510% each (`data/barbarian.json:311`). Those hits sit outside the 386% coefficient. The tooltip does not say whether a Dust Devil is a direct hit or damage over time, so the damage type stays unset. No Dust Devil hit rate is stored, so they are not added. Twister's legendary Dust Devil damage +39.9%[x] and the +39.8% per 5 Strength line are `scored: false` for the same reason. The "110/+40 Strength" count is tooltip text, not board data. Weapon attacks per second (0.90 on Deathshead) are stored and are not a Dust Devil hit rate.
+
+If the two 510% devils hit once for each 386% Whirlwind hit, on the same weapon-damage base, the hit total would be `(386 + 2 × 510) / 386 = 3.642×`. That hit rate is not stored, so this has no score. The 39.9%[x] would apply to the devil portion only.
+
+### 5. Warbringer, stacking lines, and seasonal buffs
+
+Warbringer's legendary 45%[x] while Fortified is in the table at ×1.45. The 2% Maximum Life Fortify grant is defense and is skipped. The other Warbringer nodes have null buckets: Raw Power Damage 20 and Dust Devil 39.5, Brute Force damage while Fortified 20 and Dust Devil 19.5 (`data/barbarian.json:9761`, `data/barbarian.json:9800`). All Damage 606.7% already includes the tooltip split +316.5% from items and Paragon, so those untagged node percents are not added on top.
+
+Stacking lines that are equipped:
+
+- Leoric's Crown stores Armor, a +65%[x] gem effect, 41% Damage Reduction, and −30% Movement Speed. The Splinter of the Black Soulstone is socketed in the helm. The gem effect raises the splinter base 2.5%[x] to the tooltip 4.1%[x] per soul (2.5 × 1.65 = 4.125, shown as 4.1). The helm copy of that line is stored with `scored: false`. The gem line stays utility. The video gem read of +150% is ignored.
+- Splinter of the Black Soulstone is the one scored soul effect, 4.1%[x] per soul. The base 2.5% is not scored again. Empty `souls` uses 15, an estimate, so the sum model is `1 + 0.041 × 15 = ×1.615` and the defence note is +15% damage taken. The compound model is `1.041^souls` (×1.8271 at 15, ×2.9592 at 27). At 4 souls the sum factor is ×1.164 and at 27 it is ×2.107. The video range was about 4 to 27 or more. Screenshots showed 17 and 30. The stored cap is 200. A count above 200 scores at 200. The calibration section below reports 15, 30, and 200.
+- Aspect of Channeling 138%[x] is in the calc. Whirlwind's own channel bonus is 1%[x] per hit, cap 25 (`data/barbarian.json:366`). The uptime note says those stacks are reached fast and are not added on top of the 138%. If both apply, the cap is another ×1.25.
+- Earthstriker's 26%[+] per stack is the retired 4 × 26 = 104 path. That percent is stored and is not applied. Sheet Overpower Damage is the additive total on an Overpower hit. The 19.5%[x] while you have Overpower stays a separate multiplier.
+- Twister is one 4s buff, covered above. Imbiber's per-potion line is ×1.000 at 0 missing potions.
+
+Seasonal data: Hell's Legacy has an empty effect list ("No mechanic numbers are stored"). Ghosts of Odium stores physical damage 56,847 with a null bucket, unverified (`data/barbarian.json:11225`). Undying Rage has a null value. The build's talismans are name strings, and the scorer does not read `build.talismans`. The scored seasonal multiplier is the Splinter of the Black Soulstone, one 4.1%[x] per soul effect, socketed in Leoric's Crown.
+
+Cross-skill buffs the whirlwind-only score leaves out, with a stored duration and cooldown:
+
+- War Cry 38.5%[x] for 4s on a 15.09s cooldown (`data/barbarian.json:1478`). Uptime 4/15.09 = 0.265076. Expected factor ×1.1021.
+- Wrath of the Berserker 30%[x] for 15.8s on a 54.32s cooldown (`data/barbarian.json:1884`). Uptime 15.8/54.32 = 0.290869. Expected factor ×1.0873.
+
+Challenging Shout's 20%[x] on the first 5 taunted has no duration stored (`data/barbarian.json:1382`), and its 20%[x] vs Burning has no Burning uptime. Both stay unscored.
+
+### 6. Vulnerable `[x]` beyond Melted Heart
+
+The only scored Vulnerable Damage Multiplier is Melted Heart's 35%, inside `1.2 × 1.35`. Decimator's 20%[x] vs Vulnerable is general damage versus Vulnerable, already in the `[x]` product, and it is a different stat from Vulnerable Damage Multiplier. Sheet Vulnerable Damage 208.8% stays additive on that state.
+
+Two Greater Affix lines, `v1-selig-vuln-mult` and `v1-crush-vuln-mult`, are +10% "Vulnerable Damage Multiplier" with a null bucket, from the video, unverified (`data/barbarian.json:8795`, `data/barbarian.json:9215`). Treating both as vuln `[x]` summed with the 35% is a suspect, ×1.1180 on the blend. The ring also has +16% Vulnerable Damage with a null bucket (`data/barbarian.json:9239`). That looks like an additive vulnerable line and may already sit inside sheet 208.8%. It is not added again.
+
+### 7. Crit `[x]` lines: sum and product
+
+Headline sums the three gear lines: `1 + (310 + 88 + 44) / 100 = 5.42`. There is no separate aspect, unique, or skill `[x]` crit line on the headline. The modal-state crit factor is `(15.837 + 74.248) / 15.837 × 5.42 = 30.8304`.
+
+The product of the same three lines is `4.10 × 1.88 × 1.44 = 11.09952`, which is ×2.0479 against the sum. On `active-weapon` only Deathshead's 88% remains, so the product equals the sum. On `sheet-includes-gear-x` the gear lines are omitted, so the product equals that reading too.
+
+Flawless Technique's +45%[x] Critical Strike Damage is an alternate reading (`data/barbarian.json:9478`). Consecutive-weapon uptime is 1, an estimate, and the line multiplies on its own (×1.45). The headline leaves it out. The patch-note 45%[x] is generic damage with null conditions and stays out as well.
+
+Wrath glyph +17.8%[x] Critical Strike Damage is kept inside sheet 7,424.8% (`data/barbarian.json:10585`).
+
+Damage over time does not crit. The crit factor on a damage-over-time part is 1, and crit-damage [x] lines are left off that part. Challenging Shout's 2,430% burn and Wrath of the Berserker's 56% burn were already on that factor, and they stay there. Whirlwind's scored 386% hit is direct, so the blended headline stays 42,398,366,381.44. The 510% Dust Devils have no stored damage type. They stay outside the coefficient and are flagged.
+
+### 8. Sheet lines dropped or double-counted
+
+The offensive sheet is screenshot-verified and `additiveAudit.verified` is true. Every conditional row in the sheet is in the table. Other elements (Fire 120.5, Lightning 90.5, Cold 134.3, Holy, Poison, and Shadow 90.5) stay off a Physical skill. Thorns is 0.
+
+Counted on both sides, on purpose:
+
+- Sheet vs Healthy 26 and vs Injured 26 match Might's 26%[x]. The numbers match, so this one is ambiguous. The headline keeps the additive 26 and the `[x]` 26.
+- Vulnerable Damage 208.8% is additive. Melted Heart's 35% is a Vulnerable Damage Multiplier. Both are counted.
+- while Fortified 35% does not match Warbringer 45%[x] or Crushing 64%[x]. The additive 35 and both `[x]` lines are counted.
+- Imbiber's 16%[x] while Healthy and the sheet's 223.2% while Healthy are different numbers. Both are counted.
+
+Left out of the product, with a stored value:
+
+- Whirlwind's allocated Cost Damage Bonus is +40%[x] at +10 Fury cost (`data/barbarian.json:334`). The scorer reads the skill coefficient and skill effects. It does not read upgrade modifier values, so this 40% is absent. If the allocated upgrade is part of every Whirlwind hit, the factor is ×1.40.
+- Grand Skull sockets are stored on the gear and are not read. Insight has two sockets at 28%[x], Deathshead has two at 28%[x], Spirit has one at 24%[x], and Ramaladni has one at 24%[x] (`data/builds.json:349`). The gem tooltip is 24%[x] (`data/barbarian.json:11376`). The 2H item notes say the socket display is 28% and the gem tooltip is 24%. Whether the sockets add or multiply, and whether only the swinging weapon counts, is unknown. The stored socket values give: Deathshead sum ×1.56, Deathshead product ×1.6384, all six summed ×2.60, all six multiplied ×4.1275.
+- Deathshead x25% All Damage Multiplier and Spirit x66% All Damage Multiplier have null conditions (`data/barbarian.json:9086`, `data/barbarian.json:8534`). A null condition stays unknown, so both are left out. The screenshot notes do not state a condition. If they are unconditional, the factor is ×1.25 × ×1.66 = ×2.075.
+- The codex Channeling 69%[x] is `scored: false` and is not applied with the 138% imprint.
+
+## Suspects
+
+Ranked by the multiplier each would add on the blended headline. "Defined" means the repo stores both the rate and the uptime or count. A ceiling uses a stored cap or a keyword at uptime 1 and is labeled unknown. Unknown rows have no score.
+
+| Rank | Suspect | Plausible multiplier | Blended headline | 500B / that score | Status |
+| --- | --- | ---: | ---: | ---: | --- |
+| 1 | Ramaladni per Fury at Max Fury 826 | ×5.1045 vs the old ×1.005, absolute ×5.13 | 42,398,366,381.44 | 11.79× | Fixed in this pass. Already in every row below. |
+| 2 | All six Grand Skull sockets multiplied | ×4.1275 | 174,997,712,728.62 | 2.86× | Stored socket values. Sum-versus-product and which weapons count are unknown. |
+| 3 | Dust Devils, two hits at 510% per Whirlwind hit | ×3.642 on the coefficient | no score | — | Hit rate is unknown. |
+| 4 | Berserking keyword doubled, uptime 1 | ×2.50 | 105,995,915,953.59 | 4.72× | Ceiling. Uptime is null on purpose. |
+| 5 | Deathshead x25% and Spirit x66% if unconditional | ×2.0750 | 87,976,610,241.48 | 5.68× | Conditions are null. |
+| 6 | Gear crit lines multiplied instead of summed | ×2.0479 | 86,826,847,900.01 | 5.76× | Alternate. The research sum stays the headline. Active-weapon and sheet-includes readings do not change. |
+| 7 | Berserking keyword 75%[x], uptime 1 | ×1.75 | 74,197,141,167.51 | 6.74× | Ceiling. Uptime is null on purpose. |
+| 8 | Deathshead's two Grand Skull sockets summed | ×1.5600 | 66,141,451,555.04 | 7.56× | Swinging-weapon reading of the stored 28% sockets. The product of those two is ×1.6384 and 69,465,483,479.34. |
+| 9 | War Cry 38.5%, Wrath 30%, and the channel cap of 25, at their stored weights | ×1.4978 | 63,503,231,702.76 | 7.87× | Defined. War Cry alone ×1.1021, Wrath alone ×1.0873, channel cap alone ×1.2500. |
+| 10 | Flawless Technique +45%[x] crit, separate | ×1.4500 | 61,477,631,253.08 | 8.13× | Alternate. Consecutive-weapon uptime 1 is an estimate. |
+| 11 | Whirlwind Cost Damage Bonus | ×1.4000 | 59,357,712,934.01 | 8.42× | Allocated upgrade, screenshot 40%[x]. Absent from the scorer. |
+| 12 | The two +10% Vulnerable Damage Multiplier affixes | ×1.1180 | 47,400,402,463.24 | 10.55× | Null bucket, video, unverified. |
+| — | Overpower from Life and Fortify | unknown | no score | — | No formula is stored. The 104% line is already applied. |
+| — | Ghosts of Odium 56,847 | unknown | no score | — | Null bucket. The unit is not stored. |
+| — | Current Fury below Max Fury | shrinks Ramaladni | no score | — | 7% per second drain is stored. Current Fury is not. |
+
+The defined set at the stored uptimes (Ramaladni already fixed, plus War Cry, Wrath, and the channel cap) is 63,503,231,702.76 blended, still 7.87× under 500B. Forcing those buffs and the other modeled uptimes on raises the headline to 222,189,247,616.94, which is 2.25× under 500B. Adding the crit-product alternate on that all-on state reaches 455,017,342,750.77, which is 1.10× under 500B. One further stored line of about ×1.10 or more (the allocated 40%[x], Deathshead's skull sockets, or a partial Berserking uptime) would pass 500B on that stack. Each of those is still an assumption, and the crit product is the less likely reading of the research note.
+
+No single stored line with a known count, other than the Ramaladni fix, closes a 500B hit on the pre-splinter headline. The Leoric 200-soul ceiling is withdrawn. Those stacks belong to the splinter, and the video count is about 4 to 27, not 200.
+
+## Scores under each crit reading
+
+`sheet-includes-gear-x-active-weapon` matches `sheet-includes-gear-x` on this build, because both leave every gear crit line out. Powers are the blended expectation unless the row says all-on.
+
+| Case | headline | sheet-includes-gear-x | active-weapon | sheet-includes-gear-x-active-weapon |
+| --- | ---: | ---: | ---: | ---: |
+| Baseline, Ramaladni fixed | 42,398,366,381.44 | 7,822,576,823.14 | 14,706,444,427.51 | 7,822,576,823.14 |
+| Previous single 0.5% | 8,306,112,712.15 | 1,532,493,120.32 | 2,881,087,066.21 | 1,532,493,120.32 |
+| Baseline, every modeled uptime at 1 | 98,723,353,564.87 | 18,214,640,879.13 | 34,243,524,852.76 | 18,214,640,879.13 |
+| War Cry 38.5% at 4/15.09 | 46,725,303,705.98 | 8,620,904,742.80 | 16,207,300,916.47 | 8,620,904,742.80 |
+| Wrath 30% at 15.8/54.32 | 46,098,076,555.37 | 8,505,180,176.27 | 15,989,738,731.38 | 8,505,180,176.27 |
+| Channel cap 25% | 52,997,957,976.79 | 9,778,221,028.93 | 18,383,055,534.39 | 9,778,221,028.93 |
+| Vulnerable GA +10 and +10 | 47,400,402,463.24 | 8,745,461,709.08 | 16,441,468,013.08 | 8,745,461,709.08 |
+| Gear crit as a product | 86,826,847,900.01 | 7,822,576,823.14 | 14,706,444,427.51 | 7,822,576,823.14 |
+| Berserking 75%, uptime 1, ceiling | 74,197,141,167.51 | 13,689,509,440.50 | 25,736,277,748.14 | 13,689,509,440.50 |
+| Berserking 150%, uptime 1, ceiling | 105,995,915,953.59 | 19,556,442,057.86 | 36,766,111,068.77 | 19,556,442,057.86 |
+| Whirlwind cost bonus 40% | 59,357,712,934.01 | 10,951,607,552.40 | 20,589,022,198.51 | 10,951,607,552.40 |
+| Deathshead skulls summed (56%) | 66,141,451,555.04 | 12,203,219,844.10 | 22,942,053,306.91 | 12,203,219,844.10 |
+| Deathshead skulls multiplied | 69,465,483,479.34 | 12,816,509,867.04 | 24,095,038,550.03 | 12,816,509,867.04 |
+| All weapon skulls summed (160%) | 110,235,752,591.73 | 20,338,699,740.17 | 38,236,755,511.52 | 20,338,699,740.17 |
+| All weapon skulls multiplied | 174,997,712,728.62 | 32,287,400,872.44 | 60,700,313,640.19 | 32,287,400,872.44 |
+| x25% and x66% All Damage if unconditional | 87,976,610,241.48 | 16,231,846,908.02 | 30,515,872,187.08 | 16,231,846,908.02 |
+| Flawless +45%[x] crit | 61,477,631,253.08 | 11,342,736,393.56 | 21,324,344,419.89 | 11,342,736,393.56 |
+| Defined together: War Cry, Wrath, channel cap | 63,503,231,702.76 | 11,716,463,413.79 | 22,026,951,217.93 | 11,716,463,413.79 |
+| Defined together, gear crit as a product | 130,047,119,990.68 | 11,716,463,413.79 | 22,026,951,217.93 | 11,716,463,413.79 |
+| Defined together plus the Vulnerable GAs | 70,995,158,477.27 | 13,098,737,726.43 | 24,625,626,925.69 | 13,098,737,726.43 |
+| Defined together plus the 40% cost bonus | 88,904,524,383.87 | 16,403,048,779.31 | 30,837,731,705.11 | 16,403,048,779.31 |
+| Defined together, all of those buffs forced on | 222,189,247,616.94 | 40,994,326,128.59 | 77,069,333,121.74 | 40,994,326,128.59 |
+| That all-on row, gear crit as a product | 455,017,342,750.77 | 40,994,326,128.59 | 77,069,333,121.74 | 40,994,326,128.59 |
+
+The flagged range on the fixed baseline above is 7,822,576,823.14 to 42,398,366,381.44. Headline was the top of that range. Those rows are the previous baseline: a one-time 4.1%[x] on the helm, no per-soul splinter, and Overpower still multiplied by the retired 104% path. The engine now scores one splinter effect at 4.1%[x] per soul (×1.615 at the default 15 souls) and puts sheet Overpower Damage in the additive pool. The blended town headline is 46,191,544,367.22.
+
+## Combat sheet, video-model reading 2026-10-23
+
+The score tables above are the previous town baseline. This section is the per-hit comparison after two corrections. The Splinter of the Black Soulstone is socketed in Leoric's Crown. Leoric's screenshot gem effect is +65%[x] (the video read of +150% is ignored). That boost raises the splinter base 2.5%[x] to one scored effect of 4.1%[x] per soul (2.5 × 1.65 = 4.125, shown as 4.1). The base 2.5% is not scored again. Empty `souls` uses 15 and that default is an estimate. The sum model is `1 + 0.041 × souls` (×1.164 at 4, ×1.615 at 15, ×2.107 at 27). The compound model is `1.041^souls` (×1.1744 at 4, ×1.8271 at 15, ×2.9592 at 27). Each soul still adds 1% damage taken on the defence notes.
+
+Overpower follows the attached research note `d4-overpower-formula.md` (Research Scout). Since patch 3.0 (Season 13), Overpower adds to the additive pool and stacks with crit. Life and Fortify do not scale it. The base is 15%[+] per stack plus Overpower Damage Per Stack. Stacks cap at 4 in this model. Some sources say 8, and extra-stack sources such as Tidal Aspect exist. Each stack lasts 4s. Sheet Overpower Damage 6,432.2% is that additive line on an Overpower hit. It is not a separate ×65.322. `overpowerSheetMeaning` is `total` by default, or `perStack` with 4 stacks (6,432.2% × 4 = 25,728.8%). Both are reported. The stored 104% (4 × 26) is retired and is not applied. Scout suggests the stat hover's bottom line, "from items and Paragon", is the raw value, while the top line may fold in multipliers. That reading is unverified.
+
+`combat-nobuff` and `combat-allbuff` are a video-model reading from 2026-10-23. That reading is unconfirmed. The saved `sheetContext` stays `town`. The blended town headline is 46,191,544,367.22.
+
+The video shows fighting with Fortified and Flawless Technique stacks, then the same fight with War Cry, Rallying Cry, Challenging Shout, Berserking, Wrath of the Berserker, Dust Devil, and the soul stacks. Attack speed 120%, crit chance 100%, crit damage 10,819.5%, Vulnerable Damage 2,836.8%, and Physical 250.5% are the same in both contexts. All Damage is 1,755.2% with no buffs, then ramps from 1,996% to 9,897.7% over about 14 seconds. The lower all-buff rows use the no-buff values, and the result lists that fallback. Current Fury is 826 in both combat contexts.
+
+Each row below is one Whirlwind crit at 15 souls, sum model (×1.615), with `overpowerSheetMeaning` `total`. Channeling, Fortified, Fury above 50, Unstoppable, player Healthy, elites, and consecutive-weapon are on. Missing potions are 0. The mid-life band leaves vs Healthy, vs Injured, Weapons Master, and Might's 26%[x] off. No-buff leaves Vulnerable, Berserking, and Dust Devil off. All-buff turns those three on. A normal crit leaves Overpower off. An Overpower crit adds 6,432.2% to the additive pool and turns Earthstriker and Decimator's Overpower line on. The separate Overpower multiplier stays 1. Powers are billions. Exact totals are locked in `test/combat-sheet.test.js`. `sheet-includes-gear-x-active-weapon` matches `sheet-includes-gear-x`.
+
+| Hit | headline | sheet-includes-gear-x | active-weapon | sheet-includes-gear-x-active-weapon |
+| --- | ---: | ---: | ---: | ---: |
+| No buff, normal crit | 16.43B | 3.03B | 5.70B | 3.03B |
+| No buff, Overpower crit | 34.63B | 6.39B | 12.01B | 6.39B |
+| All buff, All Damage 1,996%, normal crit | 44.86B | 8.28B | 15.56B | 8.28B |
+| All buff, All Damage 1,996%, Overpower crit | 88.64B | 16.35B | 30.75B | 16.35B |
+| All buff, All Damage 9,897.7%, normal crit | 65.69B | 12.12B | 22.78B | 12.12B |
+| All buff, All Damage 9,897.7%, Overpower crit | 118.51B | 21.87B | 41.11B | 21.87B |
+
+The same headline hits at souls 4, 15, and 27. Sum is `1 + 0.041 × souls`. Compound is `1.041^souls`. Overpower uses the total reading.
+
+| Hit | 4 sum | 4 compound | 15 sum | 15 compound | 27 sum | 27 compound |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| No buff, normal crit | 11.84B | 11.95B | 16.43B | 18.59B | 21.44B | 30.11B |
+| No buff, Overpower crit | 24.96B | 25.18B | 34.63B | 39.18B | 45.18B | 63.45B |
+| All buff, All Damage 1,996%, normal crit | 32.33B | 32.62B | 44.86B | 50.75B | 58.53B | 82.20B |
+| All buff, All Damage 1,996%, Overpower crit | 63.89B | 64.46B | 88.64B | 100.28B | 115.65B | 162.42B |
+| All buff, All Damage 9,897.7%, normal crit | 47.34B | 47.77B | 65.69B | 74.31B | 85.70B | 120.36B |
+| All buff, All Damage 9,897.7%, Overpower crit | 85.41B | 86.17B | 118.51B | 134.07B | 154.61B | 217.14B |
+
+`perStack` multiplies the sheet percent by 4 before adding it. Normal hits stay the same. Headline Overpower hits at 15 souls, sum model: no buff 67.83B, all-buff low 161.58B, all-buff high 191.44B. At 27 souls on the compound model the all-buff high Overpower hit is 350.78B mid-life and 776.25B on a Healthy Vulnerable target.
+
+A Healthy Vulnerable target also adds vs Healthy 181.8%, Weapons Master 75%[x], and Might 26%[x]. Headline at 15 souls, sum model, total reading: no-buff normal 85.96B, all-buff high normal 145.90B, all-buff high Overpower 262.83B (423.65B on `perStack`). At 27 souls the all-buff high normal hit is 190.35B on the sum model and 267.33B on the compound model.
+
+The 841B video read is withdrawn. A second pass reads it as two overlapping numbers with a Dust Devil, and Nikolay found no hit of 800B or more. The live calibration target is a 718B peak at 30 souls. The table below is the previous grid, kept so the 15-soul sheet comparison stays visible. The calibration section is the comparison that replaces it.
+
+Headline, which keeps the gear crit sum ×5.42, stays the working reading. Research Scout floats the conflict that the sheet Crit Damage may already include the gear [x] lines. Under `sheet-includes-gear-x` a Healthy Vulnerable no-buff hit is 15.86B, under the 20B floor, and the all-buff high Healthy hit is 26.92B, under the 150B floor. That reading is too low for the observed hits, so the gear [x] sum stays in the headline factor.
+
+The town-to-combat jumps were checked as possible double counts. Critical Strike Damage 7,424.8% to 10,819.5% is ×1.457. `7424.8 × 1.45 = 10,765.96`, and the remainder is about 53.5 points, which looks like Flawless Technique's ~45%[x] already inside the sheet. Headline leaves that separate ×1.45 off. Vulnerable Damage 208.8% to 2,836.8% is extra additive, and the ×1.62 vulnerable factor still applies. All Damage 606.7% to 1,755.2%, then the ramp to 9,897.7%, is a much smaller step than the [x] product. `sheet-includes-gear-x` mid-life hits are 3.03B to 21.87B, so the gear crit sum and the other [x] lines are still required.
+
+## Calibration, screenshots 2026-10-23
+
+Nikolay's screenshots outrank the video hit reads. The biggest confirmed single hit is 718B, on a Boss Training Dummy. Other visible hits there are mostly 300–510B. A separate screenshot shows the soul buff at 30 stacks, with hits of 75–115B on non-boss targets. The calibration pairs that 718B peak with 30 souls.
+
+Subo and Varyana were active in the 718B fight, hitting the dummy and using shouts and buffs. Nikolay thinks their contribution is not significant. The model stays solo. Party buffs are a minor possible source in the unexplained list. They are not fitted and they are not modeled.
+
+### Calibrated defaults
+
+Three switches are locked as the working defaults. The alternatives stay switchable.
+
+| Switch | Default | Alternate |
+| --- | --- | --- |
+| `soulModel` | `sum`, `1 + 0.041 × souls` | `compound`, `1.041^souls` |
+| `overpowerSheetMeaning` | `total` | `perStack`, sheet Overpower Damage × 4 |
+| `critAudit.reading` | `headline` | `sheet-includes-gear-x`, `active-weapon`, `sheet-includes-gear-x-active-weapon` |
+
+These defaults are calibrated against the 718B boss-dummy hit at 30 souls (peak 784B with the Burning line, 653B without it; average 341B). `total` is the closer Overpower reading of that hit. `headline` is the crit reading that reaches this band. Pass `soulModel`, `overpowerSheetMeaning`, or `critReading` to score an alternate. The saved build stores `soulModel` `sum`, `overpowerSheetMeaning` `total`, and `critAudit.reading` `headline`.
+
+`souls` stays an input. The stored cap is 200. Empty `souls` still uses 15, an estimate. A count above 200 scores at 200. The rows below are 15, 30, and 200, sum and compound, at 4.1%[x] per soul. Sum is the locked default. Compound stays the alternate.
+
+### Buff timeline
+
+The timeline reads duration and cooldown from the stored skill tooltips. Sheet Cooldown Reduction 39.4% is a video reading on the character sheet. Each tooltip cooldown is multiplied by `1 - 0.394`. The helm 25% and the ring 5% are parts of that sheet total and are not added again. Marshal's stored cut, 2.0s off the active cooldown of other non-Shout skills after a Shout, is applied inside the timeline. Both the percent formula and the flat cut are estimates.
+
+A skill with a missing duration or a missing cooldown is left off the timeline and flagged.
+
+| Skill | Duration | Cooldown | Effective cooldown | On the timeline |
+| --- | ---: | ---: | ---: | --- |
+| War Cry | 4s | 15.09s | 9.14454s | yes, 38.5%[x] |
+| Challenging Shout | 8s | 15.09s | 9.14454s | yes, 20%[x] vs Burning tied to the burn length, an estimate |
+| Rallying Cry | 4s | not stored | — | no. The earlier 25s video cooldown stays unconfirmed |
+| Wrath of the Berserker | 15.8s | 54.32s | 32.91792s before the flat cut | yes, 30%[x] |
+| Iron Skin | not stored | 8.45s | — | no |
+
+The 20%[x] on the first 5 taunted has no duration stored, so it stays off. The horizon is 60s. Every modeled buff is cast together at 0s, then again on cooldown. No phase between the skills is stored. Every uptime is an estimate. Overpower uses the stored full-stack assumption for the whole Wrath window, plus the stored 4s linger. Unstoppable on this timeline is Wrath's duration plus Tibault's stored 5s after. Iron Skin's window is not added.
+
+| Buff | Casts in 60s | Uptime |
+| --- | ---: | ---: |
+| War Cry | 7 | 0.466667 |
+| Challenging Shout | 7 | 0.885546 |
+| Wrath of the Berserker | 3 | 0.764622 |
+| Overpower, full stacks plus the 4s linger | — | 0.897955 |
+| All three buffs together | — | 0.358515 (21.51s) |
+
+### Peak, average, and the 718B hit
+
+The scored hit is one Whirlwind crit, headline reading, on a Healthy Vulnerable boss. The dummy is scored as an elite. That elite flag is an estimate. The peak forces War Cry, Challenging Shout, and Wrath on together, with Overpower on, and uses the high end of the All Damage ramp, 9,897.7%. The sustained average weights each slice of the 60s timeline. A slice with any modeled buff up uses the low end of that ramp, 1,996%. A slice with none up uses the no-buff sheet. The ramp between those ends is not interpolated. Vulnerable follows War Cry's 4s. Berserking follows War Cry or Wrath. The dummy is held Healthy for the whole average, so the average is the sustained rate while it is Healthy.
+
+Overpower stays additive. The separate multiplier stays 1. `total` adds sheet 6,432.2%. `perStack` adds 6,432.2% × 4.
+
+| Souls | Model | Peak, total | Peak, perStack | Average, total | Average, perStack |
+| --- | --- | ---: | ---: | ---: | ---: |
+| 15 | sum | 567.86B | 915.33B | 247.29B | 450.59B |
+| 15 | compound | 642.44B | 1,035.54B | 279.77B | 509.77B |
+| 30 | sum | 784.11B | 1,263.89B | 341.46B | 622.18B |
+| 30 | compound | 1,173.79B | 1,892.02B | 511.16B | 931.40B |
+| 200 | sum | 3,234.88B | 5,214.26B | 1,408.73B | 2,566.85B |
+| 200 | compound | 1,086,966.49B | 1,752,067.47B | 473,352.43B | 862,499.37B |
+
+At 30 souls, sum model, headline, Healthy Vulnerable boss:
+
+- The peak with everything overlapping is 784.11B on `total` and 1,263.89B on `perStack`.
+- The sustained average is 341.46B on `total` and 622.18B on `perStack`.
+- The predicted peak against 718B is 784.11B on `total`, about 1.09× the calibration hit, and 1,263.89B on `perStack`, about 1.76× that hit.
+- Leaving off the estimated 20%[x] vs Burning line, the same peak is 653.42B, about 0.91× the 718B hit.
+
+The 341.46B average sits inside the 300–510B hits on the dummy. The `total` peak is the closer reading of the 718B hit. It sits about 66B above that hit. The `perStack` peak sits well above it.
+
+Non-boss hits at 30 souls, sum model, with no cross-skill buff lines: no-buff mid-life 25.46B, no-buff Healthy 56.90B, all-buff high Healthy 200.70B. The screenshot band is 75–115B.
+
+### What is still unexplained
+
+- Party buffs from Subo and Varyana. They were active in the 718B fight, hitting the dummy and using shouts and buffs. Nikolay thinks the contribution is not significant. The model stays solo. This is a minor possible source. It is not fitted and it is not modeled.
+- The `total` peak is 784.11B against the 718B calibration hit. The estimated Burning line is the swing: with it the peak is 784.11B, and without it the peak is 653.42B.
+- `perStack` at 30 souls is 1,263.89B on the peak and 622.18B on the average. The peak sits well above 718B. The average sits above the 300–510B cluster.
+- 200 souls, on both the sum and the compound model, sits far above the 718B hit. The cap is reported because long fights can reach it.
+- Non-boss hits at 30 souls are 25.46B and 56.90B with no buffs, under the 75–115B screenshot band, and 200.70B on the all-buff Healthy hit, above that band.
+- Dust Devil hits stay unscored. Damage type and hit rate are not stored. The withdrawn 841B read was two overlapping numbers with a Dust Devil.
+- Rallying Cry's cooldown is not stored, so its buff and its Marshal cut are not on the timeline.
+- Iron Skin's duration is not stored, so its Unstoppable window is not on the timeline.
+- Challenging Shout's 20%[x] on the first 5 taunted has no duration stored.
+- The Berserking keyword 75%[x], and the doubled reading while Wrath is up, are not copied onto a damage effect.
+- Sheet Cooldown Reduction 39.4% is a video reading. The `tooltip × (1 - sheet)` formula is an estimate.
+- The timeline phase, all buffs cast together at 0s, is an estimate.
+- Overpower partial stacks are not scaled. The sheet total is applied only while the stored full-stack window is on.
+- Stone of Jordan's 10s Vulnerable touch has no touch interval. Vulnerable follows War Cry's 4s.
+- The Boss Training Dummy is scored as an elite. That is an estimate. The average holds the dummy Healthy for the whole window.
+- War Cry 38.5%[x], Wrath 30%[x], and the Burning line are applied on top of a combat sheet that was read while buffs were up. Whether the sheet already folded those lines in is unverified.
+- The All Damage ramp from 1,996% to 9,897.7% is not interpolated.
+- Grand Skull sockets, the unmatched Deathhead tooltip, Polearm Expertise 10/10, and attack speed 120% stay unscored.
+
+The first step-3 comparison, the d4builds.gg Whirlwind Barbarian endgame guide variant 4 against this build, is in `docs/compare-guide-v4.md`. That comparison scores the four guide uniques from `d4-guide-uniques.md` as estimates. The guide row uses the unboosted 2.5%[x] per soul. Nikolay's row keeps 4.1%[x].

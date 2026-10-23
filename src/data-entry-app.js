@@ -1,6 +1,6 @@
 import { ENTITY_KEYS, entityTemplate, upsertEntity } from './catalog.js';
 import { validate } from './schema.js';
-import { formatNeedsInput, needsInput } from './needs-input.js';
+import { needsInput, pendingAllocation, splitForBuild } from './needs-input.js';
 import { esc } from './html.js';
 
 const $ = (id) => document.getElementById(id);
@@ -10,6 +10,8 @@ const TYPES = Object.keys(ENTITY_KEYS);
 let catalog = null;
 let bundled = null;
 let schema = null;
+let extraNeeds = [];
+let userBuild = null;
 let type = 'skill';
 let draft = null;
 
@@ -24,9 +26,19 @@ function list() {
 }
 
 function renderChecklist() {
-  const items = needsInput(catalog);
-  $('checklistCount').textContent = `(${items.length})`;
-  $('checklist').textContent = formatNeedsInput(items);
+  const items = [...needsInput(catalog), ...extraNeeds].sort((a, b) => a.path.localeCompare(b.path) || a.reason.localeCompare(b.reason));
+  const split = splitForBuild(items, userBuild, catalog);
+  const pending = pendingAllocation(items).length;
+  $('checklistCount').textContent = `(${split.engineBlocking.length} engine-blocking, ${split.required.length} required, ${split.niceToHave.length} nice-to-have, ${pending} pending allocation)`;
+  const block = (label, group, withProvenance) => {
+    const lines = [`${label} (${group.length})`];
+    for (const item of group) {
+      const provenance = withProvenance ? ` — ${item.provenance}` : '';
+      lines.push(`${item.path} — ${item.reason}${provenance} — ${item.message}`);
+    }
+    return lines.join('\n');
+  };
+  $('checklist').textContent = `${block('Engine-blocking', split.engineBlocking, true)}\n\n${block('Required', split.required, true)}\n\n${block('Nice to have', split.niceToHave, false)}`;
 }
 
 function renderList() {
@@ -42,10 +54,14 @@ function textInput(name, value) {
   return `<input name="${esc(name)}" type="text" value="${esc(value ?? '')}">`;
 }
 
+const EFFECT_KINDS = ['', 'damage', 'defense', 'resource', 'mobility', 'utility', 'base-weapon'];
+
 function effectRows(effects) {
   const rows = effects?.length ? effects : [];
   return rows.map((effect, index) => `<fieldset data-effect="${index}"><legend>Effect ${index + 1}</legend>
+    ${type === 'gem' ? field('Slot type', textInput(`slotType-${index}`, effect.slotType)) : ''}
     ${field('Stat', textInput(`stat-${index}`, effect.stat))}
+    ${field('Kind', `<select name="kind-${index}">${EFFECT_KINDS.map(kind => `<option ${effect.kind === kind || (effect.kind == null && kind === '') ? 'selected' : ''}>${esc(kind)}</option>`).join('')}</select>`)}
     ${field('Bucket', `<select name="bucket-${index}">${['', 'additive', 'multiplicative', 'crit', 'vuln', 'overpower', 'mainstat', 'special', 'none', 'additive?', 'vuln?'].map(bucket => `<option ${effect.bucket === bucket || (effect.bucket == null && bucket === '') ? 'selected' : ''}>${esc(bucket)}</option>`).join('')}</select>`)}
     ${field('Value or min,max', textInput(`value-${index}`, Array.isArray(effect.value) ? effect.value.join(',') : effect.value ?? ''))}
     ${field('Conditions (blank = unknown, - = none)', textInput(`conditions-${index}`, effect.conditions == null ? '' : effect.conditions.length ? effect.conditions.join(', ') : '-'))}
@@ -86,7 +102,7 @@ function renderForm() {
   if (type === 'affix') parts.push(field('Slot', textInput('slot', draft.slot)));
   if (type === 'paragonNode') parts.push(field('Board id', textInput('boardId', draft.boardId)));
   if (type === 'paragonBoard') parts.push(field('Node ids', textInput('nodeIds', (draft.nodeIds || []).join(', '))));
-  if (type === 'glyph') parts.push(field('Level', `<input name="level" type="number" value="${draft.level ?? ''}">`));
+  if (type === 'glyph' || type === 'gem') parts.push(field('Level', `<input name="level" type="number" value="${draft.level ?? ''}">`));
   if (draft.effects) parts.push(effectRows(draft.effects));
   parts.push('<p><button type="submit">Save</button> <button type="button" id="deleteEntity">Delete</button></p>');
   $('entityForm').innerHTML = parts.join('');
@@ -108,7 +124,7 @@ function readConditions(raw) {
 
 function readForm(form) {
   const data = new FormData(form);
-  const next = entityTemplate(type);
+  const next = draft ? structuredClone(draft) : entityTemplate(type);
   next.id = String(data.get('id') || '').trim();
   next.name = String(data.get('name') || '');
   if (type !== 'paragonBoard' && type !== 'seasonalMechanic' && type !== 'talisman') next.name = next.name || next.id;
@@ -117,10 +133,12 @@ function readForm(form) {
   next.verified = data.get('verified') === 'on';
   const note = String(data.get('note') || '').trim();
   if (note) next.note = note;
+  else if (draft && draft.note === null) next.note = null;
   else delete next.note;
   if (type === 'skill') {
     next.category = String(data.get('category') || '').trim() || null;
-    next.tags = String(data.get('tags') || '').split(',').map(tag => tag.trim()).filter(Boolean);
+    const tagText = String(data.get('tags') || '').trim();
+    next.tags = tagText ? tagText.split(',').map(tag => tag.trim()).filter(Boolean) : (draft && draft.tags === null ? null : []);
     next.coeffPct = num(data.get('coeffPct'));
     next.rank = num(data.get('rank'));
     next.dot = data.get('dot') === '' ? null : data.get('dot') === 'true';
@@ -136,13 +154,17 @@ function readForm(form) {
   if (type === 'affix') next.slot = String(data.get('slot') || '').trim() || null;
   if (type === 'paragonNode') next.boardId = String(data.get('boardId') || '').trim() || null;
   if (type === 'paragonBoard') next.nodeIds = String(data.get('nodeIds') || '').split(',').map(id => id.trim()).filter(Boolean);
-  if (type === 'glyph') next.level = num(data.get('level'));
+  if (type === 'glyph' || type === 'gem') next.level = num(data.get('level'));
   if (next.effects) {
     const effects = [];
     let index = 0;
+    const previous = Array.isArray(draft?.effects) ? draft.effects : [];
     while (data.has(`effectSource-${index}`) || form.querySelector(`[data-effect="${index}"]`)) {
       const effect = {
+        ...(previous[index] || {}),
+        ...(type === 'gem' ? { slotType: String(data.get(`slotType-${index}`) || '').trim() || null } : {}),
         stat: String(data.get(`stat-${index}`) || '').trim() || null,
+        kind: String(data.get(`kind-${index}`) || '').trim() || null,
         bucket: String(data.get(`bucket-${index}`) || '').trim() || null,
         value: readValue(data.get(`value-${index}`)),
         conditions: readConditions(data.get(`conditions-${index}`)),
@@ -152,6 +174,7 @@ function readForm(form) {
       };
       const effectNote = String(data.get(`effectNote-${index}`) || '').trim();
       if (effectNote) effect.note = effectNote;
+      else delete effect.note;
       effects.push(effect);
       index += 1;
       if (index > 30) break;
@@ -201,7 +224,9 @@ $('entityForm').addEventListener('click', (event) => {
   }
   if (event.target?.id === 'addEffect' && draft) {
     draft = readForm($('entityForm'));
-    draft.effects.push({ stat: null, bucket: null, value: null, conditions: null, stacking: null, source: draft.source || 'manual-entry', verified: false });
+    const added = { stat: null, kind: null, bucket: null, value: null, conditions: null, stacking: null, source: draft.source || 'manual-entry', verified: false };
+    if (type === 'gem') added.slotType = null;
+    draft.effects.push(added);
     renderForm();
   }
   if (event.target?.id === 'deleteEntity' && draft?.id) {
@@ -263,6 +288,12 @@ $('resetCatalog').addEventListener('click', () => {
 
 bundled = await (await fetch('data/barbarian.json')).json();
 schema = await (await fetch('data/schema/catalog.schema.json')).json();
+const [savedBuilds, metaBuilds] = await Promise.all([
+  fetch('data/builds.json').then(response => response.json()),
+  fetch('data/meta-builds.json').then(response => response.json())
+]);
+extraNeeds = [...needsInput(savedBuilds, '/builds.json'), ...needsInput(metaBuilds, '/meta-builds.json')];
+userBuild = (savedBuilds.builds || []).find(entry => entry.id === 'users-current-build') || savedBuilds.builds?.[0] || null;
 catalog = structuredClone(bundled);
 if (localStorage[STORAGE]) $('status').textContent = 'Bundled catalog loaded. This browser also has a local edit; Reset clears it, or import a file. Showing the bundled file.';
 else $('status').textContent = 'Bundled catalog loaded.';

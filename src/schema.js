@@ -1,6 +1,9 @@
 // Subset of JSON Schema 2020-12 used by data/schema/*.schema.json.
 // Keywords: $ref, $defs, type, properties, required, additionalProperties,
 // items, enum, const, minimum, maximum, minItems, maxItems, minLength, oneOf, anyOf.
+// effect.value and effect.range are independent. Masterworking (up to 25, with one
+// affix boosted again at the cap) and Horadric Cube transfiguration can put a point
+// value outside its base range. That is not a validation error.
 
 export function validate(schema, data) {
   const errors = [];
