@@ -698,6 +698,7 @@
         ],
         "armorMitigationScope": "direct and DoT",
         "mitigationCapPct": 90,
+        "note": "Splinter of the Black Soulstone adds +1% damage taken per soul. The soul count is the souls input. Empty souls use 15 and that default is an estimate. This percent is not in the DR list.",
         "coldResistance": {
           "gear": {
             "town": 18947,
@@ -918,12 +919,30 @@
         "combat": null
       },
       "sheetContext": "town",
+      "souls": null,
+      "splinter": {
+        "id": "splinter-of-the-black-soulstone",
+        "equipped": true,
+        "slot": "jewelry",
+        "slotId": null,
+        "source": "https://helltides.com/tools/splinters",
+        "verified": false,
+        "note": "Season 15 Soul Splinter, socketed in jewelry. Which jewelry piece holds it is not stored. Manual entry."
+      },
       "combatObservations": {
         "source": "video-model reading 2026-10-23, unconfirmed",
         "verified": false,
         "note": "Fighting sheet from the combat video. Not confirmed by screenshots. sheetContext stays town, so the headline score stays the town score.",
         "currentFury": "The Fury globe stays full. combat-nobuff and combat-allbuff currentFury are Max Fury 826, observed.",
-        "leoricSouls": "The Leoric skull icon shows no stack count. The per-soul rate stays applied once.",
+        "leoricSouls": "The skull-stack icon is the Splinter of the Black Soulstone, socketed in jewelry. It is not Leoric's Crown.",
+        "souls": {
+          "videoLow": 4,
+          "videoHigh": 27,
+          "screenshot": 17,
+          "defaultSouls": 15,
+          "estimate": true,
+          "note": "The video range was about 4 to 27 or more. A screenshot showed 17. The working default is 15, an estimate."
+        },
         "polearmExpertise": "10/10. The catalog already stores Polearm Expertise at that rank.",
         "allDamageRamp": {
           "low": 1996,

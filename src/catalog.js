@@ -487,6 +487,52 @@ function applyOffensiveSheet(build, skills, modifiers, notes) {
   }
 }
 
+const DEFAULT_SOULS = 15;
+
+function applySplinter(catalog, build, modifiers, notes, opts = {}) {
+  const ref = build?.splinter;
+  if (!ref || ref.equipped === false || !ref.id) return { souls: null, soulsEstimate: false, soulFactor: null, soulModel: null };
+  const entity = (catalog.seasonalMechanics || []).find(item => item.id === ref.id);
+  if (!entity) {
+    notes.push(`Splinter ${ref.id} is not in the catalog.`);
+    return { souls: null, soulsEstimate: false, soulFactor: null, soulModel: null };
+  }
+  const damage = (entity.effects || []).find(effect => effect.kind === 'damage' && /per soul/i.test(effect.stat || ''));
+  const taken = (entity.effects || []).find(effect => effect.kind === 'defense' && /damage taken per soul/i.test(effect.stat || ''));
+  const rate = typeof damage?.value === 'number' ? damage.value : null;
+  if (rate == null) {
+    notes.push(`${entity.name}: the per-soul damage rate is missing, so the splinter is not scored.`);
+    return { souls: null, soulsEstimate: false, soulFactor: null, soulModel: null };
+  }
+  const measured = typeof build.souls === 'number' && Number.isFinite(build.souls);
+  const souls = measured ? build.souls : DEFAULT_SOULS;
+  const soulsEstimate = !measured;
+  const compound = opts.soulModel === 'compound';
+  const perSoul = 1 + rate / 100;
+  const factor = compound ? perSoul ** souls : 1 + (rate / 100) * souls;
+  const alternate = compound ? 1 + (rate / 100) * souls : perSoul ** souls;
+  modifiers.push({
+    name: entity.name,
+    bucket: 'multiplicative',
+    value: (factor - 1) * 100,
+    active: true,
+    kind: 'season',
+    id: entity.id,
+    souls,
+    soulModel: compound ? 'compound' : 'sum'
+  });
+  const applied = compound ? `${perSoul}^${souls}` : `1 + ${rate}/100 × ${souls}`;
+  const other = compound ? `1 + ${rate}/100 × ${souls}` : `${perSoul}^${souls}`;
+  const countText = soulsEstimate
+    ? `Souls default to ${souls}. That default is an estimate. The video range was about 4 to 27 or more, and a screenshot showed 17.`
+    : `Souls ${souls}.`;
+  notes.push(`${entity.name}: ${rate}%[x] per soul, socketed in jewelry. ${applied} = ${factor}. ${countText} The compounded alternative at this count is ${other} = ${alternate}. Source: ${entity.source}.`);
+  if (typeof taken?.value === 'number') {
+    notes.push(`${entity.name}: +${taken.value}% damage taken per soul × ${souls} = +${taken.value * souls}% damage taken.${soulsEstimate ? ' Estimate.' : ''} This stays a defence note. It is not added to the DR list.`);
+  }
+  return { souls, soulsEstimate, soulFactor: factor, soulModel: compound ? 'compound' : 'sum' };
+}
+
 export function engineInputFromBuild(catalog, build, opts = {}) {
   const applied = applySheetContext(build, sheetContextOf(build, opts), opts);
   build = applied.build;
@@ -648,6 +694,7 @@ export function engineInputFromBuild(catalog, build, opts = {}) {
   if (applied.currentFuryEstimate && typeof build.currentFury === 'number') {
     notes.push(`Current Fury defaults to Max Fury ${build.currentFury}. That default is an estimate.`);
   }
+  const splinter = applySplinter(catalog, build, modifiers, notes, opts);
   return {
     weaponDmg: build.weaponDmg,
     coeffPct,
@@ -669,7 +716,11 @@ export function engineInputFromBuild(catalog, build, opts = {}) {
     sheetContext: applied.context,
     sheetFallbacks: applied.fallbacks,
     currentFuryEstimate: applied.currentFuryEstimate,
-    currentFury: typeof build.currentFury === 'number' ? build.currentFury : null
+    currentFury: typeof build.currentFury === 'number' ? build.currentFury : null,
+    souls: splinter.souls,
+    soulsEstimate: splinter.soulsEstimate,
+    soulFactor: splinter.soulFactor,
+    soulModel: splinter.soulModel
   };
 }
 
@@ -811,6 +862,17 @@ export function evaluateBuild(catalog, build, opts = {}) {
   }
   const uptime = build.uptime || blankUptime();
   const result = blendScore(input, uptime);
+  let soulAlternate = null;
+  if (typeof input.soulFactor === 'number' && opts.soulModel !== 'compound') {
+    const altInput = applyFormulaOpts(engineInputFromBuild(catalog, build, { ...opts, soulModel: 'compound' }), {
+      ...opts,
+      critReading,
+      activeWeaponSlot,
+      soulModel: 'compound'
+    });
+    const alt = blendScore(altInput, uptime);
+    soulAlternate = { total: alt.total, model: 'compound', factor: altInput.soulFactor, souls: altInput.souls, verified: false };
+  }
   let critAlternate = null;
   let conditionalCritAlternate = null;
   if (typeof input.critChance === 'number' && input.critChance > 0 && typeof input.critDmg === 'number' && input.critDmg > 0 && opts.omitGearCritMult !== true && opts.omitCritMult !== true) {
@@ -842,7 +904,12 @@ export function evaluateBuild(catalog, build, opts = {}) {
     conditionalCritAlternate,
     sheetContext: input.sheetContext,
     sheetFallbacks: input.sheetFallbacks,
-    currentFuryEstimate: input.currentFuryEstimate
+    currentFuryEstimate: input.currentFuryEstimate,
+    souls: input.souls,
+    soulsEstimate: input.soulsEstimate,
+    soulFactor: input.soulFactor,
+    soulModel: input.soulModel,
+    soulAlternate
   };
 }
 

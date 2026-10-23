@@ -64,7 +64,16 @@ test('the saved build stays on the town sheet and tags the combat reading as unc
   assert.equal(saved.combatObservations.weaponTooltip.applied, false);
   assert.equal(saved.combatObservations.weaponTooltip.name, 'Deathhead of Channeling');
   const town = evaluateBuild(catalog, { ...saved, skills: ['whirlwind'] });
-  near(town.result.total, 42398366381.44);
+  near(town.result.total, 56001684701.70);
+  assert.equal(town.souls, 15);
+  assert.equal(town.soulsEstimate, true);
+  assert.ok(Math.abs(town.soulFactor - 1.375) < 1e-9);
+  assert.equal(town.input.modifiers.some(mod => mod.id === 'leorics-crown'), false);
+  const splinter = town.input.modifiers.find(mod => mod.id === 'splinter-of-the-black-soulstone');
+  assert.ok(Math.abs(splinter.value - 37.5) < 1e-9);
+  assert.match(town.input.notes.join('\n'), /\+15% damage taken/);
+  assert.equal(saved.defense.dr.length, 1);
+  assert.equal(saved.defense.dr[0], 50);
   assert.equal(town.sheetContext, 'town');
   assert.equal(town.currentFuryEstimate, true);
   assert.equal(town.input.critDmg, 7424.8);
@@ -115,7 +124,7 @@ test('vs Healthy and vs Injured are separate rows, and Overpower Damage applies 
   assert.equal(healthy.input.modifiers.some(mod => mod.name === 'vs Healthy' && mod.value === 181.8), true);
   assert.equal(healthy.input.modifiers.some(mod => mod.name === 'vs Injured'), false);
   assert.equal(healthy.input.modifiers.some(mod => mod.value === 75), true);
-  near(healthy.result.total, 55408916612.11);
+  near(healthy.result.total, 73186609357.97);
 
   const injured = score('combat-nobuff', 'low', 'normal', { enemyInjured: 1 });
   assert.equal(injured.input.modifiers.some(mod => mod.name === 'vs Injured' && mod.value === 133.4), true);
@@ -134,18 +143,18 @@ test('per-hit predictions under each crit reading', () => {
   const expected = {
     'combat-nobuff': {
       low: {
-        normal: [10591728422.51, 1954193435.89, 3673883659.47, 1954193435.89],
-        overpower: [992145715678.01, 183052715069.74, 344139104331.12, 183052715069.74]
+        normal: [13990035140.21, 2581187295.24, 4852632115.05, 2581187295.24],
+        overpower: [1310471046164.52, 241784325860.61, 454554532617.95, 241784325860.61]
       }
     },
     'combat-allbuff': {
       low: {
-        normal: [28916905658.21, 5335222446.16, 10030218198.79, 5335222446.16],
-        overpower: [2708697099755.43, 499759612501.00, 939548071501.88, 499759612501.00]
+        normal: [38194760115.31, 7047003711.31, 13248366977.27, 7047003711.31],
+        overpower: [3577769944441.61, 660105155801.04, 1240997692905.95, 660105155801.04]
       },
       high: {
-        normal: [42341465068.30, 7812078425.89, 14686707440.66, 7812078425.89],
-        overpower: [3966199045828.55, 731771041665.78, 1375729558331.67, 731771041665.78]
+        normal: [55926526867.35, 10318547392.50, 19398869097.90, 10318547392.50],
+        overpower: [5238735531233.67, 966556371076.32, 1817125977623.49, 966556371076.32]
       }
     }
   };
@@ -163,5 +172,12 @@ test('per-hit predictions under each crit reading', () => {
     enemyHealthy: 1,
     healthyInjured: 1
   });
-  near(healthyHigh.result.total, 94043985148.16);
+  near(healthyHigh.result.total, 124217559633.74);
+  const four = score('combat-nobuff', 'low', 'normal', {}, 'headline');
+  const atFour = evaluateBuild(catalog, { ...hit('combat-nobuff', 'normal'), souls: 4 }, { sheetContext: 'combat-nobuff' });
+  const at27 = evaluateBuild(catalog, { ...hit('combat-nobuff', 'normal'), souls: 27 }, { sheetContext: 'combat-nobuff', soulModel: 'compound' });
+  near(atFour.result.total, four.result.total * 1.1 / 1.375);
+  near(at27.soulFactor, 1.025 ** 27);
+  assert.equal(atFour.soulsEstimate, false);
+  assert.match(atFour.input.notes.join('\n'), /\+4% damage taken/);
 });

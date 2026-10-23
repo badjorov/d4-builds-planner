@@ -227,6 +227,8 @@ export function buildFromCore(catalog, skills, opts = {}) {
     ...(opts.offensiveSheet ? { offensiveSheet: opts.offensiveSheet } : {}),
     ...(opts.vulnerableDamageInAdditive === true ? { vulnerableDamageInAdditive: true } : {}),
     ...(opts.critAudit ? { critAudit: opts.critAudit } : {}),
+    ...(opts.splinter ? { splinter: opts.splinter } : {}),
+    ...(Object.hasOwn(opts, 'souls') ? { souls: opts.souls } : {}),
     boards: opts.boards || [],
     glyphs: opts.glyphs || [],
     gear: emptyGear(catalog).map(slot => ({

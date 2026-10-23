@@ -72,6 +72,8 @@
     "note": { "type": ["string", "null"] },
     "maxFury": { "$ref": "#/$defs/sheetReading" },
     "sheetContext": { "enum": ["town", "combat", "combat-nobuff", "combat-allbuff"] },
+    "souls": { "type": ["number", "null"] },
+    "splinter": { "$ref": "#/$defs/splinter" },
     "attackSpeed": { "$ref": "#/$defs/sheetReading" },
     "currentFury": { "$ref": "#/$defs/sheetReading" },
     "furyRegeneration": { "$ref": "#/$defs/sheetReading" },
@@ -194,6 +196,20 @@
         "castsPerSecond": { "type": ["number", "null"] }
       }
     },
+    "splinter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "equipped"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "equipped": { "type": "boolean" },
+        "slot": { "type": ["string", "null"] },
+        "slotId": { "type": ["string", "null"] },
+        "source": { "type": "string", "minLength": 1 },
+        "verified": { "type": "boolean" },
+        "note": { "type": "string" }
+      }
+    },
     "combatObservations": {
       "type": "object",
       "additionalProperties": false,
@@ -204,6 +220,18 @@
         "note": { "type": "string" },
         "currentFury": { "type": "string" },
         "leoricSouls": { "type": "string" },
+        "souls": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "videoLow": { "type": "number" },
+            "videoHigh": { "type": "number" },
+            "screenshot": { "type": "number" },
+            "defaultSouls": { "type": "number" },
+            "estimate": { "type": "boolean" },
+            "note": { "type": "string" }
+          }
+        },
         "polearmExpertise": { "type": "string" },
         "allDamageRamp": {
           "type": "object",
@@ -430,6 +458,7 @@
         "armorMitigationScope": { "type": "string" },
         "resistMitigationPct": { "$ref": "#/$defs/sheetReading" },
         "mitigationCapPct": { "type": ["number", "null"] },
+        "note": { "type": "string" },
         "coldResistance": { "$ref": "#/$defs/coldResistance" },
         "dr": {
           "oneOf": [

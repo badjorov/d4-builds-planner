@@ -78,6 +78,6 @@ test('the whirlwind headline stays on the direct hit', () => {
   assert.equal(dust.damageType, null);
   assert.equal(whirlwind.input.isDot, false);
   assert.equal(whirlwind.input.coeffPct, 386);
-  assert.ok(Math.abs(whirlwind.result.total - 42398366381.44) < 0.01, String(whirlwind.result.total));
+  assert.ok(Math.abs(whirlwind.result.total - 56001684701.70) < 0.01, String(whirlwind.result.total));
   assert.equal(whirlwind.input.notes.some(note => note.includes('Dust Devils') && note.includes('no damage type')), true);
 });

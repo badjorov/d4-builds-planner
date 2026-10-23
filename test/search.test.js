@@ -90,11 +90,10 @@ test('real catalog does not rank an unverified build unless asked', () => {
   const gearIds = shown.ranked[0].gear.map(item => item.id).sort();
   assert.deepEqual(gearIds, [
     'gohrs-devastating-grips',
-    'leorics-crown',
     'ramaladni',
     'stone-of-jordan'
   ]);
-  const multipliers = [117, 23, 4.1, 0.5];
+  const multipliers = [117, 23, 0.5];
   const expected = 100 * 24.3 * multipliers.reduce((product, value) => product * (1 + value / 100), 1);
   near(shown.ranked[0].power, expected);
   assert.equal(shown.ranked.some(result => result.skills.includes('death-blow') || result.skills.includes('flay')), false);
@@ -125,6 +124,8 @@ test('a candidate with the equipped layout scores the equipped power', () => {
     glyphs: saved.glyphs,
     uptime: saved.uptime,
     critAudit: saved.critAudit,
+    splinter: saved.splinter,
+    souls: saved.souls,
     slotHands: Object.fromEntries(saved.gear.filter(slot => slot.hands).map(slot => [slot.slotId, slot.hands])),
     arsenalSlots: saved.gear.filter(slot => weaponIds.has(slot.slotId)).map(slot => ({
       slotId: slot.slotId,
