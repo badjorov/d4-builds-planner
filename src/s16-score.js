@@ -1016,23 +1016,44 @@ export function scoreProposedDoubleSwing(catalog, savedBuild, opts = {}) {
   }
   const definition = { ...base, id: 'ds-s16-proposed', scoredLines: lines };
   const scored = scoreS16Build(catalog, savedBuild, definition, { variants: { sliceAndDice: true }, dustDevilGlyph: false });
-  return { ...scored, split, counts };
+  return { ...scored, split, counts, ...withCastRates(scored) };
+}
+
+export const SWORD_WEAPON_APS = 1.1;
+export const NON_GEAR_ATTACK_SPEED = 12.5;
+
+export function doubleSwingCastRate(attackSpeedPct) {
+  return SWORD_WEAPON_APS * (1 + attackSpeedPct / 100);
+}
+
+function scaleDps(row, factor) {
+  return { peak: row.peak * factor, average: row.average * factor };
 }
 
 function withCastRates(scored) {
-  const fast = DS_WEAPON_APS * (1 + DEFAULT_ATTACK_SPEED_PCT / 100);
-  const slow = DS_WEAPON_APS;
-  const scale = slow / fast;
-  const scaleDps = (row) => ({
-    peak: row.peak * scale,
-    average: row.average * scale
-  });
+  const capped = doubleSwingCastRate(DEFAULT_ATTACK_SPEED_PCT);
+  const sheet = doubleSwingCastRate(NON_GEAR_ATTACK_SPEED);
   return {
-    castsPerSecond: { capped: fast, baseWeapon: slow },
-    dpsAtBaseWeaponSpeed: {
-      min: scaleDps(scored.dps.min),
-      max: scaleDps(scored.dps.max)
+    weaponAps: SWORD_WEAPON_APS,
+    nonGearAttackSpeed: NON_GEAR_ATTACK_SPEED,
+    castsPerSecond: { capped, sheet },
+    dpsAtSheet: {
+      min: scaleDps(scored.dps.min, sheet / capped),
+      max: scaleDps(scored.dps.max, sheet / capped)
     }
+  };
+}
+
+export function attackSpeedMarginal(dpsAtCapAverage) {
+  const perCast = dpsAtCapAverage / doubleSwingCastRate(DEFAULT_ATTACK_SPEED_PCT);
+  const step = 10;
+  const gain = perCast * doubleSwingCastRate(step) - perCast * doubleSwingCastRate(0);
+  return {
+    from: NON_GEAR_ATTACK_SPEED,
+    to: DEFAULT_ATTACK_SPEED_PCT,
+    perTen: gain,
+    linear: true,
+    castsPerTen: SWORD_WEAPON_APS * (step / 100)
   };
 }
 
@@ -1068,7 +1089,7 @@ export function scoreGoldenEpiphany(catalog, savedBuild, opts = {}) {
     setCount: { jewelry: 3, charms: 3, total: 6, capInFiles: 5, wasted: 1 },
     ...withCastRates(scored),
     furyAtCap: { sheetRegen: furyAt(casts.capped, 80), withoutInsight: furyAt(casts.capped, 33) },
-    furyAtBase: { sheetRegen: furyAt(casts.baseWeapon, 80), withoutInsight: furyAt(casts.baseWeapon, 33) }
+    furyAtSheet: { sheetRegen: furyAt(casts.sheet, 80), withoutInsight: furyAt(casts.sheet, 33) }
   };
 }
 

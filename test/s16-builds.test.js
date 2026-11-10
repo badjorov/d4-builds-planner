@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { MASTERWORK_MARK, MASTERWORK_UPLIFT } from '../src/masterwork.js';
 import { attackSpeedOverCap } from '../src/attack-speed.js';
-import { charmCounts, scoreGoldenEpiphany, scoreProposedDoubleSwing, scoreS16, whirlwindBreakpointTable, whirlwindEffectPerSecond, whirlwindFrames, whirlwindFury } from '../src/s16-score.js';
+import { attackSpeedMarginal, charmCounts, scoreGoldenEpiphany, scoreProposedDoubleSwing, scoreS16, whirlwindBreakpointTable, whirlwindEffectPerSecond, whirlwindFrames, whirlwindFury } from '../src/s16-score.js';
 import { reallocateOverCapAttackSpeed } from '../src/search.js';
 import { SKILL_RANK_BONUS, skillRankMultiplier } from '../src/skill-rank.js';
 
@@ -231,9 +231,13 @@ test('Golden Epiphany scores under the proposed Double Swing', () => {
   assert.equal(stay.setCount.wasted, 1);
   assert.ok(stay.dps.max.average < proposed.dps.max.average);
   assert.ok(drop.dps.max.average < stay.dps.max.average);
-  assert.ok(Math.abs(stay.dpsAtBaseWeaponSpeed.max.average - stay.dps.max.average * (1.1 / 2.42)) < 1e6);
+  const sheetRate = 1.1 * 1.125;
+  assert.ok(Math.abs(stay.castsPerSecond.sheet - sheetRate) < 1e-9);
+  assert.ok(Math.abs(stay.dpsAtSheet.max.average - stay.dps.max.average * (sheetRate / 2.42)) < 1e6);
   assert.ok(stay.furyAtCap.sheetRegen.net < 0);
   const doc = readFileSync(new URL('../docs/s16-builds.md', import.meta.url), 'utf8');
+  assert.ok(attackSpeedMarginal(proposed.dps.max.average).perTen > 0);
+  assert.match(doc, /1\.2375/);
   assert.match(doc, /Unique_Charm_Count_Bonus/);
   assert.match(doc, /80–100/);
 });
