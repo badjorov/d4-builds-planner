@@ -2,7 +2,9 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { MASTERWORK_MARK, MASTERWORK_UPLIFT } from '../src/masterwork.js';
+import { attackSpeedOverCap } from '../src/attack-speed.js';
 import { scoreS16, whirlwindBreakpointTable, whirlwindEffectPerSecond, whirlwindFrames, whirlwindFury } from '../src/s16-score.js';
+import { reallocateOverCapAttackSpeed } from '../src/search.js';
 import { SKILL_RANK_BONUS, skillRankMultiplier } from '../src/skill-rank.js';
 
 const read = (path) => JSON.parse(readFileSync(new URL(path, import.meta.url), 'utf8'));
@@ -154,4 +156,38 @@ test('Whirlwind Fury and Lucky Hit scale with the tick rate', () => {
   assert.deepEqual(table.map(row => row.attackSpeedPct), [0, 27.5, 48.8, 91, 143.5]);
   assert.equal(table.filter(row => row.defaultLanding).length, 1);
   assert.equal(table.find(row => row.defaultLanding).frames, 13);
+  const above = table.find(row => row.attackSpeedPct === 143.5);
+  assert.equal(above.aboveCap, true);
+  assert.equal(above.referenceOnly, true);
+  assert.equal(above.frames, 10);
+});
+
+test('attack speed above the 120% cap is worth 0', () => {
+  const capped = whirlwindFury({ attackSpeedPct: 143.5 });
+  const atCap = whirlwindFury({ attackSpeedPct: 120 });
+  assert.equal(capped.frames, atCap.frames);
+  assert.equal(capped.cap, 120);
+  assert.ok(Math.abs(capped.ticksPerSecond - atCap.ticksPerSecond) < 1e-9);
+  const catalog = read('../data/barbarian.json');
+  const build = read('../data/builds.json').builds.find(item => item.id === 'users-current-build');
+  const over = attackSpeedOverCap(catalog, build);
+  assert.equal(over.cap, 120);
+  assert.equal(over.label, 'user-observed in-game, S15; recheck S16');
+  assert.ok(Math.abs(over.overCap - 151.5) < 1e-9);
+  assert.equal(over.wasted.length, 4);
+  const moved = reallocateOverCapAttackSpeed(catalog, build);
+  for (const row of moved.report.replacements) {
+    assert.equal(row.worth, 0);
+    assert.equal(moved.build.gear.some(slot => (slot.affixes || []).some(affix => affix.affixId === row.affixId)), false);
+  }
+  const weapon = moved.build.gear.find(slot => slot.slotId === 'weapon-1');
+  const spirit = moved.build.gear.find(slot => slot.slotId === 'weapon-3');
+  assert.equal(weapon.affixes.some(affix => affix.affixId === 'v1-insight-damage'), true);
+  assert.equal(spirit.affixes.some(affix => affix.affixId === 'v1-spirit-all-damage'), true);
+  const ww = scoreS16(catalog, build).find(row => row.id === 's16-whirlwind');
+  assert.equal(ww.whirlwind.weaponId, '2h-polearm');
+  assert.equal(ww.whirlwind.framesEstimate, true);
+  assert.equal(ww.mightTwoHander.count, 1);
+  assert.equal(ww.lines.some(line => line.name === 'Polearm Expertise'), true);
+  assert.equal(ww.lines.some(line => line.name === 'Might, two-handed damage'), false);
 });

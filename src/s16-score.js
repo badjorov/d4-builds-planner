@@ -1,9 +1,11 @@
+import { evaluateBuild } from './catalog.js';
 import { rotationReport } from './rotation.js';
 import { DEFAULT_SKILL_RANK, skillRankMultiplier } from './skill-rank.js';
+import { ATTACK_SPEED_CAP_LABEL, clampAttackSpeedPct, resolveAttackSpeedCap } from './attack-speed.js';
 
 const FURY = 826;
 export const DEFAULT_ATTACK_SPEED_PCT = 120;
-export const DEFAULT_WHIRLWIND_WEAPON = '2h-axe';
+export const DEFAULT_WHIRLWIND_WEAPON = '2h-polearm';
 export const WHIRLWIND_MEASUREMENT = 'community-measured S15 (3.2), recheck after S16 launch';
 export const WHIRLWIND_BREAKPOINT_SOURCES = [
   'https://maxroll.gg/d4/resources/attack-speed-mechanics',
@@ -19,7 +21,13 @@ export const WHIRLWIND_2H_BREAKPOINTS = [
 const WHIRLWIND_WEAPONS = {
   '2h-axe': { label: '2H axe, polearm or mace', framesAtZero: 26, stepped: true },
   '2h-mace': { label: '2H axe, polearm or mace', framesAtZero: 26, stepped: true },
-  '2h-polearm': { label: '2H axe, polearm or mace', framesAtZero: 26, stepped: true },
+  '2h-polearm': {
+    label: '2H polearm',
+    framesAtZero: 26,
+    stepped: true,
+    framesEstimate: true,
+    framesNote: 'Polearm-specific frames are an estimate. The measured 0% group is 2H axe, polearm, or mace at 26 frames, and the steps are that 2H table.'
+  },
   '2h-sword': { label: '2H sword', framesAtZero: 24, stepped: false },
   '1h': { label: '1H', framesAtZero: 21, stepped: false }
 };
@@ -162,6 +170,22 @@ const LINES = {
     always: true,
     label: '200%[x] increased Bleeding damage. Static value. Applies to the bleed.'
   },
+  mightTwoHander: {
+    name: 'Might, two-handed damage',
+    bucket: 'multiplicative',
+    min: 8,
+    max: 8,
+    always: true,
+    label: '8%[x] with a Two-Handed weapon. Added only when the equipped Might glyph is absent from the score.'
+  },
+  polearm: {
+    name: 'Polearm Expertise',
+    bucket: 'multiplicative',
+    min: 15,
+    max: 15,
+    always: true,
+    label: 'Rank 10 is 15%[x] while Healthy. PTR Barbarian_WeaponExpertise_2HPolearm_Rank10 SF_0 is 0.15. Per level, Lucky Hit Chance is 0.015 × level, so rank 10 is also 15% Lucky Hit Chance. Level 10/10. Player Healthy uptime is 1. That uptime is an estimate.'
+  },
   mace: {
     name: 'One-Handed Mace Expertise',
     bucket: 'multiplicative',
@@ -253,7 +277,7 @@ export const S16_DEFINITIONS = [
     hitSkill: 'whirlwind',
     storedCoeff: 386,
     noOverpower: false,
-    scoredLines: ['ramaladni', 'sescheron', 'cruciblePlus', 'crucibleStreak'],
+    scoredLines: ['ramaladni', 'sescheron', 'cruciblePlus', 'crucibleStreak', 'polearm'],
     coeffNote: 'Whirlwind formulas match on 3.2 and 3.3_ptr. The tooltip payload is 1.65 × 13/30 × SkillRankBonus[rank]. At rank 41 that is 386.1%, the stored 386%.'
   },
   {
@@ -319,6 +343,8 @@ export function scoreS16Build(catalog, savedBuild, definition, opts = {}) {
   const coeff = coefficient(definition, rank, opts);
   const build = bareBuild(savedBuild, definition.timelineSkills);
   const specs = activeLines(definition, opts);
+  const might = definition.id === 's16-whirlwind' ? mightTwoHander(catalog, build) : null;
+  if (might && !might.applied) specs.push(LINES.mightTwoHander);
   const min = runReport(catalog, build, definition, specs, 'min', opts);
   const max = runReport(catalog, build, definition, specs, 'max', opts);
   const scale = coeff.coeffRatio;
@@ -353,6 +379,7 @@ export function scoreS16Build(catalog, savedBuild, definition, opts = {}) {
     max: { peak: max.peak.total * scale, average: max.average.total * scale },
     isolation,
     attackSpeed: attackSpeedFactor(opts),
+    mightTwoHander: might,
     attackSpeedModel: definition.id === 's16-whirlwind' ? whirlwindModel(opts) : null,
     whirlwind: definition.id === 's16-whirlwind' ? whirlwindTiming(opts) : null,
     furyReport: furyReport(definition.id, opts),
@@ -381,8 +408,23 @@ export function scoreS16(catalog, savedBuild, opts = {}) {
 }
 
 export function attackSpeedFactor(opts = {}) {
-  const bonus = typeof opts.attackSpeedPct === 'number' ? opts.attackSpeedPct : DEFAULT_ATTACK_SPEED_PCT;
-  return { bonus, baseAps: BASE_APS, aps: BASE_APS * (1 + bonus / 100) };
+  const requested = typeof opts.attackSpeedPct === 'number' ? opts.attackSpeedPct : DEFAULT_ATTACK_SPEED_PCT;
+  const clamped = clampAttackSpeedPct(requested, opts);
+  return {
+    bonus: clamped.effective,
+    requested: clamped.requested,
+    cap: clamped.cap,
+    overCap: clamped.overCap,
+    capLabel: ATTACK_SPEED_CAP_LABEL,
+    baseAps: BASE_APS,
+    aps: BASE_APS * (1 + clamped.effective / 100)
+  };
+}
+
+function mightTwoHander(catalog, build) {
+  const scored = evaluateBuild(catalog, { ...build, skills: ['whirlwind'] });
+  const lines = (scored.input.modifiers || []).filter(mod => mod.id === 'might' && mod.value === 8);
+  return { applied: lines.length > 0, count: lines.length, value: 8 };
 }
 
 export function whirlwindModel(opts = {}) {
@@ -409,6 +451,8 @@ export function whirlwindFrames(attackSpeedPct = DEFAULT_ATTACK_SPEED_PCT, weapo
     breakpointPct: step.attackSpeedPct,
     frames,
     interpolated: !stepped && attackSpeedPct > 0,
+    framesEstimate: weapon.framesEstimate === true,
+    framesNote: weapon.framesNote || null,
     estimate: true,
     label: WHIRLWIND_MEASUREMENT
   };
@@ -416,12 +460,14 @@ export function whirlwindFrames(attackSpeedPct = DEFAULT_ATTACK_SPEED_PCT, weapo
 
 export function whirlwindTiming(opts = {}) {
   const speed = attackSpeedFactor(opts);
+  const capFields = { cap: speed.cap, requestedAttackSpeedPct: speed.requested, capLabel: speed.capLabel };
   if (whirlwindModel(opts) === 'flat') {
     return {
       model: 'flat',
       frames: null,
       ticksPerSecond: TICKS_AT_ONE_APS,
       attackSpeedPct: speed.bonus,
+      ...capFields,
       weapon: whirlwindWeapon(opts).label,
       interpolated: false,
       estimate: false,
@@ -432,7 +478,8 @@ export function whirlwindTiming(opts = {}) {
   return {
     model: 'breakpoints',
     ...frames,
-    ticksPerSecond: 60 / frames.frames
+    ticksPerSecond: 60 / frames.frames,
+    ...capFields
   };
 }
 
@@ -555,11 +602,13 @@ function dpsOf(id, hit, fury) {
 
 export function whirlwindBreakpointTable(catalog, savedBuild, opts = {}) {
   const definition = S16_DEFINITIONS.find(item => item.id === 's16-whirlwind');
+  const weaponId = opts.whirlwindWeapon || DEFAULT_WHIRLWIND_WEAPON;
+  const cap = resolveAttackSpeedCap(opts);
   const scored = scoreS16Build(catalog, savedBuild, definition, {
     ...opts,
     attackSpeedPct: 0,
     whirlwindAttackSpeedModel: 'breakpoints',
-    whirlwindWeapon: '2h-axe'
+    whirlwindWeapon: weaponId
   });
   const ticksAtZero = scored.whirlwind.ticksPerSecond;
   const perTick = {
@@ -568,17 +617,22 @@ export function whirlwindBreakpointTable(catalog, savedBuild, opts = {}) {
     maxPeak: scored.dps.max.peak / ticksAtZero,
     maxAverage: scored.dps.max.average / ticksAtZero
   };
-  const landing = whirlwindFrames(opts.attackSpeedPct ?? DEFAULT_ATTACK_SPEED_PCT, '2h-axe');
+  const requested = opts.attackSpeedPct ?? DEFAULT_ATTACK_SPEED_PCT;
+  const landing = whirlwindFrames(Math.min(requested, cap), weaponId);
   return WHIRLWIND_2H_BREAKPOINTS.map(step => {
+    const aboveCap = step.attackSpeedPct > cap + 1e-9;
     const fury = whirlwindFury({
       ...opts,
       attackSpeedPct: step.attackSpeedPct,
+      ignoreAttackSpeedCap: aboveCap,
       whirlwindAttackSpeedModel: 'breakpoints',
-      whirlwindWeapon: '2h-axe'
+      whirlwindWeapon: weaponId
     });
     return {
       attackSpeedPct: step.attackSpeedPct,
-      frames: step.frames,
+      frames: fury.frames,
+      aboveCap,
+      referenceOnly: aboveCap,
       ticksPerSecond: fury.ticksPerSecond,
       dps: {
         min: {
@@ -597,7 +651,7 @@ export function whirlwindBreakpointTable(catalog, savedBuild, opts = {}) {
       spenderUptime: fury.spenderUptime,
       sustainable: fury.sustainable,
       poolSeconds: fury.poolSeconds,
-      defaultLanding: landing.breakpointPct === step.attackSpeedPct,
+      defaultLanding: !aboveCap && landing.breakpointPct === step.attackSpeedPct,
       label: WHIRLWIND_MEASUREMENT
     };
   });
