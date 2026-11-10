@@ -382,6 +382,7 @@ export function rotationReport(catalog, build, opts = {}) {
       unstoppable: slice.unstoppable,
       enemyHealthy: slice.enemyHealthy,
       elites: slice.elites,
+      berserkStreak5: slice.berserkStreak5 || 0,
       sheetContext: slice.sheetContext,
       endpoint: slice.endpoint,
       soulRatePct: opts.soulRatePct ?? null,
@@ -403,11 +404,12 @@ export function rotationReport(catalog, build, opts = {}) {
 
   const peakSlice = decorate({
     vulnerable: 1,
-    overpower: 1,
+    overpower: opts.noOverpower ? 0 : 1,
     berserk: 1,
     unstoppable: 1,
     enemyHealthy: 1,
     elites: 1,
+    berserkStreak5: 0,
     sheetContext: 'combat-allbuff',
     endpoint: 'high',
     extras: extrasFor(simulated, allIds)
@@ -422,16 +424,27 @@ export function rotationReport(catalog, build, opts = {}) {
 
   let averageTotal30 = 0;
   let averagePerStack30 = 0;
+  let berserkStreak = 0;
   for (const segment of rotation.segments) {
     const weight = segment.seconds / rotation.horizon;
     const anyBuff = segment.active.length > 0;
+    const berserk = segment.active.includes('war-cry') || segment.active.includes('wrath-of-the-berserker');
+    let berserkStreak5 = 0;
+    if (berserk) {
+      const need = Math.max(0, 5 - berserkStreak);
+      berserkStreak5 = segment.seconds <= need ? 0 : (segment.seconds - need) / segment.seconds;
+      berserkStreak += segment.seconds;
+    } else {
+      berserkStreak = 0;
+    }
     const slice = {
       vulnerable: segment.active.includes('war-cry') ? 1 : 0,
-      overpower: segment.overpower ? 1 : 0,
-      berserk: segment.active.includes('war-cry') || segment.active.includes('wrath-of-the-berserker') ? 1 : 0,
+      overpower: opts.noOverpower ? 0 : (segment.overpower ? 1 : 0),
+      berserk: berserk ? 1 : 0,
       unstoppable: segment.unstoppable ? 1 : 0,
       enemyHealthy: 1,
       elites: 1,
+      berserkStreak5,
       sheetContext: anyBuff ? 'combat-allbuff' : 'combat-nobuff',
       endpoint: 'low',
       extras: extrasFor(simulated, segment.active)

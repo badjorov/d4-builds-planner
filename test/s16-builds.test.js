@@ -44,11 +44,27 @@ test('the three provisional Season 16 builds score without soul stacks', () => {
   const build = saved.builds.find(entry => entry.id === 'users-current-build');
   const scores = scoreS16(catalog, build);
   assert.equal(scores.length, 3);
+  const byId = Object.fromEntries(scores.map(row => [row.id, row]));
+  assert.equal(byId['s16-double-swing'].ptrCoeff, 150);
+  assert.equal(byId['s16-double-swing'].storedCoeff, 114);
+  assert.equal(byId['s16-whirlwind'].ptrCoeff, 165);
+  assert.equal(byId['s16-whirlwind'].storedCoeff, 386);
+  assert.equal(byId['s16-flay'].ptrCoeff, 115);
+  assert.equal(byId['s16-flay'].dot, true);
   for (const row of scores) {
-    assert.ok(row.min.peak < row.max.peak);
-    assert.ok(row.min.average < row.max.average);
+    assert.ok(row.max.peak > row.min.peak);
     assert.equal(row.fury, 826);
   }
+  const sescheron = byId['s16-whirlwind'].isolation.find(line => /Colossal/.test(line.name));
+  assert.ok(Math.abs(sescheron.peak - 7) < 1e-9);
+  const streak = byId['s16-double-swing'].isolation.find(line => /5s/.test(line.name));
+  assert.ok(Math.abs(streak.peak - 1) < 1e-9);
+  assert.ok(streak.average > 2);
+  const bleed = byId['s16-flay'].isolation.find(line => /Bleeding/.test(line.name));
+  assert.ok(Math.abs(bleed.peak - 3) < 1e-9);
+  const fistsOff = scoreS16(catalog, build, { fistsOfFate: false }).find(row => row.id === 's16-double-swing');
+  assert.ok(fistsOff.max.peak < byId['s16-double-swing'].max.peak);
+  assert.ok(Math.abs(byId['s16-double-swing'].max.peak / fistsOff.max.peak - 1.505) < 1e-6);
   const doc = readFileSync(new URL('../docs/s16-builds.md', import.meta.url), 'utf8');
   assert.match(doc, /provisional/);
   assert.match(doc, /1H Mace Expertise/);

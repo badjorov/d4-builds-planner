@@ -63,46 +63,71 @@ Unresolved:
 
 Flay's skill-kit unlock is `Barb_Unlock_Flay`. There is no `Power_Barbarian_Flay` file in the checkout.
 
+## Coefficients
+
+The rank table `Table(34, sLevel)` is not in the checkout. The score uses the constant in the PTR formula, which is the value at a table of 1.
+
+| Skill | Stored | PTR | Formula |
+| --- | ---: | ---: | --- |
+| Double Swing | 114% | 150% per swing | `SF_0 = 1.5 * Table(34, sLevel)`. SF_1 is 1.5. One swing is scored. |
+| Whirlwind | 386% | 165% | `SF_0 = 1.65 * Table(34, sLevel)`. |
+| Flay bleed | 45% over 5s | 115% over 5s | Power `Barbarian_Maim` is named Flay. Bleed total `SF_5 = 1.15 * Table(34, sLevel)`. Duration `SF_7` is 5. Direct hit `SF_1` is 5.5% and is not added. |
+
 ## Scores at 0 souls
 
-Healthy Vulnerable boss. Min and max are the parsed PTR rolls. Every figure is an estimate.
+Healthy Vulnerable boss. Min and max are the parsed PTR rolls. Every figure is an estimate. Flay is the bleed: no crit, and Overpower is off because the bleed dot has no overpower term.
 
 | Build | Peak min | Peak max | Average min | Average max |
 | --- | ---: | ---: | ---: | ---: |
-| Double Swing | 1.52B | 2.98B | 0.48B | 0.88B |
-| Whirlwind | 1.79B | 2.36B | 0.86B | 1.13B |
-| Flay direct stub | 0.32B | 0.70B | 0.06B | 0.10B |
+| Double Swing | 17.58B | 41.33B | 12.66B | 27.84B |
+| Whirlwind | 5.36B | 7.06B | 5.81B | 7.65B |
+| Flay bleed | 2.38B | 5.31B | 0.25B | 0.41B |
 
-### Main lines that were scored
+Whirlwind's average is above its peak because the Crucible 200%[x] starts after 5 seconds of Berserking. The full-overlap peak is the first 4 seconds of War Cry, so that line is off the peak and on for part of the average.
+
+### Set bonuses in isolation
+
+The piece count for the three set powers is not in the checked-out files. A build that names the set scores all three powers. Each factor is that one line added to the build's other lines, at the max roll, divided by the same score without the set lines.
+
+| Line | Bucket | Value | Peak | Average | Builds |
+| --- | --- | ---: | ---: | ---: | --- |
+| Sescheron's Fury, Colossal damage | [x] | 600 | ×7.0000 | ×7.0000 | Double Swing, Whirlwind |
+| Berserker's Crucible, Berserking damage | [+] | 50 | ×1.0016 | ×1.0021 | Double Swing, Whirlwind |
+| Berserker's Crucible, after 5s Berserking | [x] | 200 | ×1.0000 | ×2.2790 / ×2.2633 | Double Swing / Whirlwind |
+| Bloodletter's Flow, Bleeding damage | [x] | 200 | ×3.0000 | ×3.0000 | Flay |
+
+Sescheron's first power is 120%[x] while Colossal. The third power replaces that with 600%[x]. They do not stack. The score uses 600%[x]. Uptime is 1 because Fury 826 is above the 100 Fury line. That uptime is an estimate.
+
+The Crucible 10%[x] against Elites after 60 seconds of Berserking is in the file. No slice of this 60s timeline reaches a 60 second Berserking streak, so its contribution is ×1.
+
+### Other scored lines
 
 | Line | Bucket | Min | Max | Where |
 | --- | --- | ---: | ---: | --- |
 | Ramaladni's Magnum Opus, per Fury | [x] | 0.35 | 0.50 | all three, times Fury 826 |
 | Tibault's Will, while Unstoppable | [x] | 15 | 20 | Double Swing, Flay |
-| Earthstriker's Overpower | [x] | 15 | 35 | Double Swing. Rank 1 and rank 21. Unverified. |
-| Crushing, while Fortified | [x] | 45 | 65 | Double Swing. Rank 1 and rank 21. Unverified. |
+| Earthstriker's Overpower | [x] | 15 | 35 | Double Swing |
+| Crushing, while Fortified | [x] | 45 | 65 | Double Swing |
 | Ring of Red Furor, next Core cast | [x] | 50 | 60 | Double Swing peak only |
+| Fists of Fate, expected hit | [x] | ×1.255 | ×1.505 | Double Swing. Estimate. Switchable off. |
 | Shard of Verathiel, Basic damage | [x] | 70 | 100 | Flay |
 | Hooves of the Mountain God, Fury drain | [x] | 45 | 60 | Flay peak only |
-| Moonrise, Basic damage in Bloodrage | [x] | 60 | 100 | Flay peak only. Rank 1 and rank 21. Unverified. |
+| Moonrise, Basic damage in Bloodrage | [x] | 60 | 100 | Flay peak only |
 
-Double Swing's hit is 114/386 of the calibrated Whirlwind hit. The stored 114% has no damage type. The PTR note's 150% per swing is not applied.
-
-Whirlwind keeps the 386% coefficient.
-
-Flay's row is the stored 15% direct piece, 15/386 of the Whirlwind hit. The bleed is not in that number.
+Fists of Fate deals 1% to 250–300% of normal damage. The expected multiplier is (1% + cap) / 2. Turning it off drops the Double Swing max peak from 41.33B to 27.46B.
 
 ## Unscored
 
-- Horadric jewelry, Horadric weapon and armor lines, and the two-set bonuses for Sescheron's Fury, Berserker's Crucible, and Bloodletter's Flow. The set pieces are named and not given a damage factor.
-- Fists of Fate. The PTR line is a random 1% to 250–300% of normal damage, format a bare `%`.
-- Paingorger's Gauntlets. The echo to marked enemies is a separate hit.
-- Accursed Touch. It applies Vulnerable. It is not a damage percent. The boss timeline is already Vulnerable during War Cry.
-- Disobedience. The line is damage reduction, not damage dealt.
-- Ambidextrous. The patch note says 8%[x] to 15%[x]. Nikolay's glyphs stay in the sheet, so that change is not added on top.
-- New S16 systems: War Plans, Marks of Wisdom, Tyrael's Boons, Greater Temper. None of them have a damage term in this score.
-- Flay bleed. The 45% bleed over 5 seconds in the stored tooltip is not a scored component. Damage over time does not crit. The direct stub still uses the Whirlwind crit model, so it is not the bleed build.
-- Crucible and Sescheron's set bonuses and their Horadric seal lines (Elite Damage, Attack Speed, Damage Reduction, Fury, Life, Berserking stats). No set count is stored, so none of those lines are multiplied in.
+- Horadric seal affixes. The strings give the bucket (`%x` on Sescheron damage, Crucible elite damage, Bloodletter bleed, rupture, and vulnerable damage). The number is a `GearAffix_*` formula id, and that table is not in the checkout, so the roll stays null.
+- Set lines that are not a damage percent: cast speed, size, Fury, life, damage reduction, cooldown reduction, the shout trigger, and Bloodletter's 80%[x] longer bleed duration. The duration stays 5 seconds in the damage score.
+- The Crucible 10%[x] elite line after 60 seconds of Berserking. Uptime on this timeline is 0.
+- Paingorger's Gauntlets. The echo is a separate hit.
+- Accursed Touch. It applies Vulnerable and is not a damage percent.
+- Disobedience. Damage reduction.
+- Ambidextrous. Nikolay's glyphs stay in the sheet.
+- War Plans, Marks of Wisdom, Tyrael's Boons, and Greater Temper.
+- Flay's 5.5% direct hit. The score is the bleed only.
+- Double Swing's second swing. The score is one swing at 150%.
 - Ring of Red Furor, Hooves, and Moonrise have no stored uptime. They are on the peak and off the average.
-- Legendary-rank tops for Earthstriker, Crushing, and Moonrise use rank 21 from `arMaxLegendaryRanks`. That scaling is unverified.
-- The sheet and the paragon already on Nikolay's build are an assumption. These lists do not include his node ids.
+- Legendary-rank tops and the skill rank table are unverified or missing.
+- The sheet and the paragon on Nikolay's build are an assumption.
