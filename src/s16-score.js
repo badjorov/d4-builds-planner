@@ -227,7 +227,15 @@ const LINES = {
     min: 50,
     max: 50,
     always: true,
-    label: 'Mid of 40–60%[x], taken at full Fury. The screenshot fight stayed full. Mid-roll.'
+    label: 'Mid of 40–60%[x] at full Fury. The stripped sheet does not stay full, so this is an upper reading. Mid-roll.'
+  },
+  edgemasterHalf: {
+    name: "Edgemaster's Aspect",
+    bucket: 'multiplicative',
+    min: 25,
+    max: 25,
+    always: true,
+    label: 'Half of the 50%[x] full-Fury mid, for a bar that drains. Resource fraction 0.5 is an estimate.'
   },
   crushingMid: {
     name: 'Crushing',
@@ -1005,7 +1013,7 @@ export function scoreProposedDoubleSwing(catalog, savedBuild, opts = {}) {
   const lines = [...PROPOSED_LINES];
   if (opts.amulet !== 'crushing') lines.push('selig');
   if (opts.amulet === 'crushing' || opts.rings === 'crushing' || (opts.rings == null && opts.amulet === 'crushing')) lines.push('crushingMid');
-  if (opts.rings === 'edgemaster' || opts.rings == null) lines.push('edgemaster');
+  if (opts.rings === 'edgemaster' || opts.rings == null) lines.push(opts.edgemasterFull === false ? 'edgemasterHalf' : 'edgemaster');
   if (counts.sescheron5) lines.push('sescheron');
   else lines.push('sescheronPartial');
   if (counts.crucible5) lines.push('crucibleStreak');
@@ -1014,7 +1022,7 @@ export function scoreProposedDoubleSwing(catalog, savedBuild, opts = {}) {
     const index = lines.indexOf('fists');
     if (index >= 0) lines.splice(index, 1);
   }
-  const definition = { ...base, id: 'ds-s16-proposed', scoredLines: lines };
+  const definition = { ...base, id: 'ds-s16-proposed', fury: 605, scoredLines: lines };
   const scored = scoreS16Build(catalog, savedBuild, definition, { variants: { sliceAndDice: true }, dustDevilGlyph: false });
   return { ...scored, split, counts, ...withCastRates(scored) };
 }
@@ -1044,6 +1052,24 @@ function withCastRates(scored) {
   };
 }
 
+export const STRIPPED_FURY = { max: 555, regen: 12, generationPct: 30, onKill: 11, cdr: 9 };
+const SESCHERON_MAX_FURY = 50;
+
+export function proposedFuryBalance(castRate, opts = {}) {
+  const maxFury = STRIPPED_FURY.max + (opts.sescheron === false ? 0 : SESCHERON_MAX_FURY);
+  const drain = opts.ramaladni === false ? 0 : (7 / 100) * maxFury;
+  const regen = opts.regen ?? STRIPPED_FURY.regen;
+  const cost = (opts.furyCost ?? 20) * castRate;
+  const critChance = opts.critChance ?? 0.278;
+  const perCrit = opts.scaleGeneration ? 3 * (1 + STRIPPED_FURY.generationPct / 100) : 3;
+  const critFury = perCrit * (2 * (1 + HIT_TWICE_CHANCE)) * castRate * critChance;
+  const crucibleRegen = opts.after10s ? 10 : 0;
+  const costFactor = opts.after5s ? 0.7 : 1;
+  const tibault = opts.tibault ?? 0;
+  const net = regen + crucibleRegen + critFury + tibault - drain - cost * costFactor;
+  return { maxFury, drain, regen, cost: cost * costFactor, critFury, net, secondsToEmpty: net >= 0 ? Infinity : maxFury / -net };
+}
+
 export function attackSpeedMarginal(dpsAtCapAverage) {
   const perCast = dpsAtCapAverage / doubleSwingCastRate(DEFAULT_ATTACK_SPEED_PCT);
   const step = 10;
@@ -1062,7 +1088,7 @@ export function scoreGoldenEpiphany(catalog, savedBuild, opts = {}) {
   const base = S16_DEFINITIONS.find(item => item.id === 's16-double-swing');
   const lines = PROPOSED_LINES.filter(id => id !== 'fists').concat(['fists', 'nomad', 'bloodMad', 'crucibleStreak']);
   if (aspects) lines.push('crushingMid', 'edgemaster');
-  const definition = { ...base, id: 'ds-s16-golden-epiphany', scoredLines: lines };
+  const definition = { ...base, id: 'ds-s16-golden-epiphany', fury: STRIPPED_FURY.max, scoredLines: lines };
   const scored = scoreS16Build(catalog, savedBuild, definition, {
     variants: { sliceAndDice: true },
     dustDevilGlyph: false,
