@@ -2,6 +2,15 @@ import { rotationReport } from './rotation.js';
 import { DEFAULT_SKILL_RANK, skillRankMultiplier } from './skill-rank.js';
 
 const FURY = 826;
+export const DEFAULT_ATTACK_SPEED_PCT = 120;
+const BASE_APS = 1;
+const FURY_REGEN = 85;
+const WW_FURY_PER_SECOND = 15;
+const DS_FURY_PER_CAST = 20;
+const FLAY_FURY_GEN = 15;
+const FLAY_VERATHIEL_COST = 25;
+const LUNGING_FURY = 12;
+const BLEED_BASE_DURATION = 5;
 const FURY_NOTE = 'Combat Fury 826 is Nikolay\'s observed combat-allbuff reading. These builds do not store their own Fury. Using 826 is an estimate.';
 
 const ENGINE_WHIRLWIND = 386;
@@ -322,6 +331,12 @@ export function scoreS16Build(catalog, savedBuild, definition, opts = {}) {
     min: { peak: min.peak.total * scale, average: min.average.total * scale },
     max: { peak: max.peak.total * scale, average: max.average.total * scale },
     isolation,
+    attackSpeed: attackSpeedFactor(opts),
+    furyReport: furyReport(definition.id, attackSpeedFactor(opts)),
+    dps: {
+      min: dpsOf(definition.id, { peak: min.peak.total * scale, average: min.average.total * scale }, attackSpeedFactor(opts), furyReport(definition.id, attackSpeedFactor(opts))),
+      max: dpsOf(definition.id, { peak: max.peak.total * scale, average: max.average.total * scale }, attackSpeedFactor(opts), furyReport(definition.id, attackSpeedFactor(opts)))
+    },
     lines: specs.map(spec => ({
       name: spec.name,
       bucket: spec.bucket === 'multiplicative' ? '[x]' : '[+]',
@@ -334,6 +349,91 @@ export function scoreS16Build(catalog, savedBuild, definition, opts = {}) {
 
 export function scoreS16(catalog, savedBuild, opts = {}) {
   return S16_DEFINITIONS.map(definition => scoreS16Build(catalog, savedBuild, definition, opts));
+}
+
+export function attackSpeedFactor(opts = {}) {
+  const bonus = typeof opts.attackSpeedPct === 'number' ? opts.attackSpeedPct : DEFAULT_ATTACK_SPEED_PCT;
+  return { bonus, baseAps: BASE_APS, aps: BASE_APS * (1 + bonus / 100) };
+}
+
+function furyReport(id, speed) {
+  const drain = (7 / 100) * FURY;
+  const passive = FURY_REGEN - drain;
+  const estimates = [
+    `Attack speed bonus +${speed.bonus}% is the S15 sheet value. Estimate for these builds.`,
+    'Base attacks per second is 1. The power files use Attacks_Per_Second_Total and the mace item type stores +10% weapon speed, not a base rate. The sheet bonus is not increased by that +10%.',
+    `Fury regeneration ${FURY_REGEN}/s is the town sheet. Combat regeneration is null. Estimate.`,
+    `Ramaladni drains 7% of maximum Fury per second. Maximum Fury ${FURY} is the combat reading. Estimate.`
+  ];
+  if (id === 's16-whirlwind') {
+    const net = passive - WW_FURY_PER_SECOND;
+    return {
+      spender: 'Whirlwind',
+      actionsPerSecond: speed.aps * (30 / 13),
+      action: 'ticks',
+      costPerSecond: WW_FURY_PER_SECOND,
+      generationPerSecond: passive,
+      net,
+      sustainable: net >= 0,
+      spenderUptime: net >= 0 ? 1 : 0,
+      attackSpeedChangesDamage: false,
+      estimates
+    };
+  }
+  if (id === 's16-double-swing') {
+    const casts = speed.aps;
+    const cost = DS_FURY_PER_CAST * casts;
+    const lunging = speed.aps * 1.25;
+    const generated = LUNGING_FURY * lunging;
+    const uptime = Math.min(1, Math.max(0, (generated + passive) / (generated + cost)));
+    return {
+      spender: 'Double Swing',
+      actionsPerSecond: casts,
+      action: 'casts',
+      costPerSecond: cost,
+      generationPerSecond: generated + passive,
+      lungingCastsPerSecond: lunging,
+      net: passive - cost,
+      netWhileWeaving: 0,
+      sustainable: passive - cost >= 0,
+      spenderUptime: uptime,
+      attackSpeedChangesDamage: true,
+      estimates
+    };
+  }
+  const casts = speed.aps * 1.25;
+  const generated = FLAY_FURY_GEN * casts;
+  const cost = FLAY_VERATHIEL_COST * casts;
+    const net = passive + generated - cost;
+    const poolSeconds = net >= 0 ? Infinity : FURY / -net;
+    return {
+    spender: 'Flay',
+    actionsPerSecond: casts,
+    action: 'casts',
+    costPerSecond: cost,
+    generationPerSecond: generated + passive,
+    net,
+    poolSeconds,
+    sustainable: net >= 0,
+    spenderUptime: net >= 0 ? 1 : Math.min(1, poolSeconds / 60),
+    attackSpeedChangesDamage: true,
+    estimates: estimates.concat('Shard of Verathiel adds 25 Fury per Flay cast. Flay itself generates 15. There is no second generator on the bar.')
+  };
+}
+
+function dpsOf(id, hit, speed, fury) {
+  if (id === 's16-whirlwind') {
+    const rate = 30 / 13;
+    return { peak: hit.peak * rate, average: hit.average * rate * fury.spenderUptime };
+  }
+  if (id === 's16-double-swing') {
+    return {
+      peak: hit.peak * fury.actionsPerSecond,
+      average: hit.average * fury.actionsPerSecond * fury.spenderUptime
+    };
+  }
+  const duration = BLEED_BASE_DURATION * BLOODLETTER_DURATION;
+  return { peak: hit.peak / duration, average: hit.average / duration * fury.spenderUptime };
 }
 
 export function formatBillions(total) {

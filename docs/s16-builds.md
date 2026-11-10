@@ -82,17 +82,45 @@ Whirlwind's formulas and tooltip strings match on 3.2 and 3.3_ptr. It is not a n
 
 Optional Double Swing hits, off in this table: Flurry adds 0.5× per sweep, Slice and Dice adds one 1.2× outer hit, and the Twister tooltip payload is 0.5× one sweep. Pass `variants: { flurry, sliceAndDice, twister }` to turn them on.
 
-## Scores at 0 souls
+## Damage per second
 
-Healthy Vulnerable boss. Min and max are the parsed PTR rolls. Every figure is an estimate. Flay is the bleed: no crit, and Overpower is off because the bleed dot has no overpower term.
+Rank 41. Attack speed input +120% (estimate, the S15 sheet). The 60s buff timeline is unchanged. Peak DPS is the full-overlap window at a full Fury globe. Average DPS is the 60s average, reduced by the sustainable casting fraction when the rotation cannot be held.
+
+Whirlwind's tick damage is the tooltip hit divided by attacks per second, and the tick rate is attacks per second × 30/13. Those cancel, so +120% attack speed does not change Whirlwind DPS. The damage per second is the tooltip hit × 30/13.
 
 | Build | Peak min | Peak max | Average min | Average max |
 | --- | ---: | ---: | ---: | ---: |
-| Double Swing | 227.83B | 535.57B | 164.08B | 360.80B |
-| Whirlwind | 12.53B | 16.53B | 13.58B | 17.91B |
-| Flay bleed | 23.11B | 51.60B | 3.42B | 5.52B |
+| Double Swing | 501.22B/s | 1,178.26B/s | 282.12B/s | 620.37B/s |
+| Whirlwind | 28.93B/s | 38.14B/s | 31.35B/s | 41.33B/s |
+| Flay bleed | 2.57B/s | 5.73B/s | 0.38B/s | 0.61B/s |
 
-Whirlwind's average is above its peak because the Crucible 200%[x] starts after 5 seconds of Berserking. The full-overlap peak is the first 4 seconds of War Cry, so that line is off the peak and on for part of the average.
+Whirlwind's average is above its peak because the Crucible 200%[x] starts after 5 seconds of Berserking. The full-overlap peak is the first 4 seconds of War Cry.
+
+Flay bleed DPS is one application's total divided by its duration. Bloodletter's 2-piece multiplies both the total and the duration by 1.8, so the per-second rate is the 621% total divided by 5 seconds. The buff allows 1 stack and does not extend past that duration. No field says whether a new Flay refreshes or snapshots the coefficient. The score assumes one stack stays up while Flay is being cast. That refresh is uncertain.
+
+## Fury per second
+
+Base attacks per second is 1, an estimate. The powers use `Attacks_Per_Second_Total` and do not store a weapon base. The mace item type's +10% weapon speed is not added on top of the sheet. At +120%, attacks per second is 2.20. Fury regeneration 85/s is the town sheet, because combat regeneration is null. Ramaladni drains 7% of 826 Fury per second on every build. Tuskhelm's 6 Fury/s is not on these lists.
+
+| Build | Actions | Cost | Generation | Net | Holds for 60s |
+| --- | --- | ---: | ---: | ---: | --- |
+| Whirlwind | 5.08 ticks/s | 15.00 | 27.18 | +12.18 | yes |
+| Double Swing | 2.20 casts/s | 44.00 | 60.18 while Lunging Strike fills the rest | −16.82 if only Double Swing is cast | no. Spender uptime 0.78, with Lunging Strike filling the other 0.22 |
+| Flay | 2.75 casts/s | 68.75 | 68.43 | −0.32 | the 826 pool covers the 60s window. It does not cover an endless fight |
+
+Whirlwind's channel cost is `SF_5` per tick and `SF_5 × ticks per second` is 15, so the fury per second does not change with attack speed. The tooltip labels that cost "per second". Double Swing costs 20 Fury per cast (`tInitialCost`). Its cast rate is `Attacks_Per_Second_Total` because the Slice and Dice penalty `SF_23` is 0. Flay generates 15 and, with Shard of Verathiel equipped, spends 25. Its cast rate is `Attacks_Per_Second_Total × 1.25`. Lunging Strike generates 12 per cast at `Attacks_Per_Second_Total × 1.25`.
+
+## Estimated inputs
+
+- Rank 41. Double Swing and Flay are stored at rank 10. The S16 default stays 41 until a rank is passed in.
+- Attack speed bonus +120%.
+- Base attacks per second 1.0.
+- Maximum Fury 826 and Ramaladni's 7% drain.
+- Town Fury regeneration 85/s.
+- One-Handed Mace Expertise level 10 with two maces, on Double Swing only.
+- Fists of Fate expected value, on by default.
+- Flay bleed refresh. One stack is in the data. Refresh versus snapshot is not.
+- Lunging Strike as the sixth Double Swing skill. Unconfirmed.
 
 ### Set bonuses in isolation
 

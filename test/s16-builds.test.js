@@ -82,6 +82,18 @@ test('the three provisional Season 16 builds score without soul stacks', () => {
   assert.ok(streak.average > 2);
   const bleed = byId['s16-flay'].isolation.find(line => /Bleeding/.test(line.name));
   assert.ok(Math.abs(bleed.peak - 3) < 1e-9);
+  const ww = byId['s16-whirlwind'];
+  assert.equal(ww.furyReport.attackSpeedChangesDamage, false);
+  assert.equal(ww.furyReport.sustainable, true);
+  assert.ok(Math.abs(ww.dps.max.peak - ww.max.peak * (30 / 13)) < 1);
+  const slower = scoreS16(catalog, build, { attackSpeedPct: 0 }).find(row => row.id === 's16-whirlwind');
+  assert.ok(Math.abs(slower.dps.max.peak - ww.dps.max.peak) < 1);
+  const ds = byId['s16-double-swing'];
+  assert.equal(ds.furyReport.sustainable, false);
+  assert.ok(ds.furyReport.spenderUptime < 1);
+  assert.ok(Math.abs(ds.dps.max.peak - ds.max.peak * ds.attackSpeed.aps) < 1);
+  const flayScore = byId['s16-flay'];
+  assert.ok(Math.abs(flayScore.dps.max.peak - flayScore.max.peak / 9) < 1);
   const fistsOff = scoreS16(catalog, build, { fistsOfFate: false }).find(row => row.id === 's16-double-swing');
   assert.ok(fistsOff.max.peak < byId['s16-double-swing'].max.peak);
   assert.ok(Math.abs(byId['s16-double-swing'].max.peak / fistsOff.max.peak - 1.505) < 1e-6);
@@ -92,4 +104,5 @@ test('the three provisional Season 16 builds score without soul stacks', () => {
   assert.match(doc, /placeholder/);
   assert.match(doc, /2,426\.80B|Soul Splinter|souls are 0|no soul/i);
   assert.match(doc, /bleed/);
+  assert.match(doc, /DPS|damage per second/);
 });
