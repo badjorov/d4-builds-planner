@@ -88,7 +88,7 @@ Rank 41. Attack speed input +120% (estimate, the S15 sheet). The 60s buff timeli
 
 Whirlwind uses frame breakpoints. Per-tick damage stays the rank-41 tooltip value, the stored 386% basis. Ticks per second are `60 / frames`. The +120% sheet bonus lands on the 91% step: 13 frames, 4.615 ticks/s. This is community-measured S15 (3.2), recheck after S16 launch. The frame counts are the 2H steps from [attack speed mechanics](https://maxroll.gg/d4/resources/attack-speed-mechanics) and the [Whirlwind barbarian guide](https://maxroll.gg/d4/build-guides/whirlwind-barbarian-guide). The spin weapon is a 2H polearm. Polearm-specific frames are an estimate: the measured 0% group is 2H axe, polearm, or mace at 26 frames, and the steps are that 2H table. Ramaladni's Magnum Opus is the one-handed sword in the 1H slot. 1H and 2H sword have a measured frame count only at 0% attack speed. Above 0% their frames follow the 2H ratio, and that interpolation is flagged.
 
-`attackSpeedCap` defaults to 120%. The label is user-observed in-game, S15; recheck S16. Removing the attack speed items left the sheet at 120%, so effective attack speed is clamped to the cap for Whirlwind breakpoints, Double Swing and Flay cast rates, and Lucky Hit or on-hit scaling. The 143.5% breakpoint is above that cap. Its row stays in the table as a reference and is left out of the scored build.
+`attackSpeedCap` defaults to 120%. The label is probable cap, estimate (inferred from the sheet never exceeding 120% in S15); recheck S16. Pass null or Infinity for an uncapped run. With the default, effective attack speed is clamped to 120% for Whirlwind breakpoints, Double Swing and Flay cast rates, and Lucky Hit or on-hit scaling. The 143.5% breakpoint is above that probable cap. Its row stays in the table as a reference and is left out of the scored build.
 
 `whirlwindAttackSpeedModel: 'flat'` keeps the literal formula reading. In that reading the tick rate and the per-tick damage move together, so damage per second stays at the 1.0 APS rate of `30/13` ticks.
 
@@ -113,7 +113,7 @@ The +120% default lands on the 91% row. Generation is town Fury regeneration 85/
 | 27.5% | 20 | 3.000 | 43.24B/s | 57.01B/s | 46.87B/s | 61.79B/s | 19.50 | 27.18 | +7.68 | holds |
 | 48.8% | 17 | 3.529 | 50.88B/s | 67.08B/s | 55.14B/s | 72.69B/s | 22.94 | 27.18 | +4.24 | holds |
 | 91% (+120% lands here) | 13 | 4.615 | 66.53B/s | 87.72B/s | 72.10B/s | 95.06B/s | 30.00 | 27.18 | −2.82 | holds for 60s, uptime 1.00. An endless channel runs out |
-| 143.5% (above the 120% cap, reference only) | 10 | 6.000 | 86.49B/s | 114.03B/s | 93.73B/s | 123.58B/s | 39.00 | 27.18 | −11.82 | reference. The scored build clamps to 120% |
+| 143.5% (above the probable 120% cap, reference only) | 10 | 6.000 | 86.49B/s | 114.03B/s | 93.73B/s | 123.58B/s | 39.00 | 27.18 | −11.82 | reference. The scored build clamps to the probable cap |
 
 Flay bleed DPS is one application's total divided by its duration. Bloodletter's 2-piece multiplies both the total and the duration by 1.8, so the per-second rate is the 621% total divided by 5 seconds. The buff allows 1 stack and does not extend past that duration. No field says whether a new Flay refreshes or snapshots the coefficient. The score assumes one stack stays up while Flay is being cast. That refresh is uncertain.
 
@@ -137,7 +137,7 @@ Double Swing costs 20 Fury per cast (`tInitialCost`). Its cast rate is `Attacks_
 - Rank 41. Double Swing and Flay are stored at rank 10. The S16 default stays 41 until a rank is passed in.
 - Attack speed bonus +120%. Whirlwind reads it as a frame breakpoint. The label is community-measured S15 (3.2), recheck after S16 launch.
 - Whirlwind weapon type, default 2H polearm. Polearm-specific frames are an estimate. Ramaladni's Magnum Opus is the one-handed sword.
-- Attack speed cap 120%. Label: user-observed in-game, S15; recheck S16. The equipped attack speed affixes add 151.5% past that cap: helm 17.5, gloves 34.0, Insight 54.2, Spirit 45.8. Each is worth 0. Search drops them. Insight already has its x310% Critical Strike Damage Multiplier, and Spirit already has its x66% All Damage Multiplier. Helm and gloves have no stored damage affix to take the slot.
+- Attack speed cap 120%. Label: probable cap, estimate (inferred from the sheet never exceeding 120% in S15); recheck S16. Pass null or Infinity to leave it uncapped. The equipped attack speed affixes add 151.5% past that probable cap: helm 17.5, gloves 34.0, Insight 54.2, Spirit 45.8. Each is worth 0 under the default. Search drops them. Insight already has its x310% Critical Strike Damage Multiplier, and Spirit already has its x66% All Damage Multiplier. Helm and gloves have no stored damage affix to take the slot.
 - Polearm Expertise 10/10. PTR rank 10 is 15%[x] while Healthy, and 1.5% Lucky Hit Chance per level (15% at rank 10). Player Healthy uptime is 1. That uptime is an estimate.
 - Might's 8%[x] with a Two-Handed weapon is already on the equipped glyph. It is scored once.
 - Whirlwind attack-speed model, default `breakpoints`. `flat` keeps the literal formula reading.

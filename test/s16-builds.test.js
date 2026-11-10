@@ -172,7 +172,15 @@ test('attack speed above the 120% cap is worth 0', () => {
   const build = read('../data/builds.json').builds.find(item => item.id === 'users-current-build');
   const over = attackSpeedOverCap(catalog, build);
   assert.equal(over.cap, 120);
-  assert.equal(over.label, 'user-observed in-game, S15; recheck S16');
+  assert.equal(over.label, 'probable cap, estimate (inferred from the sheet never exceeding 120% in S15); recheck S16');
+  const open = whirlwindFury({ attackSpeedPct: 143.5, attackSpeedCap: null });
+  const unbounded = whirlwindFury({ attackSpeedPct: 143.5, attackSpeedCap: Infinity });
+  assert.equal(open.frames, 10);
+  assert.equal(unbounded.frames, 10);
+  assert.equal(open.cap, Infinity);
+  assert.equal(unbounded.cap, Infinity);
+  assert.equal(attackSpeedOverCap(catalog, build, { attackSpeedCap: null }).wasted.length, 0);
+  assert.equal(attackSpeedOverCap(catalog, build, { attackSpeedCap: Infinity }).overCap, 0);
   assert.ok(Math.abs(over.overCap - 151.5) < 1e-9);
   assert.equal(over.wasted.length, 4);
   const moved = reallocateOverCapAttackSpeed(catalog, build);
