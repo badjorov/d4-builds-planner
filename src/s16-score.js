@@ -261,6 +261,22 @@ const LINES = {
     always: true,
     label: 'Stored legendary text +15.6%[x] vs Elites at a transcribed level. His new glyph level is not in the screenshots. Boss-dummy uptime 1 is an estimate.'
   },
+  nomad: {
+    name: "Nomad's Longing Heart",
+    bucket: 'multiplicative',
+    min: 70,
+    max: 70,
+    always: true,
+    label: 'Mid of 30–40%[x] is 35%[x]. The string doubles that against Healthy and Injured, so the scored line is 70%[x]. That uptime is an estimate. The cost is 25%[x] more Fury.'
+  },
+  bloodMad: {
+    name: 'Blood-Mad Idol',
+    bucket: 'multiplicative',
+    min: 90,
+    max: 90,
+    always: true,
+    label: 'Mid of the file range 80–100%[x]. Always Berserking. The 200%[x] over 8 seconds is damage taken and is not scored as damage dealt.'
+  },
   skullGem: {
     name: 'Skull in the swinging sword',
     bucket: 'multiplicative',
@@ -537,6 +553,7 @@ function runReport(catalog, build, definition, specs, end, opts) {
     hitSkill: definition.hitSkill,
     noOverpower: definition.noOverpower === true,
     forceVulnerable: definition.forceVulnerable === true,
+    alwaysBerserk: opts.alwaysBerserk === true,
     extraModifiersFor: (slice, info) => modifiersFor(specs, end, slice, info, opts)
   });
 }
@@ -1000,6 +1017,59 @@ export function scoreProposedDoubleSwing(catalog, savedBuild, opts = {}) {
   const definition = { ...base, id: 'ds-s16-proposed', scoredLines: lines };
   const scored = scoreS16Build(catalog, savedBuild, definition, { variants: { sliceAndDice: true }, dustDevilGlyph: false });
   return { ...scored, split, counts };
+}
+
+function withCastRates(scored) {
+  const fast = DS_WEAPON_APS * (1 + DEFAULT_ATTACK_SPEED_PCT / 100);
+  const slow = DS_WEAPON_APS;
+  const scale = slow / fast;
+  const scaleDps = (row) => ({
+    peak: row.peak * scale,
+    average: row.average * scale
+  });
+  return {
+    castsPerSecond: { capped: fast, baseWeapon: slow },
+    dpsAtBaseWeaponSpeed: {
+      min: scaleDps(scored.dps.min),
+      max: scaleDps(scored.dps.max)
+    }
+  };
+}
+
+export function scoreGoldenEpiphany(catalog, savedBuild, opts = {}) {
+  const aspects = opts.jewelryAspects !== false;
+  const base = S16_DEFINITIONS.find(item => item.id === 's16-double-swing');
+  const lines = PROPOSED_LINES.filter(id => id !== 'fists').concat(['fists', 'nomad', 'bloodMad', 'crucibleStreak']);
+  if (aspects) lines.push('crushingMid', 'edgemaster');
+  const definition = { ...base, id: 'ds-s16-golden-epiphany', scoredLines: lines };
+  const scored = scoreS16Build(catalog, savedBuild, definition, {
+    variants: { sliceAndDice: true },
+    dustDevilGlyph: false,
+    alwaysBerserk: true
+  });
+  const furyCost = 20 * 1.25;
+  const casts = withCastRates(scored).castsPerSecond;
+  const drain = (7 / 100) * DS_FURY;
+  const furyAt = (castRate, regen) => {
+    const cost = furyCost * castRate;
+    const critFury = 3 * (2 * (1 + HIT_TWICE_CHANCE)) * castRate;
+    return {
+      regen,
+      costPerSecond: cost,
+      drain,
+      critFury,
+      net: regen - drain - cost,
+      netWithCritAndUnstoppable: regen - drain - cost + critFury + 25
+    };
+  };
+  return {
+    ...scored,
+    jewelryAspects: aspects,
+    setCount: { jewelry: 3, charms: 3, total: 6, capInFiles: 5, wasted: 1 },
+    ...withCastRates(scored),
+    furyAtCap: { sheetRegen: furyAt(casts.capped, 80), withoutInsight: furyAt(casts.capped, 33) },
+    furyAtBase: { sheetRegen: furyAt(casts.baseWeapon, 80), withoutInsight: furyAt(casts.baseWeapon, 33) }
+  };
 }
 
 export function formatBillions(total) {

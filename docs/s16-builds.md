@@ -195,6 +195,28 @@ Fury cost without Stone of Jordan is the file's 20 per cast. At 120% and 1.10 at
 
 Selig is the low-life shell: damage is dealt to Fury before life, maximum Fury is doubled, maximum life is cut by 75%, and above 50 Fury he gains 30%[x] and Berserking. Crushing on the amulet drops that shell. The 30%[x] is the scored loss. The life and Fury changes are not in the damage number. Mid rolls are flagged: Tuskhelm 45%[x] of 40–50, Edgemaster 50%[x] of 40–60 at full Fury, Crushing 55%[x] of the stored 45–65, Challenger 15.6%[x] from the old transcription because the new glyph level is not on the screenshots. Slice and Dice has `SF_23` = 0 on 3.3_ptr and 0.4 on 3.2, so the cast-speed penalty is gone. The Twister glyph's 40.2%[x] and 13%[x] leave with that glyph. The skill still creates three Dust Devils at `SF_0 × 0.5`. Jewelry gems at flawless quality are 900 resistance for ruby, topaz, and sapphire, so they tie for damage. Weapon skulls are 20%[x] damage. Armor rubies are +40 Strength. One swinging-sword skull replaces the old 24%[x] physical gem.
 
+## Golden Epiphany
+
+Scenario `ds-s16-golden-epiphany` uses the same gear and the same attack-speed and sheet caveats. The talisman changes.
+
+Seal of the Golden Epiphany is item `Talisman_Seal_MythicUnique_02`. `Talisman_Charm_Slot_Count_Base` is 6, the same as the other mythic seals. The forced affix is `Talisman_SealAffix_Ancestral_02`, named of Nobility. Its attribute is `Unique_Charm_Count_Bonus` = 2. The string says the seal can equip up to 3 unique charms. There is no `Set_Item_Discount` on this seal, so the Diamond Mind charm discount does not apply.
+
+The six charms are 3 Crucible pieces, Fists of Fate, Nomad's Longing Heart, and Blood-Mad Idol. The three uniques match the string's cap of 3. Jewelry is +1 Crucible on the amulet and on each ring, which is 3, plus 3 charms, which is 6. The Crucible powers in the files stop at the 5-piece line. No 6-piece damage power is in the checkout, so the count is scored as 5 and one count is unused. There is no Sescheron's Fury.
+
+Nomad's Longing Heart, `Amulet_Unique_Barb_104_x2`, is 30–40%[x] Core damage and 25%[x] more Fury cost. The string doubles the damage against Healthy and Injured enemies. The mid is 35%[x], and the doubled mid is 70%[x]. That doubled uptime is an estimate. Blood-Mad Idol, `Amulet_Unique_Generic_102`, has `Affix_Value_1` of 80–100%[x]. The mid is 90%[x] and is flagged. It also forces Berserking. The static 200%[x] over 8 seconds is damage taken and is not scored as damage dealt.
+
+The jewelry +1 is still not an affix string, so it is not clear whether those pieces can also carry Crushing, Selig, or Edgemaster. Both cases are scored. Case (a) keeps Crushing on the amulet and Edgemaster on a ring. Case (b) drops both.
+
+| Reading | Average at 2.42 casts/s | Peak at 2.42 | Average at 1.10 | Peak at 1.10 |
+| --- | ---: | ---: | ---: | ---: |
+| Proposed, Crushing and Edgemaster | 3,970.14B/s | 3,690.43B/s | 1,804.61B/s | 1,677.47B/s |
+| Golden Epiphany, aspects stay | 2,219.72B/s | 1,702.87B/s | 1,008.96B/s | 774.03B/s |
+| Golden Epiphany, aspects drop | 954.72B/s | 732.42B/s | 433.96B/s | 332.92B/s |
+
+The proposed setup wins in both jewelry cases. Sescheron's 600%[x] is ×7. Nomad's doubled mid and Blood-Mad's mid are ×1.70 and ×1.90, together ×3.23. The 5-piece is ×2.17 that pair. On the aspects-stay average, that gap is about 2,591B/s before the always-Berserking uptime is unwound. The 1.10 casts/s column is the same scores times 1.10/2.42, for the case where the new gear's known attack speed is 0 and no non-gear attack speed remains.
+
+Nomad changes Fury. The cost becomes 20 × 1.25 = 25 per cast. At 2.42 casts/s that is 60.50 spent. Against regeneration 80 and the 57.89 drain, the bare net is −38.39 per second. Wrath's crit Fury and Tibault's 25 while Unstoppable bring it to about +4.0 if the sheet 80 stays. If Insight's 47 leaves that 80, the same extras finish about 43 per second short. At 1.10 casts/s the cost is 27.50, and the sheet-80 reading with those extras is positive by about 27.5 per second. Blood-Mad adds no Fury number. Tuskhelm's 6 per second still depends on the enrage proc, which may not retrigger while Berserking is forced on.
+
 ### Set bonuses in isolation
 
 The piece count for the three set powers is not in the checked-out files. A build that names the set scores all three powers. Each factor is that one line added to the build's other lines, at the max roll, divided by the same score without the set lines.

@@ -428,7 +428,7 @@ export function rotationReport(catalog, build, opts = {}) {
   for (const segment of rotation.segments) {
     const weight = segment.seconds / rotation.horizon;
     const anyBuff = segment.active.length > 0;
-    const berserk = segment.active.includes('war-cry') || segment.active.includes('wrath-of-the-berserker');
+    const berserk = opts.alwaysBerserk === true || segment.active.includes('war-cry') || segment.active.includes('wrath-of-the-berserker');
     let berserkStreak5 = 0;
     if (berserk) {
       const need = Math.max(0, 5 - berserkStreak);
