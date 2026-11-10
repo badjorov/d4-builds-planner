@@ -1,4 +1,5 @@
 import { evaluateBuild } from './catalog.js';
+import { compute } from './engine.js';
 import { rotationReport } from './rotation.js';
 import { DEFAULT_SKILL_RANK, skillRankMultiplier } from './skill-rank.js';
 import { ATTACK_SPEED_CAP_LABEL, clampAttackSpeedPct, resolveAttackSpeedCap } from './attack-speed.js';
@@ -45,7 +46,18 @@ const FURY_NOTE = 'Combat Fury 826 is Nikolay\'s observed combat-allbuff reading
 const ENGINE_WHIRLWIND = 386;
 const WW_BASE = 1.65;
 const WW_TICK_SHARE = 13 / 30;
-const DS_BASE = 1.5;
+const DS_LIVE_BASE = 0.75;
+const DS_PTR_BASE = 1.5;
+const DS_RANK = 48;
+const DS_FURY = 827;
+const DS_WEAPON_APS = 1.1;
+const DS_FURY_COST = 26;
+const TWIN_FIRST = 1.6;
+const TWIN_SECOND = 2.2;
+const HIT_TWICE_CHANCE = 0.2;
+const DUST_DEVIL_COEFF = 0.5;
+const DUST_DEVIL_COUNT = 3;
+const DUST_DEVIL_BONUS = 1.402 * 1.13;
 const FLAY_BLEED_BASE = 1.15;
 const FLAY_ENGINE_COEFF = 15;
 const BLOODLETTER_DURATION = 1.8;
@@ -54,8 +66,15 @@ export function whirlwindTooltipPct(rank) {
   return WW_BASE * WW_TICK_SHARE * skillRankMultiplier(rank) * 100;
 }
 
-export function doubleSwingSweepPct(rank) {
-  return DS_BASE * skillRankMultiplier(rank) * 100;
+export function doubleSwingSweepPct(rank, base = DS_PTR_BASE) {
+  return base * skillRankMultiplier(rank) * 100;
+}
+
+export function doubleSwingCastPct(rank, base = DS_PTR_BASE) {
+  const sweep = doubleSwingSweepPct(rank, base);
+  const weapons = (sweep * TWIN_FIRST + sweep * TWIN_SECOND) * (1 + HIT_TWICE_CHANCE);
+  const devils = DUST_DEVIL_COUNT * sweep * DUST_DEVIL_COEFF * DUST_DEVIL_BONUS * (1 + HIT_TWICE_CHANCE);
+  return { sweep, weapons, devils, total: weapons + devils };
 }
 
 export function flayBleedPct(rank, durationFactor = 1) {
@@ -63,6 +82,23 @@ export function flayBleedPct(rank, durationFactor = 1) {
 }
 
 const LINES = {
+  ramaladniObserved: {
+    name: "Ramaladni's Magnum Opus",
+    bucket: 'multiplicative',
+    min: 0.5,
+    max: 0.5,
+    perFury: true,
+    always: true,
+    label: '0.50%[x] per Fury. Screenshot roll, top of [0.35-0.50]. Maximum Fury 827.'
+  },
+  tibaultObserved: {
+    name: "Tibault's Will",
+    bucket: 'multiplicative',
+    min: 26,
+    max: 26,
+    when: 'unstoppable',
+    label: '26%[x] while Unstoppable. Screenshot roll, top of [20-26].'
+  },
   ramaladni: {
     name: "Ramaladni's Magnum Opus",
     bucket: 'multiplicative',
@@ -83,10 +119,106 @@ const LINES = {
   earthstriker: {
     name: "Earthstriker's",
     bucket: 'multiplicative',
-    min: 15,
-    max: 35,
+    min: 19.5,
+    max: 19.5,
     when: 'overpower',
-    label: '14+legendary rank %[x] Overpower. Rank 1 is 15. Rank 21 is 35. Unverified.'
+    label: '19.5%[x] [15.5-20.5] while you have Overpower. Screenshot imprint. The catalog stores the same 19.5%[x].'
+  },
+  starless: {
+    name: 'Ring of Starless Skies',
+    bucket: 'multiplicative',
+    min: 10,
+    max: 50,
+    always: true,
+    label: '10%[x] for 3s on spending Fury, up to 50%[x]. The sustained reading is 50%[x]. That uptime is an estimate.'
+  },
+  selig: {
+    name: 'Melted Heart of Selig',
+    bucket: 'multiplicative',
+    min: 30,
+    max: 30,
+    always: true,
+    label: '30%[x] while above 50 Fury. The dummy kept Fury full. Uptime 1.'
+  },
+  spiritAll: {
+    name: 'Spirit, All Damage',
+    bucket: 'multiplicative',
+    min: 66,
+    max: 66,
+    always: true,
+    label: 'x66% All Damage Multiplier on the dual-wield sword.'
+  },
+  ambidextrous: {
+    name: 'Ambidextrous',
+    bucket: 'multiplicative',
+    min: 18.1,
+    max: 18.1,
+    always: true,
+    label: '8%[x] with one-handed weapons plus legendary 10.1%[x]. Level 97. Combined as 18.1%[x] because both are always on while dual wielding.'
+  },
+  exploit: {
+    name: 'Exploit, Vulnerable',
+    bucket: 'multiplicative',
+    min: 13.6,
+    max: 13.6,
+    always: true,
+    label: 'Legendary +13.6%[x] to Vulnerable. The per-5-Dexterity line has no [x] tag and stays out.'
+  },
+  marshalGlyph: {
+    name: 'Marshal',
+    bucket: 'multiplicative',
+    min: 13.9,
+    max: 13.9,
+    always: true,
+    label: 'Legendary +13.9%[x]. Level 135.'
+  },
+  oneEnemy: {
+    name: 'Double Swing Damage Increase',
+    bucket: 'multiplicative',
+    min: 2,
+    max: 2,
+    always: true,
+    label: '+2%[x] per enemy hit. The boss dummy is one stack. A pack is not scored.'
+  },
+  warbringer: {
+    name: 'Warbringer',
+    bucket: 'multiplicative',
+    min: 45,
+    max: 45,
+    always: true,
+    label: '45%[x] while Fortified. Challenging Shout fortifies. Uptime 1 is an estimate.'
+  },
+  decimatorVuln: {
+    name: 'Decimator, Vulnerable',
+    bucket: 'multiplicative',
+    min: 25,
+    max: 25,
+    always: true,
+    label: '25%[x] to Vulnerable. Screenshot legendary node.'
+  },
+  decimatorOver: {
+    name: 'Decimator, Overpower',
+    bucket: 'multiplicative',
+    min: 25,
+    max: 25,
+    when: 'overpower',
+    label: '25%[x] while you have Overpower charges.'
+  },
+  weaponsMaster: {
+    name: 'Weapons Master',
+    bucket: 'multiplicative',
+    min: 75,
+    max: 75,
+    always: true,
+    label: '75%[x] to Injured and Healthy enemies. The dummy starts Healthy. Uptime 1 is an estimate for the whole minute.'
+  },
+  physicalGem: {
+    name: 'Swinging sword gem',
+    bucket: 'multiplicative',
+    min: 24,
+    max: 24,
+    always: true,
+    label: 'x24% Physical Damage Multiplier in the swinging sword. The other sword has the same gem and is not stacked on top. Estimate.'
   },
   crushing: {
     name: 'Crushing',
@@ -202,7 +334,8 @@ function percent(spec, end, opts) {
     return level * maces;
   }
   const roll = end === 'min' ? spec.min : spec.max;
-  return spec.perFury ? roll * FURY : roll;
+  const fury = typeof opts.fury === 'number' ? opts.fury : FURY;
+  return spec.perFury ? roll * fury : roll;
 }
 
 function lineOn(spec, slice, info) {
@@ -260,15 +393,16 @@ export const S16_DEFINITIONS = [
   {
     id: 's16-double-swing',
     name: 'Double Swing',
-    timelineSkills: ['double-swing', 'war-cry', 'rallying-cry', 'challenging-shout', 'wrath-of-the-berserker', 'lunging-strike'],
+    timelineSkills: ['double-swing', 'war-cry', 'rallying-cry', 'challenging-shout', 'wrath-of-the-berserker', 'iron-skin'],
     hitSkill: 'whirlwind',
-    storedCoeff: 114,
+    storedCoeff: 461,
+    rank: DS_RANK,
+    fury: DS_FURY,
+    weaponAps: DS_WEAPON_APS,
     noOverpower: false,
-    fistsOfFate: true,
-    mace: true,
     swings: 2,
-    scoredLines: ['ramaladni', 'tibault', 'earthstriker', 'crushing', 'redFuror', 'fists', 'mace', 'sescheron', 'cruciblePlus', 'crucibleStreak'],
-    coeffNote: 'DAMAGE fires once per weapon, so both sweeps are scored. PTR SF_1 is 1.5 and live 3.2 SF_1 is 0.75. The stored 114% is not 75% × SkillRankBonus[10].'
+    scoredLines: ['ramaladniObserved', 'tibaultObserved', 'earthstriker', 'starless', 'selig', 'spiritAll', 'ambidextrous', 'exploit', 'marshalGlyph', 'oneEnemy', 'warbringer', 'decimatorVuln', 'decimatorOver', 'weaponsMaster', 'physicalGem'],
+    coeffNote: 'Live SF_1 is 0.75 and the rank-48 tooltip is 461.25% per weapon. PTR SF_1 is 1.5, so the same rank is 922.5% per weapon. Twin Strikes is 60%[x] then 120%[x]. Chance to Hit Twice is a 20% expected extra hit. Each Dust Devil payload is SF_0 × 0.5, and a cast creates 3.'
   },
   {
     id: 's16-whirlwind',
@@ -308,14 +442,18 @@ function coefficient(definition, rank, opts) {
     return { ptrCoeff: pct, coeffRatio: pct / ENGINE_WHIRLWIND, previous: 165 };
   }
   if (definition.id === 's16-double-swing') {
-    const sweep = DS_BASE * mult * 100;
-    let sweeps = definition.swings;
-    const enabled = opts.variants || {};
-    if (enabled.flurry) sweeps += VARIANTS.flurry;
-    if (enabled.sliceAndDice) sweeps += VARIANTS.sliceAndDice;
-    if (enabled.twister) sweeps += VARIANTS.twister;
-    const pct = sweep * sweeps;
-    return { ptrCoeff: pct, sweep, sweeps, coeffRatio: pct / ENGINE_WHIRLWIND, previous: 150 };
+    const live = doubleSwingCastPct(rank, DS_LIVE_BASE);
+    const ptr = doubleSwingCastPct(rank, DS_PTR_BASE);
+    let extra = 0;
+    if (opts.variants?.sliceAndDice) extra += ptr.sweep * VARIANTS.sliceAndDice * (1 + HIT_TWICE_CHANCE);
+    return {
+      ptrCoeff: ptr.total + extra,
+      liveCoeff: live.total,
+      sweep: ptr.sweep,
+      sweeps: (ptr.total + extra) / ptr.sweep,
+      coeffRatio: (ptr.total + extra) / ENGINE_WHIRLWIND,
+      previous: live.sweep
+    };
   }
   const duration = definition.bleedDuration || 1;
   const pct = FLAY_BLEED_BASE * mult * 100 * duration;
@@ -338,21 +476,50 @@ function runReport(catalog, build, definition, specs, end, opts) {
   });
 }
 
+function withObservedDoubleSwing(build) {
+  const next = structuredClone(build);
+  next.glyphs = [];
+  next.boards = [];
+  next.weaponDmg = { town: 4596, combat: null };
+  next.mainStat = { town: 4155, combat: null };
+  next.maxFury = { town: DS_FURY, combat: null };
+  next.currentFury = DS_FURY;
+  next.critChance = { town: 100, combat: null, 'combat-nobuff': 100, 'combat-allbuff': 100 };
+  next.critDmg = { town: 7139, combat: null, 'combat-nobuff': 10396.6, 'combat-allbuff': 10396.6 };
+  next.additivePct = {
+    town: 1627.8,
+    combat: null,
+    'combat-nobuff': 1627.8,
+    'combat-allbuff': 8211.3,
+    'combat-allbuff-high': 12482.6
+  };
+  next.offensiveSheet = {
+    ...(next.offensiveSheet || {}),
+    vulnerable: { town: 648, 'combat-allbuff': 648, 'combat-nobuff': 648 },
+    vsElites: { town: 663.7, 'combat-allbuff': 663.7 },
+    vsHealthy: { town: 206.3, 'combat-allbuff': 206.3 },
+    vsInjured: { town: 206.3, 'combat-allbuff': 206.3 }
+  };
+  return next;
+}
+
 export function scoreS16Build(catalog, savedBuild, definition, opts = {}) {
-  const rank = typeof opts.rank === 'number' ? opts.rank : DEFAULT_SKILL_RANK;
-  const coeff = coefficient(definition, rank, opts);
-  const build = bareBuild(savedBuild, definition.timelineSkills);
-  const specs = activeLines(definition, opts);
+  const rank = typeof opts.rank === 'number' ? opts.rank : (definition.rank ?? DEFAULT_SKILL_RANK);
+  const local = { ...opts, fury: definition.fury ?? opts.fury };
+  const coeff = coefficient(definition, rank, local);
+  let build = bareBuild(savedBuild, definition.timelineSkills);
+  if (definition.id === 's16-double-swing') build = withObservedDoubleSwing(build);
+  const specs = activeLines(definition, local);
   const might = definition.id === 's16-whirlwind' ? mightTwoHander(catalog, build) : null;
   if (might && !might.applied) specs.push(LINES.mightTwoHander);
-  const min = runReport(catalog, build, definition, specs, 'min', opts);
-  const max = runReport(catalog, build, definition, specs, 'max', opts);
+  const min = runReport(catalog, build, definition, specs, 'min', local);
+  const max = runReport(catalog, build, definition, specs, 'max', local);
   const scale = coeff.coeffRatio;
   const withoutSets = specs.filter(spec => !spec.name.includes('Fury') && !spec.name.includes('Crucible') && !spec.name.includes('Bloodletter'));
-  const base = runReport(catalog, build, definition, withoutSets, 'max', opts);
+  const base = runReport(catalog, build, definition, withoutSets, 'max', local);
   const isolation = [];
   for (const spec of specs.filter(item => /Fury|Crucible|Bloodletter/.test(item.name))) {
-    const alone = runReport(catalog, build, definition, [...withoutSets, spec], 'max', opts);
+    const alone = runReport(catalog, build, definition, [...withoutSets, spec], 'max', local);
     isolation.push({
       name: spec.name,
       bucket: spec.bucket === 'additive' ? '[+]' : '[x]',
@@ -364,7 +531,7 @@ export function scoreS16Build(catalog, savedBuild, definition, opts = {}) {
   return {
     id: definition.id,
     name: definition.name,
-    fury: FURY,
+    fury: definition.fury ?? FURY,
     rank,
     rankMultiplier: skillRankMultiplier(rank),
     storedCoeff: definition.storedCoeff,
@@ -540,25 +707,28 @@ function furyReport(id, opts) {
     };
   }
   if (id === 's16-double-swing') {
-    const casts = speed.aps;
-    const cost = DS_FURY_PER_CAST * casts;
-    const lunging = speed.aps * 1.25;
-    const generated = LUNGING_FURY * lunging;
-    const uptime = Math.min(1, Math.max(0, (generated + passive) / (generated + cost)));
+    const casts = DS_WEAPON_APS * (1 + speed.bonus / 100);
+    const cost = DS_FURY_COST * casts;
+    const drain = (7 / 100) * DS_FURY;
+    const regen = 80;
+    const critFury = 3 * (2 * (1 + HIT_TWICE_CHANCE)) * casts;
+    const bare = regen - drain - cost;
+    const withCrit = bare + critFury;
     return {
       spender: 'Double Swing',
       actionsPerSecond: casts,
       action: 'casts',
       costPerSecond: cost,
-      generationPerSecond: generated + passive,
-      lungingCastsPerSecond: lunging,
-      net: passive - cost,
-      netWhileWeaving: 0,
-      sustainable: passive - cost >= 0,
-      holdsFor60: uptime >= 1,
-      spenderUptime: uptime,
+      generationPerSecond: regen - drain,
+      critFuryPerSecond: critFury,
+      net: bare,
+      netWithCritFury: withCrit,
+      netWithCritAndUnstoppable: withCrit + 25,
+      sustainable: false,
+      holdsFor60: true,
+      spenderUptime: 1,
       attackSpeedChangesDamage: true,
-      estimates
+      estimates: estimates.concat('The bar has no Basic skill. The dummy kept Fury full for 30s, so spender uptime is 1. Sheet regen 80 minus Ramaladni 7% of 827 minus the 26 Fury tooltip cost does not cover the casts. Wrath generates 3 Fury per critical strike, and Tibault adds 25 while Unstoppable. Starless also reduces cost by an unstated amount. Those sources are the gap.')
     };
   }
   const casts = speed.aps * 1.25;
@@ -655,6 +825,71 @@ export function whirlwindBreakpointTable(catalog, savedBuild, opts = {}) {
       label: WHIRLWIND_MEASUREMENT
     };
   });
+}
+
+export function liveDoubleSwingHit() {
+  const cast = doubleSwingCastPct(DS_RANK, DS_LIVE_BASE);
+  const lines = [
+    ['Ramaladni', 0.5 * DS_FURY],
+    ['Tibault', 26],
+    ['Earthstriker', 19.5],
+    ['Starless', 50],
+    ['Selig', 30],
+    ['Spirit', 66],
+    ['Ambidextrous', 18.1],
+    ['Exploit', 13.6],
+    ['Marshal', 13.9],
+    ['One enemy', 2],
+    ['Warbringer', 45],
+    ['Decimator Vulnerable', 25],
+    ['Decimator Overpower', 25],
+    ['Weapons Master', 75],
+    ['Sword gem', 24]
+  ];
+  const base = {
+    weaponDmg: 4596,
+    coeffPct: cast.total,
+    additivePct: 12482.6 + 648 + 663.7 + 206.3,
+    mainStat: 4155,
+    mainStatPer10: 0.8,
+    critChance: 100,
+    critDmg: 10396.6,
+    vulnerable: true,
+    modifiers: []
+  };
+  const sheetOnly = compute(base).total;
+  const withMultipliers = compute({
+    ...base,
+    modifiers: lines.map(([name, value]) => ({ name, bucket: 'multiplicative', value, active: true }))
+  }).total;
+  return {
+    cast,
+    sheetOnly,
+    withMultipliers,
+    observed: [13e9, 157e9],
+    top: [139e9, 157e9]
+  };
+}
+
+export function doubleSwingUpgradeGains(catalog, savedBuild) {
+  const definition = S16_DEFINITIONS.find(item => item.id === 's16-double-swing');
+  const current = scoreS16Build(catalog, savedBuild, definition);
+  const withFifth = scoreS16Build(catalog, savedBuild, {
+    ...definition,
+    scoredLines: [...definition.scoredLines, 'crucibleStreak']
+  });
+  const withoutTwo = {
+    ...definition,
+    scoredLines: definition.scoredLines.filter(id => id !== 'oneEnemy')
+  };
+  const withSlice = scoreS16Build(catalog, savedBuild, withoutTwo, { variants: { sliceAndDice: true } });
+  const perTen = current.dps.max.average * (1.1 / 1) - current.dps.max.average;
+  return {
+    current: current.dps.max.average,
+    crucibleFive: withFifth.dps.max.average - current.dps.max.average,
+    sliceInstead: withSlice.dps.max.average - current.dps.max.average,
+    perTenMultiplicative: perTen
+  };
 }
 
 export function formatBillions(total) {

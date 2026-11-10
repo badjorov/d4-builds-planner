@@ -12,14 +12,14 @@
       "season": 16,
       "placeholder": {
         "for": "Nikolay's Double Swing setup",
-        "status": "waiting",
-        "using": "research-note list"
+        "status": "replaced",
+        "using": "screenshots 2026-11-10"
       },
-      "skills": ["Double Swing", "War Cry", "Rallying Cry", "Challenging Shout", "Wrath of the Berserker", "Lunging Strike"],
+      "skills": ["Double Swing", "War Cry", "Rallying Cry", "Challenging Shout", "Wrath of the Berserker", "Iron Skin"],
       "sixthSkill": {
-        "name": "Lunging Strike",
-        "confirmed": false,
-        "note": "Elyxir lists the sixth slot as Iron Skin, Steel Grasp, or Lunging Strike. Lunging Strike is used here and is unconfirmed."
+        "name": "Iron Skin",
+        "confirmed": true,
+        "note": "The 10 Nov 2026 skill bar has Iron Skin in the sixth slot. There is no Basic skill."
       },
       "uniques": ["Fists of Fate", "Ramaladni's Magnum Opus", "Tibault's Will", "Ring of Red Furor"],
       "aspects": ["Earthstriker's", "Crushing", "Disobedience"],

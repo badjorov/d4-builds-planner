@@ -1,5 +1,5 @@
 export const DEFAULT_ATTACK_SPEED_CAP = 120;
-export const ATTACK_SPEED_CAP_LABEL = 'probable cap, estimate (inferred from the sheet never exceeding 120% in S15); recheck S16';
+export const ATTACK_SPEED_CAP_LABEL = 'evidence, not confirmed';
 
 export function resolveAttackSpeedCap(opts = {}) {
   if (Object.hasOwn(opts, 'attackSpeedCap') && (opts.attackSpeedCap == null || opts.attackSpeedCap === Infinity)) return Infinity;
@@ -58,6 +58,6 @@ export function attackSpeedOverCap(catalog, build, opts = {}) {
     label: ATTACK_SPEED_CAP_LABEL,
     overCap,
     wasted,
-    note: 'Probable cap, estimate (inferred from the sheet never exceeding 120% in S15); recheck S16. These affixes are listed as past that cap because removing them left the sheet at 120%.'
+    note: 'Evidence, not confirmed. The 10 Nov 2026 sheet reads 120.0% Attack Speed in town and in combat while the gear lines add to about 147.5% (Leoric 12.5, Spirit 45.8, Insight 54.2, Starless 15.0, Stone of Jordan 20). These affixes are listed as past that reading.'
   };
 }

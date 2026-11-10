@@ -48,10 +48,10 @@ test('the three provisional Season 16 builds score without soul stacks', () => {
   assert.equal(file.souls, 0);
   assert.equal(file.builds.length, 3);
   const swing = file.builds.find(build => build.id === 's16-double-swing');
-  assert.equal(swing.placeholder.status, 'waiting');
+  assert.equal(swing.placeholder.status, 'replaced');
   assert.deepEqual(swing.unresolved, []);
-  assert.equal(swing.sixthSkill.confirmed, false);
-  assert.equal(swing.sixthSkill.name, 'Lunging Strike');
+  assert.equal(swing.sixthSkill.confirmed, true);
+  assert.equal(swing.sixthSkill.name, 'Iron Skin');
   const flay = file.builds.find(build => build.id === 's16-flay');
   assert.ok(flay.sources.includes('https://d4guides.gg/en/build/barbarian-flay'));
   assert.ok(flay.sources.includes('https://d4guides.gg/en/database/horadric-affixes/bloodletters-flow'));
@@ -62,11 +62,11 @@ test('the three provisional Season 16 builds score without soul stacks', () => {
   const scores = scoreS16(catalog, build);
   assert.equal(scores.length, 3);
   const byId = Object.fromEntries(scores.map(row => [row.id, row]));
-  assert.equal(byId['s16-double-swing'].rank, 41);
-  assert.equal(byId['s16-double-swing'].rankMultiplier, 5.4);
-  assert.equal(byId['s16-double-swing'].storedCoeff, 114);
-  assert.ok(Math.abs(byId['s16-double-swing'].ptrCoeff - 1620) < 1e-6);
-  assert.equal(byId['s16-double-swing'].previousCoeff, 150);
+  assert.equal(byId['s16-double-swing'].rank, 48);
+  assert.equal(byId['s16-double-swing'].rankMultiplier, 6.15);
+  assert.equal(byId['s16-double-swing'].storedCoeff, 461);
+  assert.ok(Math.abs(byId['s16-double-swing'].previousCoeff - 461.25) < 1e-6);
+  assert.ok(byId['s16-double-swing'].ptrCoeff > byId['s16-double-swing'].previousCoeff * 2);
   assert.equal(byId['s16-whirlwind'].storedCoeff, 386);
   assert.ok(Math.abs(byId['s16-whirlwind'].ptrCoeff - 386.1) < 1e-6);
   assert.equal(byId['s16-whirlwind'].previousCoeff, 165);
@@ -75,11 +75,11 @@ test('the three provisional Season 16 builds score without soul stacks', () => {
   assert.equal(byId['s16-flay'].dot, true);
   for (const row of scores) {
     assert.ok(row.max.peak > row.min.peak);
-    assert.equal(row.fury, 826);
+    assert.equal(row.fury, row.id === 's16-double-swing' ? 827 : 826);
   }
   const sescheron = byId['s16-whirlwind'].isolation.find(line => /Colossal/.test(line.name));
   assert.ok(Math.abs(sescheron.peak - 7) < 1e-9);
-  const streak = byId['s16-double-swing'].isolation.find(line => /5s/.test(line.name));
+  const streak = byId['s16-whirlwind'].isolation.find(line => /5s/.test(line.name));
   assert.ok(Math.abs(streak.peak - 1) < 1e-9);
   assert.ok(streak.average > 2);
   const bleed = byId['s16-flay'].isolation.find(line => /Bleeding/.test(line.name));
@@ -99,14 +99,14 @@ test('the three provisional Season 16 builds score without soul stacks', () => {
   assert.equal(slower.whirlwind.frames, 26);
   assert.ok(Math.abs(slower.dps.max.peak - ww.dps.max.peak / 2) < 1);
   const ds = byId['s16-double-swing'];
-  assert.equal(ds.furyReport.sustainable, false);
-  assert.ok(ds.furyReport.spenderUptime < 1);
-  assert.ok(Math.abs(ds.dps.max.peak - ds.max.peak * ds.attackSpeed.aps) < 1);
+  assert.equal(ds.furyReport.spenderUptime, 1);
+  assert.ok(ds.furyReport.net < 0);
+  assert.ok(ds.furyReport.netWithCritAndUnstoppable > 0);
+  assert.ok(Math.abs(ds.dps.max.peak - ds.max.peak * ds.furyReport.actionsPerSecond) < 1);
   const flayScore = byId['s16-flay'];
   assert.ok(Math.abs(flayScore.dps.max.peak - flayScore.max.peak / 9) < 1);
-  const fistsOff = scoreS16(catalog, build, { fistsOfFate: false }).find(row => row.id === 's16-double-swing');
-  assert.ok(fistsOff.max.peak < byId['s16-double-swing'].max.peak);
-  assert.ok(Math.abs(byId['s16-double-swing'].max.peak / fistsOff.max.peak - 1.505) < 1e-6);
+  assert.equal(byId['s16-double-swing'].lines.some(line => line.name === 'Fists of Fate'), false);
+  assert.equal(byId['s16-double-swing'].lines.some(line => /5s/.test(line.name)), false);
   const doc = readFileSync(new URL('../docs/s16-builds.md', import.meta.url), 'utf8');
   assert.match(doc, /provisional/);
   assert.match(doc, /One-Handed Mace Expertise/);
@@ -172,7 +172,7 @@ test('attack speed above the 120% cap is worth 0', () => {
   const build = read('../data/builds.json').builds.find(item => item.id === 'users-current-build');
   const over = attackSpeedOverCap(catalog, build);
   assert.equal(over.cap, 120);
-  assert.equal(over.label, 'probable cap, estimate (inferred from the sheet never exceeding 120% in S15); recheck S16');
+  assert.equal(over.label, 'evidence, not confirmed');
   const open = whirlwindFury({ attackSpeedPct: 143.5, attackSpeedCap: null });
   const unbounded = whirlwindFury({ attackSpeedPct: 143.5, attackSpeedCap: Infinity });
   assert.equal(open.frames, 10);

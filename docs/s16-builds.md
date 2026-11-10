@@ -12,7 +12,7 @@ The score uses the calibrated defaults: Overpower `total`, headline crit, and da
 
 ## Double Swing
 
-Skills: Double Swing, War Cry, Rallying Cry, Challenging Shout, Wrath of the Berserker, Lunging Strike. The sixth slot is unconfirmed. Elyxir lists Iron Skin, Steel Grasp, or Lunging Strike, and this row uses Lunging Strike. Link: https://www.elyxir.gg/guide/diablo-iv/diablo-iv-season-16-ptr-double-swing-barbarian-defense-and-positioning-guide
+Skills: Double Swing, War Cry, Rallying Cry, Challenging Shout, Wrath of the Berserker, Iron Skin. The 10 Nov 2026 screenshots replace the earlier placeholder list. The sixth slot is Iron Skin. There is no Basic skill.
 
 Uniques: Fists of Fate, Ramaladni's Magnum Opus, Tibault's Will, Ring of Red Furor.
 
@@ -60,7 +60,7 @@ One-Handed Mace Expertise resolves to `Power_Barbarian_WeaponExpertise_1HMace`. 
 
 Flay's power file is `Barbarian_Maim`. The string name is Flay.
 
-The sixth Double Swing skill is Lunging Strike, and that choice is unconfirmed. No name in these three lists is left unresolved.
+The sixth Double Swing skill is Iron Skin. The earlier placeholder used Lunging Strike. No name in these three lists is left unresolved.
 
 ## Skill rank
 
@@ -88,13 +88,13 @@ Rank 41. Attack speed input +120% (estimate, the S15 sheet). The 60s buff timeli
 
 Whirlwind uses frame breakpoints. Per-tick damage stays the rank-41 tooltip value, the stored 386% basis. Ticks per second are `60 / frames`. The +120% sheet bonus lands on the 91% step: 13 frames, 4.615 ticks/s. This is community-measured S15 (3.2), recheck after S16 launch. The frame counts are the 2H steps from [attack speed mechanics](https://maxroll.gg/d4/resources/attack-speed-mechanics) and the [Whirlwind barbarian guide](https://maxroll.gg/d4/build-guides/whirlwind-barbarian-guide). The spin weapon is a 2H polearm. Polearm-specific frames are an estimate: the measured 0% group is 2H axe, polearm, or mace at 26 frames, and the steps are that 2H table. Ramaladni's Magnum Opus is the one-handed sword in the 1H slot. 1H and 2H sword have a measured frame count only at 0% attack speed. Above 0% their frames follow the 2H ratio, and that interpolation is flagged.
 
-`attackSpeedCap` defaults to 120%. The label is probable cap, estimate (inferred from the sheet never exceeding 120% in S15); recheck S16. Pass null or Infinity for an uncapped run. With the default, effective attack speed is clamped to 120% for Whirlwind breakpoints, Double Swing and Flay cast rates, and Lucky Hit or on-hit scaling. The 143.5% breakpoint is above that probable cap. Its row stays in the table as a reference and is left out of the scored build.
+`attackSpeedCap` defaults to 120%. The label is evidence, not confirmed. The 10 Nov 2026 sheet reads 120.0% in town and in combat while the gear lines add to about 147.5%. Pass null or Infinity for an uncapped run. With the default, effective attack speed is clamped to 120% for Whirlwind breakpoints, Double Swing and Flay cast rates, and Lucky Hit or on-hit scaling. The 143.5% breakpoint is above that reading. Its row stays in the table as a reference and is left out of the scored build.
 
 `whirlwindAttackSpeedModel: 'flat'` keeps the literal formula reading. In that reading the tick rate and the per-tick damage move together, so damage per second stays at the 1.0 APS rate of `30/13` ticks.
 
 | Build | Peak min | Peak max | Average min | Average max |
 | --- | ---: | ---: | ---: | ---: |
-| Double Swing | 501.22B/s | 1,178.26B/s | 282.12B/s | 620.37B/s |
+| Double Swing, his 10 Nov setup | 384.94B/s | 524.92B/s | 187.22B/s | 255.30B/s |
 | Whirlwind, breakpoints at +120% | 66.53B/s | 87.72B/s | 72.10B/s | 95.06B/s |
 | Whirlwind, flat formulas | 33.27B/s | 43.86B/s | 36.05B/s | 47.53B/s |
 | Flay bleed | 2.57B/s | 5.73B/s | 0.38B/s | 0.61B/s |
@@ -113,7 +113,7 @@ The +120% default lands on the 91% row. Generation is town Fury regeneration 85/
 | 27.5% | 20 | 3.000 | 43.24B/s | 57.01B/s | 46.87B/s | 61.79B/s | 19.50 | 27.18 | +7.68 | holds |
 | 48.8% | 17 | 3.529 | 50.88B/s | 67.08B/s | 55.14B/s | 72.69B/s | 22.94 | 27.18 | +4.24 | holds |
 | 91% (+120% lands here) | 13 | 4.615 | 66.53B/s | 87.72B/s | 72.10B/s | 95.06B/s | 30.00 | 27.18 | −2.82 | holds for 60s, uptime 1.00. An endless channel runs out |
-| 143.5% (above the probable 120% cap, reference only) | 10 | 6.000 | 86.49B/s | 114.03B/s | 93.73B/s | 123.58B/s | 39.00 | 27.18 | −11.82 | reference. The scored build clamps to the probable cap |
+| 143.5% (above the 120% reading, reference only) | 10 | 6.000 | 86.49B/s | 114.03B/s | 93.73B/s | 123.58B/s | 39.00 | 27.18 | −11.82 | reference. The scored build clamps to 120% |
 
 Flay bleed DPS is one application's total divided by its duration. Bloodletter's 2-piece multiplies both the total and the duration by 1.8, so the per-second rate is the 621% total divided by 5 seconds. The buff allows 1 stack and does not extend past that duration. No field says whether a new Flay refreshes or snapshots the coefficient. The score assumes one stack stays up while Flay is being cast. That refresh is uncertain.
 
@@ -127,27 +127,46 @@ Whirlwind Fury per second is `15 × (ticks per second / ticks per second at 1.0 
 | --- | --- | ---: | ---: | ---: | --- |
 | Whirlwind, breakpoints | 4.615 ticks/s | 30.00 | 27.18 | −2.82 | yes for 60s. The pool lasts 292.9s |
 | Whirlwind, flat formulas | 2.308 ticks/s | 15.00 | 27.18 | +12.18 | yes |
-| Double Swing | 2.20 casts/s | 44.00 | 60.18 while Lunging Strike fills the rest | −16.82 if only Double Swing is cast | no. Spender uptime 0.78, with Lunging Strike filling the other 0.22 |
+| Double Swing | 2.42 casts/s | 62.92 | 22.11 from regen 80 minus the 7% drain | −40.81 before crit Fury and Unstoppable regen | the dummy stayed full, so uptime is 1. With 3 Fury per crit and Tibault's 25, the model is +1.61 |
 | Flay | 2.75 casts/s | 68.75 | 68.43 | −0.32 | the 826 pool covers the 60s window. It does not cover an endless fight |
 
-Double Swing costs 20 Fury per cast (`tInitialCost`). Its cast rate is `Attacks_Per_Second_Total` because the Slice and Dice penalty `SF_23` is 0. Flay generates 15 and, with Shard of Verathiel equipped, spends 25. Its cast rate is `Attacks_Per_Second_Total × 1.25`. Lunging Strike generates 12 per cast at `Attacks_Per_Second_Total × 1.25`.
+Double Swing's tooltip cost is 26 Fury. That is the file cost of 20 times Stone of Jordan's +30% resource cost. The swords say 1.10 attacks per second, and the sheet attack speed is 120%, so the cast rate is 2.42. Flay generates 15 and, with Shard of Verathiel equipped, spends 25. Its cast rate is `Attacks_Per_Second_Total × 1.25`.
 
 ## Estimated inputs
 
-- Rank 41. Double Swing and Flay are stored at rank 10. The S16 default stays 41 until a rank is passed in.
+- Whirlwind and Flay stay at rank 41. Double Swing is rank 48 from the 10 Nov 2026 tooltip.
 - Attack speed bonus +120%. Whirlwind reads it as a frame breakpoint. The label is community-measured S15 (3.2), recheck after S16 launch.
 - Whirlwind weapon type, default 2H polearm. Polearm-specific frames are an estimate. Ramaladni's Magnum Opus is the one-handed sword.
-- Attack speed cap 120%. Label: probable cap, estimate (inferred from the sheet never exceeding 120% in S15); recheck S16. Pass null or Infinity to leave it uncapped. The equipped attack speed affixes add 151.5% past that probable cap: helm 17.5, gloves 34.0, Insight 54.2, Spirit 45.8. Each is worth 0 under the default. Search drops them. Insight already has its x310% Critical Strike Damage Multiplier, and Spirit already has its x66% All Damage Multiplier. Helm and gloves have no stored damage affix to take the slot.
+- Attack speed cap 120%. Label: evidence, not confirmed. The sheet reads 120.0% while the 10 Nov gear lines add to about 147.5% (Leoric 12.5, Spirit 45.8, Insight 54.2, Starless 15.0, Stone of Jordan 20). Pass null or Infinity to leave it uncapped. Attack speed past that reading is worth 0.
 - Polearm Expertise 10/10. PTR rank 10 is 15%[x] while Healthy, and 1.5% Lucky Hit Chance per level (15% at rank 10). Player Healthy uptime is 1. That uptime is an estimate.
 - Might's 8%[x] with a Two-Handed weapon is already on the equipped glyph. It is scored once.
 - Whirlwind attack-speed model, default `breakpoints`. `flat` keeps the literal formula reading.
 - Base attacks per second 1.0.
 - Maximum Fury 826 and Ramaladni's 7% drain.
 - Town Fury regeneration 85/s.
-- One-Handed Mace Expertise level 10 with two maces, on Double Swing only.
-- Fists of Fate expected value, on by default.
+- His technique slot is Two-Handed Mace Expertise, 10/10. The old One-Handed Mace Expertise line is not on this setup. The 15%[x] critical strike damage while Berserking on that technique is not added on top of the combat crit sheet.
+- Fists of Fate is not on this Double Swing setup.
 - Flay bleed refresh. One stack is in the data. Refresh versus snapshot is not.
-- Lunging Strike as the sixth Double Swing skill. Unconfirmed.
+- Double Swing rank 48. The other skills on his bar are Rallying Cry 39, War Cry 39, Challenging Shout 25, Wrath 39, and Iron Skin 28. Their stored buff numbers are not rescaled.
+- Dust Devil payload is `SF_0 × 0.5` in the power file. The tooltip ratio 368 / 461.25 is 0.798. His Twister glyph is +40.2%[x] and +13%[x], and `0.5 × 1.402 × 1.13 = 0.792`. The model keeps the file 0.5 and applies those two glyph lines on the devils only.
+- Berserker's Crucible is 3/5. Hellfire Torch's +1 set count is inactive for him. The 200%[x] at 5 seconds is off. S16 removes Splinters, and Leoric's soul counter was not readable, so the 4.1%[x] per soul stays at 0 souls.
+- Lunging Strike is not on the bar.
+
+## His Double Swing, projected Season 16 average
+
+The sustained reading, with Starless at 50%[x], is **255.30B/s**. The one-stack Starless reading is 187.22B/s. Peak at the 12,482.6% All Damage frame is 524.92B/s. S15 sheet values stay in place where Season 16 has not published a replacement. The skill coefficient is the only part doubled, from the live 75% base to the PTR 150% base.
+
+Upgrades, measured on that 255.30B/s average:
+
+| Upgrade | Average gain |
+| --- | ---: |
+| Berserker's Crucible 5-piece, the inactive 200%[x] after 5s of Berserking | +261.27B/s |
+| Slice and Dice instead of the +2%[x] per enemy | +43.62B/s |
+| Each 10%[x] in place of an attack speed affix that sits past 120% | +25.53B/s |
+
+## Live dummy check
+
+One live cast at the t=30 sheet, with the known [x] lines and without the shout buffs, is 38.30B. The larger Twin Strikes sweep is about 14B of that. The dummy's readable hits run from about 13B to 157B, with the top around 139-157B. The modeled sweep sits on the low end of that band. The top of the band is higher than this cast. Combat Critical Strike Damage 10,396.6% is the crit input. Town crit 7,139% times 1.45 is 10,352, close to that combat reading, so Flawless Technique's 45%[x] is treated as already inside the combat crit number and is not multiplied again. Leoric's 4.1%[x] per soul is off because the counter was not readable and Season 16 removes Splinters. A boss dummy also does not die, so Leoric's on-kill soul does not stack during the check.
 
 ### Set bonuses in isolation
 
