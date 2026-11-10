@@ -16,6 +16,16 @@ Soul-splinter socket attributes, by item tier: Lesser Splinter of the Black Soul
 
 The Furnace linked affix is 75–100%[x] (format `0%x`), step argument 10. The charm item forces that same affix. 150–200 is not in this build. Blood-Mad Idol's linked affix is 80–100%[x] (format `%x`), and the self-burn is static 200%[x] over 8 seconds. Both Berserking lines use `%x`, not `%+`.
 
+## Expected: masterwork/transfigure
+
+Nikolay confirmed that his rolls can sit above the game-data base range through masterworking and transfiguration. The screenshot value stays the actual value. The implied uplift is that value divided by the top of the base range.
+
+| Item | Our value and bucket | Parsed base | PTR | Mark |
+| --- | --- | --- | --- | --- |
+| Leoric's Crown, gem effect | 65 [x] | 35–50 [x] | same | expected: masterwork/transfigure. Screenshot 65 against base 35–50 [x]. 65/50 = ×1.30 on the top of the base range, +15 points. |
+| Gohr's Devastating Grips, Whirlwind increased damage | 98–117 [x] | 75–90 none | same | expected: masterwork/transfigure. Screenshot range 98–117 against base 75–90. High end 117/90 = ×1.30. Low end 98/75 = ×1.3067, which is 0.5 above a uniform ×1.30 (97.5). The file format is a bare %, so the parsed bucket is none. The screenshot stays stored as [x]. |
+| Tibault's Will, damage while Unstoppable | 26 [x] | 15–20 [x] | same | expected: masterwork/transfigure. Screenshot 26 against base 15–20 [x]. 26/20 = ×1.30 on the top of the base range, +6 points. |
+
 ## Mismatches first
 
 | Item | Our value and bucket | Parsed live value and bucket | PTR | Match |
@@ -23,11 +33,8 @@ The Furnace linked affix is 75–100%[x] (format `0%x`), step argument 10. The c
 | Abyssal Splinter of the Black Soulstone, attribute | 2.5 [x] | 2.5 none | same | no (bucket differs) |
 | Blood-Mad Idol, additional damage (linked affix) | 75–150 [x] | 80–100 [x] | same | no (range differs) |
 | Blood-Mad Idol, damage taken | 200 none | 200 [x] | same | no (bucket differs) |
-| Gohr's Devastating Grips, Whirlwind increased damage | 98–117 [x] | 75–90 none | same | no (range differs; bucket differs) |
-| Leoric's Crown, gem effect | 65 [x] | 35–50 [x] | same | no (value is outside the parsed base range) |
 | Splinter of the Black Soulstone, item of that name | 2.5 [x] | 1.5 none | same | no (value is outside the parsed base range; bucket differs) |
 | The Furnace, damage to Elites | 75–200 [x] | 75–100 [x] | same | no (range differs) |
-| Tibault's Will, damage while Unstoppable | 26 [x] | 15–20 [x] | same | no (value is outside the parsed base range) |
 | Melted Heart of Selig, Maximum Life | -75 none | 75 none | same | yes (same magnitude, opposite sign) |
 | Ramaladni's Magnum Opus, Fury drain | 7 none | 7 none | same | yes |
 | Ramaladni's Magnum Opus, per Fury | 0.35–0.5 [x] | 0.35–0.5 [x] | same | yes |

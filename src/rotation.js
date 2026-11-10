@@ -280,10 +280,10 @@ const BASE_UPTIME = {
   enemyInjured: 0
 };
 
-function sliceBuild(build, souls, slice) {
+function sliceBuild(build, souls, slice, hitSkill) {
   return {
     ...build,
-    skills: ['whirlwind'],
+    skills: [hitSkill || 'whirlwind'],
     souls,
     uptime: {
       ...build.uptime,
@@ -311,7 +311,7 @@ function scoreSlice(catalog, build, slice, opts) {
     extraModifiers: slice.extras || []
   };
   if (typeof opts.soulRatePct === 'number') options.soulRatePct = opts.soulRatePct;
-  return evaluateBuild(catalog, sliceBuild(build, opts.souls, slice), options);
+  return evaluateBuild(catalog, sliceBuild(build, opts.souls, slice, opts.hitSkill), options);
 }
 
 function extrasFor(buffs, activeIds, includeAssumed = true) {
@@ -346,6 +346,7 @@ function billions(total) {
 }
 
 export function rotationReport(catalog, build, opts = {}) {
+  const reportSouls = typeof opts.souls === 'number' ? opts.souls : 30;
   const buffs = durationBuffs(catalog, build);
   const cdr = sheetCooldownReduction(build);
   const shoutCut = shoutCooldownCut(catalog, build);
@@ -384,14 +385,17 @@ export function rotationReport(catalog, build, opts = {}) {
       sheetContext: slice.sheetContext,
       endpoint: slice.endpoint,
       soulRatePct: opts.soulRatePct ?? null,
+      souls: reportSouls,
+      hitSkill: opts.hitSkill || 'whirlwind',
       extras: (slice.extras || []).map(extra => [extra.id, extra.bucket, extra.value])
     });
     if (!cache.has(key)) {
       cache.set(key, scoreSlice(catalog, build, slice, {
-        souls: 30,
+        souls: reportSouls,
         soulModel: 'sum',
         overpowerSheetMeaning: meaning,
-        soulRatePct: opts.soulRatePct
+        soulRatePct: opts.soulRatePct,
+        hitSkill: opts.hitSkill
       }).result.total);
     }
     return cache.get(key);
@@ -410,11 +414,11 @@ export function rotationReport(catalog, build, opts = {}) {
   }, true);
   const peakTotal30 = evalSlice(peakSlice, 'total');
   const peakPerStack30 = evalSlice(peakSlice, 'perStack');
-  const peakScore = scoreSlice(catalog, build, peakSlice, { souls: 30, soulModel: 'sum', overpowerSheetMeaning: 'total' });
+  const peakScore = scoreSlice(catalog, build, peakSlice, { souls: reportSouls, soulModel: 'sum', overpowerSheetMeaning: 'total', hitSkill: opts.hitSkill });
   const peakWithoutAssumed = scoreSlice(catalog, build, {
     ...peakSlice,
     extras: extrasFor(simulated, allIds, false)
-  }, { souls: 30, soulModel: 'sum', overpowerSheetMeaning: 'total' });
+  }, { souls: reportSouls, soulModel: 'sum', overpowerSheetMeaning: 'total', hitSkill: opts.hitSkill });
 
   let averageTotal30 = 0;
   let averagePerStack30 = 0;
@@ -436,7 +440,7 @@ export function rotationReport(catalog, build, opts = {}) {
     averagePerStack30 += weight * evalSlice(decorate(slice, false), 'perStack');
   }
 
-  const base = soulFactor(30, 'sum', opts.soulRatePct);
+  const base = soulFactor(reportSouls, 'sum', opts.soulRatePct);
   const scale = (souls, model) => soulFactor(souls, model, opts.soulRatePct) / base;
   const targetBillions = build?.combatObservations?.calibration?.peakBillions ?? null;
   const target = typeof targetBillions === 'number' ? targetBillions * 1e9 : null;
@@ -475,7 +479,7 @@ export function rotationReport(catalog, build, opts = {}) {
     sheetContext,
     endpoint,
     extras: []
-  }, { souls: 30, soulModel: 'sum', overpowerSheetMeaning: 'total' }).result.total;
+  }, { souls: reportSouls, soulModel: 'sum', overpowerSheetMeaning: 'total', hitSkill: opts.hitSkill }).result.total;
 
   const party = build?.combatObservations?.calibration?.party || null;
   const unexplained = [
@@ -511,7 +515,7 @@ export function rotationReport(catalog, build, opts = {}) {
     rotation,
     fullOverlap,
     peak: {
-      souls: 30,
+      souls: reportSouls,
       model: 'sum',
       reading: 'headline',
       target,
@@ -524,7 +528,7 @@ export function rotationReport(catalog, build, opts = {}) {
       perStackRatio: target ? peakPerStack30 / target : null
     },
     average: {
-      souls: 30,
+      souls: reportSouls,
       model: 'sum',
       total: averageTotal30,
       perStack: averagePerStack30,

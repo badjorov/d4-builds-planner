@@ -529,7 +529,18 @@ function writeValidation(payload, catalog) {
     }
   }
 
-  rows.sort((a, b) => (a.match === b.match ? a.item.localeCompare(b.item) : a.match === 'no' ? -1 : 1));
+  const expectedUplift = {
+    "Gohr's Devastating Grips, Whirlwind increased damage": 'Screenshot range 98–117 against base 75–90. High end 117/90 = ×1.30. Low end 98/75 = ×1.3067, which is 0.5 above a uniform ×1.30 (97.5). The file format is a bare %, so the parsed bucket is none. The screenshot stays stored as [x].',
+    "Leoric's Crown, gem effect": 'Screenshot 65 against base 35–50 [x]. 65/50 = ×1.30 on the top of the base range, +15 points.',
+    "Tibault's Will, damage while Unstoppable": 'Screenshot 26 against base 15–20 [x]. 26/20 = ×1.30 on the top of the base range, +6 points.'
+  };
+  const expected = [];
+  const compared = [];
+  for (const row of rows) {
+    if (expectedUplift[row.item]) expected.push({ ...row, match: 'expected: masterwork/transfigure', reason: expectedUplift[row.item] });
+    else compared.push(row);
+  }
+  compared.sort((a, b) => (a.match === b.match ? a.item.localeCompare(b.item) : a.match === 'no' ? -1 : 1));
   const orphan = idolCharm ? `The affix Talisman_Charm_Affix_Amulet_Unique_Generic_102 parses to ${fmtRange(findLine(idolCharm.lines, /Affix_Value_1/))} ${bucketWord(findLine(idolCharm.lines, /Affix_Value_1/)?.bucket)} with static ${idolCharm.staticValues.join(', ')}. No checked-out item forces that affix. The Blood-Mad Idol amulet and its charm item both force Amulet_Unique_Generic_102.` : '';
   const lines = [
     '# Datamined values against the hand-entered catalog',
@@ -550,12 +561,24 @@ function writeValidation(payload, catalog) {
     '',
     `The Furnace linked affix is 75–100%[x] (format \`0%x\`), step argument 10. The charm item forces that same affix. 150–200 is not in this build. Blood-Mad Idol's linked affix is 80–100%[x] (format \`%x\`), and the self-burn is static 200%[x] over 8 seconds. Both Berserking lines use \`%x\`, not \`%+\`.`,
     '',
+    '## Expected: masterwork/transfigure',
+    '',
+    'Nikolay confirmed that his rolls can sit above the game-data base range through masterworking and transfiguration. The screenshot value stays the actual value. The implied uplift is that value divided by the top of the base range.',
+    '',
+    '| Item | Our value and bucket | Parsed base | PTR | Mark |',
+    '| --- | --- | --- | --- | --- |'
+  ];
+  for (const row of expected) {
+    lines.push(`| ${row.item} | ${row.ours} | ${row.live} | ${row.ptr} | ${row.match}. ${row.reason} |`);
+  }
+  lines.push(
+    '',
     '## Mismatches first',
     '',
     '| Item | Our value and bucket | Parsed live value and bucket | PTR | Match |',
     '| --- | --- | --- | --- | --- |'
-  ];
-  for (const row of rows) {
+  );
+  for (const row of compared) {
     const reason = row.reason ? ` (${row.reason})` : '';
     lines.push(`| ${row.item} | ${row.ours} | ${row.live} | ${row.ptr} | ${row.match}${reason} |`);
   }
