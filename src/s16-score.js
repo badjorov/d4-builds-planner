@@ -70,10 +70,11 @@ export function doubleSwingSweepPct(rank, base = DS_PTR_BASE) {
   return base * skillRankMultiplier(rank) * 100;
 }
 
-export function doubleSwingCastPct(rank, base = DS_PTR_BASE) {
+export function doubleSwingCastPct(rank, base = DS_PTR_BASE, dustDevilGlyph = true) {
   const sweep = doubleSwingSweepPct(rank, base);
   const weapons = (sweep * TWIN_FIRST + sweep * TWIN_SECOND) * (1 + HIT_TWICE_CHANCE);
-  const devils = DUST_DEVIL_COUNT * sweep * DUST_DEVIL_COEFF * DUST_DEVIL_BONUS * (1 + HIT_TWICE_CHANCE);
+  const devilBonus = dustDevilGlyph ? DUST_DEVIL_BONUS : 1;
+  const devils = DUST_DEVIL_COUNT * sweep * DUST_DEVIL_COEFF * devilBonus * (1 + HIT_TWICE_CHANCE);
   return { sweep, weapons, devils, total: weapons + devils };
 }
 
@@ -212,6 +213,62 @@ const LINES = {
     always: true,
     label: '75%[x] to Injured and Healthy enemies. The dummy starts Healthy. Uptime 1 is an estimate for the whole minute.'
   },
+  tuskhelmBerserk: {
+    name: 'Tuskhelm of Joritz the Mighty',
+    bucket: 'multiplicative',
+    min: 45,
+    max: 45,
+    always: true,
+    label: 'Mid of the stored 40–50%[x] when you gain Berserking while already Berserking. Uptime 1 is an estimate. Mid-roll.'
+  },
+  edgemaster: {
+    name: "Edgemaster's Aspect",
+    bucket: 'multiplicative',
+    min: 50,
+    max: 50,
+    always: true,
+    label: 'Mid of 40–60%[x], taken at full Fury. The screenshot fight stayed full. Mid-roll.'
+  },
+  crushingMid: {
+    name: 'Crushing',
+    bucket: 'multiplicative',
+    min: 55,
+    max: 55,
+    always: true,
+    label: 'Mid of the stored 45–65%[x] while Fortified. Fortified uptime 1 is an estimate. Mid-roll.'
+  },
+  heavyHitting: {
+    name: 'Heavy Hitting',
+    bucket: 'multiplicative',
+    min: 50,
+    max: 50,
+    always: true,
+    label: 'Mid of 40–60%[x] for Dust Devils, Earthquakes, or Iron Shrapnel. Applied only when the cast still creates Dust Devils. Mid-roll.'
+  },
+  grandfatherCrit: {
+    name: 'The Grandfather',
+    bucket: 'crit-mult',
+    min: 120,
+    max: 120,
+    always: true,
+    label: 'PTR Affix_Value_1 is 120 and the string is %x Critical Strike Damage. It may apply only while that weapon swings. Double Swing swings the swords.'
+  },
+  challenger: {
+    name: 'Challenger',
+    bucket: 'multiplicative',
+    min: 15.6,
+    max: 15.6,
+    always: true,
+    label: 'Stored legendary text +15.6%[x] vs Elites at a transcribed level. His new glyph level is not in the screenshots. Boss-dummy uptime 1 is an estimate.'
+  },
+  skullGem: {
+    name: 'Skull in the swinging sword',
+    bucket: 'multiplicative',
+    min: 20,
+    max: 20,
+    always: true,
+    label: 'Flawless skull weapon socket is 20%[x] damage. One swinging sword. The second sword is not stacked.'
+  },
   physicalGem: {
     name: 'Swinging sword gem',
     bucket: 'multiplicative',
@@ -269,6 +326,14 @@ const LINES = {
     always: true,
     estimate: true,
     label: 'Expected value of a hit that deals 1% to 250–300% of normal damage. Low roll EV ×1.255, high roll EV ×1.505. Estimate. Switchable off.'
+  },
+  sescheronPartial: {
+    name: "Sescheron's Fury, below 5 pieces",
+    bucket: 'multiplicative',
+    min: 120,
+    max: 120,
+    when: 'colossal',
+    label: 'Power 01 is 120%[x] while Colossal. Power 03 replaces it with 600%[x], so this line is the set while the 5-piece is off. Fury 827 stays above 100. Estimate that 4/5 still has power 01.'
   },
   sescheron: {
     name: "Sescheron's Fury, Colossal damage",
@@ -442,8 +507,8 @@ function coefficient(definition, rank, opts) {
     return { ptrCoeff: pct, coeffRatio: pct / ENGINE_WHIRLWIND, previous: 165 };
   }
   if (definition.id === 's16-double-swing') {
-    const live = doubleSwingCastPct(rank, DS_LIVE_BASE);
-    const ptr = doubleSwingCastPct(rank, DS_PTR_BASE);
+    const live = doubleSwingCastPct(rank, DS_LIVE_BASE, opts.dustDevilGlyph !== false);
+    const ptr = doubleSwingCastPct(rank, DS_PTR_BASE, opts.dustDevilGlyph !== false);
     let extra = 0;
     if (opts.variants?.sliceAndDice) extra += ptr.sweep * VARIANTS.sliceAndDice * (1 + HIT_TWICE_CHANCE);
     return {
@@ -890,6 +955,51 @@ export function doubleSwingUpgradeGains(catalog, savedBuild) {
     sliceInstead: withSlice.dps.max.average - current.dps.max.average,
     perTenMultiplicative: perTen
   };
+}
+
+const PROPOSED_LINES = ['ramaladniObserved', 'tibaultObserved', 'earthstriker', 'ambidextrous', 'exploit', 'marshalGlyph', 'warbringer', 'decimatorVuln', 'decimatorOver', 'weaponsMaster', 'skullGem', 'tuskhelmBerserk', 'challenger', 'fists'];
+
+export function charmCounts() {
+  const crucibleCharms = 3;
+  const sescheronCharms = 2;
+  const fists = true;
+  const used = crucibleCharms + sescheronCharms + 1;
+  return {
+    slots: 6,
+    rings: 2,
+    amulet: 1,
+    jewelry: 'Each ring is +1 Sescheron and the amulet is +1 Crucible.',
+    crucibleCharms,
+    sescheronCharms,
+    fists,
+    crucible5: true,
+    sescheron5: true,
+    used,
+    fits: used <= 6,
+    spare: 6 - used,
+    seal: 'Talisman_Seal_MythicUnique_03 sets Talisman_Charm_Slot_Count_Base to 6. Affix Talisman_SealAffix_Ancestral_03 sets Set_Item_Discount to 1. The string says the charm requirement drops by 1, with a minimum of 2.'
+  };
+}
+
+export function scoreProposedDoubleSwing(catalog, savedBuild, opts = {}) {
+  const split = 'ds-s16-proposed';
+  const counts = charmCounts();
+  const base = S16_DEFINITIONS.find(item => item.id === 's16-double-swing');
+  const lines = [...PROPOSED_LINES];
+  if (opts.amulet !== 'crushing') lines.push('selig');
+  if (opts.amulet === 'crushing' || opts.rings === 'crushing' || (opts.rings == null && opts.amulet === 'crushing')) lines.push('crushingMid');
+  if (opts.rings === 'edgemaster' || opts.rings == null) lines.push('edgemaster');
+  if (counts.sescheron5) lines.push('sescheron');
+  else lines.push('sescheronPartial');
+  if (counts.crucible5) lines.push('crucibleStreak');
+  if (opts.grandfather) lines.push('grandfatherCrit');
+  if (!counts.fists) {
+    const index = lines.indexOf('fists');
+    if (index >= 0) lines.splice(index, 1);
+  }
+  const definition = { ...base, id: 'ds-s16-proposed', scoredLines: lines };
+  const scored = scoreS16Build(catalog, savedBuild, definition, { variants: { sliceAndDice: true }, dustDevilGlyph: false });
+  return { ...scored, split, counts };
 }
 
 export function formatBillions(total) {

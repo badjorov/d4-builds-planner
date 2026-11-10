@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { MASTERWORK_MARK, MASTERWORK_UPLIFT } from '../src/masterwork.js';
 import { attackSpeedOverCap } from '../src/attack-speed.js';
-import { scoreS16, whirlwindBreakpointTable, whirlwindEffectPerSecond, whirlwindFrames, whirlwindFury } from '../src/s16-score.js';
+import { charmCounts, scoreProposedDoubleSwing, scoreS16, whirlwindBreakpointTable, whirlwindEffectPerSecond, whirlwindFrames, whirlwindFury } from '../src/s16-score.js';
 import { reallocateOverCapAttackSpeed } from '../src/search.js';
 import { SKILL_RANK_BONUS, skillRankMultiplier } from '../src/skill-rank.js';
 
@@ -198,4 +198,25 @@ test('attack speed above the 120% cap is worth 0', () => {
   assert.equal(ww.mightTwoHander.count, 1);
   assert.equal(ww.lines.some(line => line.name === 'Polearm Expertise'), true);
   assert.equal(ww.lines.some(line => line.name === 'Might, two-handed damage'), false);
+});
+
+test('the proposed Season 16 Double Swing fits both 5-piece sets and Fists of Fate', () => {
+  const counts = charmCounts();
+  assert.equal(counts.crucibleCharms, 3);
+  assert.equal(counts.sescheronCharms, 2);
+  assert.equal(counts.fists, true);
+  assert.equal(counts.fits, true);
+  assert.equal(counts.used, 6);
+  assert.match(counts.seal, /Set_Item_Discount/);
+  const catalog = read('../data/barbarian.json');
+  const build = read('../data/builds.json').builds.find(item => item.id === 'users-current-build');
+  const real = scoreS16(catalog, build).find(row => row.id === 's16-double-swing');
+  const proposed = scoreProposedDoubleSwing(catalog, build, { amulet: 'crushing', rings: 'edgemaster' });
+  assert.equal(proposed.id, 'ds-s16-proposed');
+  assert.ok(proposed.dps.max.average > real.dps.max.average * 10);
+  assert.equal(proposed.lines.some(line => /5s/.test(line.name)), true);
+  assert.equal(proposed.lines.some(line => /Colossal/.test(line.name)), true);
+  const doc = readFileSync(new URL('../docs/s16-builds.md', import.meta.url), 'utf8');
+  assert.match(doc, /Set_Item_Discount/);
+  assert.match(doc, /Fists of Fate/);
 });
