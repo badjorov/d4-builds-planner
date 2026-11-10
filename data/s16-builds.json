@@ -15,15 +15,20 @@
         "status": "waiting",
         "using": "research-note list"
       },
-      "skills": ["Double Swing", "War Cry", "Rallying Cry", "Challenging Shout", "Wrath of the Berserker"],
-      "skillChoiceUnresolved": ["Leap", "Lunging Strike"],
+      "skills": ["Double Swing", "War Cry", "Rallying Cry", "Challenging Shout", "Wrath of the Berserker", "Lunging Strike"],
+      "sixthSkill": {
+        "name": "Lunging Strike",
+        "confirmed": false,
+        "note": "Elyxir lists the sixth slot as Iron Skin, Steel Grasp, or Lunging Strike. Lunging Strike is used here and is unconfirmed."
+      },
       "uniques": ["Fists of Fate", "Ramaladni's Magnum Opus", "Tibault's Will", "Ring of Red Furor"],
       "aspects": ["Earthstriker's", "Crushing", "Disobedience"],
       "sets": ["Sescheron's Fury", "Berserker's Crucible"],
       "other": ["Vehement Halo", "Ambidextrous", "1H Mace Expertise"],
       "sources": [
         "https://legends.army/video/rob57ftu",
-        "https://d4gold.com/news/diablo-4-season-16-ptr-3-3-0-patch-notes-changes-for-double-swing-barbarian"
+        "https://d4gold.com/news/diablo-4-season-16-ptr-3-3-0-patch-notes-changes-for-double-swing-barbarian",
+        "https://www.elyxir.gg/guide/diablo-iv/diablo-iv-season-16-ptr-double-swing-barbarian-defense-and-positioning-guide"
       ],
       "resolved": [
         {"name": "Double Swing", "ptr": "Power_Barbarian_DoubleSwing"},
@@ -41,7 +46,7 @@
         {"name": "Leap", "ptr": "Power_Barbarian_Leap"},
         {"name": "Lunging Strike", "ptr": "Power_Barbarian_LungingStrike"}
       ],
-      "unresolved": ["1H Mace Expertise"]
+      "unresolved": []
     },
     {
       "id": "s16-whirlwind",
@@ -85,7 +90,9 @@
       "sets": ["Bloodletter's Flow"],
       "sources": [
         "https://d4guides.gg/en/news/season-16-tier-list-after-the-ptr-who-clears-tower-150",
-        "https://www.wowhead.com/diablo-4/guide/classes/barbarian/flay-build-overview"
+        "https://www.wowhead.com/diablo-4/guide/classes/barbarian/flay-build-overview",
+        "https://d4guides.gg/en/build/barbarian-flay",
+        "https://d4guides.gg/en/database/horadric-affixes/bloodletters-flow"
       ],
       "resolved": [
         {"name": "Flay", "ptr": "Barb_Unlock_Flay in SkillKit/Barbarian.skl. No Power_Barbarian_Flay file is in the checkout, and the English name string was not in the Power_Barbarian string files."},

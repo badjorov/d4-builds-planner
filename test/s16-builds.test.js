@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { MASTERWORK_MARK, MASTERWORK_UPLIFT } from '../src/masterwork.js';
 import { scoreS16 } from '../src/s16-score.js';
+import { SKILL_RANK_BONUS, skillRankMultiplier } from '../src/skill-rank.js';
 
 const read = (path) => JSON.parse(readFileSync(new URL(path, import.meta.url), 'utf8'));
 
@@ -29,6 +30,15 @@ test('screenshot rolls above the base range are a masterwork uplift', () => {
   assert.equal(catalog.uniques.find(item => item.id === 'tibaults-will').effects.find(effect => effect.stat === 'damage while Unstoppable').value, 26);
 });
 
+test('SkillRankBonus is read from the table, with rank 41 at index 41', () => {
+  assert.equal(SKILL_RANK_BONUS.length, 151);
+  assert.equal(skillRankMultiplier(41), 5.4);
+  assert.equal(skillRankMultiplier(1), 1);
+  assert.equal(skillRankMultiplier(2), 1.1);
+  assert.equal(skillRankMultiplier(10), 2);
+  assert.equal(skillRankMultiplier(150), 17.4);
+});
+
 test('the three provisional Season 16 builds score without soul stacks', () => {
   const file = read('../data/s16-builds.json');
   assert.equal(file.season, 16);
@@ -37,7 +47,12 @@ test('the three provisional Season 16 builds score without soul stacks', () => {
   assert.equal(file.builds.length, 3);
   const swing = file.builds.find(build => build.id === 's16-double-swing');
   assert.equal(swing.placeholder.status, 'waiting');
-  assert.deepEqual(swing.unresolved, ['1H Mace Expertise']);
+  assert.deepEqual(swing.unresolved, []);
+  assert.equal(swing.sixthSkill.confirmed, false);
+  assert.equal(swing.sixthSkill.name, 'Lunging Strike');
+  const flay = file.builds.find(build => build.id === 's16-flay');
+  assert.ok(flay.sources.includes('https://d4guides.gg/en/build/barbarian-flay'));
+  assert.ok(flay.sources.includes('https://d4guides.gg/en/database/horadric-affixes/bloodletters-flow'));
   assert.ok(swing.sources[0].startsWith('https://'));
   const catalog = read('../data/barbarian.json');
   const saved = read('../data/builds.json');
@@ -45,11 +60,16 @@ test('the three provisional Season 16 builds score without soul stacks', () => {
   const scores = scoreS16(catalog, build);
   assert.equal(scores.length, 3);
   const byId = Object.fromEntries(scores.map(row => [row.id, row]));
-  assert.equal(byId['s16-double-swing'].ptrCoeff, 150);
+  assert.equal(byId['s16-double-swing'].rank, 41);
+  assert.equal(byId['s16-double-swing'].rankMultiplier, 5.4);
   assert.equal(byId['s16-double-swing'].storedCoeff, 114);
-  assert.equal(byId['s16-whirlwind'].ptrCoeff, 165);
+  assert.ok(Math.abs(byId['s16-double-swing'].ptrCoeff - 1620) < 1e-6);
+  assert.equal(byId['s16-double-swing'].previousCoeff, 150);
   assert.equal(byId['s16-whirlwind'].storedCoeff, 386);
-  assert.equal(byId['s16-flay'].ptrCoeff, 115);
+  assert.ok(Math.abs(byId['s16-whirlwind'].ptrCoeff - 386.1) < 1e-6);
+  assert.equal(byId['s16-whirlwind'].previousCoeff, 165);
+  assert.ok(Math.abs(byId['s16-flay'].ptrCoeff - 1117.8) < 1e-6);
+  assert.equal(byId['s16-flay'].previousCoeff, 115);
   assert.equal(byId['s16-flay'].dot, true);
   for (const row of scores) {
     assert.ok(row.max.peak > row.min.peak);
@@ -67,7 +87,8 @@ test('the three provisional Season 16 builds score without soul stacks', () => {
   assert.ok(Math.abs(byId['s16-double-swing'].max.peak / fistsOff.max.peak - 1.505) < 1e-6);
   const doc = readFileSync(new URL('../docs/s16-builds.md', import.meta.url), 'utf8');
   assert.match(doc, /provisional/);
-  assert.match(doc, /1H Mace Expertise/);
+  assert.match(doc, /One-Handed Mace Expertise/);
+  assert.match(doc, /5\.40/);
   assert.match(doc, /placeholder/);
   assert.match(doc, /2,426\.80B|Soul Splinter|souls are 0|no soul/i);
   assert.match(doc, /bleed/);

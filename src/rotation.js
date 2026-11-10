@@ -438,7 +438,7 @@ export function rotationReport(catalog, build, opts = {}) {
       berserkStreak = 0;
     }
     const slice = {
-      vulnerable: segment.active.includes('war-cry') ? 1 : 0,
+      vulnerable: opts.forceVulnerable ? 1 : (segment.active.includes('war-cry') ? 1 : 0),
       overpower: opts.noOverpower ? 0 : (segment.overpower ? 1 : 0),
       berserk: berserk ? 1 : 0,
       unstoppable: segment.unstoppable ? 1 : 0,

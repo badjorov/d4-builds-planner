@@ -1,32 +1,28 @@
 import { rotationReport } from './rotation.js';
+import { DEFAULT_SKILL_RANK, skillRankMultiplier } from './skill-rank.js';
 
 const FURY = 826;
 const FURY_NOTE = 'Combat Fury 826 is Nikolay\'s observed combat-allbuff reading. These builds do not store their own Fury. Using 826 is an estimate.';
 
-// PTR skill formulas. Table(34, rank) is not in the checkout, so the score uses the
-// constant at a table value of 1. That is the number the patch text calls 150% per swing.
-export const PTR_COEFFICIENTS = {
-  'double-swing': {
-    stored: 114,
-    ptr: 150,
-    formula: 'SF_0 = 1.5 * Table(34, sLevel). Payload 0 uses SF_0. SF_1 is 1.5.',
-    perSwing: true
-  },
-  whirlwind: {
-    stored: 386,
-    ptr: 165,
-    formula: 'SF_0 = 1.65 * Table(34, sLevel). The score uses 165%, the constant at table value 1.'
-  },
-  flay: {
-    storedDirect: 15,
-    storedBleed: 45,
-    storedDuration: 5,
-    ptrDirect: 5.5,
-    ptrBleed: 115,
-    ptrDuration: 5,
-    formula: 'Power Barbarian_Maim is named Flay. Direct SF_1 is 0.055. Bleed total SF_5 is 1.15 * Table(34, sLevel). Duration SF_7 is 5. The dot scalar SF_6 is that total divided by 5.'
-  }
-};
+const ENGINE_WHIRLWIND = 386;
+const WW_BASE = 1.65;
+const WW_TICK_SHARE = 13 / 30;
+const DS_BASE = 1.5;
+const FLAY_BLEED_BASE = 1.15;
+const FLAY_ENGINE_COEFF = 15;
+const BLOODLETTER_DURATION = 1.8;
+
+export function whirlwindTooltipPct(rank) {
+  return WW_BASE * WW_TICK_SHARE * skillRankMultiplier(rank) * 100;
+}
+
+export function doubleSwingSweepPct(rank) {
+  return DS_BASE * skillRankMultiplier(rank) * 100;
+}
+
+export function flayBleedPct(rank, durationFactor = 1) {
+  return FLAY_BLEED_BASE * skillRankMultiplier(rank) * 100 * durationFactor;
+}
 
 const LINES = {
   ramaladni: {
@@ -135,10 +131,22 @@ const LINES = {
     max: 200,
     always: true,
     label: '200%[x] increased Bleeding damage. Static value. Applies to the bleed.'
+  },
+  mace: {
+    name: 'One-Handed Mace Expertise',
+    bucket: 'multiplicative',
+    expertise: true,
+    always: true,
+    label: '1%[x] per expertise level, doubled with two maces, against Stunned enemies or Bosses. The boss score keeps it on. Level 10 and two maces are estimates.'
   }
 };
 
-function percent(spec, end) {
+function percent(spec, end, opts) {
+  if (spec.expertise) {
+    const level = typeof opts.expertiseLevel === 'number' ? opts.expertiseLevel : 10;
+    const maces = opts.twoMaces === false ? 1 : 2;
+    return level * maces;
+  }
   const roll = end === 'min' ? spec.min : spec.max;
   return spec.perFury ? roll * FURY : roll;
 }
@@ -153,11 +161,11 @@ function lineOn(spec, slice, info) {
   return true;
 }
 
-function modifiersFor(specs, end, slice, info) {
+function modifiersFor(specs, end, slice, info, opts) {
   const lines = [];
   for (const spec of specs) {
     if (!lineOn(spec, slice, info)) continue;
-    const roll = percent(spec, end);
+    const roll = percent(spec, end, opts);
     const value = spec.when === 'streak5' ? roll * slice.berserkStreak5 : roll;
     if (!value) continue;
     const mod = {
@@ -198,15 +206,15 @@ export const S16_DEFINITIONS = [
   {
     id: 's16-double-swing',
     name: 'Double Swing',
-    timelineSkills: ['double-swing', 'war-cry', 'rallying-cry', 'challenging-shout', 'wrath-of-the-berserker'],
+    timelineSkills: ['double-swing', 'war-cry', 'rallying-cry', 'challenging-shout', 'wrath-of-the-berserker', 'lunging-strike'],
     hitSkill: 'whirlwind',
     storedCoeff: 114,
-    ptrCoeff: 150,
-    coeffRatio: 150 / 386,
     noOverpower: false,
     fistsOfFate: true,
-    scoredLines: ['ramaladni', 'tibault', 'earthstriker', 'crushing', 'redFuror', 'fists', 'sescheron', 'cruciblePlus', 'crucibleStreak'],
-    coeffNote: 'Stored Double Swing coefficient 114%. PTR payload is 1.5 × Table(34, rank), and SF_1 is 1.5, which is the 150% per swing in the patch text. The rank table is not in the checkout, so the score uses 150% for one swing. A second swing is not added.'
+    mace: true,
+    swings: 2,
+    scoredLines: ['ramaladni', 'tibault', 'earthstriker', 'crushing', 'redFuror', 'fists', 'mace', 'sescheron', 'cruciblePlus', 'crucibleStreak'],
+    coeffNote: 'DAMAGE fires once per weapon, so both sweeps are scored. PTR SF_1 is 1.5 and live 3.2 SF_1 is 0.75. The stored 114% is not 75% × SkillRankBonus[10].'
   },
   {
     id: 's16-whirlwind',
@@ -214,11 +222,9 @@ export const S16_DEFINITIONS = [
     timelineSkills: ['whirlwind', 'rallying-cry', 'challenging-shout', 'iron-skin', 'war-cry', 'wrath-of-the-berserker'],
     hitSkill: 'whirlwind',
     storedCoeff: 386,
-    ptrCoeff: 165,
-    coeffRatio: 165 / 386,
     noOverpower: false,
     scoredLines: ['ramaladni', 'sescheron', 'cruciblePlus', 'crucibleStreak'],
-    coeffNote: 'Stored Whirlwind coefficient 386% is the rank 41 screenshot. PTR SF_0 is 1.65 × Table(34, rank). The rank table is not in the checkout, so the score uses 165%.'
+    coeffNote: 'Whirlwind formulas match on 3.2 and 3.3_ptr. The tooltip payload is 1.65 × 13/30 × SkillRankBonus[rank]. At rank 41 that is 386.1%, the stored 386%.'
   },
   {
     id: 's16-flay',
@@ -226,14 +232,41 @@ export const S16_DEFINITIONS = [
     timelineSkills: ['flay', 'rupture', 'war-cry', 'challenging-shout', 'rallying-cry', 'wrath-of-the-berserker'],
     hitSkill: 'flay',
     storedCoeff: 45,
-    ptrCoeff: 115,
-    coeffRatio: 115 / 15,
     noOverpower: true,
+    forceVulnerable: true,
     dot: true,
+    bleedDuration: 1.8,
     scoredLines: ['ramaladni', 'tibault', 'verathiel', 'hooves', 'moonrise', 'bloodletterBleed'],
-    coeffNote: 'Flay is Power Barbarian_Maim. Stored tooltip bleed is 45% over 5 seconds. PTR bleed total is 1.15 × Table(34, rank), duration 5. The score uses 115% as one damage-over-time application. Crit is off. The bleed dot has no overpower term, so Overpower is off. The 5.5% direct hit is not added.'
+    coeffNote: 'Flay is Power Barbarian_Maim. Bleed total is 1.15 × SkillRankBonus[rank] over 5 seconds. Bloodletter\'s 2-piece makes that duration 80%[x] longer, so the scored total is multiplied by 1.8. Crit is off. The bleed dot has no overpower term. The 2-piece also makes bleeding enemies Vulnerable, so Vulnerable stays on.'
   }
 ];
+
+const VARIANTS = {
+  flurry: 0.5 * 2,
+  sliceAndDice: 1.2,
+  twister: 0.5
+};
+
+function coefficient(definition, rank, opts) {
+  const mult = skillRankMultiplier(rank);
+  if (definition.id === 's16-whirlwind') {
+    const pct = WW_BASE * WW_TICK_SHARE * mult * 100;
+    return { ptrCoeff: pct, coeffRatio: pct / ENGINE_WHIRLWIND, previous: 165 };
+  }
+  if (definition.id === 's16-double-swing') {
+    const sweep = DS_BASE * mult * 100;
+    let sweeps = definition.swings;
+    const enabled = opts.variants || {};
+    if (enabled.flurry) sweeps += VARIANTS.flurry;
+    if (enabled.sliceAndDice) sweeps += VARIANTS.sliceAndDice;
+    if (enabled.twister) sweeps += VARIANTS.twister;
+    const pct = sweep * sweeps;
+    return { ptrCoeff: pct, sweep, sweeps, coeffRatio: pct / ENGINE_WHIRLWIND, previous: 150 };
+  }
+  const duration = definition.bleedDuration || 1;
+  const pct = FLAY_BLEED_BASE * mult * 100 * duration;
+  return { ptrCoeff: pct, coeffRatio: pct / FLAY_ENGINE_COEFF, previous: 115 };
+}
 
 function activeLines(definition, opts) {
   return definition.scoredLines
@@ -241,26 +274,29 @@ function activeLines(definition, opts) {
     .map(id => LINES[id]);
 }
 
-function runReport(catalog, build, definition, specs, end) {
+function runReport(catalog, build, definition, specs, end, opts) {
   return rotationReport(catalog, build, {
     souls: 0,
     hitSkill: definition.hitSkill,
     noOverpower: definition.noOverpower === true,
-    extraModifiersFor: (slice, info) => modifiersFor(specs, end, slice, info)
+    forceVulnerable: definition.forceVulnerable === true,
+    extraModifiersFor: (slice, info) => modifiersFor(specs, end, slice, info, opts)
   });
 }
 
 export function scoreS16Build(catalog, savedBuild, definition, opts = {}) {
+  const rank = typeof opts.rank === 'number' ? opts.rank : DEFAULT_SKILL_RANK;
+  const coeff = coefficient(definition, rank, opts);
   const build = bareBuild(savedBuild, definition.timelineSkills);
   const specs = activeLines(definition, opts);
-  const min = runReport(catalog, build, definition, specs, 'min');
-  const max = runReport(catalog, build, definition, specs, 'max');
-  const scale = definition.coeffRatio;
+  const min = runReport(catalog, build, definition, specs, 'min', opts);
+  const max = runReport(catalog, build, definition, specs, 'max', opts);
+  const scale = coeff.coeffRatio;
   const withoutSets = specs.filter(spec => !spec.name.includes('Fury') && !spec.name.includes('Crucible') && !spec.name.includes('Bloodletter'));
-  const base = runReport(catalog, build, definition, withoutSets, 'max');
+  const base = runReport(catalog, build, definition, withoutSets, 'max', opts);
   const isolation = [];
   for (const spec of specs.filter(item => /Fury|Crucible|Bloodletter/.test(item.name))) {
-    const alone = runReport(catalog, build, definition, [...withoutSets, spec], 'max');
+    const alone = runReport(catalog, build, definition, [...withoutSets, spec], 'max', opts);
     isolation.push({
       name: spec.name,
       bucket: spec.bucket === 'additive' ? '[+]' : '[x]',
@@ -273,8 +309,13 @@ export function scoreS16Build(catalog, savedBuild, definition, opts = {}) {
     id: definition.id,
     name: definition.name,
     fury: FURY,
+    rank,
+    rankMultiplier: skillRankMultiplier(rank),
     storedCoeff: definition.storedCoeff,
-    ptrCoeff: definition.ptrCoeff,
+    previousCoeff: coeff.previous,
+    ptrCoeff: coeff.ptrCoeff,
+    sweep: coeff.sweep ?? null,
+    sweeps: coeff.sweeps ?? null,
     dot: definition.dot === true,
     coeffNote: definition.coeffNote,
     furyNote: FURY_NOTE,

@@ -12,7 +12,7 @@ The score uses the calibrated defaults: Overpower `total`, headline crit, and da
 
 ## Double Swing
 
-Skills: Double Swing, War Cry, Rallying Cry, Challenging Shout, Wrath of the Berserker. The note also names Leap or Lunging Strike and does not pick one.
+Skills: Double Swing, War Cry, Rallying Cry, Challenging Shout, Wrath of the Berserker, Lunging Strike. The sixth slot is unconfirmed. Elyxir lists Iron Skin, Steel Grasp, or Lunging Strike, and this row uses Lunging Strike. Link: https://www.elyxir.gg/guide/diablo-iv/diablo-iv-season-16-ptr-double-swing-barbarian-defense-and-positioning-guide
 
 Uniques: Fists of Fate, Ramaladni's Magnum Opus, Tibault's Will, Ring of Red Furor.
 
@@ -50,28 +50,37 @@ Aspects: Moonrise.
 
 Sets: Bloodletter's Flow.
 
-Links: https://d4guides.gg/en/news/season-16-tier-list-after-the-ptr-who-clears-tower-150 and https://www.wowhead.com/diablo-4/guide/classes/barbarian/flay-build-overview
+Links: https://d4guides.gg/en/news/season-16-tier-list-after-the-ptr-who-clears-tower-150 , https://www.wowhead.com/diablo-4/guide/classes/barbarian/flay-build-overview , https://d4guides.gg/en/build/barbarian-flay , and https://d4guides.gg/en/database/horadric-affixes/bloodletters-flow
 
 ## Names against the PTR catalog
 
 Resolved ids are in `data/s16-builds.json`. Berserker's Crucible and Bloodletter's Flow match the set tags. The charm items are named "of the Crucible" and "of the Bloodletter".
 
-Unresolved:
+One-Handed Mace Expertise resolves to `Power_Barbarian_WeaponExpertise_1HMace`. The string is that name. It is 1%[x] per expertise level, doubled with two maces, against Stunned enemies or Bosses.
 
-- **1H Mace Expertise.** No Item, Affix, or Power record with that name is in the PTR checkout. The patch notes name it as expertise.
-- **Double Swing's sixth skill.** Leap and Lunging Strike both resolve. The note does not choose one, so neither is scored.
+Flay's power file is `Barbarian_Maim`. The string name is Flay.
 
-Flay's skill-kit unlock is `Barb_Unlock_Flay`. There is no `Power_Barbarian_Flay` file in the checkout.
+The sixth Double Swing skill is Lunging Strike, and that choice is unconfirmed. No name in these three lists is left unresolved.
+
+## Skill rank
+
+`SkillRankBonus` is `PowerFormulaTables.gam.json`, the same 151 values on 3.2 and 3.3_ptr. Index equals rank. Index 0 is present. Rank 41 is index 41 and the value is **5.40**. The fit `1 + 0.1(r−1) + 0.05·floor(r/5)` matches `flValue[r]` for ranks 1 through 150. It does not match if the array is read as rank = index + 1.
+
+The default rank is **41**, Nikolay's Whirlwind rank, and it is an estimate for the other skills. `scoreS16(..., { rank })` changes it. Double Swing and Flay are stored at rank 10 in the catalog. Those stored ranks are not the S16 default.
 
 ## Coefficients
 
-The rank table `Table(34, sLevel)` is not in the checkout. The score uses the constant in the PTR formula, which is the value at a table of 1.
+The previous S16 pass used the rank-1 constants. This pass uses the tooltip-equivalent at rank 41, which is the basis of the 386% Whirlwind calibration. Whirlwind's per-hit payload also divides by attack speed. The calibrated model scores the tooltip number and does not divide by attack speed again, so these coefficients do the same.
 
-| Skill | Stored | PTR | Formula |
-| --- | ---: | ---: | --- |
-| Double Swing | 114% | 150% per swing | `SF_0 = 1.5 * Table(34, sLevel)`. SF_1 is 1.5. One swing is scored. |
-| Whirlwind | 386% | 165% | `SF_0 = 1.65 * Table(34, sLevel)`. |
-| Flay bleed | 45% over 5s | 115% over 5s | Power `Barbarian_Maim` is named Flay. Bleed total `SF_5 = 1.15 * Table(34, sLevel)`. Duration `SF_7` is 5. Direct hit `SF_1` is 5.5% and is not added. |
+| Skill | Stored | Previous S16 coeff | Rank 41 coeff |
+| --- | ---: | ---: | ---: |
+| Whirlwind | 386% | 165% | **386.1%** = 165% × 13/30 × 5.40 |
+| Double Swing | 114% | 150% for one sweep | **810% per sweep, 1,620% for both sweeps** = 150% × 5.40 × 2 |
+| Flay bleed | 45% over 5s | 115% over 5s | **621% over 5s, then ×1.8 = 1,117.8%** |
+
+Whirlwind's formulas and tooltip strings match on 3.2 and 3.3_ptr. It is not a nerf. Live 3.2 Double Swing `SF_1` is 0.75, half of the PTR 1.5. At the stored rank 10, 75% × SkillRankBonus[10] is 150%, not the stored 114%.
+
+Optional Double Swing hits, off in this table: Flurry adds 0.5× per sweep, Slice and Dice adds one 1.2× outer hit, and the Twister tooltip payload is 0.5× one sweep. Pass `variants: { flurry, sliceAndDice, twister }` to turn them on.
 
 ## Scores at 0 souls
 
@@ -79,9 +88,9 @@ Healthy Vulnerable boss. Min and max are the parsed PTR rolls. Every figure is a
 
 | Build | Peak min | Peak max | Average min | Average max |
 | --- | ---: | ---: | ---: | ---: |
-| Double Swing | 17.58B | 41.33B | 12.66B | 27.84B |
-| Whirlwind | 5.36B | 7.06B | 5.81B | 7.65B |
-| Flay bleed | 2.38B | 5.31B | 0.25B | 0.41B |
+| Double Swing | 227.83B | 535.57B | 164.08B | 360.80B |
+| Whirlwind | 12.53B | 16.53B | 13.58B | 17.91B |
+| Flay bleed | 23.11B | 51.60B | 3.42B | 5.52B |
 
 Whirlwind's average is above its peak because the Crucible 200%[x] starts after 5 seconds of Berserking. The full-overlap peak is the first 4 seconds of War Cry, so that line is off the peak and on for part of the average.
 
@@ -110,6 +119,7 @@ The Crucible 10%[x] against Elites after 60 seconds of Berserking is in the file
 | Crushing, while Fortified | [x] | 45 | 65 | Double Swing |
 | Ring of Red Furor, next Core cast | [x] | 50 | 60 | Double Swing peak only |
 | Fists of Fate, expected hit | [x] | ×1.255 | ×1.505 | Double Swing. Estimate. Switchable off. |
+| One-Handed Mace Expertise | [x] | 20 | 20 | Double Swing. Level 10 and two maces are estimates. The boss keeps the line on. |
 | Shard of Verathiel, Basic damage | [x] | 70 | 100 | Flay |
 | Hooves of the Mountain God, Fury drain | [x] | 45 | 60 | Flay peak only |
 | Moonrise, Basic damage in Bloodrage | [x] | 60 | 100 | Flay peak only |
@@ -119,7 +129,7 @@ Fists of Fate deals 1% to 250–300% of normal damage. The expected multiplier i
 ## Unscored
 
 - Horadric seal affixes. The strings give the bucket (`%x` on Sescheron damage, Crucible elite damage, Bloodletter bleed, rupture, and vulnerable damage). The number is a `GearAffix_*` formula id, and that table is not in the checkout, so the roll stays null.
-- Set lines that are not a damage percent: cast speed, size, Fury, life, damage reduction, cooldown reduction, the shout trigger, and Bloodletter's 80%[x] longer bleed duration. The duration stays 5 seconds in the damage score.
+- Set lines that are not a damage percent: cast speed, size, Fury, life, damage reduction, cooldown reduction, and the shout trigger. Bloodletter's 80%[x] longer duration is applied to the Flay bleed total (×1.8) and is not a separate damage line. That 2-piece also makes bleeding enemies Vulnerable, so the Flay score keeps Vulnerable on.
 - The Crucible 10%[x] elite line after 60 seconds of Berserking. Uptime on this timeline is 0.
 - Paingorger's Gauntlets. The echo is a separate hit.
 - Accursed Touch. It applies Vulnerable and is not a damage percent.
