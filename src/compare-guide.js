@@ -1,5 +1,10 @@
+import { readFileSync } from 'fs';
 import { resolveCritReading, resolveOverpowerMeaning, resolveSoulModel } from './catalog.js';
 import { rotationReport } from './rotation.js';
+
+function dataminedGuideRolls() {
+  return JSON.parse(readFileSync(new URL('../data/datamined/guide-rolls.json', import.meta.url), 'utf8'));
+}
 
 export const GUIDE_ID = 'ww-d4builds-immortal-speed-130';
 export const GUIDE_SOURCE = 'https://d4builds.gg/builds/whirlwind-barbarian-endgame/?var=4';
@@ -369,6 +374,26 @@ export function compareGuide(catalog, buildsFile, metaFile) {
     bloodMad: scoreSet(catalog, nikolay, variants, { bloodMad: true, forceBerserk: true }),
     furnace: scoreSet(catalog, nikolay, variants, { furnace: true })
   };
+  const mined = dataminedGuideRolls();
+  const scoreEnds = (build, flags) => {
+    const scored = {};
+    for (const end of ['min', 'max']) {
+      scored[end] = scoreProfile(catalog, build, { end, additive: false, rolls: mined.rolls, eliteShare }, flags);
+    }
+    return scored;
+  };
+  const dataminedScores = {
+    full: scoreEnds(guideBuild, fullFlags),
+    bloodMad: scoreEnds(nikolay, { bloodMad: true, forceBerserk: true }),
+    furnace: scoreEnds(nikolay, { furnace: true })
+  };
+  const packEnds = (scored) => {
+    const one = (rows) => ({
+      peak: ratio(at(rows, 30, 'peakTotal'), at(nikolayRows, 30, 'peakTotal')),
+      average: ratio(at(rows, 30, 'averageTotal'), at(nikolayRows, 30, 'averageTotal'))
+    });
+    return { min: one(scored.min), max: one(scored.max) };
+  };
 
   const slots = rows.map(row => {
     const scored = row.same ? null : swapScores.get(row.slot.slotId);
@@ -459,7 +484,8 @@ export function compareGuide(catalog, buildsFile, metaFile) {
     'Patch 3.1 notes say some while-Berserking [x] bonuses were additive, and the items were not named. The additive columns score Tuskhelm and Blood-Mad Idol in the additive pool. Starless and The Furnace stay [x].',
     'Leoric\'s Crown database ranges of 35-50 or 75-100 are recorded on the gem note. The screenshot +65%[x] stays the stored boost.',
     'The guide names Spirit as a 1H mace. Nikolay\'s stored Spirit is a 1H sword. No separate mace damage number is stored.',
-    'The four unique entries cite d4-guide-uniques.md. The note\'s source URLs were not in the workspace, so no URL is invented. Season 15, patch 3.2.3. Verified stays false.'
+    'The four unique entries cite d4-guide-uniques.md. The research-note source URLs are stored on sourceUrls. Season 15, patch 3.2.3. Verified stays false.',
+    `The datamined column uses DiabloTools/d4data build ${mined.buildVersion} where the roll is one range and the format specifier is %x: Starless 10–50, Tuskhelm 40–50, Blood-Mad Idol 80–100, The Furnace 75–100. The soul rate stays ${soulBase}%[x] on the guide row because the splinter tiers are 1, 1.5, 2, and 2.5. Legendary-rank scaling is not applied.`
   ];
   return {
     source: guide.source || GUIDE_SOURCE,
@@ -476,6 +502,15 @@ export function compareGuide(catalog, buildsFile, metaFile) {
     extraCdrPct,
     eliteShare,
     rolls,
+    datamined: {
+      buildVersion: mined.buildVersion,
+      commit: mined.commit,
+      rolls: mined.rolls,
+      rows: dataminedScores.full,
+      full: packEnds(dataminedScores.full),
+      bloodMad: packEnds(dataminedScores.bloodMad),
+      furnace: packEnds(dataminedScores.furnace)
+    },
     nikolay: { id: nikolay.id, name: nikolay.name, rows: nikolayRows },
     guideScores: {
       id: guide.id,
@@ -524,7 +559,7 @@ export function renderGuideComparison(report) {
     '',
     `The guide is the recorded row \`${report.guideId}\` in \`data/meta-builds.json\`. Source: ${report.source}. Author ${report.author}, updated ${report.updated}, recorded ${report.recordedOn}. That row is names and the link. This comparison uses those recorded names.`,
     '',
-    `The four guide uniques are manual entries from \`${report.uniqueSource}\` (Research Scout), Season 15, patch 3.2.3. The note's source URLs were not in the workspace, so no URL is invented. Each value is an estimate and stays unverified.`,
+    `The four guide uniques are manual entries from \`${report.uniqueSource}\` (Research Scout), Season 15, patch 3.2.3. The research-note source URLs are stored on those records. Each hand-entered value stays unverified. The datamined column is a separate reading from DiabloTools/d4data build ${report.datamined.buildVersion}.`,
     '',
     `The score uses the locked defaults. Souls use the sum \`1 + rate × souls\`. Nikolay's rate is ${report.soulRates.nikolay}%[x]. The guide rate is ${report.soulRates.guide}%[x], because Tuskhelm does not count as jewelry and the splinter is not gem-boosted. \`overpowerSheetMeaning\` is \`total\`. \`critAudit.reading\` is \`headline\`. Those defaults are calibrated against the 718B boss-dummy hit at 30 souls (peak 784B with the Burning line, 653B without it; average 341B). Both builds use the combat-allbuff sheet and the same 60s buff timeline. The peak is the full overlap on the high end of the All Damage ramp. The sustained average weights that timeline. The guide states no sheet, so both rows use Nikolay's sheet.`,
     '',
@@ -543,6 +578,22 @@ export function renderGuideComparison(report) {
   lines.push(
     '',
     `On the full guide loadout, the 30-soul peak runs from ${factorText(report.full.min.peak)} at the min reading to ${factorText(report.full.max.peak)} at the max reading. The additive readings are ${factorText(report.full.additiveMin.peak)} and ${factorText(report.full.additiveMax.peak)}. The sustained average runs from ${factorText(report.full.min.average)} to ${factorText(report.full.max.average)}, and the additive average readings are ${factorText(report.full.additiveMin.average)} and ${factorText(report.full.additiveMax.average)}.`,
+    '',
+    '## Datamined column',
+    '',
+    `This reading keeps Nikolay's hand-entered row and replaces only the guide unique rolls that the live files state as one range with a \`%x\` specifier. Starless stays 10–50%[x]. Tuskhelm stays 40–50%[x]. Blood-Mad Idol's linked affix is 80–100%[x]. The Furnace is 75–100%[x]. Both Berserking lines stay [x] in this column, because the string specifier is \`%x\` and not \`%+\`. The guide soul rate stays ${report.soulRates.guide}%[x]. The splinter item tiers are 1, 1.5, 2, and 2.5, so that rate is not replaced.`,
+    '',
+    '| Reading | Souls | Peak | Sustained average |',
+    '| --- | ---: | ---: | ---: |',
+    ...[15, 30].flatMap(souls => ['min', 'max'].map(end => {
+      const row = report.datamined.rows[end].find(item => item.souls === souls);
+      const label = end === 'min' ? 'Guide datamined min' : 'Guide datamined max';
+      return `| ${label} | ${souls} | ${billionsText(row.peakTotal)} | ${billionsText(row.averageTotal)} |`;
+    })),
+    '',
+    `At 30 souls the datamined guide peak is ${billionsText(report.datamined.rows.min.find(row => row.souls === 30).peakTotal)} to ${billionsText(report.datamined.rows.max.find(row => row.souls === 30).peakTotal)} (${factorText(report.datamined.full.min.peak)} to ${factorText(report.datamined.full.max.peak)} against Nikolay). The datamined average is ${billionsText(report.datamined.rows.min.find(row => row.souls === 30).averageTotal)} to ${billionsText(report.datamined.rows.max.find(row => row.souls === 30).averageTotal)} (${factorText(report.datamined.full.min.average)} to ${factorText(report.datamined.full.max.average)}).`,
+    '',
+    `Isolated at 30 souls, Blood-Mad Idol is ${factorText(report.datamined.bloodMad.min.peak)} to ${factorText(report.datamined.bloodMad.max.peak)} on the peak and ${factorText(report.datamined.bloodMad.min.average)} to ${factorText(report.datamined.bloodMad.max.average)} on the average. The Furnace is ${factorText(report.datamined.furnace.min.peak)} to ${factorText(report.datamined.furnace.max.peak)} on the peak and ${factorText(report.datamined.furnace.min.average)} to ${factorText(report.datamined.furnace.max.average)} on the average. Starless and Tuskhelm use the same [x] ends as the hand-entered min and max, so their isolated factors do not change.`,
     '',
     'At the peak every compared line is on, so the [x] peak is the product of the isolated peak factors. The average is not that product. Blood-Mad Idol keeps Berserk on outside the War Cry and Wrath windows, which also keeps the Tuskhelm line on, and The Furnace average uses the stored elite share. The additive readings join the combat-allbuff pool, so 40 to 150 additive is a small change beside All Damage and Overpower Damage.',
     '',

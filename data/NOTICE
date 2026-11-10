@@ -1,0 +1,9 @@
+Diablo IV game data © Blizzard Entertainment.
+Not affiliated with or endorsed by Blizzard Entertainment.
+Not for redistribution.
+
+The parsed catalog in data/datamined/ is a scoped reading of community-parsed game files
+(DiabloTools/d4data, branches 3.2 and 3.3_ptr) joined to display names from
+josdemmers/Diablo4Companion. The parser code upstream is MIT. The game numbers and
+text are Blizzard's. This repository stores that scoped parse beside the hand-entered
+catalog. It does not redistribute the raw d4data checkout.

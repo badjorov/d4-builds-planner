@@ -331,6 +331,7 @@
         "recordedSource": { "type": "string", "minLength": 1 },
         "effects": { "type": "array", "items": { "$ref": "#/$defs/effect" } },
         "source": { "$ref": "#/$defs/source" },
+        "datamined": { "$ref": "#/$defs/datamined" },
         "verified": { "type": "boolean" },
         "note": { "type": ["string", "null"] }
       }
@@ -345,8 +346,45 @@
         "slots": { "oneOf": [{ "type": "null" }, { "type": "array", "items": { "type": "string" } }] },
         "effects": { "type": "array", "items": { "$ref": "#/$defs/effect" } },
         "source": { "$ref": "#/$defs/source" },
+        "sourceUrls": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "datamined": { "$ref": "#/$defs/datamined" },
         "verified": { "type": "boolean" },
         "note": { "type": "string" }
+      }
+    },
+    "datamined": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["repo", "branch", "commit", "buildVersion", "provisional", "idName", "lines"],
+      "properties": {
+        "repo": { "type": "string", "minLength": 1 },
+        "branch": { "type": "string", "minLength": 1 },
+        "commit": { "type": "string", "minLength": 1 },
+        "buildVersion": { "type": "string", "minLength": 1 },
+        "provisional": { "type": "boolean" },
+        "idName": { "type": "string", "minLength": 1 },
+        "sno": { "type": ["integer", "null"] },
+        "slot": { "type": ["string", "null"] },
+        "ptrSame": { "type": "boolean" },
+        "lines": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["stat", "bucket", "min", "max", "step", "formula"],
+            "properties": {
+              "stat": { "type": ["string", "null"] },
+              "bucket": { "$ref": "#/$defs/bucket" },
+              "min": { "type": ["number", "null"] },
+              "max": { "type": ["number", "null"] },
+              "step": { "type": ["number", "null"] },
+              "value": { "type": ["number", "null"] },
+              "formula": { "type": ["string", "null"] },
+              "format": { "type": ["string", "null"] },
+              "interpretation": { "type": "string" }
+            }
+          }
+        }
       }
     },
     "affix": {
@@ -465,6 +503,8 @@
         "name": { "type": ["string", "null"] },
         "effects": { "type": "array", "items": { "$ref": "#/$defs/effect" } },
         "source": { "$ref": "#/$defs/source" },
+        "sourceUrls": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "datamined": { "$ref": "#/$defs/datamined" },
         "verified": { "type": "boolean" },
         "suspect": { "type": "boolean" },
         "note": { "type": "string" }

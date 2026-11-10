@@ -1,0 +1,55 @@
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { readFileSync } from 'fs';
+import { parseFormula, bucketFromFormat, classScope } from '../src/d4data-formula.js';
+
+test('pity-bonus formulas keep step, min, and max unverified', () => {
+  const furnace = parseFormula('FloatRangeWithIntervalUniqueAffixPityBonus(SharedRandomFloat(), 10, 75, 100)');
+  assert.equal(furnace.kind, 'range-with-rng');
+  assert.equal(furnace.step, 10);
+  assert.equal(furnace.min, 75);
+  assert.equal(furnace.max, 100);
+  assert.equal(furnace.unverified, true);
+  const idol = parseFormula('FloatRandomRangeWithIntervalUniqueAffixPityBonus(5, 80, 100)');
+  assert.equal(idol.kind, 'random-range');
+  assert.deepEqual([idol.step, idol.min, idol.max], [5, 80, 100]);
+  const ram = parseFormula('FloatRandomRangeWithIntervalUniqueAffixPityBonus(10, 0.0035, 0.005)');
+  assert.equal(ram.step, 10);
+  assert.equal(ram.min, 0.0035);
+  assert.equal(ram.max, 0.005);
+  const rank = parseFormula('39+CurrentLegendaryRank()*1');
+  assert.equal(rank.kind, 'legendary-rank');
+  assert.equal(rank.min, 39);
+  assert.equal(rank.step, 1);
+  assert.equal(rank.max, null);
+  assert.equal(bucketFromFormat('0%x'), 'multiplicative');
+  assert.equal(bucketFromFormat('%+'), 'additive');
+  assert.equal(bucketFromFormat('%'), null);
+  assert.equal(classScope([0, 0, 1, 0, 0, 0, 0, 0]), 'barbarian');
+  assert.equal(classScope([1, 1, 1, 1, 1, 1, 1, 1]), 'generic');
+});
+
+test('hand-entered guide ranges stay put and the datamined rolls are the live files', () => {
+  const catalog = JSON.parse(readFileSync(new URL('../data/barbarian.json', import.meta.url), 'utf8'));
+  const rolls = JSON.parse(readFileSync(new URL('../data/datamined/guide-rolls.json', import.meta.url), 'utf8'));
+  const furnace = catalog.uniques.find(item => item.id === 'the-furnace');
+  const idol = catalog.uniques.find(item => item.id === 'blood-mad-idol');
+  assert.deepEqual(furnace.effects[0].range, [75, 200]);
+  assert.equal(furnace.effects[0].bucket, 'multiplicative');
+  assert.deepEqual(idol.effects.find(effect => effect.kind === 'damage').range, [75, 150]);
+  assert.equal(furnace.datamined.buildVersion, '3.2.4.74043');
+  assert.equal(furnace.datamined.provisional, false);
+  assert.equal(furnace.datamined.lines[0].min, 75);
+  assert.equal(furnace.datamined.lines[0].max, 100);
+  assert.equal(furnace.datamined.lines[0].bucket, 'multiplicative');
+  assert.equal(idol.datamined.lines.find(line => line.stat === 'Affix_Value_1').min, 80);
+  assert.equal(idol.datamined.lines.find(line => line.stat === 'Affix_Value_1').max, 100);
+  assert.equal(idol.datamined.lines.find(line => line.stat === 'Affix_Value_1').bucket, 'multiplicative');
+  assert.deepEqual(rolls.rolls.furnace, { min: 75, max: 100, bucket: 'multiplicative' });
+  assert.deepEqual(rolls.rolls.bloodMad, { min: 80, max: 100, bucket: 'multiplicative' });
+  assert.ok(furnace.sourceUrls.includes('https://d4guides.gg/en/database/items/the-furnace'));
+  assert.ok(idol.sourceUrls.includes('https://d4guides.gg/en/database/items/blood-mad-idol'));
+  const notice = readFileSync(new URL('../data/NOTICE', import.meta.url), 'utf8');
+  assert.match(notice, /© Blizzard Entertainment/);
+  assert.match(notice, /Not for redistribution/);
+});

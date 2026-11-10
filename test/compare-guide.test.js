@@ -115,6 +115,19 @@ test('the guide variant 4 comparison runs on the calibrated timeline', () => {
   assert.match(doc, /meta-builds.json/);
   assert.match(doc, /2\.5%/);
   assert.match(doc, /d4-guide-uniques\.md/);
+  const mined30 = {
+    min: report.datamined.rows.min.find(row => row.souls === 30),
+    max: report.datamined.rows.max.find(row => row.souls === 30)
+  };
+  assert.ok(mined30.min.peakTotal < mined30.max.peakTotal);
+  assert.ok(mined30.max.peakTotal < guide30.max.peakTotal);
+  assert.ok(Math.abs(report.datamined.furnace.min.peak - 1.75) < 1e-9);
+  assert.ok(Math.abs(report.datamined.furnace.max.peak - 2) < 1e-9);
+  assert.ok(Math.abs(report.datamined.bloodMad.min.peak - 1.8) < 1e-9);
+  assert.ok(Math.abs(report.datamined.bloodMad.max.peak - 2) < 1e-9);
+  assert.equal(report.datamined.buildVersion, '3.2.4.74043');
+  assert.match(doc, /Guide datamined max/);
+  assert.match(doc, /80–100/);
 });
 
 test('the four guide uniques stay estimates and Leoric keeps the screenshot gem boost', () => {

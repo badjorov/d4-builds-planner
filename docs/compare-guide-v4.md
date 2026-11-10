@@ -2,7 +2,7 @@
 
 The guide is the recorded row `ww-d4builds-immortal-speed-130` in `data/meta-builds.json`. Source: https://d4builds.gg/builds/whirlwind-barbarian-endgame/?var=4. Author Rob2628, updated 2026-10-12, recorded 2026-10-21. That row is names and the link. This comparison uses those recorded names.
 
-The four guide uniques are manual entries from `d4-guide-uniques.md` (Research Scout), Season 15, patch 3.2.3. The note's source URLs were not in the workspace, so no URL is invented. Each value is an estimate and stays unverified.
+The four guide uniques are manual entries from `d4-guide-uniques.md` (Research Scout), Season 15, patch 3.2.3. The research-note source URLs are stored on those records. Each hand-entered value stays unverified. The datamined column is a separate reading from DiabloTools/d4data build 3.2.4.74043.
 
 The score uses the locked defaults. Souls use the sum `1 + rate × souls`. Nikolay's rate is 4.1%[x]. The guide rate is 2.5%[x], because Tuskhelm does not count as jewelry and the splinter is not gem-boosted. `overpowerSheetMeaning` is `total`. `critAudit.reading` is `headline`. Those defaults are calibrated against the 718B boss-dummy hit at 30 souls (peak 784B with the Burning line, 653B without it; average 341B). Both builds use the combat-allbuff sheet and the same 60s buff timeline. The peak is the full overlap on the high end of the All Damage ramp. The sustained average weights that timeline. The guide states no sheet, so both rows use Nikolay's sheet.
 
@@ -24,6 +24,21 @@ Min uses Starless 10%[x], Tuskhelm 40, Blood-Mad Idol 75, and The Furnace 75. Ma
 | Guide additive max | 30 | 2,265.49B | 903.70B |
 
 On the full guide loadout, the 30-soul peak runs from ×3.0090 at the min reading to ×10.7664 at the max reading. The additive readings are ×1.2326 and ×2.8893. The sustained average runs from ×2.9461 to ×9.8385, and the additive average readings are ×1.2085 and ×2.6466.
+
+## Datamined column
+
+This reading keeps Nikolay's hand-entered row and replaces only the guide unique rolls that the live files state as one range with a `%x` specifier. Starless stays 10–50%[x]. Tuskhelm stays 40–50%[x]. Blood-Mad Idol's linked affix is 80–100%[x]. The Furnace is 75–100%[x]. Both Berserking lines stay [x] in this column, because the string specifier is `%x` and not `%+`. The guide soul rate stays 2.5%[x]. The splinter item tiers are 1, 1.5, 2, and 2.5, so that rate is not replaced.
+
+| Reading | Souls | Peak | Sustained average |
+| --- | ---: | ---: | ---: |
+| Guide datamined min | 15 | 1,906.77B | 812.99B |
+| Guide datamined max | 15 | 3,537.61B | 1,478.17B |
+| Guide datamined min | 30 | 2,426.80B | 1,034.72B |
+| Guide datamined max | 30 | 4,502.42B | 1,881.30B |
+
+At 30 souls the datamined guide peak is 2,426.80B to 4,502.42B (×3.0950 to ×5.7421 against Nikolay). The datamined average is 1,034.72B to 1,881.30B (×3.0302 to ×5.5095).
+
+Isolated at 30 souls, Blood-Mad Idol is ×1.8000 to ×2.0000 on the peak and ×1.8008 to ×2.0009 on the average. The Furnace is ×1.7500 to ×2.0000 on the peak and ×1.5625 to ×1.7500 on the average. Starless and Tuskhelm use the same [x] ends as the hand-entered min and max, so their isolated factors do not change.
 
 At the peak every compared line is on, so the [x] peak is the product of the isolated peak factors. The average is not that product. Blood-Mad Idol keeps Berserk on outside the War Cry and Wrath windows, which also keeps the Tuskhelm line on, and The Furnace average uses the stored elite share. The additive readings join the combat-allbuff pool, so 40 to 150 additive is a small change beside All Damage and Overpower Damage.
 
@@ -104,5 +119,6 @@ Paragon boards and glyphs match by name: Starting Board / Might; Warbringer / Tw
 - Patch 3.1 notes say some while-Berserking [x] bonuses were additive, and the items were not named. The additive columns score Tuskhelm and Blood-Mad Idol in the additive pool. Starless and The Furnace stay [x].
 - Leoric's Crown database ranges of 35-50 or 75-100 are recorded on the gem note. The screenshot +65%[x] stays the stored boost.
 - The guide names Spirit as a 1H mace. Nikolay's stored Spirit is a 1H sword. No separate mace damage number is stored.
-- The four unique entries cite d4-guide-uniques.md. The note's source URLs were not in the workspace, so no URL is invented. Season 15, patch 3.2.3. Verified stays false.
+- The four unique entries cite d4-guide-uniques.md. The research-note source URLs are stored on sourceUrls. Season 15, patch 3.2.3. Verified stays false.
+- The datamined column uses DiabloTools/d4data build 3.2.4.74043 where the roll is one range and the format specifier is %x: Starless 10–50, Tuskhelm 40–50, Blood-Mad Idol 80–100, The Furnace 75–100. The soul rate stays 2.5%[x] on the guide row because the splinter tiers are 1, 1.5, 2, and 2.5. Legendary-rank scaling is not applied.
 
