@@ -1,0 +1,35 @@
+{
+  "unambiguous": true,
+  "soulRatePct": null,
+  "commit": "75e619f0d90a0951945747f45feef59c076a5db0",
+  "buildVersion": "3.2.4.74043",
+  "rolls": {
+    "starless": {
+      "min": 10,
+      "max": 50,
+      "bucket": "multiplicative"
+    },
+    "tuskhelm": {
+      "min": 40,
+      "max": 50,
+      "bucket": "multiplicative"
+    },
+    "bloodMad": {
+      "min": 80,
+      "max": 100,
+      "bucket": "multiplicative"
+    },
+    "furnace": {
+      "min": 75,
+      "max": 100,
+      "bucket": "multiplicative"
+    }
+  },
+  "notes": [
+    "Starless is a flat 10%[x]. Static Value 2 is 5, and 10 × 5 is the 50%[x] cap. The resource-cost amount is not in the formula.",
+    "Tuskhelm damage is Affix_Value_2, 40–50, format %x. Fury per second is static 6. Cooldown Reduction is static 10 with a bare % format.",
+    "Blood-Mad Idol and its charm item both force Amulet_Unique_Generic_102: 80–100, format %x. The unlinked charm affix 75–125 is not used.",
+    "The Furnace and its charm item both force 2HMace_Unique_Generic_001: 75–100, format 0%x.",
+    "The soul-splinter percent depends on the item tier (1, 1.5, 2, 2.5), so the datamined comparison does not replace the 2.5 or 4.1 rates."
+  ]
+}

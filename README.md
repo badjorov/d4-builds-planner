@@ -18,6 +18,8 @@ Only official Blizzard pages and manual entry from your own game client. No data
 
 One exception is recorded on purpose. `data/meta-builds.json` has a single user-supplied Whirlwind name list and a d4builds link. That row stores names and the link only. It has no numeric guide data, `verified` is false, and it is not an open-license dataset. Do not add more rows from guide sites.
 
+A second, separate store is `data/datamined/`. `scripts/import-d4data.mjs` reads a sparse checkout of DiabloTools/d4data (live `3.2` and provisional `3.3_ptr`) and writes Barbarian and generic affixes, aspects, uniques, tempers, paragon, skills, and charms. Hand-entered values in `data/barbarian.json` stay as they are. Parsed lines are added beside them on `datamined`. Diablo IV game data © Blizzard Entertainment. Not affiliated with or endorsed by Blizzard Entertainment. Not for redistribution. See `data/NOTICE`.
+
 Search tests use invented numbers only in `test/fixtures/`, and those files are marked `SYNTHETIC`.
 
 Sources cited by the catalog:

@@ -9,17 +9,17 @@
       {
         "url": "https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy",
         "title": "Celebrate 30 Years of Diablo in Season of Hell's Legacy",
-        "license": "\u00a9 Blizzard Entertainment. Official patch notes. Not an open-license dataset."
+        "license": "© Blizzard Entertainment. Official patch notes. Not an open-license dataset."
       },
       {
         "url": "https://news.blizzard.com/en-us/article/24292852/the-3-2-0-ptr-what-you-need-to-know",
         "title": "The 3.2.0 PTR: What You Need to Know",
-        "license": "\u00a9 Blizzard Entertainment. Official PTR notes. Not an open-license dataset."
+        "license": "© Blizzard Entertainment. Official PTR notes. Not an open-license dataset."
       },
       {
         "url": "https://news.blizzard.com/en-us/article/23189677/diablo-iv-feature-overview",
         "title": "Diablo IV Feature Overview",
-        "license": "\u00a9 Blizzard Entertainment. Official feature overview, cited only for the statement that Barbarians carry four weapons. Not an open-license dataset."
+        "license": "© Blizzard Entertainment. Official feature overview, cited only for the statement that Barbarians carry four weapons. Not an open-license dataset."
       },
       {
         "url": "user video 2026-10-21 batch2 (transcribed)",
@@ -49,7 +49,12 @@
       {
         "url": "d4-guide-uniques.md",
         "title": "Research Scout notes on Ring of Starless Skies, Tuskhelm of Joritz the Mighty, Blood-Mad Idol, and The Furnace",
-        "license": "User-supplied research note, Season 15 patch 3.2.3. Manual entry. Not scraped. The note's source URLs were not in the workspace, so those URLs are not invented. Every value from this source stays verified false and is an estimate."
+        "license": "User-supplied research note, Season 15 patch 3.2.3. Manual entry. Not scraped. The note's source URLs are stored on the four guide uniques. Every value from this source stays verified false and is an estimate."
+      },
+      {
+        "url": "https://github.com/DiabloTools/d4data",
+        "title": "DiabloTools/d4data 3.2 3.2.4.74043 (75e619f0d90a0951945747f45feef59c076a5db0) and 3.3_ptr 3.3.0.74145 (4685d49dec56566f64da847df0709dbd2d66b832), plus Diablo4Companion names",
+        "license": "Parser code is MIT. Diablo IV game data © Blizzard Entertainment. Not affiliated with or endorsed by Blizzard Entertainment. Not for redistribution. Parsed numbers are stored beside the hand-entered catalog and do not replace it."
       }
     ]
   },
@@ -6314,7 +6319,75 @@
       ],
       "source": "https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy",
       "verified": false,
-      "note": "Fury threshold 100 -> 30; +1%[x] crit dmg per Fury above 30. Base crit bonus value unknown."
+      "note": "Fury threshold 100 -> 30; +1%[x] crit dmg per Fury above 30. Base crit bonus value unknown.",
+      "datamined": {
+        "repo": "https://github.com/DiabloTools/d4data",
+        "branch": "3.2",
+        "commit": "75e619f0d90a0951945747f45feef59c076a5db0",
+        "buildVersion": "3.2.4.74043",
+        "provisional": false,
+        "idName": "Ring_Unique_Barb_100",
+        "sno": 1709696,
+        "slot": "ring",
+        "ptrSame": true,
+        "lines": [
+          {
+            "stat": "Affix_Value_1",
+            "bucket": "multiplicative",
+            "min": 50,
+            "max": 60,
+            "step": 10,
+            "value": null,
+            "formula": "FloatRandomRangeWithIntervalUniqueAffixPityBonus(10, 50, 60)",
+            "format": "%x",
+            "interpretation": "unverified"
+          },
+          {
+            "stat": "Static Value 3",
+            "bucket": null,
+            "min": 30,
+            "max": 30,
+            "step": null,
+            "value": 30,
+            "formula": "30",
+            "format": null,
+            "interpretation": "unverified"
+          },
+          {
+            "stat": "Static Value 0",
+            "bucket": null,
+            "min": 5,
+            "max": 5,
+            "step": null,
+            "value": 5,
+            "formula": "5",
+            "format": null,
+            "interpretation": "unverified"
+          },
+          {
+            "stat": "Static Value 1",
+            "bucket": null,
+            "min": 5,
+            "max": 5,
+            "step": null,
+            "value": 5,
+            "formula": "5",
+            "format": null,
+            "interpretation": "unverified"
+          },
+          {
+            "stat": "Static Value 2",
+            "bucket": "multiplicative",
+            "min": 1,
+            "max": 1,
+            "step": null,
+            "value": 1,
+            "formula": "1",
+            "format": "%x",
+            "interpretation": "unverified"
+          }
+        ]
+      }
     },
     {
       "id": "ravenous",
@@ -6334,7 +6407,64 @@
       ],
       "source": "https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy",
       "verified": false,
-      "note": "Applies 1 Rend stack, 0.5s cooldown."
+      "note": "Applies 1 Rend stack, 0.5s cooldown.",
+      "datamined": {
+        "repo": "https://github.com/DiabloTools/d4data",
+        "branch": "3.2",
+        "commit": "75e619f0d90a0951945747f45feef59c076a5db0",
+        "buildVersion": "3.2.4.74043",
+        "provisional": false,
+        "idName": "Ring_Unique_Barb_101_x2",
+        "sno": 2576759,
+        "slot": "ring",
+        "ptrSame": true,
+        "lines": [
+          {
+            "stat": "Affix_Value_1",
+            "bucket": null,
+            "min": 6,
+            "max": 8,
+            "step": 10,
+            "value": null,
+            "formula": "FloatRangeWithIntervalUniqueAffixPityBonus(SharedRandomFloat(), 10, 6.0, 8.0)",
+            "format": "1",
+            "interpretation": "unverified"
+          },
+          {
+            "stat": "Affix_Value_2",
+            "bucket": "multiplicative",
+            "min": 60,
+            "max": 80,
+            "step": 10,
+            "value": null,
+            "formula": "FloatRangeWithIntervalUniqueAffixPityBonus(SharedRandomFloat(),10, 0.6, 0.8)",
+            "format": "1%x",
+            "interpretation": "unverified"
+          },
+          {
+            "stat": "Static Value 0",
+            "bucket": null,
+            "min": 1,
+            "max": 1,
+            "step": null,
+            "value": 1,
+            "formula": "1",
+            "format": null,
+            "interpretation": "unverified"
+          },
+          {
+            "stat": "Static Value 1",
+            "bucket": null,
+            "min": 0.5,
+            "max": 0.5,
+            "step": null,
+            "value": 0.5,
+            "formula": "0.5",
+            "format": "1",
+            "interpretation": "unverified"
+          }
+        ]
+      }
     },
     {
       "id": "nomads-heart",
@@ -6354,7 +6484,42 @@
       ],
       "source": "https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy",
       "verified": false,
-      "note": "'Double damage bonus' now also vs Healthy; value unknown."
+      "note": "'Double damage bonus' now also vs Healthy; value unknown.",
+      "datamined": {
+        "repo": "https://github.com/DiabloTools/d4data",
+        "branch": "3.2",
+        "commit": "75e619f0d90a0951945747f45feef59c076a5db0",
+        "buildVersion": "3.2.4.74043",
+        "provisional": false,
+        "idName": "Amulet_Unique_Barb_104_x2",
+        "sno": 2582126,
+        "slot": "amulet",
+        "ptrSame": true,
+        "lines": [
+          {
+            "stat": "Affix_Value_1",
+            "bucket": "multiplicative",
+            "min": 30,
+            "max": 40,
+            "step": 10,
+            "value": null,
+            "formula": "FloatRandomRangeWithIntervalUniqueAffixPityBonus(10, 0.30, 0.40)",
+            "format": "1%x",
+            "interpretation": "unverified"
+          },
+          {
+            "stat": "Static Value 0",
+            "bucket": "multiplicative",
+            "min": 25,
+            "max": 25,
+            "step": null,
+            "value": 25,
+            "formula": "25",
+            "format": "%x",
+            "interpretation": "unverified"
+          }
+        ]
+      }
     },
     {
       "id": "ramaladni",
@@ -6420,7 +6585,42 @@
       ],
       "source": "https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy",
       "verified": false,
-      "note": "Ancestral Unique Sword, 1H Slashing, 900 Item Power, Quality 25 (+25), Transfigured, 1.10 attacks per second. Screenshot unique power is 0.50%[x] [0.35-0.50] per Fury and 7% Fury drain per second. Video DPS was 2,350, per hit [1,566-3,133], and the drain was 2 Fury per second."
+      "note": "Ancestral Unique Sword, 1H Slashing, 900 Item Power, Quality 25 (+25), Transfigured, 1.10 attacks per second. Screenshot unique power is 0.50%[x] [0.35-0.50] per Fury and 7% Fury drain per second. Video DPS was 2,350, per hit [1,566-3,133], and the drain was 2 Fury per second.",
+      "datamined": {
+        "repo": "https://github.com/DiabloTools/d4data",
+        "branch": "3.2",
+        "commit": "75e619f0d90a0951945747f45feef59c076a5db0",
+        "buildVersion": "3.2.4.74043",
+        "provisional": false,
+        "idName": "1HSword_Unique_Barb_101",
+        "sno": 578742,
+        "slot": "weapon",
+        "ptrSame": true,
+        "lines": [
+          {
+            "stat": "Affix_Value_1",
+            "bucket": "multiplicative",
+            "min": 0.35,
+            "max": 0.5,
+            "step": 10,
+            "value": null,
+            "formula": "FloatRandomRangeWithIntervalUniqueAffixPityBonus(10, 0.0035, 0.005)",
+            "format": "2%x",
+            "interpretation": "unverified"
+          },
+          {
+            "stat": "Static Value 0",
+            "bucket": null,
+            "min": 7,
+            "max": 7,
+            "step": null,
+            "value": 7,
+            "formula": "7",
+            "format": "%",
+            "interpretation": "unverified"
+          }
+        ]
+      }
     },
     {
       "id": "harrogath",
@@ -6440,7 +6640,42 @@
       ],
       "source": "https://news.blizzard.com/en-us/article/24295394/celebrate-30-years-of-diablo-in-season-of-hell-s-legacy",
       "verified": false,
-      "note": "CDR 0.5s."
+      "note": "CDR 0.5s.",
+      "datamined": {
+        "repo": "https://github.com/DiabloTools/d4data",
+        "branch": "3.2",
+        "commit": "75e619f0d90a0951945747f45feef59c076a5db0",
+        "buildVersion": "3.2.4.74043",
+        "provisional": false,
+        "idName": "Chest_Unique_Barb_100",
+        "sno": 1199202,
+        "slot": "chest",
+        "ptrSame": true,
+        "lines": [
+          {
+            "stat": "Affix_Value_1",
+            "bucket": null,
+            "min": 45,
+            "max": 60,
+            "step": 10,
+            "value": null,
+            "formula": "FloatRandomRangeWithIntervalUniqueAffixPityBonus(10, 45, 60)",
+            "format": "%",
+            "interpretation": "unverified"
+          },
+          {
+            "stat": "Static Value 0",
+            "bucket": null,
+            "min": 0.5,
+            "max": 0.5,
+            "step": null,
+            "value": 0.5,
+            "formula": "0.5",
+            "format": "1",
+            "interpretation": "unverified"
+          }
+        ]
+      }
     },
     {
       "slots": [
@@ -6523,7 +6758,31 @@
       "verified": false,
       "id": "leorics-crown",
       "name": "Leoric's Crown",
-      "note": "Ancestral Mythic Unique, 900 Item Power, 25/25, Transfigured. The 25/25 figure is stored as read and is not interpreted. The Splinter of the Black Soulstone is socketed in this helm. The tooltip shows 4.1%[x] per soul, up to 200 stacks, and +1% damage taken per soul. That 4.1 is the splinter base 2.5%[x] times the gem effect +65%[x] (1.65), shown as 4.1. The gem line stays utility. Armor, Damage Reduction, and Movement Speed stay defense or mobility. The per-soul damage line is scored once on the splinter, so this helm copy has scored false. The video gem read of +150% is ignored."
+      "note": "Ancestral Mythic Unique, 900 Item Power, 25/25, Transfigured. The 25/25 figure is stored as read and is not interpreted. The Splinter of the Black Soulstone is socketed in this helm. The tooltip shows 4.1%[x] per soul, up to 200 stacks, and +1% damage taken per soul. That 4.1 is the splinter base 2.5%[x] times the gem effect +65%[x] (1.65), shown as 4.1. The gem line stays utility. Armor, Damage Reduction, and Movement Speed stay defense or mobility. The per-soul damage line is scored once on the splinter, so this helm copy has scored false. The video gem read of +150% is ignored.",
+      "datamined": {
+        "repo": "https://github.com/DiabloTools/d4data",
+        "branch": "3.2",
+        "commit": "75e619f0d90a0951945747f45feef59c076a5db0",
+        "buildVersion": "3.2.4.74043",
+        "provisional": false,
+        "idName": "AttackSpeed",
+        "sno": 583206,
+        "slot": "helm",
+        "ptrSame": true,
+        "lines": [
+          {
+            "stat": "Attack_Speed_Percent_Bonus",
+            "bucket": null,
+            "min": 0,
+            "max": 0,
+            "step": null,
+            "value": 0,
+            "formula": "0",
+            "format": null,
+            "interpretation": "unverified"
+          }
+        ]
+      }
     },
     {
       "slots": [
@@ -6568,7 +6827,31 @@
       "verified": false,
       "id": "enigma",
       "name": "Enigma",
-      "note": "Ancestral Unique Runeword, 900 Item Power."
+      "note": "Ancestral Unique Runeword, 900 Item Power.",
+      "datamined": {
+        "repo": "https://github.com/DiabloTools/d4data",
+        "branch": "3.2",
+        "commit": "75e619f0d90a0951945747f45feef59c076a5db0",
+        "buildVersion": "3.2.4.74043",
+        "provisional": false,
+        "idName": "Runeword_All_Skills_2",
+        "sno": 2676293,
+        "slot": null,
+        "ptrSame": true,
+        "lines": [
+          {
+            "stat": "Skill_Rank_All_Bonus",
+            "bucket": null,
+            "min": 2,
+            "max": 2,
+            "step": null,
+            "value": 2,
+            "formula": "2",
+            "format": null,
+            "interpretation": "unverified"
+          }
+        ]
+      }
     },
     {
       "slots": [
@@ -6606,7 +6889,42 @@
       "verified": false,
       "id": "gohrs-devastating-grips",
       "name": "Gohr's Devastating Grips",
-      "note": "Mythic, 900 Item Power."
+      "note": "Mythic, 900 Item Power.",
+      "datamined": {
+        "repo": "https://github.com/DiabloTools/d4data",
+        "branch": "3.2",
+        "commit": "75e619f0d90a0951945747f45feef59c076a5db0",
+        "buildVersion": "3.2.4.74043",
+        "provisional": false,
+        "idName": "Gloves_Unique_Barb_001_x2",
+        "sno": 2577891,
+        "slot": "gloves",
+        "ptrSame": true,
+        "lines": [
+          {
+            "stat": "Affix_Value_1",
+            "bucket": null,
+            "min": 75,
+            "max": 90,
+            "step": 10,
+            "value": null,
+            "formula": "FloatRandomRangeWithIntervalUniqueAffixPityBonus(10, 0.75, 0.9)",
+            "format": "%",
+            "interpretation": "unverified"
+          },
+          {
+            "stat": "Static Value 0",
+            "bucket": null,
+            "min": 2,
+            "max": 2,
+            "step": null,
+            "value": 2,
+            "formula": "2",
+            "format": null,
+            "interpretation": "unverified"
+          }
+        ]
+      }
     },
     {
       "slots": [
@@ -6665,7 +6983,53 @@
       "verified": false,
       "id": "tibaults-will",
       "name": "Tibault's Will",
-      "note": "Mythic, 900 Item Power."
+      "note": "Mythic, 900 Item Power.",
+      "datamined": {
+        "repo": "https://github.com/DiabloTools/d4data",
+        "branch": "3.2",
+        "commit": "75e619f0d90a0951945747f45feef59c076a5db0",
+        "buildVersion": "3.2.4.74043",
+        "provisional": false,
+        "idName": "Pants_Unique_Generic_102",
+        "sno": 1559366,
+        "slot": "pants",
+        "ptrSame": true,
+        "lines": [
+          {
+            "stat": "Affix_Value_1",
+            "bucket": "multiplicative",
+            "min": 15,
+            "max": 20,
+            "step": 5,
+            "value": null,
+            "formula": "FloatRandomRangeWithIntervalUniqueAffixPityBonus(5, 15, 20)",
+            "format": "%x",
+            "interpretation": "unverified"
+          },
+          {
+            "stat": "Static Value 0",
+            "bucket": null,
+            "min": 25,
+            "max": 25,
+            "step": null,
+            "value": 25,
+            "formula": "25",
+            "format": null,
+            "interpretation": "unverified"
+          },
+          {
+            "stat": "Static Value 1",
+            "bucket": null,
+            "min": 5,
+            "max": 5,
+            "step": null,
+            "value": 5,
+            "formula": "5",
+            "format": null,
+            "interpretation": "unverified"
+          }
+        ]
+      }
     },
     {
       "slots": [
@@ -6715,7 +7079,31 @@
       "verified": false,
       "id": "insight",
       "name": "Insight",
-      "note": "Runeword RalTirTalSol. Ancestral Unique Polearm, 2H Slashing, 900 Item Power, Quality 55 (+25), Transfigured, 0.90 attacks per second. Screenshot DPS 4,615 and per hit [4,360-5,896]. Video DPS was 3,040 and per hit [2,432-3,648]. Video 1.00 attacks per second in a 1H slot is overridden. Rune effect text after 10% Damage Reduction stays cut off."
+      "note": "Runeword RalTirTalSol. Ancestral Unique Polearm, 2H Slashing, 900 Item Power, Quality 55 (+25), Transfigured, 0.90 attacks per second. Screenshot DPS 4,615 and per hit [4,360-5,896]. Video DPS was 3,040 and per hit [2,432-3,648]. Video 1.00 attacks per second in a 1H slot is overridden. Rune effect text after 10% Damage Reduction stays cut off.",
+      "datamined": {
+        "repo": "https://github.com/DiabloTools/d4data",
+        "branch": "3.2",
+        "commit": "75e619f0d90a0951945747f45feef59c076a5db0",
+        "buildVersion": "3.2.4.74043",
+        "provisional": false,
+        "idName": "RuneWord_FasterCastRate_17pct",
+        "sno": 2678981,
+        "slot": null,
+        "ptrSame": true,
+        "lines": [
+          {
+            "stat": "Attack_Speed_Percent_Bonus",
+            "bucket": null,
+            "min": 0.175,
+            "max": 0.175,
+            "step": null,
+            "value": 0.175,
+            "formula": ".175",
+            "format": null,
+            "interpretation": "unverified"
+          }
+        ]
+      }
     },
     {
       "slots": [
@@ -6753,7 +7141,31 @@
       "verified": false,
       "id": "spirit",
       "name": "Spirit",
-      "note": "Runeword TalThulOrtAmn. Ancestral Unique Sword, 1H Slashing, 900 Item Power, Quality 31 (+25), Transfigured, 1.10 attacks per second. Screenshot per hit [1,745-2,373]. Video high end was 2,783. Screenshot: Spirit is the runeword Tal Thul Ort Amn and has no separate Tal rune. The cut-off Rune Tal field from the video was removed."
+      "note": "Runeword TalThulOrtAmn. Ancestral Unique Sword, 1H Slashing, 900 Item Power, Quality 31 (+25), Transfigured, 1.10 attacks per second. Screenshot per hit [1,745-2,373]. Video high end was 2,783. Screenshot: Spirit is the runeword Tal Thul Ort Amn and has no separate Tal rune. The cut-off Rune Tal field from the video was removed.",
+      "datamined": {
+        "repo": "https://github.com/DiabloTools/d4data",
+        "branch": "3.2",
+        "commit": "75e619f0d90a0951945747f45feef59c076a5db0",
+        "buildVersion": "3.2.4.74043",
+        "provisional": false,
+        "idName": "Runeword_All_Skills_5",
+        "sno": 2686454,
+        "slot": null,
+        "ptrSame": true,
+        "lines": [
+          {
+            "stat": "Skill_Rank_All_Bonus",
+            "bucket": null,
+            "min": 5,
+            "max": 5,
+            "step": null,
+            "value": 5,
+            "formula": "5",
+            "format": null,
+            "interpretation": "unverified"
+          }
+        ]
+      }
     },
     {
       "slots": [
@@ -6807,7 +7219,31 @@
       "verified": false,
       "id": "stone-of-jordan",
       "name": "Stone of Jordan",
-      "note": "Unique, 900 Item Power. Video Ring 1. +115 Resistance to All Elements, with no range shown."
+      "note": "Unique, 900 Item Power. Video Ring 1. +115 Resistance to All Elements, with no range shown.",
+      "datamined": {
+        "repo": "https://github.com/DiabloTools/d4data",
+        "branch": "3.2",
+        "commit": "75e619f0d90a0951945747f45feef59c076a5db0",
+        "buildVersion": "3.2.4.74043",
+        "provisional": false,
+        "idName": "Ring_Unique_Generic_108",
+        "sno": 2672415,
+        "slot": "ring",
+        "ptrSame": true,
+        "lines": [
+          {
+            "stat": "Affix_Value_1",
+            "bucket": "multiplicative",
+            "min": 15,
+            "max": 25,
+            "step": 10,
+            "value": null,
+            "formula": "FloatRangeWithIntervalUniqueAffixPityBonus(SharedRandomFloat(), 10, .15, .25)",
+            "format": "0%x",
+            "interpretation": "unverified"
+          }
+        ]
+      }
     },
     {
       "slots": [
@@ -6918,19 +7354,51 @@
       "verified": false,
       "id": "melted-heart-of-selig",
       "name": "Melted Heart of Selig",
-      "note": "Mythic, 900 Item Power. The header and one affix both read +28.5% Resistance to All Elements. The ranged affix is the stored roll."
+      "note": "Mythic, 900 Item Power. The header and one affix both read +28.5% Resistance to All Elements. The ranged affix is the stored roll.",
+      "datamined": {
+        "repo": "https://github.com/DiabloTools/d4data",
+        "branch": "3.2",
+        "commit": "75e619f0d90a0951945747f45feef59c076a5db0",
+        "buildVersion": "3.2.4.74043",
+        "provisional": false,
+        "idName": "Amulet_Unique_Generic_100",
+        "sno": 1222427,
+        "slot": "amulet",
+        "ptrSame": true,
+        "lines": [
+          {
+            "stat": "Static Value 1",
+            "bucket": null,
+            "min": 75,
+            "max": 75,
+            "step": null,
+            "value": 75,
+            "formula": "75",
+            "format": "%",
+            "interpretation": "unverified"
+          }
+        ]
+      }
     },
     {
       "id": "ring-of-starless-skies",
       "name": "Ring of Starless Skies",
-      "slots": ["ring-1", "ring-2"],
+      "slots": [
+        "ring-1",
+        "ring-2"
+      ],
       "effects": [
         {
           "stat": "damage for 3s on spending Primary Resource",
           "bucket": "multiplicative",
           "value": null,
-          "range": [10, 50],
-          "conditions": ["spending Primary Resource"],
+          "range": [
+            10,
+            50
+          ],
+          "conditions": [
+            "spending Primary Resource"
+          ],
           "stacking": "10%[x] for 3s, stacking up to 50%[x]",
           "source": "d4-guide-uniques.md",
           "verified": false,
@@ -6952,19 +7420,77 @@
       ],
       "source": "d4-guide-uniques.md",
       "verified": false,
-      "note": "Season 15, patch 3.2.3. Manual entry from Research Scout's d4-guide-uniques.md. The note's source URLs were not in the workspace, so no URL is invented. Estimate. Verified stays false."
+      "note": "Season 15, patch 3.2.3. Manual entry from Research Scout's d4-guide-uniques.md. The research-note source URLs are stored on sourceUrls. Estimate. Verified stays false.",
+      "sourceUrls": [
+        "https://d4guides.gg/en/database/items/ring-of-starless-skies",
+        "https://www.wowhead.com/diablo-4/item/ring-of-starless-skies-1306338",
+        "https://d4gg.gg/en/diablo4/database/item/1306338/"
+      ],
+      "datamined": {
+        "repo": "https://github.com/DiabloTools/d4data",
+        "branch": "3.2",
+        "commit": "75e619f0d90a0951945747f45feef59c076a5db0",
+        "buildVersion": "3.2.4.74043",
+        "provisional": false,
+        "idName": "Ring_Unique_Generic_101",
+        "sno": 578943,
+        "slot": "ring",
+        "ptrSame": true,
+        "lines": [
+          {
+            "stat": "Affix_Value_1",
+            "bucket": "multiplicative",
+            "min": 10,
+            "max": 10,
+            "step": null,
+            "value": 10,
+            "formula": "10",
+            "format": "%x",
+            "interpretation": "unverified"
+          },
+          {
+            "stat": "Static Value 1",
+            "bucket": null,
+            "min": 3,
+            "max": 3,
+            "step": null,
+            "value": 3,
+            "formula": "3",
+            "format": null,
+            "interpretation": "unverified"
+          },
+          {
+            "stat": "Static Value 2",
+            "bucket": "multiplicative",
+            "min": 5,
+            "max": 5,
+            "step": null,
+            "value": 5,
+            "formula": "5",
+            "format": "%x",
+            "interpretation": "unverified"
+          }
+        ]
+      }
     },
     {
       "id": "tuskhelm-of-joritz-the-mighty-unique",
       "name": "Tuskhelm of Joritz the Mighty",
-      "slots": ["helm"],
+      "slots": [
+        "helm"
+      ],
       "effects": [
         {
           "stat": "damage on gaining Berserking while Berserk",
           "bucket": "multiplicative",
           "value": null,
-          "range": [40, 50],
-          "conditions": ["while Berserking"],
+          "range": [
+            40,
+            50
+          ],
+          "conditions": [
+            "while Berserking"
+          ],
           "stacking": null,
           "source": "d4-guide-uniques.md",
           "verified": false,
@@ -6998,7 +7524,70 @@
       ],
       "source": "d4-guide-uniques.md",
       "verified": false,
-      "note": "Season 15, patch 3.2.3. Manual entry from Research Scout's d4-guide-uniques.md. Helm unique. It does not count as jewelry, so the Black Soulstone splinter is not gem-boosted in this helm. The guide row uses the unboosted 2.5%[x] per soul. The charm transcription under talismans is a separate video read and is not replaced. Estimate. The note's source URLs were not in the workspace."
+      "note": "Season 15, patch 3.2.3. Manual entry from Research Scout's d4-guide-uniques.md. Helm unique. It does not count as jewelry, so the Black Soulstone splinter is not gem-boosted in this helm. The guide row uses the unboosted 2.5%[x] per soul. The charm transcription under talismans is a separate video read and is not replaced. Estimate. The research-note source URLs are stored on sourceUrls. ",
+      "sourceUrls": [
+        "https://d4guides.gg/en/database/items/tuskhelm-of-joritz-the-mighty",
+        "https://diablo4.wiki.fextralife.com/Tuskhelm_of_Joritz_the_Mighty",
+        "https://www.purediablo.com/d4/database/uniques/tuskhelmofjoritzthemighty/",
+        "https://game8.co/games/Diablo-4/archives/430459"
+      ],
+      "datamined": {
+        "repo": "https://github.com/DiabloTools/d4data",
+        "branch": "3.2",
+        "commit": "75e619f0d90a0951945747f45feef59c076a5db0",
+        "buildVersion": "3.2.4.74043",
+        "provisional": false,
+        "idName": "Helm_Unique_Barb_100",
+        "sno": 1489569,
+        "slot": "helm",
+        "ptrSame": true,
+        "lines": [
+          {
+            "stat": "Affix_Value_1",
+            "bucket": null,
+            "min": 5,
+            "max": 5,
+            "step": null,
+            "value": 5,
+            "formula": "5",
+            "format": null,
+            "interpretation": "unverified"
+          },
+          {
+            "stat": "Affix_Value_2",
+            "bucket": "multiplicative",
+            "min": 40,
+            "max": 50,
+            "step": 10,
+            "value": null,
+            "formula": "FloatRandomRangeWithIntervalUniqueAffixPityBonus(10, 40, 50)",
+            "format": "%x",
+            "interpretation": "unverified"
+          },
+          {
+            "stat": "Static Value 1",
+            "bucket": null,
+            "min": 6,
+            "max": 6,
+            "step": null,
+            "value": 6,
+            "formula": "6",
+            "format": null,
+            "interpretation": "unverified"
+          },
+          {
+            "stat": "Static Value 2",
+            "bucket": null,
+            "min": 10,
+            "max": 10,
+            "step": null,
+            "value": 10,
+            "formula": "10",
+            "format": "%",
+            "interpretation": "unverified"
+          }
+        ]
+      }
     },
     {
       "id": "blood-mad-idol",
@@ -7032,8 +7621,14 @@
           "stat": "damage while Berserking and Burning",
           "bucket": "multiplicative",
           "value": null,
-          "range": [75, 150],
-          "conditions": ["while Berserking", "while Burning"],
+          "range": [
+            75,
+            150
+          ],
+          "conditions": [
+            "while Berserking",
+            "while Burning"
+          ],
           "stacking": null,
           "source": "d4-guide-uniques.md",
           "verified": false,
@@ -7044,19 +7639,79 @@
       ],
       "source": "d4-guide-uniques.md",
       "verified": false,
-      "note": "Season 15, patch 3.2.3. Manual entry from Research Scout's d4-guide-uniques.md. Charm. The recorded guide lists it under seasonal charms. Estimate. The note's source URLs were not in the workspace."
+      "note": "Season 15, patch 3.2.3. Manual entry from Research Scout's d4-guide-uniques.md. Charm. The recorded guide lists it under seasonal charms. Estimate. The research-note source URLs are stored on sourceUrls. ",
+      "sourceUrls": [
+        "https://d4guides.gg/en/database/items/blood-mad-idol",
+        "https://www.purediablo.com/d4/database/uniques/bloodmadidol/",
+        "https://bubaigei.com/d4/en/items/blood-mad-idol/",
+        "https://diablofilter.com/items/blood-mad-idol",
+        "https://diablo4.wiki.fextralife.com/Blood-Mad_Idol"
+      ],
+      "datamined": {
+        "repo": "https://github.com/DiabloTools/d4data",
+        "branch": "3.2",
+        "commit": "75e619f0d90a0951945747f45feef59c076a5db0",
+        "buildVersion": "3.2.4.74043",
+        "provisional": false,
+        "idName": "Amulet_Unique_Generic_102",
+        "sno": 1719182,
+        "slot": "amulet",
+        "ptrSame": true,
+        "lines": [
+          {
+            "stat": "Affix_Value_1",
+            "bucket": "multiplicative",
+            "min": 80,
+            "max": 100,
+            "step": 5,
+            "value": null,
+            "formula": "FloatRandomRangeWithIntervalUniqueAffixPityBonus(5, 80, 100)",
+            "format": "%x",
+            "interpretation": "unverified"
+          },
+          {
+            "stat": "Static Value 0",
+            "bucket": "multiplicative",
+            "min": 200,
+            "max": 200,
+            "step": null,
+            "value": 200,
+            "formula": "200",
+            "format": "%x",
+            "interpretation": "unverified"
+          },
+          {
+            "stat": "Static Value 1",
+            "bucket": null,
+            "min": 8,
+            "max": 8,
+            "step": null,
+            "value": 8,
+            "formula": "8",
+            "format": null,
+            "interpretation": "unverified"
+          }
+        ]
+      }
     },
     {
       "id": "the-furnace",
       "name": "The Furnace",
-      "slots": ["weapon-2"],
+      "slots": [
+        "weapon-2"
+      ],
       "effects": [
         {
           "stat": "damage to Elites",
           "bucket": "multiplicative",
           "value": null,
-          "range": [75, 200],
-          "conditions": ["vs Elites"],
+          "range": [
+            75,
+            200
+          ],
+          "conditions": [
+            "vs Elites"
+          ],
           "stacking": null,
           "source": "d4-guide-uniques.md",
           "verified": false,
@@ -7067,7 +7722,50 @@
       ],
       "source": "d4-guide-uniques.md",
       "verified": false,
-      "note": "Season 15, patch 3.2.3. Manual entry from Research Scout's d4-guide-uniques.md. The catalog slot is weapon-2, a 2H mace. The recorded guide variant 4 lists The Furnace as a charm and keeps Aspect of Channeling on 2H Bludgeoning, so the comparison does not replace that weapon. Estimate. The note's source URLs were not in the workspace."
+      "note": "Season 15, patch 3.2.3. Manual entry from Research Scout's d4-guide-uniques.md. The catalog slot is weapon-2, a 2H mace. The recorded guide variant 4 lists The Furnace as a charm and keeps Aspect of Channeling on 2H Bludgeoning, so the comparison does not replace that weapon. Estimate. The research-note source URLs are stored on sourceUrls. ",
+      "sourceUrls": [
+        "https://d4guides.gg/en/database/items/the-furnace",
+        "https://diablo4.wiki.fextralife.com/The_Furnace",
+        "https://www.purediablo.com/d4/database/uniques/thefurnace/",
+        "https://diablofilter.com/items/the-furnace",
+        "https://diablo.trade/wiki/uniques/4194e31c-b715-4151-ac23-487d250030f6-the-furnace",
+        "https://d4guides.gg/en/news/diablo-4-season-15-all-legacy-uniques-explained"
+      ],
+      "datamined": {
+        "repo": "https://github.com/DiabloTools/d4data",
+        "branch": "3.2",
+        "commit": "75e619f0d90a0951945747f45feef59c076a5db0",
+        "buildVersion": "3.2.4.74043",
+        "provisional": false,
+        "idName": "2HMace_Unique_Generic_001",
+        "sno": 578836,
+        "slot": "weapon",
+        "ptrSame": true,
+        "lines": [
+          {
+            "stat": "Affix_Value_1",
+            "bucket": "multiplicative",
+            "min": 75,
+            "max": 100,
+            "step": 10,
+            "value": null,
+            "formula": "FloatRangeWithIntervalUniqueAffixPityBonus(SharedRandomFloat(), 10, 75, 100)",
+            "format": "0%x",
+            "interpretation": "unverified"
+          },
+          {
+            "stat": "Multiplicative_Damage_Percent_Bonus_Vs_Elites",
+            "bucket": null,
+            "min": 75,
+            "max": 100,
+            "step": 10,
+            "value": null,
+            "formula": "FloatRangeWithIntervalUniqueAffixPityBonus(SharedRandomFloat(), 10, 75, 100)/100",
+            "format": null,
+            "interpretation": "unverified"
+          }
+        ]
+      }
     }
   ],
   "affixes": [
@@ -9654,7 +10352,9 @@
           "stat": "Critical Strike Damage for 4s",
           "bucket": "crit",
           "value": 45,
-          "conditions": ["consecutive attacks with the same weapon"],
+          "conditions": [
+            "consecutive attacks with the same weapon"
+          ],
           "stacking": null,
           "source": "user video 1 (watchVideo 2026-10-22)",
           "verified": false,
@@ -9921,7 +10621,9 @@
           "kind": "damage",
           "bucket": "multiplicative",
           "value": 45,
-          "conditions": ["while Fortified"],
+          "conditions": [
+            "while Fortified"
+          ],
           "stacking": null,
           "source": "user screenshot 2026-10-22",
           "verified": true,
@@ -10078,7 +10780,9 @@
           "stat": "damage vs Vulnerable",
           "bucket": "multiplicative",
           "value": 20,
-          "conditions": ["vs Vulnerable"],
+          "conditions": [
+            "vs Vulnerable"
+          ],
           "alignWithState": true,
           "stacking": null,
           "source": "user video 1 (watchVideo 2026-10-22)",
@@ -10090,7 +10794,9 @@
           "stat": "damage while having Overpower",
           "bucket": "multiplicative",
           "value": 20,
-          "conditions": ["while having Overpower"],
+          "conditions": [
+            "while having Overpower"
+          ],
           "alignWithState": true,
           "stacking": null,
           "source": "user video 1 (watchVideo 2026-10-22)",
@@ -10239,7 +10945,9 @@
           "stat": "damage vs Injured and Healthy",
           "bucket": "multiplicative",
           "value": 75,
-          "conditions": ["vs Healthy and Injured"],
+          "conditions": [
+            "vs Healthy and Injured"
+          ],
           "alignWithState": true,
           "stacking": null,
           "source": "user video 1 (watchVideo 2026-10-22)",
@@ -10553,7 +11261,9 @@
           "stat": "damage with Two-Handed",
           "bucket": "multiplicative",
           "value": 8,
-          "conditions": ["with a Two-Handed weapon"],
+          "conditions": [
+            "with a Two-Handed weapon"
+          ],
           "stacking": null,
           "source": "user screenshot 2026-10-22",
           "verified": true,
@@ -10564,7 +11274,9 @@
           "stat": "legendary bonus vs Healthy and Injured",
           "bucket": "multiplicative",
           "value": 26,
-          "conditions": ["vs Healthy and Injured"],
+          "conditions": [
+            "vs Healthy and Injured"
+          ],
           "alignWithState": true,
           "stacking": null,
           "source": "user screenshot 2026-10-22",
@@ -10593,7 +11305,9 @@
           "stat": "Dust Devil damage per 5 Strength",
           "bucket": "additive",
           "value": 39.8,
-          "conditions": ["Dust Devils"],
+          "conditions": [
+            "Dust Devils"
+          ],
           "stacking": null,
           "source": "user screenshot 2026-10-22",
           "verified": true,
@@ -10605,7 +11319,9 @@
           "stat": "damage for 4s after creating a Dust Devil",
           "bucket": "multiplicative",
           "value": 13,
-          "conditions": ["for 4s after creating a Dust Devil"],
+          "conditions": [
+            "for 4s after creating a Dust Devil"
+          ],
           "stacking": null,
           "source": "user screenshot 2026-10-22",
           "verified": true,
@@ -10616,7 +11332,9 @@
           "stat": "Dust Devil damage",
           "bucket": "multiplicative",
           "value": 39.9,
-          "conditions": ["Dust Devil damage"],
+          "conditions": [
+            "Dust Devil damage"
+          ],
           "stacking": null,
           "source": "user screenshot 2026-10-22",
           "verified": true,
@@ -10645,7 +11363,9 @@
           "stat": "damage while Healthy per 5 Willpower",
           "bucket": null,
           "value": 10.3,
-          "conditions": ["while you are Healthy"],
+          "conditions": [
+            "while you are Healthy"
+          ],
           "stacking": null,
           "source": "user screenshot 2026-10-22",
           "verified": true,
@@ -10656,7 +11376,9 @@
           "stat": "damage per missing potion",
           "bucket": "multiplicative",
           "value": 5,
-          "conditions": ["per missing potion"],
+          "conditions": [
+            "per missing potion"
+          ],
           "stacking": null,
           "source": "user screenshot 2026-10-22",
           "verified": true,
@@ -10668,7 +11390,9 @@
           "kind": "defense",
           "bucket": "multiplicative",
           "value": 5,
-          "conditions": ["per missing potion"],
+          "conditions": [
+            "per missing potion"
+          ],
           "stacking": null,
           "source": "user screenshot 2026-10-22",
           "verified": true,
@@ -10679,7 +11403,9 @@
           "stat": "damage while Healthy",
           "bucket": "multiplicative",
           "value": 16,
-          "conditions": ["while you are Healthy"],
+          "conditions": [
+            "while you are Healthy"
+          ],
           "stacking": null,
           "source": "user screenshot 2026-10-22",
           "verified": true,
@@ -10801,7 +11527,9 @@
           "kind": "utility",
           "bucket": null,
           "value": 2,
-          "conditions": ["after casting a Shout"],
+          "conditions": [
+            "after casting a Shout"
+          ],
           "stacking": null,
           "source": "user screenshot 2026-10-22",
           "verified": true,
@@ -10813,7 +11541,9 @@
           "kind": "resource",
           "bucket": null,
           "value": 20,
-          "conditions": ["if Rallying Cry is used"],
+          "conditions": [
+            "if Rallying Cry is used"
+          ],
           "stacking": null,
           "source": "user screenshot 2026-10-22",
           "verified": true,
@@ -11433,7 +12163,42 @@
       ],
       "source": "https://helltides.com/tools/splinters",
       "verified": false,
-      "note": "Season 15 Soul Splinter, socketed in Leoric's Crown. The scored rate is the tooltip 4.1%[x] per soul. Source chain: base 2.5%[x] × Leoric gem effect 1.65. The soul count is the build's souls input."
+      "note": "Season 15 Soul Splinter, socketed in Leoric's Crown. The scored rate is the tooltip 4.1%[x] per soul. Source chain: base 2.5%[x] × Leoric gem effect 1.65. The soul count is the build's souls input. The parsed Abyssal Splinter attribute is 2.5. The item named Splinter of the Black Soulstone is 1.5. Those attributes are stored on datamined and do not replace 4.1 or 2.5.",
+      "datamined": {
+        "repo": "https://github.com/DiabloTools/d4data",
+        "branch": "3.2",
+        "commit": "75e619f0d90a0951945747f45feef59c076a5db0",
+        "buildVersion": "3.2.4.74043",
+        "provisional": false,
+        "idName": "S15_SoulSplinter_BlackSoulStone_04",
+        "sno": 2662963,
+        "slot": null,
+        "ptrSame": true,
+        "lines": [
+          {
+            "stat": "Plus_All_Stats",
+            "bucket": null,
+            "min": 50,
+            "max": 50,
+            "step": null,
+            "value": 50,
+            "formula": "50",
+            "format": null,
+            "interpretation": "unverified"
+          },
+          {
+            "stat": "S15_Socketable_BlackSoulstone",
+            "bucket": null,
+            "min": 2.5,
+            "max": 2.5,
+            "step": null,
+            "value": 2.5,
+            "formula": "2.5",
+            "format": null,
+            "interpretation": "unverified"
+          }
+        ]
+      }
     },
     {
       "id": "hells-legacy",
