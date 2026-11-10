@@ -86,34 +86,56 @@ Optional Double Swing hits, off in this table: Flurry adds 0.5× per sweep, Slic
 
 Rank 41. Attack speed input +120% (estimate, the S15 sheet). The 60s buff timeline is unchanged. Peak DPS is the full-overlap window at a full Fury globe. Average DPS is the 60s average, reduced by the sustainable casting fraction when the rotation cannot be held.
 
-Whirlwind's tick damage is the tooltip hit divided by attacks per second, and the tick rate is attacks per second × 30/13. Those cancel, so +120% attack speed does not change Whirlwind DPS. The damage per second is the tooltip hit × 30/13.
+Whirlwind uses frame breakpoints. Per-tick damage stays the rank-41 tooltip value, the stored 386% basis. Ticks per second are `60 / frames`. The +120% sheet bonus lands on the 91% step: 13 frames, 4.615 ticks/s. This is community-measured S15 (3.2), recheck after S16 launch. The frame counts are the 2H steps from [attack speed mechanics](https://maxroll.gg/d4/resources/attack-speed-mechanics) and the [Whirlwind barbarian guide](https://maxroll.gg/d4/build-guides/whirlwind-barbarian-guide). The weapon input defaults to a 2H axe, polearm, or mace, and that default is an estimate. Ramaladni's Magnum Opus is a one-handed sword. 1H and 2H sword have a measured frame count only at 0% attack speed. Above 0% their frames follow the 2H axe ratio, and that interpolation is flagged.
+
+`whirlwindAttackSpeedModel: 'flat'` keeps the literal formula reading. In that reading the tick rate and the per-tick damage move together, so damage per second stays at the 1.0 APS rate of `30/13` ticks.
 
 | Build | Peak min | Peak max | Average min | Average max |
 | --- | ---: | ---: | ---: | ---: |
 | Double Swing | 501.22B/s | 1,178.26B/s | 282.12B/s | 620.37B/s |
-| Whirlwind | 28.93B/s | 38.14B/s | 31.35B/s | 41.33B/s |
+| Whirlwind, breakpoints at +120% | 57.85B/s | 76.27B/s | 62.70B/s | 82.66B/s |
+| Whirlwind, flat formulas | 28.93B/s | 38.14B/s | 31.35B/s | 41.33B/s |
 | Flay bleed | 2.57B/s | 5.73B/s | 0.38B/s | 0.61B/s |
 
 Whirlwind's average is above its peak because the Crucible 200%[x] starts after 5 seconds of Berserking. The full-overlap peak is the first 4 seconds of War Cry.
+
+Lucky Hit and on-hit effects scale with the tick rate. Dust Devils and flat-per-second damage-over-time effects stay on their own timer. The Whirlwind number above is direct-hit damage. Accursed Touch is on the skill list, and its Lucky Hit effect sits outside this damage number. Dust Devil hits stay unscored.
+
+### Whirlwind, each 2H breakpoint
+
+The +120% default lands on the 91% row. Generation is town Fury regeneration 85/s minus Ramaladni's 7% drain of 826 Fury. Every row covers 60 seconds. At 91% the pool lasts 292.9 seconds. At 143.5% it lasts 69.9 seconds.
+
+| Attack speed | Frames | Ticks/s | Peak min | Peak max | Average min | Average max | Fury cost | Generation | Net | 60s |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |
+| 0% | 26 | 2.308 | 28.93B/s | 38.14B/s | 31.35B/s | 41.33B/s | 15.00 | 27.18 | +12.18 | holds |
+| 27.5% | 20 | 3.000 | 37.60B/s | 49.58B/s | 40.75B/s | 53.73B/s | 19.50 | 27.18 | +7.68 | holds |
+| 48.8% | 17 | 3.529 | 44.24B/s | 58.33B/s | 47.94B/s | 63.21B/s | 22.94 | 27.18 | +4.24 | holds |
+| 91% (+120% lands here) | 13 | 4.615 | 57.85B/s | 76.27B/s | 62.70B/s | 82.66B/s | 30.00 | 27.18 | −2.82 | holds for 60s, uptime 1.00. An endless channel runs out |
+| 143.5% | 10 | 6.000 | 75.21B/s | 99.16B/s | 81.51B/s | 107.46B/s | 39.00 | 27.18 | −11.82 | holds for 60s, uptime 1.00. An endless channel runs out |
 
 Flay bleed DPS is one application's total divided by its duration. Bloodletter's 2-piece multiplies both the total and the duration by 1.8, so the per-second rate is the 621% total divided by 5 seconds. The buff allows 1 stack and does not extend past that duration. No field says whether a new Flay refreshes or snapshots the coefficient. The score assumes one stack stays up while Flay is being cast. That refresh is uncertain.
 
 ## Fury per second
 
-Base attacks per second is 1, an estimate. The powers use `Attacks_Per_Second_Total` and do not store a weapon base. The mace item type's +10% weapon speed is not added on top of the sheet. At +120%, attacks per second is 2.20. Fury regeneration 85/s is the town sheet, because combat regeneration is null. Ramaladni drains 7% of 826 Fury per second on every build. Tuskhelm's 6 Fury/s is not on these lists.
+Double Swing and Flay use a base of 1 attack per second, an estimate, times `1 + attack speed`. The powers use `Attacks_Per_Second_Total` and the mace item type stores +10% weapon speed, not a base rate. The sheet bonus is not increased by that +10%. At +120% their attack rate is 2.20. Fury regeneration 85/s is the town sheet, because combat regeneration is null. Ramaladni drains 7% of 826 Fury per second on every build. Tuskhelm's 6 Fury/s is not on these lists.
+
+Whirlwind Fury per second is `15 × (ticks per second / ticks per second at 1.0 APS)`. The 1.0 APS reference is `30/13`, the same rate as 26 frames. At the +120% step that ratio is 2, so the cost is 30 Fury/s.
 
 | Build | Actions | Cost | Generation | Net | Holds for 60s |
 | --- | --- | ---: | ---: | ---: | --- |
-| Whirlwind | 5.08 ticks/s | 15.00 | 27.18 | +12.18 | yes |
+| Whirlwind, breakpoints | 4.615 ticks/s | 30.00 | 27.18 | −2.82 | yes for 60s. The pool lasts 292.9s |
+| Whirlwind, flat formulas | 2.308 ticks/s | 15.00 | 27.18 | +12.18 | yes |
 | Double Swing | 2.20 casts/s | 44.00 | 60.18 while Lunging Strike fills the rest | −16.82 if only Double Swing is cast | no. Spender uptime 0.78, with Lunging Strike filling the other 0.22 |
 | Flay | 2.75 casts/s | 68.75 | 68.43 | −0.32 | the 826 pool covers the 60s window. It does not cover an endless fight |
 
-Whirlwind's channel cost is `SF_5` per tick and `SF_5 × ticks per second` is 15, so the fury per second does not change with attack speed. The tooltip labels that cost "per second". Double Swing costs 20 Fury per cast (`tInitialCost`). Its cast rate is `Attacks_Per_Second_Total` because the Slice and Dice penalty `SF_23` is 0. Flay generates 15 and, with Shard of Verathiel equipped, spends 25. Its cast rate is `Attacks_Per_Second_Total × 1.25`. Lunging Strike generates 12 per cast at `Attacks_Per_Second_Total × 1.25`.
+Double Swing costs 20 Fury per cast (`tInitialCost`). Its cast rate is `Attacks_Per_Second_Total` because the Slice and Dice penalty `SF_23` is 0. Flay generates 15 and, with Shard of Verathiel equipped, spends 25. Its cast rate is `Attacks_Per_Second_Total × 1.25`. Lunging Strike generates 12 per cast at `Attacks_Per_Second_Total × 1.25`.
 
 ## Estimated inputs
 
 - Rank 41. Double Swing and Flay are stored at rank 10. The S16 default stays 41 until a rank is passed in.
-- Attack speed bonus +120%.
+- Attack speed bonus +120%. Whirlwind reads it as a frame breakpoint. The label is community-measured S15 (3.2), recheck after S16 launch.
+- Whirlwind weapon type, default 2H axe, polearm, or mace. Estimate. Ramaladni's Magnum Opus is a one-handed sword.
+- Whirlwind attack-speed model, default `breakpoints`. `flat` keeps the literal formula reading.
 - Base attacks per second 1.0.
 - Maximum Fury 826 and Ramaladni's 7% drain.
 - Town Fury regeneration 85/s.

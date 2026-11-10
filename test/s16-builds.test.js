@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { MASTERWORK_MARK, MASTERWORK_UPLIFT } from '../src/masterwork.js';
-import { scoreS16 } from '../src/s16-score.js';
+import { scoreS16, whirlwindBreakpointTable, whirlwindEffectPerSecond, whirlwindFrames, whirlwindFury } from '../src/s16-score.js';
 import { SKILL_RANK_BONUS, skillRankMultiplier } from '../src/skill-rank.js';
 
 const read = (path) => JSON.parse(readFileSync(new URL(path, import.meta.url), 'utf8'));
@@ -83,11 +83,19 @@ test('the three provisional Season 16 builds score without soul stacks', () => {
   const bleed = byId['s16-flay'].isolation.find(line => /Bleeding/.test(line.name));
   assert.ok(Math.abs(bleed.peak - 3) < 1e-9);
   const ww = byId['s16-whirlwind'];
-  assert.equal(ww.furyReport.attackSpeedChangesDamage, false);
-  assert.equal(ww.furyReport.sustainable, true);
-  assert.ok(Math.abs(ww.dps.max.peak - ww.max.peak * (30 / 13)) < 1);
+  assert.equal(ww.attackSpeedModel, 'breakpoints');
+  assert.equal(ww.whirlwind.frames, 13);
+  assert.equal(ww.furyReport.attackSpeedChangesDamage, true);
+  assert.equal(ww.furyReport.holdsFor60, true);
+  assert.ok(Math.abs(ww.furyReport.costPerSecond - 30) < 1e-9);
+  assert.ok(Math.abs(ww.dps.max.peak - ww.max.peak * (60 / 13)) < 1);
+  assert.ok(Math.abs(ww.flatDps.max.peak - ww.max.peak * (30 / 13)) < 1);
+  const flat = scoreS16(catalog, build, { whirlwindAttackSpeedModel: 'flat', attackSpeedPct: 120 }).find(row => row.id === 's16-whirlwind');
+  assert.equal(flat.attackSpeedModel, 'flat');
+  assert.ok(Math.abs(flat.dps.max.peak - ww.flatDps.max.peak) < 1);
   const slower = scoreS16(catalog, build, { attackSpeedPct: 0 }).find(row => row.id === 's16-whirlwind');
-  assert.ok(Math.abs(slower.dps.max.peak - ww.dps.max.peak) < 1);
+  assert.equal(slower.whirlwind.frames, 26);
+  assert.ok(Math.abs(slower.dps.max.peak - ww.dps.max.peak / 2) < 1);
   const ds = byId['s16-double-swing'];
   assert.equal(ds.furyReport.sustainable, false);
   assert.ok(ds.furyReport.spenderUptime < 1);
@@ -105,4 +113,45 @@ test('the three provisional Season 16 builds score without soul stacks', () => {
   assert.match(doc, /2,426\.80B|Soul Splinter|souls are 0|no soul/i);
   assert.match(doc, /bleed/);
   assert.match(doc, /DPS|damage per second/);
+  assert.match(doc, /community-measured S15 \(3\.2\), recheck after S16 launch/);
+  assert.match(doc, /91%/);
+});
+
+test('Whirlwind frames step at the measured 2H breakpoints', () => {
+  assert.equal(whirlwindFrames(0).frames, 26);
+  assert.equal(whirlwindFrames(27.4).frames, 26);
+  assert.equal(whirlwindFrames(27.5).frames, 20);
+  assert.equal(whirlwindFrames(48.8).frames, 17);
+  assert.equal(whirlwindFrames(90).frames, 17);
+  assert.equal(whirlwindFrames(91).frames, 13);
+  assert.equal(whirlwindFrames(120).frames, 13);
+  assert.equal(whirlwindFrames(143.5).frames, 10);
+  assert.equal(whirlwindFrames(200).frames, 10);
+  assert.equal(whirlwindFrames(0, '2h-sword').frames, 24);
+  assert.equal(whirlwindFrames(0, '1h').frames, 21);
+  const sword = whirlwindFrames(120, '2h-sword');
+  const oneHand = whirlwindFrames(120, '1h');
+  assert.equal(sword.interpolated, true);
+  assert.equal(oneHand.interpolated, true);
+  assert.ok(Math.abs(sword.frames - 12) < 1e-9);
+  assert.ok(Math.abs(oneHand.frames - 10.5) < 1e-9);
+});
+
+test('Whirlwind Fury and Lucky Hit scale with the tick rate', () => {
+  const fury = whirlwindFury({ attackSpeedPct: 120 });
+  assert.ok(Math.abs(fury.ticksPerSecond - 60 / 13) < 1e-9);
+  assert.ok(Math.abs(fury.costPerSecond - 15 * ((60 / 13) / (30 / 13))) < 1e-9);
+  const flat = whirlwindFury({ attackSpeedPct: 120, whirlwindAttackSpeedModel: 'flat' });
+  assert.ok(Math.abs(flat.costPerSecond - 15) < 1e-9);
+  const ticks = 60 / 13;
+  assert.ok(Math.abs(whirlwindEffectPerSecond({ kind: 'lucky-hit', perTick: 2 }, ticks) - 2 * ticks) < 1e-9);
+  assert.ok(Math.abs(whirlwindEffectPerSecond({ kind: 'on-hit', perTick: 4 }, ticks) - 4 * ticks) < 1e-9);
+  assert.equal(whirlwindEffectPerSecond({ kind: 'dust-devil', perSecond: 5 }, ticks), 5);
+  assert.equal(whirlwindEffectPerSecond({ kind: 'flat-dot', perSecond: 7 }, ticks), 7);
+  const catalog = read('../data/barbarian.json');
+  const build = read('../data/builds.json').builds.find(item => item.id === 'users-current-build');
+  const table = whirlwindBreakpointTable(catalog, build);
+  assert.deepEqual(table.map(row => row.attackSpeedPct), [0, 27.5, 48.8, 91, 143.5]);
+  assert.equal(table.filter(row => row.defaultLanding).length, 1);
+  assert.equal(table.find(row => row.defaultLanding).frames, 13);
 });

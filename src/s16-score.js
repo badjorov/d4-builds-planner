@@ -3,6 +3,27 @@ import { DEFAULT_SKILL_RANK, skillRankMultiplier } from './skill-rank.js';
 
 const FURY = 826;
 export const DEFAULT_ATTACK_SPEED_PCT = 120;
+export const DEFAULT_WHIRLWIND_WEAPON = '2h-axe';
+export const WHIRLWIND_MEASUREMENT = 'community-measured S15 (3.2), recheck after S16 launch';
+export const WHIRLWIND_BREAKPOINT_SOURCES = [
+  'https://maxroll.gg/d4/resources/attack-speed-mechanics',
+  'https://maxroll.gg/d4/build-guides/whirlwind-barbarian-guide'
+];
+export const WHIRLWIND_2H_BREAKPOINTS = [
+  { attackSpeedPct: 0, frames: 26 },
+  { attackSpeedPct: 27.5, frames: 20 },
+  { attackSpeedPct: 48.8, frames: 17 },
+  { attackSpeedPct: 91, frames: 13 },
+  { attackSpeedPct: 143.5, frames: 10 }
+];
+const WHIRLWIND_WEAPONS = {
+  '2h-axe': { label: '2H axe, polearm or mace', framesAtZero: 26, stepped: true },
+  '2h-mace': { label: '2H axe, polearm or mace', framesAtZero: 26, stepped: true },
+  '2h-polearm': { label: '2H axe, polearm or mace', framesAtZero: 26, stepped: true },
+  '2h-sword': { label: '2H sword', framesAtZero: 24, stepped: false },
+  '1h': { label: '1H', framesAtZero: 21, stepped: false }
+};
+const TICKS_AT_ONE_APS = 30 / 13;
 const BASE_APS = 1;
 const FURY_REGEN = 85;
 const WW_FURY_PER_SECOND = 15;
@@ -332,11 +353,19 @@ export function scoreS16Build(catalog, savedBuild, definition, opts = {}) {
     max: { peak: max.peak.total * scale, average: max.average.total * scale },
     isolation,
     attackSpeed: attackSpeedFactor(opts),
-    furyReport: furyReport(definition.id, attackSpeedFactor(opts)),
+    attackSpeedModel: definition.id === 's16-whirlwind' ? whirlwindModel(opts) : null,
+    whirlwind: definition.id === 's16-whirlwind' ? whirlwindTiming(opts) : null,
+    furyReport: furyReport(definition.id, opts),
     dps: {
-      min: dpsOf(definition.id, { peak: min.peak.total * scale, average: min.average.total * scale }, attackSpeedFactor(opts), furyReport(definition.id, attackSpeedFactor(opts))),
-      max: dpsOf(definition.id, { peak: max.peak.total * scale, average: max.average.total * scale }, attackSpeedFactor(opts), furyReport(definition.id, attackSpeedFactor(opts)))
+      min: dpsOf(definition.id, { peak: min.peak.total * scale, average: min.average.total * scale }, furyReport(definition.id, opts)),
+      max: dpsOf(definition.id, { peak: max.peak.total * scale, average: max.average.total * scale }, furyReport(definition.id, opts))
     },
+    flatDps: definition.id === 's16-whirlwind'
+      ? {
+        min: dpsOf(definition.id, { peak: min.peak.total * scale, average: min.average.total * scale }, whirlwindFury({ ...opts, whirlwindAttackSpeedModel: 'flat' })),
+        max: dpsOf(definition.id, { peak: max.peak.total * scale, average: max.average.total * scale }, whirlwindFury({ ...opts, whirlwindAttackSpeedModel: 'flat' }))
+      }
+      : null,
     lines: specs.map(spec => ({
       name: spec.name,
       bucket: spec.bucket === 'multiplicative' ? '[x]' : '[+]',
@@ -356,28 +385,111 @@ export function attackSpeedFactor(opts = {}) {
   return { bonus, baseAps: BASE_APS, aps: BASE_APS * (1 + bonus / 100) };
 }
 
-function furyReport(id, speed) {
-  const drain = (7 / 100) * FURY;
-  const passive = FURY_REGEN - drain;
+export function whirlwindModel(opts = {}) {
+  return opts.whirlwindAttackSpeedModel === 'flat' ? 'flat' : 'breakpoints';
+}
+
+function whirlwindWeapon(opts = {}) {
+  const id = opts.whirlwindWeapon || DEFAULT_WHIRLWIND_WEAPON;
+  return { id, ...(WHIRLWIND_WEAPONS[id] || WHIRLWIND_WEAPONS[DEFAULT_WHIRLWIND_WEAPON]) };
+}
+
+export function whirlwindFrames(attackSpeedPct = DEFAULT_ATTACK_SPEED_PCT, weaponId = DEFAULT_WHIRLWIND_WEAPON) {
+  const weapon = whirlwindWeapon({ whirlwindWeapon: weaponId });
+  let step = WHIRLWIND_2H_BREAKPOINTS[0];
+  for (const row of WHIRLWIND_2H_BREAKPOINTS) {
+    if (attackSpeedPct + 1e-9 >= row.attackSpeedPct) step = row;
+  }
+  const stepped = weapon.stepped;
+  const frames = stepped ? step.frames : weapon.framesAtZero * (step.frames / 26);
+  return {
+    weaponId: weapon.id,
+    weapon: weapon.label,
+    attackSpeedPct,
+    breakpointPct: step.attackSpeedPct,
+    frames,
+    interpolated: !stepped && attackSpeedPct > 0,
+    estimate: true,
+    label: WHIRLWIND_MEASUREMENT
+  };
+}
+
+export function whirlwindTiming(opts = {}) {
+  const speed = attackSpeedFactor(opts);
+  if (whirlwindModel(opts) === 'flat') {
+    return {
+      model: 'flat',
+      frames: null,
+      ticksPerSecond: TICKS_AT_ONE_APS,
+      attackSpeedPct: speed.bonus,
+      weapon: whirlwindWeapon(opts).label,
+      interpolated: false,
+      estimate: false,
+      label: 'Literal power formulas. Per-tick damage and the tick rate both follow attacks per second, so damage per second stays at the 1.0 APS tooltip rate.'
+    };
+  }
+  const frames = whirlwindFrames(speed.bonus, opts.whirlwindWeapon);
+  return {
+    model: 'breakpoints',
+    ...frames,
+    ticksPerSecond: 60 / frames.frames
+  };
+}
+
+const TICK_SCALED_KINDS = new Set(['direct', 'lucky-hit', 'on-hit']);
+const UNSCALED_KINDS = new Set(['dust-devil', 'flat-dot']);
+
+export function whirlwindEffectPerSecond(effect, ticksPerSecond) {
+  if (UNSCALED_KINDS.has(effect.kind)) return effect.perSecond;
+  if (TICK_SCALED_KINDS.has(effect.kind)) return effect.perTick * ticksPerSecond;
+  throw new Error(`Unknown Whirlwind effect kind ${effect.kind}.`);
+}
+
+function passiveFury() {
+  return FURY_REGEN - (7 / 100) * FURY;
+}
+
+export function whirlwindFury(opts = {}) {
+  const timing = whirlwindTiming(opts);
+  const generation = passiveFury();
+  const cost = WW_FURY_PER_SECOND * (timing.ticksPerSecond / TICKS_AT_ONE_APS);
+  const net = generation - cost;
+  const poolSeconds = net >= 0 ? Infinity : FURY / -net;
+  const spenderUptime = net >= 0 ? 1 : Math.min(1, poolSeconds / 60);
+  return {
+    ...timing,
+    action: 'ticks',
+    actionsPerSecond: timing.ticksPerSecond,
+    costPerSecond: cost,
+    generationPerSecond: generation,
+    net,
+    poolSeconds,
+    sustainable: net >= 0,
+    holdsFor60: spenderUptime >= 1,
+    spenderUptime,
+    attackSpeedChangesDamage: timing.model === 'breakpoints'
+  };
+}
+
+function furyReport(id, opts) {
+  const speed = attackSpeedFactor(opts);
+  const passive = passiveFury();
   const estimates = [
     `Attack speed bonus +${speed.bonus}% is the S15 sheet value. Estimate for these builds.`,
-    'Base attacks per second is 1. The power files use Attacks_Per_Second_Total and the mace item type stores +10% weapon speed, not a base rate. The sheet bonus is not increased by that +10%.',
+    'Base attacks per second is 1 for Double Swing and Flay. The power files use Attacks_Per_Second_Total and the mace item type stores +10% weapon speed, not a base rate. The sheet bonus is not increased by that +10%.',
     `Fury regeneration ${FURY_REGEN}/s is the town sheet. Combat regeneration is null. Estimate.`,
     `Ramaladni drains 7% of maximum Fury per second. Maximum Fury ${FURY} is the combat reading. Estimate.`
   ];
   if (id === 's16-whirlwind') {
-    const net = passive - WW_FURY_PER_SECOND;
+    const fury = whirlwindFury(opts);
     return {
       spender: 'Whirlwind',
-      actionsPerSecond: speed.aps * (30 / 13),
-      action: 'ticks',
-      costPerSecond: WW_FURY_PER_SECOND,
-      generationPerSecond: passive,
-      net,
-      sustainable: net >= 0,
-      spenderUptime: net >= 0 ? 1 : 0,
-      attackSpeedChangesDamage: false,
-      estimates
+      ...fury,
+      estimates: estimates.concat(
+        fury.model === 'breakpoints'
+          ? `${WHIRLWIND_MEASUREMENT}. Weapon defaults to ${fury.weapon}. Per-tick damage stays the rank-41 tooltip value. Fury per second is 15 times the tick rate divided by the 1.0 APS tick rate.`
+          : 'Flat model. Fury per second stays 15.'
+      )
     };
   }
   if (id === 's16-double-swing') {
@@ -396,6 +508,7 @@ function furyReport(id, speed) {
       net: passive - cost,
       netWhileWeaving: 0,
       sustainable: passive - cost >= 0,
+      holdsFor60: uptime >= 1,
       spenderUptime: uptime,
       attackSpeedChangesDamage: true,
       estimates
@@ -404,9 +517,10 @@ function furyReport(id, speed) {
   const casts = speed.aps * 1.25;
   const generated = FLAY_FURY_GEN * casts;
   const cost = FLAY_VERATHIEL_COST * casts;
-    const net = passive + generated - cost;
-    const poolSeconds = net >= 0 ? Infinity : FURY / -net;
-    return {
+  const net = passive + generated - cost;
+  const poolSeconds = net >= 0 ? Infinity : FURY / -net;
+  const spenderUptime = net >= 0 ? 1 : Math.min(1, poolSeconds / 60);
+  return {
     spender: 'Flay',
     actionsPerSecond: casts,
     action: 'casts',
@@ -415,16 +529,19 @@ function furyReport(id, speed) {
     net,
     poolSeconds,
     sustainable: net >= 0,
-    spenderUptime: net >= 0 ? 1 : Math.min(1, poolSeconds / 60),
+    holdsFor60: spenderUptime >= 1,
+    spenderUptime,
     attackSpeedChangesDamage: true,
     estimates: estimates.concat('Shard of Verathiel adds 25 Fury per Flay cast. Flay itself generates 15. There is no second generator on the bar.')
   };
 }
 
-function dpsOf(id, hit, speed, fury) {
+function dpsOf(id, hit, fury) {
   if (id === 's16-whirlwind') {
-    const rate = 30 / 13;
-    return { peak: hit.peak * rate, average: hit.average * rate * fury.spenderUptime };
+    return {
+      peak: hit.peak * fury.ticksPerSecond,
+      average: hit.average * fury.ticksPerSecond * fury.spenderUptime
+    };
   }
   if (id === 's16-double-swing') {
     return {
@@ -434,6 +551,56 @@ function dpsOf(id, hit, speed, fury) {
   }
   const duration = BLEED_BASE_DURATION * BLOODLETTER_DURATION;
   return { peak: hit.peak / duration, average: hit.average / duration * fury.spenderUptime };
+}
+
+export function whirlwindBreakpointTable(catalog, savedBuild, opts = {}) {
+  const definition = S16_DEFINITIONS.find(item => item.id === 's16-whirlwind');
+  const scored = scoreS16Build(catalog, savedBuild, definition, {
+    ...opts,
+    attackSpeedPct: 0,
+    whirlwindAttackSpeedModel: 'breakpoints',
+    whirlwindWeapon: '2h-axe'
+  });
+  const ticksAtZero = scored.whirlwind.ticksPerSecond;
+  const perTick = {
+    minPeak: scored.dps.min.peak / ticksAtZero,
+    minAverage: scored.dps.min.average / ticksAtZero,
+    maxPeak: scored.dps.max.peak / ticksAtZero,
+    maxAverage: scored.dps.max.average / ticksAtZero
+  };
+  const landing = whirlwindFrames(opts.attackSpeedPct ?? DEFAULT_ATTACK_SPEED_PCT, '2h-axe');
+  return WHIRLWIND_2H_BREAKPOINTS.map(step => {
+    const fury = whirlwindFury({
+      ...opts,
+      attackSpeedPct: step.attackSpeedPct,
+      whirlwindAttackSpeedModel: 'breakpoints',
+      whirlwindWeapon: '2h-axe'
+    });
+    return {
+      attackSpeedPct: step.attackSpeedPct,
+      frames: step.frames,
+      ticksPerSecond: fury.ticksPerSecond,
+      dps: {
+        min: {
+          peak: perTick.minPeak * fury.ticksPerSecond,
+          average: perTick.minAverage * fury.ticksPerSecond * fury.spenderUptime
+        },
+        max: {
+          peak: perTick.maxPeak * fury.ticksPerSecond,
+          average: perTick.maxAverage * fury.ticksPerSecond * fury.spenderUptime
+        }
+      },
+      costPerSecond: fury.costPerSecond,
+      generationPerSecond: fury.generationPerSecond,
+      net: fury.net,
+      holdsFor60: fury.holdsFor60,
+      spenderUptime: fury.spenderUptime,
+      sustainable: fury.sustainable,
+      poolSeconds: fury.poolSeconds,
+      defaultLanding: landing.breakpointPct === step.attackSpeedPct,
+      label: WHIRLWIND_MEASUREMENT
+    };
+  });
 }
 
 export function formatBillions(total) {
