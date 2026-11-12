@@ -229,7 +229,7 @@ A Lunging Strike filler generates 12 per cast. At this attack rate that is about
 
 ## Checkpoints
 
-These are watch items. The headline for the double 5/5 plan is the sustained-Fury case: Crushing on the amulet, one Crushing ring, one Edgemaster ring, the Diamond Mind seal, and Fists of Fate, at 1.2375 casts per second. That average is **1,742.31B/s** and the peak is **1,770.48B/s**. A second Crushing is on the plan and is not scored as a second multiplier. The Fury-starved downside is 333.85B/s if he spends the pool for 11.5 seconds and then stops, or 432.87B/s if Ramaladni's comes off and the bar can stay up.
+These are watch items. The sustained-Fury gear case is Crushing on the amulet, one Crushing ring, one Edgemaster ring, the Diamond Mind seal, and Fists of Fate, at 1.2375 casts per second. The stored-tooltip rotation averages **1,742.31B/s**, with a peak of **1,770.48B/s**. That average is not 100% Wrath. On a 60 second clock it is Wrath for 52.7% of the minute: the catalog cooldown is 54.32 seconds and the duration is 15.8 seconds, the video sheet cooldown reduction is 39.4%, and Marshal is off because the observed sheet clears glyphs. The realistic headline, at the file cooldown and the stripped 9% plus Marshal, is **1,120.03B/s**. A second Crushing is on the plan and is not scored as a second multiplier. The Fury-starved downside is 333.85B/s if he spends the pool for 11.5 seconds and then stops, or 432.87B/s if Ramaladni's comes off and the bar can stay up.
 
 Attack speed curve on that sustained average. The step is linear. The 120% cap is probable and switchable.
 
@@ -273,19 +273,23 @@ The target is Ramaladni's 7% of maximum Fury plus the Double Swing spend. At 605
 | Wrath of the Berserker | 16.0s | 90s | 82.2% | 19.5% |
 | Iron Skin | 3.0s | 14s | 78.6% | 23.5% |
 
-The temper files for generic cooldown reduction and for War Cry, Challenging Shout, Iron Skin, and Wrath store formula 0. The roll table is not in the checkout, so the points per roll and the number of rolls are unresolved. The gap from 9% to Wrath's 82.2% is 73.2 points. With Marshal's 2 seconds on both shouts, Wrath's uptime at 9% CDR is about 23.7%. ESTIMATE.
+The temper files for generic cooldown reduction and for War Cry, Challenging Shout, Iron Skin, and Wrath store formula 0. The roll table is not in the checkout, so the points per roll and the number of rolls are unresolved. The gap from 9% to Wrath's 82.2% is 73.2 points.
 
-Twin Strikes grants Berserking for 3 seconds on the later sweep. At 1.2375 casts per second that can keep Berserking up while he is spending, so the Crucible 5 second and 10 second timers do not require Blood-Mad. ESTIMATE. Wrath still supplies its own 30%[x], Unstoppable, and a long Berserking window.
+Twin Strikes, `Gloves_Unique_Barb_100_x2`, grants Berserking for 3 seconds on the later sweep. The static value is 3. At 1.2375 casts per second the next cast is 0.81 seconds away, so that 3 seconds covers the gap while he is spending. ESTIMATE that each cast refreshes it. War Cry's Berserking is 4 seconds and its file cooldown is 25 seconds, so War Cry alone does not keep a 5 second streak. With the Twin Strikes estimate, the Crucible 200%[x] stays up outside Wrath. Blood-Mad is not in this plan. Wrath still adds its 30%[x], Unstoppable, and the Overpower window. Iron Skin's 3 second Unstoppable is in the file, and the catalog has no duration for it, so Tibault stays off outside Wrath. The doubled Berserking keyword is still not a scored damage line.
 
-The rotation with Wrath on the bar scores 1,742.31B/s. With Wrath removed it scores 359.58B/s. That gap is the whole window, including Unstoppable and the Crucible streak. Scaling only the 30%[x] from the no-Wrath floor is the narrower reading:
+The stored-tooltip rotation splits into 2,784.16B/s while Wrath is up and 583.06B/s while it is down. Weighted by its own 52.7% that is the 1,742.31B/s average. The down side of that split lets the Crucible streak fall off, because only War Cry is supplying Berserking.
 
-| Wrath uptime | Average, 30%[x] only |
+The corrected table uses two file-timed rotations at 9% cooldown reduction. Wrath's file cooldown is 90 seconds and its duration is 16 seconds. War Cry and Challenging Shout use 25 seconds. Marshal cuts non-Shout cooldowns by 2 seconds after each of those shouts. The cast gap settles at 68.25 seconds, so the repeating uptime is 16 / 68.25 = 23.4%. A 60 second clock that opens on the cast only contains one 16 second window, which is 26.7%, because the next cast is past the minute. The Wrath-up rotation holds Wrath, Unstoppable, and Overpower for the whole minute, and Twin Strikes keeps Berserking in both rotations. ESTIMATE on the hold, the refresh, and the 2 second cut. Crucible's own 10% cooldown reduction is not in this uptime.
+
+| Wrath uptime | Average |
 | --- | ---: |
-| 100% | 467.45B/s |
-| 90% | 456.67B/s |
-| 75% | 440.49B/s |
-| 50% | 413.52B/s |
-| 23.7%, the Marshal estimate at 9% CDR | 385.15B/s |
+| 100% | 2,580.50B/s |
+| 90% | 2,389.73B/s |
+| 75% | 2,103.58B/s |
+| 50% | 1,626.65B/s |
+| 23.4%, 9% CDR plus Marshal, repeating | 1,120.03B/s |
+
+The 100% row is the Wrath-up rotation, 2,580.50B/s. The other rows are that rate blended with the no-Wrath rotation, 672.80B/s. The realistic headline is the 23.4% row.
 
 ### Crit chance
 

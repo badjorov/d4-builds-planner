@@ -44,12 +44,6 @@ export function wrathUptime(sheetCdr, marshalSeconds = 0) {
   return { effectiveCooldown: effective, uptime: Math.min(1, 16 / effective) };
 }
 
-const WRATH_BONUS = 0.3;
-
-export function wrathDamage(noWrathDps, uptime) {
-  return noWrathDps * (1 + WRATH_BONUS * uptime);
-}
-
 export function furyStage(stage) {
   const drain = 0.07 * stage.maxFury;
   const spend = stage.costPerCast * stage.casts;

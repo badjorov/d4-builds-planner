@@ -1,6 +1,6 @@
 import { evaluateBuild } from './catalog.js';
 import { compute } from './engine.js';
-import { rotationReport } from './rotation.js';
+import { rotationReport, simulateBuffRotation } from './rotation.js';
 import { DEFAULT_SKILL_RANK, skillRankMultiplier } from './skill-rank.js';
 import { ATTACK_SPEED_CAP_LABEL, clampAttackSpeedPct, resolveAttackSpeedCap } from './attack-speed.js';
 
@@ -555,13 +555,24 @@ function activeLines(definition, opts) {
     .map(id => LINES[id]);
 }
 
+function withSkillTiming(catalog, timing) {
+  if (!timing) return catalog;
+  return {
+    ...catalog,
+    skills: (catalog.skills || []).map(skill => timing[skill.id] ? { ...skill, ...timing[skill.id] } : skill)
+  };
+}
+
 function runReport(catalog, build, definition, specs, end, opts) {
-  return rotationReport(catalog, build, {
+  return rotationReport(withSkillTiming(catalog, opts.skillTiming), build, {
     souls: 0,
     hitSkill: definition.hitSkill,
     noOverpower: definition.noOverpower === true,
     forceVulnerable: definition.forceVulnerable === true,
     alwaysBerserk: opts.alwaysBerserk === true,
+    holdBuffs: opts.holdBuffs,
+    cdrPct: opts.cdrPct,
+    shoutCutSeconds: opts.shoutCutSeconds,
     extraModifiersFor: (slice, info) => modifiersFor(specs, end, slice, info, opts)
   });
 }
@@ -643,6 +654,11 @@ export function scoreS16Build(catalog, savedBuild, definition, opts = {}) {
     dps: {
       min: dpsOf(definition.id, { peak: min.peak.total * scale, average: min.average.total * scale }, furyReport(definition.id, opts)),
       max: dpsOf(definition.id, { peak: max.peak.total * scale, average: max.average.total * scale }, furyReport(definition.id, opts))
+    },
+    wrathSplit: {
+      uptime: max.wrathSplit.uptime,
+      on: dpsOf(definition.id, { peak: (max.wrathSplit.on || 0) * scale, average: (max.wrathSplit.on || 0) * scale }, furyReport(definition.id, opts)),
+      off: max.wrathSplit.off == null ? null : dpsOf(definition.id, { peak: max.wrathSplit.off * scale, average: max.wrathSplit.off * scale }, furyReport(definition.id, opts))
     },
     flatDps: definition.id === 's16-whirlwind'
       ? {
@@ -1026,8 +1042,62 @@ export function scoreProposedDoubleSwing(catalog, savedBuild, opts = {}) {
     ? base.timelineSkills.filter(id => id !== 'wrath-of-the-berserker')
     : base.timelineSkills;
   const definition = { ...base, fury: 605, scoredLines: lines, timelineSkills: skills };
-  const scored = scoreS16Build(catalog, savedBuild, definition, { variants: { sliceAndDice: true }, dustDevilGlyph: false });
+  const scored = scoreS16Build(catalog, savedBuild, definition, {
+    variants: { sliceAndDice: true },
+    dustDevilGlyph: false,
+    alwaysBerserk: opts.alwaysBerserk === true,
+    holdBuffs: opts.holdWrath ? ['wrath-of-the-berserker'] : undefined,
+    cdrPct: opts.cdrPct,
+    shoutCutSeconds: opts.shoutCutSeconds,
+    skillTiming: opts.skillTiming
+  });
   return { ...scored, id: 'ds-s16-proposed', split, counts, ...withCastRates(scored) };
+}
+
+export const FILE_SHOUT_TIMING = {
+  'war-cry': { cooldown: 25, duration: 4 },
+  'challenging-shout': { cooldown: 25, duration: 8 },
+  'wrath-of-the-berserker': { cooldown: 90, duration: 16 }
+};
+
+export function blendWrathUptime(onAverage, offAverage, uptime) {
+  return uptime * onAverage + (1 - uptime) * offAverage;
+}
+
+export function proposedWrathBlend(catalog, savedBuild) {
+  const gear = { amulet: 'crushing', rings: 'edgemaster' };
+  const timing = { skillTiming: FILE_SHOUT_TIMING, cdrPct: 9, shoutCutSeconds: 2 };
+  const headline = scoreProposedDoubleSwing(catalog, savedBuild, gear);
+  const timed = scoreProposedDoubleSwing(catalog, savedBuild, { ...gear, ...timing });
+  const window = scoreProposedDoubleSwing(catalog, savedBuild, { ...gear, ...timing, holdWrath: true, alwaysBerserk: true });
+  const outside = scoreProposedDoubleSwing(catalog, savedBuild, { ...gear, ...timing, skipWrath: true, alwaysBerserk: true });
+  const on = window.dpsAtSheet.max.average;
+  const off = outside.dpsAtSheet.max.average;
+  const cycle = simulateBuffRotation([
+    { id: 'war-cry', name: 'War Cry', duration: 4, cooldown: 25, isShout: true, simulated: true, lines: [] },
+    { id: 'challenging-shout', name: 'Challenging Shout', duration: 8, cooldown: 25, isShout: true, simulated: true, lines: [] },
+    { id: 'wrath-of-the-berserker', name: 'Wrath of the Berserker', duration: 16, cooldown: 90, isShout: false, simulated: true, lines: [] }
+  ], { cdrPct: 9, shoutCutSeconds: 2, horizon: 400 });
+  const wrath = cycle.buffs.find(buff => buff.id === 'wrath-of-the-berserker');
+  const gap = wrath.casts[1] - wrath.casts[0];
+  const uptime = Math.min(1, wrath.duration / gap);
+  const at = (value) => blendWrathUptime(on, off, value);
+  return {
+    headline: headline.dpsAtSheet.max.average,
+    headlineAssumesFullWrath: headline.wrathAtSheet.uptime >= 1 - 1e-9,
+    headlineUptime: headline.wrathAtSheet.uptime,
+    headlineOn: headline.wrathAtSheet.on.average,
+    headlineOff: headline.wrathAtSheet.off?.average ?? null,
+    window: on,
+    outside: off,
+    gap,
+    uptime,
+    openingMinuteUptime: timed.wrathAtSheet.uptime,
+    realistic: at(uptime),
+    table: [1, 0.9, 0.75, 0.5, uptime].map(value => ({ uptime: value, average: at(value) })),
+    twinStrikesKeepsBerserk: true,
+    estimate: 'Twin Strikes grants Berserking for 3 seconds on the later sweep. At 1.2375 casts per second that covers the gap, so the Crucible streak stays up outside Wrath. War Cry is 4 seconds and does not bridge its cooldown. Marshal\'s 2 second cut and the refresh are estimates.'
+  };
 }
 
 export const SWORD_WEAPON_APS = 1.1;
@@ -1044,14 +1114,21 @@ function scaleDps(row, factor) {
 function withCastRates(scored) {
   const capped = doubleSwingCastRate(DEFAULT_ATTACK_SPEED_PCT);
   const sheet = doubleSwingCastRate(NON_GEAR_ATTACK_SPEED);
+  const factor = sheet / capped;
+  const half = (row) => row ? { peak: row.peak * factor, average: row.average * factor } : null;
   return {
     weaponAps: SWORD_WEAPON_APS,
     nonGearAttackSpeed: NON_GEAR_ATTACK_SPEED,
     castsPerSecond: { capped, sheet },
     dpsAtSheet: {
-      min: scaleDps(scored.dps.min, sheet / capped),
-      max: scaleDps(scored.dps.max, sheet / capped)
-    }
+      min: scaleDps(scored.dps.min, factor),
+      max: scaleDps(scored.dps.max, factor)
+    },
+    wrathAtSheet: scored.wrathSplit ? {
+      uptime: scored.wrathSplit.uptime,
+      on: half(scored.wrathSplit.on),
+      off: half(scored.wrathSplit.off)
+    } : null
   };
 }
 
