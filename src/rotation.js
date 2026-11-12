@@ -227,6 +227,19 @@ export function simulateBuffRotation(buffs, opts = {}) {
     const unstoppable = unstoppableIntervals.some(([from, to]) => mid >= from && mid < to);
     segments.push({ start, end, seconds: end - start, active, overpower, unstoppable });
   }
+  const held = new Set(opts.holdBuffs || []);
+  if (held.size) {
+    notes.push('Held buffs stay active for the whole horizon. Wrath held this way also keeps Unstoppable and Overpower up. That hold is an estimate.');
+    for (const segment of segments) {
+      for (const id of held) {
+        if (!segment.active.includes(id)) segment.active.push(id);
+      }
+      if (held.has('wrath-of-the-berserker')) {
+        segment.unstoppable = true;
+        segment.overpower = true;
+      }
+    }
+  }
 
   const uptime = {};
   for (const buff of runnable) {
@@ -280,10 +293,10 @@ const BASE_UPTIME = {
   enemyInjured: 0
 };
 
-function sliceBuild(build, souls, slice) {
+function sliceBuild(build, souls, slice, hitSkill) {
   return {
     ...build,
-    skills: ['whirlwind'],
+    skills: [hitSkill || 'whirlwind'],
     souls,
     uptime: {
       ...build.uptime,
@@ -311,7 +324,7 @@ function scoreSlice(catalog, build, slice, opts) {
     extraModifiers: slice.extras || []
   };
   if (typeof opts.soulRatePct === 'number') options.soulRatePct = opts.soulRatePct;
-  return evaluateBuild(catalog, sliceBuild(build, opts.souls, slice), options);
+  return evaluateBuild(catalog, sliceBuild(build, opts.souls, slice, opts.hitSkill), options);
 }
 
 function extrasFor(buffs, activeIds, includeAssumed = true) {
@@ -346,18 +359,24 @@ function billions(total) {
 }
 
 export function rotationReport(catalog, build, opts = {}) {
+  const reportSouls = typeof opts.souls === 'number' ? opts.souls : 30;
   const buffs = durationBuffs(catalog, build);
-  const cdr = sheetCooldownReduction(build);
-  const shoutCut = shoutCooldownCut(catalog, build);
   const afterglow = unstoppableAfterglow(catalog);
   const linger = typeof build?.overpowerStacks?.lingerSeconds === 'number' ? build.overpowerStacks.lingerSeconds : null;
+  const cdr = typeof opts.cdrPct === 'number'
+    ? { pct: opts.cdrPct, source: 'caller', suspect: false, estimate: true, applied: true }
+    : sheetCooldownReduction(build);
+  const shoutCut = typeof opts.shoutCutSeconds === 'number'
+    ? { seconds: opts.shoutCutSeconds, source: 'caller', estimate: true, applied: opts.shoutCutSeconds > 0 }
+    : shoutCooldownCut(catalog, build);
   const rotation = simulateBuffRotation(buffs, {
     horizon: opts.horizon,
     cdrPct: cdr.pct,
     extraCdrPct: typeof opts.extraCdrPct === 'number' ? opts.extraCdrPct : 0,
     shoutCutSeconds: shoutCut.applied ? shoutCut.seconds : 0,
     overpowerLinger: linger,
-    unstoppableAfter: afterglow.seconds
+    unstoppableAfter: afterglow.seconds,
+    holdBuffs: opts.holdBuffs
   });
   const simulated = buffs.filter(buff => buff.simulated);
   const allIds = simulated.map(buff => buff.id);
@@ -381,17 +400,21 @@ export function rotationReport(catalog, build, opts = {}) {
       unstoppable: slice.unstoppable,
       enemyHealthy: slice.enemyHealthy,
       elites: slice.elites,
+      berserkStreak5: slice.berserkStreak5 || 0,
       sheetContext: slice.sheetContext,
       endpoint: slice.endpoint,
       soulRatePct: opts.soulRatePct ?? null,
+      souls: reportSouls,
+      hitSkill: opts.hitSkill || 'whirlwind',
       extras: (slice.extras || []).map(extra => [extra.id, extra.bucket, extra.value])
     });
     if (!cache.has(key)) {
       cache.set(key, scoreSlice(catalog, build, slice, {
-        souls: 30,
+        souls: reportSouls,
         soulModel: 'sum',
         overpowerSheetMeaning: meaning,
-        soulRatePct: opts.soulRatePct
+        soulRatePct: opts.soulRatePct,
+        hitSkill: opts.hitSkill
       }).result.total);
     }
     return cache.get(key);
@@ -399,44 +422,76 @@ export function rotationReport(catalog, build, opts = {}) {
 
   const peakSlice = decorate({
     vulnerable: 1,
-    overpower: 1,
+    overpower: opts.noOverpower ? 0 : 1,
     berserk: 1,
     unstoppable: 1,
     enemyHealthy: 1,
     elites: 1,
+    berserkStreak5: 0,
     sheetContext: 'combat-allbuff',
     endpoint: 'high',
     extras: extrasFor(simulated, allIds)
   }, true);
   const peakTotal30 = evalSlice(peakSlice, 'total');
   const peakPerStack30 = evalSlice(peakSlice, 'perStack');
-  const peakScore = scoreSlice(catalog, build, peakSlice, { souls: 30, soulModel: 'sum', overpowerSheetMeaning: 'total' });
+  const peakScore = scoreSlice(catalog, build, peakSlice, { souls: reportSouls, soulModel: 'sum', overpowerSheetMeaning: 'total', hitSkill: opts.hitSkill });
   const peakWithoutAssumed = scoreSlice(catalog, build, {
     ...peakSlice,
     extras: extrasFor(simulated, allIds, false)
-  }, { souls: 30, soulModel: 'sum', overpowerSheetMeaning: 'total' });
+  }, { souls: reportSouls, soulModel: 'sum', overpowerSheetMeaning: 'total', hitSkill: opts.hitSkill });
 
   let averageTotal30 = 0;
   let averagePerStack30 = 0;
+  let berserkStreak = 0;
+  let wrathOnTotal = 0;
+  let wrathOffTotal = 0;
+  let wrathOnSeconds = 0;
+  let wrathOffSeconds = 0;
   for (const segment of rotation.segments) {
     const weight = segment.seconds / rotation.horizon;
     const anyBuff = segment.active.length > 0;
+    const wrathUp = segment.active.includes('wrath-of-the-berserker');
+    const berserk = opts.alwaysBerserk === true || segment.active.includes('war-cry') || wrathUp;
+    let berserkStreak5 = 0;
+    if (berserk) {
+      const need = Math.max(0, 5 - berserkStreak);
+      berserkStreak5 = segment.seconds <= need ? 0 : (segment.seconds - need) / segment.seconds;
+      berserkStreak += segment.seconds;
+    } else {
+      berserkStreak = 0;
+    }
     const slice = {
-      vulnerable: segment.active.includes('war-cry') ? 1 : 0,
-      overpower: segment.overpower ? 1 : 0,
-      berserk: segment.active.includes('war-cry') || segment.active.includes('wrath-of-the-berserker') ? 1 : 0,
+      vulnerable: opts.forceVulnerable ? 1 : (segment.active.includes('war-cry') ? 1 : 0),
+      overpower: opts.noOverpower ? 0 : (segment.overpower ? 1 : 0),
+      berserk: berserk ? 1 : 0,
       unstoppable: segment.unstoppable ? 1 : 0,
       enemyHealthy: 1,
       elites: 1,
+      berserkStreak5,
       sheetContext: anyBuff ? 'combat-allbuff' : 'combat-nobuff',
       endpoint: 'low',
       extras: extrasFor(simulated, segment.active)
     };
-    averageTotal30 += weight * evalSlice(decorate(slice, false), 'total');
+    const total = evalSlice(decorate(slice, false), 'total');
+    averageTotal30 += weight * total;
     averagePerStack30 += weight * evalSlice(decorate(slice, false), 'perStack');
+    if (wrathUp) {
+      wrathOnTotal += segment.seconds * total;
+      wrathOnSeconds += segment.seconds;
+    } else {
+      wrathOffTotal += segment.seconds * total;
+      wrathOffSeconds += segment.seconds;
+    }
   }
+  const wrathSplit = {
+    uptime: wrathOnSeconds / rotation.horizon,
+    on: wrathOnSeconds ? wrathOnTotal / wrathOnSeconds : null,
+    off: wrathOffSeconds ? wrathOffTotal / wrathOffSeconds : null,
+    onSeconds: wrathOnSeconds,
+    offSeconds: wrathOffSeconds
+  };
 
-  const base = soulFactor(30, 'sum', opts.soulRatePct);
+  const base = soulFactor(reportSouls, 'sum', opts.soulRatePct);
   const scale = (souls, model) => soulFactor(souls, model, opts.soulRatePct) / base;
   const targetBillions = build?.combatObservations?.calibration?.peakBillions ?? null;
   const target = typeof targetBillions === 'number' ? targetBillions * 1e9 : null;
@@ -475,7 +530,7 @@ export function rotationReport(catalog, build, opts = {}) {
     sheetContext,
     endpoint,
     extras: []
-  }, { souls: 30, soulModel: 'sum', overpowerSheetMeaning: 'total' }).result.total;
+  }, { souls: reportSouls, soulModel: 'sum', overpowerSheetMeaning: 'total', hitSkill: opts.hitSkill }).result.total;
 
   const party = build?.combatObservations?.calibration?.party || null;
   const unexplained = [
@@ -509,9 +564,10 @@ export function rotationReport(catalog, build, opts = {}) {
     overpowerLinger: linger,
     buffs,
     rotation,
+    wrathSplit,
     fullOverlap,
     peak: {
-      souls: 30,
+      souls: reportSouls,
       model: 'sum',
       reading: 'headline',
       target,
@@ -524,7 +580,7 @@ export function rotationReport(catalog, build, opts = {}) {
       perStackRatio: target ? peakPerStack30 / target : null
     },
     average: {
-      souls: 30,
+      souls: reportSouls,
       model: 'sum',
       total: averageTotal30,
       perStack: averagePerStack30,

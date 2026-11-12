@@ -1,0 +1,111 @@
+{
+  "season": 16,
+  "patch": "3.3.0",
+  "provisional": true,
+  "souls": 0,
+  "sourceNote": "Short name lists from the user's S16 research notes. No guide text is copied. Soul Splinter stacks are 0. The Season 15 calibration stays stored.",
+  "builds": [
+    {
+      "id": "s16-double-swing",
+      "name": "Double Swing",
+      "provisional": true,
+      "season": 16,
+      "placeholder": {
+        "for": "Nikolay's Double Swing setup",
+        "status": "replaced",
+        "using": "screenshots 2026-11-10"
+      },
+      "skills": ["Double Swing", "War Cry", "Rallying Cry", "Challenging Shout", "Wrath of the Berserker", "Iron Skin"],
+      "sixthSkill": {
+        "name": "Iron Skin",
+        "confirmed": true,
+        "note": "The 10 Nov 2026 skill bar has Iron Skin in the sixth slot. There is no Basic skill."
+      },
+      "uniques": ["Fists of Fate", "Ramaladni's Magnum Opus", "Tibault's Will", "Ring of Red Furor"],
+      "aspects": ["Earthstriker's", "Crushing", "Disobedience"],
+      "sets": ["Sescheron's Fury", "Berserker's Crucible"],
+      "other": ["Vehement Halo", "Ambidextrous", "1H Mace Expertise"],
+      "sources": [
+        "https://legends.army/video/rob57ftu",
+        "https://d4gold.com/news/diablo-4-season-16-ptr-3-3-0-patch-notes-changes-for-double-swing-barbarian",
+        "https://www.elyxir.gg/guide/diablo-iv/diablo-iv-season-16-ptr-double-swing-barbarian-defense-and-positioning-guide"
+      ],
+      "resolved": [
+        {"name": "Double Swing", "ptr": "Power_Barbarian_DoubleSwing"},
+        {"name": "Fists of Fate", "ptr": "Item_Gloves_Unique_Generic_002"},
+        {"name": "Ramaladni's Magnum Opus", "ptr": "Item_1HSword_Unique_Barb_101"},
+        {"name": "Tibault's Will", "ptr": "Item_Pants_Unique_Generic_102"},
+        {"name": "Ring of Red Furor", "ptr": "Item_Ring_Unique_Barb_100"},
+        {"name": "Earthstriker's", "ptr": "Affix_legendary_barb_104"},
+        {"name": "Crushing", "ptr": "Affix_legendary_druid_049_x2"},
+        {"name": "Disobedience", "ptr": "Affix_legendary_generic_036"},
+        {"name": "Sescheron's Fury", "ptr": "set tag on Talisman_Charm_Set_Barb_01"},
+        {"name": "Berserker's Crucible", "ptr": "set tag on Talisman_Charm_Set_Barb_02. Charm names say of the Crucible."},
+        {"name": "Vehement Halo", "ptr": "Item_Ring_Legendary_Generic_050"},
+        {"name": "Ambidextrous", "ptr": "ParagonGlyph_Rare_021_Strength_Main"},
+        {"name": "Leap", "ptr": "Power_Barbarian_Leap"},
+        {"name": "Lunging Strike", "ptr": "Power_Barbarian_LungingStrike"}
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "s16-whirlwind",
+      "name": "Whirlwind (Sescheron's + Crucible)",
+      "provisional": true,
+      "season": 16,
+      "skills": ["Whirlwind", "Rallying Cry", "Challenging Shout", "Iron Skin", "War Cry", "Wrath of the Berserker"],
+      "uniques": ["Ramaladni's Magnum Opus"],
+      "optional": ["Melted Heart of Selig", "Disobedience"],
+      "aspects": ["Accursed Touch"],
+      "sets": ["Sescheron's Fury", "Berserker's Crucible"],
+      "paragon": ["Warbringer", "Carnage", "Decimator", "Weapons Master"],
+      "sources": [
+        "https://www.elyxir.gg/guide/diablo-iv/diablo-iv-ptr-whirlwind-barbarian-guide-bigger-spins-and-better-positioning"
+      ],
+      "resolved": [
+        {"name": "Whirlwind", "ptr": "Power_Barbarian_Whirlwind"},
+        {"name": "Ramaladni's Magnum Opus", "ptr": "Item_1HSword_Unique_Barb_101"},
+        {"name": "Accursed Touch", "ptr": "Affix_legendary_generic_122"},
+        {"name": "Disobedience", "ptr": "Affix_legendary_generic_036"},
+        {"name": "Melted Heart of Selig", "ptr": "Item_Amulet_Unique_Generic_100"},
+        {"name": "Sescheron's Fury", "ptr": "set tag on Talisman_Charm_Set_Barb_01"},
+        {"name": "Berserker's Crucible", "ptr": "set tag on Talisman_Charm_Set_Barb_02"},
+        {"name": "Warbringer", "ptr": "ParagonBoard_Paragon_Barb_07"},
+        {"name": "Carnage", "ptr": "ParagonBoard_Paragon_Barb_03"},
+        {"name": "Decimator", "ptr": "ParagonBoard_Paragon_Barb_04"},
+        {"name": "Weapons Master", "ptr": "ParagonBoard_Paragon_Barb_08"}
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "s16-flay",
+      "name": "Flay bleed",
+      "provisional": true,
+      "season": 16,
+      "gearConfidence": "low",
+      "gearNote": "The S16 gear list was not published. The names below are the legacy core, plus Bloodletter's Flow as an unverified inference.",
+      "skills": ["Flay", "Rupture", "War Cry", "Challenging Shout", "Rallying Cry", "Wrath of the Berserker"],
+      "uniques": ["Hooves of the Mountain God", "Shard of Verathiel", "Ramaladni's Magnum Opus", "Tibault's Will", "Paingorger's Gauntlets"],
+      "aspects": ["Moonrise"],
+      "sets": ["Bloodletter's Flow"],
+      "sources": [
+        "https://d4guides.gg/en/news/season-16-tier-list-after-the-ptr-who-clears-tower-150",
+        "https://www.wowhead.com/diablo-4/guide/classes/barbarian/flay-build-overview",
+        "https://d4guides.gg/en/build/barbarian-flay",
+        "https://d4guides.gg/en/database/horadric-affixes/bloodletters-flow"
+      ],
+      "resolved": [
+        {"name": "Flay", "ptr": "Barb_Unlock_Flay in SkillKit/Barbarian.skl. No Power_Barbarian_Flay file is in the checkout, and the English name string was not in the Power_Barbarian string files."},
+        {"name": "Rupture", "ptr": "Power file Barbarian_Rupture"},
+        {"name": "Hooves of the Mountain God", "ptr": "Item_Boots_Unique_Barb_101"},
+        {"name": "Shard of Verathiel", "ptr": "Item_S05_BSK_1HSword_Unique_Generic_001"},
+        {"name": "Ramaladni's Magnum Opus", "ptr": "Item_1HSword_Unique_Barb_101"},
+        {"name": "Tibault's Will", "ptr": "Item_Pants_Unique_Generic_102"},
+        {"name": "Paingorger's Gauntlets", "ptr": "Item_Gloves_Unique_Generic_004"},
+        {"name": "Moonrise", "ptr": "Affix_legendary_generic_120"},
+        {"name": "Bloodletter's Flow", "ptr": "set tag on Talisman_Charm_Set_Barb_04. Charm names say of the Bloodletter."}
+      ],
+      "unresolved": []
+    }
+  ]
+}

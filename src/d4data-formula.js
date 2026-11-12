@@ -93,7 +93,8 @@ function parseLegendaryRank(body) {
     [/^([+-]?\d*\.?\d+)\+CurrentLegendaryRank\(\)\*([+-]?\d*\.?\d+)$/, 0],
     [/^([+-]?\d*\.?\d+)\+\(\(CurrentLegendaryRank\(\)-1\)\)$/, 1],
     [/^([+-]?\d*\.?\d+)\+\(CurrentLegendaryRank\(\)-1\)$/, 1],
-    [/^([+-]?\d*\.?\d+)\+CurrentLegendaryRank\(\)-1$/, 1]
+    [/^([+-]?\d*\.?\d+)\+CurrentLegendaryRank\(\)-1$/, 1],
+    [/^([+-]?\d*\.?\d+)\+CurrentLegendaryRank\(\)$/, 0]
   ];
   for (const [pattern, rankOffset] of patterns) {
     const match = cleaned.match(pattern);

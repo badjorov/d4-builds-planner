@@ -1,4 +1,5 @@
 import { marginal } from './engine.js';
+import { attackSpeedOverCap, isAttackSpeedText } from './attack-speed.js';
 import { blankBuild, damageEffects, emptyGear, engineInputFromBuild, evaluateBuild, knownBucket, pointValue, slotIds, unverifiedShare, verificationFields, buildKeys } from './catalog.js';
 import { checkBuild } from './constraints.js';
 import { noveltyAgainstMeta, rankByPowerNovelty } from './novelty.js';
@@ -180,14 +181,61 @@ export function beamSearch(catalog, build, opts = {}) {
   return { build: withGear(build, best.gear), chosen: best.chosen };
 }
 
+function affixDamage(affix) {
+  let best = null;
+  for (const effect of affix.effects || []) {
+    if (effect.scored === false) continue;
+    if (isAttackSpeedText(effect.stat) || isAttackSpeedText(affix.name)) continue;
+    const value = pointValue(effect.value);
+    const bucket = knownBucket(effect.bucket);
+    if (value == null || !bucket) continue;
+    if (!best || value > best.value) best = { value, bucket };
+  }
+  return best;
+}
+
+export function bestDamageAffix(catalog, build, slotId, opts = {}) {
+  const equipped = new Set((build.gear || []).flatMap(slot => (slot.affixes || []).map(affix => affix.affixId)));
+  const probe = marginal(engineInputFromBuild(catalog, build, opts));
+  let best = null;
+  for (const affix of catalog.affixes || []) {
+    if (affix.slot !== slotId || equipped.has(affix.id)) continue;
+    const damage = affixDamage(affix);
+    if (!damage) continue;
+    const score = (probe[damage.bucket] || 0) * damage.value;
+    if (score <= 0) continue;
+    if (!best || score > best.score || (score === best.score && affix.name.localeCompare(best.name) < 0)) {
+      best = { id: affix.id, name: affix.name, score, value: damage.value, bucket: damage.bucket };
+    }
+  }
+  return best;
+}
+
+export function reallocateOverCapAttackSpeed(catalog, build, opts = {}) {
+  const report = attackSpeedOverCap(catalog, build, opts);
+  const gear = cloneGear(build.gear || []);
+  const replacements = [];
+  for (const wasted of report.wasted) {
+    const slot = gear.find(item => item.slotId === wasted.slotId);
+    if (!slot) continue;
+    slot.affixes = slot.affixes.filter(affix => affix.affixId !== wasted.affixId);
+    const best = bestDamageAffix(catalog, { ...build, gear }, wasted.slotId, opts);
+    if (best) slot.affixes.push({ affixId: best.id, value: best.value });
+    replacements.push({ ...wasted, replacementId: best?.id || null, replacementName: best?.name || null });
+  }
+  return { build: { ...build, gear }, report: { ...report, replacements } };
+}
+
 export function searchGear(catalog, build, opts = {}) {
+  const adjusted = reallocateOverCapAttackSpeed(catalog, build, opts);
+  build = adjusted.build;
   const greedy = greedyAssign(catalog, build, opts);
   const beam = beamSearch(catalog, build, opts);
   const greedyPower = evaluateBuild(catalog, greedy.build, opts).result.total;
   const beamPower = evaluateBuild(catalog, beam.build, opts).result.total;
   const picked = beamPower >= greedyPower ? beam : greedy;
   const evaluation = evaluateBuild(catalog, picked.build, opts);
-  return { ...picked, power: evaluation.result.total, evaluation, greedy, beam, greedyPower, beamPower };
+  return { ...picked, power: evaluation.result.total, evaluation, greedy, beam, greedyPower, beamPower, attackSpeed: adjusted.report };
 }
 
 function arsenalAffixes(catalog, opts) {
