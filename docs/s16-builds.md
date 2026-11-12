@@ -176,16 +176,16 @@ Seal of the Diamond Mind confirms the charm discount. Item `Talisman_Seal_Mythic
 
 With that discount, Crucible 5/5 is the amulet +1 plus 3 charms, and Sescheron's 5/5 is the two rings plus 2 charms. That is 5 of the 6 slots. Fists of Fate exists as charm `Talisman_Charm_Unique_Gloves_Unique_Generic_002` and takes the sixth. Both sets at 5/5 and Fists of Fate fit. Without the discount the same jewelry would need 4 + 3 = 7 charms, which does not fit.
 
-The recommended gear, on his rank-48 sheet, scores **3,329.80B/s to 3,970.14B/s** average and **3,095.20B/s to 3,690.43B/s** peak. The low end is Selig with Edgemaster. The high end is Crushing on the amulet and Edgemaster on the rings, with Fists of Fate's low and high expected values inside that spread. His current setup is 255.30B/s average and 524.92B/s peak. The recommended high end is about ×15.5 on the average. The peak sits under the average because the Crucible 200%[x] starts after 5 seconds of Berserking, and the full-overlap peak is the first 4 seconds of War Cry.
+The recommended gear, on his rank-48 sheet, scores **2,857.63B/s to 3,407.18B/s** average and **2,903.84B/s to 3,462.27B/s** peak at the 2.42 casts per second cap. The low end is Selig with Edgemaster. The high end is Crushing on the amulet and Edgemaster on the rings. His current setup is 255.30B/s average and 524.92B/s peak. The cap high end is about ×13.3 on the average. The headline rate is the stripped 1.2375 casts per second, where that high end is 1,742.31B/s average and 1,770.48B/s peak.
 
-| Choice | Average | Peak | Against the other option |
+| Choice | Average at 2.42 | Peak at 2.42 | Against the other option |
 | --- | ---: | ---: | --- |
-| Amulet Crushing, rings Edgemaster | 3,970.14B/s | 3,690.43B/s | +640.34B/s average versus Selig with the same rings |
-| Amulet Selig, rings Edgemaster | 3,329.80B/s | 3,095.20B/s | Keeps the low-life fury shell |
-| Amulet Crushing and Crushing on the rings | 2,646.76B/s | 2,460.28B/s | A second Crushing is not stacked |
+| Amulet Crushing, rings Edgemaster | 3,407.18B/s | 3,462.27B/s | +549.55B/s average versus Selig with the same rings |
+| Amulet Selig, rings Edgemaster | 2,857.63B/s | 2,903.84B/s | Keeps the low-life fury shell |
+| Amulet Crushing and Crushing on the rings | 2,271.45B/s | 2,308.18B/s | A second Crushing is not stacked |
 | The Grandfather's 120%[x] crit, added to the Crushing row | ×2.200 | ×2.200 | Only if the bonus applies while the swords swing |
 
-Ranked by average damage: both 5-piece sets, then Fists of Fate's expected value inside the range above, then Crushing instead of Selig (+640.34B/s), then Edgemaster instead of a second Crushing. Heavy Hitting is 40–60%[x] and the string limits it to Dust Devils, Earthquakes, or Iron Shrapnel. Dust devils are about 23% of this cast, so a mid 50%[x] on that share is about ×1.12 on the cast. Edgemaster at full Fury is 50%[x] on the whole cast. Crushing's mid of the stored 45–65%[x] is 55%[x] while Fortified. One Crushing and one Edgemaster is the pair. A second copy of either aspect is not stacked.
+Ranked by average damage: both 5-piece sets, then Fists of Fate's expected value, then Crushing instead of Selig (+549.55B/s at the cap), then Edgemaster instead of a second Crushing. Heavy Hitting is 40–60%[x] and the string limits it to Dust Devils, Earthquakes, or Iron Shrapnel. Dust devils are about 23% of this cast, so a mid 50%[x] on that share is about ×1.12 on the cast. Edgemaster at full Fury is 50%[x] on the whole cast. Crushing's mid of the stored 45–65%[x] is 55%[x] while Fortified. One Crushing and one Edgemaster is the pair. A second copy of either aspect is not stacked.
 
 Duelist's Aspect stores 4.5–6.5% weapon damage per stack and the bucket is empty, so it is unscored. The Furnace is 260%[x] to Elites on the two-handed mace. Double Swing swings the swords, so that line is not applied. Warpath is [x] only while wielding a bludgeoning weapon. Those two-handed picks do not change this score. Disobedience in the PTR string is damage reduction from damage over time, so the chest adds no damage. Cir then Vex grants +1 to all skills for 10 seconds after five casts, and the overflow text stops at +3. That rank bump is not folded into the rank-48 coefficient. Bac then Jah replaces Evade with Teleport and grants Unstoppable. No damage number is scored. The seal's Sescheron attack-speed affix points at `GearAffix_AttackSpeed` with a formula of 0, and that table is not in the checkout.
 
@@ -209,23 +209,89 @@ The jewelry +1 is still not an affix string, so it is not clear whether those pi
 
 | Reading | Average at 2.42 casts/s | Peak at 2.42 | Average at 1.2375 | Peak at 1.2375 |
 | --- | ---: | ---: | ---: | ---: |
-| Proposed, Crushing and Edgemaster | 3,970.14B/s | 3,690.43B/s | 2,030.19B/s | 1,887.15B/s |
-| Golden Epiphany, aspects stay | 2,219.72B/s | 1,702.87B/s | 1,135.08B/s | 870.78B/s |
-| Golden Epiphany, aspects drop | 954.72B/s | 732.42B/s | 488.21B/s | 374.53B/s |
+| Proposed, Crushing and Edgemaster | 3,407.18B/s | 3,462.27B/s | 1,742.31B/s | 1,770.48B/s |
+| Golden Epiphany, aspects stay | 1,990.35B/s | 1,498.36B/s | 1,017.80B/s | 766.21B/s |
+| Golden Epiphany, aspects drop | 856.07B/s | 644.46B/s | 437.76B/s | 329.55B/s |
 
 The 1.2375 column is the S16 baseline: weapon speed 1.10 times the 12.5% bonus on the stripped sheet. The 2.42 column is the same scores at the 120% cap. The proposed setup still wins. Sescheron's 600%[x] is ×7. Nomad's doubled mid and Blood-Mad's mid are ×1.70 and ×1.90, together ×3.23. The 5-piece is ×2.17 that pair.
 
-Each +10% attack speed, from 12.5% up to the 120% cap, adds 0.11 casts per second and 180.46B/s of average damage on the proposed Crushing and Edgemaster row. The step is constant, so the model is linear in the bonus. Double Swing's power uses `Attacks_Per_Second_Total` and has no frame table. `SF_23` is 0 on 3.3_ptr. The Whirlwind frame breakpoints are not applied here. Calling the step linear is an estimate.
+Each +10% attack speed, from 12.5% up to the 120% cap, adds 0.11 casts per second and 154.87B/s of average damage on the proposed Crushing and Edgemaster row. The step is constant, so the model is linear in the bonus. Double Swing's power uses `Attacks_Per_Second_Total` and has no frame table. `SF_23` is 0 on 3.3_ptr. The Whirlwind frame breakpoints are not applied here. Calling the step linear is an estimate.
 
-On that same baseline, Edgemaster on a ring is +676.73B/s. Crushing on the amulet instead of Selig is +218.30B/s, because Selig already has 30%[x]. Crushing with no amulet damage line under it is +720.39B/s. A +10% attack speed affix is +180.46B/s. Edgemaster and Crushing both beat one attack speed affix for the slot. Matching Edgemaster's 50%[x] takes about +37.5% attack speed on that one slot.
+On that same baseline, Edgemaster on a ring is +580.77B/s. Crushing on the amulet instead of Selig is +281.02B/s, because Selig already has 30%[x]. Crushing with no amulet damage line under it is +412.16B/s. A +10% attack speed affix is +154.87B/s. Edgemaster and Crushing both beat one attack speed affix for the slot. Matching Edgemaster's 50%[x] takes about +37.5% attack speed on that one slot.
 
 The Sescheron seal line of the Fervent and the Crucible seal line of Volatility both point at `GearAffix_AttackSpeed` with a stored formula of 0. That formula table is not in the checkout, so the percent stays unresolved. There is no 8–10% figure in these files. Crucible's 2-piece, `Talisman_SetPower_Barb02_01`, has static values 50 and 20: 50%[+] Berserking damage and 20%[+] cast speed. Cast speed is a different stat from the 12.5% Attack Speed Bonus, and it is not added into that 12.5%. The numbered attack speed on this gear is the 12.5% non-gear bonus. The cap is still 107.5 points above that.
 
 The same stripped sheet shows Maximum Fury 555, Fury Regeneration 12, Fury Generation 30.0%, Fury On Kill 11, and Cooldown Reduction 9.0%. The old 827 and 80 or 85 readings were the geared sheet. Ramaladni's file value is 0.35–0.50%[x] per Fury, and the screenshot roll is 0.50%. The drain is a static 7% of maximum Fury per second. At 555 that drain is 38.85. Sescheron's 5-piece, `Talisman_SetPower_Barb01_03`, adds 50 maximum Fury, so the proposed pool is 605 and the drain is 42.35. The damage line becomes 0.50% × 605 = 302.5%[x]. The seal's maximum-Fury and Fury-generation lines use formula tables that are not in the checkout, so those percents stay unresolved. Edgemaster's 50%[x] is the full-Fury reading. A bar that drains does not get it. Half of that mid, 25%[x], is the estimate used while the pool is falling.
 
-At 1.2375 casts per second the Double Swing cost is 24.75 Fury. With regeneration 12, the 42.35 drain, and critical-strike Fury at the stripped 27.8% crit chance, the opening net is −52.62 per second. Crucible's 5-piece, `Talisman_SetPower_Barb02_03`, confirms 30% Fury cost reduction after 5 seconds and 10 Fury per second after 10 seconds. Those static values are 30, 10, and 10. The net is still −45.20 from 5 to 10 seconds and −35.20 after that. A full pool of 605 lasts 13.3 seconds. It does not sustain, and there is no filler on the bar. Fury on kill is 11 and the dummy does not die, so that line is 0 here. Wrath's 3 Fury per critical strike is not multiplied by the 30% Fury Generation in any formula in the checkout. Scaling it by 1.30 adds about 0.7 per second and does not close the gap. Tibault's 25 while Unstoppable, even at a full uptime that is only an estimate, still empties the pool in 45.9 seconds. Twin Strikes has no Fury number. Tuskhelm's 6 per second is the enrage proc, not a steady regen.
+At 1.2375 casts per second the Double Swing cost is 24.75 Fury. With regeneration 12, the 42.35 drain, and critical-strike Fury at the stripped 27.8% crit chance, the opening net is −52.62 per second. Crucible's 5-piece, `Talisman_SetPower_Barb02_03`, confirms 30% Fury cost reduction after 5 seconds and 10 Fury per second after 10 seconds. Those static values are 30, 10, and 10. The net is still −45.20 from 5 to 10 seconds and −35.20 after that. A full pool of 605 lasts 11.5 seconds at the opening net. It does not sustain, and there is no filler on the bar. Fury on kill is 11 and the dummy does not die, so that line is 0 here. Wrath's 3 Fury per critical strike is not multiplied by the 30% Fury Generation in any formula in the checkout. Scaling it by 1.30 adds about 0.7 per second and does not close the gap. Tibault's 25 while Unstoppable, even at a full uptime that is only an estimate, still leaves the opening net at −27.62 and empties the pool in 21.9 seconds. After the 10-second bonus that same 25 leaves the net at −10.20, and the pool lasts 59.3 seconds. Twin Strikes has no Fury number. Tuskhelm's 6 per second is the enrage proc, not a steady regen.
 
-A Lunging Strike filler generates 12 per cast. At this attack rate that is about 19 per second, which is less than the 42.35 drain, so a basic skill does not keep the bar up. More maximum Fury makes the 7% drain larger. Cost reduction does not touch the drain. The swap that uses a known item is taking Ramaladni's off. The drain becomes 0. After the 10-second Crucible bonus the net is +7.15 per second, and the opening dip stays inside the 605 pool. The damage cost is the 302.5%[x] line. At the 1.2375 baseline the full-Fury Edgemaster row falls from 1,591.33B/s average to about 395B/s without that line. Keeping Ramaladni and casting until the pool empties at 13.3 seconds, then stopping, averages about 353B/s over 60 seconds, which is below the steady no-Ramaladni number. The revised baseline with Ramaladni and a full-Fury Edgemaster, which the sustain math does not support, is 1,591.33B/s average and 1,479.22B/s peak. The draining Edgemaster estimate, 25%[x], is 1,326.11B/s average and 1,232.68B/s peak, and that rate also ends when the pool empties.
+A Lunging Strike filler generates 12 per cast. At this attack rate that is about 19 per second, which is less than the 42.35 drain, so a basic skill does not keep the bar up. More maximum Fury makes the 7% drain larger. Cost reduction does not touch the drain. The swap that uses a known item is taking Ramaladni's off. The drain becomes 0. After the 10-second Crucible bonus the net is +7.15 per second, and the opening dip stays inside the 605 pool. The damage cost is the 302.5%[x] line. At the 1.2375 baseline the full-Fury Edgemaster row falls from 1,742.31B/s average to 432.87B/s without that line. Keeping Ramaladni and casting until the pool empties at 11.5 seconds, then stopping, averages 333.85B/s over 60 seconds, which is below the steady no-Ramaladni number. The sustained-Fury baseline, which the sustain math does not support until the gap below is closed, is 1,742.31B/s average and 1,770.48B/s peak. The draining Edgemaster estimate, 25%[x], is 1,451.92B/s average and 1,475.40B/s peak, and that rate also ends when the pool empties. The scenario now keeps the Double Swing coefficient, the observed sheet, and the sword cast rate. An earlier 1,591.33B/s reading used the bleed formula because the scenario id no longer matched Double Swing.
+
+## Checkpoints
+
+These are watch items. The headline for the double 5/5 plan is the sustained-Fury case: Crushing on the amulet, one Crushing ring, one Edgemaster ring, the Diamond Mind seal, and Fists of Fate, at 1.2375 casts per second. That average is **1,742.31B/s** and the peak is **1,770.48B/s**. A second Crushing is on the plan and is not scored as a second multiplier. The Fury-starved downside is 333.85B/s if he spends the pool for 11.5 seconds and then stops, or 432.87B/s if Ramaladni's comes off and the bar can stay up.
+
+Attack speed curve on that sustained average. The step is linear. The 120% cap is probable and switchable.
+
+| Attack speed | Casts/s | Average |
+| --- | ---: | ---: |
+| 12.5% | 1.2375 | 1,742.31B/s |
+| 40% | 1.54 | 2,168.21B/s |
+| 80% | 1.98 | 2,787.69B/s |
+| 120% | 2.42 | 3,407.18B/s |
+
+### Fury
+
+The target is Ramaladni's 7% of maximum Fury plus the Double Swing spend. At 605 maximum Fury the drain is 42.35/s.
+
+| Stage | Drain | Spend | Have | Gap |
+| --- | ---: | ---: | ---: | ---: |
+| Current geared sheet, 827 Fury, 2.42 casts/s, cost 26, regen 80 | 57.89 | 62.92 | 80 | 40.81 before crit Fury and Tibault. The dummy stayed full, so the practical gap was 0 |
+| Stripped sheet, 555 Fury, 1.2375 casts/s, cost 20, regen 12 | 38.85 | 24.75 | 12 | 51.60 |
+| Sets online, before 5s | 42.35 | 24.75 | 14.5 with the 27.8% crit Fury | 52.62 |
+| Sets online, after 10s, 30% cost cut and +10 Fury/s | 42.35 | 17.32 | 24.5 | 35.20 |
+| Sustained target | 42.35 | 24.75 before the cost cut | the gap has to be 0 | he still has to find about 35/s after the Crucible bonus |
+
+### Attack speed
+
+| Stage | Bonus | Distance to 120% | Casts/s |
+| --- | ---: | ---: | ---: |
+| Current geared sheet | 120% | 0 | 2.42 |
+| Stripped sheet | 12.5% | 107.5 points | 1.2375 |
+| Proposed gear, numbered lines only | 12.5% | 107.5 points | 1.2375 |
+| Cap, if he restores it | 120% | 0 | 2.42 |
+
+### Cooldowns
+
+`CDR needed = 1 - duration / cooldown`, using the file bases. The sheet applies CDR as one minus the total. Whether separate rolls add or multiply is ESTIMATE. Crucible's 10% after 10 seconds of Berserking is in the 5-piece static values. Whether it adds to the 9% sheet is ESTIMATE. Marshal's 2 second cut is his 10 Nov glyph tooltip, not a formula re-read here, so that uptime is ESTIMATE.
+
+| Skill | Duration | Cooldown | CDR for 100% | Uptime at 9% |
+| --- | ---: | ---: | ---: | ---: |
+| Rallying Cry | 4.0s | 0 unless Upgrade C | none. It is a recast | recast |
+| War Cry | 4.0s | 25s | 84.0% | 17.6% |
+| Challenging Shout | 8.0s | 25s | 68.0% | 35.2% |
+| Wrath of the Berserker | 16.0s | 90s | 82.2% | 19.5% |
+| Iron Skin | 3.0s | 14s | 78.6% | 23.5% |
+
+The temper files for generic cooldown reduction and for War Cry, Challenging Shout, Iron Skin, and Wrath store formula 0. The roll table is not in the checkout, so the points per roll and the number of rolls are unresolved. The gap from 9% to Wrath's 82.2% is 73.2 points. With Marshal's 2 seconds on both shouts, Wrath's uptime at 9% CDR is about 23.7%. ESTIMATE.
+
+Twin Strikes grants Berserking for 3 seconds on the later sweep. At 1.2375 casts per second that can keep Berserking up while he is spending, so the Crucible 5 second and 10 second timers do not require Blood-Mad. ESTIMATE. Wrath still supplies its own 30%[x], Unstoppable, and a long Berserking window.
+
+The rotation with Wrath on the bar scores 1,742.31B/s. With Wrath removed it scores 359.58B/s. That gap is the whole window, including Unstoppable and the Crucible streak. Scaling only the 30%[x] from the no-Wrath floor is the narrower reading:
+
+| Wrath uptime | Average, 30%[x] only |
+| --- | ---: |
+| 100% | 467.45B/s |
+| 90% | 456.67B/s |
+| 75% | 440.49B/s |
+| 50% | 413.52B/s |
+| 23.7%, the Marshal estimate at 9% CDR | 385.15B/s |
+
+### Crit chance
+
+The stripped sheet's chance row is 27.8% after Leoric's, Spirit, Insight, Stone of Jordan, and Starless are removed. The files do not split that 27.8% into base, paragon, and leftover gear. Fists of Fate is not a crit-chance line. The planned pieces do not add a stored crit-chance roll. Tempered crit-chance formulas in the datamine are 0, same missing table as the cooldown tempers. The gap to 100% is 72.2 points, and the rolls that would close it are unresolved.
+
+At the headline's crit damage, 10,396.6%, and the combat-allbuff All Damage of 8,211.3%, each +10% crit chance below the cap is worth 5.56% of that slice's full-crit damage. On the 1,742.31B/s average that is 96.83B/s. Slices that use the no-buff additive are worth more per point. ESTIMATE.
 
 Nomad changes Fury. The cost becomes 25 per cast. At 1.2375 casts per second that is 30.94 spent. Against regeneration 80 and the 57.89 drain, the bare net is −8.83 per second. Wrath's crit Fury and Tibault's 25 while Unstoppable bring it to +25.08. If Insight's 47 was inside the 80, regeneration is 33, the bare net is −55.83, and those extras finish at −21.92. At 2.42 casts per second the bare net is −38.39, and the extras bring the sheet-80 reading to +4.03. Blood-Mad adds no Fury number. Tuskhelm's 6 per second still depends on the enrage proc.
 

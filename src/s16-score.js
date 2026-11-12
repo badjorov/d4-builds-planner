@@ -1010,7 +1010,7 @@ export function scoreProposedDoubleSwing(catalog, savedBuild, opts = {}) {
   const split = 'ds-s16-proposed';
   const counts = charmCounts();
   const base = S16_DEFINITIONS.find(item => item.id === 's16-double-swing');
-  const lines = [...PROPOSED_LINES];
+  const lines = opts.skipRamaladni ? PROPOSED_LINES.filter(id => id !== 'ramaladniObserved') : [...PROPOSED_LINES];
   if (opts.amulet !== 'crushing') lines.push('selig');
   if (opts.amulet === 'crushing' || opts.rings === 'crushing' || (opts.rings == null && opts.amulet === 'crushing')) lines.push('crushingMid');
   if (opts.rings === 'edgemaster' || opts.rings == null) lines.push(opts.edgemasterFull === false ? 'edgemasterHalf' : 'edgemaster');
@@ -1022,9 +1022,12 @@ export function scoreProposedDoubleSwing(catalog, savedBuild, opts = {}) {
     const index = lines.indexOf('fists');
     if (index >= 0) lines.splice(index, 1);
   }
-  const definition = { ...base, id: 'ds-s16-proposed', fury: 605, scoredLines: lines };
+  const skills = opts.skipWrath
+    ? base.timelineSkills.filter(id => id !== 'wrath-of-the-berserker')
+    : base.timelineSkills;
+  const definition = { ...base, fury: 605, scoredLines: lines, timelineSkills: skills };
   const scored = scoreS16Build(catalog, savedBuild, definition, { variants: { sliceAndDice: true }, dustDevilGlyph: false });
-  return { ...scored, split, counts, ...withCastRates(scored) };
+  return { ...scored, id: 'ds-s16-proposed', split, counts, ...withCastRates(scored) };
 }
 
 export const SWORD_WEAPON_APS = 1.1;
@@ -1088,7 +1091,7 @@ export function scoreGoldenEpiphany(catalog, savedBuild, opts = {}) {
   const base = S16_DEFINITIONS.find(item => item.id === 's16-double-swing');
   const lines = PROPOSED_LINES.filter(id => id !== 'fists').concat(['fists', 'nomad', 'bloodMad', 'crucibleStreak']);
   if (aspects) lines.push('crushingMid', 'edgemaster');
-  const definition = { ...base, id: 'ds-s16-golden-epiphany', fury: STRIPPED_FURY.max, scoredLines: lines };
+  const definition = { ...base, fury: STRIPPED_FURY.max, scoredLines: lines };
   const scored = scoreS16Build(catalog, savedBuild, definition, {
     variants: { sliceAndDice: true },
     dustDevilGlyph: false,
@@ -1111,6 +1114,7 @@ export function scoreGoldenEpiphany(catalog, savedBuild, opts = {}) {
   };
   return {
     ...scored,
+    id: 'ds-s16-golden-epiphany',
     jewelryAspects: aspects,
     setCount: { jewelry: 3, charms: 3, total: 6, capInFiles: 5, wasted: 1 },
     ...withCastRates(scored),
