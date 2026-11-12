@@ -1,0 +1,31 @@
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import { acquisitionCheckpoints, twinStrikesCastRatio } from '../src/s16-acquisition.js';
+import { formatBillions, proposedWrathBlend } from '../src/s16-score.js';
+
+test('the acquisition checkpoints only move stats the files quantify', () => {
+  const rows = acquisitionCheckpoints();
+  const byId = Object.fromEntries(rows.map(row => [row.id, row]));
+  assert.ok(byId.start.net < 0);
+  assert.equal(byId.start.attackSpeed, 12.5);
+  assert.ok(Math.abs(byId.start.crit - 27.8) < 1e-9);
+  assert.ok(byId.crucible.net > 0);
+  assert.ok(byId.ramaladni.net < 0);
+  assert.ok(Math.abs(byId.ramaladni.drain - 42.35) < 1e-9);
+  assert.equal(byId.done.attackSpeed, 12.5);
+  assert.equal(byId.done.dps, 'headline');
+  const gloves = twinStrikesCastRatio();
+  assert.equal(gloves.rankMultiplier, 6.15);
+  assert.ok(gloves.top > gloves.low);
+  assert.ok(gloves.top < 1.5);
+  const doc = readFileSync(new URL('../docs/s16-gear-acquisition.md', import.meta.url), 'utf8');
+  assert.match(doc, /UNRESOLVED/);
+  assert.match(doc, /1,120\.03B/);
+  assert.match(doc, /Helm_Unique_Barb_100/);
+  assert.match(doc, /S16_Recipe_Greater_Temper/);
+  const catalog = JSON.parse(readFileSync(new URL('../data/barbarian.json', import.meta.url), 'utf8'));
+  const build = JSON.parse(readFileSync(new URL('../data/builds.json', import.meta.url), 'utf8')).builds.find(item => item.id === 'users-current-build');
+  const headline = formatBillions(proposedWrathBlend(catalog, build).realistic);
+  assert.equal(headline, '1,120.03B');
+});
